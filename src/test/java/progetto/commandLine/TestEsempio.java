@@ -1,4 +1,4 @@
-package commandLine;
+package progetto.commandLine;
 
 import junit.framework.TestCase;
 
