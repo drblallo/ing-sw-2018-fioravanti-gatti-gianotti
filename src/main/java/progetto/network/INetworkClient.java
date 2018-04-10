@@ -2,7 +2,7 @@ package progetto.network;
 
 public interface INetworkClient {
 
-	void connect(String ip, String playerName, String password);
+	boolean connect(String ip, int portNumber, String playerName, String password);
 	void disconect();
 
 	void createGame(String roomName);
