@@ -1,4 +1,4 @@
-package progetto.commandLine;
+package progetto.commandline;
 
 public interface ICommand {
 

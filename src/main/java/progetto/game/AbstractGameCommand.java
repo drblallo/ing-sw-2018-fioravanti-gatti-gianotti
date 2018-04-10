@@ -1,7 +1,5 @@
 package progetto.game;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.io.Serializable;
 
 /**
@@ -70,7 +68,7 @@ public abstract class AbstractGameCommand implements Serializable
 	 */
 	public final String serialize(AbstractGameCommand command)
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -80,7 +78,7 @@ public abstract class AbstractGameCommand implements Serializable
 	 */
 	public static AbstractGameCommand deserialize(String serialized)
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 }

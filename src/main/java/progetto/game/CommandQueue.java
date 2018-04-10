@@ -1,33 +1,32 @@
 package progetto.game;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CommandQueue implements IProcessor<AbstractGameCommand> {
 	public void sendItem(AbstractGameCommand item) {
-		throw new  NotImplementedException();
+		throw new  UnsupportedOperationException();
 	}
 
 	public void processItems(int itemToProcessCount) {
-		throw new  NotImplementedException();
+		throw new  UnsupportedOperationException();
 	}
 
 	public void processAllItems() {
-		throw new  NotImplementedException();
+		throw new  UnsupportedOperationException();
 	}
 
 	public int getPendingItemsCount() {
-		throw new  NotImplementedException();
+		throw new  UnsupportedOperationException();
 	}
 
 	public AbstractGameCommand getPendingItem(int index) {
-		throw new  NotImplementedException();
+		throw new  UnsupportedOperationException();
 	}
 
 	public void getPastItemCount() {
-		throw new  NotImplementedException();
+		throw new  UnsupportedOperationException();
 	}
 
 	public AbstractGameCommand getPastItem(int index) {
-		throw new  NotImplementedException();
+		throw new  UnsupportedOperationException();
 	}
 
 }
