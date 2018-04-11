@@ -6,7 +6,7 @@ import java.io.Serializable;
  * This is the class every command must be derived from.
  * every derived class must implement canBeExecuted and execute.
  */
-public abstract class AbstractGameCommand implements Serializable
+public abstract class AbstractGameAction implements Serializable
 {
 	private int playerID = -1;
 
@@ -14,7 +14,7 @@ public abstract class AbstractGameCommand implements Serializable
 	 * constructor that sets the caller id.
 	 * @param callerID the id of the player trying to execute the command.
 	 */
-	protected AbstractGameCommand(int callerID)
+	protected AbstractGameAction(int callerID)
 	{
 		playerID = callerID;
 	}
@@ -22,7 +22,7 @@ public abstract class AbstractGameCommand implements Serializable
 	/**
 	 * Default constructor used while deserializing this class.
 	 */
-	private AbstractGameCommand()
+	private AbstractGameAction()
 	{
 
 	}
@@ -58,27 +58,5 @@ public abstract class AbstractGameCommand implements Serializable
 	 * @return true if the execution was allowed, false otherwise
 	 */
 	protected abstract boolean execute(Game game);
-
-	/**
-	 * Serialize trough reflection this object, the class name of this object is included in the string
-	 * so that it can be deserialized correctly
-	 *
-	 * field that start with dns_ are skipped when serializing.
-	 * only primitive types and string are serialized into the object, everything else is skipped
-	 */
-	public final String serialize(AbstractGameCommand command)
-	{
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 *
-	 * @param serialized the serialized command
-	 * @return an instance of the deserialized command
-	 */
-	public static AbstractGameCommand deserialize(String serialized)
-	{
-		throw new UnsupportedOperationException();
-	}
 
 }

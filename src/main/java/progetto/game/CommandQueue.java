@@ -1,7 +1,7 @@
 package progetto.game;
 
-public class CommandQueue implements IProcessor<AbstractGameCommand> {
-	public void sendItem(AbstractGameCommand item) {
+public class CommandQueue implements IProcessor<AbstractGameAction> {
+	public void sendItem(AbstractGameAction item) {
 		throw new  UnsupportedOperationException();
 	}
 
@@ -17,7 +17,7 @@ public class CommandQueue implements IProcessor<AbstractGameCommand> {
 		throw new  UnsupportedOperationException();
 	}
 
-	public AbstractGameCommand getPendingItem(int index) {
+	public AbstractGameAction getPendingItem(int index) {
 		throw new  UnsupportedOperationException();
 	}
 
@@ -25,7 +25,7 @@ public class CommandQueue implements IProcessor<AbstractGameCommand> {
 		throw new  UnsupportedOperationException();
 	}
 
-	public AbstractGameCommand getPastItem(int index) {
+	public AbstractGameAction getPastItem(int index) {
 		throw new  UnsupportedOperationException();
 	}
 
