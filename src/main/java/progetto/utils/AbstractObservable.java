@@ -1,15 +1,29 @@
 package progetto.utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class AbstractObservable<T> {
+/**
+ * A AbstractObservable is a class that must be extended to be able to be observed by a IObserver.
+ * Notice that is you prefer composition over inheritance it's better to create a Callback object instead.
+ *
+ * AbstractObservables are thread safe.
+ * @param <T> The type that is passed to IObserver when called.
+ */
+public abstract class AbstractObservable<T>
+{
 
-	private ArrayList<IObserver<T>> currentObservers = new ArrayList<IObserver<T>>();
-	private ArrayList<IObserver<T>> toBeRemovedObservers = new ArrayList<IObserver<T>>();
+	private final List<IObserver<T>> currentObservers = Collections.synchronizedList(new ArrayList<IObserver<T>>());
+	private final List<IObserver<T>> toBeRemovedObservers = Collections.synchronizedList(new ArrayList<IObserver<T>>());
 	private static final Logger LOGGER = Logger.getLogger(AbstractObservable.class.getName());
 
+	/**
+	 * removes all the observer marked for deletion.
+	 * this should only be called when we are sure that no other change is being executed.
+	 */
 	private void fixLists()
 	{
 		if (!toBeRemovedObservers.isEmpty())
@@ -20,15 +34,25 @@ public abstract class AbstractObservable<T> {
 		}
 	}
 
+	/**
+	 * call this method when you wish to notify a change to every observer.
+	 * @param value the value that must be sent to every listener
+	 */
 	protected final synchronized void change(T value)
 	{
 		fixLists();
 
 		LOGGER.log(Level.FINE, "notifying observers");
-		for (int a = 0; a < currentObservers.size(); a++)
-			currentObservers.get(a).notifyChange(value);
+		for (IObserver<T> o : currentObservers)
+			o.notifyChange(value);
+
+		fixLists();
 	}
 
+	/**
+	 * add a observer to the observer list, there cannot be multiple copies of observers.
+	 * @param obs the observer to be added.
+	 */
 	public final synchronized void addObserver(IObserver<T> obs)
 	{
 		if (!currentObservers.contains(obs)) {
@@ -41,6 +65,10 @@ public abstract class AbstractObservable<T> {
 		}
 	}
 
+	/**
+	 * mark an observer for deletion, it will be deleted the next time change is called.
+	 * @param obs the observer to be marked
+	 */
 	public final synchronized void removeObserver(IObserver<T> obs)
 	{
 		if (!toBeRemovedObservers.contains(obs) && currentObservers.contains(obs)) {
@@ -54,12 +82,18 @@ public abstract class AbstractObservable<T> {
 		}
 	}
 
+	/**
+	 * mark all current existing observer for deletion
+	 */
 	public final synchronized void clearObserver()
 	{
 		LOGGER.log(Level.FINE, "marking all observer for removal");
 		toBeRemovedObservers.addAll(currentObservers);
 	}
 
+	/**
+	 * @return The number of observer that will be called the next time change is called.
+	 */
 	public final synchronized int getObserversCount()
 	{
 		return currentObservers.size() - toBeRemovedObservers.size();

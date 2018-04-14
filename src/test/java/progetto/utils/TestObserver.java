@@ -9,7 +9,7 @@ public class TestObserver extends TestCase {
 
 	public void testAttach()
 	{
-		ObserverStub obs = new ObserverStub();
+		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
 		s.triggerChange("val");
@@ -24,7 +24,7 @@ public class TestObserver extends TestCase {
 
 	public void testDetach()
 	{
-		ObserverStub obs = new ObserverStub();
+		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
 
@@ -42,7 +42,7 @@ public class TestObserver extends TestCase {
 
 	public void testClear()
 	{
-		ObserverStub obs = new ObserverStub();
+		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
 
