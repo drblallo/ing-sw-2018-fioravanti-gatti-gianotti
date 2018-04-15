@@ -19,6 +19,7 @@ public abstract class AbstractObservable<T>
 	private final List<IObserver<T>> currentObservers = Collections.synchronizedList(new ArrayList<IObserver<T>>());
 	private final List<IObserver<T>> toBeRemovedObservers = Collections.synchronizedList(new ArrayList<IObserver<T>>());
 	private static final Logger LOGGER = Logger.getLogger(AbstractObservable.class.getName());
+	private int suspensions = 0;
 
 	/**
 	 * removes all the observer marked for deletion.
@@ -43,9 +44,11 @@ public abstract class AbstractObservable<T>
 		fixLists();
 
 		LOGGER.log(Level.FINE, "notifying observers");
-		for (IObserver<T> o : currentObservers)
-			o.notifyChange(value);
 
+		if (!isSuspended()) {
+			for (IObserver<T> o : currentObservers)
+				o.notifyChange(value);
+		}
 		fixLists();
 	}
 
@@ -98,5 +101,35 @@ public abstract class AbstractObservable<T>
 	{
 		return currentObservers.size() - toBeRemovedObservers.size();
 	}
+
+	/**
+	 * prevent the observable from notify changes.
+	 * if it's called twice then it must be resumed twice
+	 */
+	public final void stop()
+	{
+		suspensions++;
+	}
+
+	/**
+	 * resume the notifications
+	 */
+	public final void start()
+	{
+		if (suspensions > 0)
+			suspensions--;
+		else
+			LOGGER.log(Level.FINE, "tried to restart the observable too many times");
+	}
+
+	/**
+	 *
+	 * @return true if the observable is suspended
+	 */
+	public final boolean isSuspended()
+	{
+		return (suspensions > 0);
+	}
+
 
 }

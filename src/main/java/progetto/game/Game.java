@@ -9,11 +9,6 @@ public final class Game {
 		throw new UnsupportedOperationException();
 	}
 
-	public Game(String fullState)
-	{
-		throw new UnsupportedOperationException();
-	}
-
 	public CommandQueue getCommandQueue() {
 		return commandQueue;
 	}

@@ -1,11 +1,16 @@
 package progetto.commandline;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+import progetto.network.NetworkSettings;
 
-public class TestEsempio extends TestCase{
+import static org.junit.Assert.assertEquals;
 
+public class TestEsempio {
+
+	@Test
 	public void testSample()
 	{
-		assertEquals(true, true);
+		NetworkSettings sett = new NetworkSettings();
+		assertEquals(42, sett.getEasterEgg());
 	}
 }

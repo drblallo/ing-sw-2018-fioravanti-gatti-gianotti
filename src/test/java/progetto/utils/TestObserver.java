@@ -2,8 +2,6 @@ package progetto.utils;
 
 import junit.framework.TestCase;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TestObserver extends TestCase {
 
@@ -37,6 +35,27 @@ public class TestObserver extends TestCase {
 		assertEquals(s.getObserversCount(), 0);
 		s.triggerChange("val");
 		assertEquals(obs.currentVal,"NONE");
+
+	}
+
+	public void testStop()
+	{
+		ObserverStub<String> obs = new ObserverStub<String>();
+		ObservableStub s = new ObservableStub();
+		obs.currentVal = "NONE";
+		s.triggerChange("val");
+		assertEquals(obs.currentVal, "NONE");
+		assertEquals(s.getObserversCount(), 0);
+
+		s.addObserver(obs);
+		assertEquals(s.getObserversCount(), 1);
+		s.stop();
+		s.triggerChange("val");
+		s.start();
+		s.start();
+		assertEquals(obs.currentVal,"NONE");
+		s.triggerChange("val");
+		assertEquals(obs.currentVal,"val");
 
 	}
 

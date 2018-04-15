@@ -5,7 +5,7 @@ package progetto.network;
  * It is assumed that the sequence of string is enough to ensurer that the state of the object is unique.
  *
  */
-public interface ISyncInterface {
+public interface ISync {
 
 	/**
 	 * Send the string to process
@@ -20,8 +20,9 @@ public interface ISyncInterface {
 	/**
 	 *
 	 * @return hash of the state of the object.
+	 * @param index index of state of the requested hash
 	 */
-	String getHash();
+	String getHash(int index);
 
 	/**
 	 *
@@ -34,6 +35,11 @@ public interface ISyncInterface {
 	 */
 	String getString(int index);
 
+	/**
+	 *
+	 * @return latest hash
+	 */
+	String getHash();
 	/**
 	 * reset the state of the object as if it was just been created.
 	 */

@@ -20,14 +20,6 @@ public abstract class AbstractGameAction implements Serializable
 	}
 
 	/**
-	 * Default constructor used while deserializing this class.
-	 */
-	private AbstractGameAction()
-	{
-
-	}
-
-	/**
 	 *
 	 * @return the name of this class.
 	 */
