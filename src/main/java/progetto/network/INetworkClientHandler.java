@@ -5,13 +5,9 @@ import progetto.utils.Callback;
 public interface INetworkClientHandler {
 
 	void disconnect(boolean disconectGracefully);
-	int getPlayerID();
-	void setID(int id);
 
 	void sendMessage(String message);
-	void sendSyncCommand(String syncCommand);
-	void checkSyncronization();
-	void sendServerState();
+	void sendEnforce(AbstractEnforce enforce);
 
 	/**
 	 *
@@ -25,4 +21,5 @@ public interface INetworkClientHandler {
 	 */
 	Callback<INetworkClientHandler> getConnectionLostCallback();
 
+	Callback<AbstractRequest> getRequestCallback();
 }

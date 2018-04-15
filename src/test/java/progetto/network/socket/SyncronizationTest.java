@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import progetto.network.INetworkClient;
+import progetto.network.ClientConnection;
 import progetto.network.NetworkSettings;
 import progetto.utils.ObserverStub;
 
@@ -38,15 +38,15 @@ public class SyncronizationTest {
 		stub.wait(50);
 		stub.wait(50);
 		int roomID = stub.socketClient.getServerState().getRooms().get(0).getRoomID();
-		stub.socketClient.sendSyncCommand("SyncMeUp");
+		stub.socketClient.sendSynString("SyncMeUp");
 		stub.socketClient.joinGame(roomID, "randomName");
 		stub.socketClient2.joinGame(roomID, "extraName");
 
 
 		stub.wait(100);
 		for (int a = 0; a < NetworkSettings.CHECK_SYNC_RATEO + 1; a++) {
-			stub.socketClient.sendSyncCommand("SyncMeUp");
-			stub.socketClient.sendSyncCommand("SyncMeUpNot");
+			stub.socketClient.sendSynString("SyncMeUp");
+			stub.socketClient.sendSynString("SyncMeUpNot");
 			stub.wait(100);
 			Assert.assertEquals(
 					stub.socketClient.getSynchronizedObject().getHash(a+1),
@@ -76,13 +76,13 @@ public class SyncronizationTest {
 		stub.socketClient.joinGame(roomID, "randomName");
 		stub.socketClient2.joinGame(roomID, "extraName");
 
-		ObserverStub<INetworkClient> obs = new ObserverStub<INetworkClient>();
+		ObserverStub<ClientConnection> obs = new ObserverStub<ClientConnection>();
 		obs.currentVal = null;
 		stub.socketClient2.getSyncronizationFailedCallback().addObserver(obs);
 
 		stub.wait(500);
 		for (int a = 0; a < NetworkSettings.CHECK_SYNC_RATEO + 1; a++) {
-			stub.socketClient.sendSyncCommand("SyncMeUp");
+			stub.socketClient.sendSynString("SyncMeUp");
 			stub.wait(100);
 			stub.socketClient2.getSynchronizedObject().clear();
 			Assert.assertNotEquals(
@@ -118,12 +118,12 @@ public class SyncronizationTest {
 	public void testTTL()
 	{
 		ObserverStub<AbstractSocketManager> obs = new ObserverStub<AbstractSocketManager>();
-		ObserverStub<INetworkClient> obs2 = new ObserverStub<INetworkClient>();
+		ObserverStub<ClientConnection> obs2 = new ObserverStub<ClientConnection>();
 		obs.currentVal = null;
 
-		stub.socketClient.getConnectionLostCallback().addObserver(obs2);
-		stub.socketClient.getConnectionClosedCallback().addObserver(obs);
-		stub.socketClient.disconnect(false);
+		stub.socketClient.getConnectionEndedCallback().addObserver(obs2);
+		stub.scl.getConnectionClosedCallback().addObserver(obs);
+		stub.scl.disconnect(false);
 		stub.wait(NetworkSettings.DEFAULT_TIME_TO_LIVE * (NetworkSettings.MAX_TIME_TO_LIVE_SKIPPED + 2));
 		Assert.assertEquals(false, stub.socketClient.isRunning());
 		Assert.assertEquals(true, stub.socketClient2.isRunning());

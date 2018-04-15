@@ -1,7 +1,5 @@
 package progetto.network;
 
-import progetto.network.connectionstate.Room;
-import progetto.network.connectionstate.ServerState;
 import progetto.utils.Callback;
 
 public interface INetworkClient {
@@ -20,46 +18,11 @@ public interface INetworkClient {
 
 	/**
 	 *
-	 * @param roomName tries to create a room on the server
-	 */
-	void createGame(String roomName);
-
-	/**
-	 *  tries to join a room
-	 * @param playerName the name with which you will be called.
-	 */
-	void joinGame(int roomID, String playerName);
-
-	/**
-	 *
-	 * @return the current room
-	 */
-	Room getRoom();
-
-	/**
-	 * tries to pick a particular chair
-	 * @param chairID
-	 */
-	void pickChair(int chairID);
-
-	/**
-	 * send a message to a particular player
-	 * @param message
-	 * @param targetID
-	 */
-	void sendPrivateMessage(String message, int targetID);
-
-	/**
-	 * set the player ready to start.
-	 * @param ready
-	 */
-	void setReady(boolean ready);
-
-	/**
-	 *
 	 * @return the callaback that is called every time a message is received
 	 */
 	Callback<String> getMessageCallback();
+
+	Callback<AbstractEnforce> getEnforceCallback();
 
 	/**
 	 *
@@ -67,26 +30,7 @@ public interface INetworkClient {
 	 */
 	Callback<INetworkClient> getConnectionLostCallback();
 
-	/**
-	 * ask the server for a new copy of the server state
-	 */
-	void fetchServerState();
 
-	/**
-	 * send a action that must be recieved by every player
-	 * @param command
-	 */
-	void sendSyncCommand(String command);
+	void sendRequest(AbstractRequest request);
 
-	/**
-	 * return the last received server state
-	 * @return
-	 */
-	ServerState getServerState();
-
-	int getChair();
-
-	int getPlayerID();
-
-	boolean isReady();
 }

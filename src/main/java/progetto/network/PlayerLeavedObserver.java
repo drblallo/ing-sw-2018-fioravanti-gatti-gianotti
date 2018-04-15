@@ -2,17 +2,21 @@ package progetto.network;
 
 import progetto.utils.IObserver;
 
-class PlayerLeavedObserver implements IObserver<INetworkClientHandler>
+/**
+ * this is the class that is attached by the network server to a module
+ * this is called when a player drops out and removes it from the connections manager
+ */
+final class PlayerLeavedObserver implements IObserver<ServerConnection>
 {
-	private NetworkServer server;
+	private ConnectionsManager server;
 
-	public PlayerLeavedObserver(NetworkServer s, INetworkModule mod)
+	public PlayerLeavedObserver(ConnectionsManager s, ServerConnection con)
 	{
 		server = s;
-		mod.getPlayerLeavedCallback().addObserver(this);
+		con.getConnectionLostCallback().addObserver(this);
 	}
 
-	public void notifyChange(INetworkClientHandler ogg) {
-		server.getConnectionsManager().remove(ogg);
+	public void notifyChange(ServerConnection ogg) {
+		server.remove(ogg);
 	}
 }

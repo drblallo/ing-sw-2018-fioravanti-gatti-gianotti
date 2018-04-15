@@ -1,5 +1,7 @@
 package progetto.network;
 
+import java.util.List;
+
 /**
  * This interface is used to connect the network to whatever we want to keep synchronized across the net.
  * It is assumed that the sequence of string is enough to ensurer that the state of the object is unique.
@@ -44,4 +46,6 @@ public interface ISync {
 	 * reset the state of the object as if it was just been created.
 	 */
 	void clear();
+
+	List<String> getAllString();
 }

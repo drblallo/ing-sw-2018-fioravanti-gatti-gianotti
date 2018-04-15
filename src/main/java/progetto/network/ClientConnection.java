@@ -1,34 +1,46 @@
-package progetto.network.socket.client;
+package progetto.network;
 
-import progetto.network.INetworkClient;
-import progetto.network.ISync;
 import progetto.network.connectionstate.Room;
 import progetto.network.connectionstate.ServerState;
-import progetto.network.socket.AbstractSocketManager;
-import progetto.network.socket.server.*;
 import progetto.utils.Callback;
+import progetto.utils.IObserver;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * A socket client is a implementation of INetwork client, it is used on the client side to communicate with the server
- */
-public final class SocketClient extends AbstractSocketManager implements INetworkClient {
+public final class ClientConnection
+{
+	private final class ConnectionClosedObserver implements IObserver<INetworkClient>
+	{
+		private ClientConnection con;
+		private ConnectionClosedObserver(ClientConnection c)
+		{
+			con = c;
+		}
 
-	private static final Logger LOGGER = Logger.getLogger( SocketClient.class.getName() );
+
+		public void notifyChange(INetworkClient ogg) {
+			con.connectionEndedCallback.call(con);
+		}
+	}
+
+	private static final Logger LOGGER = Logger.getLogger( ClientConnection.class.getName() );
 	private ServerState serverState = new ServerState();
 	private int playerID = -1;
 	private Room roomInfo = new Room();
-	private final Callback<INetworkClient> syncronizationFailedCallback = new Callback<INetworkClient>();
-	private final Callback<INetworkClient> connectionLostCallback = new Callback<INetworkClient>();
 	private final ISync synchronizedObj;
+	private final Callback<ClientConnection> syncronizationFailedCallback = new Callback<ClientConnection>();
+	private final Callback<ClientConnection> connectionEndedCallback = new Callback<ClientConnection>();
 
-	public SocketClient(ISync ogg, String ip, int port)
+	private final INetworkClient handler;
+
+	public ClientConnection(INetworkClient h, ISync ogg)
 	{
-		super(ip, port);
+		handler = h;
 		synchronizedObj = ogg;
+		h.getEnforceCallback().addObserver(new EnforceObserver(this));
+		h.getConnectionLostCallback().addObserver(new ConnectionClosedObserver(this));
 	}
 
 	/**
@@ -40,15 +52,18 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 		return synchronizedObj;
 	}
 
+	public Callback<ClientConnection> getConnectionEndedCallback() {
+		return connectionEndedCallback;
+	}
+
 	/**
 	 *	sets the server state to the provided state.
-	 *	used by ServerStateTransferCommand to provided the client with rooms info.
 	 * @param state new state of the server
 	 */
 	final void setServerState(ServerState state)
 	{
 		serverState = state;
-		LOGGER.log(Level.INFO, "Received server state information");
+		LOGGER.log(Level.FINE, "Received server state information");
 	}
 
 	/**
@@ -64,50 +79,30 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 	 */
 	public final void createGame(String roomName)
 	{
-		LOGGER.log(Level.INFO, "Trying to create a room");
-		sendCommand(new CreateRoomCommand(roomName));
+		LOGGER.log(Level.FINE, "Trying to create a room");
+
+		handler.sendRequest(new RoomCreationRequest(roomName));
 	}
+
 
 	/**
 	 * callback called every time a discrepancy in synchronization is noted
 	 * @return the instance of socket client that failed the synchronization
 	 */
-	public final Callback<INetworkClient> getSyncronizationFailedCallback() {
+	public final Callback<ClientConnection> getSyncronizationFailedCallback() {
 		return syncronizationFailedCallback;
-	}
-
-	/**
-	 * return the callback that is called every time the connections is closed.
-	 * @return the instance of the client that lost connection
-	 */
-	public final Callback<INetworkClient> getConnectionLostCallback()
-	{
-		return connectionLostCallback;
 	}
 
 	/**
 	 *	ask the server for the current state of the server
 	 */
 	public void fetchServerState() {
-		sendCommand(new FetchServerStateCommand());
-	}
-
-	public void sendSyncCommand(String command) {
-		LOGGER.log(Level.INFO,"Sending sync command to server {0}", command);
-		sendCommand(new SendSynchString(command));
+		handler.sendRequest(new FetchServerStateRequest());
 	}
 
 	public int getPlayerID()
 	{
 		return playerID;
-	}
-
-	/**
-	 * called when the connection gets closed.
-	 */
-	protected final void onTearDown()
-	{
-		connectionLostCallback.call(this);
 	}
 
 	/**
@@ -117,8 +112,8 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 	 */
 	public final void joinGame(int roomID, String playerName)
 	{
-		LOGGER.info("Trying to join room");
-		sendCommand(new JoinRoomCommand(roomID, playerName));
+		LOGGER.fine("Trying to join room");
+		handler.sendRequest(new JoinRoomRequest(roomID, playerName));
 	}
 
 	/**
@@ -134,7 +129,7 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 	 * @param chairID the number of the chair you are trying to pick
 	 */
 	public final void pickChair(int chairID) {
-		sendCommand(new PickChairCommand(chairID));
+		handler.sendRequest(new PickChairRequest(chairID));
 	}
 
 	/**
@@ -144,7 +139,7 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 	 */
 	public final void sendPrivateMessage(String message, int targetID)
 	{
-		sendCommand(new PrivateMessageCommand(getPlayerName(), message, targetID));
+		handler.sendRequest(new SendPrivateMessageRequest(getPlayerName()+": "+ message, targetID));
 	}
 
 	/**
@@ -164,7 +159,7 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 	 * @param ready new state of the ready value
 	 */
 	public final void setReady(boolean ready) {
-		sendCommand(new SetReadyCommand(ready));
+		handler.sendRequest(new SetReadyRequest(ready));
 	}
 
 	/**
@@ -193,7 +188,7 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 	 * sends a string to the syncObject.
 	 * @param s
 	 */
-	final void processSyncCommand(String s)
+	final synchronized void processSyncCommand(String s)
 	{
 		getSynchronizedObject().sendString(s);
 	}
@@ -203,7 +198,7 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 	 * @param state index of hash that must be compared
 	 * @param hash hash received by the server
 	 */
-	final void checkSync(int state, String hash)
+	final synchronized void checkSync(int state, String hash)
 	{
 		ISync ogg = getSynchronizedObject();
 		if (!ogg.getHash(state).equals(hash))
@@ -214,18 +209,27 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 
 	}
 
+	public Callback<String> getMessageCallback()
+	{
+		return handler.getMessageCallback();
+	}
+
 	/**
 	 * reload the entire state of the syncObject
 	 * @param commands new state
 	 */
-	final void setFullState(ArrayList<String> commands)
+	final synchronized void setFullState(List<String> commands)
 	{
-		LOGGER.info("Receiving full state from server");
+		LOGGER.fine("Receiving full state from server");
 		getSynchronizedObject().clear();
 		for (String s : commands)
 			getSynchronizedObject().sendString(s);
 	}
 
+	/**
+	 *
+	 * @return the chair currently used by this chair, -1 if he is not in a room
+	 */
 	public int getChair()
 	{
 		if (roomInfo.getInfoFromID(playerID) == null)
@@ -233,10 +237,31 @@ public final class SocketClient extends AbstractSocketManager implements INetwor
 		return roomInfo.getInfoFromID(playerID).getChairID();
 	}
 
+	/**
+	 *
+	 * @return the ready status of this player, false if he is not in a room
+	 */
 	public boolean isReady()
 	{
 		if (roomInfo.getInfoFromID(playerID) == null)
 			return false;
 		return roomInfo.getInfoFromID(playerID).isReady();
 	}
+
+	public void sendSynString(String s)
+	{
+		handler.sendRequest(new SendSyncStringRequest(s));
+	}
+
+	public void disconnect()
+	{
+		handler.disconnect(true);
+	}
+
+	public boolean isRunning()
+	{
+		return handler.isRunning();
+	}
+
+
 }

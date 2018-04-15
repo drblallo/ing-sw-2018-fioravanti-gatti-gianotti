@@ -145,7 +145,7 @@ public final class PlayerInfo implements Serializable{
 	}
 
 	/**
-	 * @return a clone of this object
+	 * @return a clone of this object, does not clone observer
 	 */
 	public synchronized PlayerInfo deepCopy()
 	{

@@ -136,7 +136,7 @@ public final class Room implements Serializable{
 	{
 		PlayerInfo info = new PlayerInfo(playerName, playerID);
 		players.add(info);
-		LOGGER.info("Player added to room");
+		LOGGER.fine("Player added to room");
 		info.getChangedEvent().addObserver(obs);
 		playerJoinEvent.call(playerID);
 		changeEvent.call(this);
@@ -152,7 +152,7 @@ public final class Room implements Serializable{
 		if (info == null)
 			return;
 
-		LOGGER.info("Player removed from room");
+		LOGGER.fine("Player removed from room");
 		players.remove(info);
 		info.getChangedEvent().removeObserver(obs);
 		playerLeaveEvent.call(info.getPlayerID());
@@ -223,6 +223,10 @@ public final class Room implements Serializable{
 		}
 	}
 
+	/**
+	 *
+	 * @return a deep copy of this object, callbacks are not counted.
+	 */
 	public synchronized Room deepCopy()
 	{
 		Room r = new Room();

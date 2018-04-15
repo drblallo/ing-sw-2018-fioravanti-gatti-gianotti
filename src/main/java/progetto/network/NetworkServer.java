@@ -33,8 +33,8 @@ public class NetworkServer {
 		}
 
 		LOGGER.fine("Closing all handlers");
-		for (INetworkClientHandler h : connectionsManager.getHandlers())
-			h.disconnect(true);
+		for (ServerConnection h : connectionsManager.getHandlers())
+			h.disconnect();
 
 		LOGGER.fine("Stopping all modules");
 		for (int a = 0; a < modules.size(); a++)
@@ -88,7 +88,7 @@ public class NetworkServer {
 	{
 		if (isRunning())
 		{
-			List<INetworkClientHandler> ls = connectionsManager.getHandlers();
+			List<ServerConnection> ls = connectionsManager.getHandlers();
 			for (int a = 0; a < ls.size(); a++)
 				ls.get(a).sendMessage(message);
 		}
@@ -106,7 +106,6 @@ public class NetworkServer {
 		}
 		LOGGER.info("adding a module to the network");
 		new PlayerJoinedObserver(this, module);
-		new PlayerLeavedObserver(this, module);
 
 		modules.add(module);
 		if (isRunning())

@@ -1,11 +1,10 @@
 package progetto.network.socket;
 
 import org.junit.Test;
+import progetto.network.ClientConnection;
 import progetto.network.NetworkServer;
 import progetto.network.SyncFactoryStub;
 import progetto.network.SyncStub;
-import progetto.network.socket.client.SocketClient;
-import progetto.network.socket.server.SocketServer;
 import progetto.utils.ObserverStub;
 
 import java.util.concurrent.CountDownLatch;
@@ -23,10 +22,10 @@ public class SocketTest
 		stub.wait(50);
 		assertEquals(true, stub.socketServer.isRunning());
 
-		SocketClient s = new SocketClient(new SyncStub(), "127.0.0.1", 8527);
+		ClientConnection s = new ClientConnection(new SocketClient("127.0.0.1", 8527), new SyncStub());
 		assertEquals(true, s.isRunning());
 		assertEquals(true, stub.socketServer.isRunning());
-		s.disconnect(true);
+		s.disconnect();
 		s.sendPrivateMessage("", 0);
 		stub.socketServer.stop();
 
@@ -43,7 +42,8 @@ public class SocketTest
 	{
 		NetworkServer stock = new NetworkServer(new SyncFactoryStub());
 		stock.start();
-		SocketServer server = new SocketServer(8527, stock);
+		SocketServer server = new SocketServer(8527);
+		stock.addModules(server);
 		assertEquals(true, server.isRunning());
 		stock.stop();
 		CountDownLatch latch = new CountDownLatch(1);
@@ -62,7 +62,8 @@ public class SocketTest
 		stub.startServer();
 		assertEquals(true, stub.socketServer.isRunning());
 
-		SocketClient s = new SocketClient(new SyncStub(), "127.0.0.1", 8527);
+
+		ClientConnection s = new ClientConnection(new SocketClient("127.0.0.1", 8527), new SyncStub());
 
 		stub.wait(50);
 		assertEquals(true, s.isRunning());
@@ -76,7 +77,7 @@ public class SocketTest
 		stub.wait(50);
 		assertEquals("testMessage", observerStub.currentVal);
 
-		s.disconnect(true);
+		s.disconnect();
 		stub.wait(50);
 		stub.tearDown();
 		stub.wait(50);

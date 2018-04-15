@@ -119,7 +119,7 @@ public abstract class AbstractSocketManager implements Runnable
 	 */
 	private final synchronized void tearDown()
 	{
-		LOGGER.info("tearing down a connection");
+		LOGGER.fine("tearing down a connection");
 		keepAliveTimer.cancel();
 		keepAliveTimer.purge();
 		onTearDown();

@@ -2,7 +2,11 @@ package progetto.network;
 
 import progetto.utils.IObserver;
 
-class PlayerJoinedObserver implements IObserver<INetworkClientHandler> {
+/**
+ * attached to new modules
+ * when a player joins the game it gets addedd to the connection manager
+ */
+final class PlayerJoinedObserver implements IObserver<INetworkClientHandler> {
 
 	private NetworkServer server;
 
@@ -14,6 +18,5 @@ class PlayerJoinedObserver implements IObserver<INetworkClientHandler> {
 
 	public void notifyChange(INetworkClientHandler ogg) {
 		server.getConnectionsManager().add(ogg);
-		ogg.setID(server.getServerState().getUnusedID());
 	}
 }

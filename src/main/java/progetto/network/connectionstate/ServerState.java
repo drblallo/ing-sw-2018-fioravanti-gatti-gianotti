@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class holds all the information at room level that are need to the server.
@@ -13,10 +15,14 @@ import java.util.List;
  * A server is composed by a list of room. Each room holds players.
  */
 public final class ServerState implements Serializable{
+
+	private static final Logger LOGGER = Logger.getLogger(ServerState.class.getName());
+
 	private List<Room> rooms = Collections.synchronizedList(new ArrayList<Room>());
 	private int lastID = 0;
 	private int lastPlayerID = 0;
 	private transient Callback<Room> createRoomEvent = new Callback<Room>();
+	private transient Callback<Room> deletedRoomEvent = new Callback<Room>();
 	private transient Callback<Integer> playerChangedRoom = new Callback<Integer>();
 
 	/**
@@ -59,6 +65,14 @@ public final class ServerState implements Serializable{
 	 */
 	public Callback<Room> getCreateRoomEvent() {
 		return createRoomEvent;
+	}
+
+	/**
+	 *
+	 * @return the callback that is called when a room is deleted
+	 */
+	public Callback<Room> getDeletedRoomEvent() {
+		return deletedRoomEvent;
 	}
 
 	/**
@@ -129,6 +143,7 @@ public final class ServerState implements Serializable{
 				r.addPlayer(newName, playerID);
 
 		}
+		LOGGER.log(Level.FINE, "placed player in room {0}", roomID);
 		playerChangedRoom.call(playerID);
 	}
 
@@ -138,9 +153,14 @@ public final class ServerState implements Serializable{
 	 */
 	public synchronized int getUnusedID()
 	{
+		LOGGER.log(Level.FINE, "giving out a new id: {0}", lastPlayerID);
 		return lastPlayerID++;
 	}
 
+	/**
+	 * @param playerID id of the requested player
+	 * @return the requested player if it exists inside a room, null otherwise
+	 */
 	public synchronized PlayerInfo getPlayer(int playerID)
 	{
 		for (Room r : rooms) {
@@ -150,6 +170,10 @@ public final class ServerState implements Serializable{
 		return null;
 	}
 
+
+	/**
+	 * @return a deep copy of the object, callbacks are not included
+	 */
 	public synchronized ServerState deepCopy()
 	{
 		ServerState state = new ServerState();
@@ -158,6 +182,25 @@ public final class ServerState implements Serializable{
 		for (Room r : rooms)
 			state.rooms.add(r.deepCopy());
 		return state;
+	}
+
+	/**
+	 * deletes a room from this server
+	 */
+	public synchronized void deleteRoom(int roomID)
+	{
+		Room r = getRoom(roomID);
+		if (r != null) {
+			for (PlayerInfo p : r.getPlayers()) {
+				r.removePlayer(p.getPlayerID());
+				playerChangedRoom.call(p.getPlayerID());
+			}
+			LOGGER.log(Level.FINE, "room deleted");
+			rooms.remove(r);
+			r.getChangeEvent().call(r);
+
+			deletedRoomEvent.call(r);
+		}
 	}
 
 }

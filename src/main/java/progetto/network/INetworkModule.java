@@ -21,5 +21,4 @@ public interface INetworkModule {
 
 
 	Callback<INetworkClientHandler> getPlayerJoinedCallback();
-	Callback<INetworkClientHandler> getPlayerLeavedCallback();
 }

@@ -1,10 +1,8 @@
-package progetto.network.socket.server;
+package progetto.network.socket;
 
 import progetto.network.INetworkClientHandler;
 import progetto.network.INetworkModule;
-import progetto.network.NetworkServer;
 import progetto.utils.Callback;
-import progetto.utils.IObserver;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -19,19 +17,16 @@ public final class SocketServer implements INetworkModule, Runnable{
 
 	private static final Logger LOGGER = Logger.getLogger( SocketServer.class.getName() );
 	private ServerSocket server = null;
-	private NetworkServer netServer;
 	private Callback<INetworkClientHandler> playerJoinedCallback = new Callback<INetworkClientHandler>();
-	private Callback<INetworkClientHandler> playerLeavedCallback = new Callback<INetworkClientHandler>();
 	private final int localPort;
 
-	public SocketServer(int port, NetworkServer s) {
+	public SocketServer(int port) {
 		localPort = port;
-		netServer = s;
-
-
-		netServer.addModules(this);
 	}
 
+	/**
+	 * closes the server
+	 */
 	public synchronized void stop() {
 		if (!isRunning())
 		{
@@ -48,6 +43,9 @@ public final class SocketServer implements INetworkModule, Runnable{
 		}
 	}
 
+	/**
+	 * start the server, create a listening thread
+	 */
 	public void start() {
 		if (server != null && !server.isClosed() && server.isBound())
 		{
@@ -70,17 +68,21 @@ public final class SocketServer implements INetworkModule, Runnable{
 		LOGGER.info("Started a socket server");
 	}
 
+	/**
+	 *
+	 * @return true if the server is running, false otherwise
+	 */
 	public synchronized boolean isRunning()
 	{
 		return server != null && server.isBound() && !server.isClosed();
 	}
 
+	/**
+	 *
+	 * @return the callback that is called every time a new player joins the game
+	 */
 	public Callback<INetworkClientHandler> getPlayerJoinedCallback() {
 		return playerJoinedCallback;
-	}
-
-	public Callback<INetworkClientHandler> getPlayerLeavedCallback() {
-		return playerLeavedCallback;
 	}
 
 	public void run() {
@@ -96,12 +98,8 @@ public final class SocketServer implements INetworkModule, Runnable{
 		try
 		{
 			Socket s = server.accept();
-			ClientHandler cl = new ClientHandler(s, netServer);
-			cl.getConnectionLostCallback().addObserver(new IObserver<INetworkClientHandler>() {
-				public void notifyChange(INetworkClientHandler ogg) {
-					playerLeavedCallback.call(ogg);
-				}
-			});
+			ClientHandler cl = new ClientHandler(s);
+
 			playerJoinedCallback.call(cl);
 
 		}

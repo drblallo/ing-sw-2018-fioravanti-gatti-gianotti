@@ -1,6 +1,7 @@
 package progetto.network;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,5 +50,12 @@ public class SyncStub implements ISync
 	public synchronized void clear() {
 		ls.clear();
 		full = "";
+	}
+
+	public synchronized List<String> getAllString()
+	{
+		ArrayList<String> s = new ArrayList<String>();
+		s.addAll(ls);
+		return s;
 	}
 }

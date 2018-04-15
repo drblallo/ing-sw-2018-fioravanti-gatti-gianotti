@@ -1,7 +1,9 @@
 package progetto.network.socket.client;
 
 import junit.framework.TestCase;
+import progetto.network.ClientConnection;
 import progetto.network.SyncStub;
+import progetto.network.socket.SocketClient;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +13,7 @@ public class TestSocketClient extends TestCase
 
 	public void testConnectFailure()
 	{
-		SocketClient c = new SocketClient(new SyncStub(), "127.0.0.1", 8527);
+		ClientConnection c = new ClientConnection(new SocketClient("127.0.0.1", 8527), new SyncStub());
 		c.sendPrivateMessage("test", 0);
 		CountDownLatch latch = new CountDownLatch(1);
 		try
@@ -23,7 +25,7 @@ public class TestSocketClient extends TestCase
 
 		}
 		assertEquals(c.isRunning(), false);
-		c.disconnect(false);
+		c.disconnect();
 		try
 		{
 			latch.await(50, TimeUnit.MILLISECONDS);

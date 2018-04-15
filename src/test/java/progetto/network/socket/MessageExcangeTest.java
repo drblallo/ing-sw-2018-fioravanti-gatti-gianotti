@@ -62,6 +62,9 @@ public class MessageExcangeTest {
 		assertEquals(true, stub.socketClient.isReady());
 		assertEquals(true, stub.networkServer.getServerState().playerExists(info.getPlayerID()));
 		stub.wait(50);
+		stub.networkServer.getServerState().deleteRoom(roomID);
+		stub.wait(500);
+		assertEquals(-1, stub.socketClient.getRoom().getRoomID());
 	}
 
 	@Test
@@ -132,7 +135,7 @@ public class MessageExcangeTest {
 		stub.socketClient.getMessageCallback().addObserver(obs);
 		stub.socketClient.sendPrivateMessage("Message", stub.socketClient.getPlayerID());
 		stub.socketClient.sendPrivateMessage("MEssage", 1000);
-		stub.wait(50);
+		stub.wait(100);
 		assertEquals("randomName: Message", obs.currentVal);
 	}
 
