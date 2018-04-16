@@ -17,10 +17,10 @@ import java.util.logging.Logger;
  * T is the on connection lost callback type
  *
  */
-public abstract class AbstractSocketManager implements Runnable
+abstract class AbstractSocket implements Runnable
 {
 
-	private static final Logger LOGGER = Logger.getLogger( AbstractSocketManager.class.getName() );
+	private static final Logger LOGGER = Logger.getLogger( AbstractSocket.class.getName() );
 
 	private Socket socket;
 	private ObjectInputStream in;
@@ -28,13 +28,13 @@ public abstract class AbstractSocketManager implements Runnable
 	private final Timer keepAliveTimer = new Timer();
 	private int ttl;
 	private final Callback<String> messageCallback = new Callback<String>();
-	private final Callback<AbstractSocketManager> connectionLostCallback = new Callback<AbstractSocketManager>();
+	private final Callback<AbstractSocket> connectionLostCallback = new Callback<AbstractSocket>();
 
 
 	/**
 	 * Builds a socketManager from ip and port
 	 */
-	public AbstractSocketManager(String target, int port)
+	AbstractSocket(String target, int port)
 	{
 
 		try
@@ -54,7 +54,7 @@ public abstract class AbstractSocketManager implements Runnable
 	 * Builds a socketManager around a already existing socket
 	 * @param sock the socket that will comply to this behaviour
 	 */
-	public AbstractSocketManager(Socket sock)
+	AbstractSocket(Socket sock)
 	{
 		socket = sock;
 		setUp();
@@ -64,7 +64,7 @@ public abstract class AbstractSocketManager implements Runnable
 	 *
 	 * @return the callback that is called when the timer signals that we are out of max time.
 	 */
-	public final Callback<AbstractSocketManager> getConnectionClosedCallback()
+	public final Callback<AbstractSocket> getConnectionClosedCallback()
 	{
 		return connectionLostCallback;
 	}

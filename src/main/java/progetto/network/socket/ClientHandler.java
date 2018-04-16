@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * This class implements the INetworkClientHandler for the socket implementation
  */
-final class ClientHandler extends AbstractSocketManager implements INetworkClientHandler
+final class ClientHandler extends AbstractSocket implements INetworkClientHandler
 {
 
 	private static final Logger LOGGER = Logger.getLogger( ClientHandler.class.getName() );

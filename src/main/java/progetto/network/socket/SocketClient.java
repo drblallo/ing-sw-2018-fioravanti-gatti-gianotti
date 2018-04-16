@@ -8,7 +8,7 @@ import progetto.utils.Callback;
 /**
  * A socket client is a implementation of INetwork client, it is used on the client side to communicate with the server
  */
-public final class SocketClient extends AbstractSocketManager implements INetworkClient {
+public final class SocketClient extends AbstractSocket implements INetworkClient {
 
 	private final Callback<INetworkClient> connectionLostCallback = new Callback<INetworkClient>();
 	private final Callback<AbstractEnforce> enforceCallback = new Callback<AbstractEnforce>();

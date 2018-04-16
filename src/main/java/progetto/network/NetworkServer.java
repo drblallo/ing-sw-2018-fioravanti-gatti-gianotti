@@ -49,13 +49,13 @@ public class NetworkServer {
 			LOGGER.warning("Tried to start a already running server");
 			return;
 		}
+		running = true;
 
 		connectionsManager = new ConnectionsManager(factory);
 		LOGGER.info("starting all modules");
 		for (int a = 0; a < modules.size(); a++)
 			modules.get(a).start();
 
-		running = true;
 	}
 
 	/**
