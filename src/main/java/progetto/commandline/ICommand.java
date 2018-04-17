@@ -4,5 +4,5 @@ public interface ICommand {
 
 	String getName();
 	String getHelp();
-	String execute(String params);
+	String execute(String[] params);
 }
