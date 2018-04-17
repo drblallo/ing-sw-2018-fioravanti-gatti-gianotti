@@ -22,11 +22,16 @@ final class ServerConnection {
 		handler = h;
 		handler.getRequestCallback().addObserver(new IObserver<AbstractRequest>() {
 			public void notifyChange(AbstractRequest ogg) {
-				reqQueue.offer(ogg);
+				offerRequest(ogg);
 			}
 		});
 
 		reqQueue.add(new FetchMyIDRequest());
+	}
+
+	public void offerRequest(AbstractRequest req)
+	{
+		reqQueue.offer(req);
 	}
 
 	public boolean isRunning() {

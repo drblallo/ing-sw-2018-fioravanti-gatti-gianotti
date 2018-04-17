@@ -13,14 +13,13 @@ public class NetworkServer implements Runnable {
 	private static final Logger LOGGER = Logger.getLogger(NetworkServer.class.getName());
 	private List<INetworkModule> modules = Collections.synchronizedList(new ArrayList<INetworkModule>());
 	private boolean running = false;
-	private ConnectionsManager connectionsManager;
+	private final ConnectionsManager connectionsManager;
 	private ISyncFactory factory;
 
 	public NetworkServer(ISyncFactory fac) {
 		factory = fac;
 		connectionsManager = new ConnectionsManager(factory);
 	}
-
 
 	/**
 	 * shutdows the server, disconnect every connection
@@ -49,7 +48,6 @@ public class NetworkServer implements Runnable {
 		}
 		running = true;
 
-		connectionsManager = new ConnectionsManager(factory);
 		LOGGER.info("starting all modules");
 		for (int a = 0; a < modules.size(); a++)
 			modules.get(a).start();
@@ -69,12 +67,14 @@ public class NetworkServer implements Runnable {
 	/**
 	 * gets connectionManager
 	 */
-	public ConnectionsManager getConnectionsManager() {
+	private ConnectionsManager getConnectionsManager() {
 		return connectionsManager;
 	}
 
-	public ServerState getServerState() {
-		return connectionsManager.getServerState();
+	public ServerState getServerStateClone() {
+		synchronized (connectionsManager) {
+			return connectionsManager.getServerState().deepCopy();
+		}
 	}
 
 	/**
@@ -83,11 +83,8 @@ public class NetworkServer implements Runnable {
 	 * @param message
 	 */
 	public synchronized void broadcastMessage(String message) {
-		if (isRunning()) {
-			List<ServerConnection> ls = connectionsManager.getHandlers();
-			for (int a = 0; a < ls.size(); a++)
-				ls.get(a).sendMessage(message);
-		}
+		if (isRunning())
+			connectionsManager.broadcast(message);
 	}
 
 
@@ -100,7 +97,7 @@ public class NetworkServer implements Runnable {
 			return;
 		}
 		LOGGER.info("adding a module to the network");
-		new PlayerJoinedObserver(this, module);
+		new PlayerJoinedObserver(connectionsManager, module);
 
 		modules.add(module);
 		if (isRunning()) {

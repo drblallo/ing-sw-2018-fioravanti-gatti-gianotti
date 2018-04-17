@@ -24,6 +24,7 @@ public final class ConnectionsManager {
 	private final Map<Integer, ISync> syncMan = new ConcurrentHashMap<Integer, ISync>();
 	private final Map<Integer, ServerConnection> handlers = new ConcurrentHashMap<Integer, ServerConnection>();
 	private final RoomChangedObserver roomChangedObserver = new RoomChangedObserver(this);
+
 	ConnectionsManager(final ISyncFactory fact) {
 		serverState = new ServerState();
 		factory = fact;
@@ -64,6 +65,13 @@ public final class ConnectionsManager {
 		}
 	}
 
+	void broadcast(String message)
+	{
+		for (ServerConnection s : handlers.values())
+			s.offerRequest(new SendPrivateMessageRequest(message, s.getPlayerID()));
+	}
+
+
 	/**
 	 * @param hand a new handler that must be used
 	 */
@@ -91,7 +99,7 @@ public final class ConnectionsManager {
 	 * @param playerID the id
 	 * @return the handler associated to a id
 	 */
-	public ServerConnection getHandlerOfPlayer(int playerID) {
+	ServerConnection getHandlerOfPlayer(int playerID) {
 		return handlers.get(playerID);
 	}
 
@@ -99,7 +107,7 @@ public final class ConnectionsManager {
 	 * @param roomID id of the room you wish the room
 	 * @return the sync object of a room
 	 */
-	public ISync getSyncObjOfRoom(int roomID) {
+	ISync getSyncObjOfRoom(int roomID) {
 		return syncMan.get(roomID);
 	}
 

@@ -35,11 +35,11 @@ public abstract class MessageExcangeTest extends SocketServerTestStub {
 		ClientConnection cl = getClientConnection(0);
 
 		cl.setReady(true);
-		assertEquals(0, networkServer.getServerState().getRoomCount());
+		assertEquals(0, networkServer.getServerStateClone().getRoomCount());
 		assertEquals(0, cl.getServerState().getRoomCount());
 		getClientConnection(0).createGame("testRoom");
 		wait(SHORT_WAIT);
-		assertEquals(1, networkServer.getServerState().getRoomCount());
+		assertEquals(1, networkServer.getServerStateClone().getRoomCount());
 		cl.fetchServerState();
 		wait(SHORT_WAIT);
 		assertEquals(1, cl.getServerState().getRoomCount());
@@ -56,17 +56,17 @@ public abstract class MessageExcangeTest extends SocketServerTestStub {
 		assertNotNull(cl.getRoom());
 		assertEquals(1, cl.getRoom().getPlayers().size());
 		assertEquals("testRoom", cl.getRoom().getName());
-		PlayerInfo info = networkServer.getServerState().getRoom(roomID).getInfoFromID(cl.getPlayerID());
+		PlayerInfo info = networkServer.getServerStateClone().getRoom(roomID).getInfoFromID(cl.getPlayerID());
 		assertNotNull(info);
 		assertNotNull(cl.getRoom().getInfoFromID(info.getPlayerID()));
 		assertEquals(info.getPlayerName(), cl.getRoom().getInfoFromID(info.getPlayerID()).getPlayerName());
 		assertEquals("randomName", cl.getPlayerName());
 		assertEquals(true, cl.isReady());
-		assertEquals(true, networkServer.getServerState().playerExists(info.getPlayerID()));
+		assertEquals(true, networkServer.getServerStateClone().playerExists(info.getPlayerID()));
 		wait(SHORT_WAIT);
-		networkServer.getServerState().deleteRoom(roomID);
+		networkServer.getServerStateClone().deleteRoom(roomID);
 		wait(LONG_WAIT);
-		assertEquals(-1, cl.getRoom().getRoomID());
+		assertEquals(0, cl.getRoom().getRoomID());
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public abstract class MessageExcangeTest extends SocketServerTestStub {
 		cl.joinGame(-1, "noName");
 		wait(LONG_WAIT);
 		assertEquals(0, cl.getRoom().getPlayers().size());
-		assertEquals(null, networkServer.getServerState().getPlayer(0));
+		assertEquals(null, networkServer.getServerStateClone().getPlayer(0));
 	}
 
 	@Test

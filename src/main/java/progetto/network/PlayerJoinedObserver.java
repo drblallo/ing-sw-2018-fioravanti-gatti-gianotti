@@ -8,14 +8,14 @@ import progetto.utils.IObserver;
  */
 final class PlayerJoinedObserver implements IObserver<INetworkClientHandler> {
 
-	private NetworkServer server;
+	private ConnectionsManager manager;
 
-	PlayerJoinedObserver(NetworkServer s, INetworkModule module) {
-		server = s;
+	PlayerJoinedObserver(ConnectionsManager m, INetworkModule module) {
+		manager = m;
 		module.getPlayerJoinedCallback().addObserver(this);
 	}
 
 	public void notifyChange(INetworkClientHandler ogg) {
-		server.getConnectionsManager().add(ogg);
+		manager.add(ogg);
 	}
 }
