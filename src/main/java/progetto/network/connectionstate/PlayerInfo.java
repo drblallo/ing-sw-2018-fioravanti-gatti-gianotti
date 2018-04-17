@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * Player name is unique inside a room, player id is unique inside a server.
  */
-public final class PlayerInfo implements Serializable{
+public final class PlayerInfo implements Serializable {
 	private static final Logger LOGGER = Logger.getLogger(PlayerInfo.class.getName());
 	private String playerName = "No Name Selected";
 	private int chairID = -1;
@@ -24,8 +24,7 @@ public final class PlayerInfo implements Serializable{
 	private transient Callback<Boolean> readyStateChangedEvent = new Callback<Boolean>();
 	private transient Callback<PlayerInfo> changedEvent = new Callback<PlayerInfo>();
 
-	PlayerInfo(String pln, int id)
-	{
+	PlayerInfo(String pln, int id) {
 		playerName = pln;
 		playerID = id;
 	}
@@ -34,8 +33,7 @@ public final class PlayerInfo implements Serializable{
 	 *
 	 * @return the name of this player. It cannot be changed once the player is created.
 	 */
-	public String getPlayerName()
-	{
+	public String getPlayerName() {
 		return playerName;
 	}
 
@@ -43,18 +41,8 @@ public final class PlayerInfo implements Serializable{
 	 *
 	 * @return the current chair of a player. Default chair is -1 that stands for observers.
 	 */
-	public synchronized int getChairID()
-	{
+	public synchronized int getChairID() {
 		return chairID;
-	}
-
-	/***
-	 *
-	 * @return true if the player status is ready, false otherwise. Default value is false.
-	 */
-	public synchronized boolean isReady()
-	{
-		return isReady;
 	}
 
 	/***
@@ -65,8 +53,7 @@ public final class PlayerInfo implements Serializable{
 	 * as argument.
 	 * @param id
 	 */
-	synchronized void setChairID(int id)
-	{
+	synchronized void setChairID(int id) {
 		LOGGER.log(Level.FINE, "Setting up new chair id {0}", id);
 		int oldChair = chairID;
 		chairID = id;
@@ -76,22 +63,19 @@ public final class PlayerInfo implements Serializable{
 
 	/***
 	 *
-	 * @return the id of this player. Player ids are unique inside a server.
+	 * @return true if the player status is ready, false otherwise. Default value is false.
 	 */
-	public synchronized int getPlayerID()
-	{
-		return playerID;
+	public synchronized boolean isReady() {
+		return isReady;
 	}
 
 	/**
 	 * Set the new ready value of this player. Triggers readyStateChangedEvent even if the new value is equal to the
 	 * old one. The old value will be passed as argument.
 	 *
-	 *
 	 * @param ready new ready value.
 	 */
-	public synchronized void setReady(boolean ready)
-	{
+	public synchronized void setReady(boolean ready) {
 		LOGGER.log(Level.FINE, "Setting up new ready value {0}", ready);
 		boolean oldReady = isReady;
 		isReady = ready;
@@ -99,17 +83,22 @@ public final class PlayerInfo implements Serializable{
 		changedEvent.call(this);
 	}
 
-	/**
+	/***
 	 *
+	 * @return the id of this player. Player ids are unique inside a server.
+	 */
+	public synchronized int getPlayerID() {
+		return playerID;
+	}
+
+	/**
 	 * @return true if the chair id of this player is -1
 	 */
-	public boolean isObserver()
-	{
+	public boolean isObserver() {
 		return chairID == -1;
 	}
 
 	/**
-	 *
 	 * @return the callback that is called when the ready state of the player changes
 	 */
 	public Callback<Boolean> getReadyStateChangedEvent() {
@@ -117,7 +106,6 @@ public final class PlayerInfo implements Serializable{
 	}
 
 	/**
-	 *
 	 * @return the callback that is called when the chair of the player changes
 	 */
 	public Callback<Integer> getChairChangedEvent() {
@@ -125,7 +113,6 @@ public final class PlayerInfo implements Serializable{
 	}
 
 	/**
-	 *
 	 * @return the callback that is called when something inside this object changes
 	 */
 	public Callback<PlayerInfo> getChangedEvent() {
@@ -135,8 +122,7 @@ public final class PlayerInfo implements Serializable{
 	/**
 	 * Set the state of this object equals to the state of info. Triggers all the related callbacks
 	 */
-	synchronized void setInfo(PlayerInfo info)
-	{
+	synchronized void setInfo(PlayerInfo info) {
 		LOGGER.fine("setting up player info");
 		playerID = info.playerID;
 		playerName = info.playerName;
@@ -147,8 +133,7 @@ public final class PlayerInfo implements Serializable{
 	/**
 	 * @return a clone of this object, does not clone observer
 	 */
-	public synchronized PlayerInfo deepCopy()
-	{
+	public synchronized PlayerInfo deepCopy() {
 		LOGGER.fine("cloning object");
 		PlayerInfo p = new PlayerInfo(playerName, playerID);
 		p.chairID = chairID;

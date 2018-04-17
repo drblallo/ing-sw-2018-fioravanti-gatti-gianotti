@@ -4,8 +4,7 @@ import progetto.network.MessageExcangeTest;
 
 public class SocketMessageExcangeTest extends MessageExcangeTest {
 
-	public SocketMessageExcangeTest()
-	{
+	public SocketMessageExcangeTest() {
 		super(new SocketServerFactory(), new ClientSocketFactory());
 	}
 }

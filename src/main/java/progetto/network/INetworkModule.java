@@ -14,7 +14,6 @@ public interface INetworkModule {
 	void start();
 
 	/**
-	 *
 	 * @return true if it's running
 	 */
 	boolean isRunning();

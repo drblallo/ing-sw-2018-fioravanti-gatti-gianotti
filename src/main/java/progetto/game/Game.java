@@ -4,8 +4,7 @@ public final class Game {
 
 	private CommandQueue commandQueue = new CommandQueue();
 
-	public Game()
-	{
+	public Game() {
 		throw new UnsupportedOperationException();
 	}
 

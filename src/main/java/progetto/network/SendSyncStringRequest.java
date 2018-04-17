@@ -2,8 +2,7 @@ package progetto.network;
 
 import progetto.network.connectionstate.Room;
 
-final class SendSyncStringRequest extends AbstractRequest
-{
+final class SendSyncStringRequest extends AbstractRequest {
 	private String command;
 
 	SendSyncStringRequest(String command) {

@@ -5,15 +5,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SyncStub implements ISync
-{
+public class SyncStub implements ISync {
 	private static final Logger LOGGER = Logger.getLogger(SyncStub.class.getName());
 	private ArrayList<String> ls = new ArrayList<String>();
 	private String full = "";
 
 	public synchronized void sendString(String s) {
 		ls.add(s);
-		full =  full + s;
+		full = full + s;
 	}
 
 	public synchronized boolean isStringGood(String s, int senderID) {
@@ -29,8 +28,8 @@ public class SyncStub implements ISync
 				toReturn = toReturn + ls.get(a);
 			}
 		}
-		LOGGER.log(Level.INFO,"Hash is {0}", toReturn);
-		LOGGER.log(Level.INFO,"Full hash is {0}", full);
+		LOGGER.log(Level.INFO, "Hash is {0}", toReturn);
+		LOGGER.log(Level.INFO, "Full hash is {0}", full);
 		return toReturn;
 	}
 
@@ -52,8 +51,7 @@ public class SyncStub implements ISync
 		full = "";
 	}
 
-	public synchronized List<String> getAllString()
-	{
+	public synchronized List<String> getAllString() {
 		ArrayList<String> s = new ArrayList<String>();
 		s.addAll(ls);
 		return s;

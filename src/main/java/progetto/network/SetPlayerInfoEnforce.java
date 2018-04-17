@@ -1,16 +1,20 @@
 package progetto.network;
 
-final class SetPlayerInfoEnforce extends AbstractEnforce{
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+final class SetPlayerInfoEnforce extends AbstractEnforce {
+
+	private static final Logger LOGGER = Logger.getLogger(SetReadyRequest.class.getName());
 	private int playerID;
 
-	public void execute(ClientConnection c) {
-		c.setPlayerID(playerID);
+	SetPlayerInfoEnforce(int id) {
+		playerID = id;
 	}
 
-	SetPlayerInfoEnforce(int id)
-	{
-		playerID = id;
+	public void execute(ClientConnection c) {
+		LOGGER.log(Level.INFO, "setting player id {0}", playerID);
+		c.setPlayerID(playerID);
 	}
 
 }

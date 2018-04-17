@@ -7,30 +7,26 @@ import progetto.utils.Waiter;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestSocketServer
-{
+public class SocketServerTest {
 
 	private SocketServer stub = new SocketServer(8527);
 	private Waiter john = new Waiter();
 
 
 	@Before
-	public void setUp()
-	{
+	public void setUp() {
 		stub.start();
 	}
 
 	@After
-	public void shutDown()
-	{
+	public void shutDown() {
 		john.wait(50);
 		stub.stop();
 		john.wait(50);
 	}
 
 	@Test
-	public void testServerOpeningAndClosing()
-	{
+	public void testServerOpeningAndClosing() {
 		stub.start();
 		john.wait(50);
 		assertEquals(true, stub.isRunning());
