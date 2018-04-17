@@ -1,13 +1,11 @@
 package progetto.network;
 
-final class SyncCheckEnforce extends AbstractEnforce
-{
+final class SyncCheckEnforce extends AbstractEnforce {
 
 	private int state;
 	private String h;
 
-	SyncCheckEnforce(int stateIndex, String hash)
-	{
+	SyncCheckEnforce(int stateIndex, String hash) {
 		state = stateIndex;
 		h = hash;
 	}

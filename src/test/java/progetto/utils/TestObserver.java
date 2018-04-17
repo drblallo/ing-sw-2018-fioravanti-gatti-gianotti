@@ -5,8 +5,7 @@ import junit.framework.TestCase;
 
 public class TestObserver extends TestCase {
 
-	public void testAttach()
-	{
+	public void testAttach() {
 		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
@@ -17,11 +16,10 @@ public class TestObserver extends TestCase {
 		s.addObserver(obs);
 		assertEquals(s.getObserversCount(), 1);
 		s.triggerChange("val");
-		assertEquals(obs.currentVal,"val");
+		assertEquals(obs.currentVal, "val");
 	}
 
-	public void testDetach()
-	{
+	public void testDetach() {
 		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
@@ -34,12 +32,11 @@ public class TestObserver extends TestCase {
 		s.removeObserver(obs);
 		assertEquals(s.getObserversCount(), 0);
 		s.triggerChange("val");
-		assertEquals(obs.currentVal,"NONE");
+		assertEquals(obs.currentVal, "NONE");
 
 	}
 
-	public void testStop()
-	{
+	public void testStop() {
 		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
@@ -53,14 +50,13 @@ public class TestObserver extends TestCase {
 		s.triggerChange("val");
 		s.start();
 		s.start();
-		assertEquals(obs.currentVal,"NONE");
+		assertEquals(obs.currentVal, "NONE");
 		s.triggerChange("val");
-		assertEquals(obs.currentVal,"val");
+		assertEquals(obs.currentVal, "val");
 
 	}
 
-	public void testClear()
-	{
+	public void testClear() {
 		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
@@ -70,7 +66,7 @@ public class TestObserver extends TestCase {
 		s.clearObserver();
 		assertEquals(s.getObserversCount(), 0);
 		s.triggerChange("val");
-		assertEquals(obs.currentVal,"NONE");
+		assertEquals(obs.currentVal, "NONE");
 
 	}
 }

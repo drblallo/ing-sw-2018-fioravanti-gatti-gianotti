@@ -5,8 +5,7 @@ import progetto.utils.ObserverStub;
 
 public class ServerStateTest extends TestCase {
 
-	public void testServerState()
-	{
+	public void testServerState() {
 		ServerState state = new ServerState();
 		assertEquals(state.getRoomCount(), 0);
 		assertEquals(state.playerExists(10), false);
@@ -27,7 +26,7 @@ public class ServerStateTest extends TestCase {
 		assertEquals(roomCreationStub.currentVal, r);
 		assertEquals(state.getRoomCount(), 1);
 		assertEquals(state.getRoom(r.getRoomID()), r);
-		state.placePlayer(plID,"testPlayer", r.getRoomID());
+		state.placePlayer(plID, "testPlayer", r.getRoomID());
 
 		assertEquals(state.getRoomOfPlayer(plID), r);
 		assertEquals(r.getInfoFromID(plID).getPlayerName(), "testPlayer");
@@ -40,8 +39,7 @@ public class ServerStateTest extends TestCase {
 
 	}
 
-	public void testRoom()
-	{
+	public void testRoom() {
 		ServerState state = new ServerState();
 		Room r = state.createRoom("testRoom");
 
@@ -61,7 +59,7 @@ public class ServerStateTest extends TestCase {
 		r.getPlayerLeaveEvent().addObserver(playerLeaveStub);
 
 		int val = state.getUnusedID();
-		state.placePlayer(val,"playerName", r.getRoomID());
+		state.placePlayer(val, "playerName", r.getRoomID());
 		assertEquals(val, playerJoinStub.currentVal.intValue());
 		state.placePlayer(val, "playerName", -1);
 		assertEquals(val, playerLeaveStub.currentVal.intValue());
@@ -69,12 +67,11 @@ public class ServerStateTest extends TestCase {
 		r.removePlayer(100);
 	}
 
-	public void testPlayerInfo()
-	{
+	public void testPlayerInfo() {
 		ServerState state = new ServerState();
 		Room r = state.createRoom("testRoom");
 		int val = state.getUnusedID();
-		state.placePlayer(val,"playerName", r.getRoomID());
+		state.placePlayer(val, "playerName", r.getRoomID());
 
 		PlayerInfo info = r.getInfoFromID(val);
 		assertEquals(true, info.isObserver());

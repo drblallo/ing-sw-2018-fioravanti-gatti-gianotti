@@ -1,6 +1,6 @@
 package progetto.network;
 
-final class JoinRoomRequest extends AbstractRequest{
+final class JoinRoomRequest extends AbstractRequest {
 
 	private int roomID;
 	private String playerName;

@@ -8,8 +8,8 @@ import progetto.utils.IObserver;
  */
 final class PlayerInfoObserver implements IObserver<PlayerInfo> {
 	private Room r;
-	PlayerInfoObserver(Room room)
-	{
+
+	PlayerInfoObserver(Room room) {
 		r = room;
 	}
 

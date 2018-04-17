@@ -4,10 +4,10 @@ package progetto.game;
  * This interface that represents a object that can receive items to be processed.
  * Items are left pending util the relative method is called
  */
-public interface IProcessor<T>
-{
+public interface IProcessor<T> {
 	/**
 	 * Append a item to the list of pending items.
+	 *
 	 * @param item the serialized command.
 	 */
 	void sendItem(T item);
@@ -23,13 +23,11 @@ public interface IProcessor<T>
 	void processAllItems();
 
 	/**
-	 *
 	 * @return the count of pending items
 	 */
 	int getPendingItemsCount();
 
 	/**
-	 *
 	 * @param index of the pending item
 	 * @return the item of the pending list
 	 */
@@ -42,7 +40,6 @@ public interface IProcessor<T>
 	void getPastItemCount();
 
 	/**
-	 *
 	 * @return the past item at index
 	 * pending items are not part of this count.
 	 */

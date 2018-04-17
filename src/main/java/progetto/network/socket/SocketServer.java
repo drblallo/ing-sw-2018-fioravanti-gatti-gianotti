@@ -13,12 +13,12 @@ import java.util.logging.Logger;
 /**
  * A socket server is a class that accept connections and redirect them on a new socket
  */
-public final class SocketServer implements INetworkModule, Runnable{
+public final class SocketServer implements INetworkModule, Runnable {
 
-	private static final Logger LOGGER = Logger.getLogger( SocketServer.class.getName() );
+	private static final Logger LOGGER = Logger.getLogger(SocketServer.class.getName());
+	private final int localPort;
 	private ServerSocket server = null;
 	private Callback<INetworkClientHandler> playerJoinedCallback = new Callback<INetworkClientHandler>();
-	private final int localPort;
 
 	public SocketServer(int port) {
 		localPort = port;
@@ -28,18 +28,14 @@ public final class SocketServer implements INetworkModule, Runnable{
 	 * closes the server
 	 */
 	public synchronized void stop() {
-		if (!isRunning())
-		{
+		if (!isRunning()) {
 			LOGGER.log(Level.INFO, "Tried to stop a server that was not started or was already closed");
 			return;
 		}
-		try
-		{
+		try {
 			server.close();
-		}
-		catch (IOException e)
-		{
-			LOGGER.log(Level.WARNING, "Failed to close server socket: "  + e.getMessage());
+		} catch (IOException e) {
+			LOGGER.log(Level.WARNING, "Failed to close server socket: " + e.getMessage());
 		}
 	}
 
@@ -47,18 +43,14 @@ public final class SocketServer implements INetworkModule, Runnable{
 	 * start the server, create a listening thread
 	 */
 	public void start() {
-		if (server != null && !server.isClosed() && server.isBound())
-		{
+		if (server != null && !server.isClosed() && server.isBound()) {
 			LOGGER.log(Level.INFO, "Tried to start a server that is already open and bounded");
 			return;
 		}
-		try
-		{
+		try {
 			server = new ServerSocket(localPort);
-		}
-		catch (IOException e)
-		{
-			LOGGER.log(Level.WARNING, "Failed to start a server socket on "+ localPort+ " " + e.getMessage());
+		} catch (IOException e) {
+			LOGGER.log(Level.WARNING, "Failed to start a server socket on " + localPort + " " + e.getMessage());
 			return;
 		}
 		LOGGER.log(Level.INFO, "Opened a socket server");
@@ -69,16 +61,13 @@ public final class SocketServer implements INetworkModule, Runnable{
 	}
 
 	/**
-	 *
 	 * @return true if the server is running, false otherwise
 	 */
-	public synchronized boolean isRunning()
-	{
+	public synchronized boolean isRunning() {
 		return server != null && server.isBound() && !server.isClosed();
 	}
 
 	/**
-	 *
 	 * @return the callback that is called every time a new player joins the game
 	 */
 	public Callback<INetworkClientHandler> getPlayerJoinedCallback() {
@@ -87,25 +76,20 @@ public final class SocketServer implements INetworkModule, Runnable{
 
 	public void run() {
 		LOGGER.log(Level.FINE, "Started a server");
-		while (isRunning())
-		{
+		while (isRunning()) {
 			acceptConnection();
 		}
 	}
 
-	private void acceptConnection()
-	{
-		try
-		{
+	private void acceptConnection() {
+		try {
 			Socket s = server.accept();
 			ClientHandler cl = new ClientHandler(s);
 
 			playerJoinedCallback.call(cl);
 
-		}
-		catch (IOException e)
-		{
-			LOGGER.log(Level.SEVERE, "Failed to accept: "+ e.getMessage());
+		} catch (IOException e) {
+			LOGGER.log(Level.SEVERE, "Failed to accept: " + e.getMessage());
 		}
 	}
 

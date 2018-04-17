@@ -5,102 +5,88 @@ import progetto.network.connectionstate.ServerState;
 import progetto.utils.Callback;
 import progetto.utils.IObserver;
 
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 final class ServerConnection {
 
-	private final class ConnectionLostObserver implements IObserver<INetworkClientHandler>
-	{
-		private ServerConnection serverConnection;
-		private ConnectionLostObserver(ServerConnection s)
-		{
-			serverConnection = s;
-		}
-
-		public void notifyChange(INetworkClientHandler ogg) {
-			serverConnection.getConnectionLostCallback().call(serverConnection);
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(ServerConnection.class.getName());
 
 	private final INetworkClientHandler handler;
+	private final Queue<AbstractRequest> reqQueue = new ConcurrentLinkedQueue<AbstractRequest>();
 	private int playerID = -1;
-	private final Callback<ServerConnection> connectionLostCallback = new Callback<ServerConnection>();
 
-	ServerConnection(INetworkClientHandler h)
-	{
+	ServerConnection(INetworkClientHandler h) {
 		handler = h;
-		handler.getConnectionLostCallback().addObserver(new ConnectionLostObserver(this));
+		handler.getRequestCallback().addObserver(new IObserver<AbstractRequest>() {
+			public void notifyChange(AbstractRequest ogg) {
+				reqQueue.offer(ogg);
+			}
+		});
+
+		reqQueue.add(new FetchMyIDRequest());
 	}
 
-	public int getPlayerID()
-	{
+	public boolean isRunning() {
+		return handler.isRunning();
+	}
+
+	public AbstractRequest popRequest() {
+		return reqQueue.poll();
+	}
+
+	public int getPlayerID() {
 		return playerID;
 	}
 
-	public void sendMessage(String message)
-	{
+	public synchronized void sendMessage(String message) {
 		handler.sendMessage(message);
 	}
 
-	public void setID(int id)
-	{
+	public void setID(int id) {
+		LOGGER.log(Level.INFO, "setting playerID {0}", id);
 		playerID = id;
+	}
+
+	public void sendID() {
 		handler.sendEnforce(new SetPlayerInfoEnforce(playerID));
 	}
 
-	public void onRoomModified(Room r)
-	{
+	public void onRoomModified(Room r) {
 		if (r != null)
 			r = r.deepCopy();
 
 		handler.sendEnforce(new SetRoomInfoEnforce(r));
 	}
 
-	public void onRoomChanged(Room r, ISync ogg)
-	{
+	public void onRoomChanged(Room r, ISync ogg) {
 
 		if (r != null) {
 			handler.sendEnforce(new SetRoomInfoEnforce(r.deepCopy()));
 			handler.sendEnforce(new SyncStateEnforce(ogg));
-		}
-		else
+		} else
 			handler.sendEnforce(new SetRoomInfoEnforce(null));
 	}
 
-	public void checkSynch(ISync ogg)
-	{
+	public void checkSynch(ISync ogg) {
 		if (ogg != null)
 			handler.sendEnforce(new SyncCheckEnforce(ogg.getStringCount(), ogg.getHash()));
 	}
 
-	public void disconnect()
-	{
+	public void disconnect() {
 		handler.disconnect(true);
 	}
 
 	/**
-	 *
 	 * @return the callaback that is called every time a message is received
 	 */
-	public Callback<String> getMessageCallback()
-	{
+	public Callback<String> getMessageCallback() {
 		return handler.getMessageCallback();
 	}
 
-	/**
-	 *
-	 * @return the callback that is called every time a connection is lost
-	 */
-	public Callback<ServerConnection> getConnectionLostCallback()
-	{
-		return connectionLostCallback;
-	}
-
-	public Callback<AbstractRequest> getRequestCallback()
-	{
-		return handler.getRequestCallback();
-	}
-
-	public void sendServerState(ServerState state)
-	{
+	public void sendServerState(ServerState state) {
 		handler.sendEnforce(new ServerStateTransferEnforce(state.deepCopy()));
 	}
 

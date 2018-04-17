@@ -5,7 +5,7 @@ import progetto.network.AbstractEnforce;
 /**
  * allows to transport a enforce across the network
  */
-final class EnforceCommand extends AbstractNetworkCommand<SocketClient>{
+final class EnforceCommand extends AbstractNetworkCommand<SocketClient> {
 
 	private AbstractEnforce abstractEnforce;
 

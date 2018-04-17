@@ -10,8 +10,7 @@ final class PlayerJoinedObserver implements IObserver<INetworkClientHandler> {
 
 	private NetworkServer server;
 
-	PlayerJoinedObserver(NetworkServer s, INetworkModule module)
-	{
+	PlayerJoinedObserver(NetworkServer s, INetworkModule module) {
 		server = s;
 		module.getPlayerJoinedCallback().addObserver(this);
 	}

@@ -9,8 +9,7 @@ final class RoomChangedObserver implements IObserver<Room> {
 
 	private ConnectionsManager manager;
 
-	RoomChangedObserver(ConnectionsManager m)
-	{
+	RoomChangedObserver(ConnectionsManager m) {
 		manager = m;
 	}
 
