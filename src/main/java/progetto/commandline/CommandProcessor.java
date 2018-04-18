@@ -67,15 +67,35 @@ public class CommandProcessor {
 
         ICommand toexecute;
         String[] tosplit;
+        StringBuilder toreturn = new StringBuilder();
+        toreturn.append("Command not found, maybe you ment:");
 
         tosplit = command.split(" ",2);
 
         if(registered.containsKey(tosplit[0])){
 
             toexecute = registered.get(tosplit[0]);
-            tosplit = tosplit[1].split(" ");
-            return toexecute.execute(tosplit);
+            if(command.contains(" ")){
+
+                tosplit = tosplit[1].split(" ");
+                return toexecute.execute(tosplit);
+            }
+            return toexecute.execute(null);
         }
-        else return "Command not found";
-    }
+
+        List<ICommand> explore = new ArrayList<ICommand>(registered.values());
+
+        for(int i=0; i<explore.size();i++) {
+
+            if (explore.get(i).getName().startsWith(tosplit[0])) {
+
+                toreturn.append('\n'+ explore.get(i).getName());
+
+            }
+
+        }
+
+        return toreturn.toString();
+
+        }
 }
