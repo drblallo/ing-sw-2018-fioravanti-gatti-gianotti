@@ -1,6 +1,7 @@
 package progetto.network;
 
-final class JoinRoomRequest extends AbstractRequest {
+final class JoinRoomRequest extends AbstractServerRequest
+{
 
 	private int roomID;
 	private String playerName;
@@ -11,7 +12,8 @@ final class JoinRoomRequest extends AbstractRequest {
 
 	}
 
-	public void execute(ConnectionsManager manager, ServerConnection serverConnection) {
-		manager.getServerState().placePlayer(serverConnection.getPlayerID(), playerName, roomID);
+	public void execute(ServerState state, AbstractRoom room)
+	{
+		state.placePlayer(playerName, roomID, getAuthor());
 	}
 }

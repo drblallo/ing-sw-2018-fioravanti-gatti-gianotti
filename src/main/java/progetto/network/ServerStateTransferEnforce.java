@@ -1,12 +1,11 @@
 package progetto.network;
 
-import progetto.network.connectionstate.ServerState;
-
 final class ServerStateTransferEnforce extends AbstractEnforce {
 
-	private ServerState state;
+	private ServerStateView state;
 
-	ServerStateTransferEnforce(ServerState state) {
+	ServerStateTransferEnforce(ServerStateView state)
+	{
 		this.state = state;
 	}
 

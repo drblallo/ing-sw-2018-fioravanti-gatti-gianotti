@@ -1,7 +1,7 @@
 package progetto.network.socket;
 
 import progetto.network.AbstractEnforce;
-import progetto.network.AbstractRequest;
+import progetto.network.AbstractRoomRequest;
 import progetto.network.INetworkClient;
 import progetto.utils.Callback;
 
@@ -16,7 +16,7 @@ public final class SocketClient extends AbstractSocket implements INetworkClient
 		super(ip, port);
 	}
 
-	public void sendRequest(AbstractRequest request) {
+	public void sendRequest(AbstractRoomRequest request) {
 		sendCommand(new RequestCommand(request));
 	}
 

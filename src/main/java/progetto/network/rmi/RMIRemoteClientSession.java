@@ -8,7 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class RMIRemoteClientSession extends UnicastRemoteObject implements IRemoteClientSession {
+final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemoteClientSession {
 	private static final Logger LOGGER = Logger.getLogger(RMIRemoteClientSession.class.getName());
 	private final transient Callback<String> messageCallback = new Callback<String>();
 	private final transient Callback<AbstractEnforce> enforceCallback = new Callback<AbstractEnforce>();

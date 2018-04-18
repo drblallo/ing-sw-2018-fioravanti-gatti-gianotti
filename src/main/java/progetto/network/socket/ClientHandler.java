@@ -1,7 +1,7 @@
 package progetto.network.socket;
 
 import progetto.network.AbstractEnforce;
-import progetto.network.AbstractRequest;
+import progetto.network.AbstractRoomRequest;
 import progetto.network.INetworkClientHandler;
 import progetto.utils.Callback;
 
@@ -16,7 +16,7 @@ final class ClientHandler extends AbstractSocket implements INetworkClientHandle
 
 	private static final Logger LOGGER = Logger.getLogger(ClientHandler.class.getName());
 
-	private final Callback<AbstractRequest> requestCallback = new Callback<AbstractRequest>();
+	private final Callback<AbstractRoomRequest> requestCallback = new Callback<AbstractRoomRequest>();
 
 	ClientHandler(Socket s) {
 		super(s);
@@ -43,7 +43,7 @@ final class ClientHandler extends AbstractSocket implements INetworkClientHandle
 	/**
 	 * @return the callback that is called when a request is received
 	 */
-	public Callback<AbstractRequest> getRequestCallback() {
+	public Callback<AbstractRoomRequest> getRequestCallback() {
 		return requestCallback;
 	}
 

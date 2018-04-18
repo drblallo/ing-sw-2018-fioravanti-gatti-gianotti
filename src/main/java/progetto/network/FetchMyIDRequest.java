@@ -1,7 +1,9 @@
 package progetto.network;
 
-class FetchMyIDRequest extends AbstractRequest {
-	public void execute(ConnectionsManager manager, ServerConnection serverConnection) {
-		serverConnection.sendID();
+final class FetchMyIDRequest extends AbstractServerRequest
+{
+	public void execute(ServerState state, AbstractRoom room)
+	{
+		getAuthor().sendID();
 	}
 }

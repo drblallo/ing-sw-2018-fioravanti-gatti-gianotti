@@ -35,7 +35,7 @@ public abstract class NetworkTest extends SocketServerTestStub {
 		assertEquals(false, socketServer.isRunning());
 		tearDown();
 		wait(SHORT_WAIT);
-		assertEquals(null, networkServer.getServerStateClone().getRoomOfPlayer(-1));
+		assertEquals(null, networkServer.getRoomView(1));
 	}
 
 	@Test

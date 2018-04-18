@@ -38,7 +38,7 @@ public abstract class SyncronizationTest extends SocketServerTestStub {
 		cl1.fetchServerState();
 		wait(SHORT_WAIT);
 		wait(SHORT_WAIT);
-		int roomID = cl1.getServerState().getRooms().get(0).getRoomID();
+		int roomID = cl1.getServerState().getRoomFromName("testRoom").roomID;
 		cl1.sendSynString("SyncMeUp");
 		cl1.joinGame(roomID, "randomName");
 		cl2.joinGame(roomID, "extraName");
@@ -73,7 +73,7 @@ public abstract class SyncronizationTest extends SocketServerTestStub {
 		wait(SHORT_WAIT);
 		clientConnection.fetchServerState();
 		wait(MEDIUM_WAIT);
-		int roomID = clientConnection.getServerState().getRooms().get(0).getRoomID();
+		int roomID = clientConnection.getServerState().getRoomFromName("testRoom").roomID;
 		clientConnection.joinGame(roomID, "randomName");
 		clientConnection2.joinGame(roomID, "extraName");
 
@@ -103,15 +103,15 @@ public abstract class SyncronizationTest extends SocketServerTestStub {
 		wait(SHORT_WAIT);
 		clientConnection.fetchServerState();
 		wait(MEDIUM_WAIT);
-		int roomID = clientConnection.getServerState().getRooms().get(0).getRoomID();
+		int roomID = clientConnection.getServerState().getRoomFromName("testRoom").roomID;
 		clientConnection.joinGame(roomID, "randomName");
 		wait(MEDIUM_WAIT);
 		clientConnection2.joinGame(roomID, "randomName");
 		wait(MEDIUM_WAIT);
 		Assert.assertEquals(roomID, clientConnection2.getRoom().getRoomID());
 		Assert.assertEquals(roomID, clientConnection.getRoom().getRoomID());
-		Assert.assertEquals(2, clientConnection2.getRoom().getPlayers().size());
-		Assert.assertEquals(2, clientConnection.getRoom().getPlayers().size());
+		Assert.assertEquals(2, clientConnection2.getRoom().getPlayerCount());
+		Assert.assertEquals(2, clientConnection.getRoom().getPlayerCount());
 
 
 	}

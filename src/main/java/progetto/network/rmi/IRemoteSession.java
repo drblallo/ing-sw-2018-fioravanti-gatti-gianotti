@@ -1,6 +1,6 @@
 package progetto.network.rmi;
 
-import progetto.network.AbstractRequest;
+import progetto.network.AbstractRoomRequest;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -8,5 +8,5 @@ import java.rmi.RemoteException;
 interface IRemoteSession extends Remote {
 	void sayGoodBye() throws RemoteException;
 
-	void sendRequest(AbstractRequest request) throws RemoteException;
+	void sendRequest(AbstractRoomRequest request) throws RemoteException;
 }

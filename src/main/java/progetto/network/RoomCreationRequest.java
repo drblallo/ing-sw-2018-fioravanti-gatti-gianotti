@@ -1,14 +1,15 @@
 package progetto.network;
 
-final class RoomCreationRequest extends AbstractRequest {
-
+final class RoomCreationRequest extends AbstractServerRequest
+{
 	private String name;
 
 	RoomCreationRequest(String name) {
 		this.name = name;
 	}
 
-	public void execute(ConnectionsManager manager, ServerConnection serverConnection) {
-		manager.getServerState().createRoom(name);
+	public void execute(ServerState state, AbstractRoom room)
+	{
+		state.createRoom(name);
 	}
 }
