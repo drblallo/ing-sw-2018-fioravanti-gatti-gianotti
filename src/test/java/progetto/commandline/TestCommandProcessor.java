@@ -28,7 +28,7 @@ public class TestCommandProcessor {
     public void testMissingCommand(){
 
         risposta=nuovo.processCommand("Ciao");
-        assertEquals("Command not found", risposta);
+        assertEquals("Command not found, maybe you ment:", risposta);
 
     }
 
@@ -156,5 +156,30 @@ public class TestCommandProcessor {
         assertTrue(returned.containsAll(conteiner));
 
     }
+
+    @Test
+    public void testMissingArgumentsHelp(){
+
+        HelpCommand commhelp = new HelpCommand(nuovo);
+
+        nuovo.registerCommand(commhelp);
+        risposta = nuovo.processCommand("help");
+
+        assertEquals("Missing arguments", risposta);
+
+    }
+
+    @Test
+    public void testMissingArgumentsEcho(){
+
+        EchoCommand echo = new EchoCommand();
+
+        nuovo.registerCommand(echo);
+        risposta = nuovo.processCommand("echo");
+
+        assertEquals("Missing arguments", risposta);
+
+    }
+
 
 }

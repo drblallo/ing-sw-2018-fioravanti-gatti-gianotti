@@ -16,6 +16,11 @@ public class EchoCommand implements ICommand {
 
     public String execute(String[] params) {
 
+        if(params==null){
+
+            return "Missing arguments";
+
+        }
         return params[0];
 
     }

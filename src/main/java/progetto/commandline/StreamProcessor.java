@@ -1,7 +1,6 @@
 package progetto.commandline;
 
 import java.io.*;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,16 +44,7 @@ public class StreamProcessor implements Runnable {
         if(c=='\n') {
 
             characterEnter();
-            return;
 
-        }
-
-        if(c=='\t') {
-
-            if(!read.toString().contains(" "))
-            {
-                characterTab();
-            }
             return;
 
         }
@@ -80,25 +70,8 @@ public class StreamProcessor implements Runnable {
         bout.write(output);
         bout.flush();
 
-        read.delete(0, read.length()-1);
+        read.delete(0, read.length());
 
-    }
-
-    private void characterTab() throws IOException {
-
-        List<ICommand> commands = comproc.getList();
-
-        if(!commands.isEmpty()) {
-
-            for (int i = 0; i < commands.size(); i++) {
-
-                if(commands.get(i).getName().startsWith(read.toString())) {
-
-                    bout.write(commands.get(i).getName() + '\n');
-                }
-            }
-            bout.flush();
-        }
     }
 
     public void run() {
