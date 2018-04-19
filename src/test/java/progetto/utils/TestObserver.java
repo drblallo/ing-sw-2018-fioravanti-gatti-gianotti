@@ -1,11 +1,16 @@
 package progetto.utils;
 
-import junit.framework.TestCase;
 
+import org.junit.Test;
 
-public class TestObserver extends TestCase {
+import static org.junit.Assert.assertEquals;
 
-	public void testAttach() {
+public class TestObserver
+{
+
+	@Test
+	public void testAttach()
+	{
 		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
@@ -19,7 +24,9 @@ public class TestObserver extends TestCase {
 		assertEquals(obs.currentVal, "val");
 	}
 
-	public void testDetach() {
+	@Test
+	public void testDetach()
+	{
 		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
@@ -36,7 +43,9 @@ public class TestObserver extends TestCase {
 
 	}
 
-	public void testStop() {
+	@Test
+	public void testStop()
+	{
 		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
@@ -56,7 +65,9 @@ public class TestObserver extends TestCase {
 
 	}
 
-	public void testClear() {
+	@Test
+	public void testClear()
+	{
 		ObserverStub<String> obs = new ObserverStub<String>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";

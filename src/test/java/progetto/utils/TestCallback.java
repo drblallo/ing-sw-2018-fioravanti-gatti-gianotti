@@ -1,9 +1,14 @@
 package progetto.utils;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class TestCallback extends TestCase {
-	public void testCallback() {
+import static org.junit.Assert.assertEquals;
+
+public class TestCallback
+{
+	@Test
+	public void testCallback()
+	{
 		ObserverStub<String> stub = new ObserverStub<String>();
 		stub.currentVal = "NONE";
 		Callback<String> callback = new Callback<String>();

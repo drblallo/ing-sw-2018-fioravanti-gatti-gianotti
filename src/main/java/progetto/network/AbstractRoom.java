@@ -69,6 +69,10 @@ abstract class AbstractRoom implements Runnable
 	private final void processAllCommand()
 	{
 		for (PlayerInfo p : players.values())
+			if (!p.getHandler().isRunning())
+				removePlayer(p.getPlayerID());
+
+		for (PlayerInfo p : players.values())
 		{
 			while (p.peekRequest() != null)
 			{
