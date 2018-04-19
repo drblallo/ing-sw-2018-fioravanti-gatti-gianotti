@@ -18,7 +18,7 @@ public final class SocketServer implements INetworkModule, Runnable {
 	private static final Logger LOGGER = Logger.getLogger(SocketServer.class.getName());
 	private final int localPort;
 	private ServerSocket server = null;
-	private Callback<INetworkClientHandler> playerJoinedCallback = new Callback<INetworkClientHandler>();
+	private Callback<INetworkClientHandler> playerJoinedCallback = new Callback<>();
 
 	public SocketServer(int port) {
 		localPort = port;
@@ -43,7 +43,7 @@ public final class SocketServer implements INetworkModule, Runnable {
 	 * start the server, create a listening thread
 	 */
 	public void start() {
-		if (server != null && !server.isClosed() && server.isBound()) {
+		if (isRunning()) {
 			LOGGER.log(Level.INFO, "Tried to start a server that is already open and bounded");
 			return;
 		}
@@ -56,6 +56,7 @@ public final class SocketServer implements INetworkModule, Runnable {
 		LOGGER.log(Level.INFO, "Opened a socket server");
 		Thread serverThread;
 		serverThread = new Thread(this);
+		serverThread.setName(getClass().getName()+" Thread");
 		serverThread.start();
 		LOGGER.info("Started a socket server");
 	}

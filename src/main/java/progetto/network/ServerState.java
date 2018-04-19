@@ -15,7 +15,7 @@ public final class ServerState implements Runnable
 
 	private static final Logger LOGGER = Logger.getLogger(ServerState.class.getName());
 
-	private final Map<Integer, AbstractRoom> rooms = new ConcurrentHashMap<Integer, AbstractRoom>();
+	private final Map<Integer, AbstractRoom> rooms = new ConcurrentHashMap<>();
 	private int lastID = 0;
 	private int lastPlayerID = 0;
 	private boolean isRunning = true;
@@ -34,16 +34,14 @@ public final class ServerState implements Runnable
 	 * creates a room with provided name, rooms with the same name are allowed
 	 *
 	 * @param roomName the name of the new room
-	 * @return the created room
 	 */
-	Room createRoom(String roomName)
+	void createRoom(String roomName)
 	{
 		Room room = new Room(roomName, lastID, factory.create());
 		rooms.put(lastID, room);
 		lastID++;
-		LOGGER.log(Level.INFO,"spawning a new room");
+		LOGGER.log(Level.FINE,"spawning a new room");
 		new Thread(room).start();
-		return room;
 	}
 
 
@@ -99,7 +97,7 @@ public final class ServerState implements Runnable
 	 */
 	private int getUnusedID()
 	{
-		LOGGER.log(Level.INFO, "giving out a new id: {0}", lastPlayerID);
+		LOGGER.log(Level.FINE, "giving out a new id: {0}", lastPlayerID);
 		int toReturno = lastPlayerID;
 		lastPlayerID++;
 		return toReturno;
@@ -121,12 +119,11 @@ public final class ServerState implements Runnable
 	{
 		AbstractRoom r = getRoom(roomID);
 
-		if (r == null)
-			return;
+		if (r != null)
+			r.stop();
 
 		LOGGER.log(Level.FINE, "room deleted");
 		rooms.remove(r);
-		r.stop();
 	}
 
 	void stop()
@@ -162,6 +159,7 @@ public final class ServerState implements Runnable
 
 	public void run()
 	{
+		Thread.currentThread().setName("Server State Thread");
 		while (isRunning)
 			processAllRequest();
 

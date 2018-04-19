@@ -56,9 +56,6 @@ public final class Room extends AbstractRoom
 	{
 		PlayerInfo info = players.get(callerID);
 
-		if (getSyncOgg() == null || info == null)
-			return;
-
 		if (!getSyncOgg().isStringGood(syncString, info.getChairID()))
 			return;
 

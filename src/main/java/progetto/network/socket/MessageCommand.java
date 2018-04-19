@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 /**
  * Command sent to send a message.
  */
-class MessageCommand extends AbstractNetworkCommand<AbstractSocket> {
+class MessageCommand implements INetworkCommand<AbstractSocket> {
 
 	private static final Logger LOGGER = Logger.getLogger(AbstractSocket.class.getName());
 	private String message;
@@ -15,7 +15,7 @@ class MessageCommand extends AbstractNetworkCommand<AbstractSocket> {
 		message = m;
 	}
 
-	void execute(AbstractSocket mng) {
+	public void execute(AbstractSocket mng) {
 		LOGGER.log(Level.FINE, message);
 		mng.getMessageCallback().call(message);
 	}

@@ -1,6 +1,6 @@
 package progetto.network;
 
-final class ServerStateTransferEnforce extends AbstractEnforce {
+final class ServerStateTransferEnforce implements IEnforce {
 
 	private ServerStateView state;
 

@@ -3,7 +3,7 @@ package progetto.network;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-final class PickChairRoomRequest extends AbstractRoomRequest
+final class PickChairRoomRequest implements AbstractRoomRequest
 {
 	private static final Logger LOGGER = Logger.getLogger(PickChairRoomRequest.class.getName());
 	private int charID;
@@ -14,7 +14,7 @@ final class PickChairRoomRequest extends AbstractRoomRequest
 
 	public void execute(AbstractRoom room, ServerConnection serverConnection)
 	{
-		LOGGER.log(Level.INFO, "player is trying to pick chair {0}", charID);
+		LOGGER.log(Level.FINE, "player is trying to pick chair {0}", charID);
 		room.setPlayerChair(serverConnection.getPlayerID(), charID);
 	}
 }

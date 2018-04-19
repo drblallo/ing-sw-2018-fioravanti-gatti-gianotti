@@ -2,7 +2,7 @@ package progetto.network;
 
 import java.util.List;
 
-final class SyncStateEnforce extends AbstractEnforce {
+final class SyncStateEnforce implements IEnforce {
 	private List<String> allCommands;
 	private String currHash;
 	SyncStateEnforce(ISync ogg) {

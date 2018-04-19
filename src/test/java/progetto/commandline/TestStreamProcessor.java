@@ -14,7 +14,7 @@ public class TestStreamProcessor {
 
     @Before
     public void setup() {
-        comproc = new CommandProcessor();
+        comproc = new CommandProcessor("main");
     }
 
 

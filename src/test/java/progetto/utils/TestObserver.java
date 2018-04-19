@@ -15,13 +15,13 @@ public class TestObserver
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
 		s.triggerChange("val");
-		assertEquals(obs.currentVal, "NONE");
-		assertEquals(s.getObserversCount(), 0);
+		assertEquals("NONE", obs.currentVal);
+		assertEquals(0, s.getObserversCount());
 
 		s.addObserver(obs);
-		assertEquals(s.getObserversCount(), 1);
+		assertEquals(1, s.getObserversCount());
 		s.triggerChange("val");
-		assertEquals(obs.currentVal, "val");
+		assertEquals( "val", obs.currentVal);
 	}
 
 	@Test
@@ -34,12 +34,12 @@ public class TestObserver
 		s.removeObserver(obs);
 		s.addObserver(obs);
 		s.addObserver(obs);
-		assertEquals(s.getObserversCount(), 1);
+		assertEquals(1, s.getObserversCount());
 		s.removeObserver(obs);
 		s.removeObserver(obs);
-		assertEquals(s.getObserversCount(), 0);
+		assertEquals(0, s.getObserversCount());
 		s.triggerChange("val");
-		assertEquals(obs.currentVal, "NONE");
+		assertEquals("NONE", obs.currentVal);
 
 	}
 
@@ -50,18 +50,18 @@ public class TestObserver
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
 		s.triggerChange("val");
-		assertEquals(obs.currentVal, "NONE");
-		assertEquals(s.getObserversCount(), 0);
+		assertEquals("NONE", obs.currentVal);
+		assertEquals(0, s.getObserversCount());
 
 		s.addObserver(obs);
-		assertEquals(s.getObserversCount(), 1);
+		assertEquals(1, s.getObserversCount() );
 		s.stop();
 		s.triggerChange("val");
 		s.start();
 		s.start();
-		assertEquals(obs.currentVal, "NONE");
+		assertEquals( "NONE", obs.currentVal);
 		s.triggerChange("val");
-		assertEquals(obs.currentVal, "val");
+		assertEquals( "val", obs.currentVal);
 
 	}
 
@@ -73,11 +73,11 @@ public class TestObserver
 		obs.currentVal = "NONE";
 
 		s.addObserver(obs);
-		assertEquals(s.getObserversCount(), 1);
+		assertEquals(1, s.getObserversCount() );
 		s.clearObserver();
-		assertEquals(s.getObserversCount(), 0);
+		assertEquals(0, s.getObserversCount());
 		s.triggerChange("val");
-		assertEquals(obs.currentVal, "NONE");
+		assertEquals( "NONE", obs.currentVal);
 
 	}
 }

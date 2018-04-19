@@ -1,6 +1,6 @@
 package progetto.network;
 
-final class SyncStringEnforce extends AbstractEnforce {
+final class SyncStringEnforce implements IEnforce {
 	private final String action;
 
 	SyncStringEnforce(String action) {

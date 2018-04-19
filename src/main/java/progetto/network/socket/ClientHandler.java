@@ -1,6 +1,6 @@
 package progetto.network.socket;
 
-import progetto.network.AbstractEnforce;
+import progetto.network.IEnforce;
 import progetto.network.AbstractRoomRequest;
 import progetto.network.INetworkClientHandler;
 import progetto.utils.Callback;
@@ -16,7 +16,7 @@ final class ClientHandler extends AbstractSocket implements INetworkClientHandle
 
 	private static final Logger LOGGER = Logger.getLogger(ClientHandler.class.getName());
 
-	private final Callback<AbstractRoomRequest> requestCallback = new Callback<AbstractRoomRequest>();
+	private final Callback<AbstractRoomRequest> requestCallback = new Callback<>();
 
 	ClientHandler(Socket s) {
 		super(s);
@@ -36,7 +36,7 @@ final class ClientHandler extends AbstractSocket implements INetworkClientHandle
 	 *
 	 * @param enforce what must be done by the player
 	 */
-	public void sendEnforce(AbstractEnforce enforce) {
+	public void sendEnforce(IEnforce enforce) {
 		sendCommand(new EnforceCommand(enforce));
 	}
 

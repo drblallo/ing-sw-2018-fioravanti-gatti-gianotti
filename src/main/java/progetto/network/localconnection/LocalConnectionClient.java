@@ -1,16 +1,22 @@
 package progetto.network.localconnection;
 
-import progetto.network.AbstractEnforce;
+import progetto.network.IEnforce;
 import progetto.network.AbstractRoomRequest;
 import progetto.network.INetworkClient;
 import progetto.utils.Callback;
 
+/**
+ * A local client connection is a fake network connection that implements INetworkClient.
+ * All calls are blocking until they are solved on the other side.
+ * Calls are not parallel.
+ * Messages are sent even if the connection is closed.
+ */
 public class LocalConnectionClient implements INetworkClient
 {
 	private boolean isRunning = true;
 	private LocalConnectionHandler otherSide;
-	private final Callback<String> messageCallback = new Callback<String>();
-	private final Callback<AbstractEnforce> enforceCallback = new Callback<AbstractEnforce>();
+	private final Callback<String> messageCallback = new Callback<>();
+	private final Callback<IEnforce> enforceCallback = new Callback<>();
 
 	public LocalConnectionClient(LocalConnectionServer server)
 	{
@@ -45,7 +51,7 @@ public class LocalConnectionClient implements INetworkClient
 		return messageCallback;
 	}
 
-	public Callback<AbstractEnforce> getEnforceCallback()
+	public Callback<IEnforce> getEnforceCallback()
 	{
 		return enforceCallback;
 	}

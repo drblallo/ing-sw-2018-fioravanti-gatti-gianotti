@@ -7,10 +7,11 @@ import progetto.utils.ObserverStub;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-public abstract class MessageExcangeTest extends SocketServerTestStub {
+public abstract class AbstractMessageExchangeTest extends AbstractNetworkTestStub {
 
-	public MessageExcangeTest(INetworkModuleFactory m, INetworkClientFactory f) {
+	public AbstractMessageExchangeTest(INetworkModuleFactory m, INetworkClientFactory f) {
 		super(m, f);
 	}
 
@@ -73,6 +74,7 @@ public abstract class MessageExcangeTest extends SocketServerTestStub {
 		getClientConnection(0).joinGame(10, "test");
 		wait(SHORT_WAIT);
 		assertEquals(-1, getClientConnection(0).getRoom().getRoomID());
+		assertNull(networkServer.getServerStateClone().getRoomFromName("false"));
 	}
 
 	@Test
@@ -106,6 +108,7 @@ public abstract class MessageExcangeTest extends SocketServerTestStub {
 
 		wait(SHORT_WAIT);
 		cl.pickChair(1);
+		cl.pickChair(1);
 		wait(LONG_WAIT);
 		wait(MEDIUM_WAIT);
 		assertEquals(1, cl.getChair());
@@ -115,6 +118,7 @@ public abstract class MessageExcangeTest extends SocketServerTestStub {
 		cl.pickChair(-1);
 		wait(SHORT_WAIT);
 		assertEquals(-1, cl.getChair());
+		assertNull(cl.getRoom().getPlayerOfChair(10));
 	}
 
 

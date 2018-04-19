@@ -1,19 +1,19 @@
 package progetto.network.socket;
 
-import progetto.network.AbstractEnforce;
+import progetto.network.IEnforce;
 
 /**
  * allows to transport a enforce across the network
  */
-final class EnforceCommand extends AbstractNetworkCommand<SocketClient> {
+final class EnforceCommand implements INetworkCommand<SocketClient> {
 
-	private AbstractEnforce abstractEnforce;
+	private IEnforce iEnforce;
 
-	EnforceCommand(AbstractEnforce enforceCommand) {
-		this.abstractEnforce = enforceCommand;
+	EnforceCommand(IEnforce enforceCommand) {
+		this.iEnforce = enforceCommand;
 	}
 
-	void execute(SocketClient mng) {
-		mng.getEnforceCallback().call(abstractEnforce);
+	public void execute(SocketClient mng) {
+		mng.getEnforceCallback().call(iEnforce);
 	}
 }

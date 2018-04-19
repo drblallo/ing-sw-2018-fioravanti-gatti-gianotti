@@ -4,10 +4,13 @@ import progetto.network.INetworkClientHandler;
 import progetto.network.INetworkModule;
 import progetto.utils.Callback;
 
+/**
+ * An implementations of INetworkModule that does not go throught the network
+ */
 public class LocalConnectionServer implements INetworkModule
 {
 	private boolean isRunning = false;
-	private final Callback<INetworkClientHandler> playerJoinedCallback = new Callback<INetworkClientHandler>();
+	private final Callback<INetworkClientHandler> playerJoinedCallback = new Callback<>();
 
 	public void stop()
 	{

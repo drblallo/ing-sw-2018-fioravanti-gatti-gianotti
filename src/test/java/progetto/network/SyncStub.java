@@ -28,8 +28,6 @@ public class SyncStub implements ISync {
 				toReturn = toReturn + ls.get(a);
 			}
 		}
-		LOGGER.log(Level.INFO, "Hash is {0}", toReturn);
-		LOGGER.log(Level.INFO, "Full hash is {0}", full);
 		return toReturn;
 	}
 

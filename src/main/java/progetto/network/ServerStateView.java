@@ -20,7 +20,7 @@ public final class ServerStateView implements Serializable
 		}
 	}
 
-	private final Map<Integer, SimpleRoomState> rooms = new HashMap<Integer, SimpleRoomState>();
+	private final Map<Integer, SimpleRoomState> rooms = new HashMap<>();
 
 	void addRoom(String roomName, int roomID, int playerSize)
 	{

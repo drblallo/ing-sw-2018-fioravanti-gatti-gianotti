@@ -1,6 +1,6 @@
 package progetto.network;
 
-final class SendPrivateMessageRoomRequest extends AbstractRoomRequest {
+final class SendPrivateMessageRoomRequest implements AbstractRoomRequest {
 	private String message;
 	private int targetID;
 

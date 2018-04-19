@@ -1,8 +1,8 @@
 package progetto.network.rmi;
 
-import progetto.network.MessageExcangeTest;
+import progetto.network.AbstractMessageExchangeTest;
 
-public class RMIMessageExcangeTest extends MessageExcangeTest {
+public class RMIMessageExcangeTest extends AbstractMessageExchangeTest {
 
 
 	public RMIMessageExcangeTest() {

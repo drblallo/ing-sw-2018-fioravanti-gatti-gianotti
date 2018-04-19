@@ -10,26 +10,21 @@ import java.util.logging.Logger;
 
 final class RMIRemoteSession extends UnicastRemoteObject implements IRemoteSession {
 	private static final Logger LOGGER = Logger.getLogger(RMIRemoteSession.class.getName());
-	private final transient Callback<String> messageCallback = new Callback<String>();
-	private final transient Callback<AbstractRoomRequest> requestCallback = new Callback<AbstractRoomRequest>();
-	private final transient Callback<RMIRemoteSession> connectionClosedCallback = new Callback<RMIRemoteSession>();
+	private final transient Callback<AbstractRoomRequest> requestCallback = new Callback<>();
+	private final transient Callback<RMIRemoteSession> connectionClosedCallback = new Callback<>();
 
 	protected RMIRemoteSession() throws RemoteException {
 	}
 
 	public void sayGoodBye() {
 		final RMIRemoteSession s = this;
-		LOGGER.info("tried to disconnect");
+		LOGGER.fine("tried to disconnect");
 		connectionClosedCallback.call(s);
 	}
 
 	public void sendRequest(final AbstractRoomRequest request) {
-		LOGGER.log(Level.INFO, "sending request {0}", request.getClass().getName());
+		LOGGER.log(Level.FINE, "sending request {0}", request.getClass().getName());
 		requestCallback.call(request);
-	}
-
-	public Callback<String> getMessageCallback() {
-		return messageCallback;
 	}
 
 	public Callback<AbstractRoomRequest> getRequestCallback() {

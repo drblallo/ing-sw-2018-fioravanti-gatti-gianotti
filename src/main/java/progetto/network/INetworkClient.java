@@ -17,12 +17,21 @@ public interface INetworkClient {
 	boolean isRunning();
 
 	/**
-	 * @return the callaback that is called every time a message is received
+	 * @return the callaback that is called every time a message is received.
 	 */
 	Callback<String> getMessageCallback();
 
-	Callback<AbstractEnforce> getEnforceCallback();
+	/**
+	 *
+	 * @return the callback that is called every time a enforce is received by the network.
+	 * Implementer must ensure that enforcers are received in order.
+	 */
+	Callback<IEnforce> getEnforceCallback();
 
+	/**
+	 *
+	 * @param request request to be sent, ensures that it will be performed after the requests already sent.
+	 */
 	void sendRequest(AbstractRoomRequest request);
 
 }

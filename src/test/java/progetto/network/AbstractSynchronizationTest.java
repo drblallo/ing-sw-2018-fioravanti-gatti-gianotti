@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import progetto.utils.ObserverStub;
 
-public abstract class SyncronizationTest extends SocketServerTestStub {
+public abstract class AbstractSynchronizationTest extends AbstractNetworkTestStub {
 
-	public SyncronizationTest(INetworkModuleFactory m, INetworkClientFactory f) {
+	public AbstractSynchronizationTest(INetworkModuleFactory m, INetworkClientFactory f) {
 		super(m, f);
 	}
 
@@ -95,36 +95,5 @@ public abstract class SyncronizationTest extends SocketServerTestStub {
 
 	}
 
-	@Test
-	public void testJoinWithSameName() {
-		ClientConnection clientConnection = getClientConnection(0);
-		ClientConnection clientConnection2 = getClientConnection(1);
-		clientConnection.createGame("testRoom");
-		wait(SHORT_WAIT);
-		clientConnection.fetchServerState();
-		wait(MEDIUM_WAIT);
-		int roomID = clientConnection.getServerState().getRoomFromName("testRoom").roomID;
-		clientConnection.joinGame(roomID, "randomName");
-		wait(MEDIUM_WAIT);
-		clientConnection2.joinGame(roomID, "randomName");
-		wait(MEDIUM_WAIT);
-		Assert.assertEquals(roomID, clientConnection2.getRoom().getRoomID());
-		Assert.assertEquals(roomID, clientConnection.getRoom().getRoomID());
-		Assert.assertEquals(2, clientConnection2.getRoom().getPlayerCount());
-		Assert.assertEquals(2, clientConnection.getRoom().getPlayerCount());
 
-
-	}
-
-	@Test
-	public void testTTL() {
-		ClientConnection clientConnection = getClientConnection(0);
-		ClientConnection clientConnection2 = getClientConnection(1);
-
-
-		getClientSocket(0).disconnect(false);
-		wait(NetworkSettings.DEFAULT_TIME_TO_LIVE * (NetworkSettings.MAX_TIME_TO_LIVE_SKIPPED + 2));
-		Assert.assertEquals(false, clientConnection.isRunning());
-		Assert.assertEquals(true, clientConnection2.isRunning());
-	}
 }

@@ -13,14 +13,12 @@ final class RMIRemoteLogger implements IRemoteLogger {
 
 	public IRemoteSession login(final IRemoteClientSession remote) throws RemoteException {
 
-		LOGGER.info("Player tries to log in");
+		LOGGER.fine("Player tries to log in");
 		final RMIRemoteSession local = new RMIRemoteSession();
 
-		new Thread(new Runnable() {
-			public void run() {
-				RMIClientHandler handler = new RMIClientHandler(remote, local);
-				server.getPlayerJoinedCallback().call(handler);
-			}
+		new Thread(() -> {
+			RMIClientHandler handler = new RMIClientHandler(remote, local);
+			server.getPlayerJoinedCallback().call(handler);
 		}).start();
 
 		return local;

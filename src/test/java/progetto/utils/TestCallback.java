@@ -14,7 +14,7 @@ public class TestCallback
 		Callback<String> callback = new Callback<String>();
 		callback.addObserver(stub);
 		callback.call("newValue");
-		assertEquals(stub.currentVal, "newValue");
+		assertEquals("newValue", stub.currentVal );
 	}
 
 

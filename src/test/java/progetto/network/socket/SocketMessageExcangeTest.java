@@ -1,8 +1,8 @@
 package progetto.network.socket;
 
-import progetto.network.MessageExcangeTest;
+import progetto.network.AbstractMessageExchangeTest;
 
-public class SocketMessageExcangeTest extends MessageExcangeTest {
+public class SocketMessageExcangeTest extends AbstractMessageExchangeTest {
 
 	public SocketMessageExcangeTest() {
 		super(new SocketServerFactory(), new ClientSocketFactory());

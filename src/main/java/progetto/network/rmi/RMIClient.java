@@ -1,10 +1,9 @@
 package progetto.network.rmi;
 
-import progetto.network.AbstractEnforce;
+import progetto.network.IEnforce;
 import progetto.network.AbstractRoomRequest;
 import progetto.network.INetworkClient;
 import progetto.utils.Callback;
-import progetto.utils.IObserver;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -16,11 +15,10 @@ import java.util.logging.Logger;
 public final class RMIClient implements INetworkClient, Runnable{
 	private static final Logger LOGGER = Logger.getLogger(RMIClient.class.getName());
 	private IRemoteSession session;
-	private RMIRemoteClientSession local;
 	private boolean isAlive = true;
-	private Callback<AbstractEnforce> enforceCallback;
+	private Callback<IEnforce> enforceCallback;
 	private Callback<String> messageCallback;
-	private Queue<AbstractRoomRequest> pendingRequests = new ConcurrentLinkedQueue<AbstractRoomRequest>();
+	private Queue<AbstractRoomRequest> pendingRequests = new ConcurrentLinkedQueue<>();
 
 	public RMIClient(String ip) {
 		try {
@@ -28,12 +26,8 @@ public final class RMIClient implements INetworkClient, Runnable{
 			Registry registry = LocateRegistry.getRegistry(ip, RMIServer.RMI_PORT);
 
 			IRemoteLogger stub = (IRemoteLogger) registry.lookup("test");
-			local = new RMIRemoteClientSession();
-			local.getConnectionLostCallback().addObserver(new IObserver<IRemoteClientSession>() {
-				public void notifyChange(IRemoteClientSession ogg) {
-					teardown();
-				}
-			});
+			RMIRemoteClientSession local = new RMIRemoteClientSession();
+			local.getConnectionLostCallback().addObserver(ogg -> teardown());
 			enforceCallback = local.getEnforceCallback();
 			messageCallback = local.getMessageCallback();
 
@@ -49,24 +43,27 @@ public final class RMIClient implements INetworkClient, Runnable{
 	private void teardown() {
 		LOGGER.log(Level.FINE, "tearing down ");
 		isAlive = false;
+
+		synchronized (this)
+		{
+			notifyAll();
+		}
 	}
 
 	public void disconnect(boolean signalGoodBye) {
 		if (signalGoodBye) {
 
-			new Thread(new Runnable() {
-				public void run() {
-					try
-					{
-						LOGGER.log(Level.FINE, "signaling goodbye ");
-						session.sayGoodBye();
-					}
-					catch (Exception e)
-					{
-						LOGGER.log(Level.SEVERE, "Failed to send message: {0}", e.getMessage());
-					}
-
+			new Thread(() -> {
+				try
+				{
+					LOGGER.log(Level.FINE, "signaling goodbye ");
+					session.sayGoodBye();
 				}
+				catch (Exception e)
+				{
+					LOGGER.log(Level.SEVERE, "Failed to send message: {0}", e.getMessage());
+				}
+
 			}).start();
 		}
 		teardown();
@@ -80,7 +77,7 @@ public final class RMIClient implements INetworkClient, Runnable{
 		return messageCallback;
 	}
 
-	public Callback<AbstractEnforce> getEnforceCallback() {
+	public Callback<IEnforce> getEnforceCallback() {
 		return enforceCallback;
 	}
 
@@ -99,6 +96,9 @@ public final class RMIClient implements INetworkClient, Runnable{
 	{
 		while (pendingRequests.peek() == null)
 		{
+			if (!isRunning())
+				return;
+
 			try
 			{
 				synchronized (this)
@@ -125,6 +125,7 @@ public final class RMIClient implements INetworkClient, Runnable{
 
 	public void run()
 	{
+		Thread.currentThread().setName(getClass().getName()+" Thread");
 		while (isRunning())
 			sendFirstPending();
 	}

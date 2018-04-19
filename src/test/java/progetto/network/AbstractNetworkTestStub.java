@@ -2,7 +2,7 @@ package progetto.network;
 
 import progetto.utils.Waiter;
 
-public class SocketServerTestStub {
+public class AbstractNetworkTestStub {
 
 	public static final int SHORT_WAIT = 100;
 	public static final int MEDIUM_WAIT = 300;
@@ -14,7 +14,7 @@ public class SocketServerTestStub {
 	private final Waiter paul = new Waiter();
 	private final INetworkClientFactory clientFactiry;
 	public int timeModifier = 1;
-	public SocketServerTestStub(INetworkModuleFactory moduleF, INetworkClientFactory clientF) {
+	public AbstractNetworkTestStub(INetworkModuleFactory moduleF, INetworkClientFactory clientF) {
 		clientFactiry = clientF;
 		socketServer = moduleF.getINetworkModule();
 	}
@@ -48,13 +48,6 @@ public class SocketServerTestStub {
 		networkServer.stop();
 	}
 
-	public interface INetworkModuleFactory {
-		INetworkModule getINetworkModule();
-	}
-
-	public interface INetworkClientFactory {
-		INetworkClient getINetworkClient();
-	}
 
 	public class ClientData {
 		private ClientConnection clientConnection;

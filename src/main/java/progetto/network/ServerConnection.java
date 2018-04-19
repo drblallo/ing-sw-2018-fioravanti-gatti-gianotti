@@ -1,7 +1,5 @@
 package progetto.network;
 
-import progetto.utils.IObserver;
-
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
@@ -12,18 +10,13 @@ final class ServerConnection {
 	private static final Logger LOGGER = Logger.getLogger(ServerConnection.class.getName());
 
 	private final INetworkClientHandler handler;
-	private final Queue<AbstractRoomRequest> reqQueue = new ConcurrentLinkedQueue<AbstractRoomRequest>();
+	private final Queue<AbstractRoomRequest> reqQueue = new ConcurrentLinkedQueue<>();
 	private int playerID = -1;
 
 	ServerConnection(INetworkClientHandler h)
 	{
 		handler = h;
-		handler.getRequestCallback().addObserver(new IObserver<AbstractRoomRequest>() {
-			public void notifyChange(AbstractRoomRequest ogg) {
-				offerRequest(ogg);
-			}
-		});
-
+		handler.getRequestCallback().addObserver(this::offerRequest);
 		reqQueue.add(new EncapsulationRoomRequest(new FetchMyIDRequest()));
 	}
 
@@ -56,7 +49,7 @@ final class ServerConnection {
 
 	public void setID(int id)
 	{
-		LOGGER.log(Level.INFO, "setting playerID {0}", id);
+		LOGGER.log(Level.FINE, "setting playerID {0}", id);
 		playerID = id;
 		sendID();
 	}

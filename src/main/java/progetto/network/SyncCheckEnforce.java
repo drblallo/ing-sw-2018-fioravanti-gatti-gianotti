@@ -1,6 +1,6 @@
 package progetto.network;
 
-final class SyncCheckEnforce extends AbstractEnforce {
+final class SyncCheckEnforce implements IEnforce {
 
 	private int state;
 	private String h;

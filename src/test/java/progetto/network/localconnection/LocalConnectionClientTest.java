@@ -33,13 +33,7 @@ public class LocalConnectionClientTest extends AbstractLocalConnectionTest
 	@Test
 	public void testSendEnforce()
 	{
-		client.getEnforceCallback().addObserver(new IObserver<AbstractEnforce>()
-		{
-			public void notifyChange(AbstractEnforce ogg)
-			{
-				lastEnforce = ogg;
-			}
-		});
+		client.getEnforceCallback().addObserver(ogg -> lastEnforce = ogg);
 		handler.sendEnforce(new EnforceStub());
 		assertEquals(EnforceStub.class, lastEnforce.getClass());
 	}
@@ -47,13 +41,7 @@ public class LocalConnectionClientTest extends AbstractLocalConnectionTest
 	@Test
 	public void testSendRequest()
 	{
-		handler.getRequestCallback().addObserver(new IObserver<AbstractRoomRequest>()
-		{
-			public void notifyChange(AbstractRoomRequest ogg)
-			{
-				called = true;
-			}
-		});
+		handler.getRequestCallback().addObserver(ogg -> called = true);
 		client.sendRequest(null);
 		assertEquals(true, called);
 	}

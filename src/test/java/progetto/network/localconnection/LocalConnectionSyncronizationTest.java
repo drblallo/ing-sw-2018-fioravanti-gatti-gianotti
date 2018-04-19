@@ -1,8 +1,8 @@
 package progetto.network.localconnection;
 
-import progetto.network.SyncronizationTest;
+import progetto.network.AbstractSynchronizationTest;
 
-public class LocalConnectionSyncronizationTest extends SyncronizationTest
+public class LocalConnectionSyncronizationTest extends AbstractSynchronizationTest
 {
 	private static final LocalConnectionServerFactory s = new LocalConnectionServerFactory();
 	private static final LocalConnectionClientFactory c = new LocalConnectionClientFactory(s);

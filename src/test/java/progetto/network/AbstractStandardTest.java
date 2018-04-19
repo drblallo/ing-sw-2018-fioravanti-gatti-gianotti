@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 
 
-public abstract class NetworkTest extends SocketServerTestStub {
-	public NetworkTest(INetworkModuleFactory m, INetworkClientFactory f) {
+public abstract class AbstractStandardTest extends AbstractNetworkTestStub {
+	public AbstractStandardTest(INetworkModuleFactory m, INetworkClientFactory f) {
 		super(m, f);
 	}
 

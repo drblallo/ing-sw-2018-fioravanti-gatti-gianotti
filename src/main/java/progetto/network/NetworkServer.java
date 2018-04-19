@@ -1,7 +1,5 @@
 package progetto.network;
 
-import progetto.utils.IObserver;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,7 +54,7 @@ public class NetworkServer
 		serverState = new ServerState(factory);
 		new Thread(serverState).start();
 
-		LOGGER.info("starting all modules");
+		LOGGER.fine("starting all modules");
 		for (int a = 0; a < modules.size(); a++)
 			modules.get(a).start();
 
@@ -104,28 +102,22 @@ public class NetworkServer
 			LOGGER.warning("Trying to add a already present module to the network");
 			return;
 		}
-		LOGGER.info("adding a module to the network");
+		LOGGER.fine("adding a module to the network");
 		final NetworkServer s = this;
 
 		module.getPlayerJoinedCallback().addObserver
-				(new IObserver<INetworkClientHandler>()
-				{
-					public void notifyChange(INetworkClientHandler ogg)
-					{
-						s.serverState.placePlayer("noName", -1, new ServerConnection(ogg));
-					}
-				});
+				(ogg -> s.serverState.placePlayer("noName", -1, new ServerConnection(ogg)));
 
 		modules.add(module);
 
 		if (isRunning())
 		{
-			LOGGER.info("starting the module");
+			LOGGER.fine("starting the module");
 			module.start();
 		}
 		else
 		{
-			LOGGER.info("stopping the module");
+			LOGGER.fine("stopping the module");
 			module.stop();
 		}
 	}

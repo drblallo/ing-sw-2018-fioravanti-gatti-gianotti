@@ -8,6 +8,6 @@ import java.io.Serializable;
  *
  * @param <T>
  */
-abstract class AbstractNetworkCommand<T extends AbstractSocket> implements Serializable {
-	abstract void execute(T mng);
+interface INetworkCommand<T extends AbstractSocket> extends Serializable {
+	void execute(T mng);
 }

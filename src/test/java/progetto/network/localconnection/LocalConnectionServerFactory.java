@@ -1,9 +1,9 @@
 package progetto.network.localconnection;
 
 import progetto.network.INetworkModule;
-import progetto.network.SocketServerTestStub;
+import progetto.network.INetworkModuleFactory;
 
-public class LocalConnectionServerFactory implements SocketServerTestStub.INetworkModuleFactory {
+public class LocalConnectionServerFactory implements INetworkModuleFactory {
 
 	private LocalConnectionServer latest;
 

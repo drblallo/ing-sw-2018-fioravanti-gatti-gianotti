@@ -20,8 +20,8 @@ abstract class AbstractSocket implements Runnable {
 
 	private static final Logger LOGGER = Logger.getLogger(AbstractSocket.class.getName());
 	private final Timer keepAliveTimer = new Timer();
-	private final Callback<String> messageCallback = new Callback<String>();
-	private final Callback<AbstractSocket> connectionLostCallback = new Callback<AbstractSocket>();
+	private final Callback<String> messageCallback = new Callback<>();
+	private final Callback<AbstractSocket> connectionLostCallback = new Callback<>();
 	private Socket socket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
@@ -71,14 +71,14 @@ abstract class AbstractSocket implements Runnable {
 	/**
 	 * @return true if we recently received a keep alive message
 	 */
-	public boolean isAlive() {
+	private boolean isAlive() {
 		return ttl >= 0;
 	}
 
 	/**
 	 * initializes the support members and stars the listening thread
 	 */
-	private final void setUp() {
+	private void setUp() {
 		ttl = NetworkSettings.MAX_TIME_TO_LIVE_SKIPPED;
 
 		try
@@ -104,7 +104,8 @@ abstract class AbstractSocket implements Runnable {
 	/**
 	 * called when the connection is closed or the keep alive timer reaches zero
 	 */
-	private final synchronized void tearDown() {
+	private synchronized void tearDown()
+	{
 		LOGGER.fine("tearing down a connection");
 		keepAliveTimer.cancel();
 		keepAliveTimer.purge();
@@ -142,7 +143,7 @@ abstract class AbstractSocket implements Runnable {
 	 *
 	 * @param msg the abstract message that must be sent
 	 */
-	protected final synchronized void sendCommand(AbstractNetworkCommand msg) {
+	final synchronized void sendCommand(INetworkCommand msg) {
 		if (socket == null) {
 			LOGGER.log(Level.SEVERE, "Trying to send command to null network");
 			return;
@@ -176,8 +177,10 @@ abstract class AbstractSocket implements Runnable {
 
 		try {
 			if (signalGoodBye)
+			{
 				sendCommand(new GoodByeCommand());
-			socket.close();
+				socket.close();
+			}
 			tearDown();
 		} catch (IOException e) { LOGGER.log(Level.WARNING, "Failed to disconnect " + e.getMessage());}
 	}
@@ -185,11 +188,11 @@ abstract class AbstractSocket implements Runnable {
 	/**
 	 * process the commands, this is called by the listening thread
 	 */
-	private final void readCommands() {
+	private void readCommands() {
 		LOGGER.log(Level.FINER,"Reading commands");
 		try {
 
-			AbstractNetworkCommand cmd = (AbstractNetworkCommand) in.readObject();
+			INetworkCommand cmd = (INetworkCommand) in.readObject();
 			if (cmd != null) {
 				LOGGER.log(Level.FINE, "Received command from network, {0}", cmd.getClass().getName());
 				cmd.execute(this);

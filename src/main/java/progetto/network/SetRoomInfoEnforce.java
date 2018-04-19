@@ -1,6 +1,6 @@
 package progetto.network;
 
-final class SetRoomInfoEnforce extends AbstractEnforce {
+final class SetRoomInfoEnforce implements IEnforce {
 	private RoomView room;
 
 	SetRoomInfoEnforce(RoomView r) {

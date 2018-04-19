@@ -3,7 +3,7 @@ package progetto.network;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-final class SetReadyRoomRequest extends AbstractRoomRequest
+final class SetReadyRoomRequest implements AbstractRoomRequest
 {
 
 	private static final Logger LOGGER = Logger.getLogger(SetReadyRoomRequest.class.getName());
@@ -15,7 +15,7 @@ final class SetReadyRoomRequest extends AbstractRoomRequest
 
 	public void execute(AbstractRoom room, ServerConnection serverConnection)
 	{
-		LOGGER.log(Level.INFO, "Trying to set player to {0}", isReady);
+		LOGGER.log(Level.FINE, "Trying to set player to {0}", isReady);
 		room.setPlayerReady(serverConnection.getPlayerID(), isReady);
 	}
 }

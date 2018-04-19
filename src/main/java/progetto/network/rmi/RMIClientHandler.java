@@ -1,10 +1,9 @@
 package progetto.network.rmi;
 
-import progetto.network.AbstractEnforce;
+import progetto.network.IEnforce;
 import progetto.network.AbstractRoomRequest;
 import progetto.network.INetworkClientHandler;
 import progetto.utils.Callback;
-import progetto.utils.IObserver;
 
 import java.rmi.RemoteException;
 import java.util.Queue;
@@ -17,18 +16,17 @@ public final class RMIClientHandler implements INetworkClientHandler, Runnable {
 	private final IRemoteClientSession session;
 	private boolean isDead = false;
 	private Callback<AbstractRoomRequest> requestCallback;
-	private Queue<AbstractEnforce> pendingEnforce = new ConcurrentLinkedQueue<AbstractEnforce>();
+	private Queue<IEnforce> pendingEnforce = new ConcurrentLinkedQueue<>();
 
 	public RMIClientHandler(IRemoteClientSession s, RMIRemoteSession local) {
 		LOGGER.log(Level.FINE, "starting client handler");
 		session = s;
 		requestCallback = local.getRequestCallback();
-		local.getConnectionClosedCallback().addObserver(new IObserver<RMIRemoteSession>() {
-			public void notifyChange(RMIRemoteSession ogg) {
+		local.getConnectionClosedCallback().addObserver (ogg -> {
 				LOGGER.log(Level.FINE, "connection got closed, tearing it down");
 				tearDown();
 			}
-		});
+		);
 		new Thread(this).start();
 	}
 
@@ -41,45 +39,37 @@ public final class RMIClientHandler implements INetworkClientHandler, Runnable {
 		isDead = true;
 		if (disconectGracefully)
 		{
-			new Thread(new Runnable()
-			{
-				public void run()
+			new Thread(() -> {
+				try
 				{
-					try
-					{
-						LOGGER.log(Level.FINE, "sending good bye");
-						session.sayGoodBye();
-					}
-					catch (RemoteException e) { LOGGER.log(Level.SEVERE, "Failed to disconnect: {0}", e.getMessage()); }
-
+					LOGGER.log(Level.FINE, "sending good bye");
+					session.sayGoodBye();
 				}
+				catch (RemoteException e) { LOGGER.log(Level.SEVERE, "Failed to disconnect: {0}", e.getMessage()); }
+
 			}).start();
 		}
 		tearDown();
 	}
 
 	public synchronized void sendMessage(final String message) {
-		new Thread(new Runnable()
-		{
-			public void run()
+		new Thread(() -> {
+			try
 			{
-				try
-				{
-					LOGGER.log(Level.INFO, "Sending message");
-					session.sendMessage(message);
-				}
-				catch (Exception e)
-				{
-					LOGGER.log(Level.SEVERE, "Failed to send message: {0}", e.getMessage());
-					tearDown();
-				}
-
+				LOGGER.log(Level.FINE, "Sending message");
+				session.sendMessage(message);
 			}
+			catch (Exception e)
+			{
+				LOGGER.log(Level.SEVERE, "Failed to send message: {0}", e.getMessage());
+				tearDown();
+			}
+
 		}).start();
 
 	}
 
-	public void sendEnforce(final AbstractEnforce enforce)
+	public void sendEnforce(final IEnforce enforce)
 	{
 		if (enforce == null)
 			return;
@@ -130,6 +120,7 @@ public final class RMIClientHandler implements INetworkClientHandler, Runnable {
 
 	public void run()
 	{
+		Thread.currentThread().setName(getClass().getName()+" Thread");
 		while (isRunning())
 			sendFirstPending();
 

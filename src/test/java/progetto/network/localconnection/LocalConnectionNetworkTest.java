@@ -1,8 +1,8 @@
 package progetto.network.localconnection;
 
-import progetto.network.NetworkTest;
+import progetto.network.AbstractStandardTest;
 
-public class LocalConnectionNetworkTest extends NetworkTest
+public class LocalConnectionNetworkTest extends AbstractStandardTest
 {
 	private static final LocalConnectionServerFactory s = new LocalConnectionServerFactory();
 	private static final LocalConnectionClientFactory c = new LocalConnectionClientFactory(s);

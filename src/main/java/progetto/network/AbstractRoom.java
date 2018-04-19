@@ -10,13 +10,13 @@ import java.util.logging.Logger;
 abstract class AbstractRoom implements Runnable
 {
 	protected String name;
-	protected final Map<Integer, PlayerInfo> players = new ConcurrentHashMap<Integer, PlayerInfo>();
+	protected final Map<Integer, PlayerInfo> players = new ConcurrentHashMap<>();
 
 	private final int id;
 	private static final Logger LOGGER = Logger.getLogger(AbstractRoom.class.getName());
 	private boolean isAlive = true;
-	private final Queue<AbstractServerRequest> reqQueue = new ConcurrentLinkedQueue<AbstractServerRequest>();
-	private final Queue<AbstractRoomRequest> roomRequests = new ConcurrentLinkedQueue<AbstractRoomRequest>();
+	private final Queue<AbstractServerRequest> reqQueue = new ConcurrentLinkedQueue<>();
+	private final Queue<AbstractRoomRequest> roomRequests = new ConcurrentLinkedQueue<>();
 	private final ISync syncOgg;
 
 	abstract void setPlayerReady(int playerID, boolean ready);
@@ -76,7 +76,7 @@ abstract class AbstractRoom implements Runnable
 		{
 			while (p.peekRequest() != null)
 			{
-				LOGGER.log(Level.INFO, "Evaluating player request ");
+				LOGGER.log(Level.FINE, "Evaluating player request ");
 				p.popRequest().execute(this, p.getHandler());
 			}
 		}
@@ -98,6 +98,7 @@ abstract class AbstractRoom implements Runnable
 
 	public final void run()
 	{
+		Thread.currentThread().setName("Room Thread");
 		while (isAlive)
 		{
 			processAllCommand();
@@ -116,38 +117,15 @@ abstract class AbstractRoom implements Runnable
 		return players.get(id);
 	}
 
-	/**
-	 * @return a arraylist holding all the playerInfo of the players inside this room.
-	 */
-	final List<PlayerInfo> getPlayers()
-	{
-		ArrayList<PlayerInfo> pls = new ArrayList<PlayerInfo>();
-		for (PlayerInfo i : players.values())
-			pls.add(players.get(i));
-
-		return pls;
-	}
 
 	final void enqueueAdd(final String playerName, final int playerID, final ServerConnection connection)
 	{
-		roomRequests.offer(new AbstractRoomRequest() {
-			@Override
-			public void execute(AbstractRoom room, ServerConnection serverConnection)
-			{
-				addPlayer(playerName, playerID, connection);
-			}
-		});
+		roomRequests.offer((AbstractRoomRequest) (room, serverConnection) -> addPlayer(playerName, playerID, connection));
 	}
 
 	final void enqueueRemoval(final int playerID)
 	{
-		roomRequests.offer(new AbstractRoomRequest() {
-			@Override
-			public void execute(AbstractRoom room, ServerConnection serverConnection)
-			{
-				removePlayer(playerID);
-			}
-		});
+		roomRequests.offer((AbstractRoomRequest) (room, serverConnection) -> removePlayer(playerID));
 	}
 
 	/**
@@ -173,10 +151,6 @@ abstract class AbstractRoom implements Runnable
 	 */
 	final void removePlayer(int playerID)
 	{
-		PlayerInfo info = getInfoFromID(playerID);
-		if (info == null)
-			return;
-
 		LOGGER.fine("Player removed from room");
 		players.remove(playerID);
 		notifyChange();

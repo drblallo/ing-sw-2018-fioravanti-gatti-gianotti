@@ -17,7 +17,7 @@ public final class RMIServer implements INetworkModule {
 	private static final Logger LOGGER = Logger.getLogger(RMIServer.class.getName());
 	private static Registry registry = null;
 	private final RMIRemoteLogger rmilogger = new RMIRemoteLogger(this);
-	private final Callback<INetworkClientHandler> palyerJoinedCallback = new Callback<INetworkClientHandler>();
+	private final Callback<INetworkClientHandler> palyerJoinedCallback = new Callback<>();
 	private boolean isRunning = false;
 
 	private synchronized Registry getRegistry() throws RemoteException {

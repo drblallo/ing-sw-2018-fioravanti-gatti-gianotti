@@ -1,6 +1,6 @@
 package progetto.network;
 
-final class SendSyncStringRoomRequest extends AbstractRoomRequest
+final class SendSyncStringRoomRequest implements AbstractRoomRequest
 {
 	private String command;
 

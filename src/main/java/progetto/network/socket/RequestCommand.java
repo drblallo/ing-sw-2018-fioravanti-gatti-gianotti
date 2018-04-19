@@ -5,14 +5,14 @@ import progetto.network.AbstractRoomRequest;
 /**
  * allow to send a request from client to the server
  */
-class RequestCommand extends AbstractNetworkCommand<ClientHandler> {
+class RequestCommand implements INetworkCommand<ClientHandler> {
 	private AbstractRoomRequest request;
 
 	RequestCommand(AbstractRoomRequest req) {
 		request = req;
 	}
 
-	void execute(ClientHandler mng) {
+	public void execute(ClientHandler mng) {
 		mng.getRequestCallback().call(request);
 	}
 }

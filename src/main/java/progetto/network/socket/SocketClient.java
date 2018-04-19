@@ -1,6 +1,6 @@
 package progetto.network.socket;
 
-import progetto.network.AbstractEnforce;
+import progetto.network.IEnforce;
 import progetto.network.AbstractRoomRequest;
 import progetto.network.INetworkClient;
 import progetto.utils.Callback;
@@ -10,7 +10,7 @@ import progetto.utils.Callback;
  */
 public final class SocketClient extends AbstractSocket implements INetworkClient {
 
-	private final Callback<AbstractEnforce> enforceCallback = new Callback<AbstractEnforce>();
+	private final Callback<IEnforce> enforceCallback = new Callback<>();
 
 	public SocketClient(String ip, int port) {
 		super(ip, port);
@@ -21,7 +21,7 @@ public final class SocketClient extends AbstractSocket implements INetworkClient
 	}
 
 
-	public Callback<AbstractEnforce> getEnforceCallback() {
+	public Callback<IEnforce> getEnforceCallback() {
 		return enforceCallback;
 	}
 

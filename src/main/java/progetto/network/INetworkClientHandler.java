@@ -8,7 +8,7 @@ public interface INetworkClientHandler {
 
 	void sendMessage(String message);
 
-	void sendEnforce(AbstractEnforce enforce);
+	void sendEnforce(IEnforce enforce);
 
 	boolean isRunning();
 

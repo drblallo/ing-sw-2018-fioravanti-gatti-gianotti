@@ -1,7 +1,6 @@
 package progetto.network;
 
 import progetto.utils.Callback;
-import progetto.utils.IObserver;
 
 import java.util.List;
 import java.util.Queue;
@@ -14,8 +13,8 @@ public final class ClientConnection implements Runnable {
 	private static final Logger LOGGER = Logger.getLogger(ClientConnection.class.getName());
 	private RoomView roomInfo = new RoomView("No Name", -1);
 	private final ISync synchronizedObj;
-	private final Callback<ClientConnection> syncronizationFailedCallback = new Callback<ClientConnection>();
-	private final Queue<AbstractEnforce> enforcesQueue = new ConcurrentLinkedQueue<AbstractEnforce>();
+	private final Callback<ClientConnection> syncronizationFailedCallback = new Callback<>();
+	private final Queue<IEnforce> enforcesQueue = new ConcurrentLinkedQueue<>();
 	private final INetworkClient handler;
 	private ServerStateView serverState = new ServerStateView();
 	private int playerID = -1;
@@ -23,11 +22,7 @@ public final class ClientConnection implements Runnable {
 	public ClientConnection(INetworkClient h, ISync ogg) {
 		handler = h;
 		synchronizedObj = ogg;
-		handler.getEnforceCallback().addObserver(new IObserver<AbstractEnforce>() {
-			public void notifyChange(AbstractEnforce ogg) {
-				enforcesQueue.add(ogg);
-			}
-		});
+		handler.getEnforceCallback().addObserver(enforcesQueue::add);
 
 		new Thread(this).start();
 	}
@@ -84,10 +79,6 @@ public final class ClientConnection implements Runnable {
 		sendServerRequest(new FetchServerStateRequest());
 	}
 
-	public synchronized void fetchMyID(){
-		sendServerRequest(new FetchMyIDRequest());
-	}
-
 	public synchronized int getPlayerID() {
 		return playerID;
 	}
@@ -98,7 +89,7 @@ public final class ClientConnection implements Runnable {
 	 * @param plID new value of the player id
 	 */
 	final synchronized void setPlayerID(int plID) {
-		LOGGER.log(Level.INFO, "Received a player ID from network: {0}", plID);
+		LOGGER.log(Level.FINE, "Received a player ID from network: {0}", plID);
 		playerID = plID;
 	}
 
@@ -161,7 +152,7 @@ public final class ClientConnection implements Runnable {
 	 */
 	final synchronized void setRoomInfo(RoomView r)
 	{
-		LOGGER.log(Level.INFO, "received new room info ");
+		LOGGER.log(Level.FINE, "received new room info ");
 		roomInfo = r;
 	}
 
@@ -212,10 +203,10 @@ public final class ClientConnection implements Runnable {
 
 		PlayerInfoView info = roomInfo.getPlayer(playerID);
 		if (info == null) {
-			LOGGER.log(Level.INFO, "did not found player {0}", playerID);
+			LOGGER.log(Level.FINE, "did not found player {0}", playerID);
 			return -1;
 		}
-		LOGGER.log(Level.INFO, "found chair: {0}", info.getChairID());
+		LOGGER.log(Level.FINE, "found chair: {0}", info.getChairID());
 		return info.getChairID();
 	}
 
@@ -251,7 +242,7 @@ public final class ClientConnection implements Runnable {
 
 	public synchronized void processAllCommand()
 	{
-		AbstractEnforce f;
+		IEnforce f;
 		while ((f = enforcesQueue.poll()) != null)
 		{
 			f.execute(this);
@@ -260,6 +251,7 @@ public final class ClientConnection implements Runnable {
 
 	public void run()
 	{
+		Thread.currentThread().setName(getClass().getName()+" Thread");
 		while (isRunning())
 		{
 			processAllCommand();
