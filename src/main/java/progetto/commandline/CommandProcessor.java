@@ -16,7 +16,7 @@ public class CommandProcessor implements ICommand {
     public CommandProcessor(String name){
 
         this.name = name;
-        registered = new HashMap<String, ICommand>();
+        registered = new HashMap<>();
 
     }
 
@@ -71,7 +71,7 @@ public class CommandProcessor implements ICommand {
 
     public List<ICommand> getList(){
 
-        return new ArrayList<ICommand>(registered.values());
+        return new ArrayList<>(registered.values());
     }
 
     public String execute(String params) {
@@ -101,7 +101,7 @@ public class CommandProcessor implements ICommand {
             return toexecute.execute(null);
         }
 
-        List<ICommand> explore = new ArrayList<ICommand>(registered.values());
+        List<ICommand> explore = new ArrayList<>(registered.values());
 
         for(int i=0; i<explore.size();i++) {
 
