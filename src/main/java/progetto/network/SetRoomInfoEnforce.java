@@ -1,11 +1,9 @@
 package progetto.network;
 
-import progetto.network.connectionstate.Room;
-
 final class SetRoomInfoEnforce extends AbstractEnforce {
-	private Room room;
+	private RoomView room;
 
-	SetRoomInfoEnforce(Room r) {
+	SetRoomInfoEnforce(RoomView r) {
 		room = r;
 	}
 

@@ -1,7 +1,9 @@
 package progetto.network;
 
-final class FetchServerStateRequest extends AbstractRequest {
-	public void execute(ConnectionsManager manager, ServerConnection serverConnection) {
-		serverConnection.sendServerState(manager.getServerState());
+final class FetchServerStateRequest extends AbstractServerRequest
+{
+	public void execute(ServerState state, AbstractRoom room)
+	{
+		getAuthor().sendServerState(state.getView());
 	}
 }

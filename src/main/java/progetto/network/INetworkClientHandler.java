@@ -12,11 +12,5 @@ public interface INetworkClientHandler {
 
 	boolean isRunning();
 
-	/**
-	 * @return the callaback that is called every time a message is received
-	 */
-	Callback<String> getMessageCallback();
-
-
-	Callback<AbstractRequest> getRequestCallback();
+	Callback<AbstractRoomRequest> getRequestCallback();
 }

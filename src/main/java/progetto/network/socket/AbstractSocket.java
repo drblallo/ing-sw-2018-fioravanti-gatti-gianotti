@@ -32,6 +32,7 @@ abstract class AbstractSocket implements Runnable {
 	 * Builds a socketManager from ip and port
 	 */
 	AbstractSocket(String target, int port) {
+		LOGGER.log(Level.INFO, "Trying to log in on {0}", target);
 
 		try {
 			socket = new Socket(target, port);
@@ -80,11 +81,13 @@ abstract class AbstractSocket implements Runnable {
 	private final void setUp() {
 		ttl = NetworkSettings.MAX_TIME_TO_LIVE_SKIPPED;
 
-		try {
+		try
+		{
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
 			new Thread(this).start();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			LOGGER.log(Level.WARNING, "Failed to create streams: " + e.getMessage());
 		}
 
@@ -93,7 +96,8 @@ abstract class AbstractSocket implements Runnable {
 			public void run() {
 				tick();
 			}
-		}, NetworkSettings.DEFAULT_TIME_TO_LIVE, NetworkSettings.DEFAULT_TIME_TO_LIVE);
+		}, 		NetworkSettings.DEFAULT_TIME_TO_LIVE,
+				NetworkSettings.DEFAULT_TIME_TO_LIVE);
 
 	}
 
@@ -125,13 +129,12 @@ abstract class AbstractSocket implements Runnable {
 	 * called by the clock every KEEP_LIVE milliseconds
 	 */
 	private final synchronized void tick() {
+		LOGGER.log(Level.FINER,"ttl left {0}", ttl);
 		KeepAliveCommand msg = new KeepAliveCommand();
 		sendCommand(msg);
 
 		ttl -= 1;
-		if (ttl <= 0) {
-			disconnect(true);
-		}
+		if (ttl <= 0) disconnect(true);
 	}
 
 	/**
@@ -176,15 +179,14 @@ abstract class AbstractSocket implements Runnable {
 				sendCommand(new GoodByeCommand());
 			socket.close();
 			tearDown();
-		} catch (IOException e) {
-			LOGGER.log(Level.WARNING, "Failed to disconnect " + e.getMessage());
-		}
+		} catch (IOException e) { LOGGER.log(Level.WARNING, "Failed to disconnect " + e.getMessage());}
 	}
 
 	/**
 	 * process the commands, this is called by the listening thread
 	 */
 	private final void readCommands() {
+		LOGGER.log(Level.FINER,"Reading commands");
 		try {
 
 			AbstractNetworkCommand cmd = (AbstractNetworkCommand) in.readObject();
@@ -195,15 +197,14 @@ abstract class AbstractSocket implements Runnable {
 		} catch (IOException e) {
 			LOGGER.log(Level.WARNING, "Failed to read object from socket: " + e.getMessage());
 			tearDown();
-		} catch (ClassNotFoundException e) {
-			LOGGER.log(Level.SEVERE, "CLASS IS MISSING IN DESERIALIZATION: " + e.getMessage());
-		}
+		} catch (ClassNotFoundException e) { LOGGER.log(Level.SEVERE, "CLASS IS MISSING " + e.getMessage()); }
 	}
 
 	public void run() {
 		while (isRunning()) {
 			readCommands();
 		}
+		LOGGER.log(Level.INFO,"reached natural end");
 	}
 
 }

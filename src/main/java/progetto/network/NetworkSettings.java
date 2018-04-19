@@ -7,7 +7,7 @@ public final class NetworkSettings {
 	public static final int CHECK_SYNC_RATEO = 5;
 	private static final int EASTER_EGG = 42;
 	private int easterEgg = EASTER_EGG;
-
+	public static final int THREAD_CHECK_RATE = 10;
 	public int getEasterEgg() {
 		return easterEgg;
 	}

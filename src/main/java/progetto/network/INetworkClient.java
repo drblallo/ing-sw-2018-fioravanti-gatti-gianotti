@@ -23,6 +23,6 @@ public interface INetworkClient {
 
 	Callback<AbstractEnforce> getEnforceCallback();
 
-	void sendRequest(AbstractRequest request);
+	void sendRequest(AbstractRoomRequest request);
 
 }

@@ -3,7 +3,7 @@ package progetto.network.rmi;
 import java.rmi.RemoteException;
 import java.util.logging.Logger;
 
-class RMIRemoteLogger implements IRemoteLogger {
+final class RMIRemoteLogger implements IRemoteLogger {
 	private static final Logger LOGGER = Logger.getLogger(RMIRemoteLogger.class.getName());
 	private final RMIServer server;
 

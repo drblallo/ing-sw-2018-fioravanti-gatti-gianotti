@@ -1,14 +1,14 @@
 package progetto.network.socket;
 
-import progetto.network.AbstractRequest;
+import progetto.network.AbstractRoomRequest;
 
 /**
  * allow to send a request from client to the server
  */
 class RequestCommand extends AbstractNetworkCommand<ClientHandler> {
-	private AbstractRequest request;
+	private AbstractRoomRequest request;
 
-	RequestCommand(AbstractRequest req) {
+	RequestCommand(AbstractRoomRequest req) {
 		request = req;
 	}
 
