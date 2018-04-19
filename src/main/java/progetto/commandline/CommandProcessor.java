@@ -1,20 +1,31 @@
 package progetto.commandline;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CommandProcessor {
+public class CommandProcessor implements ICommand {
 
     private HashMap <String, ICommand> registered;
+    private String name;
     private static final Logger LOGGER = Logger.getLogger(CommandProcessor.class.getName());
 
-    public CommandProcessor(){
+    public CommandProcessor(String name){
 
+        this.name = name;
         registered = new HashMap<String, ICommand>();
 
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getHelp() {
+        return "This is a command processor, press enter to see all the available commands";
     }
 
     public void registerCommand(ICommand command){
@@ -63,22 +74,29 @@ public class CommandProcessor {
         return new ArrayList<ICommand>(registered.values());
     }
 
-    public String processCommand(String command){
+    public String execute(String params) {
+
+        String[] tosplit;
+
+        tosplit = params.split(" ",2);
+
+        return execute(tosplit);
+    }
+
+
+    public String execute (String[] command){
 
         ICommand toexecute;
-        String[] tosplit;
         StringBuilder toreturn = new StringBuilder();
         toreturn.append("Command not found, maybe you ment:");
 
-        tosplit = command.split(" ",2);
+        if(registered.containsKey(command[0])){
 
-        if(registered.containsKey(tosplit[0])){
+            toexecute = registered.get(command[0]);
+            if(command.length!=1){
 
-            toexecute = registered.get(tosplit[0]);
-            if(command.contains(" ")){
-
-                tosplit = tosplit[1].split(" ");
-                return toexecute.execute(tosplit);
+                command = command[1].split(" ");
+                return toexecute.execute(command);
             }
             return toexecute.execute(null);
         }
@@ -87,7 +105,7 @@ public class CommandProcessor {
 
         for(int i=0; i<explore.size();i++) {
 
-            if (explore.get(i).getName().startsWith(tosplit[0])) {
+            if (explore.get(i).getName().startsWith(command[0])) {
 
                 toreturn.append('\n'+ explore.get(i).getName());
 

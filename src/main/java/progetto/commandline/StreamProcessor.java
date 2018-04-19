@@ -65,7 +65,7 @@ public class StreamProcessor implements Runnable {
 
         String output;
 
-        output = comproc.processCommand(read.toString()) + '\n';
+        output = comproc.execute(read.toString()) + '\n';
 
         bout.write(output);
         bout.flush();

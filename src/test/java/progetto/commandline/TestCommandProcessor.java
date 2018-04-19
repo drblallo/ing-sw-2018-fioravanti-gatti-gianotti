@@ -20,14 +20,14 @@ public class TestCommandProcessor {
     @Before
     public void setup(){
 
-       nuovo = new CommandProcessor();
+       nuovo = new CommandProcessor("main");
 
     }
 
     @Test
     public void testMissingCommand(){
 
-        risposta=nuovo.processCommand("Ciao");
+        risposta=nuovo.execute("Ciao");
         assertEquals("Command not found, maybe you ment:", risposta);
 
     }
@@ -38,7 +38,7 @@ public class TestCommandProcessor {
         EchoCommand command = new EchoCommand();
 
         nuovo.registerCommand(command);
-        risposta=nuovo.processCommand("echo Hello World");
+        risposta=nuovo.execute("echo Hello World");
         assertEquals("Hello", risposta);
 
     }
@@ -89,9 +89,11 @@ public class TestCommandProcessor {
         HelpCommand commhelp = new HelpCommand(nuovo);
         EchoCommand command = new EchoCommand();
 
+        assertEquals("This is a command processor, press enter to see all the available commands", nuovo.getHelp());
+
         nuovo.registerCommand(commhelp);
         nuovo.registerCommand(command);
-        risposta = nuovo.processCommand("help echo");
+        risposta = nuovo.execute("help echo");
 
         assertEquals("Return the first argument received", risposta);
 
@@ -105,7 +107,7 @@ public class TestCommandProcessor {
 
         nuovo.registerCommand(commhelp);
         nuovo.registerCommand(command);
-        risposta = nuovo.processCommand("help help");
+        risposta = nuovo.execute("help help");
 
         assertEquals("PANICKING!!!!!", risposta);
         risposta=commhelp.getName();
@@ -120,7 +122,7 @@ public class TestCommandProcessor {
         HelpCommand command = new HelpCommand(nuovo);
 
         nuovo.registerCommand(command);
-        risposta = nuovo.processCommand("help ciao");
+        risposta = nuovo.execute("help ciao");
 
         assertEquals("No command no comment", risposta);
 
@@ -163,7 +165,7 @@ public class TestCommandProcessor {
         HelpCommand commhelp = new HelpCommand(nuovo);
 
         nuovo.registerCommand(commhelp);
-        risposta = nuovo.processCommand("help");
+        risposta = nuovo.execute("help");
 
         assertEquals("Missing arguments", risposta);
 
@@ -175,7 +177,7 @@ public class TestCommandProcessor {
         EchoCommand echo = new EchoCommand();
 
         nuovo.registerCommand(echo);
-        risposta = nuovo.processCommand("echo");
+        risposta = nuovo.execute("echo");
 
         assertEquals("Missing arguments", risposta);
 
