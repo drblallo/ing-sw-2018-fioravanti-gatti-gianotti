@@ -64,30 +64,16 @@ public abstract class AbstractNetworkTest
 	{
 		module = fFact.getINetworkModule();
 		module.start();
-		module.getPlayerJoinedCallback().addObserver(new IObserver<INetworkClientHandler>() {
-			public void notifyChange(INetworkClientHandler ogg) {
-				handler = ogg;
-				handler.getRequestCallback().addObserver(new IObserver<AbstractRoomRequest>() {
-					public void notifyChange(AbstractRoomRequest ogg) {
-						request = ogg;
-					}
-				});
-			}
+		module.getPlayerJoinedCallback().addObserver(ogg -> {
+			handler = ogg;
+			handler.getRequestCallback().addObserver(ogg1 -> request = ogg1);
 		});
 		wait(SHORT_WAIT);
 
 		client = cFact.getINetworkClient();
-		client.getMessageCallback().addObserver(new IObserver<String>() {
-			public void notifyChange(String ogg) {
-				message = ogg;
-			}
-		});
+		client.getMessageCallback().addObserver(ogg -> message = ogg);
 
-		client.getEnforceCallback().addObserver(new IObserver<IEnforce>() {
-			public void notifyChange(IEnforce ogg) {
-				enforce = ogg;
-			}
-		});
+		client.getEnforceCallback().addObserver(ogg -> enforce = ogg);
 		wait(MEDIUM_WAIT);
 
 	}

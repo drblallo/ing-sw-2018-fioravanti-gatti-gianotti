@@ -2,6 +2,7 @@ package progetto.network.rmi;
 
 import org.junit.Assert;
 import org.junit.Test;
+import progetto.utils.Waiter;
 
 import java.rmi.RemoteException;
 
@@ -32,12 +33,20 @@ public class RMISessionTest
 	@Test
 	public void testClientHandler()
 	{
-		try {
-			RMIClientHandler hand = new RMIClientHandler(null, new RMIRemoteSession());
+		Waiter paul = new Waiter();
+		try
+		{
+			RMIRemoteSession session = new RMIRemoteSession();
+			RMIClientHandler hand = new RMIClientHandler(null, session);
+
 			hand.sendMessage("m");
 			hand.sendMessage("m");
 			hand.sendEnforce(null);
-		} catch (RemoteException e) {
+			paul.wait(50);
+			Assert.assertFalse(hand.isRunning());
+		}
+		catch (RemoteException e)
+		{
 			e.printStackTrace();
 		}
 	}

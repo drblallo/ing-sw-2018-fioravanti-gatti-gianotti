@@ -6,6 +6,7 @@ import progetto.utils.IObserver;
 import progetto.utils.ObserverStub;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class LocalConnectionClientTest extends AbstractLocalConnectionTest
 {
@@ -50,6 +51,7 @@ public class LocalConnectionClientTest extends AbstractLocalConnectionTest
 	public void testDisconnect()
 	{
 		client.disconnect(false);
+		assertFalse(client.isRunning());
 	}
 
 }
