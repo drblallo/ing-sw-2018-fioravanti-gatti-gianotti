@@ -1,8 +1,8 @@
 package progetto.network.rmi;
 
 import progetto.network.IEnforce;
-import progetto.network.AbstractRoomRequest;
-import progetto.network.INetworkClientHandler;
+import progetto.network.IRoomRequest;
+import progetto.network.INetworkHandler;
 import progetto.utils.Callback;
 
 import java.rmi.RemoteException;
@@ -11,14 +11,22 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public final class RMIClientHandler implements INetworkClientHandler, Runnable {
-	private static final Logger LOGGER = Logger.getLogger(RMIClientHandler.class.getName());
+/**
+ * rmi implementation of INetworkHandler
+ */
+public final class RMIHandler implements INetworkHandler, Runnable {
+	private static final Logger LOGGER = Logger.getLogger(RMIHandler.class.getName());
 	private final IRemoteClientSession session;
 	private boolean isDead = false;
-	private Callback<AbstractRoomRequest> requestCallback;
+	private Callback<IRoomRequest> requestCallback;
 	private Queue<IEnforce> pendingEnforce = new ConcurrentLinkedQueue<>();
 
-	public RMIClientHandler(IRemoteClientSession s, RMIRemoteSession local) {
+	/**
+	 * creates a new instance
+	 * @param s the remote client session that is connected to this object
+	 * @param local the remote server session that is connected to this object
+	 */
+	public RMIHandler(IRemoteClientSession s, RMIRemoteServerSession local) {
 		LOGGER.log(Level.FINE, "starting client handler");
 		session = s;
 		requestCallback = local.getRequestCallback();
@@ -30,10 +38,18 @@ public final class RMIClientHandler implements INetworkClientHandler, Runnable {
 		new Thread(this).start();
 	}
 
+	/**
+	 *
+	 * @return true if the connection is still open
+	 */
 	public boolean isRunning() {
 		return !isDead;
 	}
 
+	/**
+	 * shuts down the connection, tears down all resources
+	 * @param disconectGracefully true if the connection must be closed gracefully
+	 */
 	public synchronized void disconnect(boolean disconectGracefully) {
 		LOGGER.log(Level.FINE,"disconnection ");
 		isDead = true;
@@ -52,6 +68,10 @@ public final class RMIClientHandler implements INetworkClientHandler, Runnable {
 		tearDown();
 	}
 
+	/**
+	 * Tries to send a message
+	 * @param message the string to be sent
+	 */
 	public synchronized void sendMessage(final String message) {
 		new Thread(() -> {
 			try
@@ -69,6 +89,10 @@ public final class RMIClientHandler implements INetworkClientHandler, Runnable {
 
 	}
 
+	/**
+	 * appends a enforce to the queue of enforces that must be sent
+	 * @param enforce the enforce to be sent
+	 */
 	public void sendEnforce(final IEnforce enforce)
 	{
 		if (enforce == null)
@@ -81,15 +105,25 @@ public final class RMIClientHandler implements INetworkClientHandler, Runnable {
 		}
 	}
 
+	/**
+	 * mark this connection as dead
+	 */
 	private void tearDown() {
 		isDead = true;
 	}
 
-
-	public Callback<AbstractRoomRequest> getRequestCallback() {
+	/**
+	 *
+	 * @return the request callback that is called every time a request is received
+	 */
+	public Callback<IRoomRequest> getRequestCallback() {
 		return requestCallback;
 	}
 
+	/**
+	 * tries to send the first pending enforces
+	 * if the queue of enforces is null the thread will go to sleep utils one is added to the queue.
+	 */
 	private void sendFirstPending()
 	{
 		while (pendingEnforce.peek() == null)
@@ -118,6 +152,9 @@ public final class RMIClientHandler implements INetworkClientHandler, Runnable {
 		}
 	}
 
+	/**
+	 * while the connection is open it will keep sending all enforces
+	 */
 	public void run()
 	{
 		Thread.currentThread().setName(getClass().getName()+" Thread");

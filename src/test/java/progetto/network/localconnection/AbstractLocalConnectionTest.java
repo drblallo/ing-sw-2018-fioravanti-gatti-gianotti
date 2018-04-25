@@ -6,8 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import progetto.network.IEnforce;
 import progetto.network.ClientConnection;
-import progetto.network.INetworkClientHandler;
-import progetto.utils.IObserver;
+import progetto.network.INetworkHandler;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,8 +21,8 @@ public abstract class AbstractLocalConnectionTest
 	}
 
 	protected LocalConnectionClient client;
-	protected static final LocalConnectionServer server = new LocalConnectionServer();
-	protected static INetworkClientHandler handler;
+	protected static final LocalConnectionModule server = new LocalConnectionModule();
+	protected static INetworkHandler handler;
 	protected IEnforce lastEnforce;
 	protected boolean called = false;
 
@@ -31,13 +30,7 @@ public abstract class AbstractLocalConnectionTest
 	public static void beforeClass()
 	{
 		server.start();
-		server.getPlayerJoinedCallback().addObserver(new IObserver<INetworkClientHandler>()
-		{
-			public void notifyChange(INetworkClientHandler ogg)
-			{
-				handler = ogg;
-			}
-		});
+		server.getPlayerJoinedCallback().addObserver(ogg -> handler = ogg);
 	}
 
 	@Before

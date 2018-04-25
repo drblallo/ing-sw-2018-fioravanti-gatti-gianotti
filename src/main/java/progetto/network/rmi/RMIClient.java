@@ -1,7 +1,7 @@
 package progetto.network.rmi;
 
 import progetto.network.IEnforce;
-import progetto.network.AbstractRoomRequest;
+import progetto.network.IRoomRequest;
 import progetto.network.INetworkClient;
 import progetto.utils.Callback;
 
@@ -12,18 +12,26 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The rmi implementation of INetworkClient.
+ *
+ */
 public final class RMIClient implements INetworkClient, Runnable{
 	private static final Logger LOGGER = Logger.getLogger(RMIClient.class.getName());
-	private IRemoteSession session;
+	private IRemoteServerSession session;
 	private boolean isAlive = true;
 	private Callback<IEnforce> enforceCallback;
 	private Callback<String> messageCallback;
-	private Queue<AbstractRoomRequest> pendingRequests = new ConcurrentLinkedQueue<>();
+	private Queue<IRoomRequest> pendingRequests = new ConcurrentLinkedQueue<>();
 
+	/**
+	 * Creates the client from the provided ip
+	 * @param ip the ip where the server is located.
+	 */
 	public RMIClient(String ip) {
 		try {
 			LOGGER.log(Level.FINE, "creating module");
-			Registry registry = LocateRegistry.getRegistry(ip, RMIServer.RMI_PORT);
+			Registry registry = LocateRegistry.getRegistry(ip, RMIModule.RMI_PORT);
 
 			IRemoteLogger stub = (IRemoteLogger) registry.lookup("test");
 			RMIRemoteClientSession local = new RMIRemoteClientSession();
@@ -40,6 +48,9 @@ public final class RMIClient implements INetworkClient, Runnable{
 		}
 	}
 
+	/**
+	 * tears down the connection
+	 */
 	private void teardown() {
 		LOGGER.log(Level.FINE, "tearing down ");
 		isAlive = false;
@@ -50,6 +61,10 @@ public final class RMIClient implements INetworkClient, Runnable{
 		}
 	}
 
+	/**
+	 * closes the connection and tears down all resources
+	 * @param signalGoodBye true the connection must be closed gracefully.
+	 */
 	public void disconnect(boolean signalGoodBye) {
 		if (signalGoodBye) {
 
@@ -69,19 +84,35 @@ public final class RMIClient implements INetworkClient, Runnable{
 		teardown();
 	}
 
+	/**
+	 *
+	 * @return true if the connection is still open
+	 */
 	public boolean isRunning() {
 		return isAlive;
 	}
 
+	/**
+	 *
+	 * @return the callback that is called every time a message is received
+	 */
 	public Callback<String> getMessageCallback() {
 		return messageCallback;
 	}
 
+	/**
+	 *
+	 * @return the callback that is called every time a enforce is received
+	 */
 	public Callback<IEnforce> getEnforceCallback() {
 		return enforceCallback;
 	}
 
-	public void sendRequest(final AbstractRoomRequest request) {
+	/**
+	 * appends the request to the queue of requests to be sent
+	 * @param request request to be sent
+	 */
+	public void sendRequest(final IRoomRequest request) {
 		if (request == null)
 			return;
 
@@ -92,6 +123,10 @@ public final class RMIClient implements INetworkClient, Runnable{
 		}
 	}
 
+	/**
+	 * sends the first pending request. If there is no pending request then the thread will sleep until
+	 * a new request is added
+	 */
 	private void sendFirstPending()
 	{
 		while (pendingRequests.peek() == null)
@@ -123,6 +158,9 @@ public final class RMIClient implements INetworkClient, Runnable{
 		}
 	}
 
+	/**
+	 * while the connection is open it will keep trying to send request
+	 */
 	public void run()
 	{
 		Thread.currentThread().setName(getClass().getName()+" Thread");

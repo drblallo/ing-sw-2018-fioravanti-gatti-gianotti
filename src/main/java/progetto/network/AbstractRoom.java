@@ -7,37 +7,60 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * An abstract room is the class that holds the connections.
+ * Abstract room implements runnable, a new thread must be started
+ *
+ * When a player sends a request, this request is processed by the thread spawned.
+ * It ensures that request received by the same player are solved in order of arrival.
+ * It DOES not ensure that requests received by different player are solved in order of arrival.
+ */
 abstract class AbstractRoom implements Runnable
 {
 	protected String name;
-	protected final Map<Integer, PlayerInfo> players = new ConcurrentHashMap<>();
+	protected final Map<Integer, Player> players = new ConcurrentHashMap<>();
 
 	private final int id;
 	private static final Logger LOGGER = Logger.getLogger(AbstractRoom.class.getName());
 	private boolean isAlive = true;
 	private final Queue<AbstractServerRequest> reqQueue = new ConcurrentLinkedQueue<>();
-	private final Queue<AbstractRoomRequest> roomRequests = new ConcurrentLinkedQueue<>();
+	private final Queue<IRoomRequest> roomRequests = new ConcurrentLinkedQueue<>();
 	private final ISync syncOgg;
 
 	abstract void setPlayerReady(int playerID, boolean ready);
 	abstract void setPlayerChair(int playerID, int newChair);
 
-
+	/**
+	 *
+	 * @return the unique id of this room
+	 */
 	final int getRoomID()
 	{
 		return id;
 	}
 
+	/**
+	 *
+	 * @return the first request in the request queue that have been received by players
+	 */
 	final AbstractServerRequest popRequest()
 	{
 		return reqQueue.poll();
 	}
 
+	/**
+	 *
+	 * @return the first request in the request queue, without poping it.
+	 */
 	final AbstractServerRequest peekRequest()
 	{
 		return reqQueue.peek();
 	}
 
+	/**
+	 * insert a request in the queue of request that must be processed.
+	 * @param request to be inserted
+	 */
 	final void offerRequest(AbstractServerRequest request)
 	{
 		reqQueue.offer(request);
@@ -53,6 +76,9 @@ abstract class AbstractRoom implements Runnable
 		syncOgg = ogg;
 	}
 
+	/**
+	 * @return the synchronization object used in this room
+	 */
 	final ISync getSyncOgg()
 	{
 		return syncOgg;
@@ -66,13 +92,19 @@ abstract class AbstractRoom implements Runnable
 		return name;
 	}
 
-	private final void processAllCommand()
+	/**
+	 * this method is where all requests are performed.
+	 * This ensures the absence of threading errors when the abstract room is updated, but requires that
+	 * all modification are made inside a roomRequest.
+	 */
+	private void processAllCommand()
 	{
-		for (PlayerInfo p : players.values())
+
+		for (Player p : players.values()) //removes all players that are no longer connected
 			if (!p.getHandler().isRunning())
 				removePlayer(p.getPlayerID());
 
-		for (PlayerInfo p : players.values())
+		for (Player p : players.values()) //evaluate all requests made from a player
 		{
 			while (p.peekRequest() != null)
 			{
@@ -81,12 +113,12 @@ abstract class AbstractRoom implements Runnable
 			}
 		}
 
-		while (roomRequests.peek() != null)
+		while (roomRequests.peek() != null) //evaluate directly received by the room
 			roomRequests.poll().execute(this, null);
 
 		try
 		{
-			Thread.sleep(NetworkSettings.THREAD_CHECK_RATE);
+			Thread.sleep(NetworkSettings.THREAD_CHECK_RATE); //goes to sleep for a while
 		}
 		catch (InterruptedException e)
 		{
@@ -96,9 +128,13 @@ abstract class AbstractRoom implements Runnable
 
 	}
 
+	/**
+	 * implementation of the runnable interface
+	 * set the thread name to Room Thread
+	 */
 	public final void run()
 	{
-		Thread.currentThread().setName("Room Thread");
+		Thread.currentThread().setName("Room Thread "+getRoomID());
 		while (isAlive)
 		{
 			processAllCommand();
@@ -112,32 +148,37 @@ abstract class AbstractRoom implements Runnable
 	 * @param id the id of the player.
 	 * @return null if there is no such player, its information otherwise.
 	 */
-	final PlayerInfo getInfoFromID(int id)
+	final Player getPlayerFromID(int id)
 	{
 		return players.get(id);
 	}
 
 
-	final void enqueueAdd(final String playerName, final int playerID, final ServerConnection connection)
+	/**
+	 * append a request to create a new player inside this room the next time all pending command are processed.
+	 *
+	 * @param playerName the name with which the player will be know inside this room
+	 * @param connection the id of the player that is trying
+	 */
+	final void enqueueAdd(final String playerName, final ServerConnection connection)
 	{
-		roomRequests.offer((AbstractRoomRequest) (room, serverConnection) -> addPlayer(playerName, playerID, connection));
+		roomRequests.offer((IRoomRequest) (room, serverConnection) -> addPlayer(playerName, connection));
 	}
 
 	final void enqueueRemoval(final int playerID)
 	{
-		roomRequests.offer((AbstractRoomRequest) (room, serverConnection) -> removePlayer(playerID));
+		roomRequests.offer((IRoomRequest) (room, serverConnection) -> removePlayer(playerID));
 	}
 
 	/**
 	 * creates a new player inside this room, if such player does no exist. Triggers a playerJoinEvent.
 	 *
 	 * @param playerName the name of the new player.
-	 * @param playerID   the id of the new player.
 	 */
-	final void addPlayer(String playerName, int playerID, ServerConnection handler)
+	final void addPlayer(String playerName, ServerConnection handler)
 	{
-		PlayerInfo info = new PlayerInfo(playerName, playerID, handler);
-		players.put(playerID, info);
+		Player info = new Player(playerName, handler);
+		players.put(handler.getPlayerID(), info);
 		notifyChange();
 		if (getSyncOgg() != null)
 			handler.onRoomChanged(getSyncOgg());
@@ -147,7 +188,7 @@ abstract class AbstractRoom implements Runnable
 	/**
 	 * remove a player from this room. Trigger a playerLeaveEvent if such player existed.
 	 *
-	 * @param playerID
+	 * @param playerID the player to be removed
 	 */
 	final void removePlayer(int playerID)
 	{
@@ -163,41 +204,55 @@ abstract class AbstractRoom implements Runnable
 	 * @return the player that is sitting in a particular chair, null if chairID is invalid or if nobody is sitting
 	 * in that chair.
 	 */
-	final PlayerInfo getPlayerOfChair(int chairID)
+	final Player getPlayerOfChair(int chairID)
 	{
 		if (chairID < 0)
 			return null;
 
-		for (PlayerInfo f : players.values())
+		for (Player f : players.values())
 			if (f.getChairID() == chairID)
 				return f;
 
 		return null;
 	}
 
+	/**
+	 *
+	 * @return the count of player inside this room. Returns observers as well.
+	 */
 	final int getPlayerCount()
 	{
 		return players.keySet().size();
 	}
 
+	/**
+	 *
+	 * @return the view of this room
+	 */
 	RoomView getView()
 	{
 		RoomView v = new RoomView(name, id);
-		for (PlayerInfo info : players.values())
-			v.addPlayer(info);
+		for (Player info : players.values()) //players is thread safe, since is a concurrent hash map
+			v.addPlayer(info); //add player is thread safe
 
 		return v;
 	}
 
+	/**
+	 * stops the room thread. Clean up will be executed when the room thread desires.
+	 */
 	void stop()
 	{
 		isAlive = false;
 	}
 
-	private final void tearDown()
+	/**
+	 * closes all the player connections, calls onTearDown
+	 */
+	private void tearDown()
 	{
 		isAlive = false;
-		for (Map.Entry<Integer, PlayerInfo> p : players.entrySet())
+		for (Map.Entry<Integer, Player> p : players.entrySet())
 		{
 			p.getValue().getHandler().disconnect();
 			removePlayer(p.getKey());
@@ -205,22 +260,48 @@ abstract class AbstractRoom implements Runnable
 		onTearDown();
 	}
 
+	/**
+	 * send a message to every player inside the room
+	 * @param message to be sent
+	 */
 	void broadcast(String message)
 	{
 		for (int p : players.keySet())
 			sendMessage(p, message);
 	}
 
+	/**
+	 * send to every player the new state of the room
+	 */
 	void notifyChange()
 	{
-		for (PlayerInfo p : players.values())
-			p.getHandler().onRoomModified(this);
+		for (Player p : players.values())
+			p.getHandler().onRoomModified(getView());
 	}
 
+	/**
+	 * every derived class must implements how sync string are handled
+	 * @param syncString the string that must be syncd
+	 * @param callerID the id of the player that send the string
+	 */
 	abstract void processCommand(String syncString, int callerID);
 
-	protected void onTearDown(){}
+	/**
+	 * called when the room is closing, it is called inside the room update thread, so every modification
+	 * to the room is thread safe
+	 *
+	 * default implementation is do nothing, so there is no need to call super
+	 */
+	void onTearDown()
+	{
+		//default implementation is do nothing
+	}
 
+	/**
+	 * send a message to a particular client
+	 * @param targetID id of the target
+	 * @param message string to be sent
+	 */
 	void sendMessage(int targetID, String message)
 	{
 		if (players.get(targetID) != null)

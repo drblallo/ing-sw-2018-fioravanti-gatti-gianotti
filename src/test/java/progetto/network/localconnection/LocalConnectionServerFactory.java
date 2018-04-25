@@ -5,14 +5,14 @@ import progetto.network.INetworkModuleFactory;
 
 public class LocalConnectionServerFactory implements INetworkModuleFactory {
 
-	private LocalConnectionServer latest;
+	private LocalConnectionModule latest;
 
 	public INetworkModule getINetworkModule() {
-		latest = new LocalConnectionServer();
+		latest = new LocalConnectionModule();
 		return latest;
 	}
 
-	LocalConnectionServer getLatest()
+	LocalConnectionModule getLatest()
 	{
 		return latest;
 	}

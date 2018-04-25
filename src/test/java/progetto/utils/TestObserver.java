@@ -11,7 +11,7 @@ public class TestObserver
 	@Test
 	public void testAttach()
 	{
-		ObserverStub<String> obs = new ObserverStub<String>();
+		ObserverStub<String> obs = new ObserverStub<>();
 		ObservableStub s = new ObservableStub();
 		obs.currentVal = "NONE";
 		s.triggerChange("val");

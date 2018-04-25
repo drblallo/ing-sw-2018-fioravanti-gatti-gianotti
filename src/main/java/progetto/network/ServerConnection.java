@@ -5,85 +5,154 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The class server connection is the class that uses the various implementation of INetworkHandler to perform the
+ * room and server level behaviour.
+ *
+ * It requires an already built INetworkHandler to be created, since it cannot know how connection are established.
+ */
 final class ServerConnection {
 
 	private static final Logger LOGGER = Logger.getLogger(ServerConnection.class.getName());
 
-	private final INetworkClientHandler handler;
-	private final Queue<AbstractRoomRequest> reqQueue = new ConcurrentLinkedQueue<>();
+	private final INetworkHandler handler;
+	private final Queue<IRoomRequest> reqQueue = new ConcurrentLinkedQueue<>();
 	private int playerID = -1;
 
-	ServerConnection(INetworkClientHandler h)
+	/**
+	 * Builds a new ServerConnection
+	 * @param h the handler that will be used to exchange information with the client
+	 */
+	ServerConnection(INetworkHandler h)
 	{
 		handler = h;
 		handler.getRequestCallback().addObserver(this::offerRequest);
 		reqQueue.add(new EncapsulationRoomRequest(new FetchMyIDRequest()));
 	}
 
-	public void offerRequest(AbstractRoomRequest req)
+	/**
+	 * appends a request to the pending request queue
+	 * @param req the request to be appended
+	 */
+	private void offerRequest(IRoomRequest req)
 	{
 		reqQueue.offer(req);
 	}
 
-	public boolean isRunning() {
+	/**
+	 *
+	 * @return true if the underlying implementation is still running
+	 */
+	boolean isRunning() {
 		return handler.isRunning();
 	}
 
-	public AbstractRoomRequest popRequest()
+	/**
+	 *
+	 * @return the oldest pending request popping it.
+	 */
+	IRoomRequest popRequest()
 	{
 		return reqQueue.poll();
 	}
 
-	public AbstractRoomRequest peekRequest()
+	/**
+	 *
+	 * @return the oldest pending request without popping it.
+	 */
+	IRoomRequest peekRequest()
 	{
 		return reqQueue.peek();
 	}
 
-	public int getPlayerID() {
+	/**
+	 *
+	 * @return the player if of this player. -1 if the player creation has not been processed by server.
+	 */
+	int getPlayerID() {
 		return playerID;
 	}
 
-	public synchronized void sendMessage(String message) {
+	/**
+	 * Tries to send a message to the client.
+	 * Can be called from any thread, since the underlying implementation must ensure that messages are thread safe.
+	 *
+	 * There is no requirements for this message to be received in order.
+	 * @param message the message that must be sent.
+	 */
+	void sendMessage(String message) {
 		handler.sendMessage(message);
 	}
 
-	public void setID(int id)
+	/**
+	 * sets the player id. Should be called only by the id manager, and only once.
+	 * notifies the other end that id has changed.
+	 * @param id the new id of the player.
+	 */
+	void setID(int id)
 	{
 		LOGGER.log(Level.FINE, "setting playerID {0}", id);
 		playerID = id;
 		sendID();
 	}
 
-	public void sendID() {
+	/**
+	 * forces the client to change his player info.
+	 */
+	void sendID() {
 		handler.sendEnforce(new SetPlayerInfoEnforce(playerID));
 	}
 
-	public void onRoomModified(AbstractRoom r)
+	/**
+	 * notifies the client with the new values of the room
+	 * @param r the room view that must be sent.
+	 */
+	void onRoomModified(RoomView r)
 	{
-		handler.sendEnforce(new SetRoomInfoEnforce(r.getView()));
+		handler.sendEnforce(new SetRoomInfoEnforce(r));
 	}
 
-	public void onRoomChanged(ISync ogg)
+	/**
+	 * notifies that the player is no longer in the previous room, and that
+	 * the sync object is therefore changed.
+	 * @param ogg the new sync object
+	 */
+	void onRoomChanged(ISync ogg)
 	{
 		handler.sendEnforce(new SyncStateEnforce(ogg));
 	}
 
-	public void checkSynch(ISync ogg)
+	/**
+	 * forces the player to check if the syncobject is still synced
+	 * @param ogg the server side version of the object
+	 */
+	void checkSynch(ISync ogg)
 	{
 		handler.sendEnforce(new SyncCheckEnforce(ogg.getStringCount(), ogg.getHash()));
 	}
 
-	public void disconnect()
+	/**
+	 * tries to tear down the connection gracefully
+	 */
+	void disconnect()
 	{
 		handler.disconnect(true);
 	}
 
-	public void sendServerState(ServerStateView state)
+	/**
+	 * forces the player to update his information about the server state.
+	 * @param state the server state that must be sent.
+	 */
+	void sendServerState(ServerStateView state)
 	{
 		handler.sendEnforce(new ServerStateTransferEnforce(state));
 	}
 
-	public void sendSyncCommand(String s)
+	/**
+	 * forces the client to append a synch string to his sync object.
+	 * @param s the string to be sent
+	 */
+	void sendSyncCommand(String s)
 	{
 		handler.sendEnforce(new SyncStringEnforce(s));
 	}

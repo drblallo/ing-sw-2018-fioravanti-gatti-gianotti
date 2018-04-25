@@ -1,8 +1,11 @@
 package progetto.network;
 
+/**
+ * Extension of AbstractServerRequest used to ask the server to send the room state again.
+ */
 final class FetchServerStateRequest extends AbstractServerRequest
 {
-	public void execute(ServerState state, AbstractRoom room)
+	void execute(ServerState state, AbstractRoom room)
 	{
 		getAuthor().sendServerState(state.getView());
 	}

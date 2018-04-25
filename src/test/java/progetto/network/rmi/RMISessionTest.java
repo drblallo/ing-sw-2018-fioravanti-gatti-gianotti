@@ -19,8 +19,8 @@ public class RMISessionTest
 			session2.hashCode();
 
 
-			RMIRemoteSession s1 = new RMIRemoteSession();
-			RMIRemoteSession s2 = new RMIRemoteSession();
+			RMIRemoteServerSession s1 = new RMIRemoteServerSession();
+			RMIRemoteServerSession s2 = new RMIRemoteServerSession();
 			Assert.assertTrue(!s1.equals(s2));
 			s1.hashCode();
 			s2.hashCode();
@@ -36,8 +36,8 @@ public class RMISessionTest
 		Waiter paul = new Waiter();
 		try
 		{
-			RMIRemoteSession session = new RMIRemoteSession();
-			RMIClientHandler hand = new RMIClientHandler(null, session);
+			RMIRemoteServerSession session = new RMIRemoteServerSession();
+			RMIHandler hand = new RMIHandler(null, session);
 
 			hand.sendMessage("m");
 			hand.sendMessage("m");

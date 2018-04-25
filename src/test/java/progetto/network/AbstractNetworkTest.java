@@ -2,14 +2,13 @@ package progetto.network;
 
 import org.junit.After;
 import org.junit.Before;
-import progetto.utils.IObserver;
 import progetto.utils.Waiter;
 
 public abstract class AbstractNetworkTest
 {
 
 	private INetworkClient client;
-	private INetworkClientHandler handler;
+	private INetworkHandler handler;
 	private INetworkModule module;
 	private IEnforce enforce;
 
@@ -17,17 +16,17 @@ public abstract class AbstractNetworkTest
 		return enforce;
 	}
 
-	public AbstractRoomRequest getRequest() {
+	public IRoomRequest getRequest() {
 		return request;
 	}
 
-	private AbstractRoomRequest request;
+	private IRoomRequest request;
 
 	public INetworkClient getClient() {
 		return client;
 	}
 
-	public INetworkClientHandler getHandler() {
+	public INetworkHandler getHandler() {
 		return handler;
 	}
 

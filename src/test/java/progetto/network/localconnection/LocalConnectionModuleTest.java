@@ -3,7 +3,7 @@ package progetto.network.localconnection;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class LocalConnectionServerTest extends AbstractLocalConnectionTest
+public class LocalConnectionModuleTest extends AbstractLocalConnectionTest
 {
 
 	@Test

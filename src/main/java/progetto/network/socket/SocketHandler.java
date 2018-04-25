@@ -1,8 +1,8 @@
 package progetto.network.socket;
 
 import progetto.network.IEnforce;
-import progetto.network.AbstractRoomRequest;
-import progetto.network.INetworkClientHandler;
+import progetto.network.IRoomRequest;
+import progetto.network.INetworkHandler;
 import progetto.utils.Callback;
 
 import java.net.Socket;
@@ -10,15 +10,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class implements the INetworkClientHandler for the socket implementation
+ * This class implements the INetworkHandler for the socket implementation
  */
-final class ClientHandler extends AbstractSocket implements INetworkClientHandler {
+final class SocketHandler extends AbstractSocket implements INetworkHandler {
 
-	private static final Logger LOGGER = Logger.getLogger(ClientHandler.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(SocketHandler.class.getName());
 
-	private final Callback<AbstractRoomRequest> requestCallback = new Callback<>();
+	private final Callback<IRoomRequest> requestCallback = new Callback<>();
 
-	ClientHandler(Socket s) {
+	SocketHandler(Socket s) {
 		super(s);
 	}
 
@@ -43,7 +43,7 @@ final class ClientHandler extends AbstractSocket implements INetworkClientHandle
 	/**
 	 * @return the callback that is called when a request is received
 	 */
-	public Callback<AbstractRoomRequest> getRequestCallback() {
+	public Callback<IRoomRequest> getRequestCallback() {
 		return requestCallback;
 	}
 

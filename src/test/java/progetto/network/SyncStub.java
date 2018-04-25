@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 public class SyncStub implements ISync {
 	private static final Logger LOGGER = Logger.getLogger(SyncStub.class.getName());
-	private ArrayList<String> ls = new ArrayList<String>();
+	private ArrayList<String> ls = new ArrayList<>();
 	private String full = "";
 
 	public synchronized void sendString(String s) {

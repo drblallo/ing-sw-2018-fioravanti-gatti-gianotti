@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * A network server is the class that handles the entire state of the network on the server
+ */
 public class NetworkServer
 {
 
@@ -15,6 +18,10 @@ public class NetworkServer
 	private ISyncFactory factory;
 	private ServerState serverState;
 
+	/**
+	 * creates a network server that is able to keep synchronized object of the types spawned by the sync factory
+	 * @param fac the factory that will spawn new objects in each room.
+	 */
 	public NetworkServer(ISyncFactory fac)
 	{
 		factory = fac;
@@ -36,12 +43,15 @@ public class NetworkServer
 		serverState.stop();
 
 		LOGGER.fine("Stopping all modules");
-		for (int a = 0; a < modules.size(); a++)
-			modules.get(a).stop();
+		for (INetworkModule module : modules)
+			module.stop();
 
 		running = false;
 	}
 
+	/**
+	 * starts or restart the server
+	 */
 	public synchronized void start()
 	{
 		if (isRunning())
@@ -55,8 +65,8 @@ public class NetworkServer
 		new Thread(serverState).start();
 
 		LOGGER.fine("starting all modules");
-		for (int a = 0; a < modules.size(); a++)
-			modules.get(a).start();
+		for (INetworkModule module : modules)
+			module.start();
 
 	}
 
@@ -68,11 +78,20 @@ public class NetworkServer
 	}
 
 
+	/**
+	 *
+	 * @return the server state view of this server
+	 */
 	public ServerStateView getServerStateClone()
 	{
 		return serverState.getView();
 	}
 
+	/**
+	 *
+	 * @param roomID the id that must be returned
+	 * @return the room view requested
+	 */
 	public RoomView getRoomView(int roomID)
 	{
 		if (serverState.getRoom(roomID) == null)
@@ -83,7 +102,7 @@ public class NetworkServer
 	/**
 	 * send message to all connected users
 	 *
-	 * @param message
+	 * @param message the message that must be sent to every player
 	 */
 	public synchronized void broadcastMessage(String message)
 	{

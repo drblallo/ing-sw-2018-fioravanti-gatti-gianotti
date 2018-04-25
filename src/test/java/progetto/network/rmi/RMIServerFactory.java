@@ -6,6 +6,6 @@ import progetto.network.INetworkModuleFactory;
 public class RMIServerFactory implements INetworkModuleFactory {
 
 	public INetworkModule getINetworkModule() {
-		return new RMIServer();
+		return new RMIModule();
 	}
 }

@@ -1,6 +1,6 @@
 package progetto.network.socket;
 
-import progetto.network.INetworkClientHandler;
+import progetto.network.INetworkHandler;
 import progetto.network.INetworkModule;
 import progetto.utils.Callback;
 
@@ -18,7 +18,7 @@ public final class SocketServer implements INetworkModule, Runnable {
 	private static final Logger LOGGER = Logger.getLogger(SocketServer.class.getName());
 	private final int localPort;
 	private ServerSocket server = null;
-	private Callback<INetworkClientHandler> playerJoinedCallback = new Callback<>();
+	private Callback<INetworkHandler> playerJoinedCallback = new Callback<>();
 
 	public SocketServer(int port) {
 		localPort = port;
@@ -71,10 +71,13 @@ public final class SocketServer implements INetworkModule, Runnable {
 	/**
 	 * @return the callback that is called every time a new player joins the game
 	 */
-	public Callback<INetworkClientHandler> getPlayerJoinedCallback() {
+	public Callback<INetworkHandler> getPlayerJoinedCallback() {
 		return playerJoinedCallback;
 	}
 
+	/**
+	 * while the server is running, it waits for connection
+	 */
 	public void run() {
 		LOGGER.log(Level.FINE, "Started a server");
 		while (isRunning()) {
@@ -85,7 +88,7 @@ public final class SocketServer implements INetworkModule, Runnable {
 	private void acceptConnection() {
 		try {
 			Socket s = server.accept();
-			ClientHandler cl = new ClientHandler(s);
+			SocketHandler cl = new SocketHandler(s);
 
 			playerJoinedCallback.call(cl);
 

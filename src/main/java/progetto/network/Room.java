@@ -4,8 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * A Room contains all the information needed to keep track of the players inside a room.
- * Inside a room players name are unique.
+ * The extension of Abstract room that is able to keep the sync object synchronized.
  */
 public final class Room extends AbstractRoom
 {
@@ -18,9 +17,10 @@ public final class Room extends AbstractRoom
 	}
 
 	/**
-	 * @return the ID of this room, this value is unique inside a server.
+	 * Tries to set the player to the new ready value. Does nothing if the player does not exist.
+	 * @param playerID the player id that is trying to be set ready
+	 * @param ready the new ready value
 	 */
-
 	void setPlayerReady(int playerID, boolean ready)
 	{
 		if (players.get(playerID) != null)
@@ -32,12 +32,12 @@ public final class Room extends AbstractRoom
 	/**
 	 * Sets the chair of a particular player, if that chair is already taken then nothing is done.
 	 *
-	 * @param playerID
-	 * @param newChairID
+	 * @param playerID the id of the player
+	 * @param newChairID the new chair value of the player
 	 */
 	public void setPlayerChair(int playerID, int newChairID)
 	{
-		PlayerInfo info = getInfoFromID(playerID);
+		Player info = getPlayerFromID(playerID);
 
 		if (info != null && (getPlayerOfChair(newChairID) == null || newChairID == -1))
 		{
@@ -54,20 +54,20 @@ public final class Room extends AbstractRoom
 	 */
 	final void processCommand(String syncString, int callerID)
 	{
-		PlayerInfo info = players.get(callerID);
+		Player info = players.get(callerID);
 
 		if (!getSyncOgg().isStringGood(syncString, info.getChairID()))
 			return;
 
 		getSyncOgg().sendString(syncString);
 
-		for (PlayerInfo p : players.values())
+		for (Player p : players.values())
 			p.getHandler().sendSyncCommand(syncString);
 
 		if (getSyncOgg().getStringCount() % NetworkSettings.CHECK_SYNC_RATEO != 0)
 			return;
 
-		for (PlayerInfo p : players.values())
+		for (Player p : players.values())
 			p.getHandler().checkSynch(getSyncOgg());
 	}
 

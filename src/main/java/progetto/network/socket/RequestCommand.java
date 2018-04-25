@@ -1,18 +1,18 @@
 package progetto.network.socket;
 
-import progetto.network.AbstractRoomRequest;
+import progetto.network.IRoomRequest;
 
 /**
  * allow to send a request from client to the server
  */
-class RequestCommand implements INetworkCommand<ClientHandler> {
-	private AbstractRoomRequest request;
+class RequestCommand implements INetworkCommand<SocketHandler> {
+	private IRoomRequest request;
 
-	RequestCommand(AbstractRoomRequest req) {
+	RequestCommand(IRoomRequest req) {
 		request = req;
 	}
 
-	public void execute(ClientHandler mng) {
+	public void execute(SocketHandler mng) {
 		mng.getRequestCallback().call(request);
 	}
 }

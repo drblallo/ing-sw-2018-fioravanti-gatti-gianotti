@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 /**
  * This class holds all the information at room level that are need to the server.
- * <p>
  * A server is composed by a list of room. Each room holds players.
  */
 public final class ServerState implements Runnable
@@ -22,6 +21,10 @@ public final class ServerState implements Runnable
 	private final ISyncFactory factory;
 
 
+	/**
+	 * Build a new server state.
+	 * @param factory The factory that will be used to provide the sync object to the rooms.
+	 */
 	ServerState(ISyncFactory factory)
 	{
 		WaitingRoom waitingRoom = new WaitingRoom();
@@ -61,7 +64,7 @@ public final class ServerState implements Runnable
 	{
 		for (AbstractRoom room : rooms.values())
 		{
-			if (room.getInfoFromID(id) != null)
+			if (room.getPlayerFromID(id) != null)
 				return room;
 		}
 
@@ -85,7 +88,7 @@ public final class ServerState implements Runnable
 
 		AbstractRoom r = getRoom(roomID);
 		if (r != null)
-			r.enqueueAdd(newName, con.getPlayerID(), con);
+			r.enqueueAdd(newName, con);
 
 		LOGGER.log(Level.FINE, "placed player in room {0}", roomID);
 	}

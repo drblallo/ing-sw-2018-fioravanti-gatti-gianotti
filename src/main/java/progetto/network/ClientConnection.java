@@ -8,7 +8,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public final class ClientConnection implements Runnable {
+/**
+ * Client connection is the object encapsulating the the INetworkClient implementations that provide to the client
+ * all the method needed to communicate with the server.
+ *
+ * All request sending methods are synchronized, so requests can be performed from any thread.
+ */
+public final class ClientConnection implements Runnable
+{
 
 	private static final Logger LOGGER = Logger.getLogger(ClientConnection.class.getName());
 	private RoomView roomInfo = new RoomView("No Name", -1);
@@ -19,7 +26,13 @@ public final class ClientConnection implements Runnable {
 	private ServerStateView serverState = new ServerStateView();
 	private int playerID = -1;
 
-	public ClientConnection(INetworkClient h, ISync ogg) {
+	/**
+	 * creates a client connection. This will start the thread that processes the pending enforces sent by the server
+	 * @param h the INetworkClient implementation that must be used to exchange message with the server.
+	 * @param ogg the synchronization object that will be used in this session. The object will be cleared.
+	 */
+	public ClientConnection(INetworkClient h, ISync ogg)
+	{
 		handler = h;
 		synchronizedObj = ogg;
 		handler.getEnforceCallback().addObserver(enforcesQueue::add);
@@ -68,18 +81,26 @@ public final class ClientConnection implements Runnable {
 	 *
 	 * @return the instance of socket client that failed the synchronization
 	 */
-	public final synchronized Callback<ClientConnection> getSyncronizationFailedCallback() {
+	public final synchronized Callback<ClientConnection> getSyncronizationFailedCallback()
+	{
 		return syncronizationFailedCallback;
 	}
 
 	/**
 	 * ask the server for the current state of the server
 	 */
-	public synchronized void fetchServerState() {
+	public synchronized void fetchServerState()
+	{
 		sendServerRequest(new FetchServerStateRequest());
 	}
 
-	public synchronized int getPlayerID() {
+	/**
+	 *
+	 * @return the id of the player. Player id cannot change at run time, but can be equal to -1 if the server
+	 * did not yet sent the value that will be used this game
+	 */
+	public synchronized int getPlayerID()
+	{
 		return playerID;
 	}
 
@@ -104,7 +125,11 @@ public final class ClientConnection implements Runnable {
 		sendServerRequest(new JoinRoomRequest(roomID, playerName));
 	}
 
-	private final synchronized void sendServerRequest(AbstractServerRequest req)
+	/**
+	 * sends an abstract request to the server
+	 * @param req the request to be sent
+	 */
+	private synchronized void sendServerRequest(AbstractServerRequest req)
 	{
 		handler.sendRequest(new EncapsulationRoomRequest(req));
 	}
@@ -148,7 +173,7 @@ public final class ClientConnection implements Runnable {
 	/**
 	 * update the room info with the new one
 	 *
-	 * @param r
+	 * @param r the new room view
 	 */
 	final synchronized void setRoomInfo(RoomView r)
 	{
@@ -159,7 +184,7 @@ public final class ClientConnection implements Runnable {
 	/**
 	 * sends a string to the syncObject.
 	 *
-	 * @param s
+	 * @param s the string that must be sent to the sync object
 	 */
 	final synchronized void processSyncCommand(String s) {
 		getSynchronizedObject().sendString(s);
@@ -180,6 +205,10 @@ public final class ClientConnection implements Runnable {
 
 	}
 
+	/**
+	 * @return the callback that is called when a message is received by the network. Notice that
+	 * messages are not processed from the enforce processing thread, therefore if can be triggered at any time.
+	 */
 	public Callback<String> getMessageCallback() {
 		return handler.getMessageCallback();
 	}
@@ -201,7 +230,7 @@ public final class ClientConnection implements Runnable {
 	 */
 	public synchronized int getChair() {
 
-		PlayerInfoView info = roomInfo.getPlayer(playerID);
+		PlayerView info = roomInfo.getPlayer(playerID);
 		if (info == null) {
 			LOGGER.log(Level.FINE, "did not found player {0}", playerID);
 			return -1;
@@ -214,9 +243,8 @@ public final class ClientConnection implements Runnable {
 	 * @return the ready status of this player, false if he is not in a room
 	 */
 	public synchronized boolean isReady() {
-		if (roomInfo.getPlayer(playerID) == null)
-			return false;
-		return roomInfo.getPlayer(playerID).isReady();
+		PlayerView v = roomInfo.getPlayer(playerID);
+		return (v != null && v.isReady());
 	}
 
 	/**
@@ -228,19 +256,33 @@ public final class ClientConnection implements Runnable {
 		handler.sendRequest(new SetReadyRoomRequest(ready));
 	}
 
+	/**
+	 * send a sync string
+	 * @param s the sync string to be sent
+	 */
 	public synchronized void sendSynString(String s) {
 		handler.sendRequest(new SendSyncStringRoomRequest(s));
 	}
 
+	/**
+	 * shuts down the connection, tries to disconnect gracefully.
+	 */
 	public synchronized void disconnect() {
 		handler.disconnect(true);
 	}
 
+	/**
+	 *
+	 * @return true if the underlying implementation is still running
+	 */
 	public synchronized boolean isRunning() {
 		return handler.isRunning();
 	}
 
-	public synchronized void processAllCommand()
+	/**
+	 * used by the command process thread to process al pending requests
+	 */
+	private synchronized void processAllCommand()
 	{
 		IEnforce f;
 		while ((f = enforcesQueue.poll()) != null)
@@ -249,6 +291,9 @@ public final class ClientConnection implements Runnable {
 		}
 	}
 
+	/**
+	 * while the underlying implementation is still running it keeps processing all the received enforces.
+	 */
 	public void run()
 	{
 		Thread.currentThread().setName(getClass().getName()+" Thread");

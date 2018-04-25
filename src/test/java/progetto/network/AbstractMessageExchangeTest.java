@@ -56,7 +56,7 @@ public abstract class AbstractMessageExchangeTest extends AbstractNetworkTestStu
 		assertNotNull(cl.getRoom());
 		assertEquals(1, cl.getRoom().getPlayerCount());
 		assertEquals("testRoom", cl.getRoom().getRoomName());
-		PlayerInfoView info = networkServer.getRoomView(roomID).getPlayer(cl.getPlayerID());
+		PlayerView info = networkServer.getRoomView(roomID).getPlayer(cl.getPlayerID());
 		assertNotNull(info);
 		assertNotNull(cl.getRoom().getPlayer(info.getId()));
 		assertEquals(info.getName(), cl.getRoom().getPlayer(info.getId()).getName());

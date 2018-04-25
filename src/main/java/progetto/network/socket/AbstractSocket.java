@@ -119,7 +119,7 @@ abstract class AbstractSocket implements Runnable {
 	/**
 	 * set the current time to live
 	 *
-	 * @param timeToLive
+	 * @param timeToLive how many ttl tick can be skipped before shutting down the connection
 	 */
 	void setTTL(int timeToLive) {
 		ttl = timeToLive;
@@ -129,7 +129,7 @@ abstract class AbstractSocket implements Runnable {
 	/**
 	 * called by the clock every KEEP_LIVE milliseconds
 	 */
-	private final synchronized void tick() {
+	private synchronized void tick() {
 		LOGGER.log(Level.FINER,"ttl left {0}", ttl);
 		KeepAliveCommand msg = new KeepAliveCommand();
 		sendCommand(msg);

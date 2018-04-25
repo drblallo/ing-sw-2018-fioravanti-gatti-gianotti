@@ -2,7 +2,7 @@ package progetto.network.rmi;
 
 import org.junit.Assert;
 import org.junit.Test;
-import progetto.network.INetworkClientHandler;
+import progetto.network.INetworkHandler;
 import progetto.utils.ObserverStub;
 import progetto.utils.Waiter;
 
@@ -11,7 +11,7 @@ public class RMITest {
 	@Test
 	public void testCreation() {
 		Waiter steve = new Waiter();
-		RMIServer server = new RMIServer();
+		RMIModule server = new RMIModule();
 		server.start();
 		steve.wait(500);
 		RMIClient client = new RMIClient("127.0.0.1");
@@ -25,7 +25,7 @@ public class RMITest {
 	@Test
 	public void testMultipleLogin() {
 		Waiter steve = new Waiter();
-		RMIServer server = new RMIServer();
+		RMIModule server = new RMIModule();
 		server.start();
 		steve.wait(500);
 		RMIClient client = new RMIClient("127.0.0.1");
@@ -43,8 +43,8 @@ public class RMITest {
 	@Test
 	public void testSendMessage() {
 		Waiter steve = new Waiter();
-		RMIServer server = new RMIServer();
-		ObserverStub<INetworkClientHandler> obs = new ObserverStub<INetworkClientHandler>();
+		RMIModule server = new RMIModule();
+		ObserverStub<INetworkHandler> obs = new ObserverStub<>();
 		server.getPlayerJoinedCallback().addObserver(obs);
 		obs.currentVal = null;
 		server.start();
@@ -70,7 +70,7 @@ public class RMITest {
 	@Test
 	public void testOpenTwice()
 	{
-		RMIServer server = new RMIServer();
+		RMIModule server = new RMIModule();
 		server.start();
 		server.start();
 		Assert.assertEquals(true, server.isRunning());
@@ -82,9 +82,9 @@ public class RMITest {
 	@Test
 	public void testMultiplModules()
 	{
-		RMIServer server = new RMIServer();
+		RMIModule server = new RMIModule();
 		server.start();
-		RMIServer server2 = new RMIServer();
+		RMIModule server2 = new RMIModule();
 		Assert.assertEquals(false, server2.isRunning());
 		server2.start();
 		server.stop();

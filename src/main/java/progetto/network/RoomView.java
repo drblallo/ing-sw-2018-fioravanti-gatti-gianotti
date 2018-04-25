@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class RoomView implements Serializable{
-	private final Map<Integer, PlayerInfoView> playerInfoList = new HashMap<>();
+	private final Map<Integer, PlayerView> playerInfoList = new HashMap<>();
 	private final String roomName;
 	private final int roomID;
 
@@ -14,12 +14,12 @@ public final class RoomView implements Serializable{
 		this.roomID = roomID;
 	}
 
-	void addPlayer(PlayerInfo info)
+	void addPlayer(Player info)
 	{
 		playerInfoList.put(info.getPlayerID(), info.getView());
 	}
 
-	public PlayerInfoView getPlayer(int playerID)
+	public PlayerView getPlayer(int playerID)
 	{
 		return playerInfoList.get(playerID);
 	}
@@ -37,12 +37,12 @@ public final class RoomView implements Serializable{
 		return playerInfoList.size();
 	}
 
-	public PlayerInfoView getPlayerOfChair(int playerChair)
+	public PlayerView getPlayerOfChair(int playerChair)
 	{
 		if (playerChair <= 0)
 			return null;
 
-		for (PlayerInfoView pl : playerInfoList.values())
+		for (PlayerView pl : playerInfoList.values())
 			if (pl.getChairID() == playerChair)
 				return pl;
 		return null;

@@ -19,5 +19,5 @@ public interface INetworkModule {
 	boolean isRunning();
 
 
-	Callback<INetworkClientHandler> getPlayerJoinedCallback();
+	Callback<INetworkHandler> getPlayerJoinedCallback();
 }

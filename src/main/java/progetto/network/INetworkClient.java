@@ -2,6 +2,10 @@ package progetto.network;
 
 import progetto.utils.Callback;
 
+/**
+ * This is the interface that must be implemented by a message transport layer to allow ClientConnection to behave
+ * correctly
+ */
 public interface INetworkClient {
 
 	/**
@@ -17,7 +21,8 @@ public interface INetworkClient {
 	boolean isRunning();
 
 	/**
-	 * @return the callaback that is called every time a message is received.
+	 * @return the callaback that is called every time a message is received. Messages can be recieved out of order and
+	 * from every thread.
 	 */
 	Callback<String> getMessageCallback();
 
@@ -30,8 +35,9 @@ public interface INetworkClient {
 
 	/**
 	 *
-	 * @param request request to be sent, ensures that it will be performed after the requests already sent.
+	 * @param request request to be sent, implementation ensures that it will be sent
+	 *               to the higher level only after the requests already sent.
 	 */
-	void sendRequest(AbstractRoomRequest request);
+	void sendRequest(IRoomRequest request);
 
 }
