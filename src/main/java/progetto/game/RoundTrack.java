@@ -1,9 +1,11 @@
 package progetto.game;
 
+import progetto.utils.AbstractObservable;
+
 /**
  * RoundTrack with up to nine dices for round
  */
-public final class RoundTrack {
+public final class RoundTrack extends AbstractObservable<RoundTrack> {
 
 	private static final int NUMBER_OF_ROUNDS = 10;
 
@@ -20,9 +22,9 @@ public final class RoundTrack {
 		return dices[index].getColor(pos);
 	}
 
-	Dice getDice(int index, int pos)
+	public Dice getDice(int index, int pos)
 	{
-		return new Dice(dices[index].getValue(pos),dices[index].getColor(pos));
+		return dices[index].getDice(pos);
 	}
 
 	/**
@@ -39,12 +41,13 @@ public final class RoundTrack {
 			dices[index] = new NineDices();
 		}
 		dices[index].addDice(newDice);
+		change(this);
 	}
 
 	/**
 	 * Verify if position index is free
 	 */
-	boolean isFree(int index)
+	public boolean isFree(int index)
 	{
 		return (dices[index]==null);
 	}
@@ -72,6 +75,7 @@ public final class RoundTrack {
 	{
 		Dice dice = dices[index].getDice(pos);
 		dices[index].changeDice(pos, newDice);
+		change(this);
 		return dice;
 	}
 

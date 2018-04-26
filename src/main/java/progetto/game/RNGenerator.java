@@ -5,7 +5,6 @@ import java.util.Random;
 /**
  * Class used to generate random values (with seed), platform independent
  */
-
 public final class RNGenerator {
 
 	private static final int MAX_VALUE_RANDOM = 6;      //6 not included
@@ -15,13 +14,14 @@ public final class RNGenerator {
 	private static final int THREE = 3;
 	private static final int FOUR = 4;
 	private static final int FIVE = 5;
-	private static final int SIX = 6;
 
 	private Random random = new Random();
+	private long seed;
 
 	RNGenerator(long seed)
 	{
 		random.setSeed(seed);
+		this.seed=seed;
 	}
 
 	/**
@@ -29,6 +29,7 @@ public final class RNGenerator {
 	 */
 	public void setSeed(long seed)
 	{
+		this.seed = seed;
 		random.setSeed(seed);
 	}
 
@@ -63,11 +64,9 @@ public final class RNGenerator {
 			case FIVE:
 				value = Value.FIVE;
 				break;
-			case SIX:
+			default:
 				value = Value.SIX;
 				break;
-			default:
-				value = Value.ONE;
 		}
 		return new Dice(value, bag.draw(rollDice(bag)));
 	}
@@ -78,6 +77,37 @@ public final class RNGenerator {
 	public int rollDice(DiceBag db)
 	{
 		return random.nextInt(db.getNumberOfDices());
+	}
+
+	public Dice rollAgain(Dice dice)
+	{
+		int randValue = random.nextInt(MAX_VALUE_RANDOM)+1;
+		switch (randValue){
+			case ONE:
+				dice.setValue(Value.ONE);
+				break;
+			case TWO:
+				dice.setValue(Value.TWO);
+				break;
+			case THREE:
+				dice.setValue(Value.THREE);
+				break;
+			case FOUR:
+				dice.setValue(Value.FOUR);
+				break;
+			case FIVE:
+				dice.setValue(Value.FIVE);
+				break;
+			default:
+				dice.setValue(Value.SIX);
+				break;
+		}
+		return dice;
+	}
+
+	long getSeed()
+	{
+		return seed;
 	}
 
 }

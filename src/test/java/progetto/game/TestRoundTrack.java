@@ -84,4 +84,25 @@ public class TestRoundTrack extends TestCase {
 		assertEquals(Color.RED, rt.getColor(8, 2));
 
 	}
+
+	public void test2() {
+
+		RoundTrack rt = new RoundTrack();
+
+		rt.add(new Dice(Value.THREE, Color.PURPLE), 0);
+
+		rt.add(new Dice(Value.TWO, Color.BLUE), 2);
+
+		assertEquals(true, rt.isFree(1));
+
+		rt.change(2, 0, new Dice(Value.ONE, Color.GREEN));
+
+		assertEquals(true, rt.isFree(1));
+		assertEquals(false, rt.isFree(0));
+		assertEquals(false, rt.isFree(2));
+
+		assertEquals(Color.GREEN, rt.getDice(2,0).getColor());
+		assertEquals(Value.ONE, rt.getDice(2,0).getValue());
+
+	}
 }

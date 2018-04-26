@@ -3,28 +3,25 @@ package progetto.game;
 import progetto.utils.AbstractObservable;
 
 /**
- * Support class to contain the dice (max 9) positioned in the RoundTrack
+ * Dices extracted by the player on the main board
  */
-public final class NineDices extends AbstractObservable<NineDices> {
+public final class ExtractedDices extends AbstractObservable<ExtractedDices> {
 
 	private static final int MAX_NUMBER_OF_DICES = 9;
 
-	private Dice[] dice = new Dice[MAX_NUMBER_OF_DICES];
+	private Dice[] dicesExtracted = new Dice[MAX_NUMBER_OF_DICES];
 	private int numberOfDices=0;
 
 	public Value getValue(int index)
 	{
-		return dice[index].getValue();
+		return dicesExtracted[index].getValue();
 	}
 
 	public Color getColor(int index)
 	{
-		return dice[index].getColor();
+		return dicesExtracted[index].getColor();
 	}
 
-	/**
-	 * Add a dice to the group
-	 */
 	void addDice(Dice newDice)
 	{
 		if(numberOfDices>=MAX_NUMBER_OF_DICES)
@@ -32,7 +29,7 @@ public final class NineDices extends AbstractObservable<NineDices> {
 			return;
 		}
 		change(this);
-		dice[numberOfDices]=newDice;
+		dicesExtracted[numberOfDices]=newDice;
 		numberOfDices++;
 	}
 
@@ -41,23 +38,17 @@ public final class NineDices extends AbstractObservable<NineDices> {
 		return numberOfDices;
 	}
 
-	/**
-	 * Get a dice from the group, do not remove it
-	 */
 	public Dice getDice(int index)
 	{
-		return dice[index];
+		return dicesExtracted[index];
 	}
 
-	/**
-	 * Put the new dice in the position index (in place of the previous one)
-	 */
 	void changeDice(int index, Dice newDice)
 	{
-		if (dice[index] != null)
+		if (dicesExtracted[index] != null)
 		{
 			change(this);
-			dice[index]=newDice;
+			dicesExtracted[index]=newDice;
 		}
 	}
 }

@@ -1,5 +1,8 @@
 package progetto.game;
 
+/**
+ * Command queue of the game
+ */
 public class CommandQueue implements IProcessor<AbstractGameAction> {
 	public void sendItem(AbstractGameAction item) {
 		throw new UnsupportedOperationException();
