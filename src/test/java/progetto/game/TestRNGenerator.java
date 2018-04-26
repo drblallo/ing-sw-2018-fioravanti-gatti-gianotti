@@ -9,6 +9,8 @@ public class TestRNGenerator extends TestCase {
 		RNGenerator rnGenerator1 = new RNGenerator(1234123412);
 		RNGenerator rnGenerator2 = new RNGenerator(1234123412);
 
+		assertEquals(1234123412, rnGenerator1.getSeed());
+		assertEquals(1234123412, rnGenerator2.getSeed());
 
 		for(int i=0; i<500; i++)
 		{
@@ -17,6 +19,9 @@ public class TestRNGenerator extends TestCase {
 
 		rnGenerator1.setSeed(1212121212);
 		rnGenerator2.setSeed(1212121212);
+
+		assertEquals(1212121212, rnGenerator1.getSeed());
+		assertEquals(1212121212, rnGenerator2.getSeed());
 
 		for(int i=0; i<500; i++)
 		{
@@ -88,6 +93,44 @@ public class TestRNGenerator extends TestCase {
 
 		dice = rng1.extractDice(db);
 		assertEquals(Color.RED, dice.getColor());
+		assertEquals(Value.THREE, dice.getValue());
+
+	}
+
+	public void test4RollAgain()
+	{
+		RNGenerator rng = new RNGenerator(0);
+		Dice dice = new Dice(Value.FOUR, Color.RED);
+
+
+		dice=rng.rollAgain(dice);
+		assertEquals(Value.ONE, dice.getValue());
+
+		dice=rng.rollAgain(dice);
+		assertEquals(Value.FIVE, dice.getValue());
+
+		dice=rng.rollAgain(dice);
+		assertEquals(Value.TWO, dice.getValue());
+
+		dice=rng.rollAgain(dice);
+		assertEquals(Value.SIX, dice.getValue());
+
+		dice=rng.rollAgain(dice);
+		assertEquals(Value.SIX, dice.getValue());
+
+		dice=rng.rollAgain(dice);
+		assertEquals(Value.SIX, dice.getValue());
+
+		dice=rng.rollAgain(dice);
+		assertEquals(Value.SIX, dice.getValue());
+
+		dice=rng.rollAgain(dice);
+		assertEquals(Value.FOUR, dice.getValue());
+
+		dice=rng.rollAgain(dice);
+		assertEquals(Value.FOUR, dice.getValue());
+
+		dice=rng.rollAgain(dice);
 		assertEquals(Value.THREE, dice.getValue());
 
 	}
