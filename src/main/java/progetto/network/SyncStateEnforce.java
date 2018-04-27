@@ -1,13 +1,14 @@
 package progetto.network;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * forces the player ro reset the sync object state and to add all commands
  */
 final class SyncStateEnforce implements IEnforce {
-	private List<String> allCommands;
-	private String currHash;
+	private List<Serializable> allCommands;
+	private int currHash;
 
 	/**
 	 * @param ogg the sync object on the server side that will be used to synchronize the server

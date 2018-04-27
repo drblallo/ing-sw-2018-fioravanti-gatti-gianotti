@@ -1,17 +1,19 @@
 package progetto.network;
 
+import java.io.Serializable;
+
 /**
  * Request sent when the player desires to make a modification to the sync object inside that room.
  */
 final class SendSyncStringRoomRequest implements IRoomRequest
 {
-	private String command;
+	private Serializable command;
 
 	/**
 	 * Builds the command
 	 * @param command the command that must be applied to the sync object.
 	 */
-	SendSyncStringRoomRequest(String command)
+	SendSyncStringRoomRequest(Serializable command)
 	{
 		this.command = command;
 	}

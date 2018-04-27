@@ -1,6 +1,8 @@
 package progetto.game;
 
 import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestGame extends TestCase {
 
@@ -9,7 +11,7 @@ public class TestGame extends TestCase {
 
 		Game game = new Game();
 
-		CommandQueue commandQueue = game.getCommandQueue();
+		AbstractProcessor commandQueue = game.getCommandQueue();
 
 		RoundTrack roundTrack = game.getRoundTrack();
 
@@ -26,4 +28,14 @@ public class TestGame extends TestCase {
 
 	}
 
+	@Test
+	public void testGameEquality()
+	{
+		Game g = new Game();
+		Game g2 = new Game();
+
+		Assert.assertFalse(g.equals(null));
+		Assert.assertFalse(g.equals(this));
+		Assert.assertTrue(g.equals(g2));
+	}
 }

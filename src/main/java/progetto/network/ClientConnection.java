@@ -2,6 +2,7 @@ package progetto.network;
 
 import progetto.utils.Callback;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -186,7 +187,7 @@ public final class ClientConnection implements Runnable
 	 *
 	 * @param s the string that must be sent to the sync object
 	 */
-	final synchronized void processSyncCommand(String s) {
+	final synchronized void processSyncCommand(Serializable s) {
 		getSynchronizedObject().sendString(s);
 	}
 
@@ -196,9 +197,9 @@ public final class ClientConnection implements Runnable
 	 * @param state index of hash that must be compared
 	 * @param hash  hash received by the server
 	 */
-	final synchronized void checkSync(int state, String hash) {
+	final synchronized void checkSync(int state, int hash) {
 		ISync ogg = getSynchronizedObject();
-		if (!ogg.getHash(state).equals(hash)) {
+		if (ogg.getHash(state) != hash) {
 			LOGGER.log(Level.SEVERE, "SYNCHRONIZATION FAILED");
 			syncronizationFailedCallback.call(this);
 		}
@@ -218,10 +219,10 @@ public final class ClientConnection implements Runnable
 	 *
 	 * @param commands new state
 	 */
-	final synchronized void setFullState(List<String> commands) {
+	final synchronized void setFullState(List<Serializable> commands) {
 		LOGGER.fine("Receiving full state from server");
 		getSynchronizedObject().clear();
-		for (String s : commands)
+		for (Serializable s : commands)
 			getSynchronizedObject().sendString(s);
 	}
 
@@ -260,7 +261,7 @@ public final class ClientConnection implements Runnable
 	 * send a sync string
 	 * @param s the sync string to be sent
 	 */
-	public synchronized void sendSynString(String s) {
+	public synchronized void sendSynString(Serializable s) {
 		handler.sendRequest(new SendSyncStringRoomRequest(s));
 	}
 

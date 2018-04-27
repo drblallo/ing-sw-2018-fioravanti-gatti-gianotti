@@ -1,35 +1,81 @@
 package progetto.game;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 /**
  * Command queue of the game
  */
-public class CommandQueue implements IProcessor<AbstractGameAction> {
-	public void sendItem(AbstractGameAction item) {
-		throw new UnsupportedOperationException();
+public class CommandQueue extends AbstractProcessor<AbstractGameAction> {
+
+	private List<AbstractGameAction> pastAction = Collections.synchronizedList(new ArrayList<>());
+	private Queue<AbstractGameAction> pendingActions = new ConcurrentLinkedQueue<>();
+
+	/**
+	 * Append an action to the queue
+	 * @param action the action that must be appended
+	 */
+	void offer(AbstractGameAction action)
+	{
+		pendingActions.offer(action);
+		change(this);
 	}
 
-	public void processItems(int itemToProcessCount) {
-		throw new UnsupportedOperationException();
+	/**
+	 *
+	 * @return the oldest inserted value without removing it from the queue
+	 */
+	public AbstractGameAction peekPending()
+	{
+		return pendingActions.peek();
 	}
 
-	public void processAllItems() {
-		throw new UnsupportedOperationException();
+	/**
+	 * Removes the oldest inserted values and places it in the already executed list
+	 * @return the oldest inserted value
+	 */
+	AbstractGameAction pollPending()
+	{
+		AbstractGameAction action = pendingActions.poll();
+
+		if (action != null)
+			pastAction.add(action);
+
+		change(this);
+		return action;
 	}
 
-	public int getPendingItemsCount() {
-		throw new UnsupportedOperationException();
+	/**
+	 *
+	 * @return the number of pending actions
+	 */
+	public int getPendingItemsCount()
+	{
+		return pendingActions.size();
 	}
 
-	public AbstractGameAction getPendingItem(int index) {
-		throw new UnsupportedOperationException();
+	/**
+	 *
+	 * @return the number of already executed actions
+	 */
+	public int getPastItemCount()
+	{
+		return pastAction.size();
 	}
 
-	public void getPastItemCount() {
-		throw new UnsupportedOperationException();
-	}
-
-	public AbstractGameAction getPastItem(int index) {
-		throw new UnsupportedOperationException();
+	/**
+	 *
+	 * @param index the index of the action that is being retrieved
+	 * @return a already executed action
+	 */
+	public AbstractGameAction getPastItem(int index)
+	{
+		if (pastAction.size() <= index)
+			return null;
+		return pastAction.get(index);
 	}
 
 }

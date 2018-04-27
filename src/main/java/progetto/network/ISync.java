@@ -1,5 +1,6 @@
 package progetto.network;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,18 +12,18 @@ public interface ISync {
 	/**
 	 * Send the string to process
 	 */
-	void sendString(String s);
+	void sendString(Serializable s);
 
 	/**
 	 * @return true if the string is compatible with the senderID
 	 */
-	boolean isStringGood(String s, int senderID);
+	boolean isStringGood(Serializable s, int senderID);
 
 	/**
 	 * @param index index of state of the requested hash
 	 * @return hash of the state of the object.
 	 */
-	String getHash(int index);
+	int getHash(int index);
 
 	/**
 	 * @return the count of string that the object has received
@@ -32,17 +33,17 @@ public interface ISync {
 	/**
 	 * @return the string received at index
 	 */
-	String getString(int index);
+	Serializable getString(int index);
 
 	/**
 	 * @return latest hash
 	 */
-	String getHash();
+	int getHash();
 
 	/**
 	 * reset the state of the object as if it was just been created.
 	 */
 	void clear();
 
-	List<String> getAllString();
+	List<Serializable> getAllString();
 }

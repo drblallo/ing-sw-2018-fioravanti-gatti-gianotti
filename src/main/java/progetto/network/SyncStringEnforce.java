@@ -1,16 +1,18 @@
 package progetto.network;
 
+import java.io.Serializable;
+
 /**
  * Forces the player to append a sync string command to his sync object
  */
 final class SyncStringEnforce implements IEnforce {
-	private final String action;
+	private final Serializable action;
 
 	/**
 	 *
 	 * @param action the action that must be sent across the network
 	 */
-	SyncStringEnforce(String action) {
+	SyncStringEnforce(Serializable action) {
 		this.action = action;
 	}
 

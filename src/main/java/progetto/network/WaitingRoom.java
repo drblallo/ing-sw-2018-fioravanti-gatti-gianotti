@@ -1,5 +1,7 @@
 package progetto.network;
 
+import java.io.Serializable;
+
 /**
  * An implementation of abstract room that is used to hold all the player that have joined the server but have not
  * joined a room yet.
@@ -26,7 +28,7 @@ final class WaitingRoom extends AbstractRoom
 		return new RoomView(name, getRoomID());
 	}
 
-	void processCommand(String syncString, int callerID)
+	void processCommand(Serializable syncString, int callerID)
 	{
 		//waiting room, we drop inputs
 	}

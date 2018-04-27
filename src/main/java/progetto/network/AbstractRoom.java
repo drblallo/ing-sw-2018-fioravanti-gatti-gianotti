@@ -1,6 +1,7 @@
 package progetto.network;
 
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -284,7 +285,7 @@ abstract class AbstractRoom implements Runnable
 	 * @param syncString the string that must be syncd
 	 * @param callerID the id of the player that send the string
 	 */
-	abstract void processCommand(String syncString, int callerID);
+	abstract void processCommand(Serializable syncString, int callerID);
 
 	/**
 	 * called when the room is closing, it is called inside the room update thread, so every modification

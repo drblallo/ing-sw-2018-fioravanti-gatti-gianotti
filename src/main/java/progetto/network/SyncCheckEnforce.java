@@ -6,14 +6,14 @@ package progetto.network;
 final class SyncCheckEnforce implements IEnforce {
 
 	private int state;
-	private String h;
+	private int h;
 
 	/**
 	 * builds a new enforce
 	 * @param stateIndex the state that must be checked for synchronization
 	 * @param hash the hash that the server evaluated
 	 */
-	SyncCheckEnforce(int stateIndex, String hash) {
+	SyncCheckEnforce(int stateIndex, int hash) {
 		state = stateIndex;
 		h = hash;
 	}

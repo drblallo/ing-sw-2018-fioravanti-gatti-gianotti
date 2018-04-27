@@ -1,5 +1,6 @@
 package progetto.network;
 
+import java.io.Serializable;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
@@ -152,7 +153,7 @@ final class ServerConnection {
 	 * forces the client to append a synch string to his sync object.
 	 * @param s the string to be sent
 	 */
-	void sendSyncCommand(String s)
+	void sendSyncCommand(Serializable s)
 	{
 		handler.sendEnforce(new SyncStringEnforce(s));
 	}

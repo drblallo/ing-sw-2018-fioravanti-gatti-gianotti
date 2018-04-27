@@ -1,5 +1,6 @@
 package progetto.network;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -8,30 +9,30 @@ import java.util.logging.Logger;
 public class SyncStub implements ISync {
 	private static final Logger LOGGER = Logger.getLogger(SyncStub.class.getName());
 	private ArrayList<String> ls = new ArrayList<>();
-	private String full = "";
+	private int full = 0;
 
-	public synchronized void sendString(String s) {
-		ls.add(s);
-		full = full + s;
+	public synchronized void sendString(Serializable s) {
+		ls.add((String) s);
+		full = full + ((String)s).length();
 	}
 
-	public synchronized boolean isStringGood(String s, int senderID) {
+	public synchronized boolean isStringGood(Serializable s, int senderID) {
 		return s.equals("SyncMeUp");
 	}
 
-	public synchronized String getHash(int index) {
-		String toReturn = "";
+	public synchronized int getHash(int index) {
+		int toReturn = 0;
 		if (index > ls.size())
-			toReturn = "BROKEN HASH!!!!!";
+			toReturn = -1;
 		else {
 			for (int a = 0; a < index; a++) {
-				toReturn = toReturn + ls.get(a);
+				toReturn = toReturn + ls.get(a).length();
 			}
 		}
 		return toReturn;
 	}
 
-	public synchronized String getHash() {
+	public synchronized int getHash() {
 
 		return full;
 	}
@@ -46,11 +47,11 @@ public class SyncStub implements ISync {
 
 	public synchronized void clear() {
 		ls.clear();
-		full = "";
+		full = 0;
 	}
 
-	public synchronized List<String> getAllString() {
-		ArrayList<String> s = new ArrayList<String>();
+	public synchronized List<Serializable> getAllString() {
+		ArrayList<Serializable> s = new ArrayList<>();
 		s.addAll(ls);
 		return s;
 	}

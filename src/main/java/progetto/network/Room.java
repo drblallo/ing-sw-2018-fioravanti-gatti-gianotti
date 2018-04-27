@@ -1,5 +1,6 @@
 package progetto.network;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,8 +53,9 @@ public final class Room extends AbstractRoom
 	/**
 	 * process a sync command sent by a player to a room
 	 */
-	final void processCommand(String syncString, int callerID)
+	final void processCommand(Serializable syncString, int callerID)
 	{
+		LOGGER.log(Level.FINE, "received serializable");
 		Player info = players.get(callerID);
 
 		if (!getSyncOgg().isStringGood(syncString, info.getChairID()))
