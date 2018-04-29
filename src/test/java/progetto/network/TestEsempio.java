@@ -1,4 +1,4 @@
-package progetto.commandline;
+package progetto.network;
 
 import org.junit.Test;
 import progetto.network.NetworkSettings;
