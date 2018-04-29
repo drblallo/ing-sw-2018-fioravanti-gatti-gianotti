@@ -1,4 +1,4 @@
-package progetto;
+package progetto.serverintegration;
 
 import progetto.network.ISync;
 import progetto.network.ISyncFactory;

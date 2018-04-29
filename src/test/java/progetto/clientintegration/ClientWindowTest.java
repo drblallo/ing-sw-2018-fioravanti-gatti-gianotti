@@ -1,6 +1,7 @@
 package progetto.clientintegration;
 
 import javafx.application.Platform;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import progetto.utils.Waiter;
@@ -24,17 +25,22 @@ public class ClientWindowTest {
     }
 
     @Test
-    public void oneWindowTest (){
+    public void testOneClientWindow(){
 
         new Thread(() -> ClientMain.main(null)).start();
 
-        timoty.wait(2000);
+        int a = 0;
+        while (a++ < 10 && ClientWindow.getWindow() == null)
+			timoty.wait(500);
 
-        assertNotNull(ClientWindow.getWindow());
+        ClientCommandProcessor.getCommandProcessor();
+        Assert.assertNotNull(ClientWindow.getWindow());
 
         Platform.runLater(()->ClientWindow.getWindow().closeWindow());
 
-        timoty.wait(100);
+        a = 0;
+        while (a++ < 10 && ClientWindow.getWindow() != null)
+			timoty.wait(500);
 
         assertNull(ClientWindow.getWindow());
 

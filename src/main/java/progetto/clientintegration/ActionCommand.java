@@ -1,9 +1,10 @@
-package progetto.commandline;
+package progetto.clientintegration;
 
+import progetto.commandline.ICommand;
 import progetto.game.AbstractGameAction;
 import progetto.game.IExecuibleGame;
 
-public class ActionCommand implements ICommand {
+final class ActionCommand implements ICommand {
 
 	private final Class<? extends AbstractGameAction> actionClass;
 	private final IExecuibleGame game;

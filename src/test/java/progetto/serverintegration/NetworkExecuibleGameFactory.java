@@ -1,9 +1,12 @@
-package progetto;
+package progetto.serverintegration;
 
+import progetto.clientintegration.ClientGame;
+import progetto.clientintegration.IExecutibleGameFactory;
 import progetto.game.IExecuibleGame;
 import progetto.network.NetworkServer;
 import progetto.network.localconnection.LocalConnectionClient;
 import progetto.network.localconnection.LocalConnectionModule;
+import progetto.serverintegration.ServerGame;
 import progetto.utils.Waiter;
 
 public class NetworkExecuibleGameFactory extends IExecutibleGameFactory {

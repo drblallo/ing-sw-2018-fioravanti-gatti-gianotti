@@ -1,11 +1,12 @@
-package progetto;
+package progetto.serverintegration;
 
 
 import org.junit.Assert;
 import org.junit.Test;
+import progetto.clientintegration.AbstractGameTest;
 import progetto.game.StartGameAction;
 
-public class NetworkGameTest extends AbstractGameTest{
+public class NetworkGameTest extends AbstractGameTest {
 
 	public NetworkGameTest()
 	{

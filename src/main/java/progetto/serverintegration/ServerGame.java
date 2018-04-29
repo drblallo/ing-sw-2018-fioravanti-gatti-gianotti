@@ -1,5 +1,6 @@
-package progetto;
+package progetto.serverintegration;
 
+import progetto.clientintegration.AbstractGameSync;
 import progetto.game.*;
 import progetto.network.ISync;
 

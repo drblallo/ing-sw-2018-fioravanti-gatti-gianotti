@@ -1,7 +1,8 @@
-package progetto.commandline;
+package progetto.clientintegration;
 
 import org.junit.Assert;
 import org.junit.Test;
+import progetto.clientintegration.ActionCommand;
 import progetto.game.FrameSelectionState;
 import progetto.game.Game;
 import progetto.game.StartGameAction;

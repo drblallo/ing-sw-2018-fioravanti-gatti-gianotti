@@ -1,4 +1,4 @@
-package progetto;
+package progetto.clientintegration;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,7 +29,7 @@ public abstract class AbstractGameTest
 	public void testGameStart()
 	{
 		game.sendAction(new StartGameAction());
-		wait(100);
+		wait(500);
 		Assert.assertEquals(FrameSelectionState.class, game.getGameState().getClass());
 
 		game.getCommandQueue();
@@ -57,7 +57,7 @@ public abstract class AbstractGameTest
 		game.sendAction(new SetSeedAction(3));
 		game.sendAction(new SetPlayerCountAction(3));
 
-		wait(100);
+		wait(500);
 		Assert.assertEquals(3, game.getPlayerCount());
 	}
 

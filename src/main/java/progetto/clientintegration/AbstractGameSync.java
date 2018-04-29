@@ -1,4 +1,4 @@
-package progetto;
+package progetto.clientintegration;
 
 import progetto.game.AbstractGameAction;
 import progetto.game.Game;
