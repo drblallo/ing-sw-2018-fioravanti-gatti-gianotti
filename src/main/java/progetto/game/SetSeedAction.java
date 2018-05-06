@@ -25,7 +25,7 @@ public class SetSeedAction extends AbstractGameAction
 	@Override
 	public boolean canBeExecuted(Game game)
 	{
-		return (game.getGameState().getClass() == PreGameState.class);
+		return (game.getMainBoard().getMainBoardData().getGameState().getClass() == PreGameState.class);
 	}
 
 	/**

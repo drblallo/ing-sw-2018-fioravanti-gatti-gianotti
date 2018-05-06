@@ -133,40 +133,35 @@ public class TestWindowFrameCouple extends TestCase {
 
 		WindowFrameCouple wfc = new WindowFrameCouple(ja, jb);
 
-		assertEquals(null, wfc.getColorBond(0, 0, 1));
-		assertEquals(null, wfc.getColorBond(1,0,1));
-		assertEquals(null, wfc.getValueBond(0,0,1));
-		assertEquals(null, wfc.getValueBond(1,0,1));
+		assertEquals(null, wfc.getWindowFrame(0).getColorBond(0, 1));
+		assertEquals(null, wfc.getWindowFrame(1).getColorBond(0,1));
+		assertEquals(null, wfc.getWindowFrame(0).getValueBond(0,1));
+		assertEquals(null, wfc.getWindowFrame(1).getValueBond(0,1));
 
-		assertEquals(Color.GREEN, wfc.getColorBond(0,2,2));
-		assertEquals(Color.RED, wfc.getColorBond(1,2,2));
-		assertEquals(null, wfc.getValueBond(0,2,2));
-		assertEquals(null, wfc.getValueBond(1,2,2));
+		assertEquals(Color.GREEN, wfc.getWindowFrame(0).getColorBond(2,2));
+		assertEquals(Color.RED, wfc.getWindowFrame(1).getColorBond(2,2));
+		assertEquals(null, wfc.getWindowFrame(0).getValueBond(2,2));
+		assertEquals(null, wfc.getWindowFrame(1).getValueBond(2,2));
 
-		assertEquals(null, wfc.getColorBond(0, 4,1));
-		assertEquals(null, wfc.getColorBond(1,4,1));
-		assertEquals(Value.TWO, wfc.getValueBond(0,4,1));
-		assertEquals(Value.TWO, wfc.getValueBond(1,4,1));
+		assertEquals(null, wfc.getWindowFrame(0).getColorBond( 4,1));
+		assertEquals(null, wfc.getWindowFrame(1).getColorBond(4,1));
+		assertEquals(Value.TWO, wfc.getWindowFrame(0).getValueBond(4,1));
+		assertEquals(Value.TWO, wfc.getWindowFrame(1).getValueBond(4,1));
 
-		assertEquals(null, wfc.getColorBond(0,4,3));
-		assertEquals(Color.RED, wfc.getColorBond(1,4,3));
-		assertEquals(null, wfc.getValueBond(0,4,3));
-		assertEquals(null, wfc.getValueBond(1,4,3));
+		assertEquals(null, wfc.getWindowFrame(0).getColorBond(4,3));
+		assertEquals(Color.RED, wfc.getWindowFrame(1).getColorBond(4,3));
+		assertEquals(null, wfc.getWindowFrame(0).getValueBond(4,3));
+		assertEquals(null, wfc.getWindowFrame(1).getValueBond(4,3));
 
-		assertEquals(5, wfc.getFavorToken(0));
-		assertEquals(4, wfc.getFavorToken(1));
+		assertEquals(5, wfc.getWindowFrame(0).getFavorToken());
+		assertEquals(4, wfc.getWindowFrame(1).getFavorToken());
 
-		assertEquals("Virtus", wfc.getName(0));
-		assertEquals("Via Lux", wfc.getName(1));
-
-		assertEquals(null, wfc.getValueBond(2,0,0));
-		assertEquals(null, wfc.getColorBond(2,0,0));
-		assertEquals(null, wfc.getName(2));
-		assertEquals(0, wfc.getFavorToken(2));
-
-		WindowFrame windowFrame = new WindowFrame(ja);
+		assertEquals("Virtus", wfc.getWindowFrame(0).getName());
+		assertEquals("Via Lux", wfc.getWindowFrame(1).getName());
 
 		assertEquals(null, wfc.getWindowFrame(2));
+
+		WindowFrame windowFrame = new WindowFrame(ja);
 
 		assertEquals(windowFrame.getFavorToken(), wfc.getWindowFrame(0).getFavorToken());
 

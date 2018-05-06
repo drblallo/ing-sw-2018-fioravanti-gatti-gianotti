@@ -30,12 +30,12 @@ public class TestAction {
 		game.sendAction(new SetPlayerCountAction(3));
 		game.processAction();
 		game.processAction();
-		Assert.assertEquals(3, game.getPlayerCount());
+		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getPlayerCount());
 		game.sendAction(new StartGameAction());
 		game.processAllPendingAction();
 		game.sendAction(new SetPlayerCountAction(2));
 		game.processAction();
-		Assert.assertEquals(3, game.getPlayerCount());
+		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getPlayerCount());
 	}
 
 	@Test
@@ -72,8 +72,8 @@ public class TestAction {
 		game.processAction();
 		game.sendAction(new StartGameAction());
 		game.processAction();
-		Assert.assertEquals(FrameSelectionState.class, game.getGameState().getClass());
-		Assert.assertEquals("Frame selection", game.getGameState().getName());
+		Assert.assertEquals(FrameSelectionState.class, game.getMainBoard().getMainBoardData().getGameState().getClass());
+		Assert.assertEquals("Frame selection", game.getMainBoard().getMainBoardData().getGameState().getName());
 	}
 
 	@Test

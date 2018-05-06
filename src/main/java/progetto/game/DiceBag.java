@@ -11,7 +11,7 @@ public final class DiceBag extends AbstractObservable<DiceBag> {
 
 	private static final int NUMBER_OF_DICES_PER_COLOR = 18;
 
-	private ArrayList<Color> dices = new ArrayList<>();
+	private final ArrayList<Color> dices = new ArrayList<>();
 
 	DiceBag()
 	{

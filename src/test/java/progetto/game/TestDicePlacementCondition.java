@@ -138,5 +138,19 @@ public class TestDicePlacementCondition extends TestCase {
 
 		assertEquals(false, dicePlacementCondition.canBePlaced(0, 1, wf, dicePlacedFrame));
 
+		assertEquals(dice8, dicePlacementCondition.getDice());
+		assertEquals(false, (boolean)dicePlacementCondition.getIgnoreAdjacent());
+		assertEquals(false, (boolean)dicePlacementCondition.getIgnoreColor());
+		assertEquals(false, (boolean)dicePlacementCondition.getIgnoreValue());
+
+		dicePlacementCondition = dicePlacementCondition.setIgnoreAdjacent(true);
+		assertEquals(true, (boolean)dicePlacementCondition.getIgnoreAdjacent());
+
+		dicePlacementCondition = dicePlacementCondition.setIgnoreColor(true);
+		assertEquals(true, (boolean)dicePlacementCondition.getIgnoreColor());
+
+		dicePlacementCondition = dicePlacementCondition.setIgnoreValue(true);
+		assertEquals(true, (boolean)dicePlacementCondition.getIgnoreValue());
+
 	}
 }

@@ -5,50 +5,34 @@ import progetto.utils.AbstractObservable;
 /**
  * Dices extracted by the player on the main board
  */
-public final class ExtractedDices extends AbstractObservable<ExtractedDices> {
+public final class ExtractedDices extends AbstractObservable<ExtractedDicesData> {
 
-	private static final int MAX_NUMBER_OF_DICES = 9;
+	private ExtractedDicesData extractedDicesData = new ExtractedDicesData();
 
-	private Dice[] dicesExtracted = new Dice[MAX_NUMBER_OF_DICES];
-	private int numberOfDices=0;
-
-	public Value getValue(int index)
+	public ExtractedDicesData getExtractedDicesData()
 	{
-		return dicesExtracted[index].getValue();
-	}
-
-	public Color getColor(int index)
-	{
-		return dicesExtracted[index].getColor();
+		return extractedDicesData;
 	}
 
 	void addDice(Dice newDice)
 	{
-		if(numberOfDices>=MAX_NUMBER_OF_DICES)
-		{
-			return;
-		}
-		change(this);
-		dicesExtracted[numberOfDices]=newDice;
-		numberOfDices++;
+		extractedDicesData = extractedDicesData.addDice(newDice);
+		change(extractedDicesData);
 	}
 
-	public int getNumberOfDices()
+	Dice changeDice(int index, Dice newDice)
 	{
-		return numberOfDices;
+		Dice dice = extractedDicesData.getDice(index);
+		extractedDicesData = extractedDicesData.changeDice(index, newDice);
+		change(extractedDicesData);
+		return dice;
 	}
 
-	public Dice getDice(int index)
+	Dice removeDice(int index)
 	{
-		return dicesExtracted[index];
-	}
-
-	void changeDice(int index, Dice newDice)
-	{
-		if (dicesExtracted[index] != null)
-		{
-			change(this);
-			dicesExtracted[index]=newDice;
-		}
+		Dice dice = extractedDicesData.getDice(index);
+		extractedDicesData = extractedDicesData.removeDice(index);
+		change(extractedDicesData);
+		return dice;
 	}
 }
