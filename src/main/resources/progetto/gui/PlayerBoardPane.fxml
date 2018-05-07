@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.gui.PlayerBoardPaneController">
+   <children>
+      <HBox>
+         <children>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="PLAYER BOARD " textFill="#e81d1d">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox prefHeight="350.0" prefWidth="782.0">
+         <children>
+            <fx:include source="DicePlacedFramePane.fxml" />
+            <fx:include source="WindowFramePane.fxml" />
+         </children>
+      </HBox>
+      <fx:include source="PickedDicesSlotPane.fxml" />
+   </children>
+   <padding>
+      <Insets top="15.0" />
+   </padding>
+</VBox>

@@ -2,9 +2,14 @@ package progetto.clientintegration;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import progetto.gui.CommandLinePane;
+import progetto.commandline.CommandProcessor;
+import progetto.gui.CommandLinePaneController;
+
+import java.io.IOException;
 
 
 public class ClientWindow extends Application {
@@ -18,14 +23,24 @@ public class ClientWindow extends Application {
     }
 
     @Override
-    public synchronized void start(Stage primaryStage) {
+    public synchronized void start(Stage primaryStage) throws IOException{
 
         primaryStage.setTitle("Client Window");
 
-        CommandLinePane commandLinePane = new CommandLinePane(ClientCommandProcessor.getCommandProcessor());
+        CommandProcessor commandProcessor = ClientCommandProcessor.getCommandProcessor();
 
-        Scene scene = new Scene(commandLinePane.getLayout());
+        FXMLLoader loader = new FXMLLoader(CommandLinePaneController.class.getResource("CommandLinePane.fxml"));
+
+        Pane pane = (Pane) loader.load();
+
+        CommandLinePaneController commandLinePaneController = loader.<CommandLinePaneController>getController();
+
+        commandLinePaneController.setCommandProcessor(commandProcessor);
+
+        Scene scene = new Scene(pane);
+
         primaryStage.setScene(scene);
+
         primaryStage.show();
 
         clientWindow = this;

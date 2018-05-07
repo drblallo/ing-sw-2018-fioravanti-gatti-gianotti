@@ -21,7 +21,7 @@ public final class DicePlacedFrame extends AbstractObservable<DicePlacedFrame> {
 		nPlacedDices++;
 	}
 
-	Dice getDice(int x, int y)
+	public Dice getDice(int x, int y)
 	{
 		return dicesFrame[x][y];
 	}
@@ -33,7 +33,7 @@ public final class DicePlacedFrame extends AbstractObservable<DicePlacedFrame> {
 		nPlacedDices--;
 	}
 
-	int getNDices()
+	public int getNDices()
 	{
 		return nPlacedDices;
 	}

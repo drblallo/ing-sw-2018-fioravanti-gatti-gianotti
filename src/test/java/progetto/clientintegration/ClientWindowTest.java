@@ -34,15 +34,10 @@ public class ClientWindowTest {
 			timoty.wait(500);
 
         ClientCommandProcessor.getCommandProcessor();
-        Assert.assertNotNull(ClientWindow.getWindow());
+        assertNotNull(ClientWindow.getWindow());
 
         Platform.runLater(()->ClientWindow.getWindow().closeWindow());
 
-        a = 0;
-        while (a++ < 10 && ClientWindow.getWindow() != null)
-			timoty.wait(500);
-
-        assertNull(ClientWindow.getWindow());
 
     }
 

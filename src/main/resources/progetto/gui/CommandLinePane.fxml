@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="547.0" spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.gui.CommandLinePaneController">
+   <children>
+      <TextArea fx:id="answer" prefHeight="355.0" prefWidth="570.0">
+         <VBox.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </TextArea>
+      <Region prefHeight="0.0" prefWidth="600.0" VBox.vgrow="ALWAYS" />
+      <HBox spacing="10.0">
+         <children>
+            <TextField fx:id="commandText" onKeyPressed="#onCommandTextKeyPressed" prefHeight="25.0" prefWidth="437.0" promptText="Insert command" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="15.0" left="15.0" />
+               </HBox.margin>
+            </TextField>
+            <Region prefHeight="40.0" prefWidth="57.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="sendButton" mnemonicParsing="false" onAction="#onSendButtonClicked" prefHeight="25.0" prefWidth="72.0" text="Send">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
