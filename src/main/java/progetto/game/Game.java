@@ -8,27 +8,23 @@ import java.util.logging.Logger;
 /**
  * Current state of the game
  */
-public final class Game implements IExecuibleGame{
+public final class Game implements IExecuibleGame {
 
 	private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
 
 	private static final int MAX_NUM_PLAYERS = 4;
 
-	private CommandQueue commandQueue = new CommandQueue();
+	private final CommandQueue commandQueue = new CommandQueue();
 
-	private RoundTrack roundTrack = new RoundTrack();
+	private final RoundTrack roundTrack = new RoundTrack();
 
-	private PlayerBoard[] playerBoard = new PlayerBoard[MAX_NUM_PLAYERS];
+	private final PlayerBoard[] playerBoard = new PlayerBoard[MAX_NUM_PLAYERS];
 
-	private MainBoard mainBoard = new MainBoard();
+	private final MainBoard mainBoard = new MainBoard();
 
-	private DiceBag diceBag = new DiceBag();
+	private final DiceBag diceBag = new DiceBag();
 
-	private RNGenerator rnGenerator = new RNGenerator(0);
-
-	private AbstractGameState gameState = new PreGameState();
-
-	private int playerCount = MAX_NUM_PLAYERS;
+	private final RNGenerator rnGenerator = new RNGenerator(0);
 
 	private ArrayList<Integer> pastHashCodes = new ArrayList<>();
 
@@ -69,7 +65,7 @@ public final class Game implements IExecuibleGame{
 
 	void setSeed(long seed)
 	{
-		rnGenerator = new RNGenerator(seed);
+		rnGenerator.setSeed(seed);
 	}
 
 	long getSeed()
@@ -113,42 +109,6 @@ public final class Game implements IExecuibleGame{
 		{
 			LOGGER.log(Level.FINE, "A action could not be executed.");
 		}
-	}
-
-	/**
-	 *
-	 * @return the current game state
-	 */
-	public AbstractGameState getGameState()
-	{
-		return gameState;
-	}
-
-	/**
-	 *
-	 * @param state the new state of the game
-	 */
-	void setGameState(AbstractGameState state)
-	{
-		gameState = state;
-	}
-
-	/**
-	 *
-	 * @return the current player count
-	 */
-	public int getPlayerCount()
-	{
-		return playerCount;
-	}
-
-	/**
-	 *
-	 * @param plc the new player count
-	 */
-	void setPlayerCount(int plc)
-	{
-		playerCount = plc;
 	}
 
 	@Override

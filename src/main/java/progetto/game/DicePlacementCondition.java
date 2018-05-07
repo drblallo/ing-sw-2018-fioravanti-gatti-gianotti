@@ -19,18 +19,18 @@ import java.util.logging.Logger;
  *  -Ingore value bond
  *  -Ignore constraint of proximity to another dice
 */
-public class DicePlacementCondition {
+public final class DicePlacementCondition {
 
 	private static final int Y_MAX = 3;
 	private static final int X_MAX = 4;
 
 	private static final Logger LOGGER = Logger.getLogger(DicePlacementCondition.class.getName());
 
-	private boolean ignoreColor;
-	private boolean ignoreValue;
-	private boolean ignoreAdjacent;
+	private final boolean ignoreColor;
+	private final boolean ignoreValue;
+	private final boolean ignoreAdjacent;
 
-	private Dice dice;
+	private final Dice dice;
 
 	DicePlacementCondition(Dice dice, boolean ignoreColor, boolean ignoreValue, boolean ignoreAdjacent)
 	{
@@ -40,10 +40,43 @@ public class DicePlacementCondition {
 		this.ignoreAdjacent = ignoreAdjacent;
 	}
 
+	DicePlacementCondition setIgnoreColor(boolean ignoreCol)
+	{
+		return new DicePlacementCondition(dice, ignoreCol, ignoreValue, ignoreAdjacent);
+	}
+
+	DicePlacementCondition setIgnoreValue(boolean ignoreVal)
+	{
+		return new DicePlacementCondition(dice, ignoreColor, ignoreVal, ignoreAdjacent);
+	}
+
+	DicePlacementCondition setIgnoreAdjacent(boolean ignoreAdj)
+	{
+		return new DicePlacementCondition(dice, ignoreColor, ignoreValue, ignoreAdj);
+	}
+
+	public Dice getDice()
+	{
+		return dice;
+	}
+
+	public Boolean getIgnoreColor()
+	{
+		return ignoreColor;
+	}
+
+	public Boolean getIgnoreValue()
+	{
+		return ignoreValue;
+	}
+
+	public Boolean getIgnoreAdjacent()
+	{
+		return ignoreAdjacent;
+	}
+
 	public boolean canBePlaced(int x, int y, WindowFrame windowFrame, DicePlacedFrame dicePlacedFrame)
 	{
-		Logger.getLogger(DicePlacementCondition.class.getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
-		Logger.getLogger(DicePlacementCondition.class.getName()).setLevel(Level.ALL);
 
 		boolean ok = true;
 
@@ -53,7 +86,7 @@ public class DicePlacementCondition {
 			ok = false;
 		}
 
-		else if(dicePlacedFrame.getDice(x, y)!=null)    //Verify if the position x, y is free
+		else if(dicePlacedFrame.getDicePlacedFrameData().getDice(x, y)!=null)    //Verify if the position x, y is free
 		{
 			LOGGER.log(Level.FINE, "Only one dice in a position");
 			ok = false;
@@ -77,7 +110,7 @@ public class DicePlacementCondition {
 			ok = false;
 		}
 
-		else if(dicePlacedFrame.getNDices()!=0 && !checkAdjacent(x, y, dicePlacedFrame))                //Verify the dice is positioned near an other dice (if it is not the first dice)
+		else if(dicePlacedFrame.getDicePlacedFrameData().getNDices()!=0 && !checkAdjacent(x, y, dicePlacedFrame))                //Verify the dice is positioned near an other dice (if it is not the first dice)
 		{
 			LOGGER.log(Level.FINE, "The dice must be positioned near an other dice");
 			ok = false;
@@ -128,7 +161,7 @@ public class DicePlacementCondition {
 
 	private boolean verifyFirstDiceEdge(int x, int y, DicePlacedFrame dicePlacedFrame)
 	{
-		if(dicePlacedFrame.getNDices()==0)
+		if(dicePlacedFrame.getDicePlacedFrameData().getNDices()==0)
 		{
 			return ((x==0 || x==X_MAX) && (y==0 || y==Y_MAX));
 		}
@@ -222,7 +255,7 @@ public class DicePlacementCondition {
 		{
 			return false;
 		}
-		return(dicePlacedFrame.getDice(x, y)!=null);
+		return(dicePlacedFrame.getDicePlacedFrameData().getDice(x, y)!=null);
 	}
 
 	private boolean verifyNearValue(int x, int y, DicePlacedFrame dicePlacedFrame)
@@ -231,7 +264,7 @@ public class DicePlacementCondition {
 		{
 			return true;
 		}
-		return(!(dicePlacedFrame.getDice(x, y)!=null && (dice.getValue()==dicePlacedFrame.getDice(x, y).getValue())));
+		return(!(dicePlacedFrame.getDicePlacedFrameData().getDice(x, y)!=null && (dice.getValue()==dicePlacedFrame.getDicePlacedFrameData().getDice(x, y).getValue())));
 	}
 
 	private boolean verifyNearColor(int x, int y, DicePlacedFrame dicePlacedFrame)
@@ -240,7 +273,7 @@ public class DicePlacementCondition {
 		{
 			return true;
 		}
-		return (!(dicePlacedFrame.getDice(x, y)!=null && (dice.getColor()==dicePlacedFrame.getDice(x, y).getColor())));
+		return (!(dicePlacedFrame.getDicePlacedFrameData().getDice(x, y)!=null && (dice.getColor()==dicePlacedFrame.getDicePlacedFrameData().getDice(x, y).getColor())));
 	}
 
 }

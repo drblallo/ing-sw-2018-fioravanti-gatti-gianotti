@@ -14,32 +14,32 @@ public class TestDicePlacedFrame extends TestCase {
 
 		dpf.addDice(dice1, 2, 2);
 
-		assertEquals(1, dpf.getNDices());
+		assertEquals(1, dpf.getDicePlacedFrameData().getNDices());
 
 		dpf.addDice(dice2, 4, 3);
 
-		assertEquals(2, dpf.getNDices());
+		assertEquals(2, dpf.getDicePlacedFrameData().getNDices());
 
 		dpf.addDice(dice3, 0, 0);
 
-		assertEquals(3, dpf.getNDices());
+		assertEquals(3, dpf.getDicePlacedFrameData().getNDices());
 
-		assertEquals(dice1, dpf.getDice(2,2));
+		assertEquals(dice1, dpf.getDicePlacedFrameData().getDice(2,2));
 
-		assertEquals(3, dpf.getNDices());
+		assertEquals(3, dpf.getDicePlacedFrameData().getNDices());
 
-		assertEquals(dice3, dpf.getDice(0,0));
-		assertEquals(3, dpf.getNDices());
-		assertEquals(dice2, dpf.getDice(4,3));
-		assertEquals(3, dpf.getNDices());
+		assertEquals(dice3, dpf.getDicePlacedFrameData().getDice(0,0));
+		assertEquals(3, dpf.getDicePlacedFrameData().getNDices());
+		assertEquals(dice2, dpf.getDicePlacedFrameData().getDice(4,3));
+		assertEquals(3, dpf.getDicePlacedFrameData().getNDices());
 
 		dpf.removeDice(2,2);
 
-		assertEquals(2, dpf.getNDices());
+		assertEquals(2, dpf.getDicePlacedFrameData().getNDices());
 
-		assertEquals(null, dpf.getDice(2,2));
+		assertEquals(null, dpf.getDicePlacedFrameData().getDice(2,2));
 
-		assertEquals(2, dpf.getNDices());
+		assertEquals(2, dpf.getDicePlacedFrameData().getNDices());
 
 	}
 }

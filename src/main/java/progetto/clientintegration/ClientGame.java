@@ -62,13 +62,4 @@ public class ClientGame extends AbstractGameSync implements IExecuibleGame
 		return getGame().getDiceBag();
 	}
 
-	@Override
-	public AbstractGameState getGameState() {
-		return getGame().getGameState();
-	}
-
-	@Override
-	public int getPlayerCount() {
-		return getGame().getPlayerCount();
-	}
 }

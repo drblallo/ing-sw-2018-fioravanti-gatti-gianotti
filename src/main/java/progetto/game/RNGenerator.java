@@ -24,6 +24,11 @@ public final class RNGenerator {
 		this.seed=seed;
 	}
 
+	long getSeed()
+	{
+		return seed;
+	}
+
 	/**
 	 * Set Seed of Random
 	 */
@@ -46,8 +51,28 @@ public final class RNGenerator {
 	 */
 	public Dice extractDice(DiceBag bag)
 	{
-		Value value;
+		Value value = extractValue();
+		return new Dice(value, bag.draw(rollDice(bag)));
+	}
+
+	/**
+	 * Get a random position in dice bag
+	 */
+	public int rollDice(DiceBag db)
+	{
+		return random.nextInt(db.getNumberOfDices());
+	}
+
+	public Dice rollAgain(Dice dice)
+	{
+		Value value = extractValue();
+		return new Dice(value, dice.getColor());
+	}
+
+	private Value extractValue ()
+	{
 		int randValue = random.nextInt(MAX_VALUE_RANDOM)+1;
+		Value value;
 		switch (randValue){
 			case ONE:
 				value = Value.ONE;
@@ -68,46 +93,7 @@ public final class RNGenerator {
 				value = Value.SIX;
 				break;
 		}
-		return new Dice(value, bag.draw(rollDice(bag)));
-	}
-
-	/**
-	 * Get a random position in dice bag
-	 */
-	public int rollDice(DiceBag db)
-	{
-		return random.nextInt(db.getNumberOfDices());
-	}
-
-	public Dice rollAgain(Dice dice)
-	{
-		int randValue = random.nextInt(MAX_VALUE_RANDOM)+1;
-		switch (randValue){
-			case ONE:
-				dice.setValue(Value.ONE);
-				break;
-			case TWO:
-				dice.setValue(Value.TWO);
-				break;
-			case THREE:
-				dice.setValue(Value.THREE);
-				break;
-			case FOUR:
-				dice.setValue(Value.FOUR);
-				break;
-			case FIVE:
-				dice.setValue(Value.FIVE);
-				break;
-			default:
-				dice.setValue(Value.SIX);
-				break;
-		}
-		return dice;
-	}
-
-	long getSeed()
-	{
-		return seed;
+		return value;
 	}
 
 }

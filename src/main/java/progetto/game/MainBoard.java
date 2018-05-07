@@ -2,26 +2,17 @@ package progetto.game;
 
 import progetto.utils.AbstractObservable;
 
-import java.util.ArrayList;
-
 /**
  * Main gaming table
  */
-public class MainBoard extends AbstractObservable<MainBoard> {
+public final class MainBoard extends AbstractObservable<MainBoardData> {
 
-	private ArrayList<WindowFrameCouple> windowFrameCouples = new ArrayList<>();
-	private ExtractedDices extractedDices = new ExtractedDices();
+	private MainBoardData mainBoardData = new MainBoardData();
+	private final ExtractedDices extractedDices = new ExtractedDices();
 
-
-	void addWindowFrameCouple(WindowFrameCouple windowFrameCouple)
+	public MainBoardData getMainBoardData()
 	{
-		windowFrameCouples.add(windowFrameCouple);
-		change(this);
-	}
-
-	WindowFrameCouple getWindowFrame(int index)
-	{
-		return windowFrameCouples.get(index);
+		return mainBoardData;
 	}
 
 	public ExtractedDices getExtractedDices()
@@ -29,27 +20,30 @@ public class MainBoard extends AbstractObservable<MainBoard> {
 		return extractedDices;
 	}
 
-	void addDiceExtracted(Dice dice)
+	void addWindowFrameCouple(WindowFrameCouple windowFrameCouple)
 	{
-		extractedDices.addDice(dice);
-		change(this);
+		mainBoardData = mainBoardData.addWindowFrameCouple(windowFrameCouple);
+		change(mainBoardData);
 	}
 
-	public Dice getDiceExtracted(int index)
+	/**
+	 *
+	 * @param playerCount the new player count
+	 */
+	void setPlayerCount(int playerCount)
 	{
-		return extractedDices.getDice(index);
+		mainBoardData = mainBoardData.setPlayerCount(playerCount);
+		change(mainBoardData);
 	}
 
-	public int getNExtractedDices()
+	/**
+	 *
+	 * @param state the new state of the game
+	 */
+	void setGameState(AbstractGameState state)
 	{
-		return extractedDices.getNumberOfDices();
+		mainBoardData = mainBoardData.setGameState(state);
+		change(mainBoardData);
 	}
-
-	void changeExtracredDice(int index, Dice dice)
-	{
-		extractedDices.changeDice(index, dice);
-		change(this);
-	}
-
 
 }

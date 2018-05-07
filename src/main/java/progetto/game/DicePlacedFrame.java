@@ -5,37 +5,27 @@ import progetto.utils.AbstractObservable;
 /**
  * Player window with positioned dice
  */
-public final class DicePlacedFrame extends AbstractObservable<DicePlacedFrame> {
+public final class DicePlacedFrame extends AbstractObservable<DicePlacedFrameData> {
 
-	private static final int MAX_NUMBER_OF_ROWS = 4;
-	private static final int MAX_NUMBER_OF_COLUMNS = 5;
+	private DicePlacedFrameData dicePlacedFrameData = new DicePlacedFrameData();
 
-	private int nPlacedDices = 0;
-
-	private Dice[][] dicesFrame = new Dice[MAX_NUMBER_OF_COLUMNS][MAX_NUMBER_OF_ROWS];
+	public DicePlacedFrameData getDicePlacedFrameData()
+	{
+		return dicePlacedFrameData;
+	}
 
 	void addDice(Dice newDice, int x, int y)
 	{
-		change(this);
-		dicesFrame[x][y] = newDice;
-		nPlacedDices++;
+		dicePlacedFrameData = dicePlacedFrameData.addDice(newDice, x, y);
+		change(dicePlacedFrameData);
 	}
 
-	public Dice getDice(int x, int y)
+	Dice removeDice(int x, int y)
 	{
-		return dicesFrame[x][y];
-	}
-
-	void removeDice(int x, int y)
-	{
-		change(this);
-		dicesFrame[x][y] = null;
-		nPlacedDices--;
-	}
-
-	public int getNDices()
-	{
-		return nPlacedDices;
+		Dice dice = dicePlacedFrameData.getDice(x, y);
+		dicePlacedFrameData = dicePlacedFrameData.removeDice(x, y);
+		change(dicePlacedFrameData);
+		return dice;
 	}
 
 }

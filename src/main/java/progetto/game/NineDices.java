@@ -1,63 +1,96 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-/**
- * Support class to contain the dice (max 9) positioned in the RoundTrack
- */
-public final class NineDices extends AbstractObservable<NineDices> {
+public final class NineDices {
 
 	private static final int MAX_NUMBER_OF_DICES = 9;
 
-	private Dice[] dice = new Dice[MAX_NUMBER_OF_DICES];
-	private int numberOfDices=0;
+	private final List<Dice> dicesList;
 
-	public Value getValue(int index)
+	NineDices()
 	{
-		return dice[index].getValue();
+		ArrayList<Dice> temp = new ArrayList<>();
+		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
-	public Color getColor(int index)
+	NineDices(NineDices nineDices)
 	{
-		return dice[index].getColor();
+		ArrayList<Dice> temp = new ArrayList<>(nineDices.dicesList);
+		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
-	/**
-	 * Add a dice to the group
-	 */
-	void addDice(Dice newDice)
+	NineDices(NineDices nineDices, Dice newDice)
 	{
-		if(numberOfDices>=MAX_NUMBER_OF_DICES)
-		{
-			return;
-		}
-		change(this);
-		dice[numberOfDices]=newDice;
-		numberOfDices++;
+		ArrayList<Dice> temp = new ArrayList<>(nineDices.dicesList);
+		temp.add(newDice);
+		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
-	public int getNumberOfDices()
+	NineDices(NineDices nineDices, Dice newDice, int index)
 	{
-		return numberOfDices;
+		ArrayList<Dice> temp = new ArrayList<>(nineDices.dicesList);
+		temp.remove(index);
+		temp.add(index, newDice);
+		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
 	/**
 	 * Get a dice from the group, do not remove it
 	 */
-	public Dice getDice(int index)
+	Dice getDice(int index)
 	{
-		return dice[index];
+		if(isFree(index))
+		{
+			return null;
+		}
+		return dicesList.get(index);
 	}
 
 	/**
-	 * Put the new dice in the position index (in place of the previous one)
+	 * Verify if position index is free
 	 */
-	void changeDice(int index, Dice newDice)
+	public boolean isFree(int index)
 	{
-		if (dice[index] != null)
-		{
-			change(this);
-			dice[index]=newDice;
+		try {
+			dicesList.get( index );
+			return false;
+		} catch ( IndexOutOfBoundsException e ) {
+			return true;
 		}
 	}
+
+	int getNumberOfDices()
+	{
+		return dicesList.size();
+	}
+
+	/**
+	 * Add a dice to the group
+	 */
+	NineDices addDice(Dice newDice)
+	{
+		if(dicesList.size()>=MAX_NUMBER_OF_DICES)
+		{
+			return this;
+		}
+		return new NineDices(this, newDice);
+	}
+
+	/**
+	 * Put the new dice in the position index (in place of the previous one that is removed)
+	 */
+	NineDices changeDice(int index, Dice newDice)
+	{
+		if(index<0 || index > dicesList.size()-1)
+		{
+			return this;
+		}
+
+		return new NineDices(this, newDice, index);
+	}
+
 }
+

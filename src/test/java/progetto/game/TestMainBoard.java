@@ -44,30 +44,43 @@ public class TestMainBoard extends TestCase {
 		WindowFrameCouple windowFrameCouple2 = new WindowFrameCouple(ja, ja);
 		mainBoard.addWindowFrameCouple(windowFrameCouple2);
 
-		assertEquals(windowFrameCouple1, mainBoard.getWindowFrame(0));
-		assertEquals(windowFrameCouple2, mainBoard.getWindowFrame(1));
+		assertEquals(windowFrameCouple1, mainBoard.getMainBoardData().getWindowFrame(0));
+		assertEquals(windowFrameCouple2, mainBoard.getMainBoardData().getWindowFrame(1));
 
 		Dice dice1 = new Dice(Value.ONE, Color.YELLOW);
-		mainBoard.addDiceExtracted(dice1);
+		mainBoard.getExtractedDices().addDice(dice1);
 
 		Dice dice2 = new Dice(Value.TWO, Color.BLUE);
-		mainBoard.addDiceExtracted(dice2);
+		mainBoard.getExtractedDices().addDice(dice2);
 
-		assertEquals(dice1, mainBoard.getDiceExtracted(0));
-		assertEquals(dice2, mainBoard.getDiceExtracted(1));
+		assertEquals(dice1, mainBoard.getExtractedDices().getExtractedDicesData().getDice(0));
+		assertEquals(dice2, mainBoard.getExtractedDices().getExtractedDicesData().getDice(1));
 
-		assertEquals(dice1, mainBoard.getExtractedDices().getDice(0));
-		assertEquals(dice2, mainBoard.getExtractedDices().getDice(1));
+		assertEquals(dice1, mainBoard.getExtractedDices().getExtractedDicesData().getDice(0));
+		assertEquals(dice2, mainBoard.getExtractedDices().getExtractedDicesData().getDice(1));
 
-		assertEquals(2, mainBoard.getNExtractedDices());
+		assertEquals(2, mainBoard.getExtractedDices().getExtractedDicesData().getNumberOfDices());
 
 		Dice dice3 = new Dice(Value.THREE, Color.GREEN);
 
-		mainBoard.changeExtracredDice(1, dice3);
+		mainBoard.getExtractedDices().changeDice(1, dice3);
 
-		assertEquals(dice3, mainBoard.getDiceExtracted(1));
+		assertEquals(dice3, mainBoard.getExtractedDices().getExtractedDicesData().getDice(1));
 
-		assertEquals(2, mainBoard.getNExtractedDices());
+		assertEquals(2, mainBoard.getExtractedDices().getExtractedDicesData().getNumberOfDices());
+
+		assertEquals(4, mainBoard.getMainBoardData().getPlayerCount());
+		mainBoard.setPlayerCount(5);
+		assertEquals(5, mainBoard.getMainBoardData().getPlayerCount());
+
+		AbstractGameState state;
+		state = new PreGameState();
+
+		assertEquals(true, state.getName().equals(mainBoard.getMainBoardData().getGameState().getName()));
+
+		mainBoard.setGameState(state);
+
+		assertEquals(state, mainBoard.getMainBoardData().getGameState());
 
 	}
 
