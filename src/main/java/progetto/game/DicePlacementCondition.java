@@ -75,8 +75,10 @@ public final class DicePlacementCondition {
 		return ignoreAdjacent;
 	}
 
-	public boolean canBePlaced(int x, int y, WindowFrame windowFrame, DicePlacedFrame dicePlacedFrame)
+	public boolean canBePlaced(int x, int y, PlayerBoard playerBoard)
 	{
+		WindowFrame windowFrame = playerBoard.getPlayerBoardData().getWindowFrame();
+		DicePlacedFrame dicePlacedFrame = playerBoard.getDicePlacedFrame();
 
 		boolean ok = true;
 
@@ -163,7 +165,7 @@ public final class DicePlacementCondition {
 	{
 		if(dicePlacedFrame.getDicePlacedFrameData().getNDices()==0)
 		{
-			return ((x==0 || x==X_MAX) && (y==0 || y==Y_MAX));
+			return (x==0 || x==X_MAX || y==0 || y==Y_MAX);
 		}
 		return true;
 	}

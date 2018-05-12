@@ -12,4 +12,9 @@ public abstract class AbstractGameState
 	public String getName() {
 		return name;
 	}
+
+	void apply(Game game)
+	{
+		//estrai i dadi in RoundState
+	}
 }

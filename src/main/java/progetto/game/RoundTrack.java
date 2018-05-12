@@ -3,7 +3,7 @@ package progetto.game;
 import progetto.utils.AbstractObservable;
 
 /**
- * RoundTrack with up to nine dices for round
+ * RoundTrack with advanced dice
  */
 public final class RoundTrack extends AbstractObservable<RoundTrackData> {
 

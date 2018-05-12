@@ -63,9 +63,20 @@ public final class Game implements IExecuibleGame {
 		return diceBag;
 	}
 
+	public RNGenerator getRNGenerator()
+	{
+		return rnGenerator;
+	}
+
 	void setSeed(long seed)
 	{
 		rnGenerator.setSeed(seed);
+	}
+
+	void setState(AbstractGameState gameState)
+	{
+		mainBoard.setGameState(gameState);
+		gameState.apply(this);
 	}
 
 	long getSeed()

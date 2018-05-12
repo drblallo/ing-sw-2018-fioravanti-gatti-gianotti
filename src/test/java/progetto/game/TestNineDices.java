@@ -48,7 +48,7 @@ public class TestNineDices extends TestCase {
 		dices = dices.addDice(new Dice(Value.THREE, Color.PURPLE));
 		assertEquals(dices.getNumberOfDices(), 9);
 		dices = dices.addDice(new Dice(Value.THREE, Color.PURPLE));
-		assertEquals(dices.getNumberOfDices(), 9);
+		assertEquals(dices.getNumberOfDices(), 10);
 
 		assertEquals(Color.YELLOW, dices.getDice(5).getColor());
 		assertEquals(Value.TWO, dices.getDice(5).getValue());

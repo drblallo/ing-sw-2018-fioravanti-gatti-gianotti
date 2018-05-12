@@ -1,6 +1,7 @@
 package progetto.game;
 
 import junit.framework.TestCase;
+import org.junit.Assert;
 
 public class TestPickedDicesSlot extends TestCase {
 
@@ -38,6 +39,13 @@ public class TestPickedDicesSlot extends TestCase {
 
 		pickedDicesSlot.setIgnoreAdjacent(1, true);
 		assertEquals(true, (boolean)pickedDicesSlot.getPickedDicesSlotData().getDicePlacementCondition(1).getIgnoreAdjacent());
+
+		Assert.assertNull(pickedDicesSlot.getPickedDicesSlotData().getDicePlacementCondition(50));
+
+		Assert.assertNull(pickedDicesSlot.getPickedDicesSlotData().setIgnoreAdjacent(50, false));
+		Assert.assertNull(pickedDicesSlot.getPickedDicesSlotData().setIgnoreColor(50, false));
+		Assert.assertNull(pickedDicesSlot.getPickedDicesSlotData().setIgnoreValue(50, false));
+
 
 	}
 

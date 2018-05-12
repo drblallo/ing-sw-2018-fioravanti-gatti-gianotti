@@ -13,7 +13,7 @@ public final class DicePlacedFrameData {
 		nPlacedDices = 0;
 	}
 
-	DicePlacedFrameData(DicePlacedFrameData dicePlacedFrameData, Dice newDice, int x, int y)
+	private DicePlacedFrameData(DicePlacedFrameData dicePlacedFrameData, Dice newDice, int x, int y)
 	{
 		for (int i = 0; i < MAX_NUMBER_OF_COLUMNS; i++)
 		{
@@ -26,7 +26,7 @@ public final class DicePlacedFrameData {
 		nPlacedDices = dicePlacedFrameData.nPlacedDices+1;
 	}
 
-	DicePlacedFrameData(DicePlacedFrameData dicePlacedFrameData, int x, int y)
+	private DicePlacedFrameData(DicePlacedFrameData dicePlacedFrameData, int x, int y)
 	{
 		for (int i = 0; i < MAX_NUMBER_OF_COLUMNS; i++)
 		{

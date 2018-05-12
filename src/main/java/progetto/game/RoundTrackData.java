@@ -8,7 +8,7 @@ public final class RoundTrackData {
 
 	RoundTrackData() {}
 
-	RoundTrackData(RoundTrackData roundTrackData, Dice newDice, int index)
+	private RoundTrackData(RoundTrackData roundTrackData, Dice newDice, int index)
 	{
 		for (int i = 0; i < NUMBER_OF_ROUNDS; i++)
 		{
@@ -23,7 +23,7 @@ public final class RoundTrackData {
 		dices[index] = dices[index].addDice(newDice);
 	}
 
-	RoundTrackData(RoundTrackData roundTrackData, Dice newDice, int index, int pos)
+	private RoundTrackData(RoundTrackData roundTrackData, Dice newDice, int index, int pos)
 	{
 		for (int i = 0; i < NUMBER_OF_ROUNDS; i++)
 		{
