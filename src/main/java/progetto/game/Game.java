@@ -14,7 +14,7 @@ public final class Game implements IExecuibleGame {
 
 	private static final int MAX_NUM_PLAYERS = 4;
 
-	private final CommandQueue commandQueue = new CommandQueue();
+	private final ActionQueue actionQueue = new ActionQueue();
 
 	private final RoundTrack roundTrack = new RoundTrack();
 
@@ -38,9 +38,9 @@ public final class Game implements IExecuibleGame {
 		}
 	}
 
-	public AbstractProcessor<AbstractGameAction> getCommandQueue()
+	public AbstractProcessor<AbstractGameAction> getActionQueue()
 	{
-		return commandQueue;
+		return actionQueue;
 	}
 
 	public RoundTrack getRoundTrack()
@@ -79,7 +79,7 @@ public final class Game implements IExecuibleGame {
 	 */
 	public void sendAction(AbstractGameAction action)
 	{
-		commandQueue.offer(action);
+		actionQueue.offer(action);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public final class Game implements IExecuibleGame {
 	 */
 	public void processAllPendingAction()
 	{
-		while (commandQueue.peekPending() != null)
+		while (actionQueue.peekPending() != null)
 			processAction();
 	}
 
@@ -98,7 +98,7 @@ public final class Game implements IExecuibleGame {
 	 */
 	public void processAction()
 	{
-		AbstractGameAction action = commandQueue.pollPending();
+		AbstractGameAction action = actionQueue.pollPending();
 		if (action != null && action.canBeExecuted(this))
 		{
 			LOGGER.log(Level.FINE, "trying to execute a action");

@@ -41,12 +41,12 @@ public final class DicePlacedFrameData {
 	}
 
 
-	Dice getDice(int x, int y)
+	public Dice getDice(int x, int y)
 	{
 		return dicesFrame[x][y];
 	}
 
-	int getNDices()
+	public int getNDices()
 	{
 		return nPlacedDices;
 	}

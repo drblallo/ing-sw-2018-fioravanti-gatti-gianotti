@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * Command queue of the game
  */
-public class CommandQueue extends AbstractProcessor<AbstractGameAction> {
+public class ActionQueue extends AbstractProcessor<AbstractGameAction> {
 
 	private List<AbstractGameAction> pastAction = Collections.synchronizedList(new ArrayList<>());
 	private Queue<AbstractGameAction> pendingActions = new ConcurrentLinkedQueue<>();

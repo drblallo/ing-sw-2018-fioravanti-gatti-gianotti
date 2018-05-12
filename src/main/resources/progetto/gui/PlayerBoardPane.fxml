@@ -9,7 +9,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.gui.PlayerBoardPaneController">
    <children>
       <HBox>
@@ -23,13 +22,13 @@
             <Region HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <HBox prefHeight="350.0" prefWidth="782.0">
+      <HBox fx:id="hBox" prefHeight="350.0" prefWidth="782.0">
          <children>
-            <fx:include source="DicePlacedFramePane.fxml" />
-            <fx:include source="WindowFramePane.fxml" />
+            <fx:include source="DicePlacedFramePane.fxml" fx:id="dicePlacedFramePane" />
+            <fx:include source="WindowFramePane.fxml" fx:id="windowFramePane" />
          </children>
       </HBox>
-      <fx:include source="PickedDicesSlotPane.fxml" />
+      <fx:include source="PickedDicesSlotPane.fxml" fx:id="pickedDicesSlotPane" />
    </children>
    <padding>
       <Insets top="15.0" />

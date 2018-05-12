@@ -23,6 +23,13 @@ public final class Dice {
 		return color;
 	}
 
+	@Override
+	public String toString() {
+
+		return getColor().name() + " " +getValue().name();
+
+	}
+
 	Dice setValue(Value newValue)
 	{
 		return new Dice(newValue, color);

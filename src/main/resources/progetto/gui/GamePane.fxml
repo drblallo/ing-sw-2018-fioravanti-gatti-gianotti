@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.gui.GamePaneController">
+    <children>
+      <TabPane prefHeight="700.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+            <Tab text="Main">
+               <content>
+                  <VBox spacing="20.0">
+                     <children>
+                        <fx:include fx:id="playerBoardPane" source="PlayerBoardPane.fxml" />
+                        <fx:include fx:id="mainBoardPane" source="MainBoardPane.fxml" />
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Other Players">
+               <content>
+                  <VBox fx:id="vBox" />
+               </content>
+            </Tab>
+            <Tab text="Round Track">
+               <content>
+                  <fx:include fx:id="roundTrackPane" source="RoundTrackPane.fxml" />
+               </content>
+            </Tab>
+          <Tab text="Action Queue ">
+               <content>
+                  <fx:include fx:id="actionQueuePane" source="ActionQueuePane.fxml" />
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

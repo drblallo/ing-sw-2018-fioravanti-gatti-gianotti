@@ -38,8 +38,8 @@ public class ClientGame extends AbstractGameSync implements IExecuibleGame
 	}
 
 	@Override
-	public AbstractProcessor<AbstractGameAction> getCommandQueue() {
-		return getGame().getCommandQueue();
+	public AbstractProcessor<AbstractGameAction> getActionQueue() {
+		return getGame().getActionQueue();
 	}
 
 	@Override

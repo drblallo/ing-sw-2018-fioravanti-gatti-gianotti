@@ -4,8 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import progetto.game.DicePlacedFrame;
+import progetto.game.DicePlacedFrameData;
 
-public class DicePlacedFramePaneController extends AbstractController <DicePlacedFrame, DicePlacedFrame> {
+public class DicePlacedFramePaneController extends AbstractController <DicePlacedFrameData, DicePlacedFrame> {
 
     @FXML
     private Label number;
@@ -13,10 +14,22 @@ public class DicePlacedFramePaneController extends AbstractController <DicePlace
     @FXML
     private GridPane gridPane;
 
+    private DicePlacedFrameData dicePlacedFrameData;
+
     @Override
     protected void update() {
 
-        number.setText(Integer.toString(getObservable().getNDices()));
+        DicePlacedFrameData newDicePlacedFrameData = getObservable().getDicePlacedFrameData();
+
+        if(dicePlacedFrameData==newDicePlacedFrameData){
+
+            return;
+
+        }
+
+        dicePlacedFrameData = newDicePlacedFrameData;
+
+        number.setText(Integer.toString(dicePlacedFrameData.getNDices()));
 
         gridPane.getChildren().clear();
 
@@ -24,9 +37,9 @@ public class DicePlacedFramePaneController extends AbstractController <DicePlace
 
             for (int j=0; j<4; j++){
 
-                if(getObservable().getDice(i,j)!=null){
+                if(dicePlacedFrameData.getDice(i,j)!=null){
 
-                    gridPane.add(new Label(getObservable().getDice(i,j).toString()),i,j);
+                    gridPane.add(new Label(dicePlacedFrameData.getDice(i,j).toString()),i,j);
 
                 }
 

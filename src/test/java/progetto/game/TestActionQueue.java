@@ -5,14 +5,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestCommandQueue {
+public class TestActionQueue {
 
-	private CommandQueue queue;
+	private ActionQueue queue;
 
 	@Before
 	public void setUp()
 	{
-		queue = new CommandQueue();
+		queue = new ActionQueue();
 	}
 
 	@After

@@ -31,11 +31,11 @@ public abstract class AbstractGameSync implements ISync{
 	}
 
 	public int getStringCount() {
-		return game.getCommandQueue().getPastItemCount();
+		return game.getActionQueue().getPastItemCount();
 	}
 
 	public Serializable getString(int index) {
-		return game.getCommandQueue().getPastItem(index);
+		return game.getActionQueue().getPastItem(index);
 	}
 
 	public int getHash() {
@@ -48,8 +48,8 @@ public abstract class AbstractGameSync implements ISync{
 
 	public List<Serializable> getAllString() {
 		ArrayList<Serializable> list = new ArrayList<>();
-		for (int a = 0; a < game.getCommandQueue().getPastItemCount(); a++)
-			list.add(game.getCommandQueue().getPastItem(a));
+		for (int a = 0; a < game.getActionQueue().getPastItemCount(); a++)
+			list.add(game.getActionQueue().getPastItem(a));
 		return list;
 	}
 

@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import progetto.game.WindowFrame;
 
-public class WindowFramePaneController extends AbstractController<WindowFrame, WindowFrame> {
+public class WindowFramePaneController {
 
     @FXML
     private GridPane gridPane;
@@ -13,10 +13,9 @@ public class WindowFramePaneController extends AbstractController<WindowFrame, W
     @FXML
     private Label favorToken;
 
-    @Override
-    protected void update() {
+    public void setup(WindowFrame windowFrame){
 
-        favorToken.setText(Integer.toString(getObservable().getFavorToken()));
+        favorToken.setText(Integer.toString(windowFrame.getFavorToken()));
 
         gridPane.getChildren().clear();
 
@@ -24,7 +23,7 @@ public class WindowFramePaneController extends AbstractController<WindowFrame, W
 
             for (int j=0; j<4; j++){
 
-                gridPane.add(new Label(getObservable().getColorBond(i,j).toString() + getObservable().getValueBond(i,j).toString()), i,j);
+                gridPane.add(new Label(windowFrame.getColorBond(i,j).toString() + windowFrame.getValueBond(i,j).toString()), i,j);
 
             }
 

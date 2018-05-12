@@ -9,7 +9,7 @@ public final class PickedDicesSlot extends AbstractObservable<PickedDicesSlotDat
 
 	private PickedDicesSlotData pickedDicesSlotData = new PickedDicesSlotData();
 
-	PickedDicesSlotData getPickedDicesSlotData()
+	public PickedDicesSlotData getPickedDicesSlotData()
 	{
 		return pickedDicesSlotData;
 	}

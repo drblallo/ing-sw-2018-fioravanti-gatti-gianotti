@@ -1,43 +1,65 @@
 package progetto.gui;
 
+import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.Pane;
-import progetto.game.PlayerBoard;
-
-import java.io.IOException;
-
-public class PlayerBoardPaneController extends AbstractController<PlayerBoard, PlayerBoard> {
-
-    FXMLLoader fxmlLoader = new FXMLLoader();
-
-    private Pane windowFramePane;
-    private Pane pickedDicesSlotPane;
-    private Pane dicePlacedFramePane;
-
-    //COSI NON PENSO FUNZIONI!
+import javafx.scene.Parent;
+import progetto.game.*;
 
 
+public class PlayerBoardPaneController extends AbstractController<PlayerBoardData, PlayerBoard> {
 
-    public void setUp() throws IOException{
+    @FXML
+    private Parent dicePlacedFramePane;
 
-        windowFramePane = fxmlLoader.load(WindowFramePaneController.class.getResource("WindowFramePane.fxml"));
-        pickedDicesSlotPane = fxmlLoader.load(PickedDicesSlotPaneController.class.getResource("PickedDicesSlotPane.fxml"));
+    @FXML
+    private Parent windowFramePane;
+
+    @FXML
+    private Parent pickedDicesSlotPane;
+
+    private DicePlacedFramePaneController dicePlacedFramePaneController;
+
+    private WindowFramePaneController windowFramePaneController;
+
+    private PickedDicesSlotPaneController pickedDicesSlotPaneController;
 
 
-    }
+    protected void setup() {
 
-    @Override
-    protected void update() {
+        FXMLLoader fxmlLoader = new FXMLLoader();
 
+        fxmlLoader.setRoot(dicePlacedFramePane);
+        dicePlacedFramePaneController = fxmlLoader.<DicePlacedFramePaneController>getController();
 
+        fxmlLoader.setRoot(windowFramePane);
+        windowFramePaneController = fxmlLoader.<WindowFramePaneController>getController();
+
+        fxmlLoader.setRoot(pickedDicesSlotPane);
+        pickedDicesSlotPaneController = fxmlLoader.<PickedDicesSlotPaneController>getController();
+
+        dicePlacedFramePaneController.setObservable(getObservable().getDicePlacedFrame());
+        windowFramePaneController.setup(getObservable().getPlayerBoardData().getWindowFrame());
+        pickedDicesSlotPaneController.setObservable(getObservable().getPickedDicesSlot());
+
+        Platform.runLater(this::update);
 
     }
 
     @Override
     protected void onObserverReplaced(){
 
+        dicePlacedFramePaneController.setObservable(getObservable().getDicePlacedFrame());
+        windowFramePaneController.setup(getObservable().getPlayerBoardData().getWindowFrame());
+        pickedDicesSlotPaneController.setObservable(getObservable().getPickedDicesSlot());
+
+    }
 
 
+    @Override
+    protected void update() {
+
+        //
 
     }
 

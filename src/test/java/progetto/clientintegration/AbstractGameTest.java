@@ -32,7 +32,7 @@ public abstract class AbstractGameTest
 		wait(500);
 		Assert.assertEquals(FrameSelectionState.class, game.getMainBoard().getMainBoardData().getGameState().getClass());
 
-		game.getCommandQueue();
+		game.getActionQueue();
 		game.getDiceBag();
 		game.getMainBoard().getMainBoardData().getGameState();
 		game.getMainBoard();

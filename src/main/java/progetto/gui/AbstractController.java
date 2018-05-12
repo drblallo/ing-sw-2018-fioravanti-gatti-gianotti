@@ -8,16 +8,9 @@ public abstract class AbstractController <U, T extends AbstractObservable <U>> {
 
     private T observable;
 
-    private IObserver<U> iObserver = new IObserver<U>() {
-        @Override
-        public void notifyChange(U ogg) {
+    private IObserver<U> iObserver = ogg -> Platform.runLater(this::update);
 
-            Platform.runLater(() -> update());
-
-        }
-    };
-
-    public final void setObservable(T observable){
+    public final void setObservable(T newObservable){
 
         if(observable!=null){
 
@@ -25,11 +18,13 @@ public abstract class AbstractController <U, T extends AbstractObservable <U>> {
 
         }
 
+        observable = newObservable;
+
         observable.addObserver(iObserver);
 
         onObserverReplaced();
 
-        Platform.runLater(()->update());
+        Platform.runLater(this::update);
 
     }
 
