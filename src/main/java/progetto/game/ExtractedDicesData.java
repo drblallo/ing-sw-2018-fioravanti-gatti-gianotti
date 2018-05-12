@@ -13,13 +13,13 @@ public final class ExtractedDicesData {
 		this.extractedDices = Collections.unmodifiableList(temp);
 	}
 
-	ExtractedDicesData(ExtractedDicesData extractedDicesData, Dice newDice) {
+	private ExtractedDicesData(ExtractedDicesData extractedDicesData, Dice newDice) {
 		ArrayList<Dice> temp = new ArrayList<>(extractedDicesData.extractedDices);
 		temp.add(newDice);
 		this.extractedDices = Collections.unmodifiableList(temp);
 	}
 
-	ExtractedDicesData(ExtractedDicesData extractedDicesData, Dice newDice, int index)
+	private ExtractedDicesData(ExtractedDicesData extractedDicesData, Dice newDice, int index)
 	{
 		ArrayList<Dice> temp = new ArrayList<>(extractedDicesData.extractedDices);
 		temp.remove(index);
@@ -27,7 +27,7 @@ public final class ExtractedDicesData {
 		this.extractedDices = Collections.unmodifiableList(temp);
 	}
 
-	ExtractedDicesData(ExtractedDicesData extractedDicesData, int index) {
+	private ExtractedDicesData(ExtractedDicesData extractedDicesData, int index) {
 		ArrayList<Dice> temp = new ArrayList<>(extractedDicesData.extractedDices);
 		temp.remove(index);
 		this.extractedDices = Collections.unmodifiableList(temp);

@@ -1,6 +1,6 @@
 package progetto.game;
 
-public class PlayerBoardData {
+public final class PlayerBoardData {
 
 	private final WindowFrame windowFrame;
 
@@ -9,7 +9,7 @@ public class PlayerBoardData {
 		windowFrame = null;
 	}
 
-	PlayerBoardData(WindowFrame windowFrame)
+	private PlayerBoardData(WindowFrame windowFrame)
 	{
 		this.windowFrame = windowFrame;
 	}
@@ -23,5 +23,7 @@ public class PlayerBoardData {
 	{
 		return new PlayerBoardData(windowFrame);
 	}
+
+
 
 }

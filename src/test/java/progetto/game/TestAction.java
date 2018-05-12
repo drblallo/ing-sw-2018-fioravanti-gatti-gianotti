@@ -1,5 +1,6 @@
 package progetto.game;
 
+import org.json.JSONArray;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -111,5 +112,102 @@ public class TestAction {
 				AddWindowFrameCoupleAction.class,
 				null);
 		Assert.assertNull(a);
+	}
+
+	@Test
+	public void testActionAndStateSimulation()
+	{
+		JSONArray ja;
+		ja = new JSONArray();
+		ja.put("Virtus"); ja.put(5); ja.put(9); ja.put(0); ja.put(0); ja.put(Value.FOUR); ja.put(2); ja.put(0);
+		ja.put(Value.TWO); ja.put(3); ja.put(0); ja.put(Value.FIVE); ja.put(2); ja.put(1); ja.put(Value.SIX);
+		ja.put(4); ja.put(1); ja.put(Value.TWO); ja.put(1); ja.put(2); ja.put(Value.THREE); ja.put(3);
+		ja.put(2); ja.put(Value.FOUR); ja.put(0); ja.put(3); ja.put(Value.FIVE); ja.put(2); ja.put(3);
+		ja.put(Value.ONE); ja.put(4); ja.put(4); ja.put(0); ja.put(Color.GREEN); ja.put(3); ja.put(1);
+		ja.put(Color.GREEN); ja.put(2); ja.put(2); ja.put(Color.GREEN); ja.put(1); ja.put(3); ja.put(Color.GREEN);
+
+		WindowFrame windowFrame = new WindowFrame(ja);
+
+		WindowFrameCouple windowFrameCouple = new WindowFrameCouple(ja, ja);
+
+		game.sendAction(new AddWindowFrameCoupleAction(windowFrameCouple));
+		game.processAction();
+
+		MainBoard mainBoard = game.getMainBoard();
+		mainBoard.setPlayerCount(4);
+		game.getPlayerBoard(0).setWindowFrame(windowFrame);
+		game.getPlayerBoard(1).setWindowFrame(windowFrame);
+		game.getPlayerBoard(2).setWindowFrame(windowFrame);
+		game.getPlayerBoard(3).setWindowFrame(windowFrame);
+		game.setState(new PreGameState());
+
+		game.sendAction(new SetPlayerCountAction(4));
+		game.processAction();
+
+		Assert.assertEquals(4, mainBoard.getMainBoardData().getPlayerCount());
+
+		game.sendAction(new StartGameAction());
+		game.processAction();
+
+		game.sendAction(new FrameSetAction(-1));
+		game.processAction();
+
+		Assert.assertEquals(2, game.getMainBoard().getMainBoardData().getCurrentFirstPlayer());
+		Assert.assertEquals(2, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+
+		Assert.assertEquals(9, game.getMainBoard().getExtractedDices().getExtractedDicesData().getNumberOfDices());
+
+		game.sendAction(new PickDiceAction(2, 0));
+		game.processAction();
+
+		Assert.assertEquals(Color.BLUE, game.getPlayerBoard(2).getPickedDicesSlot().getPickedDicesSlotData().getDicePlacementCondition(0).getDice().getColor());
+		Assert.assertEquals(Value.FIVE, game.getPlayerBoard(2).getPickedDicesSlot().getPickedDicesSlotData().getDicePlacementCondition(0).getDice().getValue());
+
+		game.sendAction(new PlaceDiceAction(2, 0, 1, 0));
+		game.processAction();
+
+		Assert.assertEquals(1, game.getPlayerBoard(2).getDicePlacedFrame().getDicePlacedFrameData().getNDices());
+		Assert.assertEquals(Color.BLUE, game.getPlayerBoard(2).getDicePlacedFrame().getDicePlacedFrameData().getDice(1, 0).getColor());
+		Assert.assertEquals(Value.FIVE, game.getPlayerBoard(2).getDicePlacedFrame().getDicePlacedFrameData().getDice(1, 0).getValue());
+
+		game.sendAction(new EndTurnAction(2));
+		game.processAction();
+		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		game.sendAction(new EndTurnAction(3));
+		game.processAction();
+		Assert.assertEquals(0, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		game.sendAction(new EndTurnAction(0));
+		game.processAction();
+		Assert.assertEquals(1, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		game.sendAction(new EndTurnAction(1));
+		game.processAction();
+		Assert.assertEquals(1, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		game.sendAction(new PickDiceAction(1, 1));
+		game.processAction();
+		game.sendAction(new EndTurnAction(1));
+		game.processAction();
+		Assert.assertEquals(0, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		game.sendAction(new EndTurnAction(0));
+		game.processAction();
+		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		game.sendAction(new EndTurnAction(3));
+		game.processAction();
+		Assert.assertEquals(2, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		game.sendAction(new EndTurnAction(2));
+		game.processAction();
+		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+
+		Assert.assertFalse(game.getRoundTrack().getRoundTrackData().isFree(0));
+
+		Assert.assertEquals(1, game.getMainBoard().getMainBoardData().getCurrentRound());
+
+		for(int i=0; i<90; i++)
+		{
+			game.sendAction(new EndTurnAction(game.getMainBoard().getNextPlayer()));
+			game.processAction();
+		}
+
+		Assert.assertEquals("End game", game.getMainBoard().getMainBoardData().getGameState().getName());
+
 	}
 }

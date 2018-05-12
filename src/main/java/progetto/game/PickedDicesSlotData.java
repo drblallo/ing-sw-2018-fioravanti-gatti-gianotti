@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PickedDicesSlotData {
+/**
+ * Slot for picked dices (immutable)
+ */
+public final class PickedDicesSlotData {
 
 	private final List<DicePlacementCondition> pickedDices;
 
@@ -14,21 +17,21 @@ public class PickedDicesSlotData {
 		pickedDices = Collections.unmodifiableList(temp);
 	}
 
-	PickedDicesSlotData(PickedDicesSlotData pickedDicesSlotData, DicePlacementCondition dicePlacementCondition)
+	private PickedDicesSlotData(PickedDicesSlotData pickedDicesSlotData, DicePlacementCondition dicePlacementCondition)
 	{
 		ArrayList<DicePlacementCondition> temp = new ArrayList<>(pickedDicesSlotData.pickedDices);
 		temp.add(dicePlacementCondition);
 		pickedDices = Collections.unmodifiableList(temp);
 	}
 
-	PickedDicesSlotData(PickedDicesSlotData pickedDicesSlotData, int index)
+	private PickedDicesSlotData(PickedDicesSlotData pickedDicesSlotData, int index)
 	{
 		ArrayList<DicePlacementCondition> temp = new ArrayList<>(pickedDicesSlotData.pickedDices);
 		temp.remove(index);
 		pickedDices = Collections.unmodifiableList(temp);
 	}
 
-	PickedDicesSlotData(PickedDicesSlotData pickedDicesSlotData, int index, DicePlacementCondition dicePlacementCondition)
+	private PickedDicesSlotData(PickedDicesSlotData pickedDicesSlotData, int index, DicePlacementCondition dicePlacementCondition)
 	{
 		ArrayList<DicePlacementCondition> temp = new ArrayList<>(pickedDicesSlotData.pickedDices);
 		temp.remove(index);
@@ -43,7 +46,20 @@ public class PickedDicesSlotData {
 
 	public DicePlacementCondition getDicePlacementCondition(int index)
 	{
-		return pickedDices.get(index);
+		if(exists(index))
+		{
+			return pickedDices.get(index);
+		}
+		return null;
+	}
+
+	private boolean exists(int index) {
+		try {
+			pickedDices.get(index);
+			return true;
+		} catch (IndexOutOfBoundsException e) {
+			return false;
+		}
 	}
 
 	PickedDicesSlotData add(Dice dice, boolean ignoreColor, boolean ignoreValue, boolean ignoreAdjacent)
@@ -58,20 +74,36 @@ public class PickedDicesSlotData {
 
 	PickedDicesSlotData setIgnoreColor(int index, boolean ignoreColor)
 	{
-		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(getDicePlacementCondition(index).getDice(), ignoreColor, getDicePlacementCondition(index).getIgnoreValue(), getDicePlacementCondition(index).getIgnoreAdjacent());
-		return new PickedDicesSlotData(this, index, dicePlacementCondition);
+		DicePlacementCondition dpc = getDicePlacementCondition(index);
+		if(dpc!=null)
+		{
+			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dpc.getDice(), ignoreColor, dpc.getIgnoreValue(), dpc.getIgnoreAdjacent());
+			return new PickedDicesSlotData(this, index, dicePlacementCondition);
+		}
+		return null;
 	}
 
 	PickedDicesSlotData setIgnoreValue(int index, boolean ignoreValue)
 	{
-		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(getDicePlacementCondition(index).getDice(), getDicePlacementCondition(index).getIgnoreColor(), ignoreValue, getDicePlacementCondition(index).getIgnoreAdjacent());
-		return new PickedDicesSlotData(this, index, dicePlacementCondition);
+		DicePlacementCondition dpc = getDicePlacementCondition(index);
+		if(dpc!=null)
+		{
+			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dpc.getDice(), dpc.getIgnoreColor(), ignoreValue, dpc.getIgnoreAdjacent());
+			return new PickedDicesSlotData(this, index, dicePlacementCondition);
+		}
+		return null;
+
 	}
 
 	PickedDicesSlotData setIgnoreAdjacent(int index, boolean ignoreAdjacent)
 	{
-		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(getDicePlacementCondition(index).getDice(), getDicePlacementCondition(index).getIgnoreColor(), getDicePlacementCondition(index).getIgnoreValue(), ignoreAdjacent);
-		return new PickedDicesSlotData(this, index, dicePlacementCondition);
+		DicePlacementCondition dpc = getDicePlacementCondition(index);
+		if(dpc!=null)
+		{
+			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dpc.getDice(), dpc.getIgnoreColor(), dpc.getIgnoreValue(), ignoreAdjacent);
+			return new PickedDicesSlotData(this, index, dicePlacementCondition);
+		}
+		return null;
 	}
 
 }

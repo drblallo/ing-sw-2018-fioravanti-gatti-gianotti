@@ -6,8 +6,6 @@ import java.util.List;
 
 public final class NineDices {
 
-	private static final int MAX_NUMBER_OF_DICES = 9;
-
 	private final List<Dice> dicesList;
 
 	NineDices()
@@ -72,10 +70,6 @@ public final class NineDices {
 	 */
 	NineDices addDice(Dice newDice)
 	{
-		if(dicesList.size()>=MAX_NUMBER_OF_DICES)
-		{
-			return this;
-		}
 		return new NineDices(this, newDice);
 	}
 

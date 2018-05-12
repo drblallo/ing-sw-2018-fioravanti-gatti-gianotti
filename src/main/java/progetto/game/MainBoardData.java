@@ -11,6 +11,9 @@ public final class MainBoardData {
 	private final List<WindowFrameCouple> windowFrameCouples;
 	private final int playerCount;
 	private final AbstractGameState gameState;
+	private final int currentFirstPlayer;
+	private final int currentPlayer;
+	private final int currentRound;
 
 	MainBoardData()
 	{
@@ -18,19 +21,12 @@ public final class MainBoardData {
 		ArrayList<WindowFrameCouple> temp = new ArrayList<>();
 		windowFrameCouples = Collections.unmodifiableList(temp);
 		gameState = new PreGameState();
+		currentFirstPlayer = 0;
+		currentPlayer = 0;
+		currentRound = 1;
 	}
 
-	MainBoardData(MainBoardData mainBoardData, int playerCount)
-	{
-		this.playerCount = playerCount;
-
-		ArrayList<WindowFrameCouple> temp = new ArrayList<>(mainBoardData.windowFrameCouples);
-		windowFrameCouples = Collections.unmodifiableList(temp);
-
-		gameState = mainBoardData.gameState;
-	}
-
-	MainBoardData(MainBoardData mainBoardData, AbstractGameState gameState)
+	private MainBoardData(MainBoardData mainBoardData, AbstractGameState gameState)
 	{
 		this.playerCount = mainBoardData.playerCount;
 
@@ -38,9 +34,15 @@ public final class MainBoardData {
 		windowFrameCouples = Collections.unmodifiableList(temp);
 
 		this.gameState = gameState;
+
+		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
+
+		this.currentPlayer = mainBoardData.currentPlayer;
+
+		this.currentRound = mainBoardData.currentRound;
 	}
 
-	MainBoardData(MainBoardData mainBoardData, WindowFrameCouple windowFrameCouple)
+	private MainBoardData(MainBoardData mainBoardData, WindowFrameCouple windowFrameCouple)
 	{
 		this.playerCount = mainBoardData.playerCount;
 
@@ -49,7 +51,30 @@ public final class MainBoardData {
 		this.windowFrameCouples = Collections.unmodifiableList(temp);
 
 		this.gameState = mainBoardData.gameState;
+
+		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
+
+		this.currentPlayer = mainBoardData.currentPlayer;
+
+		this.currentRound = mainBoardData.currentRound;
 	}
+
+	private MainBoardData(MainBoardData mainBoardData, int playerCount, int currentFirstPlayer, int currentPlayer, int currentRound)
+	{
+		this.playerCount = playerCount;
+
+		ArrayList<WindowFrameCouple> temp = new ArrayList<>(mainBoardData.windowFrameCouples);
+		windowFrameCouples = Collections.unmodifiableList(temp);
+
+		this.gameState = mainBoardData.gameState;
+
+		this.currentFirstPlayer = currentFirstPlayer;
+
+		this.currentPlayer = currentPlayer;
+
+		this.currentRound = currentRound;
+	}
+
 
 	/**
 	 *
@@ -58,6 +83,16 @@ public final class MainBoardData {
 	public int getPlayerCount()
 	{
 		return playerCount;
+	}
+
+	public int getCurrentFirstPlayer()
+	{
+		return currentFirstPlayer;
+	}
+
+	public int getCurrentPlayer()
+	{
+		return currentPlayer;
 	}
 
 	WindowFrameCouple getWindowFrame(int index)
@@ -74,13 +109,18 @@ public final class MainBoardData {
 		return gameState;
 	}
 
+	public int getCurrentRound()
+	{
+		return currentRound;
+	}
+
 	/**
 	 *
 	 * @param playerCount the new player count
 	 */
 	MainBoardData setPlayerCount(int playerCount)
 	{
-		return new MainBoardData(this, playerCount);
+		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound);
 	}
 
 	/**
@@ -96,5 +136,21 @@ public final class MainBoardData {
 	{
 		return new MainBoardData(this, windowFrameCouple);
 	}
+
+	MainBoardData setCurrentFirstPlayer(int currentFirstPlayer)
+	{
+		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound);
+	}
+
+	MainBoardData setCurrentPlayer(int currentPlayer)
+	{
+		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound);
+	}
+
+	MainBoardData setCurrentRound(int currentRound)
+	{
+		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound);
+	}
+
 
 }

@@ -83,4 +83,6 @@ public final class WindowFrame implements Serializable {
 		return valueLimitationMatrix[x][y];
 	}
 
+
+
 }

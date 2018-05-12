@@ -2,6 +2,8 @@ package progetto.game;
 
 import progetto.utils.AbstractObservable;
 
+import java.util.ArrayList;
+
 /**
  * Main gaming table
  */
@@ -9,6 +11,8 @@ public final class MainBoard extends AbstractObservable<MainBoardData> {
 
 	private MainBoardData mainBoardData = new MainBoardData();
 	private final ExtractedDices extractedDices = new ExtractedDices();
+
+	private ArrayList<Integer> playerQueue = new ArrayList<>();
 
 	public MainBoardData getMainBoardData()
 	{
@@ -44,6 +48,36 @@ public final class MainBoard extends AbstractObservable<MainBoardData> {
 	{
 		mainBoardData = mainBoardData.setGameState(state);
 		change(mainBoardData);
+	}
+
+	void setCurrentFirstPlayer(int currentFirstPlayer)
+	{
+		mainBoardData = mainBoardData.setCurrentFirstPlayer(currentFirstPlayer);
+		change(mainBoardData);
+	}
+
+	void setCurrentPlayer(int currentPlayer)
+	{
+		mainBoardData = mainBoardData.setCurrentPlayer(currentPlayer);
+		change(mainBoardData);
+	}
+
+	void setCurrentRound(int currentRound)
+	{
+		mainBoardData = mainBoardData.setCurrentRound(currentRound);
+		change(mainBoardData);
+	}
+
+	void addPlayerQueue(Integer i)
+	{
+		playerQueue.add(i);
+	}
+
+	Integer getNextPlayer()
+	{
+		if(!playerQueue.isEmpty())
+			return playerQueue.remove(0);
+		return -1;
 	}
 
 }
