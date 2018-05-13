@@ -1,0 +1,10 @@
+progetto.clientintegration
+progetto.commandline
+progetto.game
+progetto.gui
+progetto.network
+progetto.network.localconnection
+progetto.network.rmi
+progetto.network.socket
+progetto.serverintegration
+progetto.utils

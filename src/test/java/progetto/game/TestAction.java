@@ -115,6 +115,72 @@ public class TestAction {
 	}
 
 	@Test
+	public void testCanBeExecutedAddWindowFrameCoupleAction()
+	{
+		JSONArray ja = new JSONArray();
+		ja.put("Virtus"); ja.put(5); ja.put(9); ja.put(0); ja.put(0); ja.put(Value.FOUR); ja.put(2); ja.put(0);
+		ja.put(Value.TWO); ja.put(3); ja.put(0); ja.put(Value.FIVE); ja.put(2); ja.put(1); ja.put(Value.SIX);
+		ja.put(4); ja.put(1); ja.put(Value.TWO); ja.put(1); ja.put(2); ja.put(Value.THREE); ja.put(3);
+		ja.put(2); ja.put(Value.FOUR); ja.put(0); ja.put(3); ja.put(Value.FIVE); ja.put(2); ja.put(3);
+		ja.put(Value.ONE); ja.put(4); ja.put(4); ja.put(0); ja.put(Color.GREEN); ja.put(3); ja.put(1);
+		ja.put(Color.GREEN); ja.put(2); ja.put(2); ja.put(Color.GREEN); ja.put(1); ja.put(3); ja.put(Color.GREEN);
+		WindowFrameCouple windowFrameCouple = new WindowFrameCouple(ja, ja);
+		AddWindowFrameCoupleAction a = new AddWindowFrameCoupleAction(windowFrameCouple);
+
+		Assert.assertTrue(a.canBeExecuted(game));
+
+		game.setState(new FrameSelectionState());
+
+		Assert.assertFalse(a.canBeExecuted(game));
+
+	}
+
+	@Test
+	public void testFrameSetAction()
+	{
+		FrameSetAction a = new FrameSetAction(1);
+		Assert.assertFalse(a.canBeExecuted(game));
+		game.setState(new FrameSelectionState());
+		Assert.assertTrue(a.canBeExecuted(game));
+	}
+
+	@Test
+	public void testPickDiceAction()
+	{
+		PickDiceAction p = new PickDiceAction(0, 0);
+		Assert.assertFalse(p.canBeExecuted(game));
+		game.setState(new RoundState());
+		Assert.assertFalse(p.canBeExecuted(game));
+		game.getMainBoard().getExtractedDices().addDice(new Dice(Value.ONE, Color.YELLOW));
+		Assert.assertTrue(p.canBeExecuted(game));
+		p = new PickDiceAction(1, 0);
+		Assert.assertFalse(p.canBeExecuted(game));
+	}
+
+	@Test
+	public void testPlaceDiceAction()
+	{
+		JSONArray ja;
+		ja = new JSONArray();
+		ja.put("Virtus"); ja.put(5); ja.put(9); ja.put(0); ja.put(0); ja.put(Value.FOUR); ja.put(2); ja.put(0);
+		ja.put(Value.TWO); ja.put(3); ja.put(0); ja.put(Value.FIVE); ja.put(2); ja.put(1); ja.put(Value.SIX);
+		ja.put(4); ja.put(1); ja.put(Value.TWO); ja.put(1); ja.put(2); ja.put(Value.THREE); ja.put(3);
+		ja.put(2); ja.put(Value.FOUR); ja.put(0); ja.put(3); ja.put(Value.FIVE); ja.put(2); ja.put(3);
+		ja.put(Value.ONE); ja.put(4); ja.put(4); ja.put(0); ja.put(Color.GREEN); ja.put(3); ja.put(1);
+		ja.put(Color.GREEN); ja.put(2); ja.put(2); ja.put(Color.GREEN); ja.put(1); ja.put(3); ja.put(Color.GREEN);
+
+		game.getPlayerBoard(0).setWindowFrame(new WindowFrame(ja));
+		PlaceDiceAction p = new PlaceDiceAction(0, 0, 0, 0);
+		Assert.assertFalse(p.canBeExecuted(game));
+		game.setState(new RoundState());
+		Assert.assertFalse(p.canBeExecuted(game));
+		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.FOUR, Color.YELLOW), true, true, true);
+		Assert.assertTrue(p.canBeExecuted(game));
+		p = new PlaceDiceAction(1, 0, 0, 0);
+		Assert.assertFalse(p.canBeExecuted(game));
+	}
+
+	@Test
 	public void testActionAndStateSimulation()
 	{
 		JSONArray ja;
@@ -210,4 +276,5 @@ public class TestAction {
 		Assert.assertEquals("End game", game.getMainBoard().getMainBoardData().getGameState().getName());
 
 	}
+
 }

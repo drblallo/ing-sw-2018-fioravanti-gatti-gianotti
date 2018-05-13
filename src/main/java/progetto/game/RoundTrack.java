@@ -9,7 +9,10 @@ public final class RoundTrack extends AbstractObservable<RoundTrackData> {
 
 	private RoundTrackData roundTrackData = new RoundTrackData();
 
-
+	/**
+	 * Get round track data
+	 * @return round track data
+	 */
 	public RoundTrackData getRoundTrackData()
 	{
 		return roundTrackData;
@@ -17,6 +20,8 @@ public final class RoundTrack extends AbstractObservable<RoundTrackData> {
 
 	/**
 	 * Add a dice in position index
+	 * @param newDice dice to add
+	 * @param index position where add the dice
 	 */
 	void add(Dice newDice, int index)
 	{
@@ -25,8 +30,11 @@ public final class RoundTrack extends AbstractObservable<RoundTrackData> {
 	}
 
 	/**
-	 * Change the dice in round index, position pos
-	 * Return the dice previously present in this position
+	 * Change the dice in round index, position pos. Return the dice previously present in this position
+	 * @param index round of the dice to change
+	 * @param pos position of the dice to change
+	 * @param newDice dice to add
+	 * @return changed dice
 	 */
 	Dice change(int index, int pos, Dice newDice)
 	{

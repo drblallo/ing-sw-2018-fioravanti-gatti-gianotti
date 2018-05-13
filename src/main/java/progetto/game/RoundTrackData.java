@@ -1,13 +1,25 @@
 package progetto.game;
 
+/**
+ * Immuutable class with data of RoundTrack
+ */
 public final class RoundTrackData {
 
 	private static final int NUMBER_OF_ROUNDS = 10;
 
 	private final NineDices[] dices = new NineDices[NUMBER_OF_ROUNDS];
 
+	/**
+	 * Constructor
+	 */
 	RoundTrackData() {}
 
+	/**
+	 * Constructor to add a dice in position index
+	 * @param roundTrackData previous roundTrackData
+	 * @param newDice dice to add
+	 * @param index number of the round
+	 */
 	private RoundTrackData(RoundTrackData roundTrackData, Dice newDice, int index)
 	{
 		for (int i = 0; i < NUMBER_OF_ROUNDS; i++)
@@ -23,6 +35,13 @@ public final class RoundTrackData {
 		dices[index] = dices[index].addDice(newDice);
 	}
 
+	/**
+	 * Constructor to change a dice
+	 * @param roundTrackData previous roundTrackData
+	 * @param newDice dice to add
+	 * @param index number of the round
+	 * @param pos position of the dice to change
+	 */
 	private RoundTrackData(RoundTrackData roundTrackData, Dice newDice, int index, int pos)
 	{
 		for (int i = 0; i < NUMBER_OF_ROUNDS; i++)
@@ -37,6 +56,12 @@ public final class RoundTrackData {
 		dices[index] = nineDices;
 	}
 
+	/**
+	 * Add a dice
+	 * @param newDice dice to add
+	 * @param index number of the round
+	 * @return new RoundTrackData with the added dice
+	 */
 	RoundTrackData add(Dice newDice, int index) {
 		if (index < 0 || index > NUMBER_OF_ROUNDS - 1) {
 			return this;
@@ -46,6 +71,8 @@ public final class RoundTrackData {
 
 	/**
 	 * Verify if position index is free
+	 * @param index number of the round
+	 * @return boolean
 	 */
 	public boolean isFree(int index) {
 		return (dices[index] == null);
@@ -53,6 +80,7 @@ public final class RoundTrackData {
 
 	/**
 	 * Return first free position
+	 * @return index of the first position
 	 */
 	public int firstFreePosition() {
 		for (int i = 0; i < NUMBER_OF_ROUNDS; i++) {
@@ -63,6 +91,12 @@ public final class RoundTrackData {
 		return -1;
 	}
 
+	/**
+	 * Get a dice
+	 * @param index number of the round
+	 * @param pos position of the dice
+	 * @return dice in round index, position pos
+	 */
 	public Dice getDice(int index, int pos)
 	{
 		if(!isFree(index))
@@ -72,7 +106,13 @@ public final class RoundTrackData {
 		return null;
 	}
 
-
+	/**
+	 * Change a dice
+	 * @param index number of the round
+	 * @param pos position of the dice
+	 * @param newDice dice to add
+	 * @return new RoundTrackData with the changed dice
+	 */
 	RoundTrackData change(int index, int pos, Dice newDice)
 	{
 		return new RoundTrackData(this, newDice, index, pos);

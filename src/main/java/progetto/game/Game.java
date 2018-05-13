@@ -29,6 +29,9 @@ public final class Game implements IExecuibleGame {
 	private ArrayList<Integer> pastHashCodes = new ArrayList<>();
 
 
+	/**
+	 * Constructor
+	 */
 	public Game()
 	{
 		pastHashCodes.add(hashCode());
@@ -38,47 +41,84 @@ public final class Game implements IExecuibleGame {
 		}
 	}
 
+	/**
+	 * Get commandQueue
+	 * @return commandQueue
+	 */
 	public AbstractProcessor<AbstractGameAction> getCommandQueue()
 	{
 		return commandQueue;
 	}
 
+	/**
+	 * Get roundTrack
+	 * @return roundTrack
+	 */
 	public RoundTrack getRoundTrack()
 	{
 		return roundTrack;
 	}
 
+	/**
+	 * Get playerBoard of player index
+	 * @param index player number
+	 * @return playerBoard[index]
+	 */
 	public PlayerBoard getPlayerBoard(int index)
 	{
 		return playerBoard[index];
 	}
 
+	/**
+	 * Get mainBoard
+	 * @return mainBoard
+	 */
 	public MainBoard getMainBoard()
 	{
 		return mainBoard;
 	}
 
+	/**
+	 * Get diceBag
+	 * @return diceBag
+	 */
 	public DiceBag getDiceBag()
 	{
 		return diceBag;
 	}
 
+	/**
+	 * Get RNGenerator
+	 * @return rnGenerator
+	 */
 	public RNGenerator getRNGenerator()
 	{
 		return rnGenerator;
 	}
 
+	/**
+	 * Set seet of RNGenerator
+	 * @param seed new value to set
+	 */
 	void setSeed(long seed)
 	{
 		rnGenerator.setSeed(seed);
 	}
 
+	/**
+	 * Set game state, execute state operations
+	 * @param gameState new state to set
+	 */
 	void setState(AbstractGameState gameState)
 	{
 		mainBoard.setGameState(gameState);
 		gameState.apply(this);
 	}
 
+	/**
+	 * Get seed
+	 * @return RNGenerator seed
+	 */
 	long getSeed()
 	{
 		return rnGenerator.getSeed();

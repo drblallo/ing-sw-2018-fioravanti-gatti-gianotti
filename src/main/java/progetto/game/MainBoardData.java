@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Immutable class with data of MainBoard
+ */
 public final class MainBoardData {
 
 	private static final int MAX_NUM_PLAYERS = 4;
@@ -15,6 +18,9 @@ public final class MainBoardData {
 	private final int currentPlayer;
 	private final int currentRound;
 
+	/**
+	 * Constructor
+	 */
 	MainBoardData()
 	{
 		playerCount = MAX_NUM_PLAYERS;
@@ -26,6 +32,11 @@ public final class MainBoardData {
 		currentRound = 1;
 	}
 
+	/**
+	 * Constructor to change gameState
+	 * @param mainBoardData previous mainBoardData
+	 * @param gameState new gameState
+	 */
 	private MainBoardData(MainBoardData mainBoardData, AbstractGameState gameState)
 	{
 		this.playerCount = mainBoardData.playerCount;
@@ -42,6 +53,11 @@ public final class MainBoardData {
 		this.currentRound = mainBoardData.currentRound;
 	}
 
+	/**
+	 * Constructor to add WindowFrameCouple
+	 * @param mainBoardData previous mainBoardData
+	 * @param windowFrameCouple to add
+	 */
 	private MainBoardData(MainBoardData mainBoardData, WindowFrameCouple windowFrameCouple)
 	{
 		this.playerCount = mainBoardData.playerCount;
@@ -59,6 +75,14 @@ public final class MainBoardData {
 		this.currentRound = mainBoardData.currentRound;
 	}
 
+	/**
+	 * Constructor to set a new vaue of playerCount or currentFirstPlayer or CurrentPlayer or currentRound
+	 * @param mainBoardData previous mainBoardData
+	 * @param playerCount new playerCount value
+	 * @param currentFirstPlayer new currentFirstPlayer value
+	 * @param currentPlayer new currentPlayer value
+	 * @param currentRound new currentRound value
+	 */
 	private MainBoardData(MainBoardData mainBoardData, int playerCount, int currentFirstPlayer, int currentPlayer, int currentRound)
 	{
 		this.playerCount = playerCount;
@@ -77,7 +101,7 @@ public final class MainBoardData {
 
 
 	/**
-	 *
+	 * Get number of player
 	 * @return the current player count
 	 */
 	public int getPlayerCount()
@@ -85,23 +109,36 @@ public final class MainBoardData {
 		return playerCount;
 	}
 
+	/**
+	 * Get current first player
+	 * @return current first player
+	 */
 	public int getCurrentFirstPlayer()
 	{
 		return currentFirstPlayer;
 	}
 
+	/**
+	 * Get current player
+	 * @return current player
+	 */
 	public int getCurrentPlayer()
 	{
 		return currentPlayer;
 	}
 
+	/**
+	 * Get windowFrame
+	 * @param index position of the window frame to get
+	 * @return selected window frame
+	 */
 	WindowFrameCouple getWindowFrame(int index)
 	{
 		return windowFrameCouples.get(index);
 	}
 
 	/**
-	 *
+	 * Get gameState
 	 * @return the current game state
 	 */
 	public AbstractGameState getGameState()
@@ -115,7 +152,7 @@ public final class MainBoardData {
 	}
 
 	/**
-	 *
+	 * Set number of player
 	 * @param playerCount the new player count
 	 */
 	MainBoardData setPlayerCount(int playerCount)
@@ -124,7 +161,7 @@ public final class MainBoardData {
 	}
 
 	/**
-	 *
+	 * Set gameState
 	 * @param state the new state of the game
 	 */
 	MainBoardData setGameState(AbstractGameState state)
@@ -132,21 +169,41 @@ public final class MainBoardData {
 		return new MainBoardData(this, state);
 	}
 
+	/**
+	 * Add a windowFrameCouple
+	 * @param windowFrameCouple to add
+	 * @return new MainBoardData with added windowFrameCouple
+	 */
 	MainBoardData addWindowFrameCouple(WindowFrameCouple windowFrameCouple)
 	{
 		return new MainBoardData(this, windowFrameCouple);
 	}
 
+	/**
+	 * Set current first player
+	 * @param currentFirstPlayer to set
+	 * @return new MainBoardData with modified currentFirstPlayer
+	 */
 	MainBoardData setCurrentFirstPlayer(int currentFirstPlayer)
 	{
 		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound);
 	}
 
+	/**
+	 * Set current player
+	 * @param currentPlayer to set
+	 * @return new MainBoardData with modified currentPlayer
+	 */
 	MainBoardData setCurrentPlayer(int currentPlayer)
 	{
 		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound);
 	}
 
+	/**
+	 * Set current round
+	 * @param currentRound to set
+	 * @return new MainBoardData with modified currentRound
+	 */
 	MainBoardData setCurrentRound(int currentRound)
 	{
 		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound);

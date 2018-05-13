@@ -1,8 +1,12 @@
 package progetto.game;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class FrameSetAction extends AbstractGameAction {
 
 	private final int selectedWindowFrame;
+	private static final Logger LOGGER = Logger.getLogger(FrameSetAction.class.getName());
 
 	public FrameSetAction(int selectedWindowFrame)
 	{
@@ -17,9 +21,9 @@ public class FrameSetAction extends AbstractGameAction {
 	@Override
 	protected void execute(Game game)
 	{
+		LOGGER.log(Level.FINE, "WindowFrame ", selectedWindowFrame);
 		//selected window frame in PlayerBoard
 		//other window frames in mainBoard
-
 		game.setState(new GameStartedState());
 	}
 }

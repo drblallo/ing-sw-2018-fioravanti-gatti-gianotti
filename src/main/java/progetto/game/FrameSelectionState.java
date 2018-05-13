@@ -12,6 +12,6 @@ public class FrameSelectionState extends AbstractGameState {
 
 	@Override
 	void apply(Game game) {
-
+		//to do
 	}
 }
