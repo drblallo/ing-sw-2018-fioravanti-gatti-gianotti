@@ -18,19 +18,28 @@ public final class RNGenerator {
 	private Random random = new Random();
 	private long seed;
 
+	/**
+	 * Constructor
+	 * @param seed of random generator
+	 */
 	RNGenerator(long seed)
 	{
 		random.setSeed(seed);
 		this.seed=seed;
 	}
 
+	/**
+	 * Get seed
+	 * @return seed
+	 */
 	long getSeed()
 	{
 		return seed;
 	}
 
 	/**
-	 * Set Seed of Random
+	 * Set Seed
+	 * @param seed seed to set
 	 */
 	public void setSeed(long seed)
 	{
@@ -39,7 +48,9 @@ public final class RNGenerator {
 	}
 
 	/**
-	 * Get a int random value (maxValue not included)
+	 * Get a int random value
+	 * @param maxValue max value (not included)
+	 * @return random value
 	 */
 	public int getNextInt(int maxValue)
 	{
@@ -48,6 +59,7 @@ public final class RNGenerator {
 
 	/**
 	 * Get a random Dice from the dice bag
+	 * @param bag diceBag from which draw the dice
 	 */
 	public Dice extractDice(DiceBag bag)
 	{
@@ -57,18 +69,29 @@ public final class RNGenerator {
 
 	/**
 	 * Get a random position in dice bag
+	 * @param db diceBag from which draw the dice
+	 * @return random position
 	 */
 	public int rollDice(DiceBag db)
 	{
 		return random.nextInt(db.getNumberOfDices());
 	}
 
+	/**
+	 * Roll again a dice
+	 * @param dice dice to roll again
+	 * @return rolled dice
+	 */
 	public Dice rollAgain(Dice dice)
 	{
 		Value value = extractValue();
 		return new Dice(value, dice.getColor());
 	}
 
+	/**
+	 * Get random Value for the dice
+	 * @return random Value (ONE to SIX)
+	 */
 	private Value extractValue ()
 	{
 		int randValue = random.nextInt(MAX_VALUE_RANDOM)+1;

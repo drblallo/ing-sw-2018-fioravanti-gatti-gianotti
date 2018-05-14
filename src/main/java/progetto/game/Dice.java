@@ -1,45 +1,65 @@
 package progetto.game;
 
 /**
- * Dice with a color and a value
+ * Dice with a color and a value  (immutable)
  */
 public final class Dice {
 	private final Value value;
 	private final Color color;
 
+	/**
+	 * Constructor
+	 * @param value
+	 * @param color
+	 */
 	Dice(Value value, Color color)
 	{
 		this.value = value;
 		this.color = color;
 	}
 
+	/**
+	 * Get value
+	 * @return value
+	 */
 	public Value getValue()
 	{
 		return value;
 	}
 
+	/**
+	 * Get color
+	 * @return color
+	 */
 	public Color getColor()
 	{
 		return color;
 	}
 
-	@Override
-	public String toString() {
-
-		return getColor().name() + " " +getValue().name();
-
-	}
-
+	/**
+	 * Set value
+	 * @param newValue
+	 * @return a new Dice with newValue as Value, same Color
+	 */
 	Dice setValue(Value newValue)
 	{
 		return new Dice(newValue, color);
 	}
 
+	/**
+	 * Set color
+	 * @param newColor
+	 * @return a new Dice with newColor as Color, same Value
+	 */
 	Dice setColor(Color newColor)
 	{
 		return new Dice(value, newColor);
 	}
 
+	/**
+	 * Increase dice Value
+	 * @return a new Dice with increased value
+	 */
 	Dice increaseValue()
 	{
 		Dice dice = this;
@@ -66,6 +86,10 @@ public final class Dice {
 		return dice;
 	}
 
+	/**
+	 * Decrease dice Value
+	 * @return a new Dice with decreased value
+	 */
 	Dice decreaseValue()
 	{
 		Dice dice = this;
@@ -92,6 +116,10 @@ public final class Dice {
 		return dice;
 	}
 
+	/**
+	 * Flip dice
+	 * @return a new Dice with the value on the opposite side
+	 */
 	Dice flip()
 	{
 		Dice dice = this;

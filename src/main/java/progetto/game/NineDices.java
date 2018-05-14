@@ -4,22 +4,37 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ *  Immutable support class with dices in a position of the roundTrack
+ */
 public final class NineDices {
 
 	private final List<Dice> dicesList;
 
+	/**
+	 * Constructor
+	 */
 	NineDices()
 	{
 		ArrayList<Dice> temp = new ArrayList<>();
 		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
+	/**
+	 * Costructor copy
+	 * @param nineDices
+	 */
 	NineDices(NineDices nineDices)
 	{
 		ArrayList<Dice> temp = new ArrayList<>(nineDices.dicesList);
 		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
+	/**
+	 * Constructor to add a dice
+	 * @param nineDices previous nineDices
+	 * @param newDice dice to add
+	 */
 	NineDices(NineDices nineDices, Dice newDice)
 	{
 		ArrayList<Dice> temp = new ArrayList<>(nineDices.dicesList);
@@ -27,6 +42,12 @@ public final class NineDices {
 		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
+	/**
+	 * Constructor to change a dice
+	 * @param nineDices previous nineDices
+	 * @param newDice dice to add in position index
+	 * @param index position of the dice to remove and for the dice to add
+	 */
 	NineDices(NineDices nineDices, Dice newDice, int index)
 	{
 		ArrayList<Dice> temp = new ArrayList<>(nineDices.dicesList);
@@ -37,6 +58,8 @@ public final class NineDices {
 
 	/**
 	 * Get a dice from the group, do not remove it
+	 * @param index position of the dice
+	 * @return the dice in position index
 	 */
 	Dice getDice(int index)
 	{
@@ -49,6 +72,8 @@ public final class NineDices {
 
 	/**
 	 * Verify if position index is free
+	 * @param index position to verify
+	 * @return boolean
 	 */
 	public boolean isFree(int index)
 	{
@@ -60,13 +85,19 @@ public final class NineDices {
 		}
 	}
 
+	/**
+	 * Get number of dices
+	 * @return number of dices
+	 */
 	int getNumberOfDices()
 	{
 		return dicesList.size();
 	}
 
 	/**
-	 * Add a dice to the group
+	 * Add a dice
+	 * @param newDice dice to add
+	 * @return new NineDices with the added dice
 	 */
 	NineDices addDice(Dice newDice)
 	{
@@ -74,7 +105,10 @@ public final class NineDices {
 	}
 
 	/**
-	 * Put the new dice in the position index (in place of the previous one that is removed)
+	 * Put the new dice in position index (in place of the previous one that is removed)
+	 * @param index position
+	 * @param newDice dice to add
+	 * @return new NineDices with the changed dice
 	 */
 	NineDices changeDice(int index, Dice newDice)
 	{

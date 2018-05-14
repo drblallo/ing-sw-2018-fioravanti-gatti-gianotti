@@ -14,12 +14,22 @@ public final class ExtractedDices extends AbstractObservable<ExtractedDicesData>
 		return extractedDicesData;
 	}
 
+	/**
+	 * Add dice to extracted dices
+	 * @param newDice to add
+	 */
 	void addDice(Dice newDice)
 	{
 		extractedDicesData = extractedDicesData.addDice(newDice);
 		change(extractedDicesData);
 	}
 
+	/**
+	 * Change the dice in position index
+	 * @param index position of the dice to change
+	 * @param newDice to add
+	 * @return removed dice
+	 */
 	Dice changeDice(int index, Dice newDice)
 	{
 		Dice dice = extractedDicesData.getDice(index);
@@ -28,6 +38,11 @@ public final class ExtractedDices extends AbstractObservable<ExtractedDicesData>
 		return dice;
 	}
 
+	/**
+	 * Remove dice from extracted dices
+	 * @param index position of the dice to remove
+	 * @return removed dice
+	 */
 	Dice removeDice(int index)
 	{
 		Dice dice = extractedDicesData.getDice(index);

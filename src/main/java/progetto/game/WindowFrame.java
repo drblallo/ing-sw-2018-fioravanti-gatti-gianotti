@@ -17,6 +17,10 @@ public final class WindowFrame implements Serializable {
 	private final int favorToken;
 	private final String name;
 
+	/**
+	 * Constructor
+	 * @param frame JSONArray of the window frame to set
+	 */
 	WindowFrame(JSONArray frame)
 	{
 		int pos=0;
@@ -63,26 +67,45 @@ public final class WindowFrame implements Serializable {
 
 	}
 
+	/**
+	 * Get number of favor token of the card
+	 * @return number of favor token of the card
+	 */
 	public int getFavorToken()
 	{
 		return favorToken;
 	}
 
+	/**
+	 * Get name of the card
+	 * @return the name of the card
+	 */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * Get color bond of the card in the selected position
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @return Color bond of the card in the selected position
+	 */
 	public Color getColorBond(int x, int y)
 	{
 		return colorLimitationMatrix[x][y];
 	}
 
+	/**
+	 * Get Value bond of the card in the selected position
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @return Value bond of the card in the selected position
+	 */
 	public Value getValueBond(int x, int y)
 	{
 		return valueLimitationMatrix[x][y];
 	}
-
 
 
 }
