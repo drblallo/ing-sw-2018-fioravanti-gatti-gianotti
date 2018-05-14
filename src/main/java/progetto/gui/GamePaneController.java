@@ -4,9 +4,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import progetto.game.Game;
+import progetto.commandline.CommandProcessor;
+import progetto.game.IExecuibleGame;
 import progetto.game.MainBoard;
 import progetto.game.MainBoardData;
 import progetto.utils.IObserver;
@@ -15,14 +16,16 @@ import java.io.IOException;
 
 public class GamePaneController {
 
-    private FXMLLoader fxmlLoader = new FXMLLoader();
-
-    private Game oldGame = null;
+    private IExecuibleGame game = null;
 
     private int currentPlayer = 0;
 
+    private int displayedPlayersCount = 1;
+
     @FXML
-    private VBox vBox;
+    private GridPane gridPane;
+
+    int col = 0, row = 0;
 
     @FXML
     private Parent mainBoardPane;
@@ -36,13 +39,24 @@ public class GamePaneController {
     @FXML
     private Parent playerBoardPane;
 
+    @FXML Parent commandLinePane;
+
+    @FXML
     private MainBoardPaneController mainBoardPaneController;
 
+    @FXML
     private ActionQueuePaneController actionQueuePaneController;
 
+    @FXML
     private RoundTrackPaneController roundTrackPaneController;
 
-    private PlayerBoardPaneController[] playerBoardPaneControllers = null;
+    @FXML
+    private CommandLinePaneController commandLinePaneController;
+
+    @FXML
+    private PlayerBoardPaneController playerBoardPaneController;
+
+    private PlayerBoardPaneController[] playerBoardPaneControllers = new PlayerBoardPaneController[MainBoardData.MAX_NUM_PLAYERS-1];
 
     private IObserver<MainBoardData> mainBoardIObserver = ogg -> Platform.runLater(this::update);
 
@@ -61,7 +75,7 @@ public class GamePaneController {
 
         }
 
-        return playerBoardPaneControllers.length;
+        return displayedPlayersCount;
 
     }
 
@@ -72,47 +86,45 @@ public class GamePaneController {
     }
 
     //ECCEZIONE?
-    public void setUp(Game game){
+    public void setUp(IExecuibleGame newGame, CommandProcessor commandProcessor){
 
-        if(oldGame == game){
+        if(game == newGame){
 
             return;
 
         }
 
-        MainBoard mainBoard = game.getMainBoard();
+        MainBoard mainBoard = newGame.getMainBoard();
 
-        if(oldGame != null){
+        if(game != null){
 
-            oldGame.getMainBoard().removeObserver(mainBoardIObserver);
+            game.getMainBoard().removeObserver(mainBoardIObserver);
 
         }
 
+        game = newGame;
+        
         mainBoard.addObserver(mainBoardIObserver);
 
         playerBoardPaneControllers = new PlayerBoardPaneController[mainBoard.getMainBoardData().getPlayerCount()];
 
-        fxmlLoader.setRoot(mainBoardPane);
-        mainBoardPaneController = fxmlLoader.<MainBoardPaneController>getController();
+        commandLinePaneController.setCommandProcessor(commandProcessor);
+
         mainBoardPaneController.setObservable(mainBoard);
 
-        fxmlLoader.setRoot(actionQueuePane);
-        actionQueuePaneController = fxmlLoader.<ActionQueuePaneController>getController();
-        actionQueuePaneController.setActionQueue(game.getActionQueue());
+        actionQueuePaneController.setActionQueue(newGame.getActionQueue());
 
-        fxmlLoader.setRoot(roundTrackPane);
-        roundTrackPaneController = fxmlLoader.<RoundTrackPaneController>getController();
-        roundTrackPaneController.setObservable(game.getRoundTrack());
+        roundTrackPaneController.setObservable(newGame.getRoundTrack());
 
-        fxmlLoader.setRoot(playerBoardPane);
-        playerBoardPaneControllers[getCurrentPlayer()] = fxmlLoader.<PlayerBoardPaneController>getController();
-        playerBoardPaneControllers[getCurrentPlayer()].setObservable(game.getPlayerBoard(getCurrentPlayer()));
+        playerBoardPaneController.setObservable(newGame.getPlayerBoard(getCurrentPlayer()));
 
-        vBox.getChildren().clear();
+        playerBoardPaneControllers[getCurrentPlayer()] = playerBoardPaneController;
 
-        for (int i=0; i<mainBoard.getMainBoardData().getPlayerCount(); i++){
+        gridPane.getChildren().clear();
 
-            if (i!=getCurrentPlayer()){
+        /*for (int i=0; i<mainBoard.getMainBoardData().getPlayerCount(); i++){
+
+            if (i!=getCurrentPlayer()&&game.getPlayerBoard(i)!=null){
 
                 addPlayerBoard(i);
 
@@ -120,23 +132,38 @@ public class GamePaneController {
 
         }
 
-        Platform.runLater(this::update);
+
+*/
+        //Platform.runLater(this::update);
 
     }
 
     protected void update(){
 
-        if(getDisplayedPlayersCount() == oldGame.getMainBoard().getMainBoardData().getPlayerCount()){
+        int currentNumberOfPlayer = game.getMainBoard().getMainBoardData().getPlayerCount();
+
+        if(getDisplayedPlayersCount() == currentNumberOfPlayer){
 
             return;
 
         }
 
-        for (int i = getDisplayedPlayersCount() + 1; i<oldGame.getMainBoard().getMainBoardData().getPlayerCount(); i++){
+        gridPane.getChildren().clear();
 
-            addPlayerBoard(i);
+        col = 0;
+        row = 0;
+
+        for (int i = 0; i<currentNumberOfPlayer; i++){
+
+            if(i!=currentPlayer) {
+
+                addPlayerBoard(i);
+
+            }
 
         }
+
+        displayedPlayersCount = currentNumberOfPlayer;
 
 
 
@@ -146,11 +173,7 @@ public class GamePaneController {
 
         Pane pane;
 
-        fxmlLoader.setRoot(GamePaneController.class.getResource("playerBoardPane.fxml"));
-
-        playerBoardPaneControllers[i] = fxmlLoader.<PlayerBoardPaneController>getController();
-
-        playerBoardPaneControllers[i].setObservable(oldGame.getPlayerBoard(i));
+        FXMLLoader fxmlLoader = new FXMLLoader(GamePaneController.class.getResource("playerBoardPane.fxml"));
 
         try{
 
@@ -162,7 +185,24 @@ public class GamePaneController {
             System.out.println("IOEXception in GamePaneController"); //METTI LOGGER
         }
 
-        vBox.getChildren().add(pane);
+        playerBoardPaneControllers[i] = fxmlLoader.<PlayerBoardPaneController>getController();
+
+        playerBoardPaneControllers[i].setObservable(game.getPlayerBoard(i));
+
+        gridPane.add(pane, col, row);
+
+        if(col == 1){
+
+            row++;
+            col = 0;
+
+        }
+
+        else {
+
+            col++;
+
+        }
 
     }
 }

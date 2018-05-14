@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import progetto.commandline.CommandProcessor;
+import progetto.game.Game;
 import progetto.game.PlayerBoard;
 import progetto.gui.CommandLinePaneController;
 import progetto.gui.GamePaneController;
@@ -30,25 +31,19 @@ public class ClientWindow extends Application {
 
         primaryStage.setTitle("Client Window");
 
-        /*CommandProcessor commandProcessor = ClientCommandProcessor.getCommandProcessor();
-
-        FXMLLoader loader = new FXMLLoader(CommandLinePaneController.class.getResource("CommandLinePane.fxml"));
-
-        Pane pane = (Pane) loader.load();
-
-        CommandLinePaneController commandLinePaneController = loader.<CommandLinePaneController>getController();
-
-        commandLinePaneController.setCommandProcessor(commandProcessor);
-
-        Scene scene = new Scene(pane);
-
-        primaryStage.setScene(scene);*/
+       CommandProcessor commandProcessor = ClientCommandProcessor.getCommandProcessor();
 
         FXMLLoader loader = new FXMLLoader(GamePaneController.class.getResource("GamePane.fxml"));
 
         Pane pane = (Pane) loader.load();
 
         GamePaneController gamePaneController = loader.<GamePaneController>getController();
+
+        gamePaneController.setUp(ClientMain.getGame(), commandProcessor);
+
+        /*FXMLLoader loader = new FXMLLoader(SocketRMIChoicePaneController.class.getResource("SocketRMIChoicePane.fxml"));
+
+        Pane pane = (Pane) loader.load(); */
 
         Scene scene = new Scene(pane);
 

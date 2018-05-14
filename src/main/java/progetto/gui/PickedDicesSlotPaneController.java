@@ -31,7 +31,7 @@ public class PickedDicesSlotPaneController extends AbstractController <PickedDic
 
         for(int i=0; i<pickedDicesSlotData.getNDices(); i++){
 
-            listView.getItems().add(new Label(pickedDicesSlotData.getDicePlacementCondition(i).toString()));
+            listView.getItems().add(new Label(pickedDicesSlotData.getDicePlacementCondition(i).getDice().toString()));
 
         }
 

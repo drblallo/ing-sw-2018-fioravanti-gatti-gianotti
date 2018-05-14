@@ -3,6 +3,12 @@ package progetto.game;
 public class EndTurnAction extends AbstractGameAction
 {
 
+	EndTurnAction(){
+
+		super(-1);
+
+	}
+
 	EndTurnAction(int nPlayer)
 	{
 		super(nPlayer);

@@ -16,18 +16,16 @@ public class MainBoardPaneController extends AbstractController<MainBoardData, M
     @FXML
     private Label numberOfPlayers;
 
+    @FXML
+    private Label gameState;
+
     private MainBoardData mainBoardData;
 
+    @FXML
     private ExtractedDicesPaneController extractedDicesPaneController;
 
 
     public void setup(){
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-
-        fxmlLoader.setRoot(extractedDicesPaneController);
-
-        extractedDicesPaneController = fxmlLoader.<ExtractedDicesPaneController>getController();
 
         extractedDicesPaneController.setObservable(getObservable().getExtractedDices());
 
@@ -56,5 +54,8 @@ public class MainBoardPaneController extends AbstractController<MainBoardData, M
         mainBoardData = newMainBoardData;
 
         numberOfPlayers.setText(Integer.toString(newMainBoardData.getPlayerCount()));
+
+        gameState.setText(mainBoardData.getGameState().getName());
+
     }
 }

@@ -9,9 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SocketRMIChoicePane">
+<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.clientintegration.SocketRMIChoicePaneController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox>
                <children>
@@ -65,26 +65,30 @@
             <HBox layoutX="20.0" layoutY="115.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="socket" mnemonicParsing="false" text="Socket" textAlignment="CENTER">
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </Button>
+                  <VBox spacing="10.0">
+                     <children>
+                        <CheckBox fx:id="socket" mnemonicParsing="false" onAction="#onCheckBoxSelected" selected="true" text="Socket">
+                           <padding>
+                              <Insets bottom="10.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox fx:id="rmi" mnemonicParsing="false" onAction="#onCheckBoxSelected" text="RMI" />
+                     </children>
+                  </VBox>
                   <Region HBox.hgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets top="15.0" />
                </padding>
             </HBox>
-            <HBox layoutX="20.0" layoutY="175.0">
+            <HBox>
                <children>
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="rmi" mnemonicParsing="false" text="RMI" textAlignment="CENTER">
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="connectButton" mnemonicParsing="false" text="Connect">
                      <HBox.margin>
-                        <Insets top="15.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Region HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

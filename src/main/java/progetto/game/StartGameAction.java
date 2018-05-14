@@ -17,7 +17,6 @@ public class StartGameAction extends AbstractGameAction
 
 	@Override
 	protected void execute(Game game) {
-		game.getMainBoard().setGameState(new FrameSelectionState());
-
+		game.setState(new FrameSelectionState());
 	}
 }

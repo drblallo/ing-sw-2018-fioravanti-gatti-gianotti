@@ -31,7 +31,7 @@ public class DicePlacedFramePaneController extends AbstractController <DicePlace
 
         number.setText(Integer.toString(dicePlacedFrameData.getNDices()));
 
-        gridPane.getChildren().clear();
+        //gridPane.getChildren().clear();
 
         for(int i=0; i<3; i++){
 

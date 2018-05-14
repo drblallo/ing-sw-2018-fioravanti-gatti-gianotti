@@ -4,6 +4,13 @@ public class FrameSetAction extends AbstractGameAction {
 
 	private final int selectedWindowFrame;
 
+	public FrameSetAction(){
+
+		super(-1);
+		selectedWindowFrame = -1;
+
+	}
+
 	public FrameSetAction(int selectedWindowFrame)
 	{
 		this.selectedWindowFrame = selectedWindowFrame;

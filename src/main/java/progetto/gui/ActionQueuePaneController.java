@@ -49,13 +49,18 @@ public class ActionQueuePaneController {
 
         for(int i=0; i<actionQueue.getPastItemCount(); i++){
 
-            pastActionsListView.getItems().add(new Label(actionQueue.getPastItem(i).getName()));
+            pastActionsListView.getItems().add(new Label(actionQueue.getPastItem(i).getToolTip()));
 
         }
 
         numberOfPendingActions.setText(Integer.toString(actionQueue.getPendingItemsCount()));
 
-        nextAction.setText(actionQueue.peekPending().getName());
+        if(actionQueue.getPendingItemsCount()!=0){
+
+            nextAction.setText(actionQueue.peekPending().getToolTip());
+
+        }
+
 
     }
 }

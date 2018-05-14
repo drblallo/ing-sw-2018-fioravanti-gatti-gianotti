@@ -7,6 +7,15 @@ public class PlaceDiceAction extends AbstractGameAction {
 	private int x;
 	private int y;
 
+	PlaceDiceAction(){
+
+		super(-1);
+		nDice = -1;
+		x = -1;
+		y = -1;
+
+	}
+
 	PlaceDiceAction(int nPlayer, int nDice, int x, int y)
 	{
 		super(nPlayer);

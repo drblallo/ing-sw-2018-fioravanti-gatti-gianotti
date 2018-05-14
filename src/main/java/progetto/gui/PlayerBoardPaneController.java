@@ -18,28 +18,25 @@ public class PlayerBoardPaneController extends AbstractController<PlayerBoardDat
     @FXML
     private Parent pickedDicesSlotPane;
 
+    @FXML
     private DicePlacedFramePaneController dicePlacedFramePaneController;
 
+    @FXML
     private WindowFramePaneController windowFramePaneController;
 
+    @FXML
     private PickedDicesSlotPaneController pickedDicesSlotPaneController;
 
 
     protected void setup() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-
-        fxmlLoader.setRoot(dicePlacedFramePane);
-        dicePlacedFramePaneController = fxmlLoader.<DicePlacedFramePaneController>getController();
-
-        fxmlLoader.setRoot(windowFramePane);
-        windowFramePaneController = fxmlLoader.<WindowFramePaneController>getController();
-
-        fxmlLoader.setRoot(pickedDicesSlotPane);
-        pickedDicesSlotPaneController = fxmlLoader.<PickedDicesSlotPaneController>getController();
-
         dicePlacedFramePaneController.setObservable(getObservable().getDicePlacedFrame());
-        windowFramePaneController.setup(getObservable().getPlayerBoardData().getWindowFrame());
+
+        if(getObservable().getPlayerBoardData().getWindowFrame()!=null){
+
+            windowFramePaneController.setup(getObservable().getPlayerBoardData().getWindowFrame());
+
+        }
         pickedDicesSlotPaneController.setObservable(getObservable().getPickedDicesSlot());
 
         Platform.runLater(this::update);
@@ -50,7 +47,11 @@ public class PlayerBoardPaneController extends AbstractController<PlayerBoardDat
     protected void onObserverReplaced(){
 
         dicePlacedFramePaneController.setObservable(getObservable().getDicePlacedFrame());
-        windowFramePaneController.setup(getObservable().getPlayerBoardData().getWindowFrame());
+        if(getObservable().getPlayerBoardData().getWindowFrame()!=null){
+
+            windowFramePaneController.setup(getObservable().getPlayerBoardData().getWindowFrame());
+
+        }
         pickedDicesSlotPaneController.setObservable(getObservable().getPickedDicesSlot());
 
     }

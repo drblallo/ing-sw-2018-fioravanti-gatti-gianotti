@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -10,6 +11,19 @@
         <fx:include fx:id="extractedDicesPane" source="ExtractedDicesPane.fxml" />
         <HBox>
             <children>
+            <Label text="Game State: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <Label fx:id="gameState">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
                 <Region HBox.hgrow="ALWAYS" />
                 <Label text="Number of players: ">
                     <padding>

@@ -6,7 +6,7 @@ import java.util.List;
 
 public final class MainBoardData {
 
-	private static final int MAX_NUM_PLAYERS = 4;
+	public static final int MAX_NUM_PLAYERS = 4;
 
 	private final List<WindowFrameCouple> windowFrameCouples;
 	private final int playerCount;

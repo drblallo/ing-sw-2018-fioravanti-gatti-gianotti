@@ -28,6 +28,13 @@ final class ActionCommand implements ICommand {
 	@Override
 	public String execute(String[] params)
 	{
+
+		if(params == null){
+
+			return "Missing arguments";
+
+		}
+
 		int[] t = new int[params.length];
 		for (int a = 0; a < params.length; a++)
 			t[a] = Integer.parseInt(params[a]);
@@ -36,7 +43,8 @@ final class ActionCommand implements ICommand {
 		if (actionCommand != null)
 		{
 			game.sendAction(actionCommand);
-			return "sent command";
+			game.processAllPendingAction();
+			return "Sent command";
 		}
 		else
 		{

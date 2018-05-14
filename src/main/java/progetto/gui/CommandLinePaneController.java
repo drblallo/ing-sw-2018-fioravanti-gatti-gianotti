@@ -17,7 +17,6 @@ public class CommandLinePaneController {
 
     private CommandProcessor commandProcessor;
 
-
     public void onCommandTextKeyPressed(){
 
         commandText.setOnKeyPressed(event -> {

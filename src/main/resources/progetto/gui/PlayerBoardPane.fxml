@@ -9,28 +9,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.gui.PlayerBoardPaneController">
+
+<AnchorPane prefHeight="550.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.gui.PlayerBoardPaneController">
    <children>
-      <HBox>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Region HBox.hgrow="ALWAYS" />
-            <Label text="PLAYER BOARD " textFill="#e81d1d">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Region HBox.hgrow="ALWAYS" />
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Label text="PLAYER BOARD " textFill="#e81d1d">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox fx:id="hBox" prefHeight="350.0" prefWidth="782.0">
+               <children>
+                  <fx:include fx:id="dicePlacedFramePane" source="DicePlacedFramePane.fxml" />
+                  <fx:include fx:id="windowFramePane" source="WindowFramePane.fxml" />
+               </children>
+            </HBox>
+            <fx:include fx:id="pickedDicesSlotPane" source="PickedDicesSlotPane.fxml" />
          </children>
-      </HBox>
-      <HBox fx:id="hBox" prefHeight="350.0" prefWidth="782.0">
-         <children>
-            <fx:include source="DicePlacedFramePane.fxml" fx:id="dicePlacedFramePane" />
-            <fx:include source="WindowFramePane.fxml" fx:id="windowFramePane" />
-         </children>
-      </HBox>
-      <fx:include source="PickedDicesSlotPane.fxml" fx:id="pickedDicesSlotPane" />
+         <padding>
+            <Insets top="15.0" />
+         </padding>
+      </VBox>
    </children>
-   <padding>
-      <Insets top="15.0" />
-   </padding>
-</VBox>
+</AnchorPane>
