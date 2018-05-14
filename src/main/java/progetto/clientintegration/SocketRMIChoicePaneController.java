@@ -2,6 +2,7 @@ package progetto.clientintegration;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
 public class SocketRMIChoicePaneController {
@@ -13,9 +14,19 @@ public class SocketRMIChoicePaneController {
     private Label iPAddress;
 
     @FXML
-    private Button socket;
+    private CheckBox socket;
 
     @FXML
-    private Button rmi;
+    private CheckBox rmi;
+
+    @FXML
+    private Button connectButton;
+
+    public void onCheckBoxSelected(){
+
+        socket.setSelected(rmi.isSelected());
+
+    }
+
 
 }
