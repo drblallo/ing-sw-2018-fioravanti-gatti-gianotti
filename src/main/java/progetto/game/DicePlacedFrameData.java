@@ -65,7 +65,7 @@ public final class DicePlacedFrameData {
 	 * @param y pos vertical
 	 * @return dice in the selected position
 	 */
-	Dice getDice(int x, int y)
+	public Dice getDice(int x, int y)
 	{
 		return dicesFrame[x][y];
 	}
@@ -74,7 +74,7 @@ public final class DicePlacedFrameData {
 	 *
 	 * @return number of dice in the placed frame
 	 */
-	int getNDices()
+	public int getNDices()
 	{
 		return nPlacedDices;
 	}

@@ -147,4 +147,10 @@ public final class Dice {
 		return dice;
 	}
 
+	public String toString(){
+
+		return getValue().toString() + " " + getColor().toString();
+
+	}
+
 }

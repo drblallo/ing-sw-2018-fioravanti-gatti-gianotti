@@ -3,6 +3,7 @@ package progetto.clientintegration;
 
 import progetto.game.Game;
 import progetto.game.IExecuibleGame;
+import progetto.serverintegration.ServerMain;
 
 public final class ClientMain {
 
@@ -11,14 +12,25 @@ public final class ClientMain {
         //constructor hiding
     }
 
-    private static IExecuibleGame game = new Game();
+    private static ClientGame clientGame;
 
-    public static IExecuibleGame getGame() {
-        return game;
+    public static ClientGame getGame() {
+        return clientGame;
+    }
+
+    public static void setClientGame(ClientGame newClientGame){
+
+        if(newClientGame.getClientConnection().isRunning()){
+
+            clientGame= newClientGame;
+
+        }
+
     }
 
     public static void main(String[] args){
 
+        ServerMain.main(args);
         ClientWindow.launchWindow(args);
 
     }

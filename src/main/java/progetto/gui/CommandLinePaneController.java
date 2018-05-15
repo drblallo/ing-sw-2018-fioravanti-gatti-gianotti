@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import progetto.commandline.CommandProcessor;
 
 public class CommandLinePaneController {
@@ -17,17 +18,14 @@ public class CommandLinePaneController {
 
     private CommandProcessor commandProcessor;
 
-    public void onCommandTextKeyPressed(){
+    @FXML
+    public void onCommandTextKeyPressed(KeyEvent keyEvent){
 
-        commandText.setOnKeyPressed(event -> {
-
-            if(event.getCode() == KeyCode.ENTER){
+            if(keyEvent.getCode() == KeyCode.ENTER){
 
                 sendToCommandLine(commandText.getText());
 
-            }
-
-        });
+        };
 
     }
 

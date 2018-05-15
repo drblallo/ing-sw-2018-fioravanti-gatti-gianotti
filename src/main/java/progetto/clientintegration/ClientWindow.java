@@ -31,7 +31,8 @@ public class ClientWindow extends Application {
 
         primaryStage.setTitle("Client Window");
 
-       CommandProcessor commandProcessor = ClientCommandProcessor.getCommandProcessor();
+
+        /*CommandProcessor commandProcessor = ClientCommandProcessor.getCommandProcessor();
 
         FXMLLoader loader = new FXMLLoader(GamePaneController.class.getResource("GamePane.fxml"));
 
@@ -39,11 +40,15 @@ public class ClientWindow extends Application {
 
         GamePaneController gamePaneController = loader.<GamePaneController>getController();
 
-        gamePaneController.setUp(ClientMain.getGame(), commandProcessor);
+        gamePaneController.setUp(ClientMain.getGame(), commandProcessor); */
 
-        /*FXMLLoader loader = new FXMLLoader(SocketRMIChoicePaneController.class.getResource("SocketRMIChoicePane.fxml"));
+        FXMLLoader loader = new FXMLLoader(SocketRMIChoicePaneController.class.getResource("SocketRMIChoicePane.fxml"));
 
-        Pane pane = (Pane) loader.load(); */
+        Pane pane = (Pane) loader.load();
+
+        SocketRMIChoicePaneController socketRMIChoicePaneController = loader.<SocketRMIChoicePaneController>getController();
+
+        socketRMIChoicePaneController.setUp(primaryStage);
 
         Scene scene = new Scene(pane);
 

@@ -14,7 +14,7 @@ public final class Game implements IExecuibleGame {
 
 	private static final int MAX_NUM_PLAYERS = 4;
 
-	private final CommandQueue commandQueue = new CommandQueue();
+	private final ActionQueue commandQueue = new ActionQueue();
 
 	private final RoundTrack roundTrack = new RoundTrack();
 
@@ -45,7 +45,7 @@ public final class Game implements IExecuibleGame {
 	 * Get commandQueue
 	 * @return commandQueue
 	 */
-	public AbstractProcessor<AbstractGameAction> getCommandQueue()
+	public AbstractProcessor<AbstractGameAction> getActionQueue()
 	{
 		return commandQueue;
 	}
