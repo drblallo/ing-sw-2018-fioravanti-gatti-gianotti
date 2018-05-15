@@ -58,15 +58,15 @@ public final class Room extends AbstractRoom
 		LOGGER.log(Level.FINE, "received serializable");
 		Player info = players.get(callerID);
 
-		if (!getSyncOgg().isStringGood(syncString, info.getChairID()))
+		if (!getSyncOgg().isItemGood(syncString, info.getChairID()))
 			return;
 
-		getSyncOgg().sendString(syncString);
+		getSyncOgg().sendItem(syncString);
 
 		for (Player p : players.values())
 			p.getHandler().sendSyncCommand(syncString);
 
-		if (getSyncOgg().getStringCount() % NetworkSettings.CHECK_SYNC_RATEO != 0)
+		if (getSyncOgg().getItemCount() % NetworkSettings.CHECK_SYNC_RATEO != 0)
 			return;
 
 		for (Player p : players.values())

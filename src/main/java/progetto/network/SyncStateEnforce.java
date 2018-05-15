@@ -14,8 +14,8 @@ final class SyncStateEnforce implements IEnforce {
 	 * @param ogg the sync object on the server side that will be used to synchronize the server
 	 */
 	SyncStateEnforce(ISync ogg) {
-		this.allCommands = ogg.getAllString();
-		this.currHash = ogg.getHash(ogg.getStringCount());
+		this.allCommands = ogg.getAllItems();
+		this.currHash = ogg.getHash(ogg.getItemCount());
 
 	}
 

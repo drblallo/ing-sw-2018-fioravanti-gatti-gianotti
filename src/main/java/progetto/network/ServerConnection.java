@@ -129,7 +129,7 @@ final class ServerConnection {
 	 */
 	void checkSynch(ISync ogg)
 	{
-		handler.sendEnforce(new SyncCheckEnforce(ogg.getStringCount(), ogg.getHash()));
+		handler.sendEnforce(new SyncCheckEnforce(ogg.getItemCount(), ogg.getHash()));
 	}
 
 	/**
