@@ -1,125 +1,150 @@
 package progetto.game;
 
-
-import progetto.utils.AbstractObservable;
-
 /**
- * Dice with a color and a value
+ * Dice with a color and a value  (immutable)
  */
-public final class Dice  extends AbstractObservable<Dice> {
-	private Value value;
-	private Color color;
+public final class Dice {
+	private final Value value;
+	private final Color color;
 
+	/**
+	 * Constructor
+	 * @param value
+	 * @param color
+	 */
 	Dice(Value value, Color color)
 	{
-		this.value=value;
-		this.color=color;
+		this.value = value;
+		this.color = color;
 	}
 
-	Value getValue()
+	/**
+	 * Get value
+	 * @return value
+	 */
+	public Value getValue()
 	{
 		return value;
 	}
 
-	Color getColor()
+	/**
+	 * Get color
+	 * @return color
+	 */
+	public Color getColor()
 	{
 		return color;
 	}
 
-	void setValue(Value newValue)
+	/**
+	 * Set value
+	 * @param newValue
+	 * @return a new Dice with newValue as Value, same Color
+	 */
+	Dice setValue(Value newValue)
 	{
-		change(this);
-		value=newValue;
+		return new Dice(newValue, color);
 	}
 
-	void setColor(Color newColor)
+	/**
+	 * Set color
+	 * @param newColor
+	 * @return a new Dice with newColor as Color, same Value
+	 */
+	Dice setColor(Color newColor)
 	{
-		change(this);
-		color=newColor;
+		return new Dice(value, newColor);
 	}
 
-	void increaseValue()
+	/**
+	 * Increase dice Value
+	 * @return a new Dice with increased value
+	 */
+	Dice increaseValue()
 	{
+		Dice dice = this;
 		switch (value)
 		{
 			case ONE:
-				change(this);
-				value=Value.TWO;
+				dice = new Dice(Value.TWO, color);
 				break;
 			case TWO:
-				change(this);
-				value=Value.THREE;
+				dice = new Dice(Value.THREE, color);
 				break;
 			case THREE:
-				change(this);
-				value=Value.FOUR;
+				dice = new Dice(Value.FOUR, color);
 				break;
 			case FOUR:
-				change(this);
-				value=Value.FIVE;
+				dice = new Dice(Value.FIVE, color);
 				break;
 			case FIVE:
-				change(this);
-				value=Value.SIX;
+				dice = new Dice(Value.SIX, color);
 				break;
 			case SIX:
 				break;
 		}
+		return dice;
 	}
 
-	void decreaseValue()
+	/**
+	 * Decrease dice Value
+	 * @return a new Dice with decreased value
+	 */
+	Dice decreaseValue()
 	{
+		Dice dice = this;
 		switch (value)
 		{
 			case SIX:
-				change(this);
-				value=Value.FIVE;
+				dice = new Dice(Value.FIVE, color);
 				break;
 			case FIVE:
-				change(this);
-				value=Value.FOUR;
+				dice = new Dice(Value.FOUR, color);
 				break;
 			case FOUR:
-				change(this);
-				value=Value.THREE;
+				dice = new Dice(Value.THREE, color);
 				break;
 			case THREE:
-				change(this);
-				value=Value.TWO;
+				dice = new Dice(Value.TWO, color);
 				break;
 			case TWO:
-				change(this);
-				value=Value.ONE;
+				dice = new Dice(Value.ONE, color);
 				break;
 			case ONE:
 				break;
 		}
+		return dice;
 	}
 
-	void flip()
+	/**
+	 * Flip dice
+	 * @return a new Dice with the value on the opposite side
+	 */
+	Dice flip()
 	{
-		change(this);
+		Dice dice = this;
 		switch (value)
 		{
 			case ONE:
-				value=Value.SIX;
+				dice = new Dice(Value.SIX, color);
 				break;
 			case TWO:
-				value=Value.FIVE;
+				dice = new Dice(Value.FIVE, color);
 				break;
 			case THREE:
-				value=Value.FOUR;
+				dice = new Dice(Value.FOUR, color);
 				break;
 			case FOUR:
-				value=Value.THREE;
+				dice = new Dice(Value.THREE, color);
 				break;
 			case FIVE:
-				value=Value.TWO;
+				dice = new Dice(Value.TWO, color);
 				break;
 			case SIX:
-				value=Value.ONE;
+				dice = new Dice(Value.ONE, color);
 				break;
 		}
+		return dice;
 	}
 
 }

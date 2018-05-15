@@ -5,50 +5,49 @@ import progetto.utils.AbstractObservable;
 /**
  * Dices extracted by the player on the main board
  */
-public final class ExtractedDices extends AbstractObservable<ExtractedDices> {
+public final class ExtractedDices extends AbstractObservable<ExtractedDicesData> {
 
-	private static final int MAX_NUMBER_OF_DICES = 9;
+	private ExtractedDicesData extractedDicesData = new ExtractedDicesData();
 
-	private Dice[] dicesExtracted = new Dice[MAX_NUMBER_OF_DICES];
-	private int numberOfDices=0;
-
-	public Value getValue(int index)
+	public ExtractedDicesData getExtractedDicesData()
 	{
-		return dicesExtracted[index].getValue();
+		return extractedDicesData;
 	}
 
-	public Color getColor(int index)
-	{
-		return dicesExtracted[index].getColor();
-	}
-
+	/**
+	 * Add dice to extracted dices
+	 * @param newDice to add
+	 */
 	void addDice(Dice newDice)
 	{
-		if(numberOfDices>=MAX_NUMBER_OF_DICES)
-		{
-			return;
-		}
-		change(this);
-		dicesExtracted[numberOfDices]=newDice;
-		numberOfDices++;
+		extractedDicesData = extractedDicesData.addDice(newDice);
+		change(extractedDicesData);
 	}
 
-	public int getNumberOfDices()
+	/**
+	 * Change the dice in position index
+	 * @param index position of the dice to change
+	 * @param newDice to add
+	 * @return removed dice
+	 */
+	Dice changeDice(int index, Dice newDice)
 	{
-		return numberOfDices;
+		Dice dice = extractedDicesData.getDice(index);
+		extractedDicesData = extractedDicesData.changeDice(index, newDice);
+		change(extractedDicesData);
+		return dice;
 	}
 
-	public Dice getDice(int index)
+	/**
+	 * Remove dice from extracted dices
+	 * @param index position of the dice to remove
+	 * @return removed dice
+	 */
+	Dice removeDice(int index)
 	{
-		return dicesExtracted[index];
-	}
-
-	void changeDice(int index, Dice newDice)
-	{
-		if (dicesExtracted[index] != null)
-		{
-			change(this);
-			dicesExtracted[index]=newDice;
-		}
+		Dice dice = extractedDicesData.getDice(index);
+		extractedDicesData = extractedDicesData.removeDice(index);
+		change(extractedDicesData);
+		return dice;
 	}
 }

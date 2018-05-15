@@ -1,23 +1,26 @@
 package progetto.game;
 
 import org.json.JSONArray;
-import progetto.utils.AbstractObservable;
 
 import java.io.Serializable;
 
 /**
  * Window frame for Window Pattern Card. Upload by file using JSON - JSONArray.
  */
-public final class WindowFrame extends AbstractObservable<WindowFrame> implements Serializable {
+public final class WindowFrame implements Serializable {
 
 	private static final int MAX_NUMBER_OF_ROWS = 4;
 	private static final int MAX_NUMBER_OF_COLUMNS = 5;
 
-	private Value[][] valueLimitationMatrix = new Value[MAX_NUMBER_OF_COLUMNS][MAX_NUMBER_OF_ROWS];
-	private Color[][] colorLimitationMatrix = new Color[MAX_NUMBER_OF_COLUMNS][MAX_NUMBER_OF_ROWS];
-	private int favorToken;
-	private String name;
+	private final Value[][] valueLimitationMatrix = new Value[MAX_NUMBER_OF_COLUMNS][MAX_NUMBER_OF_ROWS];
+	private final Color[][] colorLimitationMatrix = new Color[MAX_NUMBER_OF_COLUMNS][MAX_NUMBER_OF_ROWS];
+	private final int favorToken;
+	private final String name;
 
+	/**
+	 * Constructor
+	 * @param frame JSONArray of the window frame to set
+	 */
 	WindowFrame(JSONArray frame)
 	{
 		int pos=0;
@@ -29,7 +32,7 @@ public final class WindowFrame extends AbstractObservable<WindowFrame> implement
 		name = frame.getString(pos);
 		pos++;
 
-		setFavorToken(frame.getInt(pos));
+		favorToken=frame.getInt(pos);
 		pos++;
 
 		nVincoli = frame.getInt(pos);       //Vincoli valore
@@ -43,7 +46,7 @@ public final class WindowFrame extends AbstractObservable<WindowFrame> implement
 			y = frame.getInt(pos);
 			pos++;
 
-			addValueBond(x, y, (Value)frame.get(pos));
+			valueLimitationMatrix[x][y]=(Value)frame.get(pos);
 			pos++;
 		}
 
@@ -58,48 +61,51 @@ public final class WindowFrame extends AbstractObservable<WindowFrame> implement
 			y = frame.getInt(pos);
 			pos++;
 
-			addColorBond(x, y, (Color)frame.get(pos));
+			colorLimitationMatrix[x][y]=(Color)frame.get(pos);
 			pos++;
 		}
 
 	}
 
-	void setFavorToken(int favorToken)
-	{
-		change(this);
-		this.favorToken=favorToken;
-	}
-
-	void addValueBond(int x, int y, Value value)
-	{
-		change(this);
-		valueLimitationMatrix[x][y]=value;
-	}
-
-	void addColorBond(int x, int y, Color color)
-	{
-		change(this);
-		colorLimitationMatrix[x][y]=color;
-	}
-
+	/**
+	 * Get number of favor token of the card
+	 * @return number of favor token of the card
+	 */
 	public int getFavorToken()
 	{
 		return favorToken;
 	}
 
+	/**
+	 * Get name of the card
+	 * @return the name of the card
+	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
+	 * Get color bond of the card in the selected position
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @return Color bond of the card in the selected position
+	 */
 	public Color getColorBond(int x, int y)
 	{
 		return colorLimitationMatrix[x][y];
 	}
 
+	/**
+	 * Get Value bond of the card in the selected position
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @return Value bond of the card in the selected position
+	 */
 	public Value getValueBond(int x, int y)
 	{
 		return valueLimitationMatrix[x][y];
 	}
 
-	public String getName()
-	{
-		return name;
-	}
 
 }

@@ -3,51 +3,23 @@ package progetto.game;
 import progetto.utils.AbstractObservable;
 
 /**
- * Player playing table
+ * Player table
  */
-public class PlayerBoard extends AbstractObservable<PlayerBoard> {
+public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 
-	private WindowFrame windowFrame;
+	private PlayerBoardData playerBoardData = new PlayerBoardData();
+
 	private final DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
 	private final PickedDicesSlot pickedDicesSlot = new PickedDicesSlot();
 
-	void setWindowFrame(WindowFrameCouple windowFrameCouple, int side)
+	public PlayerBoardData getPlayerBoardData()
 	{
-		change(this);
-		this.windowFrame = windowFrameCouple.getWindowFrame(side);
+		return playerBoardData;
 	}
 
-	void setWindowFrame(WindowFrame windowFrame)
+	public int getNPickedDices()
 	{
-		change(this);
-		this.windowFrame = windowFrame;
-	}
-
-	void addDiceInPlacedFrame(Dice dice, int x, int y)
-	{
-		dicePlacedFrame.addDice(dice, x, y);
-		change(this);
-	}
-
-	public Dice getDiceFromPlacedFrame(int x, int y)
-	{
-		return dicePlacedFrame.getDice(x, y);
-	}
-
-	public int getNDicesPlaced()
-	{
-		return dicePlacedFrame.getNDices();
-	}
-
-	void removeDiceFromDicesPlaced(int x, int y)
-	{
-		dicePlacedFrame.removeDice(x, y);
-		change(this);
-	}
-
-	public DicePlacedFrame getDicePlacedFrame()
-	{
-		return dicePlacedFrame;
+		return pickedDicesSlot.getNDices();
 	}
 
 	public PickedDicesSlot getPickedDicesSlot()
@@ -55,20 +27,78 @@ public class PlayerBoard extends AbstractObservable<PlayerBoard> {
 		return pickedDicesSlot;
 	}
 
+	public DicePlacedFrame getDicePlacedFrame()
+	{
+		return dicePlacedFrame;
+	}
+
+	public int getNDicesPlaced()
+	{
+		return dicePlacedFrame.getDicePlacedFrameData().getNDices();
+	}
+
+
+	/**
+	 * Set player Window frame
+	 * @param windowFrameCouple window frame couple
+	 * @param side side to take in the window frame couple
+	 */
+	void setWindowFrame(WindowFrameCouple windowFrameCouple, int side)
+	{
+		playerBoardData = playerBoardData.setWindowFrame(windowFrameCouple.getWindowFrame(side));
+		change(playerBoardData);
+	}
+
+	/**
+	 * Set player window frame
+	 * @param windowFrame window frame to set
+	 */
+	void setWindowFrame(WindowFrame windowFrame)
+	{
+		playerBoardData = playerBoardData.setWindowFrame(windowFrame);
+		change(playerBoardData);
+
+	}
+
+	/**
+	 * Add dice in placed frame
+	 * @param dice dice to add
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 */
+	void addDiceInPlacedFrame(Dice dice, int x, int y)
+	{
+		dicePlacedFrame.addDice(dice, x, y);
+	}
+
+	/**
+	 * Get dice from placed frame
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @return selected dice
+	 */
+	public Dice getDiceFromPlacedFrame(int x, int y)
+	{
+		return dicePlacedFrame.getDicePlacedFrameData().getDice(x, y);
+	}
+
+	/**
+	 * Remove dice from placed frame
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 */
+	void removeDiceFromDicesPlaced(int x, int y)
+	{
+		dicePlacedFrame.removeDice(x, y);
+	}
+
+	/**
+	 * Add dice to picked slot
+	 * @param dice dice to add
+	 */
 	void addDiceToPickedSlot (Dice dice)
 	{
 		pickedDicesSlot.add(dice, false, false, false);
-		change(this);
-	}
-
-	public WindowFrame getWindowFrame()
-	{
-		return windowFrame;
-	}
-
-	public int getNPickedDices()
-	{
-		return pickedDicesSlot.getNDices();
 	}
 
 }

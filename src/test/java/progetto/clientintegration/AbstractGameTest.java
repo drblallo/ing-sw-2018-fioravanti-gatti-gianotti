@@ -30,14 +30,14 @@ public abstract class AbstractGameTest
 	{
 		game.sendAction(new StartGameAction());
 		wait(500);
-		Assert.assertEquals(FrameSelectionState.class, game.getGameState().getClass());
+		Assert.assertEquals(FrameSelectionState.class, game.getMainBoard().getMainBoardData().getGameState().getClass());
 
 		game.getCommandQueue();
 		game.getDiceBag();
-		game.getGameState();
+		game.getMainBoard().getMainBoardData().getGameState();
 		game.getMainBoard();
 		game.getPlayerBoard(0);
-		game.getPlayerCount();
+		game.getMainBoard().getMainBoardData().getPlayerCount();
 		game.getRoundTrack();
 		game.processAction();
 		game.processAllPendingAction();
@@ -58,7 +58,7 @@ public abstract class AbstractGameTest
 		game.sendAction(new SetPlayerCountAction(3));
 
 		wait(500);
-		Assert.assertEquals(3, game.getPlayerCount());
+		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getPlayerCount());
 	}
 
 	public void wait(int milliseconds)

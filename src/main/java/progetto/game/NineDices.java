@@ -1,63 +1,124 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
- * Support class to contain the dice (max 9) positioned in the RoundTrack
+ *  Immutable support class with dices in a position of the roundTrack
  */
-public final class NineDices extends AbstractObservable<NineDices> {
+public final class NineDices {
 
-	private static final int MAX_NUMBER_OF_DICES = 9;
+	private final List<Dice> dicesList;
 
-	private Dice[] dice = new Dice[MAX_NUMBER_OF_DICES];
-	private int numberOfDices=0;
-
-	public Value getValue(int index)
+	/**
+	 * Constructor
+	 */
+	NineDices()
 	{
-		return dice[index].getValue();
-	}
-
-	public Color getColor(int index)
-	{
-		return dice[index].getColor();
+		ArrayList<Dice> temp = new ArrayList<>();
+		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
 	/**
-	 * Add a dice to the group
+	 * Costructor copy
+	 * @param nineDices
 	 */
-	void addDice(Dice newDice)
+	NineDices(NineDices nineDices)
 	{
-		if(numberOfDices>=MAX_NUMBER_OF_DICES)
-		{
-			return;
-		}
-		change(this);
-		dice[numberOfDices]=newDice;
-		numberOfDices++;
+		ArrayList<Dice> temp = new ArrayList<>(nineDices.dicesList);
+		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
-	public int getNumberOfDices()
+	/**
+	 * Constructor to add a dice
+	 * @param nineDices previous nineDices
+	 * @param newDice dice to add
+	 */
+	NineDices(NineDices nineDices, Dice newDice)
 	{
-		return numberOfDices;
+		ArrayList<Dice> temp = new ArrayList<>(nineDices.dicesList);
+		temp.add(newDice);
+		this.dicesList = Collections.unmodifiableList(temp);
+	}
+
+	/**
+	 * Constructor to change a dice
+	 * @param nineDices previous nineDices
+	 * @param newDice dice to add in position index
+	 * @param index position of the dice to remove and for the dice to add
+	 */
+	NineDices(NineDices nineDices, Dice newDice, int index)
+	{
+		ArrayList<Dice> temp = new ArrayList<>(nineDices.dicesList);
+		temp.remove(index);
+		temp.add(index, newDice);
+		this.dicesList = Collections.unmodifiableList(temp);
 	}
 
 	/**
 	 * Get a dice from the group, do not remove it
+	 * @param index position of the dice
+	 * @return the dice in position index
 	 */
-	public Dice getDice(int index)
+	Dice getDice(int index)
 	{
-		return dice[index];
+		if(isFree(index))
+		{
+			return null;
+		}
+		return dicesList.get(index);
 	}
 
 	/**
-	 * Put the new dice in the position index (in place of the previous one)
+	 * Verify if position index is free
+	 * @param index position to verify
+	 * @return boolean
 	 */
-	void changeDice(int index, Dice newDice)
+	public boolean isFree(int index)
 	{
-		if (dice[index] != null)
-		{
-			change(this);
-			dice[index]=newDice;
+		try {
+			dicesList.get( index );
+			return false;
+		} catch ( IndexOutOfBoundsException e ) {
+			return true;
 		}
 	}
+
+	/**
+	 * Get number of dices
+	 * @return number of dices
+	 */
+	int getNumberOfDices()
+	{
+		return dicesList.size();
+	}
+
+	/**
+	 * Add a dice
+	 * @param newDice dice to add
+	 * @return new NineDices with the added dice
+	 */
+	NineDices addDice(Dice newDice)
+	{
+		return new NineDices(this, newDice);
+	}
+
+	/**
+	 * Put the new dice in position index (in place of the previous one that is removed)
+	 * @param index position
+	 * @param newDice dice to add
+	 * @return new NineDices with the changed dice
+	 */
+	NineDices changeDice(int index, Dice newDice)
+	{
+		if(index<0 || index > dicesList.size()-1)
+		{
+			return this;
+		}
+
+		return new NineDices(this, newDice, index);
+	}
+
 }
+

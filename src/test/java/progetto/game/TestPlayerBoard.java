@@ -30,7 +30,7 @@ public class TestPlayerBoard extends TestCase
 
 		playerBoard.setWindowFrame(windowFrame);
 
-		assertEquals(windowFrame, playerBoard.getWindowFrame());
+		assertEquals(windowFrame, playerBoard.getPlayerBoardData().getWindowFrame());
 
 		assertEquals(0, playerBoard.getNDicesPlaced());
 
@@ -40,7 +40,7 @@ public class TestPlayerBoard extends TestCase
 
 		assertEquals(dice, playerBoard.getDiceFromPlacedFrame(0, 0));
 
-		assertEquals(dice, playerBoard.getDicePlacedFrame().getDice(0,0));
+		assertEquals(dice, playerBoard.getDicePlacedFrame().getDicePlacedFrameData().getDice(0,0));
 
 		assertEquals(1, playerBoard.getNDicesPlaced());
 
@@ -50,7 +50,7 @@ public class TestPlayerBoard extends TestCase
 
 		assertEquals(0, playerBoard.getNDicesPlaced());
 
-		assertEquals(null, playerBoard.getDicePlacedFrame().getDice(0,0));
+		assertEquals(null, playerBoard.getDicePlacedFrame().getDicePlacedFrameData().getDice(0,0));
 
 		assertEquals(0, playerBoard.getNPickedDices());
 
@@ -62,7 +62,7 @@ public class TestPlayerBoard extends TestCase
 
 		playerBoard.setWindowFrame(windowFrameCouple, 0);
 
-		assertEquals(windowFrameCouple.getWindowFrame(0), playerBoard.getWindowFrame());
+		assertEquals(windowFrameCouple.getWindowFrame(0), playerBoard.getPlayerBoardData().getWindowFrame());
 
 	}
 

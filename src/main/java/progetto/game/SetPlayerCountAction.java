@@ -18,11 +18,11 @@ public class SetPlayerCountAction extends AbstractGameAction
 
 	@Override
 	public boolean canBeExecuted(Game game) {
-		return (game.getGameState().getClass() == PreGameState.class);
+		return (game.getMainBoard().getMainBoardData().getGameState().getClass() == PreGameState.class);
 	}
 
 	@Override
 	protected void execute(Game game) {
-		game.setPlayerCount(playerCount);
+		game.getMainBoard().setPlayerCount(playerCount);
 	}
 }

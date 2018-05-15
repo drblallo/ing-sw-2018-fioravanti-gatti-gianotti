@@ -6,6 +6,4 @@ public interface IGame {
 	PlayerBoard getPlayerBoard(int index);
 	MainBoard getMainBoard();
 	DiceBag getDiceBag();
-	AbstractGameState getGameState();
-	int getPlayerCount();
 }

@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Class where compliance with the positioning constraints of a dice in the window frame is verified
+ * Immutable class where compliance with the positioning constraints of a dice in the window frame is verified
  *
  * Rules for placing dice:
  *  -First dice to be placed along the edges
@@ -19,19 +19,26 @@ import java.util.logging.Logger;
  *  -Ingore value bond
  *  -Ignore constraint of proximity to another dice
 */
-public class DicePlacementCondition {
+public final class DicePlacementCondition {
 
 	private static final int Y_MAX = 3;
 	private static final int X_MAX = 4;
 
 	private static final Logger LOGGER = Logger.getLogger(DicePlacementCondition.class.getName());
 
-	private boolean ignoreColor;
-	private boolean ignoreValue;
-	private boolean ignoreAdjacent;
+	private final boolean ignoreColor;
+	private final boolean ignoreValue;
+	private final boolean ignoreAdjacent;
 
-	private Dice dice;
+	private final Dice dice;
 
+	/**
+	 * Constructor to add a dice with ignore conditions
+	 * @param dice to add
+	 * @param ignoreColor boolean to set ignore Value constraints
+	 * @param ignoreValue boolean to set ignore Color constraints
+	 * @param ignoreAdjacent boolean to set ignore Adjacent constraints
+	 */
 	DicePlacementCondition(Dice dice, boolean ignoreColor, boolean ignoreValue, boolean ignoreAdjacent)
 	{
 		this.dice = dice;
@@ -40,10 +47,83 @@ public class DicePlacementCondition {
 		this.ignoreAdjacent = ignoreAdjacent;
 	}
 
-	public boolean canBePlaced(int x, int y, WindowFrame windowFrame, DicePlacedFrame dicePlacedFrame)
+	/**
+	 * Set ignore Color constraints
+	 * @param ignoreCol boolean
+	 * @return new DicePlacementCondition (the previous with new ignoreColor value)
+	 */
+	DicePlacementCondition setIgnoreColor(boolean ignoreCol)
 	{
-		Logger.getLogger(DicePlacementCondition.class.getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
-		Logger.getLogger(DicePlacementCondition.class.getName()).setLevel(Level.ALL);
+		return new DicePlacementCondition(dice, ignoreCol, ignoreValue, ignoreAdjacent);
+	}
+
+	/**
+	 * Set ignore Value constraints
+	 * @param ignoreVal boolean
+	 * @return new DicePlacementCondition (the previous with new ignoreValue value)
+	 */
+	DicePlacementCondition setIgnoreValue(boolean ignoreVal)
+	{
+		return new DicePlacementCondition(dice, ignoreColor, ignoreVal, ignoreAdjacent);
+	}
+
+	/**
+	 * Set ignore Adjacent constraints
+	 * @param ignoreAdj boolean
+	 * @return new DicePlacementCondition (the previous with new ignoreAdjacent value)
+	 */
+	DicePlacementCondition setIgnoreAdjacent(boolean ignoreAdj)
+	{
+		return new DicePlacementCondition(dice, ignoreColor, ignoreValue, ignoreAdj);
+	}
+
+	/**
+	 * Get dice
+	 * @return dice
+	 */
+	public Dice getDice()
+	{
+		return dice;
+	}
+
+	/**
+	 * Get ignore Color constraints
+	 * @return ignore Color
+	 */
+	public Boolean getIgnoreColor()
+	{
+		return ignoreColor;
+	}
+
+	/**
+	 * Get ignore Value constraints
+	 * @return ignore Value
+	 */
+	public Boolean getIgnoreValue()
+	{
+		return ignoreValue;
+	}
+
+	/**
+	 * Get ignore Adjacent constraints
+	 * @return ignore Adjacent
+	 */
+	public Boolean getIgnoreAdjacent()
+	{
+		return ignoreAdjacent;
+	}
+
+	/**
+	 * Method to verify if the dice can be placed in the selected position respecting the selected constraints
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param playerBoard player board
+	 * @return boolean (true: the dice can be placed, false: the dice can't be placed)
+	 */
+	public boolean canBePlaced(int x, int y, PlayerBoard playerBoard)
+	{
+		WindowFrame windowFrame = playerBoard.getPlayerBoardData().getWindowFrame();
+		DicePlacedFrame dicePlacedFrame = playerBoard.getDicePlacedFrame();
 
 		boolean ok = true;
 
@@ -53,7 +133,7 @@ public class DicePlacementCondition {
 			ok = false;
 		}
 
-		else if(dicePlacedFrame.getDice(x, y)!=null)    //Verify if the position x, y is free
+		else if(dicePlacedFrame.getDicePlacedFrameData().getDice(x, y)!=null)    //Verify if the position x, y is free
 		{
 			LOGGER.log(Level.FINE, "Only one dice in a position");
 			ok = false;
@@ -77,7 +157,7 @@ public class DicePlacementCondition {
 			ok = false;
 		}
 
-		else if(dicePlacedFrame.getNDices()!=0 && !checkAdjacent(x, y, dicePlacedFrame))                //Verify the dice is positioned near an other dice (if it is not the first dice)
+		else if(dicePlacedFrame.getDicePlacedFrameData().getNDices()!=0 && !checkAdjacent(x, y, dicePlacedFrame))                //Verify the dice is positioned near an other dice (if it is not the first dice)
 		{
 			LOGGER.log(Level.FINE, "The dice must be positioned near an other dice");
 			ok = false;
@@ -103,11 +183,24 @@ public class DicePlacementCondition {
 		return ok;
 	}
 
+	/**
+	 * Support method to verify if selected position is correct
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @return boolean (true: position is correct, false: position is not correct)
+	 */
 	private boolean verifyPositions(int x, int y)
 	{
 		return(!(x<0 || x>X_MAX || y<0 || y>Y_MAX));
 	}
 
+	/**
+	 * Support method to verify if Color constraints are respected
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param windowFrame actual dice placed frame
+	 * @return boolean
+	 */
 	private boolean verifyColor(int x, int y, WindowFrame windowFrame)
 	{
 		if(ignoreColor)
@@ -117,6 +210,13 @@ public class DicePlacementCondition {
 		return(!(windowFrame.getColorBond(x, y)!=null && windowFrame.getColorBond(x, y)!=dice.getColor()));
 	}
 
+	/**
+	 * Support method to verify if Value constraints are respected
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param windowFrame actual dice placed frame
+	 * @return boolean
+	 */
 	private boolean verifyValue(int x, int y, WindowFrame windowFrame)
 	{
 		if(ignoreValue)
@@ -126,15 +226,29 @@ public class DicePlacementCondition {
 		return(!(windowFrame.getValueBond(x, y)!=null && windowFrame.getValueBond(x, y)!=dice.getValue()));
 	}
 
+	/**
+	 * Support method to verify the first dice is positioned near the edge
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param dicePlacedFrame actual dice placed frame
+	 * @return boolean
+	 */
 	private boolean verifyFirstDiceEdge(int x, int y, DicePlacedFrame dicePlacedFrame)
 	{
-		if(dicePlacedFrame.getNDices()==0)
+		if(dicePlacedFrame.getDicePlacedFrameData().getNDices()==0)
 		{
-			return ((x==0 || x==X_MAX) && (y==0 || y==Y_MAX));
+			return (x==0 || x==X_MAX || y==0 || y==Y_MAX);
 		}
 		return true;
 	}
 
+	/**
+	 * Support method to verify if Adjacent constraints are respected
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param dicePlacedFrame actual dice placed frame
+	 * @return boolean
+	 */
 	private boolean checkAdjacent(int x, int y, DicePlacedFrame dicePlacedFrame)
 	{
 		if(ignoreAdjacent)
@@ -164,6 +278,13 @@ public class DicePlacementCondition {
 		return found;
 	}
 
+	/**
+	 * Support method to verify if near value constraints are respected
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param dicePlacedFrame actual dice placed frame
+	 * @return boolean
+	 */
 	private boolean checkNearValue(int x, int y, DicePlacedFrame dicePlacedFrame)
 	{
 		if(ignoreValue)
@@ -190,6 +311,13 @@ public class DicePlacementCondition {
 		return found;
 	}
 
+	/**
+	 * Support method to verify if near color constraints are respected
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param dicePlacedFrame actual dice placed frame
+	 * @return boolean
+	 */
 	private boolean checkNearColor(int x, int y, DicePlacedFrame dicePlacedFrame)
 	{
 		if(ignoreColor)
@@ -216,31 +344,52 @@ public class DicePlacementCondition {
 		return found;
 	}
 
+	/**
+	 * Support method to verify if new dice is near an other dice
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param dicePlacedFrame actual dice placed frame
+	 * @return boolean
+	 */
 	private boolean verifyNear(int x, int y, DicePlacedFrame dicePlacedFrame)
 	{
 		if(x<0 || y<0 || x>X_MAX || x>Y_MAX)
 		{
 			return false;
 		}
-		return(dicePlacedFrame.getDice(x, y)!=null);
+		return(dicePlacedFrame.getDicePlacedFrameData().getDice(x, y)!=null);
 	}
 
+	/**
+	 * Support method to verify if new dice is near an other dice with same Value
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param dicePlacedFrame actual dice placed frame
+	 * @return boolean
+	 */
 	private boolean verifyNearValue(int x, int y, DicePlacedFrame dicePlacedFrame)
 	{
 		if(x<0 || y<0 || x>X_MAX || x>Y_MAX)
 		{
 			return true;
 		}
-		return(!(dicePlacedFrame.getDice(x, y)!=null && (dice.getValue()==dicePlacedFrame.getDice(x, y).getValue())));
+		return(!(dicePlacedFrame.getDicePlacedFrameData().getDice(x, y)!=null && (dice.getValue()==dicePlacedFrame.getDicePlacedFrameData().getDice(x, y).getValue())));
 	}
 
+	/**
+	 * Support method to verify if new dice is near an other dice with same Color
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param dicePlacedFrame actual dice placed frame
+	 * @return boolean
+	 */
 	private boolean verifyNearColor(int x, int y, DicePlacedFrame dicePlacedFrame)
 	{
 		if(x<0 || y<0 || x>X_MAX || x>Y_MAX)
 		{
 			return true;
 		}
-		return (!(dicePlacedFrame.getDice(x, y)!=null && (dice.getColor()==dicePlacedFrame.getDice(x, y).getColor())));
+		return (!(dicePlacedFrame.getDicePlacedFrameData().getDice(x, y)!=null && (dice.getColor()==dicePlacedFrame.getDicePlacedFrameData().getDice(x, y).getColor())));
 	}
 
 }

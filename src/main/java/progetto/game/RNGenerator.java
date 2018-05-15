@@ -18,6 +18,10 @@ public final class RNGenerator {
 	private Random random = new Random();
 	private long seed;
 
+	/**
+	 * Constructor
+	 * @param seed of random generator
+	 */
 	RNGenerator(long seed)
 	{
 		random.setSeed(seed);
@@ -25,7 +29,17 @@ public final class RNGenerator {
 	}
 
 	/**
-	 * Set Seed of Random
+	 * Get seed
+	 * @return seed
+	 */
+	long getSeed()
+	{
+		return seed;
+	}
+
+	/**
+	 * Set Seed
+	 * @param seed seed to set
 	 */
 	public void setSeed(long seed)
 	{
@@ -34,7 +48,9 @@ public final class RNGenerator {
 	}
 
 	/**
-	 * Get a int random value (maxValue not included)
+	 * Get a int random value
+	 * @param maxValue max value (not included)
+	 * @return random value
 	 */
 	public int getNextInt(int maxValue)
 	{
@@ -43,11 +59,43 @@ public final class RNGenerator {
 
 	/**
 	 * Get a random Dice from the dice bag
+	 * @param bag diceBag from which draw the dice
 	 */
 	public Dice extractDice(DiceBag bag)
 	{
-		Value value;
+		Value value = extractValue();
+		return new Dice(value, bag.draw(rollDice(bag)));
+	}
+
+	/**
+	 * Get a random position in dice bag
+	 * @param db diceBag from which draw the dice
+	 * @return random position
+	 */
+	public int rollDice(DiceBag db)
+	{
+		return random.nextInt(db.getNumberOfDices());
+	}
+
+	/**
+	 * Roll again a dice
+	 * @param dice dice to roll again
+	 * @return rolled dice
+	 */
+	public Dice rollAgain(Dice dice)
+	{
+		Value value = extractValue();
+		return new Dice(value, dice.getColor());
+	}
+
+	/**
+	 * Get random Value for the dice
+	 * @return random Value (ONE to SIX)
+	 */
+	private Value extractValue ()
+	{
 		int randValue = random.nextInt(MAX_VALUE_RANDOM)+1;
+		Value value;
 		switch (randValue){
 			case ONE:
 				value = Value.ONE;
@@ -68,46 +116,7 @@ public final class RNGenerator {
 				value = Value.SIX;
 				break;
 		}
-		return new Dice(value, bag.draw(rollDice(bag)));
-	}
-
-	/**
-	 * Get a random position in dice bag
-	 */
-	public int rollDice(DiceBag db)
-	{
-		return random.nextInt(db.getNumberOfDices());
-	}
-
-	public Dice rollAgain(Dice dice)
-	{
-		int randValue = random.nextInt(MAX_VALUE_RANDOM)+1;
-		switch (randValue){
-			case ONE:
-				dice.setValue(Value.ONE);
-				break;
-			case TWO:
-				dice.setValue(Value.TWO);
-				break;
-			case THREE:
-				dice.setValue(Value.THREE);
-				break;
-			case FOUR:
-				dice.setValue(Value.FOUR);
-				break;
-			case FIVE:
-				dice.setValue(Value.FIVE);
-				break;
-			default:
-				dice.setValue(Value.SIX);
-				break;
-		}
-		return dice;
-	}
-
-	long getSeed()
-	{
-		return seed;
+		return value;
 	}
 
 }

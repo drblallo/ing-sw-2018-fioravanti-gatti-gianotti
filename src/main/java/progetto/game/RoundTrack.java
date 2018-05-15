@@ -3,79 +3,44 @@ package progetto.game;
 import progetto.utils.AbstractObservable;
 
 /**
- * RoundTrack with up to nine dices for round
+ * RoundTrack with advanced dice
  */
-public final class RoundTrack extends AbstractObservable<RoundTrack> {
+public final class RoundTrack extends AbstractObservable<RoundTrackData> {
 
-	private static final int NUMBER_OF_ROUNDS = 10;
+	private RoundTrackData roundTrackData = new RoundTrackData();
 
-	private NineDices[] dices = new NineDices[NUMBER_OF_ROUNDS];
-
-
-	Value getValue(int index, int pos)
+	/**
+	 * Get round track data
+	 * @return round track data
+	 */
+	public RoundTrackData getRoundTrackData()
 	{
-		return dices[index].getValue(pos);
-	}
-
-	Color getColor(int index, int pos)
-	{
-		return dices[index].getColor(pos);
-	}
-
-	public Dice getDice(int index, int pos)
-	{
-		return dices[index].getDice(pos);
+		return roundTrackData;
 	}
 
 	/**
 	 * Add a dice in position index
+	 * @param newDice dice to add
+	 * @param index position where add the dice
 	 */
 	void add(Dice newDice, int index)
 	{
-		if(index<0 || index>NUMBER_OF_ROUNDS-1)
-		{
-			return;
-		}
-		if(dices[index]==null)
-		{
-			dices[index] = new NineDices();
-		}
-		dices[index].addDice(newDice);
-		change(this);
+		roundTrackData = roundTrackData.add(newDice, index);
+		change(roundTrackData);
 	}
 
 	/**
-	 * Verify if position index is free
-	 */
-	public boolean isFree(int index)
-	{
-		return (dices[index]==null);
-	}
-
-	/**
-	 * Return first free position
-	 */
-	int firstFreePosition()
-	{
-		for(int i=0; i<NUMBER_OF_ROUNDS; i++)
-		{
-			if(dices[i]==null)
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	/**
-	 * Change the dice in round index, position pos
-	 * Return the dice previously present in this position
+	 * Change the dice in round index, position pos. Return the dice previously present in this position
+	 * @param index round of the dice to change
+	 * @param pos position of the dice to change
+	 * @param newDice dice to add
+	 * @return changed dice
 	 */
 	Dice change(int index, int pos, Dice newDice)
 	{
-		Dice dice = dices[index].getDice(pos);
-		dices[index].changeDice(pos, newDice);
-		change(this);
+		Dice dice = roundTrackData.getDice(index, pos);
+		roundTrackData = roundTrackData.change(index, pos, newDice);
+		change(roundTrackData);
 		return dice;
 	}
 
