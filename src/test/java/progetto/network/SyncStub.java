@@ -11,12 +11,12 @@ public class SyncStub implements ISync {
 	private ArrayList<String> ls = new ArrayList<>();
 	private int full = 0;
 
-	public synchronized void sendString(Serializable s) {
+	public synchronized void sendItem(Serializable s) {
 		ls.add((String) s);
 		full = full + ((String)s).length();
 	}
 
-	public synchronized boolean isStringGood(Serializable s, int senderID) {
+	public synchronized boolean isItemGood(Serializable s, int senderID) {
 		return s.equals("SyncMeUp");
 	}
 
@@ -37,11 +37,11 @@ public class SyncStub implements ISync {
 		return full;
 	}
 
-	public synchronized int getStringCount() {
+	public synchronized int getItemCount() {
 		return ls.size();
 	}
 
-	public synchronized String getString(int index) {
+	public synchronized String getItem(int index) {
 		return ls.get(index);
 	}
 
@@ -50,7 +50,7 @@ public class SyncStub implements ISync {
 		full = 0;
 	}
 
-	public synchronized List<Serializable> getAllString() {
+	public synchronized List<Serializable> getAllItems() {
 		ArrayList<Serializable> s = new ArrayList<>();
 		s.addAll(ls);
 		return s;

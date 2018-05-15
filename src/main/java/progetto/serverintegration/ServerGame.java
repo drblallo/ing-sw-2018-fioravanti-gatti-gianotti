@@ -15,7 +15,7 @@ public class ServerGame extends AbstractGameSync implements  ISync
 
 	public void clear() {
 		super.clear();
-		sendString(new SetSeedAction(0));
+		sendItem(new SetSeedAction(0));
 	}
 
 }

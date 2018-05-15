@@ -22,6 +22,11 @@ public final class ClientConnection implements Runnable
 	private RoomView roomInfo = new RoomView("No Name", -1);
 	private final ISync synchronizedObj;
 	private final Callback<ClientConnection> syncronizationFailedCallback = new Callback<>();
+
+
+	private final Callback<ServerStateView> serverStateViewCallback = new Callback<>();
+	private final Callback<RoomView> roomViewCallback = new Callback<>();
+
 	private final Queue<IEnforce> enforcesQueue = new ConcurrentLinkedQueue<>();
 	private final INetworkClient handler;
 	private ServerStateView serverState = new ServerStateView();
@@ -39,6 +44,14 @@ public final class ClientConnection implements Runnable
 		handler.getEnforceCallback().addObserver(enforcesQueue::add);
 
 		new Thread(this).start();
+	}
+
+	public Callback<ServerStateView> getServerStateViewCallback() {
+		return serverStateViewCallback;
+	}
+
+	public Callback<RoomView> getRoomViewCallback() {
+		return roomViewCallback;
 	}
 
 	/**
@@ -63,6 +76,7 @@ public final class ClientConnection implements Runnable
 	final void setServerState(ServerStateView state) {
 		serverState = state;
 		LOGGER.log(Level.FINE, "Received server state information");
+		serverStateViewCallback.call(state);
 	}
 
 	/**
@@ -180,6 +194,7 @@ public final class ClientConnection implements Runnable
 	{
 		LOGGER.log(Level.FINE, "received new room info ");
 		roomInfo = r;
+		roomViewCallback.call(r);
 	}
 
 	/**
@@ -188,7 +203,7 @@ public final class ClientConnection implements Runnable
 	 * @param s the string that must be sent to the sync object
 	 */
 	final synchronized void processSyncCommand(Serializable s) {
-		getSynchronizedObject().sendString(s);
+		getSynchronizedObject().sendItem(s);
 	}
 
 	/**
@@ -223,7 +238,7 @@ public final class ClientConnection implements Runnable
 		LOGGER.fine("Receiving full state from server");
 		getSynchronizedObject().clear();
 		for (Serializable s : commands)
-			getSynchronizedObject().sendString(s);
+			getSynchronizedObject().sendItem(s);
 	}
 
 	/**

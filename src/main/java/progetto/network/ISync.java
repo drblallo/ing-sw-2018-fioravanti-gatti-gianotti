@@ -12,12 +12,12 @@ public interface ISync {
 	/**
 	 * Send the string to process
 	 */
-	void sendString(Serializable s);
+	void sendItem(Serializable s);
 
 	/**
 	 * @return true if the string is compatible with the senderID
 	 */
-	boolean isStringGood(Serializable s, int senderID);
+	boolean isItemGood(Serializable s, int senderID);
 
 	/**
 	 * @param index index of state of the requested hash
@@ -28,12 +28,12 @@ public interface ISync {
 	/**
 	 * @return the count of string that the object has received
 	 */
-	int getStringCount();
+	int getItemCount();
 
 	/**
 	 * @return the string received at index
 	 */
-	Serializable getString(int index);
+	Serializable getItem(int index);
 
 	/**
 	 * @return latest hash
@@ -45,5 +45,5 @@ public interface ISync {
 	 */
 	void clear();
 
-	List<Serializable> getAllString();
+	List<Serializable> getAllItems();
 }

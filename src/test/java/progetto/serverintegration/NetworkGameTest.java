@@ -17,8 +17,8 @@ public class NetworkGameTest extends AbstractGameTest {
 	public void testAbstractGameSync()
 	{
 		ServerGame game = new ServerGame();
-		Assert.assertFalse(game.isStringGood(null, -1));
+		Assert.assertFalse(game.isItemGood(null, -1));
 
-		Assert.assertFalse(game.isStringGood(new StartGameAction(), 2));
+		Assert.assertFalse(game.isItemGood(new StartGameAction(), 2));
 	}
 }
