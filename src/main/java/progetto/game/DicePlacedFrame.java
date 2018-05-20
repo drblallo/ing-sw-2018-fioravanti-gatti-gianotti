@@ -24,9 +24,9 @@ public final class DicePlacedFrame extends AbstractObservable<DicePlacedFrameDat
 	 * @param x pos horizontal
 	 * @param y pos vertical
 	 */
-	void addDice(Dice newDice, int x, int y)
+	void addDice(Dice newDice, int y, int x)
 	{
-		dicePlacedFrameData = dicePlacedFrameData.addDice(newDice, x, y);
+		dicePlacedFrameData = dicePlacedFrameData.addDice(newDice, y, x);
 		change(dicePlacedFrameData);
 	}
 
@@ -36,10 +36,10 @@ public final class DicePlacedFrame extends AbstractObservable<DicePlacedFrameDat
 	 * @param y pos vertical
 	 * @return the removed dice
 	 */
-	Dice removeDice(int x, int y)
+	Dice removeDice(int y, int x)
 	{
-		Dice dice = dicePlacedFrameData.getDice(x, y);
-		dicePlacedFrameData = dicePlacedFrameData.removeDice(x, y);
+		Dice dice = dicePlacedFrameData.getDice(y, x);
+		dicePlacedFrameData = dicePlacedFrameData.removeDice(y, x);
 		change(dicePlacedFrameData);
 		return dice;
 	}

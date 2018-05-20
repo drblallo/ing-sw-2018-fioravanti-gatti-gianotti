@@ -8,7 +8,7 @@ public final class DicePlacedFrameData {
 	private static final int MAX_NUMBER_OF_ROWS = 4;
 	private static final int MAX_NUMBER_OF_COLUMNS = 5;
 
-	private final Dice[][] dicesFrame = new Dice[MAX_NUMBER_OF_COLUMNS][MAX_NUMBER_OF_ROWS];
+	private final Dice[][] dicesFrame = new Dice[MAX_NUMBER_OF_ROWS][MAX_NUMBER_OF_COLUMNS];
 	private final int nPlacedDices;
 
 	/**
@@ -26,16 +26,16 @@ public final class DicePlacedFrameData {
 	 * @param x pos horizontal
 	 * @param y pos vertical
 	 */
-	private DicePlacedFrameData(DicePlacedFrameData dicePlacedFrameData, Dice newDice, int x, int y)
+	private DicePlacedFrameData(DicePlacedFrameData dicePlacedFrameData, Dice newDice, int y, int x)
 	{
-		for (int i = 0; i < MAX_NUMBER_OF_COLUMNS; i++)
+		for (int i = 0; i < MAX_NUMBER_OF_ROWS; i++)
 		{
-			for (int j = 0; j < MAX_NUMBER_OF_ROWS; j++)
+			for (int j = 0; j < MAX_NUMBER_OF_COLUMNS; j++)
 			{
 				dicesFrame[i][j] = dicePlacedFrameData.dicesFrame[i][j];
 			}
 		}
-		dicesFrame[x][y]=newDice;
+		dicesFrame[y][x]=newDice;
 		nPlacedDices = dicePlacedFrameData.nPlacedDices+1;
 	}
 
@@ -45,17 +45,17 @@ public final class DicePlacedFrameData {
 	 * @param x pos horizontal
 	 * @param y pos vertical
 	 */
-	private DicePlacedFrameData(DicePlacedFrameData dicePlacedFrameData, int x, int y)
+	private DicePlacedFrameData(DicePlacedFrameData dicePlacedFrameData, int y, int x)
 	{
-		for (int i = 0; i < MAX_NUMBER_OF_COLUMNS; i++)
+		for (int i = 0; i < MAX_NUMBER_OF_ROWS; i++)
 		{
-			for (int j = 0; j < MAX_NUMBER_OF_ROWS; j++)
+			for (int j = 0; j < MAX_NUMBER_OF_COLUMNS; j++)
 				if (dicePlacedFrameData.dicesFrame[i][j] != null)
 				{
 					dicesFrame[i][j] = dicePlacedFrameData.dicesFrame[i][j];
 				}
 		}
-		dicesFrame[x][y]=null;
+		dicesFrame[y][x]=null;
 		nPlacedDices = dicePlacedFrameData.nPlacedDices-1;
 	}
 
@@ -65,9 +65,13 @@ public final class DicePlacedFrameData {
 	 * @param y pos vertical
 	 * @return dice in the selected position
 	 */
-	Dice getDice(int x, int y)
+	Dice getDice(int y, int x)
 	{
-		return dicesFrame[x][y];
+		if(x<0 || x>MAX_NUMBER_OF_COLUMNS-1 || y<0 || y>MAX_NUMBER_OF_ROWS-1)
+		{
+			return null;
+		}
+		return dicesFrame[y][x];
 	}
 
 	/**
@@ -86,9 +90,14 @@ public final class DicePlacedFrameData {
 	 * @param y pos vertical
 	 * @return new DicePlacementFrameData (the previous one with the added dice)
 	 */
-	DicePlacedFrameData addDice(Dice newDice, int x, int y)
+	DicePlacedFrameData addDice(Dice newDice, int y, int x)
 	{
-		return new DicePlacedFrameData(this, newDice, x, y);
+		if(x<0 || x>MAX_NUMBER_OF_COLUMNS-1 || y<0 || y>MAX_NUMBER_OF_ROWS-1 || getDice(y, x)!=null)
+		{
+			return this;
+		}
+		return new DicePlacedFrameData(this, newDice, y, x);
+
 	}
 
 	/**
@@ -97,9 +106,13 @@ public final class DicePlacedFrameData {
 	 * @param y pos vertical
 	 * @return new DicePlacementFrameData (the previous one without the removed dice)
 	 */
-	DicePlacedFrameData removeDice(int x, int y)
+	DicePlacedFrameData removeDice(int y, int x)
 	{
-		return new DicePlacedFrameData(this, x, y);
+		if(x<0 || x>MAX_NUMBER_OF_COLUMNS-1 || y<0 || y>MAX_NUMBER_OF_ROWS-1)
+		{
+			return this;
+		}
+		return new DicePlacedFrameData(this, y, x);
 	}
 
 }

@@ -69,7 +69,11 @@ public final class PickedDicesSlotData {
 
 	PickedDicesSlotData remove(int index)
 	{
-		return new PickedDicesSlotData(this, index);
+		if(exists(index))
+		{
+			return new PickedDicesSlotData(this, index);
+		}
+		return this;
 	}
 
 	PickedDicesSlotData setIgnoreColor(int index, boolean ignoreColor)
@@ -80,7 +84,7 @@ public final class PickedDicesSlotData {
 			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dpc.getDice(), ignoreColor, dpc.getIgnoreValue(), dpc.getIgnoreAdjacent());
 			return new PickedDicesSlotData(this, index, dicePlacementCondition);
 		}
-		return null;
+		return this;
 	}
 
 	PickedDicesSlotData setIgnoreValue(int index, boolean ignoreValue)
@@ -91,7 +95,7 @@ public final class PickedDicesSlotData {
 			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dpc.getDice(), dpc.getIgnoreColor(), ignoreValue, dpc.getIgnoreAdjacent());
 			return new PickedDicesSlotData(this, index, dicePlacementCondition);
 		}
-		return null;
+		return this;
 
 	}
 
@@ -103,7 +107,7 @@ public final class PickedDicesSlotData {
 			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dpc.getDice(), dpc.getIgnoreColor(), dpc.getIgnoreValue(), ignoreAdjacent);
 			return new PickedDicesSlotData(this, index, dicePlacementCondition);
 		}
-		return null;
+		return this;
 	}
 
 }

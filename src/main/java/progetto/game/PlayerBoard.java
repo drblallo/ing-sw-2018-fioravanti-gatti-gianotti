@@ -66,9 +66,9 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 * @param x pos horizontal
 	 * @param y pos vertical
 	 */
-	void addDiceInPlacedFrame(Dice dice, int x, int y)
+	void addDiceInPlacedFrame(Dice dice, int y, int x)
 	{
-		dicePlacedFrame.addDice(dice, x, y);
+		dicePlacedFrame.addDice(dice, y, x);
 	}
 
 	/**
@@ -77,9 +77,9 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 * @param y pos vertical
 	 * @return selected dice
 	 */
-	public Dice getDiceFromPlacedFrame(int x, int y)
+	public Dice getDiceFromPlacedFrame(int y, int x)
 	{
-		return dicePlacedFrame.getDicePlacedFrameData().getDice(x, y);
+		return dicePlacedFrame.getDicePlacedFrameData().getDice(y, x);
 	}
 
 	/**
@@ -87,9 +87,9 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 * @param x pos horizontal
 	 * @param y pos vertical
 	 */
-	void removeDiceFromDicesPlaced(int x, int y)
+	void removeDiceFromDicesPlaced(int y, int x)
 	{
-		dicePlacedFrame.removeDice(x, y);
+		dicePlacedFrame.removeDice(y, x);
 	}
 
 	/**

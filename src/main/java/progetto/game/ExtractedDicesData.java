@@ -3,6 +3,8 @@ package progetto.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Immutable class with data of ExtractedDices
@@ -10,6 +12,8 @@ import java.util.List;
 public final class ExtractedDicesData {
 
 	private final List<Dice> extractedDices;
+
+	private static final Logger LOGGER = Logger.getLogger(ExtractedDicesData.class.getName());
 
 	/**
 	 * Constructor
@@ -122,6 +126,7 @@ public final class ExtractedDicesData {
 			extractedDices.get(index);
 			return true;
 		} catch (IndexOutOfBoundsException e) {
+			LOGGER.log(Level.SEVERE,"Wrong index");
 			return false;
 		}
 	}

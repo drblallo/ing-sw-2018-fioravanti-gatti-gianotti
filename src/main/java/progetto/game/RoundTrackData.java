@@ -1,5 +1,8 @@
 package progetto.game;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Immuutable class with data of RoundTrack
  */
@@ -8,6 +11,8 @@ public final class RoundTrackData {
 	private static final int NUMBER_OF_ROUNDS = 10;
 
 	private final NineDices[] dices = new NineDices[NUMBER_OF_ROUNDS];
+
+	private static final Logger LOGGER = Logger.getLogger(RoundTrackData.class.getName());
 
 	/**
 	 * Constructor
@@ -75,6 +80,11 @@ public final class RoundTrackData {
 	 * @return boolean
 	 */
 	public boolean isFree(int index) {
+		if (index < 0 || index > NUMBER_OF_ROUNDS - 1)
+		{
+			LOGGER.log(Level.SEVERE,"Wrong index");
+			return true;
+		}
 		return (dices[index] == null);
 	}
 
@@ -115,7 +125,12 @@ public final class RoundTrackData {
 	 */
 	RoundTrackData change(int index, int pos, Dice newDice)
 	{
-		return new RoundTrackData(this, newDice, index, pos);
+		if(!isFree(index))
+		{
+			return new RoundTrackData(this, newDice, index, pos);
+		}
+		LOGGER.log(Level.SEVERE,"Wrong position");
+		return this;
 	}
 
 }

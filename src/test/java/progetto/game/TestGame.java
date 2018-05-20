@@ -2,14 +2,22 @@ package progetto.game;
 
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestGame extends TestCase {
 
-	public void test1()
-	{
+	Game game;
 
-		Game game = new Game();
+	@Before
+	public void setUp()
+	{
+		game = new Game();
+	}
+
+	@Test
+	public void testGetter()
+	{
 
 		AbstractProcessor commandQueue = game.getCommandQueue();
 
@@ -22,10 +30,17 @@ public class TestGame extends TestCase {
 
 		DiceBag diceBag = game.getDiceBag();
 
-		game.setSeed(0);
-
 		assertEquals(0, game.getSeed());
 
+	}
+
+	@Test
+	public void testSeed()
+	{
+		Assert.assertEquals(0, game.getSeed());
+
+		game.setSeed(12121212);
+		Assert.assertEquals(12121212, game.getSeed());
 	}
 
 	@Test

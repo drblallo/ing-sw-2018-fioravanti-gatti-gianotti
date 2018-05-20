@@ -1,89 +1,38 @@
 package progetto.game;
 
 import junit.framework.TestCase;
-import org.json.JSONArray;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestWindowFrame extends TestCase {
 
-	public void test1() {
+	WindowFrame windowFrame;
 
-		JSONArray ja = new JSONArray();
-
-		ja.put("Virtus");       //nome carta
-
-		ja.put(5);              //numero token
-
-		ja.put(9);              //numero vincoli valore
-
-		ja.put(0);              //Posizione x primo vincolo valore
-		ja.put(0);              //Posizione y primo vincolo valore
-		ja.put(Value.FOUR);     //Vincolo valore
-
-		ja.put(2);              //Altri vincoli valore
-		ja.put(0);
-		ja.put(Value.TWO);
-
-		ja.put(3);
-		ja.put(0);
-		ja.put(Value.FIVE);
-
-		ja.put(2);
-		ja.put(1);
-		ja.put(Value.SIX);
-
-		ja.put(4);
-		ja.put(1);
-		ja.put(Value.TWO);
-
-		ja.put(1);
-		ja.put(2);
-		ja.put(Value.THREE);
-
-		ja.put(3);
-		ja.put(2);
-		ja.put(Value.FOUR);
-
-		ja.put(0);
-		ja.put(3);
-		ja.put(Value.FIVE);
-
-		ja.put(2);
-		ja.put(3);
-		ja.put(Value.ONE);
-
-		ja.put(4);              //numero vincoli colore
-
-		ja.put(4);              //Posizione x primo vincolo colore
-		ja.put(0);              //Posizione y primo vincolo colore
-		ja.put(Color.GREEN);    //Vincolo colore
-
-		ja.put(3);              //Altri vincoli colore
-		ja.put(1);
-		ja.put(Color.GREEN);
-
-		ja.put(2);
-		ja.put(2);
-		ja.put(Color.GREEN);
-
-		ja.put(1);
-		ja.put(3);
-		ja.put(Color.GREEN);
-
-		WindowFrame wf = new WindowFrame(ja);
-
-		assertEquals(null, wf.getColorBond(0,0));
-		assertEquals(Color.GREEN, wf.getColorBond(4,0));
-		assertEquals(Value.THREE, wf.getValueBond(1,2));
-		assertEquals(null, wf.getValueBond(1,1));
-		assertEquals(null, wf.getColorBond(1,1));
-
-		assertEquals(5, wf.getFavorToken());
-
-		assertEquals("Virtus", wf.getName());
-
-
-
+	@Test
+	public void testConstructor()
+	{
+		windowFrame = new WindowFrame();
+		Assert.assertEquals(0, windowFrame.getFavorToken());
+		Assert.assertEquals("", windowFrame.getName());
 	}
 
+	@Test
+	public void testGetter() {
+
+		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+
+		windowFrame = windowFrameCoupleArray.getWindowFrameCouples().get(2).getWindowFrame(0);
+
+		Assert.assertEquals(null, windowFrame.getColorBond(0,0));
+		Assert.assertEquals(Color.BLUE, windowFrame.getColorBond(3,0));
+		Assert.assertEquals(Value.ONE, windowFrame.getValueBond(2,4));
+		Assert.assertEquals(null, windowFrame.getValueBond(1,1));
+		Assert.assertEquals(null, windowFrame.getColorBond(1,1));
+
+		Assert.assertEquals(3, windowFrame.getFavorToken());
+
+		Assert.assertEquals("Fractal Drops", windowFrame.getName());
+
+	}
 
 }

@@ -1,115 +1,166 @@
 package progetto.game;
 
 import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TestRoundTrack extends TestCase {
 
-	public void test1() {
+	RoundTrack roundTrack;
+	
+	@Before
+	public void setUp()
+	{
+		roundTrack = new RoundTrack();
+	}
 
-		RoundTrack rt = new RoundTrack();
+	@Test
+	public void testConstructor()
+	{
+		Assert.assertEquals(0, roundTrack.getRoundTrackData().firstFreePosition());
+		for(int i=0; i<10; i++)
+		{
+			Assert.assertEquals(true, roundTrack.getRoundTrackData().isFree(i));
+		}
+	}
 
-		assertEquals(true, rt.getRoundTrackData().isFree(0));
-		assertEquals(true, rt.getRoundTrackData().isFree(1));
+	@Test
+	public void testIsFree()
+	{
+		for(int i=0; i<10; i++)
+		{
+			Assert.assertEquals(true, roundTrack.getRoundTrackData().isFree(i));
+		}
 
-		assertEquals(0, rt.getRoundTrackData().firstFreePosition());
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 0);
+		Assert.assertFalse(roundTrack.getRoundTrackData().isFree(0));
+		Assert.assertTrue(roundTrack.getRoundTrackData().isFree(1));
+	}
 
-		rt.add(new Dice(Value.THREE, Color.PURPLE), 0);
+	@Test
+	public void testFirstFreePosition()
+	{
+		Assert.assertEquals(0, roundTrack.getRoundTrackData().firstFreePosition());
 
-		assertEquals(false, rt.getRoundTrackData().isFree(0));
-		assertEquals(true, rt.getRoundTrackData().isFree(1));
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 0);
+		Assert.assertEquals(1, roundTrack.getRoundTrackData().firstFreePosition());
 
-		assertEquals(1, rt.getRoundTrackData().firstFreePosition());
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 1);
+		Assert.assertEquals(2, roundTrack.getRoundTrackData().firstFreePosition());
 
-		rt.add(new Dice(Value.TWO, Color.BLUE), 0);
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 2);
+		Assert.assertEquals(3, roundTrack.getRoundTrackData().firstFreePosition());
 
-		assertEquals(false, rt.getRoundTrackData().isFree(0));
-		assertEquals(true, rt.getRoundTrackData().isFree(1));
-		assertEquals(1, rt.getRoundTrackData().firstFreePosition());
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 3);
+		Assert.assertEquals(4, roundTrack.getRoundTrackData().firstFreePosition());
 
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 1);
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 4);
+		Assert.assertEquals(5, roundTrack.getRoundTrackData().firstFreePosition());
 
-		assertEquals(false, rt.getRoundTrackData().isFree(0));
-		assertEquals(false, rt.getRoundTrackData().isFree(1));
-		assertEquals(true, rt.getRoundTrackData().isFree(2));
-		assertEquals(2, rt.getRoundTrackData().firstFreePosition());
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 5);
+		Assert.assertEquals(6, roundTrack.getRoundTrackData().firstFreePosition());
 
-		Dice dice1 = rt.getRoundTrackData().getDice(0, 0);
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 6);
+		Assert.assertEquals(7, roundTrack.getRoundTrackData().firstFreePosition());
 
-		assertEquals(Value.THREE, dice1.getValue());
-		assertEquals(Color.PURPLE, dice1.getColor());
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 7);
+		Assert.assertEquals(8, roundTrack.getRoundTrackData().firstFreePosition());
 
-		dice1 = rt.getRoundTrackData().getDice(0, 1);
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 8);
+		Assert.assertEquals(9, roundTrack.getRoundTrackData().firstFreePosition());
 
-		assertEquals(Value.TWO, dice1.getValue());
-		assertEquals(Color.BLUE, dice1.getColor());
-
-		assertEquals(Value.TWO, rt.getRoundTrackData().getDice(0,1 ).getValue());
-		assertEquals(Color.BLUE, rt.getRoundTrackData().getDice(0,1 ).getColor());
-
-		Dice dice2 = rt.getRoundTrackData().getDice(1, 0);
-
-		assertEquals(Value.FOUR, dice2.getValue());
-		assertEquals(Color.YELLOW, dice2.getColor());
-
-		assertEquals(Value.FOUR, rt.getRoundTrackData().getDice(1, 0).getValue());
-		assertEquals(Color.YELLOW, rt.getRoundTrackData().getDice(1, 0).getColor());
-
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 2);
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 3);
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 4);
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 5);
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 6);
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 7);
-
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 8);
-		rt.add(new Dice(Value.ONE, Color.PURPLE), 8);
-		rt.add(new Dice(Value.THREE, Color.RED), 8);
-
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 9);
-		rt.add(new Dice(Value.FOUR, Color.YELLOW), 10);
-
-		assertEquals(-1, rt.getRoundTrackData().firstFreePosition());
-
-		assertEquals(Value.ONE, rt.getRoundTrackData().getDice(8,1 ).getValue());
-		assertEquals(Color.PURPLE, rt.getRoundTrackData().getDice(8,1 ).getColor());
-
-		rt.change(8, 1, new Dice(Value.TWO, Color.GREEN));
-
-		assertEquals(Value.TWO, rt.getRoundTrackData().getDice(8,1 ).getValue());
-		assertEquals(Color.GREEN, rt.getRoundTrackData().getDice(8,1 ).getColor());
-
-		rt.change(8, 0, new Dice(Value.FIVE, Color.BLUE));
-
-		assertEquals(Value.FIVE, rt.getRoundTrackData().getDice(8, 0).getValue());
-		assertEquals(Color.BLUE, rt.getRoundTrackData().getDice(8,0).getColor());
-
-		rt.change(8, 2, new Dice(Value.FOUR, Color.RED));
-
-		assertEquals(Value.FOUR, rt.getRoundTrackData().getDice(8, 2).getValue());
-		assertEquals(Color.RED, rt.getRoundTrackData().getDice(8,2 ).getColor());
+		roundTrack.add(new Dice(Value.ONE, Color.YELLOW), 9);
+		Assert.assertEquals(-1, roundTrack.getRoundTrackData().firstFreePosition());
 
 	}
 
-	public void test2() {
+	@Test
+	public void testAdd()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice1 = new Dice(Value.FOUR, Color.YELLOW);
+		Dice dice2 = new Dice(Value.FOUR, Color.BLUE);
 
-		RoundTrack rt = new RoundTrack();
+		roundTrack.add(dice, 0);
+		Assert.assertEquals(dice, roundTrack.getRoundTrackData().getDice(0, 0));
+		Assert.assertFalse(roundTrack.getRoundTrackData().isFree(0));
+		Assert.assertTrue(roundTrack.getRoundTrackData().isFree(1));
 
-		rt.add(new Dice(Value.THREE, Color.PURPLE), 0);
+		roundTrack.add(dice1, 0);
+		Assert.assertEquals(dice1, roundTrack.getRoundTrackData().getDice(0, 1));
 
-		rt.add(new Dice(Value.TWO, Color.BLUE), 2);
+		roundTrack.add(dice2, 1);
+		Assert.assertEquals(dice2, roundTrack.getRoundTrackData().getDice(1, 0));
+	}
 
-		assertEquals(true, rt.getRoundTrackData().isFree(1));
+	@Test
+	public void testAddFail()
+	{
+		RoundTrackData roundTrackData = roundTrack.getRoundTrackData();
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		roundTrack.add(dice, 15);
+		Assert.assertEquals(roundTrackData, roundTrack.getRoundTrackData());
 
-		rt.change(2, 0, new Dice(Value.ONE, Color.GREEN));
+	}
 
-		assertEquals(true, rt.getRoundTrackData().isFree(1));
-		assertEquals(false, rt.getRoundTrackData().isFree(0));
-		assertEquals(false, rt.getRoundTrackData().isFree(2));
+	@Test
+	public void testChange()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice1 = new Dice(Value.FOUR, Color.YELLOW);
+		Dice dice2 = new Dice(Value.FOUR, Color.BLUE);
+		Dice dice3 = new Dice(Value.TWO, Color.GREEN);
+		Dice dice4 = new Dice(Value.FOUR, Color.YELLOW);
 
-		assertEquals(Color.GREEN, rt.getRoundTrackData().getDice(2,0).getColor());
-		assertEquals(Value.ONE, rt.getRoundTrackData().getDice(2,0).getValue());
+		roundTrack.add(dice, 0);
+		roundTrack.add(dice1, 0);
+		roundTrack.add(dice2, 1);
 
-		assertEquals(null, rt.getRoundTrackData().getDice(5,5));
+		roundTrack.change(0, 1, dice3);
+		Assert.assertEquals(dice3, roundTrack.getRoundTrackData().getDice(0, 1));
+
+		roundTrack.change(1, 0, dice4);
+		Assert.assertEquals(dice4, roundTrack.getRoundTrackData().getDice(1, 0));
+
+		Assert.assertEquals(dice, roundTrack.getRoundTrackData().getDice(0, 0));
+
+		Assert.assertEquals(dice3, roundTrack.getRoundTrackData().getDice(0, 1));
+
+	}
+
+	@Test
+	public void testChangeFail()
+	{
+		RoundTrackData roundTrackData = roundTrack.getRoundTrackData();
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+
+		roundTrack.change(0, 1, dice);
+		Assert.assertEquals(roundTrackData, roundTrack.getRoundTrackData());
+
+		roundTrack.change(15, 0, dice);
+		Assert.assertEquals(roundTrackData, roundTrack.getRoundTrackData());
+
+	}
+
+	public void testGetDice() {
+
+		roundTrack.add(new Dice(Value.THREE, Color.PURPLE), 0);
+
+		roundTrack.add(new Dice(Value.TWO, Color.BLUE), 2);
+
+		assertEquals(true, roundTrack.getRoundTrackData().isFree(1));
+
+		roundTrack.change(2, 0, new Dice(Value.ONE, Color.GREEN));
+
+		assertEquals(true, roundTrack.getRoundTrackData().isFree(1));
+		assertEquals(false, roundTrack.getRoundTrackData().isFree(0));
+		assertEquals(false, roundTrack.getRoundTrackData().isFree(2));
+
+		assertEquals(Color.GREEN, roundTrack.getRoundTrackData().getDice(2,0).getColor());
+		assertEquals(Value.ONE, roundTrack.getRoundTrackData().getDice(2,0).getValue());
+
+		assertEquals(null, roundTrack.getRoundTrackData().getDice(5,5));
 
 	}
 }
