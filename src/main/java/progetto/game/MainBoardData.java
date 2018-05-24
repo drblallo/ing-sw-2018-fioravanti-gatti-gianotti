@@ -1,5 +1,6 @@
 package progetto.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Immutable class with data of MainBoard
  */
-public final class MainBoardData {
+public final class MainBoardData implements Serializable {
 
 	private static final int MAX_NUM_PLAYERS = 4;
 
@@ -21,7 +22,7 @@ public final class MainBoardData {
 	/**
 	 * Constructor
 	 */
-	MainBoardData()
+	public MainBoardData()
 	{
 		playerCount = MAX_NUM_PLAYERS;
 		ArrayList<WindowFrameCouple> temp = new ArrayList<>();

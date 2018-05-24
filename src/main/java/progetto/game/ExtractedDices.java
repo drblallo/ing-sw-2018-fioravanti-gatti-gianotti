@@ -1,17 +1,13 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
-
 /**
  * Dices extracted by the player on the main board
  */
-public final class ExtractedDices extends AbstractObservable<ExtractedDicesData> {
+public final class ExtractedDices extends DataContainer<ExtractedDicesData> {
 
-	private ExtractedDicesData extractedDicesData = new ExtractedDicesData();
-
-	public ExtractedDicesData getExtractedDicesData()
+	public ExtractedDices()
 	{
-		return extractedDicesData;
+		super(new ExtractedDicesData());
 	}
 
 	/**
@@ -20,8 +16,7 @@ public final class ExtractedDices extends AbstractObservable<ExtractedDicesData>
 	 */
 	void addDice(Dice newDice)
 	{
-		extractedDicesData = extractedDicesData.addDice(newDice);
-		change(extractedDicesData);
+		setData(getData().addDice(newDice));
 	}
 
 	/**
@@ -32,9 +27,8 @@ public final class ExtractedDices extends AbstractObservable<ExtractedDicesData>
 	 */
 	Dice changeDice(int index, Dice newDice)
 	{
-		Dice dice = extractedDicesData.getDice(index);
-		extractedDicesData = extractedDicesData.changeDice(index, newDice);
-		change(extractedDicesData);
+		Dice dice = getData().getDice(index);
+		setData(getData().changeDice(index, newDice));
 		return dice;
 	}
 
@@ -45,9 +39,8 @@ public final class ExtractedDices extends AbstractObservable<ExtractedDicesData>
 	 */
 	Dice removeDice(int index)
 	{
-		Dice dice = extractedDicesData.getDice(index);
-		extractedDicesData = extractedDicesData.removeDice(index);
-		change(extractedDicesData);
+		Dice dice = getData().getDice(index);
+		setData(getData().removeDice(index));
 		return dice;
 	}
 }

@@ -15,13 +15,13 @@ public class FrameSetAction extends AbstractGameAction {
 
 	@Override
 	public boolean canBeExecuted(Game game) {
-		return (game.getMainBoard().getMainBoardData().getGameState().getClass() == FrameSelectionState.class);
+		return (game.getMainBoard().getData().getGameState().getClass() == FrameSelectionState.class);
 	}
 
 	@Override
 	protected void execute(Game game)
 	{
-		LOGGER.log(Level.FINE, "WindowFrame ", selectedWindowFrame);
+		LOGGER.log(Level.FINE, "WindowFrame {0}", selectedWindowFrame);
 		//selected window frame in PlayerBoard
 		//other window frames in mainBoard
 		game.setState(new GameStartedState());

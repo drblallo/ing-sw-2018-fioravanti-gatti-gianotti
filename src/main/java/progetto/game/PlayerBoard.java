@@ -1,21 +1,20 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
-
 /**
  * Player table
  */
-public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
+public class PlayerBoard extends DataContainer<PlayerBoardData> implements IPlayerBoard
+{
 
-	private PlayerBoardData playerBoardData = new PlayerBoardData();
+
+	PlayerBoard()
+	{
+		super(new PlayerBoardData());
+	}
 
 	private final DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
 	private final PickedDicesSlot pickedDicesSlot = new PickedDicesSlot();
 
-	public PlayerBoardData getPlayerBoardData()
-	{
-		return playerBoardData;
-	}
 
 	public int getNPickedDices()
 	{
@@ -34,9 +33,8 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 
 	public int getNDicesPlaced()
 	{
-		return dicePlacedFrame.getDicePlacedFrameData().getNDices();
+		return dicePlacedFrame.getData().getNDices();
 	}
-
 
 	/**
 	 * Set player Window frame
@@ -45,8 +43,7 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 */
 	void setWindowFrame(WindowFrameCouple windowFrameCouple, int side)
 	{
-		playerBoardData = playerBoardData.setWindowFrame(windowFrameCouple.getWindowFrame(side));
-		change(playerBoardData);
+		setData(getData().setWindowFrame(windowFrameCouple.getWindowFrame(side)));
 	}
 
 	/**
@@ -55,9 +52,7 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 */
 	void setWindowFrame(WindowFrame windowFrame)
 	{
-		playerBoardData = playerBoardData.setWindowFrame(windowFrame);
-		change(playerBoardData);
-
+		setData(getData().setWindowFrame(windowFrame));
 	}
 
 	/**
@@ -79,7 +74,7 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 */
 	public Dice getDiceFromPlacedFrame(int y, int x)
 	{
-		return dicePlacedFrame.getDicePlacedFrameData().getDice(y, x);
+		return dicePlacedFrame.getData().getDice(y, x);
 	}
 
 	/**

@@ -104,7 +104,7 @@ public class TestPlayerBoard extends TestCase
 	public void testSetWindowFrame()
 	{
 		playerBoard.setWindowFrame(windowFrame);
-		Assert.assertEquals(windowFrame, playerBoard.getPlayerBoardData().getWindowFrame());
+		Assert.assertEquals(windowFrame, playerBoard.getData().getWindowFrame());
 
 	}
 
@@ -114,7 +114,7 @@ public class TestPlayerBoard extends TestCase
 
 		WindowFrameCouple windowFrameCouple = windowFrameCoupleArray.getWindowFrameCouples().get(5);
 		playerBoard.setWindowFrame(windowFrameCouple, 1);
-		Assert.assertEquals(windowFrameCouple.getWindowFrame(1), playerBoard.getPlayerBoardData().getWindowFrame());
+		Assert.assertEquals(windowFrameCouple.getWindowFrame(1), playerBoard.getData().getWindowFrame());
 
 	}
 
@@ -144,7 +144,7 @@ public class TestPlayerBoard extends TestCase
 
 		Assert.assertEquals(0, playerBoard.getNDicesPlaced());
 
-		Assert.assertNull(playerBoard.getDicePlacedFrame().getDicePlacedFrameData().getDice(0,0));
+		Assert.assertNull(playerBoard.getDicePlacedFrame().getData().getDice(0,0));
 
 	}
 

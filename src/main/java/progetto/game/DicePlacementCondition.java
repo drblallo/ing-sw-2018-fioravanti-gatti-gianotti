@@ -1,5 +1,6 @@
 package progetto.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
  *  -Ingore value bond
  *  -Ignore constraint of proximity to another dice
 */
-public final class DicePlacementCondition {
+public final class DicePlacementCondition implements Serializable{
 
 	private static final int Y_MAX = 3;
 	private static final int X_MAX = 4;
@@ -122,7 +123,7 @@ public final class DicePlacementCondition {
 	 */
 	public boolean canBePlaced(int y, int x, PlayerBoard playerBoard)
 	{
-		WindowFrame windowFrame = playerBoard.getPlayerBoardData().getWindowFrame();
+		WindowFrame windowFrame = playerBoard.getData().getWindowFrame();
 		DicePlacedFrame dicePlacedFrame = playerBoard.getDicePlacedFrame();
 
 		boolean ok = true;
@@ -133,7 +134,7 @@ public final class DicePlacementCondition {
 			ok = false;
 		}
 
-		else if(dicePlacedFrame.getDicePlacedFrameData().getDice(y, x)!=null)    //Verify if the position y, x is free
+		else if(dicePlacedFrame.getData().getDice(y, x)!=null)    //Verify if the position y, x is free
 		{
 			LOGGER.log(Level.FINE, "Only one dice in a position");
 			ok = false;
@@ -157,7 +158,7 @@ public final class DicePlacementCondition {
 			ok = false;
 		}
 
-		else if(dicePlacedFrame.getDicePlacedFrameData().getNDices()!=0 && !checkAdjacent(y, x, dicePlacedFrame))                //Verify the dice is positioned near an other dice (if it is not the first dice)
+		else if(dicePlacedFrame.getData().getNDices()!=0 && !checkAdjacent(y, x, dicePlacedFrame))                //Verify the dice is positioned near an other dice (if it is not the first dice)
 		{
 			LOGGER.log(Level.FINE, "The dice must be positioned near an other dice");
 			ok = false;
@@ -235,7 +236,7 @@ public final class DicePlacementCondition {
 	 */
 	private boolean verifyFirstDiceEdge(int y, int x, DicePlacedFrame dicePlacedFrame)
 	{
-		if(dicePlacedFrame.getDicePlacedFrameData().getNDices()==0)
+		if(dicePlacedFrame.getData().getNDices()==0)
 		{
 			return (x==0 || x==X_MAX || y==0 || y==Y_MAX);
 		}
@@ -357,7 +358,7 @@ public final class DicePlacementCondition {
 		{
 			return false;
 		}
-		return(dicePlacedFrame.getDicePlacedFrameData().getDice(y, x)!=null);
+		return(dicePlacedFrame.getData().getDice(y, x)!=null);
 	}
 
 	/**
@@ -373,7 +374,7 @@ public final class DicePlacementCondition {
 		{
 			return true;
 		}
-		return(!(dicePlacedFrame.getDicePlacedFrameData().getDice(y, x)!=null && (dice.getValue()==dicePlacedFrame.getDicePlacedFrameData().getDice(y, x).getValue())));
+		return(!(dicePlacedFrame.getData().getDice(y, x)!=null && (dice.getValue()==dicePlacedFrame.getData().getDice(y, x).getValue())));
 	}
 
 	/**
@@ -389,7 +390,7 @@ public final class DicePlacementCondition {
 		{
 			return true;
 		}
-		return (!(dicePlacedFrame.getDicePlacedFrameData().getDice(y, x)!=null && (dice.getColor()==dicePlacedFrame.getDicePlacedFrameData().getDice(y, x).getColor())));
+		return (!(dicePlacedFrame.getData().getDice(y, x)!=null && (dice.getColor()==dicePlacedFrame.getData().getDice(y, x).getColor())));
 	}
 
 }

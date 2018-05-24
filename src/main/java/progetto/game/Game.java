@@ -12,7 +12,7 @@ public final class Game implements IExecuibleGame {
 
 	private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
 
-	private static final int MAX_NUM_PLAYERS = 4;
+	public static final int MAX_NUM_PLAYERS = 4;
 
 	private final CommandQueue commandQueue = new CommandQueue();
 
@@ -45,7 +45,7 @@ public final class Game implements IExecuibleGame {
 	 * Get commandQueue
 	 * @return commandQueue
 	 */
-	public AbstractProcessor<AbstractGameAction> getCommandQueue()
+	public CommandQueue getCommandQueue()
 	{
 		return commandQueue;
 	}

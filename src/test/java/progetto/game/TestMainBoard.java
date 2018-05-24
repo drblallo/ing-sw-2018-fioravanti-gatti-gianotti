@@ -20,11 +20,11 @@ public class TestMainBoard extends TestCase {
 	{
 		mainBoard.setCurrentFirstPlayer(1);
 
-		Assert.assertEquals(1, mainBoard.getMainBoardData().getCurrentFirstPlayer());
+		Assert.assertEquals(1, mainBoard.getData().getCurrentFirstPlayer());
 
 		mainBoard.setCurrentFirstPlayer(2);
 
-		Assert.assertEquals(2, mainBoard.getMainBoardData().getCurrentFirstPlayer());
+		Assert.assertEquals(2, mainBoard.getData().getCurrentFirstPlayer());
 
 	}
 
@@ -33,11 +33,11 @@ public class TestMainBoard extends TestCase {
 	{
 		mainBoard.setCurrentPlayer(0);
 
-		Assert.assertEquals(0, mainBoard.getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(0, mainBoard.getData().getCurrentPlayer());
 
 		mainBoard.setCurrentPlayer(1);
 
-		Assert.assertEquals(1, mainBoard.getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(1, mainBoard.getData().getCurrentPlayer());
 
 	}
 
@@ -46,11 +46,11 @@ public class TestMainBoard extends TestCase {
 	{
 		mainBoard.setPlayerCount(3);
 
-		Assert.assertEquals(3, mainBoard.getMainBoardData().getPlayerCount());
+		Assert.assertEquals(3, mainBoard.getData().getPlayerCount());
 
 		mainBoard.setPlayerCount(2);
 
-		Assert.assertEquals(2, mainBoard.getMainBoardData().getPlayerCount());
+		Assert.assertEquals(2, mainBoard.getData().getPlayerCount());
 
 	}
 
@@ -59,11 +59,11 @@ public class TestMainBoard extends TestCase {
 	{
 		mainBoard.setCurrentRound(2);
 
-		Assert.assertEquals(2, mainBoard.getMainBoardData().getCurrentRound());
+		Assert.assertEquals(2, mainBoard.getData().getCurrentRound());
 
 		mainBoard.setCurrentRound(3);
 
-		Assert.assertEquals(3, mainBoard.getMainBoardData().getCurrentRound());
+		Assert.assertEquals(3, mainBoard.getData().getCurrentRound());
 
 	}
 
@@ -72,11 +72,11 @@ public class TestMainBoard extends TestCase {
 	{
 		mainBoard.setGameState(new PreGameState());
 
-		Assert.assertEquals("Pre game", mainBoard.getMainBoardData().getGameState().getName());
+		Assert.assertEquals("Pre game", mainBoard.getData().getGameState().getName());
 
 		mainBoard.setGameState(new StartRoundState());
 
-		Assert.assertEquals("Start round", mainBoard.getMainBoardData().getGameState().getName());
+		Assert.assertEquals("Start round", mainBoard.getData().getGameState().getName());
 
 	}
 
@@ -135,8 +135,8 @@ public class TestMainBoard extends TestCase {
 		WindowFrameCouple windowFrameCouple2 = windowFrameCoupleArray.getWindowFrameCouples().get(1);
 		mainBoard.addWindowFrameCouple(windowFrameCouple2);
 
-		assertEquals(windowFrameCouple1, mainBoard.getMainBoardData().getWindowFrame(0));
-		assertEquals(windowFrameCouple2, mainBoard.getMainBoardData().getWindowFrame(1));
+		assertEquals(windowFrameCouple1, mainBoard.getData().getWindowFrame(0));
+		assertEquals(windowFrameCouple2, mainBoard.getData().getWindowFrame(1));
 	}
 
 	@Test
@@ -148,18 +148,18 @@ public class TestMainBoard extends TestCase {
 		Dice dice2 = new Dice(Value.TWO, Color.BLUE);
 		mainBoard.getExtractedDices().addDice(dice2);
 
-		Assert.assertEquals(dice1, mainBoard.getExtractedDices().getExtractedDicesData().getDice(0));
-		Assert.assertEquals(dice2, mainBoard.getExtractedDices().getExtractedDicesData().getDice(1));
+		Assert.assertEquals(dice1, mainBoard.getExtractedDices().getData().getDice(0));
+		Assert.assertEquals(dice2, mainBoard.getExtractedDices().getData().getDice(1));
 
-		Assert.assertEquals(2, mainBoard.getExtractedDices().getExtractedDicesData().getNumberOfDices());
+		Assert.assertEquals(2, mainBoard.getExtractedDices().getData().getNumberOfDices());
 
 		Dice dice3 = new Dice(Value.THREE, Color.GREEN);
 
 		mainBoard.getExtractedDices().changeDice(1, dice3);
 
-		assertEquals(dice3, mainBoard.getExtractedDices().getExtractedDicesData().getDice(1));
+		assertEquals(dice3, mainBoard.getExtractedDices().getData().getDice(1));
 
-		assertEquals(2, mainBoard.getExtractedDices().getExtractedDicesData().getNumberOfDices());
+		assertEquals(2, mainBoard.getExtractedDices().getData().getNumberOfDices());
 
 	}
 

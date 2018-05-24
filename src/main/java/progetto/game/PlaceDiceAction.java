@@ -7,7 +7,7 @@ public class PlaceDiceAction extends AbstractGameAction {
 	private int x;
 	private int y;
 
-	PlaceDiceAction(int nPlayer, int nDice, int y, int x)
+	public PlaceDiceAction(int nPlayer, int nDice, int y, int x)
 	{
 		super(nPlayer);
 		this.nDice = nDice;
@@ -18,10 +18,10 @@ public class PlaceDiceAction extends AbstractGameAction {
 	@Override
 	public boolean canBeExecuted(Game game)
 	{
-		DicePlacementCondition dicePlacementCondition = game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getPickedDicesSlotData().getDicePlacementCondition(nDice);
+		DicePlacementCondition dicePlacementCondition = game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getData().getDicePlacementCondition(nDice);
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 
-		return game.getMainBoard().getMainBoardData().getGameState().getClass() == RoundState.class &&
+		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
 				dicePlacementCondition!=null &&
 				dicePlacementCondition.canBePlaced(y, x, playerBoard);
 

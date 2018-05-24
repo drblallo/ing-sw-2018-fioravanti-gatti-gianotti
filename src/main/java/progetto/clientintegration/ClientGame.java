@@ -2,8 +2,11 @@ package progetto.clientintegration;
 
 import progetto.game.*;
 import progetto.network.ClientConnection;
+import progetto.network.IEnforce;
 import progetto.network.INetworkClient;
+import progetto.utils.Callback;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,28 +41,32 @@ public class ClientGame extends AbstractGameSync implements IExecuibleGame
 	}
 
 	@Override
-	public AbstractProcessor<AbstractGameAction> getCommandQueue() {
-		return getGame().getCommandQueue();
+	public IDataContainer<CommandQueueData> getCommandQueue() {
+		return clientConnection.getProxy().getCommandQueue();
 	}
 
 	@Override
-	public RoundTrack getRoundTrack() {
-		return getGame().getRoundTrack();
+	public IDataContainer<RoundTrackData> getRoundTrack() {
+		return clientConnection.getProxy().getRoundTrack();
 	}
 
 	@Override
-	public PlayerBoard getPlayerBoard(int index) {
-		return getGame().getPlayerBoard(index);
+	public IPlayerBoard getPlayerBoard(int index) {
+		return clientConnection.getProxy().getPlayerBoard(index);
 	}
 
 	@Override
-	public MainBoard getMainBoard() {
-		return getGame().getMainBoard();
+	public IMainBoard getMainBoard() {
+		return clientConnection.getProxy().getMainBoard();
 	}
 
 	@Override
-	public DiceBag getDiceBag() {
-		return getGame().getDiceBag();
+	public Callback<IEnforce> getEnforceCallback() {
+		throw new UnsupportedOperationException("YOU ARE NOT A SERVER");
 	}
 
+	@Override
+	public List<IEnforce> getNewPlayerEnforces() {
+		throw new UnsupportedOperationException("YOU ARE NOT A SERVER");
+	}
 }

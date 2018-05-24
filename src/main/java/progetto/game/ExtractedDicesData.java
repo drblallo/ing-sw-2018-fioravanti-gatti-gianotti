@@ -1,5 +1,6 @@
 package progetto.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * Immutable class with data of ExtractedDices
  */
-public final class ExtractedDicesData {
+public final class ExtractedDicesData implements Serializable{
 
 	private final List<Dice> extractedDices;
 
@@ -18,7 +19,7 @@ public final class ExtractedDicesData {
 	/**
 	 * Constructor
 	 */
-	ExtractedDicesData() {
+	public ExtractedDicesData() {
 		ArrayList<Dice> temp = new ArrayList<>();
 		this.extractedDices = Collections.unmodifiableList(temp);
 	}

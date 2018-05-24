@@ -18,12 +18,12 @@ public class TestDicePlacedFrame extends TestCase {
 	@Test
 	public void testCostructor()
 	{
-		Assert.assertEquals(0, dicePlacedFrame.getDicePlacedFrameData().getNDices());
+		Assert.assertEquals(0, dicePlacedFrame.getData().getNDices());
 		for (int i = 0; i < 5; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(i, j));
+				Assert.assertNull(dicePlacedFrame.getData().getDice(i, j));
 			}
 		}
 	}
@@ -35,11 +35,11 @@ public class TestDicePlacedFrame extends TestCase {
 		Dice dice2 = new Dice (Value.TWO, Color.RED);
 
 		dicePlacedFrame.addDice(dice1, 1, 2);
-		Assert.assertEquals(dice1, dicePlacedFrame.getDicePlacedFrameData().getDice(1, 2));
+		Assert.assertEquals(dice1, dicePlacedFrame.getData().getDice(1, 2));
 
 		dicePlacedFrame.addDice(dice2, 1, 3);
-		Assert.assertEquals(dice1, dicePlacedFrame.getDicePlacedFrameData().getDice(1, 2));
-		Assert.assertEquals(dice2, dicePlacedFrame.getDicePlacedFrameData().getDice(1, 3));
+		Assert.assertEquals(dice1, dicePlacedFrame.getData().getDice(1, 2));
+		Assert.assertEquals(dice2, dicePlacedFrame.getData().getDice(1, 3));
 	}
 
 	public void testGetDiceFail()
@@ -48,13 +48,13 @@ public class TestDicePlacedFrame extends TestCase {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(i, j));
+				Assert.assertNull(dicePlacedFrame.getData().getDice(i, j));
 			}
 		}
-		Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(-1, 1));
-		Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(5, 5));
-		Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(3, 4));
-		Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(5, 3));
+		Assert.assertNull(dicePlacedFrame.getData().getDice(-1, 1));
+		Assert.assertNull(dicePlacedFrame.getData().getDice(5, 5));
+		Assert.assertNull(dicePlacedFrame.getData().getDice(3, 4));
+		Assert.assertNull(dicePlacedFrame.getData().getDice(5, 3));
 	}
 
 	@Test
@@ -65,41 +65,41 @@ public class TestDicePlacedFrame extends TestCase {
 		Dice dice3 = new Dice(Value.SIX, Color.PURPLE);
 
 		dicePlacedFrame.addDice(dice1, 2, 2);
-		Assert.assertEquals(1, dicePlacedFrame.getDicePlacedFrameData().getNDices());
-		Assert.assertEquals(dice1, dicePlacedFrame.getDicePlacedFrameData().getDice(2, 2));
+		Assert.assertEquals(1, dicePlacedFrame.getData().getNDices());
+		Assert.assertEquals(dice1, dicePlacedFrame.getData().getDice(2, 2));
 
 		for (int i = 0; i < 5; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
 				if(!(i==2 && j==2))
-					Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(i, j));
+					Assert.assertNull(dicePlacedFrame.getData().getDice(i, j));
 			}
 		}
 
 		dicePlacedFrame.addDice(dice2, 0, 0);
-		Assert.assertEquals(2, dicePlacedFrame.getDicePlacedFrameData().getNDices());
-		Assert.assertEquals(dice2, dicePlacedFrame.getDicePlacedFrameData().getDice(0, 0));
+		Assert.assertEquals(2, dicePlacedFrame.getData().getNDices());
+		Assert.assertEquals(dice2, dicePlacedFrame.getData().getDice(0, 0));
 
 		for (int i = 0; i < 5; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
 				if(!((i==2 && j==2) || (i==0 && j==0)))
-					Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(i, j));
+					Assert.assertNull(dicePlacedFrame.getData().getDice(i, j));
 			}
 		}
 
 		dicePlacedFrame.addDice(dice3, 3, 4);
-		Assert.assertEquals(3, dicePlacedFrame.getDicePlacedFrameData().getNDices());
-		Assert.assertEquals(dice3, dicePlacedFrame.getDicePlacedFrameData().getDice(3, 4));
+		Assert.assertEquals(3, dicePlacedFrame.getData().getNDices());
+		Assert.assertEquals(dice3, dicePlacedFrame.getData().getDice(3, 4));
 
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 5; j++)
 			{
 				if(!((i==2 && j==2) || (i==0 && j==0) || (i==3 && j==4)))
-					Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(i, j));
+					Assert.assertNull(dicePlacedFrame.getData().getDice(i, j));
 			}
 		}
 
@@ -118,7 +118,7 @@ public class TestDicePlacedFrame extends TestCase {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(i, j));
+				Assert.assertNull(dicePlacedFrame.getData().getDice(i, j));
 			}
 		}
 
@@ -126,7 +126,7 @@ public class TestDicePlacedFrame extends TestCase {
 
 		dicePlacedFrame.addDice(dice3, 1, 1);
 
-		Assert.assertEquals(dice2, dicePlacedFrame.getDicePlacedFrameData().getDice(1, 1));
+		Assert.assertEquals(dice2, dicePlacedFrame.getData().getDice(1, 1));
 
 	}
 
@@ -145,7 +145,7 @@ public class TestDicePlacedFrame extends TestCase {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(i, j));
+				Assert.assertNull(dicePlacedFrame.getData().getDice(i, j));
 			}
 		}
 
@@ -153,10 +153,10 @@ public class TestDicePlacedFrame extends TestCase {
 		dicePlacedFrame.addDice(dice3, 3, 4);
 
 		dicePlacedFrame.removeDice(3, 3);
-		Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(3, 3));
-		Assert.assertEquals(dice3, dicePlacedFrame.getDicePlacedFrameData().getDice(3, 4));
+		Assert.assertNull(dicePlacedFrame.getData().getDice(3, 3));
+		Assert.assertEquals(dice3, dicePlacedFrame.getData().getDice(3, 4));
 		dicePlacedFrame.removeDice(3, 4);
-		Assert.assertNull(dicePlacedFrame.getDicePlacedFrameData().getDice(3, 4));
+		Assert.assertNull(dicePlacedFrame.getData().getDice(3, 4));
 
 	}
 

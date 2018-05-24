@@ -183,6 +183,11 @@ abstract class AbstractRoom implements Runnable
 		notifyChange();
 		if (getSyncOgg() != null)
 			handler.onRoomChanged(getSyncOgg());
+
+		if (syncOgg != null)
+			for (IEnforce f : syncOgg.getNewPlayerEnforces())
+				handler.sendEnforce(f);
+
 		LOGGER.fine("Player added to room");
 	}
 

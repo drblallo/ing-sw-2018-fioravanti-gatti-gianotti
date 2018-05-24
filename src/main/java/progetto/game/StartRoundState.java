@@ -9,8 +9,8 @@ public class StartRoundState extends AbstractGameState{
 	void apply(Game game) {
 
 		MainBoard mainBoard = game.getMainBoard();
-		int firstPlayer = mainBoard.getMainBoardData().getCurrentFirstPlayer();
-		int nPlayer = mainBoard.getMainBoardData().getPlayerCount();
+		int firstPlayer = mainBoard.getData().getCurrentFirstPlayer();
+		int nPlayer = mainBoard.getData().getPlayerCount();
 
 		//start player queue
 		for(int i=1; i<nPlayer; i++)

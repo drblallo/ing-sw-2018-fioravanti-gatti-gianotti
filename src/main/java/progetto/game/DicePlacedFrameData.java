@@ -1,9 +1,11 @@
 package progetto.game;
 
+import java.io.Serializable;
+
 /**
  * Immutable class with data of DicePlacedFrame
  */
-public final class DicePlacedFrameData {
+public final class DicePlacedFrameData implements Serializable{
 
 	private static final int MAX_NUMBER_OF_ROWS = 4;
 	private static final int MAX_NUMBER_OF_COLUMNS = 5;
@@ -14,7 +16,7 @@ public final class DicePlacedFrameData {
 	/**
 	 * Constructor with 0 dices, empty dice placed frame
 	 */
-	DicePlacedFrameData()
+	public DicePlacedFrameData()
 	{
 		nPlacedDices = 0;
 	}

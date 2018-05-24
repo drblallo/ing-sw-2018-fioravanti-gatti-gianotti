@@ -1,18 +1,20 @@
 package progetto.game;
 
+import java.io.Serializable;
+
 /**
  * Immutable class with data of PlayerBoard
  */
-public final class PlayerBoardData {
+public final class PlayerBoardData implements Serializable{
 
 	private final WindowFrame windowFrame;
 
 	/**
 	 * consutructor
 	 */
-	PlayerBoardData()
+	public PlayerBoardData()
 	{
-		windowFrame = null;
+		windowFrame = new WindowFrame();
 	}
 
 	/**

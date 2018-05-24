@@ -1,5 +1,6 @@
 package progetto.network;
 
+import progetto.clientmodelproxy.GameProxy;
 import progetto.utils.Callback;
 
 import java.io.Serializable;
@@ -31,6 +32,7 @@ public final class ClientConnection implements Runnable
 	private final INetworkClient handler;
 	private ServerStateView serverState = new ServerStateView();
 	private int playerID = -1;
+	private final GameProxy proxy = new GameProxy();
 
 	/**
 	 * creates a client connection. This will start the thread that processes the pending enforces sent by the server
@@ -44,6 +46,11 @@ public final class ClientConnection implements Runnable
 		handler.getEnforceCallback().addObserver(enforcesQueue::add);
 
 		new Thread(this).start();
+	}
+
+	public GameProxy getProxy()
+	{
+		return proxy;
 	}
 
 	public Callback<ServerStateView> getServerStateViewCallback() {

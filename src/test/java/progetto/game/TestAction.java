@@ -30,12 +30,12 @@ public class TestAction {
 		game.sendAction(new SetPlayerCountAction(3));
 		game.processAction();
 		game.processAction();
-		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getPlayerCount());
+		Assert.assertEquals(3, game.getMainBoard().getData().getPlayerCount());
 		game.sendAction(new StartGameAction());
 		game.processAllPendingAction();
 		game.sendAction(new SetPlayerCountAction(2));
 		game.processAction();
-		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getPlayerCount());
+		Assert.assertEquals(3, game.getMainBoard().getData().getPlayerCount());
 	}
 
 	@Test
@@ -72,8 +72,8 @@ public class TestAction {
 		game.processAction();
 		game.sendAction(new StartGameAction());
 		game.processAction();
-		Assert.assertEquals(FrameSelectionState.class, game.getMainBoard().getMainBoardData().getGameState().getClass());
-		Assert.assertEquals("Frame selection", game.getMainBoard().getMainBoardData().getGameState().getName());
+		Assert.assertEquals(FrameSelectionState.class, game.getMainBoard().getData().getGameState().getClass());
+		Assert.assertEquals("Frame selection", game.getMainBoard().getData().getGameState().getName());
 	}
 
 	@Test
@@ -167,7 +167,7 @@ public class TestAction {
 		Assert.assertTrue(p.canBeExecuted(game));
 		game.sendAction(p);
 		game.processAction();
-		Assert.assertNotNull(game.getPlayerBoard(0).getDicePlacedFrame().getDicePlacedFrameData().getDice(0 , 0));
+		Assert.assertNotNull(game.getPlayerBoard(0).getDicePlacedFrame().getData().getDice(0 , 0));
 		p = new PlaceDiceAction(1, 0, 0, 0);
 		Assert.assertFalse(p.canBeExecuted(game));
 
@@ -181,7 +181,7 @@ public class TestAction {
 		game.sendAction(new AddWindowFrameCoupleAction(windowFrameCouple));
 		game.processAction();
 
-		Assert.assertEquals(windowFrameCouple, game.getMainBoard().getMainBoardData().getWindowFrame(0));
+		Assert.assertEquals(windowFrameCouple, game.getMainBoard().getData().getWindowFrame(0));
 
 	}
 
@@ -190,7 +190,7 @@ public class TestAction {
 	{
 		game.sendAction(new StartGameAction());
 		game.processAction();
-		Assert.assertEquals("Frame selection", game.getMainBoard().getMainBoardData().getGameState().getName());
+		Assert.assertEquals("Frame selection", game.getMainBoard().getData().getGameState().getName());
 	}
 
 	@Test
@@ -205,8 +205,8 @@ public class TestAction {
 		game.sendAction(new FrameSetAction(-1));
 		game.processAction();
 
-		Assert.assertEquals(2, game.getMainBoard().getMainBoardData().getCurrentFirstPlayer());
-		Assert.assertEquals(2, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(2, game.getMainBoard().getData().getCurrentFirstPlayer());
+		Assert.assertEquals(2, game.getMainBoard().getData().getCurrentPlayer());
 	}
 
 	@Test
@@ -222,7 +222,7 @@ public class TestAction {
 		game.sendAction(new FrameSetAction(-1));
 		game.processAction();
 
-		Assert.assertEquals(9, game.getMainBoard().getExtractedDices().getExtractedDicesData().getNumberOfDices());
+		Assert.assertEquals(9, game.getMainBoard().getExtractedDices().getData().getNumberOfDices());
 
 	}
 
@@ -245,14 +245,14 @@ public class TestAction {
 
 		game.sendAction(new PickDiceAction(2, 0));
 		game.processAction();
-		Assert.assertEquals(Color.BLUE, game.getPlayerBoard(2).getPickedDicesSlot().getPickedDicesSlotData().getDicePlacementCondition(0).getDice().getColor());
-		Assert.assertEquals(Value.FIVE, game.getPlayerBoard(2).getPickedDicesSlot().getPickedDicesSlotData().getDicePlacementCondition(0).getDice().getValue());
+		Assert.assertEquals(Color.BLUE, game.getPlayerBoard(2).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getColor());
+		Assert.assertEquals(Value.FIVE, game.getPlayerBoard(2).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getValue());
 
 		game.sendAction(new PlaceDiceAction(2, 0, 1, 0));
 		game.processAction();
-		Assert.assertEquals(1, game.getPlayerBoard(2).getDicePlacedFrame().getDicePlacedFrameData().getNDices());
-		Assert.assertEquals(Color.BLUE, game.getPlayerBoard(2).getDicePlacedFrame().getDicePlacedFrameData().getDice(1, 0).getColor());
-		Assert.assertEquals(Value.FIVE, game.getPlayerBoard(2).getDicePlacedFrame().getDicePlacedFrameData().getDice(1, 0).getValue());
+		Assert.assertEquals(1, game.getPlayerBoard(2).getDicePlacedFrame().getData().getNDices());
+		Assert.assertEquals(Color.BLUE, game.getPlayerBoard(2).getDicePlacedFrame().getData().getDice(1, 0).getColor());
+		Assert.assertEquals(Value.FIVE, game.getPlayerBoard(2).getDicePlacedFrame().getData().getDice(1, 0).getValue());
 
 	}
 
@@ -271,7 +271,7 @@ public class TestAction {
 
 		game.sendAction(new EndTurnAction(2));
 		game.processAction();
-		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(3, game.getMainBoard().getData().getCurrentPlayer());
 	}
 
 	@Test
@@ -297,18 +297,18 @@ public class TestAction {
 		game.sendAction(new EndTurnAction(2));
 		game.processAction();
 
-		Dice dice = game.getMainBoard().getExtractedDices().getExtractedDicesData().getDice(0);
+		Dice dice = game.getMainBoard().getExtractedDices().getData().getDice(0);
 
 		//pick dice
 		game.sendAction(new PickDiceAction(3, 0));
 		game.processAction();
-		Assert.assertEquals(7, game.getMainBoard().getExtractedDices().getExtractedDicesData().getNumberOfDices());
+		Assert.assertEquals(7, game.getMainBoard().getExtractedDices().getData().getNumberOfDices());
 		//end turn, picked dice not placed
 		game.sendAction(new EndTurnAction(3));
 		game.processAction();
 		//not placed dice back to extractedDices
-		Assert.assertEquals(dice, game.getMainBoard().getExtractedDices().getExtractedDicesData().getDice(7));
-		Assert.assertEquals(8, game.getMainBoard().getExtractedDices().getExtractedDicesData().getNumberOfDices());
+		Assert.assertEquals(dice, game.getMainBoard().getExtractedDices().getData().getDice(7));
+		Assert.assertEquals(8, game.getMainBoard().getExtractedDices().getData().getNumberOfDices());
 	}
 
 	@Test
@@ -316,7 +316,7 @@ public class TestAction {
 	{
 		game.getMainBoard().setPlayerCount(1);
 		game.setState(new StartRoundState());
-		Assert.assertEquals(4, game.getMainBoard().getExtractedDices().getExtractedDicesData().getNumberOfDices());
+		Assert.assertEquals(4, game.getMainBoard().getExtractedDices().getData().getNumberOfDices());
 	}
 
 	@Test
@@ -341,39 +341,39 @@ public class TestAction {
 		game.processAction();
 		game.sendAction(new EndTurnAction(2));
 		game.processAction();
-		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(3, game.getMainBoard().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(3));
 		game.processAction();
 		game.sendAction(new EndTurnAction(0));
 		game.processAction();
-		Assert.assertEquals(1, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(1, game.getMainBoard().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(1));
 		game.processAction();
-		Assert.assertEquals(1, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(1, game.getMainBoard().getData().getCurrentPlayer());
 		game.sendAction(new PickDiceAction(1, 1));
 		game.processAction();
 		game.sendAction(new EndTurnAction(1));
 		game.processAction();
-		Assert.assertEquals(0, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(0, game.getMainBoard().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(0));
 		game.processAction();
-		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(3, game.getMainBoard().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(3));
 		game.processAction();
-		Assert.assertEquals(2, game.getMainBoard().getMainBoardData().getCurrentPlayer());
+		Assert.assertEquals(2, game.getMainBoard().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(2));
 		game.processAction();
-		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getCurrentPlayer());
-		Assert.assertFalse(game.getRoundTrack().getRoundTrackData().isFree(0));
-		Assert.assertTrue(game.getRoundTrack().getRoundTrackData().isFree(1));
-		Assert.assertEquals(1, game.getMainBoard().getMainBoardData().getCurrentRound());
+		Assert.assertEquals(3, game.getMainBoard().getData().getCurrentPlayer());
+		Assert.assertFalse(game.getRoundTrack().getData().isFree(0));
+		Assert.assertTrue(game.getRoundTrack().getData().isFree(1));
+		Assert.assertEquals(1, game.getMainBoard().getData().getCurrentRound());
 		for(int i=0; i<90; i++)
 		{
 			game.sendAction(new EndTurnAction(game.getMainBoard().getNextPlayer()));
 			game.processAction();
 		}
 
-		Assert.assertEquals("End game", game.getMainBoard().getMainBoardData().getGameState().getName());
+		Assert.assertEquals("End game", game.getMainBoard().getData().getGameState().getName());
 
 	}
 

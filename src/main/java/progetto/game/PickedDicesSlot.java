@@ -1,51 +1,46 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
 
 /**
  * Dices that still need to be placed that have been taken by the player
  */
-public final class PickedDicesSlot extends AbstractObservable<PickedDicesSlotData> {
+public final class PickedDicesSlot extends DataContainer<PickedDicesSlotData> {
 
-	private PickedDicesSlotData pickedDicesSlotData = new PickedDicesSlotData();
-
-	PickedDicesSlotData getPickedDicesSlotData()
+	PickedDicesSlot()
 	{
-		return pickedDicesSlotData;
+		super(new PickedDicesSlotData());
 	}
 
 	void add(Dice dice, boolean ignoreColor, boolean ignoreValue, boolean ignoreAdjacent)
 	{
-		pickedDicesSlotData = pickedDicesSlotData.add(dice, ignoreColor, ignoreValue, ignoreAdjacent);
-		change(pickedDicesSlotData);
+		setData(getData().add(dice, ignoreColor, ignoreValue, ignoreAdjacent));
 	}
 
 	public int getNDices()
 	{
-		return pickedDicesSlotData.getNDices();
+		return getData().getNDices();
 	}
 
 	DicePlacementCondition remove(int index)
 	{
-		DicePlacementCondition dicePlacementCondition = pickedDicesSlotData.getDicePlacementCondition(index);
-		pickedDicesSlotData = pickedDicesSlotData.remove(index);
-		change(pickedDicesSlotData);
+		DicePlacementCondition dicePlacementCondition = getData().getDicePlacementCondition(index);
+		setData(getData().remove(index));
 		return dicePlacementCondition;
 	}
 
 	void setIgnoreColor(int index, boolean ignoreColor)
 	{
-		pickedDicesSlotData = pickedDicesSlotData.setIgnoreColor(index, ignoreColor);
+		setData(getData().setIgnoreColor(index, ignoreColor));
 	}
 
 	void setIgnoreValue(int index, boolean ignoreValue)
 	{
-		pickedDicesSlotData = pickedDicesSlotData.setIgnoreValue(index, ignoreValue);
+		setData(getData().setIgnoreValue(index, ignoreValue));
 	}
 
 	void setIgnoreAdjacent(int index, boolean ignoreAdjacent)
 	{
-		pickedDicesSlotData = pickedDicesSlotData.setIgnoreAdjacent(index, ignoreAdjacent);
+		setData(getData().setIgnoreAdjacent(index, ignoreAdjacent));
 	}
 
 

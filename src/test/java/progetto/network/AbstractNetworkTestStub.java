@@ -13,7 +13,7 @@ public class AbstractNetworkTestStub {
 	private final ClientData[] clientData = new ClientData[2];
 	private final Waiter paul = new Waiter();
 	private final INetworkClientFactory clientFactiry;
-	public int timeModifier = 1;
+	public int timeModifier = 2;
 	public AbstractNetworkTestStub(INetworkModuleFactory moduleF, INetworkClientFactory clientF) {
 		clientFactiry = clientF;
 		socketServer = moduleF.getINetworkModule();

@@ -1,15 +1,17 @@
 package progetto.network;
 
+import progetto.utils.Callback;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SyncStub implements ISync {
 	private static final Logger LOGGER = Logger.getLogger(SyncStub.class.getName());
 	private ArrayList<String> ls = new ArrayList<>();
 	private int full = 0;
+	private Callback<IEnforce> enforceCallback = new Callback<>();
 
 	public synchronized void sendItem(Serializable s) {
 		ls.add((String) s);
@@ -54,5 +56,15 @@ public class SyncStub implements ISync {
 		ArrayList<Serializable> s = new ArrayList<>();
 		s.addAll(ls);
 		return s;
+	}
+
+	@Override
+	public Callback<IEnforce> getEnforceCallback() {
+		return enforceCallback;
+	}
+
+	@Override
+	public List<IEnforce> getNewPlayerEnforces() {
+		return new ArrayList<>();
 	}
 }

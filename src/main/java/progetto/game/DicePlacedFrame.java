@@ -1,21 +1,14 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
-
 /**
  * Player window with positioned dice
  */
-public final class DicePlacedFrame extends AbstractObservable<DicePlacedFrameData> {
+public final class DicePlacedFrame extends DataContainer<DicePlacedFrameData> {
 
-	private DicePlacedFrameData dicePlacedFrameData = new DicePlacedFrameData();
 
-	/**
-	 * Get dicePlacedFrameData
-	 * @return dicePlacedFrameData
-	 */
-	public DicePlacedFrameData getDicePlacedFrameData()
+	DicePlacedFrame()
 	{
-		return dicePlacedFrameData;
+		super(new DicePlacedFrameData());
 	}
 
 	/**
@@ -26,8 +19,7 @@ public final class DicePlacedFrame extends AbstractObservable<DicePlacedFrameDat
 	 */
 	void addDice(Dice newDice, int y, int x)
 	{
-		dicePlacedFrameData = dicePlacedFrameData.addDice(newDice, y, x);
-		change(dicePlacedFrameData);
+		setData(getData().addDice(newDice, y, x));
 	}
 
 	/**
@@ -38,9 +30,8 @@ public final class DicePlacedFrame extends AbstractObservable<DicePlacedFrameDat
 	 */
 	Dice removeDice(int y, int x)
 	{
-		Dice dice = dicePlacedFrameData.getDice(y, x);
-		dicePlacedFrameData = dicePlacedFrameData.removeDice(y, x);
-		change(dicePlacedFrameData);
+		Dice dice = getData().getDice(y, x);
+		setData(getData().removeDice(y, x));
 		return dice;
 	}
 

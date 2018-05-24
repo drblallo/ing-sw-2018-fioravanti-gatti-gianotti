@@ -1,12 +1,14 @@
 package progetto.game;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Immuutable class with data of RoundTrack
  */
-public final class RoundTrackData {
+public final class RoundTrackData implements Serializable
+{
 
 	private static final int NUMBER_OF_ROUNDS = 10;
 
@@ -17,7 +19,7 @@ public final class RoundTrackData {
 	/**
 	 * Constructor
 	 */
-	RoundTrackData() {}
+	public RoundTrackData() {}
 
 	/**
 	 * Constructor to add a dice in position index

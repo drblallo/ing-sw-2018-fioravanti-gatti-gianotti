@@ -19,8 +19,8 @@ public class TestPickedDicesSlot extends TestCase {
 	public void testConstructor()
 	{
 		Assert.assertEquals(0, pickedDicesSlot.getNDices());
-		Assert.assertNull(pickedDicesSlot.getPickedDicesSlotData().getDicePlacementCondition(0));
-		Assert.assertNull(pickedDicesSlot.getPickedDicesSlotData().getDicePlacementCondition(1));
+		Assert.assertNull(pickedDicesSlot.getData().getDicePlacementCondition(0));
+		Assert.assertNull(pickedDicesSlot.getData().getDicePlacementCondition(1));
 	}
 
 	@Test
@@ -75,29 +75,29 @@ public class TestPickedDicesSlot extends TestCase {
 		pickedDicesSlot.add(new Dice(Value.ONE, Color.YELLOW), false, true, false);
 
 		pickedDicesSlot.setIgnoreColor(0, true);
-		Assert.assertTrue(pickedDicesSlot.getPickedDicesSlotData().getDicePlacementCondition(0).getIgnoreColor());
+		Assert.assertTrue(pickedDicesSlot.getData().getDicePlacementCondition(0).getIgnoreColor());
 
 		pickedDicesSlot.setIgnoreValue(0, false);
-		Assert.assertFalse(pickedDicesSlot.getPickedDicesSlotData().getDicePlacementCondition(0).getIgnoreValue());
+		Assert.assertFalse(pickedDicesSlot.getData().getDicePlacementCondition(0).getIgnoreValue());
 
 		pickedDicesSlot.setIgnoreAdjacent(0, true);
-		Assert.assertTrue(pickedDicesSlot.getPickedDicesSlotData().getDicePlacementCondition(0).getIgnoreAdjacent());
+		Assert.assertTrue(pickedDicesSlot.getData().getDicePlacementCondition(0).getIgnoreAdjacent());
 
 	}
 
 	@Test
 	public void testSetIgnoreFail()
 	{
-		PickedDicesSlotData pickedDicesSlotData = pickedDicesSlot.getPickedDicesSlotData();
+		PickedDicesSlotData pickedDicesSlotData = pickedDicesSlot.getData();
 
 		pickedDicesSlot.setIgnoreColor(0, true);
-		Assert.assertEquals(pickedDicesSlotData, pickedDicesSlot.getPickedDicesSlotData());
+		Assert.assertEquals(pickedDicesSlotData, pickedDicesSlot.getData());
 
 		pickedDicesSlot.setIgnoreValue(0, true);
-		Assert.assertEquals(pickedDicesSlotData, pickedDicesSlot.getPickedDicesSlotData());
+		Assert.assertEquals(pickedDicesSlotData, pickedDicesSlot.getData());
 
 		pickedDicesSlot.setIgnoreAdjacent(0, true);
-		Assert.assertEquals(pickedDicesSlotData, pickedDicesSlot.getPickedDicesSlotData());
+		Assert.assertEquals(pickedDicesSlotData, pickedDicesSlot.getData());
 
 	}
 

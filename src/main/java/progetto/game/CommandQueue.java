@@ -1,18 +1,19 @@
 package progetto.game;
 
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.LinkedList;
 
 /**
  * Command queue of the game
  */
-public class CommandQueue extends AbstractProcessor<AbstractGameAction> {
+public class CommandQueue extends DataContainer<CommandQueueData> implements AbstractProcessor<AbstractGameAction> {
 
-	private List<AbstractGameAction> pastAction = Collections.synchronizedList(new ArrayList<>());
-	private Queue<AbstractGameAction> pendingActions = new ConcurrentLinkedQueue<>();
+
+	CommandQueue()
+	{
+		super(new CommandQueueData(new ArrayList<>(), new LinkedList<>()));
+	}
 
 	/**
 	 * Append an action to the queue
@@ -20,8 +21,7 @@ public class CommandQueue extends AbstractProcessor<AbstractGameAction> {
 	 */
 	void offer(AbstractGameAction action)
 	{
-		pendingActions.offer(action);
-		change(this);
+		setData(getData().offerPendingActions(action));
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class CommandQueue extends AbstractProcessor<AbstractGameAction> {
 	 */
 	public AbstractGameAction peekPending()
 	{
-		return pendingActions.peek();
+		return getData().peekPending();
 	}
 
 	/**
@@ -39,12 +39,14 @@ public class CommandQueue extends AbstractProcessor<AbstractGameAction> {
 	 */
 	AbstractGameAction pollPending()
 	{
-		AbstractGameAction action = pendingActions.poll();
 
-		if (action != null)
-			pastAction.add(action);
+		AbstractGameAction action = getData().peekPending();
 
-		change(this);
+		if (action != null) {
+			setData(getData().popPendingAction());
+			setData(getData().addPastAction(action));
+		}
+
 		return action;
 	}
 
@@ -54,7 +56,7 @@ public class CommandQueue extends AbstractProcessor<AbstractGameAction> {
 	 */
 	public int getPendingItemsCount()
 	{
-		return pendingActions.size();
+		return getData().pendingSize();
 	}
 
 	/**
@@ -63,7 +65,7 @@ public class CommandQueue extends AbstractProcessor<AbstractGameAction> {
 	 */
 	public int getPastItemCount()
 	{
-		return pastAction.size();
+		return getData().pastSize();
 	}
 
 	/**
@@ -73,9 +75,7 @@ public class CommandQueue extends AbstractProcessor<AbstractGameAction> {
 	 */
 	public AbstractGameAction getPastItem(int index)
 	{
-		if (pastAction.size() <= index)
-			return null;
-		return pastAction.get(index);
+		return getData().getPastItem(index);
 	}
 
 }

@@ -18,7 +18,7 @@ public class TestActionCommand {
 		String[] s = {"-1"};
 		Assert.assertEquals("sent command", command.execute(s));
 		game.processAllPendingAction();
-		Assert.assertEquals(FrameSelectionState.class, game.getMainBoard().getMainBoardData().getGameState().getClass());
+		Assert.assertEquals(FrameSelectionState.class, game.getMainBoard().getData().getGameState().getClass());
 		s = new String[0];
 		command.execute(s);
 	}

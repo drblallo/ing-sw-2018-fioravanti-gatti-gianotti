@@ -1,9 +1,11 @@
 package progetto.game;
 
+import java.io.Serializable;
+
 /**
  * Dice with a color and a value  (immutable)
  */
-public final class Dice {
+public final class Dice implements Serializable {
 	private final Value value;
 	private final Color color;
 

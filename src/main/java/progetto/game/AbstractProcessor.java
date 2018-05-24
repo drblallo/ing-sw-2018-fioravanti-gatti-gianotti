@@ -1,12 +1,10 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
-
 /**
  * This interface that represents a object that can receive items to be processed.
  * Items are left pending util the relative method is called
  */
-public abstract class AbstractProcessor<T> extends AbstractObservable<AbstractProcessor<T>> {
+public interface AbstractProcessor<T> {
 
 	/**
 	 * @return the count of pending items

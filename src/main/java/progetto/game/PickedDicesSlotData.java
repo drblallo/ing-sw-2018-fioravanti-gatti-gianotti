@@ -1,5 +1,6 @@
 package progetto.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,11 +8,11 @@ import java.util.List;
 /**
  * Slot for picked dices (immutable)
  */
-public final class PickedDicesSlotData {
+public final class PickedDicesSlotData implements Serializable{
 
 	private final List<DicePlacementCondition> pickedDices;
 
-	PickedDicesSlotData()
+	public PickedDicesSlotData()
 	{
 		ArrayList<DicePlacementCondition> temp = new ArrayList<>();
 		pickedDices = Collections.unmodifiableList(temp);

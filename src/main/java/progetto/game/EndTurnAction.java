@@ -3,7 +3,7 @@ package progetto.game;
 public class EndTurnAction extends AbstractGameAction
 {
 
-	EndTurnAction(int nPlayer)
+	public EndTurnAction(int nPlayer)
 	{
 		super(nPlayer);
 	}
@@ -11,8 +11,8 @@ public class EndTurnAction extends AbstractGameAction
 	@Override
 	public boolean canBeExecuted(Game game)
 	{
-		return game.getMainBoard().getMainBoardData().getGameState().getClass() == RoundState.class &&
-				getCallerID() == game.getMainBoard().getMainBoardData().getCurrentPlayer();
+		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
+				getCallerID() == game.getMainBoard().getData().getCurrentPlayer();
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class EndTurnAction extends AbstractGameAction
 		PickedDicesSlot pickedDicesSlot = game.getPlayerBoard(getCallerID()).getPickedDicesSlot();
 		ExtractedDices extractedDices = game.getMainBoard().getExtractedDices();
 
-		while(pickedDicesSlot.getPickedDicesSlotData().getNDices()>0)
+		while(pickedDicesSlot.getData().getNDices()>0)
 		{
 			Dice dice = pickedDicesSlot.remove(0).getDice();
 			extractedDices.addDice(dice);

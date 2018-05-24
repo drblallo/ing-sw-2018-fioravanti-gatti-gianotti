@@ -14,7 +14,8 @@ import java.util.logging.Logger;
  *
  * @param <T> The type that is passed to IObserver when called.
  */
-public abstract class AbstractObservable<T> {
+public abstract class AbstractObservable<T>
+{
 
 	private static final Logger LOGGER = Logger.getLogger(AbstractObservable.class.getName());
 	private final List<IObserver<T>> currentObservers = Collections.synchronizedList(new ArrayList<IObserver<T>>());

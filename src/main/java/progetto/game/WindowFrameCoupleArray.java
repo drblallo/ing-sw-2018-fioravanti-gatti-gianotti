@@ -16,10 +16,17 @@ public class WindowFrameCoupleArray implements Serializable {
 	private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
 	private ArrayList<WindowFrameCouple> windowFrameCouples = new ArrayList<>();
 
+	private static final WindowFrameCoupleArray array = new WindowFrameCoupleArray();
+
+	public static List<WindowFrameCouple> getList()
+	{
+		return array.getWindowFrameCouples();
+	}
+
 	/**
 	 * Constructor
 	 */
-	WindowFrameCoupleArray()
+	public WindowFrameCoupleArray()
 	{
 		String path = "windowFrameCouples.json";
 		readWindowFrameCouples(path);

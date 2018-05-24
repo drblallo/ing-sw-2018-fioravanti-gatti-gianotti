@@ -10,7 +10,7 @@ public class GameStartedState extends AbstractGameState
 	void apply(Game game)
 	{
 		//First player selection
-		int firstPlayer = game.getRNGenerator().getNextInt(game.getMainBoard().getMainBoardData().getPlayerCount());
+		int firstPlayer = game.getRNGenerator().getNextInt(game.getMainBoard().getData().getPlayerCount());
 		game.getMainBoard().setCurrentFirstPlayer(firstPlayer);
 		game.getMainBoard().setCurrentPlayer(firstPlayer);
 		game.getMainBoard().setCurrentRound(0);
