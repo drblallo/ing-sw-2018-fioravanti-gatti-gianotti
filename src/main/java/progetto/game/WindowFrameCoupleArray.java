@@ -80,7 +80,7 @@ public class WindowFrameCoupleArray implements Serializable {
 		catch (Exception e)
 		{
 			LOGGER.log(Level.SEVERE, e.getMessage());
-			LOGGER.log(Level.SEVERE, "File reading has failed");
+			LOGGER.log(Level.WARNING, "File reading has failed");
 			windowFrameCouples = new ArrayList<>();
 		}
 	}

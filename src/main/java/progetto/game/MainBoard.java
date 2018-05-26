@@ -100,4 +100,14 @@ public final class MainBoard extends DataContainer<MainBoardData> implements IMa
 		return -1;
 	}
 
+	void setPublicObjectiveCards(AbstractPublicObjectiveCard[] publicObjectiveCards)
+	{
+		AbstractPublicObjectiveCard[] newPublicObjectiveCards = new AbstractPublicObjectiveCard[publicObjectiveCards.length];
+		for(int i=0; i<publicObjectiveCards.length; i++)
+		{
+			newPublicObjectiveCards[i] = publicObjectiveCards[i];
+		}
+		setData(getData().setPublicObjectiveCards(newPublicObjectiveCards));
+	}
+
 }

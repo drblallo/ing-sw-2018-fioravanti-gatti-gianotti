@@ -2,6 +2,7 @@ package progetto.clientintegration;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import progetto.game.*;
 import progetto.utils.Waiter;
@@ -74,7 +75,7 @@ public abstract class AbstractGameTest
 		ClientGame g = (ClientGame) game;
 		g.sendAction(new SetPlayerCountAction(1));
 		g.sendAction(new StartGameAction());
-		g.sendAction(new FrameSetAction(1));
+		g.sendAction(new FrameSetAction(0, 0, 1));
 		wait(500);
 		Assert.assertEquals(
 				RoundState.class.getName(),

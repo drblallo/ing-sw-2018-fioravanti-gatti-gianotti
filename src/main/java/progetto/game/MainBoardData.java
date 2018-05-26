@@ -18,6 +18,7 @@ public final class MainBoardData implements Serializable {
 	private final int currentFirstPlayer;
 	private final int currentPlayer;
 	private final int currentRound;
+	private final AbstractPublicObjectiveCard[] publicObjectiveCard;
 
 	/**
 	 * Constructor
@@ -31,6 +32,7 @@ public final class MainBoardData implements Serializable {
 		currentFirstPlayer = 0;
 		currentPlayer = 0;
 		currentRound = 1;
+		publicObjectiveCard = null;
 	}
 
 	/**
@@ -52,6 +54,8 @@ public final class MainBoardData implements Serializable {
 		this.currentPlayer = mainBoardData.currentPlayer;
 
 		this.currentRound = mainBoardData.currentRound;
+
+		this.publicObjectiveCard = mainBoardData.publicObjectiveCard;
 	}
 
 	/**
@@ -74,6 +78,8 @@ public final class MainBoardData implements Serializable {
 		this.currentPlayer = mainBoardData.currentPlayer;
 
 		this.currentRound = mainBoardData.currentRound;
+
+		this.publicObjectiveCard = mainBoardData.publicObjectiveCard;
 	}
 
 	/**
@@ -98,6 +104,31 @@ public final class MainBoardData implements Serializable {
 		this.currentPlayer = currentPlayer;
 
 		this.currentRound = currentRound;
+
+		this.publicObjectiveCard = mainBoardData.publicObjectiveCard;
+	}
+
+	/**
+	 * Constructor to set publicObjectiveCards
+	 * @param mainBoardData previous mainBoardData
+	 * @param publicObjectiveCard to set
+	 */
+	private MainBoardData(MainBoardData mainBoardData, AbstractPublicObjectiveCard[] publicObjectiveCard)
+	{
+		this.playerCount = mainBoardData.playerCount;
+
+		ArrayList<WindowFrameCouple> temp = new ArrayList<>(mainBoardData.windowFrameCouples);
+		windowFrameCouples = Collections.unmodifiableList(temp);
+
+		this.gameState = mainBoardData.gameState;
+
+		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
+
+		this.currentPlayer = mainBoardData.currentPlayer;
+
+		this.currentRound = mainBoardData.currentRound;
+
+		this.publicObjectiveCard = publicObjectiveCard;
 	}
 
 
@@ -210,5 +241,14 @@ public final class MainBoardData implements Serializable {
 		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound);
 	}
 
+	MainBoardData setPublicObjectiveCards(AbstractPublicObjectiveCard[] publicObjectiveCards)
+	{
+		return new MainBoardData(this, publicObjectiveCards);
+	}
+
+	AbstractPublicObjectiveCard[] getPublicObjectiveCards()
+	{
+		return publicObjectiveCard;
+	}
 
 }

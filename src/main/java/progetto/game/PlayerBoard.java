@@ -15,7 +15,6 @@ public class PlayerBoard extends DataContainer<PlayerBoardData> implements IPlay
 	private final DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
 	private final PickedDicesSlot pickedDicesSlot = new PickedDicesSlot();
 
-
 	public int getNPickedDices()
 	{
 		return pickedDicesSlot.getNDices();
@@ -54,6 +53,39 @@ public class PlayerBoard extends DataContainer<PlayerBoardData> implements IPlay
 	{
 		setData(getData().setWindowFrame(windowFrame));
 	}
+
+	/**
+	 * Set player extracted window frame couples
+	 * @param extractedWindowFrame window frame to set
+	 */
+	void setExtractedWindowFrameCouples(WindowFrameCouple[] extractedWindowFrame)
+	{
+		WindowFrameCouple[] newExtractedWindowFrame = new WindowFrameCouple[extractedWindowFrame.length];
+		for(int i=0; i<extractedWindowFrame.length; i++)
+		{
+			newExtractedWindowFrame[i] = extractedWindowFrame[i];
+		}
+		setData(getData().setExtractedWindowFrame(newExtractedWindowFrame));
+	}
+
+	/**
+	 * Set player window frame
+	 * @param couple couple to set
+	 * @param side side to set
+	 */
+	void setWindowFrame(int couple, int side)
+	{
+		setData(getData().setWindowFrame(couple, side));
+	}
+
+	/**
+	 * Set player window frame (empty window frame)
+	 */
+	void setEmptyWindowFrame()
+	{
+		setData(getData().setEmptyWindowFrame());
+	}
+
 
 	/**
 	 * Add dice in placed frame
@@ -96,4 +128,13 @@ public class PlayerBoard extends DataContainer<PlayerBoardData> implements IPlay
 		pickedDicesSlot.add(dice, false, false, false);
 	}
 
+	void setPrivateObjectiveCard(AbstractPrivateObjectiveCard[] privateObjectiveCards)
+	{
+		AbstractPrivateObjectiveCard[] newPrivateObjectiveCards = new AbstractPrivateObjectiveCard[privateObjectiveCards.length];
+		for(int i=0; i<privateObjectiveCards.length; i++)
+		{
+			newPrivateObjectiveCards[i] = privateObjectiveCards[i];
+		}
+		setData(getData().setPrivateObjectiveCard(newPrivateObjectiveCards));
+	}
 }
