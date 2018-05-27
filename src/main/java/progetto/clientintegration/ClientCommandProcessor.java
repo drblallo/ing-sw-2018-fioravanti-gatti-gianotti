@@ -3,40 +3,40 @@ package progetto.clientintegration;
 import progetto.commandline.CommandProcessor;
 import progetto.commandline.EchoCommand;
 import progetto.commandline.HelpCommand;
+import progetto.commandline.ICommand;
 import progetto.game.*;
 
-final class ClientCommandProcessor {
+final class ClientCommandProcessor extends CommandProcessor{
 
-    private ClientCommandProcessor(){
+    public ClientCommandProcessor(){
 
-        //constructor hiding
+        super("Command Processor");
 
     }
 
+    public void setGame(IExecuibleGame iExecuibleGame){
 
+        for (ICommand c: getList()
+             ) {
 
-    private static CommandProcessor processor = null;
-
-    public static synchronized CommandProcessor getCommandProcessor() {
-
-        if (processor == null) {
-
-            processor = new CommandProcessor("main");
-            processor.registerCommand(new EchoCommand());
-            processor.registerCommand(new HelpCommand(processor));
-
-            processor.registerCommand(new ActionCommand(StartGameAction.class, ClientMain.getGame()));
-            processor.registerCommand(new ActionCommand(AddWindowFrameCoupleAction.class, ClientMain.getGame()));
-            processor.registerCommand(new ActionCommand(SetPlayerCountAction.class, ClientMain.getGame()));
-
-            processor.registerCommand(new ActionCommand(SetSeedAction.class, ClientMain.getGame()));
-            processor.registerCommand(new ActionCommand(FrameSetAction.class, ClientMain.getGame()));
-	        processor.registerCommand(new ActionCommand(PickDiceAction.class, ClientMain.getGame()));
-	        processor.registerCommand(new ActionCommand(PlaceDiceAction.class, ClientMain.getGame()));
-	        processor.registerCommand(new ActionCommand(EndTurnAction.class, ClientMain.getGame()));
+            deregisterCommand(c);
         }
 
-        return processor;
+        registerCommand(new EchoCommand());
+        registerCommand(new HelpCommand(this));
+
+        registerCommand(new ActionCommand(StartGameAction.class,iExecuibleGame));
+        registerCommand(new ActionCommand(AddWindowFrameCoupleAction.class,iExecuibleGame));
+        registerCommand(new ActionCommand(SetPlayerCountAction.class, iExecuibleGame));
+
+        registerCommand(new ActionCommand(SetSeedAction.class, iExecuibleGame));
+        registerCommand(new ActionCommand(FrameSetAction.class,iExecuibleGame));
+        registerCommand(new ActionCommand(PickDiceAction.class, iExecuibleGame));
+        registerCommand(new ActionCommand(PlaceDiceAction.class, iExecuibleGame));
+        registerCommand(new ActionCommand(EndTurnAction.class, iExecuibleGame));
 
     }
-}
+
+
+
+    }

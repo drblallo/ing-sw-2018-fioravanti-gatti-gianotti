@@ -1,7 +1,9 @@
 package progetto.network;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -69,5 +71,20 @@ public final class ServerStateView implements Serializable
 	public int getRoomCount()
 	{
 		return rooms.size();
+	}
+
+
+	/**
+	 *
+	 * @return the content of this object as a list
+	 */
+	public List<SimpleRoomState> asList()
+	{
+		ArrayList<SimpleRoomState> arrayList = new ArrayList<>();
+
+		for (SimpleRoomState s : rooms.values())
+			arrayList.add(s);
+
+		return arrayList;
 	}
 }

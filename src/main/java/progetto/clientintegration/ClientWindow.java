@@ -9,9 +9,7 @@ import javafx.stage.Stage;
 import progetto.commandline.CommandProcessor;
 import progetto.game.Game;
 import progetto.game.PlayerBoard;
-import progetto.gui.CommandLinePaneController;
-import progetto.gui.GamePaneController;
-import progetto.gui.PlayerBoardPaneController;
+import progetto.gui.*;
 
 import java.io.IOException;
 
@@ -19,6 +17,7 @@ import java.io.IOException;
 public class ClientWindow extends Application {
 
     private static ClientWindow clientWindow;
+    private ClientViewStateMachine clientViewStateMachine;
 
     public static void launchWindow(String[] args){
 
@@ -31,18 +30,20 @@ public class ClientWindow extends Application {
 
         primaryStage.setTitle("Client Window");
 
+        clientViewStateMachine = new ClientViewStateMachine(primaryStage);
+        clientViewStateMachine.setClientCommandProcessor(new ClientCommandProcessor());
 
-        /*CommandProcessor commandProcessor = ClientCommandProcessor.getCommandProcessor();
+        ViewState<StartingPaneController> startingPaneControllerViewState =
+                new ViewState<>(clientViewStateMachine, "StartingPane.fxml", StartingPaneController.class);
 
-        FXMLLoader loader = new FXMLLoader(GamePaneController.class.getResource("GamePane.fxml"));
+        startingPaneControllerViewState.show();
 
-        Pane pane = (Pane) loader.load();
+        new ClientViewState<SocketRMIChoicePaneController>(clientViewStateMachine, "SocketRMIChoicePane.fxml", SocketRMIChoicePaneController.class);
+        new ClientViewState<ExistingGamesPaneController>(clientViewStateMachine, "ExistingGamesPane.fxml", ExistingGamesPaneController.class);
+        new ClientViewState<RoomsPaneController>(clientViewStateMachine, "RoomsPane.fxml", RoomsPaneController.class);
+        new GameViewState(clientViewStateMachine, "GamePane.fxml", GamePaneController.class);
 
-        GamePaneController gamePaneController = loader.<GamePaneController>getController();
-
-        gamePaneController.setUp(ClientMain.getGame(), commandProcessor); */
-
-        FXMLLoader loader = new FXMLLoader(SocketRMIChoicePaneController.class.getResource("SocketRMIChoicePane.fxml"));
+        /*FXMLLoader loader = new FXMLLoader(SocketRMIChoicePaneController.class.getResource("SocketRMIChoicePane.fxml"));
 
         Pane pane = (Pane) loader.load();
 
@@ -50,11 +51,17 @@ public class ClientWindow extends Application {
 
         socketRMIChoicePaneController.setUp(primaryStage);
 
+        FXMLLoader fxmlLoader = new FXMLLoader(StartingPaneController.class.getResource("StartingPane.fxml"));
+
+        Pane pane = (Pane) fxmlLoader.load();
+
+        StartingPaneController startingPaneController = fxmlLoader.<StartingPaneController>getController();
+
         Scene scene = new Scene(pane);
 
         primaryStage.setScene(scene);
 
-        primaryStage.show();
+        primaryStage.show();*/
 
         clientWindow = this;
 

@@ -16,7 +16,7 @@ public class RoundTrackPaneController extends AbstractController<RoundTrackData,
     @Override
     protected void update() {
 
-        int j=0;
+        int j;
 
         RoundTrackData newRoundTrackData = getObservable().getRoundTrackData();
 

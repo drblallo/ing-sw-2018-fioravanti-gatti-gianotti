@@ -48,5 +48,11 @@ public class CommandLinePaneController {
 
     }
 
+    public void clearTextArea(){
+
+        answer.clear();
+
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package progetto.clientintegration;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,20 +8,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import progetto.gui.AbstractStateController;
 import progetto.network.ClientConnection;
 import progetto.network.INetworkClient;
 import progetto.network.NetworkServer;
+import progetto.network.ServerStateView;
 import progetto.network.rmi.RMIClient;
 import progetto.network.socket.SocketClient;
 import progetto.serverintegration.ServerMain;
+import progetto.utils.IObserver;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SocketRMIChoicePaneController {
+public class SocketRMIChoicePaneController extends AbstractClientStateController{
 
     private static final Logger LOGGER = Logger.getLogger(SocketRMIChoicePaneController.class.getName());
 
@@ -39,13 +45,8 @@ public class SocketRMIChoicePaneController {
     @FXML
     private Button connectButton;
 
-    private Stage stage;
-
-    public void setUp(Stage primaryStage){
-
-        stage = primaryStage;
-
-    }
+    @FXML
+    private AnchorPane myPane;
 
     public void onSocketBoxSelected(){
 
@@ -59,11 +60,29 @@ public class SocketRMIChoicePaneController {
 
     }
 
-    public void onConnectButtonClicked(){
+    @FXML
+    public void onConnectButtonClicked() {
+
+        ClientGame clientGame = createClientConnection();
+
+        if (clientGame == null)
+        {
+            errorMessage.setText("Failed to connect");
+            return;
+        }
+
+        getClientViewStateMachine().setCurrentClientGame(clientGame);
+        ExistingGames.getExistingGames().addClientGame(clientGame);
+        getClientViewStateMachine().setCurrentClientGame(clientGame);
+
+        getViewStateMachine().getStateFromName("RoomsPane.fxml").show();
+
+
+    }
+
+    private ClientGame createClientConnection(){
 
         INetworkClient c;
-
-        Pane pane;
 
         if(rmi.isSelected()) {
 
@@ -75,35 +94,15 @@ public class SocketRMIChoicePaneController {
             c = new SocketClient(iPAddress.getText(), ServerMain.DEFAULT_PORT);
         }
 
-        if(c.isRunning()){
+        ClientGame clientConnection = new ClientGame(c);
 
-            ClientGame clientGame = new ClientGame(c);
 
-            ClientMain.setClientGame(clientGame);
+        clientConnection.getClientConnection().fetchServerState();
 
-            FXMLLoader loader = new FXMLLoader(RoomsPaneController.class.getResource("RoomsPane.fxml"));
-            try{
+        if (!c.isRunning())
+            return null;
 
-                pane = (Pane) loader.load();
-
-            } catch (IOException e){
-
-                LOGGER.log(Level.SEVERE, "IOException {0}", e.getMessage());
-                pane = null;
-
-            }
-
-            RoomsPaneController roomsPaneController = loader.<RoomsPaneController>getController();
-
-            roomsPaneController.update();
-
-            stage.setScene(new Scene(pane));
-
-            return;
-
-        }
-
-        errorMessage.setText("Failed to connect");
+        return clientConnection;
 
     }
 

@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import progetto.game.AbstractGameAction;
 import progetto.game.AbstractProcessor;
-import progetto.game.ActionQueue;
 import progetto.utils.IObserver;
 
 public class ActionQueuePaneController {

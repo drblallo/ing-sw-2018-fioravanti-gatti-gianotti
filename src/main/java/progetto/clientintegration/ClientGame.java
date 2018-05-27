@@ -1,6 +1,7 @@
 package progetto.clientintegration;
 
 import progetto.game.*;
+import progetto.gui.GamePaneController;
 import progetto.network.ClientConnection;
 import progetto.network.INetworkClient;
 

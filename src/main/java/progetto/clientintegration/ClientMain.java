@@ -12,22 +12,6 @@ public final class ClientMain {
         //constructor hiding
     }
 
-    private static ClientGame clientGame;
-
-    public static ClientGame getGame() {
-        return clientGame;
-    }
-
-    public static void setClientGame(ClientGame newClientGame){
-
-        if(newClientGame.getClientConnection().isRunning()){
-
-            clientGame= newClientGame;
-
-        }
-
-    }
-
     public static void main(String[] args){
 
         ServerMain.main(args);

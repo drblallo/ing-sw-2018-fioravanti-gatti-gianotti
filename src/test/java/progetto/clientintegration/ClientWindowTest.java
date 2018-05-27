@@ -24,7 +24,7 @@ public class ClientWindowTest {
 
     }
 
-    @Test
+    /*@Test
     public void testOneClientWindow(){
 
         new Thread(() -> ClientMain.main(null)).start();
@@ -39,6 +39,6 @@ public class ClientWindowTest {
         Platform.runLater(()->ClientWindow.getWindow().closeWindow());
 
 
-    }
+    } */
 
 }

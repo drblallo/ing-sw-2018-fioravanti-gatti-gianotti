@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import progetto.commandline.CommandProcessor;
@@ -14,11 +16,11 @@ import progetto.utils.IObserver;
 
 import java.io.IOException;
 
-public class GamePaneController {
+public class GamePaneController extends AbstractStateController{
 
     private IExecuibleGame game = null;
 
-    private int currentPlayer = 0;
+    private int myChair = 0;
 
     private int displayedPlayersCount = 1;
 
@@ -38,6 +40,9 @@ public class GamePaneController {
 
     @FXML
     private Parent playerBoardPane;
+
+    @FXML
+    private TabPane tabPane;
 
     @FXML Parent commandLinePane;
 
@@ -61,9 +66,9 @@ public class GamePaneController {
     private IObserver<MainBoardData> mainBoardIObserver = ogg -> Platform.runLater(this::update);
 
 
-    private int getCurrentPlayer() {
+    private int getMyChair() {
 
-        return currentPlayer;
+        return myChair;
 
     }
 
@@ -79,22 +84,23 @@ public class GamePaneController {
 
     }
 
-    public void setCurrentPlayer(int currentPlayer) {
+    public void setMyChair(int myChair) {
 
-        this.currentPlayer = currentPlayer;
+        this.myChair = myChair;
 
     }
 
-    //ECCEZIONE?
-    public void setUp(IExecuibleGame newGame, CommandProcessor commandProcessor){
 
-        if(game == newGame){
+    public void onPreShow(CommandProcessor commandProcessor){
+
+        if(game == getViewStateMachine().getCurrentGame()){
 
             return;
 
         }
 
-        MainBoard mainBoard = newGame.getMainBoard();
+
+        MainBoard mainBoard = getViewStateMachine().getCurrentGame().getMainBoard();
 
         if(game != null){
 
@@ -102,7 +108,7 @@ public class GamePaneController {
 
         }
 
-        game = newGame;
+        game = getViewStateMachine().getCurrentGame();
         
         mainBoard.addObserver(mainBoardIObserver);
 
@@ -112,33 +118,21 @@ public class GamePaneController {
 
         mainBoardPaneController.setObservable(mainBoard);
 
-        actionQueuePaneController.setActionQueue(newGame.getActionQueue());
+        actionQueuePaneController.setActionQueue(game.getActionQueue());
 
-        roundTrackPaneController.setObservable(newGame.getRoundTrack());
+        roundTrackPaneController.setObservable(game.getRoundTrack());
 
-        playerBoardPaneController.setObservable(newGame.getPlayerBoard(getCurrentPlayer()));
+        playerBoardPaneController.setObservable(game.getPlayerBoard(getMyChair()));
 
-        playerBoardPaneControllers[getCurrentPlayer()] = playerBoardPaneController;
+        playerBoardPaneControllers[getMyChair()] = playerBoardPaneController;
 
         gridPane.getChildren().clear();
-
-        /*for (int i=0; i<mainBoard.getMainBoardData().getPlayerCount(); i++){
-
-            if (i!=getCurrentPlayer()&&game.getPlayerBoard(i)!=null){
-
-                addPlayerBoard(i);
-
-            }
-
-        }
-
-
-*/
-        //Platform.runLater(this::update);
 
     }
 
     protected void update(){
+
+        //System.out.println(getViewStateMachine().getCurrentGame().getMainBoard().getMainBoardData().getGameState());
 
         int currentNumberOfPlayer = game.getMainBoard().getMainBoardData().getPlayerCount();
 
@@ -155,7 +149,7 @@ public class GamePaneController {
 
         for (int i = 0; i<currentNumberOfPlayer; i++){
 
-            if(i!=currentPlayer) {
+            if(i!=myChair) {
 
                 addPlayerBoard(i);
 
@@ -205,4 +199,23 @@ public class GamePaneController {
         }
 
     }
+
+    public void addChatPane(Pane pane){
+
+        Tab tab = new Tab("Room Pane");
+
+        tab.setContent(pane);
+
+        tabPane.getTabs().add(tab);
+
+    }
+
+    @FXML
+    private void onBackButtonClicked(){
+
+        getViewStateMachine().getStateFromName("StartingPane.fxml").show();
+        commandLinePaneController.clearTextArea();
+
+    }
+
 }

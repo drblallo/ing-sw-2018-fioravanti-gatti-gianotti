@@ -12,13 +12,13 @@ public abstract class AbstractGameSync implements ISync{
 	private Game game = new Game();
 
 	@Override
-	public void sendString(Serializable s) {
+	public void sendItem(Serializable s) {
 		game.sendAction((AbstractGameAction) s);
 		game.processAllPendingAction();
 	}
 
 	@Override
-	public boolean isStringGood(Serializable s, int senderID) {
+	public boolean isItemGood(Serializable s, int senderID) {
 		AbstractGameAction action = (AbstractGameAction) s;
 		if (action == null)
 			return false;
@@ -30,11 +30,11 @@ public abstract class AbstractGameSync implements ISync{
 		return game.getHash(index);
 	}
 
-	public int getStringCount() {
+	public int getItemCount() {
 		return game.getActionQueue().getPastItemCount();
 	}
 
-	public Serializable getString(int index) {
+	public Serializable getItem(int index) {
 		return game.getActionQueue().getPastItem(index);
 	}
 
@@ -46,7 +46,7 @@ public abstract class AbstractGameSync implements ISync{
 		game = new Game();
 	}
 
-	public List<Serializable> getAllString() {
+	public List<Serializable> getAllItems() {
 		ArrayList<Serializable> list = new ArrayList<>();
 		for (int a = 0; a < game.getActionQueue().getPastItemCount(); a++)
 			list.add(game.getActionQueue().getPastItem(a));

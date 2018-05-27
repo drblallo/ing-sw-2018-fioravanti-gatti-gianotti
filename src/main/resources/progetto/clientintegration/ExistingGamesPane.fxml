@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="myPane" prefHeight="263.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.clientintegration.ExistingGamesPaneController">
+   <children>
+      <VBox prefHeight="450.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox>
+               <children>
+                  <Label text="Partite aperte: ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Indietro" />
+               </children>
+            </HBox>
+            <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
+            <HBox spacing="10.0">
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Label fx:id="errorLabel" textFill="#ff0202">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#onSelectButtonClicked" text="Seleziona" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

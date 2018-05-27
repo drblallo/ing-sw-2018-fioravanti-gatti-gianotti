@@ -43,5 +43,23 @@
                 </Label>
             </children>
         </HBox>
+      <HBox>
+         <children>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="Giocatore corrente: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentPlayer" text="-1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="15.0" right="15.0" />
+         </padding>
+      </HBox>
     </children>
 </VBox>

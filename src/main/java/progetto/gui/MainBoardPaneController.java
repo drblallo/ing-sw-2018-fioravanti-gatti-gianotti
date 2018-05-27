@@ -2,7 +2,6 @@ package progetto.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import progetto.game.MainBoard;
@@ -23,6 +22,9 @@ public class MainBoardPaneController extends AbstractController<MainBoardData, M
 
     @FXML
     private ExtractedDicesPaneController extractedDicesPaneController;
+
+    @FXML
+    private Label currentPlayer;
 
 
     public void setup(){
@@ -56,6 +58,8 @@ public class MainBoardPaneController extends AbstractController<MainBoardData, M
         numberOfPlayers.setText(Integer.toString(newMainBoardData.getPlayerCount()));
 
         gameState.setText(mainBoardData.getGameState().getName());
+
+        currentPlayer.setText("" + mainBoardData.getCurrentPlayer());
 
     }
 }
