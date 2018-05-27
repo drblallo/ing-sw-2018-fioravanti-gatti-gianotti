@@ -26,22 +26,6 @@ public class PlayerBoardPaneController extends AbstractController<PlayerBoardDat
     @FXML
     private PickedDicesSlotPaneController pickedDicesSlotPaneController;
 
-
-    protected void setup() {
-
-        dicePlacedFramePaneController.setObservable(getObservable().getDicePlacedFrame());
-
-        if(getObservable().getPlayerBoardData().getWindowFrame()!=null){
-
-            windowFramePaneController.setup(getObservable().getPlayerBoardData().getWindowFrame());
-
-        }
-        pickedDicesSlotPaneController.setObservable(getObservable().getPickedDicesSlot());
-
-        Platform.runLater(this::update);
-
-    }
-
     @Override
     protected void onObserverReplaced(){
 

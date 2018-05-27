@@ -1,6 +1,5 @@
 package progetto.clientintegration;
 
-import progetto.gui.AbstractStateController;
 import progetto.gui.ViewState;
 
 public class ClientViewState<T extends AbstractClientStateController> extends ViewState<T> {

@@ -11,21 +11,11 @@ public class PickedDicesSlotPaneController extends AbstractController <PickedDic
     @FXML
     private ListView<Label> listView;
 
-    private PickedDicesSlotData pickedDicesSlotData;
-
 
     @Override
     protected void update() {
 
-        PickedDicesSlotData newPickedDiceSlotData = getObservable().getPickedDicesSlotData();
-
-        if(newPickedDiceSlotData==pickedDicesSlotData){
-
-            return;
-
-        }
-
-        pickedDicesSlotData = newPickedDiceSlotData;
+        PickedDicesSlotData pickedDicesSlotData = getObservable().getPickedDicesSlotData();
 
         listView.getItems().clear();
 

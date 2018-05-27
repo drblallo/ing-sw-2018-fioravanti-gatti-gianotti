@@ -1,14 +1,8 @@
 package progetto.clientintegration;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import progetto.gui.AbstractController;
-import progetto.gui.AbstractStateController;
 
 import java.util.List;
 
@@ -50,7 +44,8 @@ public class ExistingGamesPaneController extends AbstractClientStateController{
         }
 
         ClientGame clientGame =
-                ExistingGames.getExistingGames().getExistingGamesList().get(listView.getSelectionModel().getSelectedIndex());
+                ExistingGames.getExistingGames().getExistingGamesList().get(listView.getSelectionModel()
+                        .getSelectedIndex());
 
         getClientViewStateMachine().setCurrentClientGame(clientGame);
         getViewStateMachine().getStateFromName("GamePane.fxml").show();

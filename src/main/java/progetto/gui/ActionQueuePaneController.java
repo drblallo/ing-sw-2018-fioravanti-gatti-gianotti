@@ -21,7 +21,8 @@ public class ActionQueuePaneController {
 
     private AbstractProcessor<AbstractGameAction> actionQueue;
 
-    private IObserver<AbstractProcessor<AbstractGameAction>> actionQueueIObserver = ogg -> Platform.runLater(this::update);
+    private IObserver<AbstractProcessor<AbstractGameAction>> actionQueueIObserver =
+            ogg -> Platform.runLater(this::update);
 
 
     public final void setActionQueue(AbstractProcessor<AbstractGameAction> newActionQueue){

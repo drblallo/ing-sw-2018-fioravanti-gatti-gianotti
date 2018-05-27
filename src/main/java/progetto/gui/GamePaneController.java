@@ -3,7 +3,6 @@ package progetto.gui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
@@ -15,36 +14,22 @@ import progetto.game.MainBoardData;
 import progetto.utils.IObserver;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GamePaneController extends AbstractStateController{
 
+    private static final Logger LOGGER = Logger.getLogger(GamePaneController.class.getName());
+
     private IExecuibleGame game = null;
 
-    private int myChair = 0;
-
-    private int displayedPlayersCount = 1;
+    private int displayedPlayersCount = -1;
 
     @FXML
     private GridPane gridPane;
 
-    int col = 0, row = 0;
-
-    @FXML
-    private Parent mainBoardPane;
-
-    @FXML
-    private Parent actionQueuePane;
-
-    @FXML
-    private Parent roundTrackPane;
-
-    @FXML
-    private Parent playerBoardPane;
-
     @FXML
     private TabPane tabPane;
-
-    @FXML Parent commandLinePane;
 
     @FXML
     private MainBoardPaneController mainBoardPaneController;
@@ -58,38 +43,10 @@ public class GamePaneController extends AbstractStateController{
     @FXML
     private CommandLinePaneController commandLinePaneController;
 
-    @FXML
-    private PlayerBoardPaneController playerBoardPaneController;
-
-    private PlayerBoardPaneController[] playerBoardPaneControllers = new PlayerBoardPaneController[MainBoardData.MAX_NUM_PLAYERS-1];
+    private PlayerBoardPaneController[] playerBoardPaneControllers =
+            new PlayerBoardPaneController[MainBoardData.MAX_NUM_PLAYERS];
 
     private IObserver<MainBoardData> mainBoardIObserver = ogg -> Platform.runLater(this::update);
-
-
-    private int getMyChair() {
-
-        return myChair;
-
-    }
-
-    private int getDisplayedPlayersCount(){
-
-        if(playerBoardPaneControllers == null){
-
-            return 0;
-
-        }
-
-        return displayedPlayersCount;
-
-    }
-
-    public void setMyChair(int myChair) {
-
-        this.myChair = myChair;
-
-    }
-
 
     public void onPreShow(CommandProcessor commandProcessor){
 
@@ -98,7 +55,6 @@ public class GamePaneController extends AbstractStateController{
             return;
 
         }
-
 
         MainBoard mainBoard = getViewStateMachine().getCurrentGame().getMainBoard();
 
@@ -109,10 +65,8 @@ public class GamePaneController extends AbstractStateController{
         }
 
         game = getViewStateMachine().getCurrentGame();
-        
-        mainBoard.addObserver(mainBoardIObserver);
 
-        playerBoardPaneControllers = new PlayerBoardPaneController[mainBoard.getMainBoardData().getPlayerCount()];
+        mainBoard.addObserver(mainBoardIObserver);
 
         commandLinePaneController.setCommandProcessor(commandProcessor);
 
@@ -122,13 +76,6 @@ public class GamePaneController extends AbstractStateController{
 
         roundTrackPaneController.setObservable(game.getRoundTrack());
 
-        playerBoardPaneController.setObservable(game.getPlayerBoard(getMyChair()));
-        playerBoardPaneController.setup();
-
-        playerBoardPaneControllers[getMyChair()] = playerBoardPaneController;
-
-        gridPane.getChildren().clear();
-
         update();
 
     }
@@ -137,7 +84,7 @@ public class GamePaneController extends AbstractStateController{
 
         int currentNumberOfPlayer = game.getMainBoard().getMainBoardData().getPlayerCount();
 
-        if(getDisplayedPlayersCount() == currentNumberOfPlayer){
+        if(displayedPlayersCount == currentNumberOfPlayer){
 
             return;
 
@@ -145,16 +92,9 @@ public class GamePaneController extends AbstractStateController{
 
         gridPane.getChildren().clear();
 
-        col = 0;
-        row = 0;
-
         for (int i = 0; i<currentNumberOfPlayer; i++){
 
-            if(i!=myChair) {
-
                 addPlayerBoard(i);
-
-            }
 
         }
 
@@ -168,7 +108,7 @@ public class GamePaneController extends AbstractStateController{
 
         Pane pane;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(GamePaneController.class.getResource("playerBoardPane.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(GamePaneController.class.getResource("PlayerBoardPane.fxml"));
 
         try{
 
@@ -177,34 +117,21 @@ public class GamePaneController extends AbstractStateController{
         }catch (IOException e){
 
             pane = null;
-            System.out.println("IOEXception in GamePaneController"); //METTI LOGGER
+            LOGGER.log(Level.SEVERE, e.getMessage());
         }
 
         playerBoardPaneControllers[i] = fxmlLoader.<PlayerBoardPaneController>getController();
-
         playerBoardPaneControllers[i].setObservable(game.getPlayerBoard(i));
-        playerBoardPaneController.setup();
 
-        gridPane.add(pane, col, row);
-
-        if(col == 1){
-
-            row++;
-            col = 0;
-
-        }
-
-        else {
-
-            col++;
-
-        }
+        gridPane.add(pane, i/2, i%2);
 
     }
 
     public void addChatPane(Pane pane){
 
-        Tab tab = new Tab("Room Pane");
+        Tab tab = new Tab("Chat Pane");
+
+        tab.setId("chatPane");
 
         tab.setContent(pane);
 

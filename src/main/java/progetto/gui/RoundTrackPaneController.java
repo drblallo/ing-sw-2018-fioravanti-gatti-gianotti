@@ -11,22 +11,12 @@ public class RoundTrackPaneController extends AbstractController<RoundTrackData,
     @FXML
     private ListView<Label> listView;
 
-    private RoundTrackData roundTrackData;
-
     @Override
     protected void update() {
 
         int j;
 
-        RoundTrackData newRoundTrackData = getObservable().getRoundTrackData();
-
-        if(newRoundTrackData == roundTrackData){
-
-            return;
-
-        }
-
-        roundTrackData = newRoundTrackData;
+        RoundTrackData roundTrackData = getObservable().getRoundTrackData();
 
         listView.getItems().clear();
 

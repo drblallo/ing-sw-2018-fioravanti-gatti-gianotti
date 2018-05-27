@@ -2,29 +2,17 @@ package progetto.clientintegration;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import progetto.gui.AbstractStateController;
-import progetto.gui.GamePaneController;
 import progetto.network.ClientConnection;
 import progetto.network.ServerStateView;
-import progetto.utils.Callback;
 import progetto.utils.IObserver;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class RoomsPaneController extends AbstractClientStateController{
-
-    private static final Logger LOGGER = Logger.getLogger(RoomsPaneController.class.getName());
 
     private List<ServerStateView.SimpleRoomState> simpleRoomStateList;
 
@@ -43,9 +31,6 @@ public class RoomsPaneController extends AbstractClientStateController{
     @FXML
     private TextField usernameTextField;
 
-    @FXML
-    private AnchorPane myPane;
-
     private IObserver<ServerStateView> serverStateViewIObserver = ogg -> Platform.runLater(this::update);
 
 
@@ -63,6 +48,8 @@ public class RoomsPaneController extends AbstractClientStateController{
         clientConnection = getClientViewStateMachine().getCurrentClientGame().getClientConnection();
 
         clientConnection.getServerStateViewCallback().addObserver(serverStateViewIObserver);
+
+        update();
 
     }
 
@@ -143,8 +130,10 @@ public class RoomsPaneController extends AbstractClientStateController{
 
         }
 
-        clientConnection.joinGame(simpleRoomStateList.get(listView.getSelectionModel().getSelectedIndex()).roomID, usernameTextField.getText());
-        getClientViewStateMachine().getClientCommandProcessor().setGame(getClientViewStateMachine().getCurrentClientGame());
+        clientConnection.joinGame(simpleRoomStateList.get(listView.getSelectionModel().
+                getSelectedIndex()).roomID, usernameTextField.getText());
+        getClientViewStateMachine().getClientCommandProcessor().
+                setGame(getClientViewStateMachine().getCurrentClientGame());
         getClientViewStateMachine().getStateFromName("GamePane.fxml").show();
     }
 

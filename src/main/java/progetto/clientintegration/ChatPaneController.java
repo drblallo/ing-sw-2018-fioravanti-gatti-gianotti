@@ -13,6 +13,8 @@ import progetto.network.RoomView;
 import progetto.utils.IObserver;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ChatPaneController {
 
@@ -36,9 +38,18 @@ public class ChatPaneController {
 
     private IObserver<String> stringIObserver = ogg -> Platform.runLater(()-> chatArea.appendText(ogg));
 
+    private static final Logger LOGGER = Logger.getLogger(ChatPaneController.class.getName());
+
     public void onPreShow(ClientGame clientGame){
 
-        if(clientGame!=null){
+        if(clientGame==null){
+
+            LOGGER.log(Level.SEVERE, "clientGame == null ");
+            return;
+
+        }
+
+        if(this.clientGame!=null){
 
             clientGame.getClientConnection().getRoomViewCallback().removeObserver(roomViewIObserver);
             clientGame.getClientConnection().getMessageCallback().removeObserver(stringIObserver);
@@ -114,7 +125,7 @@ public class ChatPaneController {
     @FXML
     private void onSitButtonPressed(){
 
-        if (chairs.getSelectionModel().selectedItemProperty()!=null){
+        if (chairs.getSelectionModel().getSelectedItem()!=null){
 
             clientGame.getClientConnection().pickChair(chairs.getSelectionModel().selectedItemProperty().get());
             update();

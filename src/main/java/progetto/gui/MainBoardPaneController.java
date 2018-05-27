@@ -1,8 +1,6 @@
 package progetto.gui;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import progetto.game.MainBoard;
 import progetto.game.MainBoardData;
@@ -10,15 +8,11 @@ import progetto.game.MainBoardData;
 public class MainBoardPaneController extends AbstractController<MainBoardData, MainBoard> {
 
     @FXML
-    private Parent extractedDicesPane;
-
-    @FXML
     private Label numberOfPlayers;
 
     @FXML
     private Label gameState;
 
-    private MainBoardData mainBoardData;
 
     @FXML
     private ExtractedDicesPaneController extractedDicesPaneController;
@@ -36,17 +30,9 @@ public class MainBoardPaneController extends AbstractController<MainBoardData, M
     @Override
     protected void update() {
 
-        MainBoardData newMainBoardData = getObservable().getMainBoardData();
+        MainBoardData mainBoardData = getObservable().getMainBoardData();
 
-        if(newMainBoardData==mainBoardData){
-
-            return;
-
-        }
-
-        mainBoardData = newMainBoardData;
-
-        numberOfPlayers.setText(Integer.toString(newMainBoardData.getPlayerCount()));
+        numberOfPlayers.setText(Integer.toString(mainBoardData.getPlayerCount()));
 
         gameState.setText(mainBoardData.getGameState().getName());
 

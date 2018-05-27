@@ -25,7 +25,7 @@ public class CommandLinePaneController {
 
                 sendToCommandLine(commandText.getText());
 
-        };
+        }
 
     }
 

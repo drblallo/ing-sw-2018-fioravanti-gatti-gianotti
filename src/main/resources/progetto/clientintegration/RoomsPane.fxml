@@ -24,7 +24,7 @@
                      </padding>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onUpdateButtonClicked" text="Aggiorna">
+                  <Button fx:id="update" mnemonicParsing="false" onAction="#onUpdateButtonClicked" text="Aggiorna">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
@@ -37,7 +37,7 @@
                <children>
                   <Region HBox.hgrow="ALWAYS" />
                   <TextField fx:id="roomNameTextField" promptText="Nome stanza" />
-                  <Button mnemonicParsing="false" onAction="#onCreateButtonClicked" text="Crea stanza" />
+                  <Button fx:id="createRoom" mnemonicParsing="false" onAction="#onCreateButtonClicked" text="Crea stanza" />
                </children>
                <padding>
                   <Insets bottom="10.0" />

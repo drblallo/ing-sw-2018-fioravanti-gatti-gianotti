@@ -5,8 +5,8 @@ package progetto.game;
  */
 public final class DicePlacedFrameData {
 
-	private static final int MAX_NUMBER_OF_ROWS = 4;
-	private static final int MAX_NUMBER_OF_COLUMNS = 5;
+	public static final int MAX_NUMBER_OF_ROWS = 4;
+	public static final int MAX_NUMBER_OF_COLUMNS = 5;
 
 	private final Dice[][] dicesFrame = new Dice[MAX_NUMBER_OF_COLUMNS][MAX_NUMBER_OF_ROWS];
 	private final int nPlacedDices;

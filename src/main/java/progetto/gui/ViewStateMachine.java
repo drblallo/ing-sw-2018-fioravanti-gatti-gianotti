@@ -1,7 +1,6 @@
 package progetto.gui;
 
 import javafx.stage.Stage;
-import progetto.game.Game;
 import progetto.game.IExecuibleGame;
 
 import java.util.HashMap;
@@ -45,6 +44,11 @@ public class ViewStateMachine {
 
     void setCurrentViewState(ViewState currentViewState){
 
+        if(this.currentViewState!=null){
+
+            this.currentViewState.onHide();
+
+        }
         this.currentViewState = currentViewState;
 
     }

@@ -1,21 +1,11 @@
 package progetto.clientintegration;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import progetto.gui.AbstractStateController;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public final class StartingPaneController extends AbstractStateController{
-
-    private static final Logger LOGGER = Logger.getLogger(StartingPaneController.class.getName());
 
     @FXML
     private AnchorPane myPane;
@@ -39,7 +29,7 @@ public final class StartingPaneController extends AbstractStateController{
     @Override
     public void onPreShow(){
 
-        if(ExistingGames.getExistingGames().getExistingGamesList().size()!=0){
+        if(!ExistingGames.getExistingGames().getExistingGamesList().isEmpty()){
 
             continueButton.setDisable(false);
 

@@ -11,20 +11,10 @@ public class ExtractedDicesPaneController extends AbstractController<ExtractedDi
     @FXML
     private ListView listView;
 
-    private ExtractedDicesData extractedDicesData;
-
     @Override
     protected void update() {
 
-        ExtractedDicesData newExtractedDicesData = getObservable().getExtractedDicesData();
-
-        if(newExtractedDicesData==extractedDicesData){
-
-            return;
-
-        }
-
-        extractedDicesData = newExtractedDicesData;
+        ExtractedDicesData extractedDicesData = getObservable().getExtractedDicesData();
 
         listView.getItems().clear();
 

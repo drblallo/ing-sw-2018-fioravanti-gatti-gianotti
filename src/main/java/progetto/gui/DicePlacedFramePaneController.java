@@ -14,28 +14,16 @@ public class DicePlacedFramePaneController extends AbstractController <DicePlace
     @FXML
     private GridPane gridPane;
 
-    private DicePlacedFrameData dicePlacedFrameData;
-
     @Override
     protected void update() {
 
-        DicePlacedFrameData newDicePlacedFrameData = getObservable().getDicePlacedFrameData();
-
-        if(dicePlacedFrameData==newDicePlacedFrameData){
-
-            return;
-
-        }
-
-        dicePlacedFrameData = newDicePlacedFrameData;
+        DicePlacedFrameData dicePlacedFrameData = getObservable().getDicePlacedFrameData();
 
         number.setText(Integer.toString(dicePlacedFrameData.getNDices()));
 
-        //gridPane.getChildren().clear();
+        for(int i=0; i<DicePlacedFrameData.MAX_NUMBER_OF_ROWS-1; i++){
 
-        for(int i=0; i<3; i++){
-
-            for (int j=0; j<4; j++){
+            for (int j=0; j<DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS-1; j++){
 
                 if(dicePlacedFrameData.getDice(i,j)!=null){
 

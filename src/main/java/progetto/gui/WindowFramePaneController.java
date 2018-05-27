@@ -3,6 +3,7 @@ package progetto.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import progetto.game.DicePlacedFrameData;
 import progetto.game.WindowFrame;
 
 public class WindowFramePaneController {
@@ -19,11 +20,12 @@ public class WindowFramePaneController {
 
         gridPane.getChildren().clear();
 
-        for(int i=0; i<3; i++){
+        for(int i = 0; i< DicePlacedFrameData.MAX_NUMBER_OF_ROWS-1; i++){
 
-            for (int j=0; j<4; j++){
+            for (int j=0; j<DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS-1; j++){
 
-                gridPane.add(new Label(windowFrame.getColorBond(i,j).toString() + windowFrame.getValueBond(i,j).toString()), i,j);
+                gridPane.add(new Label(windowFrame.getColorBond(i,j).toString() +
+                        windowFrame.getValueBond(i,j).toString()), i,j);
 
             }
 

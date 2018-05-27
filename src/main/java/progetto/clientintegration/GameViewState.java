@@ -4,14 +4,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import progetto.gui.GamePaneController;
 import progetto.gui.ViewState;
+import progetto.network.RoomView;
+import progetto.utils.IObserver;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameViewState extends ViewState <GamePaneController> {
 
-    private Pane pane;
     private ChatPaneController chatPaneController;
     private ClientViewStateMachine clientViewStateMachine;
+    private static final Logger LOGGER = Logger.getLogger(GameViewState.class.getName());
 
     public GameViewState(ClientViewStateMachine clientViewStateMachine, String fxml, Class c) {
 
@@ -29,7 +33,7 @@ public class GameViewState extends ViewState <GamePaneController> {
         }catch (IOException e){
 
             pane = null;
-            System.out.println("IOEXception in GamePaneController"); //METTI LOGGER
+            LOGGER.log(Level.SEVERE, e.getMessage());
         }
 
         chatPaneController = fxmlLoader.<ChatPaneController>getController();

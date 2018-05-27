@@ -1,17 +1,15 @@
 package progetto.clientintegration;
 
-import progetto.gui.ViewStateMachine;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExistingGames {
+public final class ExistingGames {
 
     private static ExistingGames existingGames;
 
     private ArrayList<ClientGame> clientGameArrayList = new ArrayList<>();
 
-    public static ExistingGames getExistingGames() {
+    public static synchronized ExistingGames getExistingGames() {
         if(existingGames == null){
 
             existingGames = new ExistingGames();

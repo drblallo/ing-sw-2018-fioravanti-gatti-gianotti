@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class ViewState<T extends AbstractStateController> {
 
-    private final static Logger LOGGER = Logger.getLogger(ViewState.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewState.class.getName());
     private ViewStateMachine viewStateMachine;
     private Scene scene;
     private T controller;
@@ -66,6 +66,12 @@ public class ViewState<T extends AbstractStateController> {
         stage.setScene(scene);
         viewStateMachine.setCurrentViewState(this);
         stage.show();
+
+    }
+
+    protected void onHide(){
+
+        //
 
     }
 
