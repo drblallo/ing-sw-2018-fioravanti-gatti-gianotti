@@ -76,6 +76,12 @@ public class TestFrameSelection {
 	@Test
 	public void testFrameExtraction1Player()
 	{
+		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		game.getMainBoard().setPlayerCount(1);
 		game.setState(new FrameSelectionState());
 
@@ -95,6 +101,12 @@ public class TestFrameSelection {
 	@Test
 	public void testFrameExtraction4Player()
 	{
+		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		game.setState(new FrameSelectionState());
 
 		Assert.assertEquals(4, game.getMainBoard().getData().getPlayerCount());
@@ -127,9 +139,14 @@ public class TestFrameSelection {
 	@Test
 	public void testFrameSelection1Player()
 	{
+		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		game.getMainBoard().setPlayerCount(1);
 		game.setState(new FrameSelectionState());
-		WindowFrameCouple[] windowFrameCouples = game.getPlayerBoard(0).getData().getExtractedWindowFrameCouplesWindowFrame();
 
 		game.sendAction(new FrameSetAction(0, 1, 0));
 		game.processAction();
@@ -141,6 +158,12 @@ public class TestFrameSelection {
 	@Test
 	public void testFrameSelection4Player()
 	{
+		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		game.setState(new FrameSelectionState());
 
 		game.sendAction(new FrameSetAction(0, 0, 0));
@@ -181,6 +204,12 @@ public class TestFrameSelection {
 	@Test
 	public void testFrameSelection1PlayerEmptyError()
 	{
+		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		game.getMainBoard().setPlayerCount(1);
 		game.setState(new FrameSelectionState());
 

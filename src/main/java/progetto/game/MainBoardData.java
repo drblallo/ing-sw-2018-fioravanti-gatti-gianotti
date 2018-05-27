@@ -170,6 +170,15 @@ public final class MainBoardData implements Serializable {
 	}
 
 	/**
+	 * Get List windowFrameCouples
+	 * @return List of window frame couples
+	 */
+	List<WindowFrameCouple> getWindowFrameCouples()
+	{
+		return new ArrayList<>(this.windowFrameCouples);
+	}
+
+	/**
 	 * Get gameState
 	 * @return the current game state
 	 */

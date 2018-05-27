@@ -68,6 +68,12 @@ public class TestAction {
 	@Test
 	public void testStartGame()
 	{
+		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		game.sendAction(new StartGameAction());
 		game.processAction();
 		game.sendAction(new StartGameAction());
@@ -133,6 +139,12 @@ public class TestAction {
 	@Test
 	public void testFrameSetAction()
 	{
+		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		FrameSetAction a = new FrameSetAction(0, 1, 0);
 		Assert.assertFalse(a.canBeExecuted(game));
 		game.setState(new FrameSelectionState());
@@ -188,6 +200,12 @@ public class TestAction {
 	@Test
 	public void testStartGameAction()
 	{
+		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		game.sendAction(new StartGameAction());
 		game.processAction();
 		Assert.assertEquals("Frame selection", game.getMainBoard().getData().getGameState().getName());
@@ -196,6 +214,11 @@ public class TestAction {
 	@Test
 	public void testCurrentPlayer() {
 		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		WindowFrameCouple windowFrameCouple = windowFrameCoupleArray.getWindowFrameCouples().get(1);
 		WindowFrame windowFrame = windowFrameCouple.getWindowFrame(0);
 		MainBoard mainBoard = game.getMainBoard();
@@ -236,6 +259,11 @@ public class TestAction {
 	public void testPickDiceAndPlaceDiceAction()
 	{
 		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		WindowFrameCouple windowFrameCouple = windowFrameCoupleArray.getWindowFrameCouples().get(1);
 		WindowFrame windowFrame = windowFrameCouple.getWindowFrame(0);
 		MainBoard mainBoard = game.getMainBoard();
@@ -271,8 +299,12 @@ public class TestAction {
 	public void testEndTurnAction()
 	{
 		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		WindowFrameCouple windowFrameCouple = windowFrameCoupleArray.getWindowFrameCouples().get(1);
-		WindowFrame windowFrame = windowFrameCouple.getWindowFrame(0);
 		MainBoard mainBoard = game.getMainBoard();
 		mainBoard.setPlayerCount(4);
 		game.sendAction(new StartGameAction());
@@ -292,6 +324,11 @@ public class TestAction {
 	public void testEndTurnDicePickedNotPlaced()
 	{
 		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		WindowFrameCouple windowFrameCouple = windowFrameCoupleArray.getWindowFrameCouples().get(1);
 		WindowFrame windowFrame = windowFrameCouple.getWindowFrame(0);
 		MainBoard mainBoard = game.getMainBoard();
@@ -340,6 +377,11 @@ public class TestAction {
 	public void testEndRoundEndGame()
 	{
 		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		{
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+		}
+		game.processAllPendingAction();
 		WindowFrameCouple windowFrameCouple = windowFrameCoupleArray.getWindowFrameCouples().get(1);
 		WindowFrame windowFrame = windowFrameCouple.getWindowFrame(0);
 		MainBoard mainBoard = game.getMainBoard();

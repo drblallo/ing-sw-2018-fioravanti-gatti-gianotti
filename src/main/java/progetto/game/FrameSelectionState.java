@@ -121,8 +121,7 @@ public class FrameSelectionState extends AbstractGameState {
 	 */
 	private void windowFrameReadAndExtraction(Game game)
 	{
-		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
-		List<WindowFrameCouple> windowFrameCouples = windowFrameCoupleArray.getWindowFrameCouples();
+		List<WindowFrameCouple> windowFrameCouples = game.getMainBoard().getData().getWindowFrameCouples();
 		WindowFrameCouple[] couples;
 		RNGenerator rnGenerator = game.getRNGenerator();
 		int nPlayer = game.getMainBoard().getData().getPlayerCount();

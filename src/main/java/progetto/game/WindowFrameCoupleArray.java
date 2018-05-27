@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 /**
  * ArrayList of Window Frame Couples. Upload by file JSON using GSON.
  */
-public class WindowFrameCoupleArray implements Serializable {
+public class WindowFrameCoupleArray {
 
 	private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
-	private ArrayList<WindowFrameCouple> windowFrameCouples = new ArrayList<>();
+	private WindowFrameCoupleArrayInternal windowFrameCoupleArrayInternal = new WindowFrameCoupleArrayInternal();
 
 	private static final WindowFrameCoupleArray array = new WindowFrameCoupleArray();
 
@@ -41,7 +41,6 @@ public class WindowFrameCoupleArray implements Serializable {
 		if(path.isEmpty())
 		{
 			LOGGER.log(Level.SEVERE, "Wrong path");
-			windowFrameCouples = new ArrayList<>();
 		}
 		else
 		{
@@ -55,7 +54,7 @@ public class WindowFrameCoupleArray implements Serializable {
 	 */
 	public List<WindowFrameCouple> getWindowFrameCouples()
 	{
-		return new ArrayList<>(windowFrameCouples);
+		return windowFrameCoupleArrayInternal.getWindowFrameCouples();
 	}
 
 	/**
@@ -66,22 +65,18 @@ public class WindowFrameCoupleArray implements Serializable {
 		if(path.isEmpty())
 		{
 			LOGGER.log(Level.SEVERE, "Empty path");
-			windowFrameCouples = new ArrayList<>();
 			return;
 		}
 
 		try(InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(path), java.nio.charset.Charset.defaultCharset()))
 		{
-			WindowFrameCoupleArray windowFrameCoupleArray;
 			Gson gson = new Gson();
-			windowFrameCoupleArray = gson.fromJson(inputStreamReader, WindowFrameCoupleArray.class);
-			windowFrameCouples = new ArrayList<>(windowFrameCoupleArray.getWindowFrameCouples());
+			windowFrameCoupleArrayInternal = gson.fromJson(inputStreamReader, WindowFrameCoupleArrayInternal.class);
 		}
 		catch (Exception e)
 		{
 			LOGGER.log(Level.SEVERE, e.getMessage());
 			LOGGER.log(Level.WARNING, "File reading has failed");
-			windowFrameCouples = new ArrayList<>();
 		}
 	}
 
