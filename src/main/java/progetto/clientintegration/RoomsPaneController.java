@@ -144,7 +144,7 @@ public class RoomsPaneController extends AbstractClientStateController{
         }
 
         clientConnection.joinGame(simpleRoomStateList.get(listView.getSelectionModel().getSelectedIndex()).roomID, usernameTextField.getText());
-        getClientViewStateMachine().getClientCommandProcessor().setGame(getClientViewStateMachine().getCurrentClientGame().getGame());
+        getClientViewStateMachine().getClientCommandProcessor().setGame(getClientViewStateMachine().getCurrentClientGame());
         getClientViewStateMachine().getStateFromName("GamePane.fxml").show();
     }
 

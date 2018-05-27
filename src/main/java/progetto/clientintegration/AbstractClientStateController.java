@@ -2,7 +2,7 @@ package progetto.clientintegration;
 
 import progetto.gui.AbstractStateController;
 
-public class AbstractClientStateController extends AbstractStateController {
+public abstract class AbstractClientStateController extends AbstractStateController {
 
     private ClientViewStateMachine clientViewStateMachine;
 

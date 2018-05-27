@@ -123,16 +123,17 @@ public class GamePaneController extends AbstractStateController{
         roundTrackPaneController.setObservable(game.getRoundTrack());
 
         playerBoardPaneController.setObservable(game.getPlayerBoard(getMyChair()));
+        playerBoardPaneController.setup();
 
         playerBoardPaneControllers[getMyChair()] = playerBoardPaneController;
 
         gridPane.getChildren().clear();
 
+        update();
+
     }
 
     protected void update(){
-
-        //System.out.println(getViewStateMachine().getCurrentGame().getMainBoard().getMainBoardData().getGameState());
 
         int currentNumberOfPlayer = game.getMainBoard().getMainBoardData().getPlayerCount();
 
@@ -182,6 +183,7 @@ public class GamePaneController extends AbstractStateController{
         playerBoardPaneControllers[i] = fxmlLoader.<PlayerBoardPaneController>getController();
 
         playerBoardPaneControllers[i].setObservable(game.getPlayerBoard(i));
+        playerBoardPaneController.setup();
 
         gridPane.add(pane, col, row);
 

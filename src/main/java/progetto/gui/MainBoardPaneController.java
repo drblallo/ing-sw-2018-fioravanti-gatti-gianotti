@@ -26,15 +26,6 @@ public class MainBoardPaneController extends AbstractController<MainBoardData, M
     @FXML
     private Label currentPlayer;
 
-
-    public void setup(){
-
-        extractedDicesPaneController.setObservable(getObservable().getExtractedDices());
-
-        Platform.runLater(this::update);
-
-    }
-
     @Override
     protected void onObserverReplaced() {
 

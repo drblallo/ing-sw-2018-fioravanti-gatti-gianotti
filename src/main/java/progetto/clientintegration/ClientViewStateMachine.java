@@ -17,8 +17,8 @@ public class ClientViewStateMachine extends ViewStateMachine {
     public void setCurrentClientGame(ClientGame clientGame){
 
         this.currentClientGame = clientGame;
-        setCurrentGame(clientGame.getGame());
-        getClientCommandProcessor().setGame(clientGame.getGame());
+        setCurrentGame(clientGame);
+        getClientCommandProcessor().setGame(clientGame);
 
     }
 

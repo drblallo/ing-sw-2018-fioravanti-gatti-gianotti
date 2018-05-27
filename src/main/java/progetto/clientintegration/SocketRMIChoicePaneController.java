@@ -73,7 +73,6 @@ public class SocketRMIChoicePaneController extends AbstractClientStateController
 
         getClientViewStateMachine().setCurrentClientGame(clientGame);
         ExistingGames.getExistingGames().addClientGame(clientGame);
-        getClientViewStateMachine().setCurrentClientGame(clientGame);
 
         getViewStateMachine().getStateFromName("RoomsPane.fxml").show();
 
