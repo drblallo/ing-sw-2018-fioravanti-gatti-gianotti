@@ -2,22 +2,22 @@ package progetto.clientmodelproxy;
 
 import progetto.game.*;
 
-public class PlayerBoardProxy extends DataContainerProxy<PlayerBoardData> implements IPlayerBoard
+public class PlayerBoardProxy extends AbstractPlayerBoard
 {
 
-	private DataContainerProxy<PickedDicesSlotData> pickedDicesSlotData = new DataContainerProxy<>(new PickedDicesSlotData());
-	private DataContainerProxy<DicePlacedFrameData> dicePlacedFrameData = new DataContainerProxy<>(new DicePlacedFrameData());
+	private DataContainer<PickedDicesSlotData> pickedDicesSlotData = new DataContainer<>(new PickedDicesSlotData());
+	private DataContainer<DicePlacedFrameData> dicePlacedFrameData = new DataContainer<>(new DicePlacedFrameData());
 
 	public PlayerBoardProxy()
 	{
 		super(new PlayerBoardData());
 	}
 
-	public DataContainerProxy<PickedDicesSlotData> getPickedDicesSlot() {
+	public DataContainer<PickedDicesSlotData> getPickedDicesSlot() {
 		return pickedDicesSlotData;
 	}
 
-	public DataContainerProxy<DicePlacedFrameData> getDicePlacedFrame() {
+	public DataContainer<DicePlacedFrameData> getDicePlacedFrame() {
 		return dicePlacedFrameData;
 	}
 

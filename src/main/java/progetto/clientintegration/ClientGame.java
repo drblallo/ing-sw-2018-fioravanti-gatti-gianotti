@@ -41,22 +41,22 @@ public class ClientGame extends AbstractGameSync implements IExecuibleGame
 	}
 
 	@Override
-	public IDataContainer<CommandQueueData> getCommandQueue() {
+	public DataContainer<CommandQueueData> getCommandQueue() {
 		return clientConnection.getProxy().getCommandQueue();
 	}
 
 	@Override
-	public IDataContainer<RoundTrackData> getRoundTrack() {
+	public DataContainer<RoundTrackData> getRoundTrack() {
 		return clientConnection.getProxy().getRoundTrack();
 	}
 
 	@Override
-	public IPlayerBoard getPlayerBoard(int index) {
+	public AbstractPlayerBoard getPlayerBoard(int index) {
 		return clientConnection.getProxy().getPlayerBoard(index);
 	}
 
 	@Override
-	public IMainBoard getMainBoard() {
+	public AbstractMainBoard getMainBoard() {
 		return clientConnection.getProxy().getMainBoard();
 	}
 

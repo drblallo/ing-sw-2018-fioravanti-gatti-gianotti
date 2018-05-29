@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public final class DicePlacedFrameData implements Serializable{
 
-	private static final int MAX_NUMBER_OF_ROWS = 4;
-	private static final int MAX_NUMBER_OF_COLUMNS = 5;
+	public static final int MAX_NUMBER_OF_ROWS = 4;
+	public static final int MAX_NUMBER_OF_COLUMNS = 5;
 
 	private final Dice[][] dicesFrame = new Dice[MAX_NUMBER_OF_ROWS][MAX_NUMBER_OF_COLUMNS];
 	private final int nPlacedDices;
@@ -67,7 +67,7 @@ public final class DicePlacedFrameData implements Serializable{
 	 * @param y pos vertical
 	 * @return dice in the selected position
 	 */
-	Dice getDice(int y, int x)
+	public Dice getDice(int y, int x)
 	{
 		if(x<0 || x>MAX_NUMBER_OF_COLUMNS-1 || y<0 || y>MAX_NUMBER_OF_ROWS-1)
 		{
@@ -80,7 +80,7 @@ public final class DicePlacedFrameData implements Serializable{
 	 *
 	 * @return number of dice in the placed frame
 	 */
-	int getNDices()
+	public int getNDices()
 	{
 		return nPlacedDices;
 	}

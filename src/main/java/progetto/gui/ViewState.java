@@ -55,12 +55,6 @@ public class ViewState<T extends AbstractStateController> {
     }
 
     public void show(){
-
-        if(viewStateMachine.getCurrentViewState() == this){
-
-            return;
-
-        }
         controller.onPreShow();
         Stage stage = viewStateMachine.getStage();
         stage.setScene(scene);

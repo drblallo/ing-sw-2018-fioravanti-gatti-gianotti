@@ -20,12 +20,21 @@ public class WindowFramePaneController {
 
         gridPane.getChildren().clear();
 
-        for(int i = 0; i< DicePlacedFrameData.MAX_NUMBER_OF_ROWS-1; i++){
+        for(int i = 0; i< DicePlacedFrameData.MAX_NUMBER_OF_ROWS; i++){
 
-            for (int j=0; j<DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS-1; j++){
+            for (int j=0; j<DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS; j++){
 
-                gridPane.add(new Label(windowFrame.getColorBond(i,j).toString() +
-                        windowFrame.getValueBond(i,j).toString()), i,j);
+                if(windowFrame.getColorBond(i,j)!=null){
+
+                    gridPane.add(new Label(windowFrame.getColorBond(i,j).toString()),j,i);
+
+                }
+
+                else if(windowFrame.getValueBond(i,j)!=null){
+
+                    gridPane.add(new Label(windowFrame.getValueBond(i,j).toString()), j,i);
+
+                }
 
             }
 

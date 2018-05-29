@@ -7,12 +7,12 @@ import org.junit.Test;
 
 public class TestActionQueue {
 
-	private ActionQueue queue;
+	private CommandQueue queue;
 
 	@Before
 	public void setUp()
 	{
-		queue = new ActionQueue();
+		queue = new CommandQueue();
 	}
 
 	@After

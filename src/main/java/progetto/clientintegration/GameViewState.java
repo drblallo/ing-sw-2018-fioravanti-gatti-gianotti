@@ -4,8 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import progetto.gui.GamePaneController;
 import progetto.gui.ViewState;
-import progetto.network.RoomView;
-import progetto.utils.IObserver;
 
 import java.io.IOException;
 import java.util.logging.Level;

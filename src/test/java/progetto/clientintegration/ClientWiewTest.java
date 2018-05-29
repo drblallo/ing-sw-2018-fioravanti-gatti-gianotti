@@ -25,6 +25,8 @@ public class ClientWiewTest extends ApplicationTest {
 
     private NetworkServer networkServer;
 
+    Waiter timoty = new Waiter();
+
     @Before
     public void setUp() throws Exception {
 
@@ -48,8 +50,6 @@ public class ClientWiewTest extends ApplicationTest {
 
     @Test
     public void testFirst() {
-
-        Waiter timoty = new Waiter();
 
         clickOn("#newGame");
         clickOn("#rmi");
@@ -89,19 +89,22 @@ public class ClientWiewTest extends ApplicationTest {
         write("");
         clickOn("#sendButton");
         clickOn("#commandText");
-        write("SetPlayerCountAction 0 2\n");
+        write("SetPlayerCountAction 0 1\n");
         write("StartGameAction 0\n");
-        write("FrameSetAction 0 -1\n");
+        write("FrameSetAction 0 0 0\n");
         write("PickDiceAction 0 1\n");
-        clickOn("#mainTab");
+        write("PlaceDiceAction 0 0 0 0\n");
+        write("PlaceDiceAction 0 0 0 4\n");
+        write("PlaceDiceAction 0 0 3 0\n");
+        write("PlaceDiceAction 0 0 3 4\n");
+        clickOn("#otherPlayers");
         timoty.wait(1000);
         clickOn("#commandLinePane");
         clickOn("#commandText");
         write("EndTurnAction 0\n");
         write("EndTurnAction 0\n");
         write("EndTurnAction 0\n");
-        clickOn("#mainTab");
-        timoty.wait(500);
+        clickOn("#roundTrack");
         clickOn("#backButton");
         clickOn("#continueButton");
         clickOn("#backButton");
@@ -115,6 +118,8 @@ public class ClientWiewTest extends ApplicationTest {
         clickOn("#rmi");
         clickOn("#connectButton");
 
+
+        timoty.wait(500);
         Assert.assertTrue(true);
 
     }
@@ -131,14 +136,49 @@ public class ClientWiewTest extends ApplicationTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void testTwoGame(){
+
+        clickOn("#newGame");
+        clickOn("#connectButton");
+        clickOn("#roomNameTextField");
+        write("Room1");
+        clickOn("#createRoom");
+        clickOn("#usernameTextField");
+        write("Luca");
+        clickOn("#listView");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        clickOn("#enterButton");
+        clickOn("#backButton");
+
+        clickOn("#newGame");
+        clickOn("#connectButton");
+        clickOn("#roomNameTextField");
+        write("Room2");
+        clickOn("#createRoom");
+        clickOn("#usernameTextField");
+        write("Luca");
+        clickOn("#listView");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        clickOn("#enterButton");
+
+        Assert.assertTrue(true);
+    }
+
     @After
     public void tearDown() throws Exception {
+
+        timoty.wait(500);
 
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});
-
         networkServer.stop();
 
+        timoty.wait(500);
     }
+
 }

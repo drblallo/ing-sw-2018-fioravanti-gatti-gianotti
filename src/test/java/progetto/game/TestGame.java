@@ -19,7 +19,7 @@ public class TestGame extends TestCase {
 	public void testGetter()
 	{
 
-		AbstractProcessor commandQueue = game.getActionQueue();
+		AbstractProcessor commandQueue = game.getCommandQueue();
 
 		RoundTrack roundTrack = game.getRoundTrack();
 

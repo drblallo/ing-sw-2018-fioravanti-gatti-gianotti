@@ -2,7 +2,7 @@ package progetto.clientmodelproxy;
 
 import progetto.game.*;
 
-public class MainBoardProxy extends DataContainerProxy<MainBoardData> implements IMainBoard
+public class MainBoardProxy extends AbstractMainBoard
 {
 
 	public MainBoardProxy()

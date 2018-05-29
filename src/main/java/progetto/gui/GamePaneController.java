@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import progetto.commandline.CommandProcessor;
 import progetto.game.IExecuibleGame;
-import progetto.game.MainBoard;
+import progetto.game.AbstractMainBoard;
 import progetto.game.MainBoardData;
 import progetto.utils.IObserver;
 
@@ -56,7 +56,7 @@ public class GamePaneController extends AbstractStateController{
 
         }
 
-        MainBoard mainBoard = getViewStateMachine().getCurrentGame().getMainBoard();
+        AbstractMainBoard mainBoard = getViewStateMachine().getCurrentGame().getMainBoard();
 
         if(game != null){
 
@@ -72,7 +72,7 @@ public class GamePaneController extends AbstractStateController{
 
         mainBoardPaneController.setObservable(mainBoard);
 
-        actionQueuePaneController.setActionQueue(game.getActionQueue());
+        actionQueuePaneController.setObservable(game.getCommandQueue());
 
         roundTrackPaneController.setObservable(game.getRoundTrack());
 
@@ -82,7 +82,7 @@ public class GamePaneController extends AbstractStateController{
 
     protected void update(){
 
-        int currentNumberOfPlayer = game.getMainBoard().getMainBoardData().getPlayerCount();
+        int currentNumberOfPlayer = game.getMainBoard().getData().getPlayerCount();
 
         if(displayedPlayersCount == currentNumberOfPlayer){
 

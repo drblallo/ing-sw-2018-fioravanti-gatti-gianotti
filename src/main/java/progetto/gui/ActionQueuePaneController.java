@@ -1,14 +1,11 @@
 package progetto.gui;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import progetto.game.AbstractGameAction;
-import progetto.game.AbstractProcessor;
-import progetto.utils.IObserver;
+import progetto.game.*;
 
-public class ActionQueuePaneController {
+public class ActionQueuePaneController extends AbstractController<CommandQueueData, DataContainer<CommandQueueData>>{
 
     @FXML
     private ListView<Label> pastActionsListView;
@@ -19,45 +16,24 @@ public class ActionQueuePaneController {
     @FXML
     private Label numberOfPendingActions;
 
-    private AbstractProcessor<AbstractGameAction> actionQueue;
+    @Override
+    protected void update(){
 
-    private IObserver<AbstractProcessor<AbstractGameAction>> actionQueueIObserver =
-            ogg -> Platform.runLater(this::update);
-
-
-    public final void setActionQueue(AbstractProcessor<AbstractGameAction> newActionQueue){
-
-
-        if(actionQueue!=null){
-
-            actionQueue.removeObserver(actionQueueIObserver);
-
-        }
-
-        actionQueue = newActionQueue;
-
-        actionQueue.addObserver(actionQueueIObserver);
-
-        Platform.runLater(this::update);
-
-    }
-
-
-    private void update(){
+        CommandQueueData commandQueueData = getObservable().getData();
 
         pastActionsListView.getItems().clear();
 
-        for(int i=0; i<actionQueue.getPastItemCount(); i++){
+        for(int i=0; i<commandQueueData.pastSize(); i++){
 
-            pastActionsListView.getItems().add(new Label(actionQueue.getPastItem(i).getToolTip()));
+            pastActionsListView.getItems().add(new Label(commandQueueData.getPastItem(i).getToolTip()));
 
         }
 
-        numberOfPendingActions.setText(Integer.toString(actionQueue.getPendingItemsCount()));
+        numberOfPendingActions.setText(Integer.toString(commandQueueData.pendingSize()));
 
-        if(actionQueue.getPendingItemsCount()!=0){
+        if(commandQueueData.pendingSize()!=0){
 
-            nextAction.setText(actionQueue.peekPending().getToolTip());
+            nextAction.setText(commandQueueData.peekPending().getToolTip());
 
         }
 

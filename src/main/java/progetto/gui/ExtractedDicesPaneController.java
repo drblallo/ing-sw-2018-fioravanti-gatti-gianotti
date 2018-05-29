@@ -3,10 +3,11 @@ package progetto.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import progetto.game.ExtractedDices;
+import progetto.game.DataContainer;
 import progetto.game.ExtractedDicesData;
 
-public class ExtractedDicesPaneController extends AbstractController<ExtractedDicesData, ExtractedDices> {
+public class ExtractedDicesPaneController extends AbstractController<ExtractedDicesData,
+        DataContainer<ExtractedDicesData>> {
 
     @FXML
     private ListView listView;
@@ -14,7 +15,7 @@ public class ExtractedDicesPaneController extends AbstractController<ExtractedDi
     @Override
     protected void update() {
 
-        ExtractedDicesData extractedDicesData = getObservable().getExtractedDicesData();
+        ExtractedDicesData extractedDicesData = getObservable().getData();
 
         listView.getItems().clear();
 

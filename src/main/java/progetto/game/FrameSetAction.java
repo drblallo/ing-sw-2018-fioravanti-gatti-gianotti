@@ -10,6 +10,14 @@ public class FrameSetAction extends AbstractGameAction {
 
 	private static final Logger LOGGER = Logger.getLogger(FrameSetAction.class.getName());
 
+	public FrameSetAction(){
+
+		super(-1);
+		this.selectedCouple = 0;
+		this.selectedSide = 0;
+
+	}
+
 	public FrameSetAction(int nPlayer, int selectedCouple, int selectedSide)
 	{
 		super(nPlayer);

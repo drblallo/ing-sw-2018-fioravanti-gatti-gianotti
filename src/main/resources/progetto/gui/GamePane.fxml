@@ -36,7 +36,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Other Players">
+                  <Tab fx:id="otherPlayers" text="Other Players">
                      <content>
                         <AnchorPane prefHeight="200000.0" prefWidth="20000.0">
                            <children>
@@ -54,7 +54,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Round Track">
+                  <Tab fx:id="roundTrack" text="Round Track">
                      <content>
                         <fx:include fx:id="roundTrackPane" source="RoundTrackPane.fxml" />
                      </content>

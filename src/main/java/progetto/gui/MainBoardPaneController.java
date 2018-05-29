@@ -2,10 +2,10 @@ package progetto.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import progetto.game.MainBoard;
+import progetto.game.AbstractMainBoard;
 import progetto.game.MainBoardData;
 
-public class MainBoardPaneController extends AbstractController<MainBoardData, MainBoard> {
+public class MainBoardPaneController extends AbstractController<MainBoardData, AbstractMainBoard> {
 
     @FXML
     private Label numberOfPlayers;
@@ -30,7 +30,7 @@ public class MainBoardPaneController extends AbstractController<MainBoardData, M
     @Override
     protected void update() {
 
-        MainBoardData mainBoardData = getObservable().getMainBoardData();
+        MainBoardData mainBoardData = getObservable().getData();
 
         numberOfPlayers.setText(Integer.toString(mainBoardData.getPlayerCount()));
 

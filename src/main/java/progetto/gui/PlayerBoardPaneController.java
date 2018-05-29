@@ -1,12 +1,11 @@
 package progetto.gui;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import progetto.game.*;
 
 
-public class PlayerBoardPaneController extends AbstractController<PlayerBoardData, PlayerBoard> {
+public class PlayerBoardPaneController extends AbstractController<PlayerBoardData, AbstractPlayerBoard> {
 
     @FXML
     private Parent dicePlacedFramePane;
@@ -26,15 +25,13 @@ public class PlayerBoardPaneController extends AbstractController<PlayerBoardDat
     @FXML
     private PickedDicesSlotPaneController pickedDicesSlotPaneController;
 
+    private WindowFrame windowFrame;
+
     @Override
     protected void onObserverReplaced(){
 
         dicePlacedFramePaneController.setObservable(getObservable().getDicePlacedFrame());
-        if(getObservable().getPlayerBoardData().getWindowFrame()!=null){
 
-            windowFramePaneController.setup(getObservable().getPlayerBoardData().getWindowFrame());
-
-        }
         pickedDicesSlotPaneController.setObservable(getObservable().getPickedDicesSlot());
 
     }
@@ -43,7 +40,17 @@ public class PlayerBoardPaneController extends AbstractController<PlayerBoardDat
     @Override
     protected void update() {
 
-        //
+        WindowFrame newWindowFrame = getObservable().getData().getWindowFrame();
+
+        if(newWindowFrame == windowFrame || newWindowFrame == null){
+
+            return;
+
+        }
+
+        windowFramePaneController.setup(getObservable().getData().getWindowFrame());
+
+        windowFrame = newWindowFrame;
 
     }
 

@@ -1,7 +1,6 @@
 package progetto.clientintegration;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 import progetto.gui.*;
 import progetto.serverintegration.ServerMain;
@@ -23,6 +22,7 @@ public class ClientWindow extends Application {
 
         primaryStage.setTitle("Client Window");
 
+        primaryStage.setMaximized(true);
         ClientViewStateMachine clientViewStateMachine = new ClientViewStateMachine(primaryStage);
         clientViewStateMachine.setClientCommandProcessor(new ClientCommandProcessor());
 

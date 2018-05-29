@@ -85,7 +85,7 @@ public class ChatPaneController {
 
         }
 
-        playerCount = clientGame.getMainBoard().getMainBoardData().getPlayerCount();
+        playerCount = clientGame.getMainBoard().getData().getPlayerCount();
 
 
         chairs.getItems().clear();

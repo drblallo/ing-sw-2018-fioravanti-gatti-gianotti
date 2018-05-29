@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Main gaming table
  */
-public final class MainBoard extends DataContainer<MainBoardData> implements IMainBoard
+public final class MainBoard extends AbstractMainBoard
 {
 	MainBoard()
 	{
