@@ -1,5 +1,6 @@
 package progetto.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,11 +8,11 @@ import java.util.List;
 /**
  * Slot for picked dices (immutable)
  */
-public final class PickedDicesSlotData {
+public final class PickedDicesSlotData implements Serializable{
 
 	private final List<DicePlacementCondition> pickedDices;
 
-	PickedDicesSlotData()
+	public PickedDicesSlotData()
 	{
 		ArrayList<DicePlacementCondition> temp = new ArrayList<>();
 		pickedDices = Collections.unmodifiableList(temp);
@@ -69,7 +70,11 @@ public final class PickedDicesSlotData {
 
 	PickedDicesSlotData remove(int index)
 	{
-		return new PickedDicesSlotData(this, index);
+		if(exists(index))
+		{
+			return new PickedDicesSlotData(this, index);
+		}
+		return this;
 	}
 
 	PickedDicesSlotData setIgnoreColor(int index, boolean ignoreColor)
@@ -80,7 +85,7 @@ public final class PickedDicesSlotData {
 			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dpc.getDice(), ignoreColor, dpc.getIgnoreValue(), dpc.getIgnoreAdjacent());
 			return new PickedDicesSlotData(this, index, dicePlacementCondition);
 		}
-		return null;
+		return this;
 	}
 
 	PickedDicesSlotData setIgnoreValue(int index, boolean ignoreValue)
@@ -91,7 +96,7 @@ public final class PickedDicesSlotData {
 			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dpc.getDice(), dpc.getIgnoreColor(), ignoreValue, dpc.getIgnoreAdjacent());
 			return new PickedDicesSlotData(this, index, dicePlacementCondition);
 		}
-		return null;
+		return this;
 
 	}
 
@@ -103,7 +108,7 @@ public final class PickedDicesSlotData {
 			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dpc.getDice(), dpc.getIgnoreColor(), dpc.getIgnoreValue(), ignoreAdjacent);
 			return new PickedDicesSlotData(this, index, dicePlacementCondition);
 		}
-		return null;
+		return this;
 	}
 
 }

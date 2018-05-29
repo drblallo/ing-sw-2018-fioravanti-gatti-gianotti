@@ -1,20 +1,25 @@
 package progetto.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Immutable class with data of ExtractedDices
  */
-public final class ExtractedDicesData {
+public final class ExtractedDicesData implements Serializable{
 
 	private final List<Dice> extractedDices;
+
+	private static final Logger LOGGER = Logger.getLogger(ExtractedDicesData.class.getName());
 
 	/**
 	 * Constructor
 	 */
-	ExtractedDicesData() {
+	public ExtractedDicesData() {
 		ArrayList<Dice> temp = new ArrayList<>();
 		this.extractedDices = Collections.unmodifiableList(temp);
 	}
@@ -122,6 +127,7 @@ public final class ExtractedDicesData {
 			extractedDices.get(index);
 			return true;
 		} catch (IndexOutOfBoundsException e) {
+			LOGGER.log(Level.SEVERE,"Wrong index");
 			return false;
 		}
 	}

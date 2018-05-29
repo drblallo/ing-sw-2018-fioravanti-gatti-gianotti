@@ -12,11 +12,12 @@ public class StartGameAction extends AbstractGameAction
 
 	@Override
 	public boolean canBeExecuted(Game game) {
-		return game.getMainBoard().getMainBoardData().getGameState().getClass() == PreGameState.class;
+		return game.getMainBoard().getData().getGameState().getClass() == PreGameState.class;
 	}
 
 	@Override
 	protected void execute(Game game) {
 		game.setState(new FrameSelectionState());
+
 	}
 }

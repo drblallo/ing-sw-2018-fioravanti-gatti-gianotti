@@ -20,9 +20,9 @@ public class PickDiceAction extends AbstractGameAction {
 	@Override
 	public boolean canBeExecuted(Game game) {
 
-		return game.getMainBoard().getMainBoardData().getGameState().getClass() == RoundState.class &&
-				getCallerID() == game.getMainBoard().getMainBoardData().getCurrentPlayer() &&
-				game.getMainBoard().getExtractedDices().getExtractedDicesData().getDice(nDice) != null;
+		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
+				getCallerID() == game.getMainBoard().getData().getCurrentPlayer() &&
+				game.getMainBoard().getExtractedDices().getData().getDice(nDice) != null;
 
 	}
 

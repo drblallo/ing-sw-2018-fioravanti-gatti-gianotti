@@ -1,27 +1,21 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
-
 import java.util.ArrayList;
 
 /**
  * Main gaming table
  */
-public final class MainBoard extends AbstractObservable<MainBoardData> {
+public final class MainBoard extends DataContainer<MainBoardData> implements IMainBoard
+{
+	MainBoard()
+	{
+		super(new MainBoardData());
+	}
 
-	private MainBoardData mainBoardData = new MainBoardData();
 	private final ExtractedDices extractedDices = new ExtractedDices();
 
 	private ArrayList<Integer> playerQueue = new ArrayList<>();
 
-	/**
-	 * Get immutable mainBoardData
-	 * @return mainBoardData
-	 */
-	public MainBoardData getMainBoardData()
-	{
-		return mainBoardData;
-	}
 
 	/**
 	 * Get extracted dices
@@ -38,8 +32,7 @@ public final class MainBoard extends AbstractObservable<MainBoardData> {
 	 */
 	void addWindowFrameCouple(WindowFrameCouple windowFrameCouple)
 	{
-		mainBoardData = mainBoardData.addWindowFrameCouple(windowFrameCouple);
-		change(mainBoardData);
+		setData(getData().addWindowFrameCouple(windowFrameCouple));
 	}
 
 	/**
@@ -48,8 +41,7 @@ public final class MainBoard extends AbstractObservable<MainBoardData> {
 	 */
 	void setPlayerCount(int playerCount)
 	{
-		mainBoardData = mainBoardData.setPlayerCount(playerCount);
-		change(mainBoardData);
+		setData(getData().setPlayerCount(playerCount));
 	}
 
 	/**
@@ -58,8 +50,7 @@ public final class MainBoard extends AbstractObservable<MainBoardData> {
 	 */
 	void setGameState(AbstractGameState state)
 	{
-		mainBoardData = mainBoardData.setGameState(state);
-		change(mainBoardData);
+		setData(getData().setGameState(state));
 	}
 
 	/**
@@ -68,8 +59,7 @@ public final class MainBoard extends AbstractObservable<MainBoardData> {
 	 */
 	void setCurrentFirstPlayer(int currentFirstPlayer)
 	{
-		mainBoardData = mainBoardData.setCurrentFirstPlayer(currentFirstPlayer);
-		change(mainBoardData);
+		setData(getData().setCurrentFirstPlayer(currentFirstPlayer));
 	}
 
 	/**
@@ -78,8 +68,7 @@ public final class MainBoard extends AbstractObservable<MainBoardData> {
 	 */
 	void setCurrentPlayer(int currentPlayer)
 	{
-		mainBoardData = mainBoardData.setCurrentPlayer(currentPlayer);
-		change(mainBoardData);
+		setData(getData().setCurrentPlayer(currentPlayer));
 	}
 
 	/**
@@ -88,8 +77,7 @@ public final class MainBoard extends AbstractObservable<MainBoardData> {
 	 */
 	void setCurrentRound(int currentRound)
 	{
-		mainBoardData = mainBoardData.setCurrentRound(currentRound);
-		change(mainBoardData);
+		setData(getData().setCurrentRound(currentRound));
 	}
 
 	/**
@@ -110,6 +98,16 @@ public final class MainBoard extends AbstractObservable<MainBoardData> {
 		if(!playerQueue.isEmpty())
 			return playerQueue.remove(0);
 		return -1;
+	}
+
+	void setPublicObjectiveCards(AbstractPublicObjectiveCard[] publicObjectiveCards)
+	{
+		AbstractPublicObjectiveCard[] newPublicObjectiveCards = new AbstractPublicObjectiveCard[publicObjectiveCards.length];
+		for(int i=0; i<publicObjectiveCards.length; i++)
+		{
+			newPublicObjectiveCards[i] = publicObjectiveCards[i];
+		}
+		setData(getData().setPublicObjectiveCards(newPublicObjectiveCards));
 	}
 
 }

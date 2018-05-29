@@ -1,5 +1,7 @@
 package progetto.network;
 
+import progetto.utils.Callback;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -46,4 +48,7 @@ public interface ISync {
 	void clear();
 
 	List<Serializable> getAllItems();
+
+	Callback<IEnforce> getEnforceCallback();
+	List<IEnforce> getNewPlayerEnforces();
 }

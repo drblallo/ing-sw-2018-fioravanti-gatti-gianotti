@@ -35,7 +35,6 @@ public class TestDiceBag extends TestCase {
 		for(int i=0; i<18; i++)
 			Assert.assertEquals(Color.PURPLE, diceBag.draw(0));
 
-		Assert.assertEquals(null, diceBag.draw(0));
 	}
 
 
@@ -48,6 +47,16 @@ public class TestDiceBag extends TestCase {
 		Assert.assertEquals(Color.BLUE, diceBag.draw(50));
 		Assert.assertEquals(Color.RED, diceBag.draw(35));
 		Assert.assertEquals(Color.YELLOW, diceBag.draw(15));
+
+	}
+
+	@Test
+	public void testDrawFail() {
+
+		Assert.assertNull(diceBag.draw(100));
+		for(int i=0; i<90; i++)
+			diceBag.draw(0);
+		Assert.assertNull(diceBag.draw(0));
 
 	}
 

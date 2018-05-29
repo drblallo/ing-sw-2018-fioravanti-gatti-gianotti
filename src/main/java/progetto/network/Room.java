@@ -15,6 +15,11 @@ public final class Room extends AbstractRoom
 	Room(String name, int id, ISync ogg)
 	{
 		super(name, id, ogg);
+		ogg.getEnforceCallback().addObserver(enf ->
+		{
+			for (Player p : players.values())
+				p.getHandler().sendEnforce(enf);
+		} );
 	}
 
 	/**

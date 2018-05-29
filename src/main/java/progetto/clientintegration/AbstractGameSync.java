@@ -1,24 +1,26 @@
 package progetto.clientintegration;
 
-import progetto.game.AbstractGameAction;
-import progetto.game.Game;
+import progetto.game.*;
 import progetto.network.ISync;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractGameSync implements ISync{
+public abstract class AbstractGameSync implements ISync
+{
 	private Game game = new Game();
 
 	@Override
-	public void sendItem(Serializable s) {
+	public void sendItem(Serializable s)
+	{
 		game.sendAction((AbstractGameAction) s);
 		game.processAllPendingAction();
 	}
 
 	@Override
-	public boolean isItemGood(Serializable s, int senderID) {
+	public boolean isItemGood(Serializable s, int senderID)
+	{
 		AbstractGameAction action = (AbstractGameAction) s;
 		if (action == null)
 			return false;
@@ -53,7 +55,7 @@ public abstract class AbstractGameSync implements ISync{
 		return list;
 	}
 
-	Game getGame()
+	protected Game getGame()
 	{
 		return game;
 	}

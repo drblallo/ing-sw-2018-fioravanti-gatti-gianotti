@@ -157,4 +157,9 @@ final class ServerConnection {
 	{
 		handler.sendEnforce(new SyncStringEnforce(s));
 	}
+
+	void sendEnforce(IEnforce f)
+	{
+		handler.sendEnforce(f);
+	}
 }

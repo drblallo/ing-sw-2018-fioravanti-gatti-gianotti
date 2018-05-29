@@ -1,6 +1,8 @@
 package progetto.game;
 
-public abstract class AbstractGameState
+import java.io.Serializable;
+
+public abstract class AbstractGameState implements Serializable
 {
 	private final String name;
 

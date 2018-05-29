@@ -2,9 +2,12 @@ package progetto.clientintegration;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import progetto.game.*;
 import progetto.utils.Waiter;
+
+import java.util.ArrayList;
 
 public abstract class AbstractGameTest
 {
@@ -30,14 +33,13 @@ public abstract class AbstractGameTest
 	{
 		game.sendAction(new StartGameAction());
 		wait(500);
-		Assert.assertEquals(FrameSelectionState.class, game.getMainBoard().getMainBoardData().getGameState().getClass());
+		Assert.assertEquals(FrameSelectionState.class, game.getMainBoard().getData().getGameState().getClass());
 
-		game.getActionQueue();
-		game.getDiceBag();
-		game.getMainBoard().getMainBoardData().getGameState();
+		game.getCommandQueue();
+		game.getMainBoard().getData().getGameState();
 		game.getMainBoard();
 		game.getPlayerBoard(0);
-		game.getMainBoard().getMainBoardData().getPlayerCount();
+		game.getMainBoard().getData().getPlayerCount();
 		game.getRoundTrack();
 		game.processAction();
 		game.processAllPendingAction();
@@ -58,11 +60,63 @@ public abstract class AbstractGameTest
 		game.sendAction(new SetPlayerCountAction(3));
 
 		wait(500);
-		Assert.assertEquals(3, game.getMainBoard().getMainBoardData().getPlayerCount());
+		Assert.assertEquals(3, game.getMainBoard().getData().getPlayerCount());
 	}
 
 	public void wait(int milliseconds)
 	{
 		steven.wait(milliseconds);
+	}
+
+
+	@Test
+	public void testProxy()
+	{
+		ClientGame g = (ClientGame) game;
+		g.sendAction(new SetPlayerCountAction(1));
+		g.sendAction(new StartGameAction());
+		g.sendAction(new FrameSetAction(0, 0, 1));
+		wait(500);
+		Assert.assertEquals(
+				RoundState.class.getName(),
+				g.getMainBoard().getData().getGameState().getClass().getName());
+		Assert.assertEquals(
+				RoundState.class.getName(),
+				g.getClientConnection().getProxy().getMainBoard().getData().getGameState().getClass().getName());
+
+		g.getClientConnection().pickChair(
+				g.getClientConnection().getProxy().getMainBoard().getData().getCurrentPlayer()
+		);
+
+		wait(400);
+
+
+
+		g.sendAction(new PickDiceAction(g.getMainBoard().getData().getCurrentPlayer(), 1));
+		g.sendAction(new PlaceDiceAction(g.getMainBoard().getData().getCurrentPlayer(), 0, 0, 0));
+		g.sendAction(new EndTurnAction(g.getMainBoard().getData().getCurrentPlayer()));
+		g.sendAction(new EndTurnAction(g.getMainBoard().getData().getCurrentPlayer()));
+		g.sendAction(new EndTurnAction(g.getMainBoard().getData().getCurrentPlayer()));
+		wait(500);
+
+
+		try
+		{
+			g.getNewPlayerEnforces();
+		}
+		catch (UnsupportedOperationException e)
+		{
+
+		}
+
+		try
+		{
+			g.getEnforceCallback();
+		}
+		catch (UnsupportedOperationException e)
+		{
+			return;
+		}
+		Assert.fail();
 	}
 }

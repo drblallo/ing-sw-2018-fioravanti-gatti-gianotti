@@ -1,21 +1,14 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
 
 /**
  * RoundTrack with advanced dice
  */
-public final class RoundTrack extends AbstractObservable<RoundTrackData> {
+public final class RoundTrack extends DataContainer<RoundTrackData> {
 
-	private RoundTrackData roundTrackData = new RoundTrackData();
-
-	/**
-	 * Get round track data
-	 * @return round track data
-	 */
-	public RoundTrackData getRoundTrackData()
+	RoundTrack()
 	{
-		return roundTrackData;
+		super(new RoundTrackData());
 	}
 
 	/**
@@ -25,8 +18,7 @@ public final class RoundTrack extends AbstractObservable<RoundTrackData> {
 	 */
 	void add(Dice newDice, int index)
 	{
-		roundTrackData = roundTrackData.add(newDice, index);
-		change(roundTrackData);
+		setData(getData().add(newDice, index));
 	}
 
 	/**
@@ -38,9 +30,8 @@ public final class RoundTrack extends AbstractObservable<RoundTrackData> {
 	 */
 	Dice change(int index, int pos, Dice newDice)
 	{
-		Dice dice = roundTrackData.getDice(index, pos);
-		roundTrackData = roundTrackData.change(index, pos, newDice);
-		change(roundTrackData);
+		Dice dice = getData().getDice(index, pos);
+		setData(getData().change(index, pos, newDice));
 		return dice;
 	}
 

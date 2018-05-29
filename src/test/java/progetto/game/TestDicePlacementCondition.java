@@ -1,169 +1,222 @@
 package progetto.game;
 
 import junit.framework.TestCase;
-import org.json.JSONArray;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TestDicePlacementCondition extends TestCase {
 
-	JSONArray ja;
+	WindowFrameCoupleArray windowFrameCoupleArray;
+	PlayerBoard playerBoard;
 
-	public void startJA()
+	@Before
+	public void setUp()
 	{
-		ja = new JSONArray();
-		ja.put("Virtus"); ja.put(5); ja.put(9); ja.put(0); ja.put(0); ja.put(Value.FOUR); ja.put(2); ja.put(0);
-		ja.put(Value.TWO); ja.put(3); ja.put(0); ja.put(Value.FIVE); ja.put(2); ja.put(1); ja.put(Value.SIX);
-		ja.put(4); ja.put(1); ja.put(Value.TWO); ja.put(1); ja.put(2); ja.put(Value.THREE); ja.put(3);
-		ja.put(2); ja.put(Value.FOUR); ja.put(0); ja.put(3); ja.put(Value.FIVE); ja.put(2); ja.put(3);
-		ja.put(Value.ONE); ja.put(4); ja.put(4); ja.put(0); ja.put(Color.GREEN); ja.put(3); ja.put(1);
-		ja.put(Color.GREEN); ja.put(2); ja.put(2); ja.put(Color.GREEN); ja.put(1); ja.put(3); ja.put(Color.GREEN);
+		windowFrameCoupleArray = new WindowFrameCoupleArray();
+		playerBoard = new PlayerBoard();
+		WindowFrame windowFrame = windowFrameCoupleArray.getWindowFrameCouples().get(1).getWindowFrame(0);
+		playerBoard.setWindowFrame(windowFrame);
+
 	}
 
-	public void test1() {
+	@Test
+	public void testGetSet()
+	{
+		Dice dice = new Dice(Value.FOUR, Color.GREEN);
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, true, false);
 
-		startJA();
+		Assert.assertEquals(dice, dicePlacementCondition.getDice());
+		Assert.assertTrue(dicePlacementCondition.getIgnoreValue());
+		Assert.assertFalse(dicePlacementCondition.getIgnoreColor());
+		Assert.assertFalse(dicePlacementCondition.getIgnoreAdjacent());
 
-		PlayerBoard playerBoard = new PlayerBoard();
+		dicePlacementCondition = dicePlacementCondition.setIgnoreValue(false);
+		Assert.assertFalse(dicePlacementCondition.getIgnoreValue());
+		dicePlacementCondition = dicePlacementCondition.setIgnoreColor(true);
+		Assert.assertTrue(dicePlacementCondition.getIgnoreColor());
+		dicePlacementCondition = dicePlacementCondition.setIgnoreAdjacent(true);
+		Assert.assertTrue(dicePlacementCondition.getIgnoreAdjacent());
 
-		WindowFrame wf = new WindowFrame(ja);
+	}
 
-		playerBoard.setWindowFrame(wf);
+	@Test
+	public void testPlacementConditionNearEdge()
+	{
+		Dice dice = new Dice(Value.FOUR, Color.GREEN);
 
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
+
+		//First dice near edge
+		Assert.assertTrue(dicePlacementCondition.canBePlaced(0, 1, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionValueBondRespected()
+	{
+		Dice dice = new Dice(Value.FOUR, Color.GREEN);
+
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
+
+		//Value bond respected
+		Assert.assertTrue(dicePlacementCondition.canBePlaced(0, 0, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionColorBondRespected()
+	{
+		Dice dice = new Dice(Value.FOUR, Color.GREEN);
+
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
+
+		//Color bond respected
+		Assert.assertTrue(dicePlacementCondition.canBePlaced(0, 4, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionAdjacentBondRespected()
+	{
+		Dice dice = new Dice(Value.FOUR, Color.GREEN);
+
+		playerBoard.addDiceInPlacedFrame(dice, 0, 1);
+
+		dice = new Dice(Value.ONE, Color.YELLOW);
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
+
+		//Adjacent bond respected
+		Assert.assertTrue(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionFailDiceNotNearEdge()
+	{
 		Dice dice = new Dice(Value.ONE, Color.YELLOW);
 
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
-		DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
-
-
-		assertEquals(false, dicePlacementCondition.canBePlaced(1, 1, playerBoard));
-
+		//First dice not near edge
+		Assert.assertFalse(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
 
 	}
 
-	public void test2() {
-
-		startJA();
-
-		PlayerBoard playerBoard = new PlayerBoard();
-
-		WindowFrame wf = new WindowFrame(ja);
-
-		playerBoard.setWindowFrame(wf);
-
-		DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
-
+	@Test
+	public void testPlacementConditionFailValueBondNotRespected()
+	{
 		Dice dice = new Dice(Value.ONE, Color.YELLOW);
 
-		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false );
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
-		assertEquals(false, dicePlacementCondition.canBePlaced(0, 0, playerBoard));
-
+		//Value bond not respected
+		Assert.assertFalse(dicePlacementCondition.canBePlaced(0, 0, playerBoard));
 
 	}
 
-	public void test3() {
-
-		startJA();
-
-		PlayerBoard playerBoard = new PlayerBoard();
-
-		WindowFrame wf = new WindowFrame(ja);
-
-		playerBoard.setWindowFrame(wf);
-
-		DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
-
+	@Test
+	public void testPlacementConditionFailColorBondNotRespected()
+	{
 		Dice dice = new Dice(Value.ONE, Color.YELLOW);
 
-		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, true, false );
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
-		assertEquals(true, dicePlacementCondition.canBePlaced(0, 0, playerBoard));
-
-		playerBoard.addDiceInPlacedFrame(dice, 0,0);
-
-		Dice dice1 = new Dice(Value.ONE, Color.YELLOW);
-
-		dicePlacementCondition = new DicePlacementCondition(dice1, false, false, false );
-
-		assertEquals(false, dicePlacementCondition.canBePlaced(1, 0, playerBoard));
-
-		Dice dice11 = new Dice(Value.THREE, Color.RED);
-
-		dicePlacementCondition = new DicePlacementCondition(dice11, false, false, false );
-
-		assertEquals(true, dicePlacementCondition.canBePlaced(1, 0, playerBoard));
-
-		playerBoard.addDiceInPlacedFrame(dice11, 1, 0);
-
-		Dice dice2 = new Dice(Value.ONE, Color.YELLOW);
-
-		dicePlacementCondition = new DicePlacementCondition(dice2, false, false, false );
-
-		assertEquals(false, dicePlacementCondition.canBePlaced(2, 0, playerBoard));
-
-		Dice dice3 = new Dice(Value.ONE, Color.YELLOW);
-
-		dicePlacementCondition = new DicePlacementCondition(dice3, false, false, false );
-
-		assertEquals(false, dicePlacementCondition.canBePlaced(4, 0, playerBoard));
-
-		Dice dice4 = new Dice(Value.ONE, Color.YELLOW);
-
-		dicePlacementCondition = new DicePlacementCondition(dice4, false, false, false );
-
-		assertEquals(false, dicePlacementCondition.canBePlaced(0, 2, playerBoard));
-
-		Dice dice5 = new Dice(Value.ONE, Color.YELLOW);
-
-		dicePlacementCondition = new DicePlacementCondition(dice5, true, false, false);
-
-		assertEquals(false, dicePlacementCondition.canBePlaced(3, 1, playerBoard));
-
-		Dice dice6 = new Dice(Value.TWO, Color.YELLOW);
-
-		dicePlacementCondition = new DicePlacementCondition(dice6, false, false, false);
-
-		assertEquals(true, dicePlacementCondition.canBePlaced(2, 0, playerBoard));
-
-		playerBoard.addDiceInPlacedFrame(dice6, 2,0);
-
-		dicePlacementCondition = new DicePlacementCondition(dice5, true, false, false);
-
-		assertEquals(true, dicePlacementCondition.canBePlaced(3, 1, playerBoard));
-
-		playerBoard.addDiceInPlacedFrame(dice5, 3,1);
-
-		assertEquals(false, dicePlacementCondition.canBePlaced(3, 1, playerBoard));
-
-		assertEquals(false, dicePlacementCondition.canBePlaced(-1, 1, playerBoard));
-
-		Dice dice7 = new Dice(Value.TWO, Color.YELLOW);
-
-		dicePlacementCondition = new DicePlacementCondition(dice7, false, false, true);
-
-		assertEquals(true, dicePlacementCondition.canBePlaced(4, 3, playerBoard));
-
-		playerBoard.addDiceInPlacedFrame(dice7, 4,3);
-
-		Dice dice8 = new Dice(Value.SIX, Color.YELLOW);
-
-		dicePlacementCondition = new DicePlacementCondition(dice8, false, false, false);
-
-		assertEquals(false, dicePlacementCondition.canBePlaced(0, 1, playerBoard));
-
-		assertEquals(dice8, dicePlacementCondition.getDice());
-		assertEquals(false, (boolean)dicePlacementCondition.getIgnoreAdjacent());
-		assertEquals(false, (boolean)dicePlacementCondition.getIgnoreColor());
-		assertEquals(false, (boolean)dicePlacementCondition.getIgnoreValue());
-
-		dicePlacementCondition = dicePlacementCondition.setIgnoreAdjacent(true);
-		assertEquals(true, (boolean)dicePlacementCondition.getIgnoreAdjacent());
-
-		dicePlacementCondition = dicePlacementCondition.setIgnoreColor(true);
-		assertEquals(true, (boolean)dicePlacementCondition.getIgnoreColor());
-
-		dicePlacementCondition = dicePlacementCondition.setIgnoreValue(true);
-		assertEquals(true, (boolean)dicePlacementCondition.getIgnoreValue());
+		//Color bond not respected
+		Assert.assertFalse(dicePlacementCondition.canBePlaced(0, 4, playerBoard));
 
 	}
+
+	@Test
+	public void testPlacementConditionFailAdjacentBondNotRespected()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
+
+		dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
+
+		playerBoard.addDiceInPlacedFrame(dice, 0, 1);
+
+		//Adjacent bond not respected
+		Assert.assertFalse(dicePlacementCondition.canBePlaced(2, 0, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionFailWrongPosition()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
+
+		Assert.assertFalse(dicePlacementCondition.canBePlaced(5, 5, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionSameColorNear()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
+		dice = new Dice(Value.TWO, Color.YELLOW);
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
+		Assert.assertFalse(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionSameValueNear()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
+		dice = new Dice(Value.ONE, Color.BLUE);
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
+		Assert.assertFalse(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionIgnoreColorBond()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
+		dice = new Dice(Value.TWO, Color.YELLOW);
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, true, false, false);
+		Assert.assertTrue(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionIgnoreValueBond()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
+		dice = new Dice(Value.ONE, Color.BLUE);
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, true, false);
+		Assert.assertTrue(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionIgnoreAdjacentBond()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
+		dice = new Dice(Value.TWO, Color.BLUE);
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, true);
+		Assert.assertTrue(dicePlacementCondition.canBePlaced(3, 4, playerBoard));
+
+	}
+
+	@Test
+	public void testPlacementConditionFailTwoDiceSamePosition()
+	{
+		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
+		dice = new Dice(Value.TWO, Color.BLUE);
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, true, true, true);
+		Assert.assertFalse(dicePlacementCondition.canBePlaced(0, 1, playerBoard));
+
+	}
+
 }

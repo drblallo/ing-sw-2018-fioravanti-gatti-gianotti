@@ -1,21 +1,19 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
-
 /**
  * Player table
  */
-public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
+public class PlayerBoard extends DataContainer<PlayerBoardData> implements IPlayerBoard
+{
 
-	private PlayerBoardData playerBoardData = new PlayerBoardData();
+
+	PlayerBoard()
+	{
+		super(new PlayerBoardData());
+	}
 
 	private final DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
 	private final PickedDicesSlot pickedDicesSlot = new PickedDicesSlot();
-
-	public PlayerBoardData getPlayerBoardData()
-	{
-		return playerBoardData;
-	}
 
 	public int getNPickedDices()
 	{
@@ -34,9 +32,8 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 
 	public int getNDicesPlaced()
 	{
-		return dicePlacedFrame.getDicePlacedFrameData().getNDices();
+		return dicePlacedFrame.getData().getNDices();
 	}
-
 
 	/**
 	 * Set player Window frame
@@ -45,8 +42,7 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 */
 	void setWindowFrame(WindowFrameCouple windowFrameCouple, int side)
 	{
-		playerBoardData = playerBoardData.setWindowFrame(windowFrameCouple.getWindowFrame(side));
-		change(playerBoardData);
+		setData(getData().setWindowFrame(windowFrameCouple.getWindowFrame(side)));
 	}
 
 	/**
@@ -55,10 +51,41 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 */
 	void setWindowFrame(WindowFrame windowFrame)
 	{
-		playerBoardData = playerBoardData.setWindowFrame(windowFrame);
-		change(playerBoardData);
-
+		setData(getData().setWindowFrame(windowFrame));
 	}
+
+	/**
+	 * Set player extracted window frame couples
+	 * @param extractedWindowFrame window frame to set
+	 */
+	void setExtractedWindowFrameCouples(WindowFrameCouple[] extractedWindowFrame)
+	{
+		WindowFrameCouple[] newExtractedWindowFrame = new WindowFrameCouple[extractedWindowFrame.length];
+		for(int i=0; i<extractedWindowFrame.length; i++)
+		{
+			newExtractedWindowFrame[i] = extractedWindowFrame[i];
+		}
+		setData(getData().setExtractedWindowFrame(newExtractedWindowFrame));
+	}
+
+	/**
+	 * Set player window frame
+	 * @param couple couple to set
+	 * @param side side to set
+	 */
+	void setWindowFrame(int couple, int side)
+	{
+		setData(getData().setWindowFrame(couple, side));
+	}
+
+	/**
+	 * Set player window frame (empty window frame)
+	 */
+	void setEmptyWindowFrame()
+	{
+		setData(getData().setEmptyWindowFrame());
+	}
+
 
 	/**
 	 * Add dice in placed frame
@@ -66,9 +93,9 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 * @param x pos horizontal
 	 * @param y pos vertical
 	 */
-	void addDiceInPlacedFrame(Dice dice, int x, int y)
+	void addDiceInPlacedFrame(Dice dice, int y, int x)
 	{
-		dicePlacedFrame.addDice(dice, x, y);
+		dicePlacedFrame.addDice(dice, y, x);
 	}
 
 	/**
@@ -77,9 +104,9 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 * @param y pos vertical
 	 * @return selected dice
 	 */
-	public Dice getDiceFromPlacedFrame(int x, int y)
+	public Dice getDiceFromPlacedFrame(int y, int x)
 	{
-		return dicePlacedFrame.getDicePlacedFrameData().getDice(x, y);
+		return dicePlacedFrame.getData().getDice(y, x);
 	}
 
 	/**
@@ -87,9 +114,9 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 	 * @param x pos horizontal
 	 * @param y pos vertical
 	 */
-	void removeDiceFromDicesPlaced(int x, int y)
+	void removeDiceFromDicesPlaced(int y, int x)
 	{
-		dicePlacedFrame.removeDice(x, y);
+		dicePlacedFrame.removeDice(y, x);
 	}
 
 	/**
@@ -101,4 +128,13 @@ public class PlayerBoard extends AbstractObservable<PlayerBoardData> {
 		pickedDicesSlot.add(dice, false, false, false);
 	}
 
+	void setPrivateObjectiveCard(AbstractPrivateObjectiveCard[] privateObjectiveCards)
+	{
+		AbstractPrivateObjectiveCard[] newPrivateObjectiveCards = new AbstractPrivateObjectiveCard[privateObjectiveCards.length];
+		for(int i=0; i<privateObjectiveCards.length; i++)
+		{
+			newPrivateObjectiveCards[i] = privateObjectiveCards[i];
+		}
+		setData(getData().setPrivateObjectiveCard(newPrivateObjectiveCards));
+	}
 }

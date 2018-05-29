@@ -1,13 +1,17 @@
 package progetto.game;
 
 import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TestCouple extends TestCase{
-	public void test1()
+
+	@Test
+	public void testConstructorAndGetter()
 	{
 		Couple couple = new Couple(1, -1);
 
-		assertEquals(1, couple.getDx());
-		assertEquals(-1, couple.getDy());
+		Assert.assertEquals(1, couple.getDx());
+		Assert.assertEquals(-1, couple.getDy());
 	}
 }

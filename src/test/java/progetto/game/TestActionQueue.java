@@ -57,4 +57,10 @@ public class TestActionQueue {
 		Assert.assertEquals(action, queue.getPastItem(0));
 
 	}
+
+	@Test
+	public void testPastItemOutOfRange()
+	{
+		Assert.assertNull(queue.getPastItem(10));
+	}
 }

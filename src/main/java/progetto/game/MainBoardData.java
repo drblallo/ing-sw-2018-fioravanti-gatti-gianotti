@@ -1,5 +1,6 @@
 package progetto.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Immutable class with data of MainBoard
  */
-public final class MainBoardData {
+public final class MainBoardData implements Serializable {
 
 	public static final int MAX_NUM_PLAYERS = 4;
 
@@ -17,11 +18,12 @@ public final class MainBoardData {
 	private final int currentFirstPlayer;
 	private final int currentPlayer;
 	private final int currentRound;
+	private final AbstractPublicObjectiveCard[] publicObjectiveCard;
 
 	/**
 	 * Constructor
 	 */
-	MainBoardData()
+	public MainBoardData()
 	{
 		playerCount = MAX_NUM_PLAYERS;
 		ArrayList<WindowFrameCouple> temp = new ArrayList<>();
@@ -30,6 +32,7 @@ public final class MainBoardData {
 		currentFirstPlayer = 0;
 		currentPlayer = 0;
 		currentRound = 1;
+		publicObjectiveCard = null;
 	}
 
 	/**
@@ -51,6 +54,8 @@ public final class MainBoardData {
 		this.currentPlayer = mainBoardData.currentPlayer;
 
 		this.currentRound = mainBoardData.currentRound;
+
+		this.publicObjectiveCard = mainBoardData.publicObjectiveCard;
 	}
 
 	/**
@@ -73,6 +78,8 @@ public final class MainBoardData {
 		this.currentPlayer = mainBoardData.currentPlayer;
 
 		this.currentRound = mainBoardData.currentRound;
+
+		this.publicObjectiveCard = mainBoardData.publicObjectiveCard;
 	}
 
 	/**
@@ -97,6 +104,31 @@ public final class MainBoardData {
 		this.currentPlayer = currentPlayer;
 
 		this.currentRound = currentRound;
+
+		this.publicObjectiveCard = mainBoardData.publicObjectiveCard;
+	}
+
+	/**
+	 * Constructor to set publicObjectiveCards
+	 * @param mainBoardData previous mainBoardData
+	 * @param publicObjectiveCard to set
+	 */
+	private MainBoardData(MainBoardData mainBoardData, AbstractPublicObjectiveCard[] publicObjectiveCard)
+	{
+		this.playerCount = mainBoardData.playerCount;
+
+		ArrayList<WindowFrameCouple> temp = new ArrayList<>(mainBoardData.windowFrameCouples);
+		windowFrameCouples = Collections.unmodifiableList(temp);
+
+		this.gameState = mainBoardData.gameState;
+
+		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
+
+		this.currentPlayer = mainBoardData.currentPlayer;
+
+		this.currentRound = mainBoardData.currentRound;
+
+		this.publicObjectiveCard = publicObjectiveCard;
 	}
 
 
@@ -135,6 +167,15 @@ public final class MainBoardData {
 	WindowFrameCouple getWindowFrame(int index)
 	{
 		return windowFrameCouples.get(index);
+	}
+
+	/**
+	 * Get List windowFrameCouples
+	 * @return List of window frame couples
+	 */
+	List<WindowFrameCouple> getWindowFrameCouples()
+	{
+		return new ArrayList<>(this.windowFrameCouples);
 	}
 
 	/**
@@ -209,5 +250,14 @@ public final class MainBoardData {
 		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound);
 	}
 
+	MainBoardData setPublicObjectiveCards(AbstractPublicObjectiveCard[] publicObjectiveCards)
+	{
+		return new MainBoardData(this, publicObjectiveCards);
+	}
+
+	AbstractPublicObjectiveCard[] getPublicObjectiveCards()
+	{
+		return publicObjectiveCard;
+	}
 
 }

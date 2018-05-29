@@ -1,7 +1,5 @@
 package progetto.game;
 
-import org.json.JSONArray;
-
 import java.io.Serializable;
 
 /**
@@ -15,13 +13,11 @@ public class WindowFrameCouple implements Serializable {
 
 	/**
 	 * Constructor
-	 * @param frameA JSONArray of the window frame of first side of the card
-	 * @param frameB JSONArray of the window frame of second side of the card
 	 */
-	WindowFrameCouple(JSONArray frameA, JSONArray frameB)
+	WindowFrameCouple()
 	{
-		windowFrame[0] = new WindowFrame(frameA);
-		windowFrame[1] = new WindowFrame(frameB);
+		windowFrame[0] = new WindowFrame();
+		windowFrame[1] = new WindowFrame();
 	}
 
 	/**

@@ -20,7 +20,7 @@ public class AddWindowFrameCoupleAction extends AbstractGameAction
 	 */
 	@Override
 	public boolean canBeExecuted(Game game) {
-		return game.getMainBoard().getMainBoardData().getGameState().getClass()==PreGameState.class;
+		return game.getMainBoard().getData().getGameState().getClass()==PreGameState.class;
 	}
 
 	/**

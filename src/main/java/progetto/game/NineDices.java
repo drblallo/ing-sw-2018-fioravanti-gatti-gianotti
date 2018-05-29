@@ -1,5 +1,6 @@
 package progetto.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  *  Immutable support class with dices in a position of the roundTrack
  */
-public final class NineDices {
+public final class NineDices implements Serializable{
 
 	private final List<Dice> dicesList;
 

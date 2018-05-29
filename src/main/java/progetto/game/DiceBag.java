@@ -1,15 +1,13 @@
 package progetto.game;
 
-import progetto.utils.AbstractObservable;
-
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Dice bag with 90 dices in 5 colors
- */
-public final class DiceBag extends AbstractObservable<DiceBag> {
+*/
+public final class DiceBag{
 
 	private static final int NUMBER_OF_DICES_PER_COLOR = 18;
 
@@ -53,9 +51,7 @@ public final class DiceBag extends AbstractObservable<DiceBag> {
 	{
 		try
 		{
-			Color color = dices.remove(index);
-			change(this);
-			return color;
+			return dices.remove(index);
 		}
 		catch(IndexOutOfBoundsException e)
 		{
@@ -70,7 +66,6 @@ public final class DiceBag extends AbstractObservable<DiceBag> {
 	 */
 	void add(Color color)
 	{
-		change(this);
 		dices.add(color);
 	}
 

@@ -16,12 +16,12 @@ public class EndRoundState extends AbstractGameState
 		ExtractedDices extractedDices = game.getMainBoard().getExtractedDices();
 		MainBoard mainBoard = game.getMainBoard();
 
-		while(extractedDices.getExtractedDicesData().getNumberOfDices()>0)
+		while(extractedDices.getData().getNumberOfDices()>0)
 		{
-			game.getRoundTrack().add(extractedDices.removeDice(0), mainBoard.getMainBoardData().getCurrentRound());
+			game.getRoundTrack().add(extractedDices.removeDice(0), mainBoard.getData().getCurrentRound());
 		}
 
-		int round = mainBoard.getMainBoardData().getCurrentRound();
+		int round = mainBoard.getData().getCurrentRound();
 
 		if(round == LAST_ROUND)
 		{
@@ -31,8 +31,8 @@ public class EndRoundState extends AbstractGameState
 		{
 			mainBoard.setCurrentRound(round+1);
 
-			int firstPlayer = mainBoard.getMainBoardData().getCurrentFirstPlayer();
-			int nPlayer = mainBoard.getMainBoardData().getPlayerCount();
+			int firstPlayer = mainBoard.getData().getCurrentFirstPlayer();
+			int nPlayer = mainBoard.getData().getPlayerCount();
 			firstPlayer = (firstPlayer+1)%nPlayer;
 			mainBoard.setCurrentFirstPlayer(firstPlayer);
 			mainBoard.setCurrentPlayer(firstPlayer);
