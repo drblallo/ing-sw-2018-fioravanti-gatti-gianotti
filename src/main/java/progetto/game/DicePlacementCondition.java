@@ -79,6 +79,16 @@ public final class DicePlacementCondition implements Serializable{
 	}
 
 	/**
+	 * Change dice
+	 * @param dice dice to set
+	 * @return new DicePlacementCondition (the previous with new ignoreAdjacent value)
+	 */
+	DicePlacementCondition changeDice(Dice dice)
+	{
+		return new DicePlacementCondition(dice, ignoreColor, ignoreValue, ignoreAdjacent);
+	}
+
+	/**
 	 * Get dice
 	 * @return dice
 	 */

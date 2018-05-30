@@ -111,4 +111,15 @@ public final class PickedDicesSlotData implements Serializable{
 		return this;
 	}
 
+	PickedDicesSlotData changeDice(int index, Dice dice)
+	{
+		DicePlacementCondition dpc = getDicePlacementCondition(index);
+		if(dpc!=null)
+		{
+			DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, dpc.getIgnoreColor(), dpc.getIgnoreValue(), dpc.getIgnoreAdjacent());
+			return new PickedDicesSlotData(this, index, dicePlacementCondition);
+		}
+		return this;
+	}
+
 }

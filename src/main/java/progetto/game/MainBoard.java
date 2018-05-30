@@ -100,14 +100,41 @@ public final class MainBoard extends DataContainer<MainBoardData> implements IMa
 		return -1;
 	}
 
-	void setPublicObjectiveCards(AbstractPublicObjectiveCard[] publicObjectiveCards)
+	/**
+	 * Add a public objective card
+	 * @param publicObjectiveCard to add
+	 */
+	void addPublicObjectiveCards(AbstractPublicObjectiveCard publicObjectiveCard)
 	{
-		AbstractPublicObjectiveCard[] newPublicObjectiveCards = new AbstractPublicObjectiveCard[publicObjectiveCards.length];
-		for(int i=0; i<publicObjectiveCards.length; i++)
-		{
-			newPublicObjectiveCards[i] = publicObjectiveCards[i];
-		}
-		setData(getData().setPublicObjectiveCards(newPublicObjectiveCards));
+		setData(getData().addPublicObjectiveCard(publicObjectiveCard));
+	}
+
+	/**
+	 * Add one tool card
+	 * @param toolCard to add
+	 */
+	void addToolCard(AbstractToolCard toolCard)
+	{
+		setData(getData().addToolCard(toolCard));
+	}
+
+	/**
+	 * Set difficulty
+	 * @param difficulty to set
+	 */
+	void setDifficulty(int difficulty)
+	{
+		setData(getData().setDifficulty(difficulty));
+	}
+
+	void setParamToolCard(String param, Integer val)
+	{
+		setData(getData().setParamToolCard(param, val));
+	}
+
+	void delParamToolCard()
+	{
+		setData(getData().delParamToolCard());
 	}
 
 }

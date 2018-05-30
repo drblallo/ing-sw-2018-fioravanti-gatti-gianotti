@@ -27,6 +27,8 @@ public class EndTurnAction extends AbstractGameAction
 			extractedDices.addDice(dice);
 		}
 
+		game.getMainBoard().delParamToolCard();
+
 		MainBoard mainBoard = game.getMainBoard();
 
 		int nextPlayer = mainBoard.getNextPlayer();

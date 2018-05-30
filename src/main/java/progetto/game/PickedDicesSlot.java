@@ -43,5 +43,9 @@ public final class PickedDicesSlot extends DataContainer<PickedDicesSlotData> {
 		setData(getData().setIgnoreAdjacent(index, ignoreAdjacent));
 	}
 
+	void changeDice(int index, Dice dice)
+	{
+		setData(getData().changeDice(index, dice));
+	}
 
 }

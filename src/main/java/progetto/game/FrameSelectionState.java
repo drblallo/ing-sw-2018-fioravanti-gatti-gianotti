@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  Distribution of private cards
- *  Selection of public cards
- *  Loading Window Frame from File
+ *  Extraction of private cards
+ *  Extraction of public cards
+ *  Extraction of tool cards
+ *  Extraction of window frames
  */
 public class FrameSelectionState extends AbstractGameState {
-
-	private static final int N_PUBLIC_CARDS = 3;
 
 	public FrameSelectionState() {
 		super("Frame selection");
@@ -23,7 +22,9 @@ public class FrameSelectionState extends AbstractGameState {
 
 		extractPublicCards(game);
 
-		windowFrameReadAndExtraction(game);
+		extractToolCards(game);
+
+		extractWindowFrame(game);
 
 	}
 
@@ -39,31 +40,23 @@ public class FrameSelectionState extends AbstractGameState {
 		privateCards.add(Color.BLUE);
 		privateCards.add(Color.GREEN);
 		privateCards.add(Color.PURPLE);
-		AbstractPrivateObjectiveCard[] privateObjectiveCard;
 		int nPlayer = game.getMainBoard().getData().getPlayerCount();
 
 		if(nPlayer==1)
 		{
-			privateObjectiveCard = new AbstractPrivateObjectiveCard[2];
+			game.getPlayerBoard(0).addPrivateObjectiveCard(new ColorShadesPrivateObjectiveCard(
+				privateCards.remove(game.getRNGenerator().getNextInt(privateCards.size()))));
 
-			privateObjectiveCard[0] = new ColorShadesPrivateObjectiveCard(
-					privateCards.remove(game.getRNGenerator().getNextInt(privateCards.size())));
-
-			privateObjectiveCard[1] = new ColorShadesPrivateObjectiveCard(
-					privateCards.remove(game.getRNGenerator().getNextInt(privateCards.size())));
-
-			game.getPlayerBoard(0).setPrivateObjectiveCard(privateObjectiveCard);
+			game.getPlayerBoard(0).addPrivateObjectiveCard(new ColorShadesPrivateObjectiveCard(
+					privateCards.remove(game.getRNGenerator().getNextInt(privateCards.size()))));
 
 		}
 		else
 		{
-			privateObjectiveCard = new AbstractPrivateObjectiveCard[1];
 			for(int i=0; i<nPlayer; i++)
 			{
-				privateObjectiveCard[0]=new ColorShadesPrivateObjectiveCard(
-						privateCards.remove(game.getRNGenerator().getNextInt(privateCards.size())));
-
-				game.getPlayerBoard(i).setPrivateObjectiveCard(privateObjectiveCard);
+				game.getPlayerBoard(i).addPrivateObjectiveCard(new ColorShadesPrivateObjectiveCard(
+						privateCards.remove(game.getRNGenerator().getNextInt(privateCards.size()))));
 			}
 		}
 	}
@@ -86,40 +79,25 @@ public class FrameSelectionState extends AbstractGameState {
 		publicCards.add(new DifferentColorsPublicObjectiveCard());
 		publicCards.add(new ColoredDiagonalsPublicObjectiveCard());
 
-		AbstractPublicObjectiveCard[] publicObjectiveCards;
 		int nPlayer = game.getMainBoard().getData().getPlayerCount();
 
-		if(nPlayer==1)
+		game.getMainBoard().addPublicObjectiveCards(publicCards.remove(game.getRNGenerator().getNextInt(publicCards.size())));
+		game.getMainBoard().addPublicObjectiveCards(publicCards.remove(game.getRNGenerator().getNextInt(publicCards.size())));
+
+
+		if(nPlayer != 1)
 		{
-			publicObjectiveCards = new AbstractPublicObjectiveCard[2];
+			game.getMainBoard().addPublicObjectiveCards(publicCards.remove(game.getRNGenerator().getNextInt(publicCards.size())));
 
-			publicObjectiveCards[0] = publicCards.remove(game.getRNGenerator().getNextInt(publicCards.size()));
-
-			publicObjectiveCards[1] = publicCards.remove(game.getRNGenerator().getNextInt(publicCards.size()));
-
-			game.getMainBoard().setPublicObjectiveCards(publicObjectiveCards);
-
-		}
-		else
-		{
-			publicObjectiveCards = new AbstractPublicObjectiveCard[N_PUBLIC_CARDS];
-
-			publicObjectiveCards[0] = publicCards.remove(game.getRNGenerator().getNextInt(publicCards.size()));
-
-			publicObjectiveCards[1] = publicCards.remove(game.getRNGenerator().getNextInt(publicCards.size()));
-
-			publicObjectiveCards[2] = publicCards.remove(game.getRNGenerator().getNextInt(publicCards.size()));
-
-			game.getMainBoard().setPublicObjectiveCards(publicObjectiveCards);
 		}
 
 	}
 
 	/**
-	 * Load window frame from file and extract window frame for every player
+	 * Extract window frame for every player
 	 * @param game
 	 */
-	private void windowFrameReadAndExtraction(Game game)
+	private void extractWindowFrame(Game game)
 	{
 		List<WindowFrameCouple> windowFrameCouples = game.getMainBoard().getData().getWindowFrameCouples();
 		WindowFrameCouple[] couples;
@@ -145,5 +123,49 @@ public class FrameSelectionState extends AbstractGameState {
 			game.setState(new GameStartedState());
 		}
 	}
+
+	/**
+	 * Extract tool cards
+	 * @param game
+	 */
+	private void extractToolCards(Game game)
+	{
+		ArrayList<AbstractToolCard> toolCards = new ArrayList<>();
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+		toolCards.add(new RoughingForcepsToolCard());
+
+		int nPlayer = game.getMainBoard().getData().getPlayerCount();
+
+		if(nPlayer == 1)
+		{
+			int difficulty = game.getMainBoard().getData().getDifficulty();
+
+			for(int i=0; i<difficulty; i++)
+			{
+				game.getMainBoard().addToolCard(toolCards.remove(game.getRNGenerator().getNextInt(toolCards.size())));
+			}
+
+		}
+
+		else
+		{
+			game.getMainBoard().addToolCard(toolCards.remove(game.getRNGenerator().getNextInt(toolCards.size())));
+			game.getMainBoard().addToolCard(toolCards.remove(game.getRNGenerator().getNextInt(toolCards.size())));
+			game.getMainBoard().addToolCard(toolCards.remove(game.getRNGenerator().getNextInt(toolCards.size())));
+
+		}
+
+	}
+
 
 }

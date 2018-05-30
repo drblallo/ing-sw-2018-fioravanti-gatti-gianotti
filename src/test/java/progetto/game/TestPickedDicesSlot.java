@@ -101,4 +101,15 @@ public class TestPickedDicesSlot extends TestCase {
 
 	}
 
+	@Test
+	public void testChangeDice()
+	{
+		pickedDicesSlot.add(new Dice(Value.ONE, Color.YELLOW), false, false, false);
+
+		pickedDicesSlot.changeDice(0, new Dice(Value.THREE, Color.PURPLE));
+		Assert.assertEquals(Value.THREE, pickedDicesSlot.getData().getDicePlacementCondition(0).getDice().getValue());
+		Assert.assertEquals(Color.PURPLE, pickedDicesSlot.getData().getDicePlacementCondition(0).getDice().getColor());
+
+	}
+
 }

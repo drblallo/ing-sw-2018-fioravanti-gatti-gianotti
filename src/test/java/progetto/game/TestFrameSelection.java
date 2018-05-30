@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class TestFrameSelection {
 
 	Game game;
@@ -19,11 +21,11 @@ public class TestFrameSelection {
 	{
 		game.setState(new FrameSelectionState());
 		Assert.assertEquals(4, game.getMainBoard().getData().getPlayerCount());
-		AbstractPublicObjectiveCard[] publicObjectiveCard = game.getMainBoard().getData().getPublicObjectiveCards();
-		Assert.assertEquals(3, publicObjectiveCard.length);
-		Assert.assertEquals("Sfumature Medie Set di 3 & 4 ovunque", publicObjectiveCard[0].getToolTip());
-		Assert.assertEquals("Sfumature diverse - riga Righe senza sfumature ripetute", publicObjectiveCard[1].getToolTip());
-		Assert.assertEquals("Sfumature Scure Set di 4 & 5 ovunque", publicObjectiveCard[2].getToolTip());
+		List<AbstractPublicObjectiveCard> cards = game.getMainBoard().getData().getPublicObjectiveCards();
+		Assert.assertEquals(3, cards.size());
+		Assert.assertEquals("Sfumature Medie Set di 3 & 4 ovunque", cards.get(0).getToolTip());
+		Assert.assertEquals("Sfumature diverse - riga Righe senza sfumature ripetute", cards.get(1).getToolTip());
+		Assert.assertEquals("Sfumature Scure Set di 4 & 5 ovunque", cards.get(2).getToolTip());
 
 	}
 
@@ -33,10 +35,10 @@ public class TestFrameSelection {
 		game.getMainBoard().setPlayerCount(1);
 		game.setState(new FrameSelectionState());
 		Assert.assertEquals(1, game.getMainBoard().getData().getPlayerCount());
-		AbstractPublicObjectiveCard[] publicObjectiveCard = game.getMainBoard().getData().getPublicObjectiveCards();
-		Assert.assertEquals(2, publicObjectiveCard.length);
-		Assert.assertEquals("Diagonali Colorate Numero di dadi dello stesso colore diagonalmente adiacenti", publicObjectiveCard[0].getToolTip());
-		Assert.assertEquals("Sfumature diverse - riga Righe senza sfumature ripetute", publicObjectiveCard[1].getToolTip());
+		List<AbstractPublicObjectiveCard> cards = game.getMainBoard().getData().getPublicObjectiveCards();
+		Assert.assertEquals(2, cards.size());
+		Assert.assertEquals("Diagonali Colorate Numero di dadi dello stesso colore diagonalmente adiacenti", cards.get(0).getToolTip());
+		Assert.assertEquals("Sfumature diverse - riga Righe senza sfumature ripetute", cards.get(1).getToolTip());
 
 	}
 
@@ -45,18 +47,18 @@ public class TestFrameSelection {
 	{
 		game.setState(new FrameSelectionState());
 		Assert.assertEquals(4, game.getMainBoard().getData().getPlayerCount());
-		AbstractPrivateObjectiveCard[] privateObjectiveCardP0 = game.getPlayerBoard(0).getData().getPrivateObjectiveCard();
-		AbstractPrivateObjectiveCard[] privateObjectiveCardP1 = game.getPlayerBoard(1).getData().getPrivateObjectiveCard();
-		AbstractPrivateObjectiveCard[] privateObjectiveCardP2 = game.getPlayerBoard(2).getData().getPrivateObjectiveCard();
-		AbstractPrivateObjectiveCard[] privateObjectiveCardP3 = game.getPlayerBoard(3).getData().getPrivateObjectiveCard();
-		Assert.assertEquals(1, privateObjectiveCardP0.length);
-		Assert.assertEquals(1, privateObjectiveCardP1.length);
-		Assert.assertEquals(1, privateObjectiveCardP2.length);
-		Assert.assertEquals(1, privateObjectiveCardP3.length);
-		Assert.assertEquals("Sfumature Giallo Somma dei valori su tutti i dadi Giallo", privateObjectiveCardP0[0].getToolTip());
-		Assert.assertEquals("Sfumature Viola Somma dei valori su tutti i dadi Viola", privateObjectiveCardP1[0].getToolTip());
-		Assert.assertEquals("Sfumature Blu Somma dei valori su tutti i dadi Blu", privateObjectiveCardP2[0].getToolTip());
-		Assert.assertEquals("Sfumature Verde Somma dei valori su tutti i dadi Verde", privateObjectiveCardP3[0].getToolTip());
+		List<AbstractPrivateObjectiveCard> privateObjectiveCardP0 = game.getPlayerBoard(0).getData().getPrivateObjectiveCard();
+		List<AbstractPrivateObjectiveCard> privateObjectiveCardP1 = game.getPlayerBoard(1).getData().getPrivateObjectiveCard();
+		List<AbstractPrivateObjectiveCard> privateObjectiveCardP2 = game.getPlayerBoard(2).getData().getPrivateObjectiveCard();
+		List<AbstractPrivateObjectiveCard> privateObjectiveCardP3 = game.getPlayerBoard(3).getData().getPrivateObjectiveCard();
+		Assert.assertEquals(1, privateObjectiveCardP0.size());
+		Assert.assertEquals(1, privateObjectiveCardP1.size());
+		Assert.assertEquals(1, privateObjectiveCardP2.size());
+		Assert.assertEquals(1, privateObjectiveCardP3.size());
+		Assert.assertEquals("Sfumature Giallo Somma dei valori su tutti i dadi Giallo", privateObjectiveCardP0.get(0).getToolTip());
+		Assert.assertEquals("Sfumature Viola Somma dei valori su tutti i dadi Viola", privateObjectiveCardP1.get(0).getToolTip());
+		Assert.assertEquals("Sfumature Blu Somma dei valori su tutti i dadi Blu", privateObjectiveCardP2.get(0).getToolTip());
+		Assert.assertEquals("Sfumature Verde Somma dei valori su tutti i dadi Verde", privateObjectiveCardP3.get(0).getToolTip());
 
 	}
 
@@ -66,10 +68,10 @@ public class TestFrameSelection {
 		game.getMainBoard().setPlayerCount(1);
 		game.setState(new FrameSelectionState());
 		Assert.assertEquals(1, game.getMainBoard().getData().getPlayerCount());
-		AbstractPrivateObjectiveCard[] privateObjectiveCardP0 = game.getPlayerBoard(0).getData().getPrivateObjectiveCard();
-		Assert.assertEquals(2, privateObjectiveCardP0.length);
-		Assert.assertEquals("Sfumature Giallo Somma dei valori su tutti i dadi Giallo", privateObjectiveCardP0[0].getToolTip());
-		Assert.assertEquals("Sfumature Viola Somma dei valori su tutti i dadi Viola", privateObjectiveCardP0[1].getToolTip());
+		List<AbstractPrivateObjectiveCard> privateObjectiveCardP0 = game.getPlayerBoard(0).getData().getPrivateObjectiveCard();
+		Assert.assertEquals(2, privateObjectiveCardP0.size());
+		Assert.assertEquals("Sfumature Giallo Somma dei valori su tutti i dadi Giallo", privateObjectiveCardP0.get(0).getToolTip());
+		Assert.assertEquals("Sfumature Viola Somma dei valori su tutti i dadi Viola", privateObjectiveCardP0.get(1).getToolTip());
 
 	}
 
@@ -91,8 +93,8 @@ public class TestFrameSelection {
 
 		WindowFrameCouple[] windowFrameCouples = game.getPlayerBoard(0).getData().getExtractedWindowFrameCouplesWindowFrame();
 
-		Assert.assertEquals("Kaleidoscopic Dream", windowFrameCouples[0].getWindowFrame(0).getName());
-		Assert.assertEquals("Firmitas", windowFrameCouples[0].getWindowFrame(1).getName());
+		Assert.assertEquals("Chromatic Splendor", windowFrameCouples[0].getWindowFrame(0).getName());
+		Assert.assertEquals("Comitas", windowFrameCouples[0].getWindowFrame(1).getName());
 		Assert.assertEquals("Fractal Drops", windowFrameCouples[1].getWindowFrame(0).getName());
 		Assert.assertEquals("Ripples of Light", windowFrameCouples[1].getWindowFrame(1).getName());
 
@@ -120,8 +122,8 @@ public class TestFrameSelection {
 
 		WindowFrameCouple[] windowFrameCouples = game.getPlayerBoard(0).getData().getExtractedWindowFrameCouplesWindowFrame();
 
-		Assert.assertEquals("Chromatic Splendor", windowFrameCouples[0].getWindowFrame(0).getName());
-		Assert.assertEquals("Comitas", windowFrameCouples[0].getWindowFrame(1).getName());
+		Assert.assertEquals("Aurorae Mangnificus", windowFrameCouples[0].getWindowFrame(0).getName());
+		Assert.assertEquals("Aurora Sagradis", windowFrameCouples[0].getWindowFrame(1).getName());
 		Assert.assertEquals("Fractal Drops", windowFrameCouples[1].getWindowFrame(0).getName());
 		Assert.assertEquals("Ripples of Light", windowFrameCouples[1].getWindowFrame(1).getName());
 
@@ -129,10 +131,10 @@ public class TestFrameSelection {
 
 		windowFrameCouples = game.getPlayerBoard(3).getData().getExtractedWindowFrameCouplesWindowFrame();
 
-		Assert.assertEquals("Via Lux", windowFrameCouples[0].getWindowFrame(0).getName());
-		Assert.assertEquals("Industria", windowFrameCouples[0].getWindowFrame(1).getName());
-		Assert.assertEquals("Virtus", windowFrameCouples[1].getWindowFrame(0).getName());
-		Assert.assertEquals("Symphony of Light", windowFrameCouples[1].getWindowFrame(1).getName());
+		Assert.assertEquals("Chromatic Splendor", windowFrameCouples[0].getWindowFrame(0).getName());
+		Assert.assertEquals("Comitas", windowFrameCouples[0].getWindowFrame(1).getName());
+		Assert.assertEquals("Lux Mundi", windowFrameCouples[1].getWindowFrame(0).getName());
+		Assert.assertEquals("Lux Astram", windowFrameCouples[1].getWindowFrame(1).getName());
 
 	}
 
@@ -178,10 +180,10 @@ public class TestFrameSelection {
 		game.sendAction(new FrameSetAction(3, 1, 1));
 		game.processAction();
 
-		Assert.assertEquals("Chromatic Splendor", game.getPlayerBoard(0).getData().getWindowFrame().getName());
-		Assert.assertEquals("Aurora Sagradis", game.getPlayerBoard(1).getData().getWindowFrame().getName());
+		Assert.assertEquals("Aurorae Mangnificus", game.getPlayerBoard(0).getData().getWindowFrame().getName());
+		Assert.assertEquals("Shadow Thief", game.getPlayerBoard(1).getData().getWindowFrame().getName());
 		Assert.assertEquals("Water of Life", game.getPlayerBoard(2).getData().getWindowFrame().getName());
-		Assert.assertEquals("Symphony of Light", game.getPlayerBoard(3).getData().getWindowFrame().getName());
+		Assert.assertEquals("Lux Astram", game.getPlayerBoard(3).getData().getWindowFrame().getName());
 
 		Assert.assertEquals("Round State", game.getMainBoard().getData().getGameState().getName());
 

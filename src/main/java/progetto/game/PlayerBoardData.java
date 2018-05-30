@@ -1,6 +1,9 @@
 package progetto.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,7 +16,7 @@ public final class PlayerBoardData implements Serializable{
 
 	private final WindowFrame windowFrame;
 	private final boolean windowFrameIsSet;
-	private final AbstractPrivateObjectiveCard[] privateObjectiveCard;
+	private final List<AbstractPrivateObjectiveCard> privateObjectiveCards;
 
 	private final WindowFrameCouple[] extractedWindowFrameCouples;
 
@@ -25,20 +28,39 @@ public final class PlayerBoardData implements Serializable{
 		windowFrame = new WindowFrame();
 		extractedWindowFrameCouples = new WindowFrameCouple[2];
 		windowFrameIsSet = false;
-		privateObjectiveCard = new AbstractPrivateObjectiveCard[0];
+		ArrayList<AbstractPrivateObjectiveCard> temp = new ArrayList<>();
+		privateObjectiveCards = Collections.unmodifiableList(temp);
 	}
 
 	/**
-	 * Constructor to set extractedWindowFrameCouples or windowFrame
+	 * Constructor to set a value
 	 * @param windowFrame windowFrame to set
 	 * @param extractedWindowFrameCouples extractedWindowFrameCouples to set
 	 */
-	private PlayerBoardData(WindowFrame windowFrame, WindowFrameCouple[] extractedWindowFrameCouples, boolean windowFrameIsSet, AbstractPrivateObjectiveCard[] privateObjectiveCard)
+	private PlayerBoardData(PlayerBoardData playerBoardData, WindowFrame windowFrame, WindowFrameCouple[] extractedWindowFrameCouples, boolean windowFrameIsSet)
 	{
 		this.windowFrame = windowFrame;
 		this.extractedWindowFrameCouples = extractedWindowFrameCouples;
 		this.windowFrameIsSet = windowFrameIsSet;
-		this.privateObjectiveCard = privateObjectiveCard;
+
+		ArrayList<AbstractPrivateObjectiveCard> temp = new ArrayList<>(playerBoardData.privateObjectiveCards);
+		this.privateObjectiveCards = Collections.unmodifiableList(temp);
+	}
+
+	/**
+	 * Constructor to add a privateObjectiveCard
+	 * @param playerBoardData previous playerBoardData
+	 * @param privateObjectiveCard to add
+	 */
+	private PlayerBoardData(PlayerBoardData playerBoardData, AbstractPrivateObjectiveCard privateObjectiveCard)
+	{
+		this.windowFrame = playerBoardData.windowFrame;
+		this.extractedWindowFrameCouples = playerBoardData.extractedWindowFrameCouples;
+		this.windowFrameIsSet = playerBoardData.windowFrameIsSet;
+
+		ArrayList<AbstractPrivateObjectiveCard> temp = new ArrayList<>(playerBoardData.privateObjectiveCards);
+		temp.add(privateObjectiveCard);
+		this.privateObjectiveCards = Collections.unmodifiableList(temp);
 	}
 
 	/**
@@ -66,7 +88,7 @@ public final class PlayerBoardData implements Serializable{
 	 */
 	PlayerBoardData setWindowFrame(WindowFrame windowFrame)
 	{
-		return new PlayerBoardData(windowFrame, extractedWindowFrameCouples, true, privateObjectiveCard);
+		return new PlayerBoardData(this, windowFrame, extractedWindowFrameCouples, true);
 	}
 
 	/**
@@ -79,7 +101,7 @@ public final class PlayerBoardData implements Serializable{
 	{
 		if((couple==0 || couple==1) && (side==0 || side==1) && extractedWindowFrameCouples[0]!=null && extractedWindowFrameCouples[1]!=null)
 		{
-			return new PlayerBoardData(extractedWindowFrameCouples[couple].getWindowFrame(side), extractedWindowFrameCouples, true, privateObjectiveCard);
+			return new PlayerBoardData(this, extractedWindowFrameCouples[couple].getWindowFrame(side), extractedWindowFrameCouples, true);
 
 		}
 		LOGGER.log(Level.SEVERE, "Wrong couple or side");
@@ -92,13 +114,13 @@ public final class PlayerBoardData implements Serializable{
 	 */
 	PlayerBoardData setEmptyWindowFrame()
 	{
-		return new PlayerBoardData(windowFrame, extractedWindowFrameCouples, true, privateObjectiveCard);
+		return new PlayerBoardData(this, windowFrame, extractedWindowFrameCouples, true);
 	}
 
 
 	PlayerBoardData setExtractedWindowFrame(WindowFrameCouple[] extractedWindowFrameCouples)
 	{
-		return new PlayerBoardData(windowFrame, extractedWindowFrameCouples, false, privateObjectiveCard);
+		return new PlayerBoardData(this, windowFrame, extractedWindowFrameCouples, false);
 	}
 
 	boolean getWindowFrameIsSet()
@@ -106,14 +128,19 @@ public final class PlayerBoardData implements Serializable{
 		return windowFrameIsSet;
 	}
 
-	AbstractPrivateObjectiveCard[] getPrivateObjectiveCard()
+	/**
+	 * Get List of private objective cards
+	 * @return List of public objective cards
+	 */
+	List<AbstractPrivateObjectiveCard> getPrivateObjectiveCard()
 	{
-		return privateObjectiveCard;
+		return new ArrayList<>(this.privateObjectiveCards);
 	}
 
-	PlayerBoardData setPrivateObjectiveCard(AbstractPrivateObjectiveCard[] privateObjectiveCard)
+
+	PlayerBoardData addPrivateObjectiveCard(AbstractPrivateObjectiveCard privateObjectiveCard)
 	{
-		return new PlayerBoardData(windowFrame, extractedWindowFrameCouples, windowFrameIsSet, privateObjectiveCard);
+		return new PlayerBoardData(this, privateObjectiveCard);
 	}
 
 }

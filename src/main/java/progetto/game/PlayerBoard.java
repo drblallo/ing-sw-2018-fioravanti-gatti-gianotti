@@ -128,13 +128,8 @@ public class PlayerBoard extends DataContainer<PlayerBoardData> implements IPlay
 		pickedDicesSlot.add(dice, false, false, false);
 	}
 
-	void setPrivateObjectiveCard(AbstractPrivateObjectiveCard[] privateObjectiveCards)
+	void addPrivateObjectiveCard(AbstractPrivateObjectiveCard privateObjectiveCard)
 	{
-		AbstractPrivateObjectiveCard[] newPrivateObjectiveCards = new AbstractPrivateObjectiveCard[privateObjectiveCards.length];
-		for(int i=0; i<privateObjectiveCards.length; i++)
-		{
-			newPrivateObjectiveCards[i] = privateObjectiveCards[i];
-		}
-		setData(getData().setPrivateObjectiveCard(newPrivateObjectiveCards));
+		setData(getData().addPrivateObjectiveCard(privateObjectiveCard));
 	}
 }

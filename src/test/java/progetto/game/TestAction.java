@@ -285,13 +285,13 @@ public class TestAction {
 		game.sendAction(new PickDiceAction(3, 0));
 		game.processAction();
 		Assert.assertEquals(Color.YELLOW, game.getPlayerBoard(3).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getColor());
-		Assert.assertEquals(Value.FIVE, game.getPlayerBoard(3).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getValue());
+		Assert.assertEquals(Value.THREE, game.getPlayerBoard(3).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getValue());
 
 		game.sendAction(new PlaceDiceAction(3, 0, 1, 0));
 		game.processAction();
 		Assert.assertEquals(1, game.getPlayerBoard(3).getDicePlacedFrame().getData().getNDices());
 		Assert.assertEquals(Color.YELLOW, game.getPlayerBoard(3).getDicePlacedFrame().getData().getDice(1, 0).getColor());
-		Assert.assertEquals(Value.FIVE, game.getPlayerBoard(3).getDicePlacedFrame().getData().getDice(1, 0).getValue());
+		Assert.assertEquals(Value.THREE, game.getPlayerBoard(3).getDicePlacedFrame().getData().getDice(1, 0).getValue());
 
 	}
 
@@ -437,6 +437,33 @@ public class TestAction {
 		}
 
 		Assert.assertEquals("End game", game.getMainBoard().getData().getGameState().getName());
+
+	}
+
+	@Test
+	public void testSetDifficultyAction()
+	{
+		game.sendAction(new SetPlayerCountAction(1));
+		game.processAction();
+
+		game.sendAction(new SetDifficultyAction(2));
+		game.processAction();
+		Assert.assertEquals(2, game.getMainBoard().getData().getDifficulty());
+
+		game.setState(new FrameSelectionState());
+
+		Assert.assertEquals(2, game.getMainBoard().getData().getToolCards().size());
+
+	}
+
+	@Test
+	public void testSetDifficultyActionFail()
+	{
+		game.setState(new RoundState());
+
+		AbstractGameAction gameAction = new SetDifficultyAction(2);
+
+		Assert.assertFalse(gameAction.canBeExecuted(game));
 
 	}
 
