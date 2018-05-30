@@ -9,9 +9,9 @@ import java.util.LinkedList;
 public class GameProxy implements IGame
 {
 	private MainBoardProxy mainBoardProxy = new MainBoardProxy();
-	private DataContainerProxy<RoundTrackData> roundTrackProxy = new DataContainerProxy<>(new RoundTrackData());
+	private DataContainer<RoundTrackData> roundTrackProxy = new DataContainer<>(new RoundTrackData());
 	private PlayerBoardProxy[] playerBoardProxy = new PlayerBoardProxy[Game.MAX_NUM_PLAYERS];
-	private DataContainerProxy<CommandQueueData> commandQueueProxy = new DataContainerProxy<>(
+	private DataContainer<CommandQueueData> commandQueueProxy = new DataContainer<>(
 			new CommandQueueData(new ArrayList<>(), new LinkedList<>()));
 
 	public GameProxy()
@@ -21,12 +21,12 @@ public class GameProxy implements IGame
 	}
 
 	@Override
-	public DataContainerProxy<CommandQueueData> getCommandQueue() {
+	public DataContainer<CommandQueueData> getCommandQueue() {
 		return commandQueueProxy;
 	}
 
 	@Override
-	public DataContainerProxy<RoundTrackData> getRoundTrack() {
+	public DataContainer<RoundTrackData> getRoundTrack() {
 		return roundTrackProxy;
 	}
 

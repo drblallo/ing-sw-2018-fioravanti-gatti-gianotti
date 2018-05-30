@@ -4,7 +4,7 @@ import progetto.utils.AbstractObservable;
 
 import java.io.Serializable;
 
-public class DataContainer<T extends Serializable> extends AbstractObservable<T> implements IDataContainer<T>
+public class DataContainer<T extends Serializable> extends AbstractObservable<T>
 {
 
 	private T data;

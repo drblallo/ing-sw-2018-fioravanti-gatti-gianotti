@@ -1,8 +1,8 @@
 package progetto.game;
 
 public interface IGame {
-	IDataContainer<CommandQueueData> getCommandQueue();
-	IDataContainer<RoundTrackData> getRoundTrack();
-	IPlayerBoard getPlayerBoard(int index);
-	IMainBoard getMainBoard();
+	DataContainer<CommandQueueData> getCommandQueue();
+	DataContainer<RoundTrackData> getRoundTrack();
+	AbstractPlayerBoard getPlayerBoard(int index);
+	AbstractMainBoard getMainBoard();
 }

@@ -56,9 +56,9 @@ public class CommandQueueData implements Serializable{
 
 	public CommandQueueData addPastAction(AbstractGameAction action)
 	{
-		ArrayList<AbstractGameAction> pending = new ArrayList<>(pendingActions);
-		pending.add(action);
-		return new CommandQueueData(pending, pendingActions);
+		ArrayList<AbstractGameAction> pasts = new ArrayList<>(pastAction);
+		pasts.add(action);
+		return new CommandQueueData(pasts, pendingActions);
 
 	}
 }

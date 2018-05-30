@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public final class RoundTrackData implements Serializable
 {
 
-	private static final int NUMBER_OF_ROUNDS = 10;
+	public static final int NUMBER_OF_ROUNDS = 10;
 
 	private final NineDices[] dices = new NineDices[NUMBER_OF_ROUNDS];
 

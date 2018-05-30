@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.gui.MainBoardPaneController">
+    <children>
+        <fx:include fx:id="extractedDicesPane" source="ExtractedDicesPane.fxml" />
+        <HBox>
+            <children>
+            <Label text="Game State: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <Label fx:id="gameState">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label text="Number of players: ">
+                    <padding>
+                        <Insets bottom="15.0" />
+                    </padding>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="numberOfPlayers" text="0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets bottom="15.0" right="15.0" />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+      <HBox>
+         <children>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="Giocatore corrente: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentPlayer" text="-1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="15.0" right="15.0" />
+         </padding>
+      </HBox>
+    </children>
+</VBox>

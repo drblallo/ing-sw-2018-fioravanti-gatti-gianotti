@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestCommandQueue {
+public class TestActionQueue {
 
 	private CommandQueue queue;
 

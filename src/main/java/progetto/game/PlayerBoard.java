@@ -3,7 +3,7 @@ package progetto.game;
 /**
  * Player table
  */
-public class PlayerBoard extends DataContainer<PlayerBoardData> implements IPlayerBoard
+public class PlayerBoard extends AbstractPlayerBoard
 {
 
 

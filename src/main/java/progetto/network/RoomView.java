@@ -1,7 +1,9 @@
 package progetto.network;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class RoomView implements Serializable{
@@ -46,5 +48,23 @@ public final class RoomView implements Serializable{
 			if (pl.getChairID() == playerChair)
 				return pl;
 		return null;
+	}
+
+
+	/**
+	 *
+	 * @return the content of this object as a list
+	 */
+	public List<PlayerView> asList(){
+
+		ArrayList<PlayerView> playerViewArrayList = new ArrayList<>();
+
+		for(PlayerView r : playerInfoList.values()){
+
+			playerViewArrayList.add(r);
+
+		}
+		return playerViewArrayList;
+
 	}
 }

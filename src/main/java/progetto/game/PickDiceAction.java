@@ -4,6 +4,13 @@ public class PickDiceAction extends AbstractGameAction {
 
 	private final int nDice;
 
+	public PickDiceAction(){
+
+		super(-1);
+		nDice = -1;
+
+	};
+
 	public PickDiceAction(int nPlayer, int nDice)
 	{
 		super(nPlayer);

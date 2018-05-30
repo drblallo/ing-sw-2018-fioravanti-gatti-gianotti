@@ -1,46 +1,45 @@
 package progetto.clientintegration;
 
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import progetto.gui.CommandLinePane;
+import progetto.gui.*;
+import progetto.serverintegration.ServerMain;
+
+import java.io.IOException;
 
 
 public class ClientWindow extends Application {
 
-    private static ClientWindow clientWindow;
+    public static void main(String[] args){
 
-    public static void launchWindow(String[] args){
-
-            launch(args);
+        ServerMain.main(args);
+        launch(args);
 
     }
 
     @Override
-    public synchronized void start(Stage primaryStage) {
+    public synchronized void start(Stage primaryStage) throws IOException{
 
         primaryStage.setTitle("Client Window");
 
-        CommandLinePane commandLinePane = new CommandLinePane(ClientCommandProcessor.getCommandProcessor());
+        primaryStage.setMaximized(true);
+        ClientViewStateMachine clientViewStateMachine = new ClientViewStateMachine(primaryStage);
+        clientViewStateMachine.setClientCommandProcessor(new ClientCommandProcessor());
 
-        Scene scene = new Scene(commandLinePane.getLayout());
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        ViewState<StartingPaneController> startingPaneControllerViewState =
+                new ViewState<>(clientViewStateMachine, "StartingPane.fxml", StartingPaneController.class);
 
-        clientWindow = this;
+        startingPaneControllerViewState.show();
 
-    }
+        new ClientViewState<SocketRMIChoicePaneController>(clientViewStateMachine,
+                "SocketRMIChoicePane.fxml", SocketRMIChoicePaneController.class);
+        new ClientViewState<ExistingGamesPaneController>(clientViewStateMachine,
+                "ExistingGamesPane.fxml", ExistingGamesPaneController.class);
+        new ClientViewState<RoomsPaneController>(clientViewStateMachine,
+                "RoomsPane.fxml", RoomsPaneController.class);
+        new GameViewState(clientViewStateMachine, "GamePane.fxml", GamePaneController.class);
 
-     static synchronized ClientWindow getWindow(){
-
-        return clientWindow;
-    }
-
-    public synchronized void closeWindow(){
-
-            clientWindow = null;
-            Platform.exit();
 
     }
+
 }
