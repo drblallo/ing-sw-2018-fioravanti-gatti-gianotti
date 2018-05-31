@@ -1,8 +1,8 @@
 package progetto.network.rmi;
 
 import progetto.network.IEnforce;
-import progetto.network.IRoomRequest;
 import progetto.network.INetworkClient;
+import progetto.network.IRoomRequest;
 import progetto.utils.Callback;
 
 import java.rmi.registry.LocateRegistry;

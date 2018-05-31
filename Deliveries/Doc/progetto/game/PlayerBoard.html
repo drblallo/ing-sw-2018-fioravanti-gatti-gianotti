@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../progetto/game/PlaceDiceAction.html" title="class in progetto.game"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.game"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/PlaceDiceAction.html" title="class in progetto.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../index.html?progetto/game/PlayerBoard.html" target="_top">Frames</a></li>
@@ -91,7 +91,7 @@ var activeTableTab = "activeTableTab";
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">progetto.game</div>
+<div class="subTitle">progetto.model</div>
 <h2 title="Class PlayerBoard" class="title">Class PlayerBoard</h2>
 </div>
 <div class="contentContainer">
@@ -99,10 +99,10 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../progetto/utils/AbstractObservable.html" title="class in progetto.utils">progetto.utils.AbstractObservable</a>&lt;<a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.game">PlayerBoardData</a>&gt;</li>
+<li><a href="../../progetto/utils/AbstractObservable.html" title="class in progetto.utils">progetto.utils.AbstractObservable</a>&lt;<a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.model">PlayerBoardData</a>&gt;</li>
 <li>
 <ul class="inheritance">
-<li>progetto.game.PlayerBoard</li>
+<li>progetto.model.PlayerBoard</li>
 </ul>
 </li>
 </ul>
@@ -114,7 +114,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">PlayerBoard</span>
-extends <a href="../../progetto/utils/AbstractObservable.html" title="class in progetto.utils">AbstractObservable</a>&lt;<a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.game">PlayerBoardData</a>&gt;</pre>
+extends <a href="../../progetto/utils/AbstractObservable.html" title="class in progetto.utils">AbstractObservable</a>&lt;<a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.model">PlayerBoardData</a>&gt;</pre>
 <div class="block">Player table</div>
 </li>
 </ul>
@@ -135,15 +135,15 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a></code></td>
+<td class="colFirst"><code>private <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#dicePlacedFrame">dicePlacedFrame</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="../../progetto/game/PickedDicesSlot.html" title="class in progetto.game">PickedDicesSlot</a></code></td>
+<td class="colFirst"><code>private <a href="../../progetto/game/PickedDicesSlot.html" title="class in progetto.model">PickedDicesSlot</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#pickedDicesSlot">pickedDicesSlot</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.game">PlayerBoardData</a></code></td>
+<td class="colFirst"><code>private <a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.model">PlayerBoardData</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#playerBoardData">playerBoardData</a></span></code>&nbsp;</td>
 </tr>
 </table>
@@ -180,7 +180,7 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>(package private) void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#addDiceInPlacedFrame-progetto.game.Dice-int-int-">addDiceInPlacedFrame</a></span>(<a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a>&nbsp;dice,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#addDiceInPlacedFrame-progetto.model.Dice-int-int-">addDiceInPlacedFrame</a></span>(<a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a>&nbsp;dice,
                     int&nbsp;x,
                     int&nbsp;y)</code>
 <div class="block">Add dice in placed frame</div>
@@ -188,19 +188,19 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>(package private) void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#addDiceToPickedSlot-progetto.game.Dice-">addDiceToPickedSlot</a></span>(<a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a>&nbsp;dice)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#addDiceToPickedSlot-progetto.model.Dice-">addDiceToPickedSlot</a></span>(<a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a>&nbsp;dice)</code>
 <div class="block">Add dice to picked slot</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a></code></td>
+<td class="colFirst"><code><a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#getDiceFromPlacedFrame-int-int-">getDiceFromPlacedFrame</a></span>(int&nbsp;x,
                       int&nbsp;y)</code>
 <div class="block">Get dice from placed frame</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a></code></td>
+<td class="colFirst"><code><a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#getDicePlacedFrame--">getDicePlacedFrame</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
@@ -212,11 +212,11 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#getNPickedDices--">getNPickedDices</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../progetto/game/PickedDicesSlot.html" title="class in progetto.game">PickedDicesSlot</a></code></td>
+<td class="colFirst"><code><a href="../../progetto/game/PickedDicesSlot.html" title="class in progetto.model">PickedDicesSlot</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#getPickedDicesSlot--">getPickedDicesSlot</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.game">PlayerBoardData</a></code></td>
+<td class="colFirst"><code><a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.model">PlayerBoardData</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#getPlayerBoardData--">getPlayerBoardData</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
@@ -228,13 +228,13 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>(package private) void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#setWindowFrame-progetto.game.WindowFrame-">setWindowFrame</a></span>(<a href="../../progetto/game/WindowFrame.html" title="class in progetto.game">WindowFrame</a>&nbsp;windowFrame)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#setWindowFrame-progetto.model.WindowFrame-">setWindowFrame</a></span>(<a href="../../progetto/game/WindowFrame.html" title="class in progetto.model">WindowFrame</a>&nbsp;windowFrame)</code>
 <div class="block">Set player window frame</div>
 </td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>(package private) void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#setWindowFrame-progetto.game.WindowFrameCouple-int-">setWindowFrame</a></span>(<a href="../../progetto/game/WindowFrameCouple.html" title="class in progetto.game">WindowFrameCouple</a>&nbsp;windowFrameCouple,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/PlayerBoard.html#setWindowFrame-progetto.model.WindowFrameCouple-int-">setWindowFrame</a></span>(<a href="../../progetto/game/WindowFrameCouple.html" title="class in progetto.model">WindowFrameCouple</a>&nbsp;windowFrameCouple,
               int&nbsp;side)</code>
 <div class="block">Set player Window frame</div>
 </td>
@@ -274,7 +274,7 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <ul class="blockList">
 <li class="blockList">
 <h4>playerBoardData</h4>
-<pre>private&nbsp;<a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.game">PlayerBoardData</a> playerBoardData</pre>
+<pre>private&nbsp;<a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.model">PlayerBoardData</a> playerBoardData</pre>
 </li>
 </ul>
 <a name="dicePlacedFrame">
@@ -283,7 +283,7 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <ul class="blockList">
 <li class="blockList">
 <h4>dicePlacedFrame</h4>
-<pre>private final&nbsp;<a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a> dicePlacedFrame</pre>
+<pre>private final&nbsp;<a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a> dicePlacedFrame</pre>
 </li>
 </ul>
 <a name="pickedDicesSlot">
@@ -292,7 +292,7 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <ul class="blockListLast">
 <li class="blockList">
 <h4>pickedDicesSlot</h4>
-<pre>private final&nbsp;<a href="../../progetto/game/PickedDicesSlot.html" title="class in progetto.game">PickedDicesSlot</a> pickedDicesSlot</pre>
+<pre>private final&nbsp;<a href="../../progetto/game/PickedDicesSlot.html" title="class in progetto.model">PickedDicesSlot</a> pickedDicesSlot</pre>
 </li>
 </ul>
 </li>
@@ -326,7 +326,7 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <ul class="blockList">
 <li class="blockList">
 <h4>getPlayerBoardData</h4>
-<pre>public&nbsp;<a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.game">PlayerBoardData</a>&nbsp;getPlayerBoardData()</pre>
+<pre>public&nbsp;<a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.model">PlayerBoardData</a>&nbsp;getPlayerBoardData()</pre>
 </li>
 </ul>
 <a name="getNPickedDices--">
@@ -344,7 +344,7 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <ul class="blockList">
 <li class="blockList">
 <h4>getPickedDicesSlot</h4>
-<pre>public&nbsp;<a href="../../progetto/game/PickedDicesSlot.html" title="class in progetto.game">PickedDicesSlot</a>&nbsp;getPickedDicesSlot()</pre>
+<pre>public&nbsp;<a href="../../progetto/game/PickedDicesSlot.html" title="class in progetto.model">PickedDicesSlot</a>&nbsp;getPickedDicesSlot()</pre>
 </li>
 </ul>
 <a name="getDicePlacedFrame--">
@@ -353,7 +353,7 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <ul class="blockList">
 <li class="blockList">
 <h4>getDicePlacedFrame</h4>
-<pre>public&nbsp;<a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;getDicePlacedFrame()</pre>
+<pre>public&nbsp;<a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;getDicePlacedFrame()</pre>
 </li>
 </ul>
 <a name="getNDicesPlaced--">
@@ -365,13 +365,13 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <pre>public&nbsp;int&nbsp;getNDicesPlaced()</pre>
 </li>
 </ul>
-<a name="setWindowFrame-progetto.game.WindowFrameCouple-int-">
+<a name="setWindowFrame-progetto.model.WindowFrameCouple-int-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setWindowFrame</h4>
-<pre>void&nbsp;setWindowFrame(<a href="../../progetto/game/WindowFrameCouple.html" title="class in progetto.game">WindowFrameCouple</a>&nbsp;windowFrameCouple,
+<pre>void&nbsp;setWindowFrame(<a href="../../progetto/game/WindowFrameCouple.html" title="class in progetto.model">WindowFrameCouple</a>&nbsp;windowFrameCouple,
                     int&nbsp;side)</pre>
 <div class="block">Set player Window frame</div>
 <dl>
@@ -381,13 +381,13 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 </dl>
 </li>
 </ul>
-<a name="setWindowFrame-progetto.game.WindowFrame-">
+<a name="setWindowFrame-progetto.model.WindowFrame-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setWindowFrame</h4>
-<pre>void&nbsp;setWindowFrame(<a href="../../progetto/game/WindowFrame.html" title="class in progetto.game">WindowFrame</a>&nbsp;windowFrame)</pre>
+<pre>void&nbsp;setWindowFrame(<a href="../../progetto/game/WindowFrame.html" title="class in progetto.model">WindowFrame</a>&nbsp;windowFrame)</pre>
 <div class="block">Set player window frame</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -395,13 +395,13 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 </dl>
 </li>
 </ul>
-<a name="addDiceInPlacedFrame-progetto.game.Dice-int-int-">
+<a name="addDiceInPlacedFrame-progetto.model.Dice-int-int-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>addDiceInPlacedFrame</h4>
-<pre>void&nbsp;addDiceInPlacedFrame(<a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a>&nbsp;dice,
+<pre>void&nbsp;addDiceInPlacedFrame(<a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a>&nbsp;dice,
                           int&nbsp;x,
                           int&nbsp;y)</pre>
 <div class="block">Add dice in placed frame</div>
@@ -419,7 +419,7 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 <ul class="blockList">
 <li class="blockList">
 <h4>getDiceFromPlacedFrame</h4>
-<pre>public&nbsp;<a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a>&nbsp;getDiceFromPlacedFrame(int&nbsp;x,
+<pre>public&nbsp;<a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a>&nbsp;getDiceFromPlacedFrame(int&nbsp;x,
                                    int&nbsp;y)</pre>
 <div class="block">Get dice from placed frame</div>
 <dl>
@@ -447,13 +447,13 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 </dl>
 </li>
 </ul>
-<a name="addDiceToPickedSlot-progetto.game.Dice-">
+<a name="addDiceToPickedSlot-progetto.model.Dice-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>addDiceToPickedSlot</h4>
-<pre>void&nbsp;addDiceToPickedSlot(<a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a>&nbsp;dice)</pre>
+<pre>void&nbsp;addDiceToPickedSlot(<a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a>&nbsp;dice)</pre>
 <div class="block">Add dice to picked slot</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -488,8 +488,8 @@ extends <a href="../../progetto/utils/AbstractObservable.html" title="class in p
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../progetto/game/PlaceDiceAction.html" title="class in progetto.game"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.game"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/PlaceDiceAction.html" title="class in progetto.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/PlayerBoardData.html" title="class in progetto.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../index.html?progetto/game/PlayerBoard.html" target="_top">Frames</a></li>

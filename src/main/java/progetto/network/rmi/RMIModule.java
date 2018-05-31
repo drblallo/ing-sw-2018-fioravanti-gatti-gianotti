@@ -78,7 +78,7 @@ public final class RMIModule implements INetworkModule {
 
 	/**
 	 *
-	 * @return the callback that is called when a player joins the game
+	 * @return the callback that is called when a player joins the model
 	 */
 	public Callback<INetworkHandler> getPlayerJoinedCallback() {
 		return palyerJoinedCallback;

@@ -1,18 +1,11 @@
 package progetto.network;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import progetto.game.FrameSetAction;
-import progetto.game.RoundState;
-import progetto.game.SetPlayerCountAction;
-import progetto.game.StartGameAction;
 import progetto.utils.ObserverStub;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public abstract class AbstractMessageExchangeTest extends AbstractNetworkTestStub {
 

@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../progetto/game/Color.html" title="enum in progetto.game"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../progetto/game/Couple.html" title="class in progetto.game"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/Color.html" title="enum in progetto.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/Couple.html" title="class in progetto.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../index.html?progetto/game/CommandQueue.html" target="_top">Frames</a></li>
@@ -91,7 +91,7 @@ var activeTableTab = "activeTableTab";
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">progetto.game</div>
+<div class="subTitle">progetto.model</div>
 <h2 title="Class CommandQueue" class="title">Class CommandQueue</h2>
 </div>
 <div class="contentContainer">
@@ -99,13 +99,13 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../progetto/utils/AbstractObservable.html" title="class in progetto.utils">progetto.utils.AbstractObservable</a>&lt;<a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.game">AbstractProcessor</a>&lt;T&gt;&gt;</li>
+<li><a href="../../progetto/utils/AbstractObservable.html" title="class in progetto.utils">progetto.utils.AbstractObservable</a>&lt;<a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.model">AbstractProcessor</a>&lt;T&gt;&gt;</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.game">progetto.game.AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt;</li>
+<li><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.model">progetto.model.AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt;</li>
 <li>
 <ul class="inheritance">
-<li>progetto.game.CommandQueue</li>
+<li>progetto.model.CommandQueue</li>
 </ul>
 </li>
 </ul>
@@ -119,7 +119,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">CommandQueue</span>
-extends <a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.game">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt;</pre>
+extends <a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.model">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt;</pre>
 <div class="block">Command queue of the game</div>
 </li>
 </ul>
@@ -140,11 +140,11 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private java.util.List&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.List&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/CommandQueue.html#pastAction">pastAction</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private java.util.Queue&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.Queue&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/CommandQueue.html#pendingActions">pendingActions</a></span></code>&nbsp;</td>
 </tr>
 </table>
@@ -180,7 +180,7 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a></code></td>
+<td class="colFirst"><code><a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/CommandQueue.html#getPastItem-int-">getPastItem</a></span>(int&nbsp;index)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -195,16 +195,16 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>(package private) void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/CommandQueue.html#offer-progetto.game.AbstractGameAction-">offer</a></span>(<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&nbsp;action)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/CommandQueue.html#offer-progetto.model.AbstractGameAction-">offer</a></span>(<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&nbsp;action)</code>
 <div class="block">Append an action to the queue</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a></code></td>
+<td class="colFirst"><code><a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/CommandQueue.html#peekPending--">peekPending</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>(package private) <a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a></code></td>
+<td class="colFirst"><code>(package private) <a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/CommandQueue.html#pollPending--">pollPending</a></span>()</code>
 <div class="block">Removes the oldest inserted values and places it in the already executed list</div>
 </td>
@@ -244,7 +244,7 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 <ul class="blockList">
 <li class="blockList">
 <h4>pastAction</h4>
-<pre>private&nbsp;java.util.List&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt; pastAction</pre>
+<pre>private&nbsp;java.util.List&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt; pastAction</pre>
 </li>
 </ul>
 <a name="pendingActions">
@@ -253,7 +253,7 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 <ul class="blockListLast">
 <li class="blockList">
 <h4>pendingActions</h4>
-<pre>private&nbsp;java.util.Queue&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt; pendingActions</pre>
+<pre>private&nbsp;java.util.Queue&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt; pendingActions</pre>
 </li>
 </ul>
 </li>
@@ -281,13 +281,13 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="offer-progetto.game.AbstractGameAction-">
+<a name="offer-progetto.model.AbstractGameAction-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>offer</h4>
-<pre>void&nbsp;offer(<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&nbsp;action)</pre>
+<pre>void&nbsp;offer(<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&nbsp;action)</pre>
 <div class="block">Append an action to the queue</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -301,10 +301,10 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 <ul class="blockList">
 <li class="blockList">
 <h4>peekPending</h4>
-<pre>public&nbsp;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&nbsp;peekPending()</pre>
+<pre>public&nbsp;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&nbsp;peekPending()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../progetto/game/AbstractProcessor.html#peekPending--">peekPending</a></code>&nbsp;in class&nbsp;<code><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.game">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt;</code></dd>
+<dd><code><a href="../../progetto/game/AbstractProcessor.html#peekPending--">peekPending</a></code>&nbsp;in class&nbsp;<code><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.model">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the oldest inserted value without removing it from the queue</dd>
 </dl>
@@ -316,7 +316,7 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 <ul class="blockList">
 <li class="blockList">
 <h4>pollPending</h4>
-<pre><a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&nbsp;pollPending()</pre>
+<pre><a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&nbsp;pollPending()</pre>
 <div class="block">Removes the oldest inserted values and places it in the already executed list</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -333,7 +333,7 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 <pre>public&nbsp;int&nbsp;getPendingItemsCount()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../progetto/game/AbstractProcessor.html#getPendingItemsCount--">getPendingItemsCount</a></code>&nbsp;in class&nbsp;<code><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.game">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt;</code></dd>
+<dd><code><a href="../../progetto/game/AbstractProcessor.html#getPendingItemsCount--">getPendingItemsCount</a></code>&nbsp;in class&nbsp;<code><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.model">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the number of pending actions</dd>
 </dl>
@@ -351,7 +351,7 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
  pending items are not part of this count</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../progetto/game/AbstractProcessor.html#getPastItemCount--">getPastItemCount</a></code>&nbsp;in class&nbsp;<code><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.game">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt;</code></dd>
+<dd><code><a href="../../progetto/game/AbstractProcessor.html#getPastItemCount--">getPastItemCount</a></code>&nbsp;in class&nbsp;<code><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.model">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the number of already executed actions</dd>
 </dl>
@@ -363,10 +363,10 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getPastItem</h4>
-<pre>public&nbsp;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&nbsp;getPastItem(int&nbsp;index)</pre>
+<pre>public&nbsp;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&nbsp;getPastItem(int&nbsp;index)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../progetto/game/AbstractProcessor.html#getPastItem-int-">getPastItem</a></code>&nbsp;in class&nbsp;<code><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.game">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.game">AbstractGameAction</a>&gt;</code></dd>
+<dd><code><a href="../../progetto/game/AbstractProcessor.html#getPastItem-int-">getPastItem</a></code>&nbsp;in class&nbsp;<code><a href="../../progetto/game/AbstractProcessor.html" title="class in progetto.model">AbstractProcessor</a>&lt;<a href="../../progetto/game/AbstractGameAction.html" title="class in progetto.model">AbstractGameAction</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>index</code> - the index of the action that is being retrieved</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -401,8 +401,8 @@ extends <a href="../../progetto/game/AbstractProcessor.html" title="class in pro
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../progetto/game/Color.html" title="enum in progetto.game"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../progetto/game/Couple.html" title="class in progetto.game"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/Color.html" title="enum in progetto.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/Couple.html" title="class in progetto.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../index.html?progetto/game/CommandQueue.html" target="_top">Frames</a></li>

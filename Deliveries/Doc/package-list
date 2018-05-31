@@ -1,10 +1,10 @@
-progetto.clientintegration
-progetto.commandline
-progetto.game
-progetto.gui
+progetto.integration.client
+progetto.view.commandline
+progetto.model
+progetto.view.gui
 progetto.network
 progetto.network.localconnection
 progetto.network.rmi
 progetto.network.socket
-progetto.serverintegration
+progetto.integration.server
 progetto.utils

@@ -1,8 +1,6 @@
 package progetto.network.localconnection;
 
-import org.junit.*;
-import progetto.network.*;
-import progetto.utils.IObserver;
+import org.junit.Test;
 import progetto.utils.ObserverStub;
 
 import static org.junit.Assert.assertEquals;

@@ -1,6 +1,6 @@
 package progetto.network;
 
-import progetto.clientmodelproxy.GameProxy;
+import progetto.proxy.ModelProxy;
 import progetto.utils.Callback;
 
 import java.io.Serializable;
@@ -32,7 +32,7 @@ public final class ClientConnection implements Runnable
 	private final INetworkClient handler;
 	private ServerStateView serverState = new ServerStateView();
 	private int playerID = -1;
-	private final GameProxy proxy = new GameProxy();
+	private final ModelProxy proxy = new ModelProxy();
 
 	/**
 	 * creates a client connection. This will start the thread that processes the pending enforces sent by the server
@@ -48,7 +48,7 @@ public final class ClientConnection implements Runnable
 		new Thread(this).start();
 	}
 
-	public GameProxy getProxy()
+	public ModelProxy getProxy()
 	{
 		return proxy;
 	}
@@ -119,7 +119,7 @@ public final class ClientConnection implements Runnable
 	/**
 	 *
 	 * @return the id of the player. Player id cannot change at run time, but can be equal to -1 if the server
-	 * did not yet sent the value that will be used this game
+	 * did not yet sent the value that will be used this model
 	 */
 	public synchronized int getPlayerID()
 	{
@@ -137,7 +137,7 @@ public final class ClientConnection implements Runnable
 	}
 
 	/**
-	 * Tries to join a game
+	 * Tries to join a model
 	 *
 	 * @param roomID     roomID you are trying to join
 	 * @param playerName the name with which you will be called.

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.integration.client.view.ChatPaneController">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Utenti:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </Label>
+            <HBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <ListView fx:id="listView" prefHeight="430.0" prefWidth="192.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="chatArea" editable="false" HBox.hgrow="ALWAYS" />
+                  <AnchorPane />
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </HBox>
+            <TextField fx:id="messageToSend" onKeyPressed="#onEnterKeyPressed" promptText="Scrivi qualcosa..">
+               <VBox.margin>
+                  <Insets left="15.0" right="30.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox spacing="15.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label text="Sedie disponibili">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="chairs" prefWidth="150.0" />
+                  <Button fx:id="sitButton" mnemonicParsing="false" onAction="#onSitButtonPressed" text="Siediti" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

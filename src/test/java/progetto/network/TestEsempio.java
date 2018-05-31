@@ -1,7 +1,6 @@
 package progetto.network;
 
 import org.junit.Test;
-import progetto.network.NetworkSettings;
 
 import static org.junit.Assert.assertEquals;
 

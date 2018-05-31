@@ -69,7 +69,7 @@ public final class SocketServer implements INetworkModule, Runnable {
 	}
 
 	/**
-	 * @return the callback that is called every time a new player joins the game
+	 * @return the callback that is called every time a new player joins the model
 	 */
 	public Callback<INetworkHandler> getPlayerJoinedCallback() {
 		return playerJoinedCallback;

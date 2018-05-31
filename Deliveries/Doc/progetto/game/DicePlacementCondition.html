@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../progetto/game/DicePlacedFrameData.html" title="class in progetto.game"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../progetto/game/EndGameState.html" title="class in progetto.game"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/DicePlacedFrameData.html" title="class in progetto.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/EndGameState.html" title="class in progetto.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../index.html?progetto/game/DicePlacementCondition.html" target="_top">Frames</a></li>
@@ -91,7 +91,7 @@ var activeTableTab = "activeTableTab";
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">progetto.game</div>
+<div class="subTitle">progetto.model</div>
 <h2 title="Class DicePlacementCondition" class="title">Class DicePlacementCondition</h2>
 </div>
 <div class="contentContainer">
@@ -99,7 +99,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>progetto.game.DicePlacementCondition</li>
+<li>progetto.model.DicePlacementCondition</li>
 </ul>
 </li>
 </ul>
@@ -142,7 +142,7 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a></code></td>
+<td class="colFirst"><code>private <a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#dice">dice</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -184,7 +184,7 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#DicePlacementCondition-progetto.game.Dice-boolean-boolean-boolean-">DicePlacementCondition</a></span>(<a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a>&nbsp;dice,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#DicePlacementCondition-progetto.model.Dice-boolean-boolean-boolean-">DicePlacementCondition</a></span>(<a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a>&nbsp;dice,
                       boolean&nbsp;ignoreColor,
                       boolean&nbsp;ignoreValue,
                       boolean&nbsp;ignoreAdjacent)</code>
@@ -208,38 +208,38 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#canBePlaced-int-int-progetto.game.PlayerBoard-">canBePlaced</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#canBePlaced-int-int-progetto.model.PlayerBoard-">canBePlaced</a></span>(int&nbsp;x,
            int&nbsp;y,
-           <a href="../../progetto/game/PlayerBoard.html" title="class in progetto.game">PlayerBoard</a>&nbsp;playerBoard)</code>
+           <a href="../../progetto/game/PlayerBoard.html" title="class in progetto.model">PlayerBoard</a>&nbsp;playerBoard)</code>
 <div class="block">Method to verify if the dice can be placed in the selected position respecting the selected constraints</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>private boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#checkAdjacent-int-int-progetto.game.DicePlacedFrame-">checkAdjacent</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#checkAdjacent-int-int-progetto.model.DicePlacedFrame-">checkAdjacent</a></span>(int&nbsp;x,
              int&nbsp;y,
-             <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
+             <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
 <div class="block">Support method to verify if Adjacent constraints are respected</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>private boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#checkNearColor-int-int-progetto.game.DicePlacedFrame-">checkNearColor</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#checkNearColor-int-int-progetto.model.DicePlacedFrame-">checkNearColor</a></span>(int&nbsp;x,
               int&nbsp;y,
-              <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
+              <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
 <div class="block">Support method to verify if near color constraints are respected</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>private boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#checkNearValue-int-int-progetto.game.DicePlacedFrame-">checkNearValue</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#checkNearValue-int-int-progetto.model.DicePlacedFrame-">checkNearValue</a></span>(int&nbsp;x,
               int&nbsp;y,
-              <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
+              <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
 <div class="block">Support method to verify if near value constraints are respected</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a></code></td>
+<td class="colFirst"><code><a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#getDice--">getDice</a></span>()</code>
 <div class="block">Get dice</div>
 </td>
@@ -263,60 +263,60 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>(package private) <a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.game">DicePlacementCondition</a></code></td>
+<td class="colFirst"><code>(package private) <a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.model">DicePlacementCondition</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#setIgnoreAdjacent-boolean-">setIgnoreAdjacent</a></span>(boolean&nbsp;ignoreAdj)</code>
 <div class="block">Set ignore Adjacent constraints</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code>(package private) <a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.game">DicePlacementCondition</a></code></td>
+<td class="colFirst"><code>(package private) <a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.model">DicePlacementCondition</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#setIgnoreColor-boolean-">setIgnoreColor</a></span>(boolean&nbsp;ignoreCol)</code>
 <div class="block">Set ignore Color constraints</div>
 </td>
 </tr>
 <tr id="i10" class="altColor">
-<td class="colFirst"><code>(package private) <a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.game">DicePlacementCondition</a></code></td>
+<td class="colFirst"><code>(package private) <a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.model">DicePlacementCondition</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#setIgnoreValue-boolean-">setIgnoreValue</a></span>(boolean&nbsp;ignoreVal)</code>
 <div class="block">Set ignore Value constraints</div>
 </td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>private boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyColor-int-int-progetto.game.WindowFrame-">verifyColor</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyColor-int-int-progetto.model.WindowFrame-">verifyColor</a></span>(int&nbsp;x,
            int&nbsp;y,
-           <a href="../../progetto/game/WindowFrame.html" title="class in progetto.game">WindowFrame</a>&nbsp;windowFrame)</code>
+           <a href="../../progetto/game/WindowFrame.html" title="class in progetto.model">WindowFrame</a>&nbsp;windowFrame)</code>
 <div class="block">Support method to verify if Color constraints are respected</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>private boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyFirstDiceEdge-int-int-progetto.game.DicePlacedFrame-">verifyFirstDiceEdge</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyFirstDiceEdge-int-int-progetto.model.DicePlacedFrame-">verifyFirstDiceEdge</a></span>(int&nbsp;x,
                    int&nbsp;y,
-                   <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
+                   <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
 <div class="block">Support method to verify the first dice is positioned near the edge</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>private boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyNear-int-int-progetto.game.DicePlacedFrame-">verifyNear</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyNear-int-int-progetto.model.DicePlacedFrame-">verifyNear</a></span>(int&nbsp;x,
           int&nbsp;y,
-          <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
+          <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
 <div class="block">Support method to verify if new dice is near an other dice</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>private boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyNearColor-int-int-progetto.game.DicePlacedFrame-">verifyNearColor</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyNearColor-int-int-progetto.model.DicePlacedFrame-">verifyNearColor</a></span>(int&nbsp;x,
                int&nbsp;y,
-               <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
+               <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
 <div class="block">Support method to verify if new dice is near an other dice with same Color</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>private boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyNearValue-int-int-progetto.game.DicePlacedFrame-">verifyNearValue</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyNearValue-int-int-progetto.model.DicePlacedFrame-">verifyNearValue</a></span>(int&nbsp;x,
                int&nbsp;y,
-               <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
+               <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</code>
 <div class="block">Support method to verify if new dice is near an other dice with same Value</div>
 </td>
 </tr>
@@ -329,9 +329,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>private boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyValue-int-int-progetto.game.WindowFrame-">verifyValue</a></span>(int&nbsp;x,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../progetto/game/DicePlacementCondition.html#verifyValue-int-int-progetto.model.WindowFrame-">verifyValue</a></span>(int&nbsp;x,
            int&nbsp;y,
-           <a href="../../progetto/game/WindowFrame.html" title="class in progetto.game">WindowFrame</a>&nbsp;windowFrame)</code>
+           <a href="../../progetto/game/WindowFrame.html" title="class in progetto.model">WindowFrame</a>&nbsp;windowFrame)</code>
 <div class="block">Support method to verify if Value constraints are respected</div>
 </td>
 </tr>
@@ -366,7 +366,7 @@ extends java.lang.Object</pre>
 <pre>private static final&nbsp;int Y_MAX</pre>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../constant-values.html#progetto.game.DicePlacementCondition.Y_MAX">Constant Field Values</a></dd>
+<dd><a href="../../constant-values.html#progetto.model.DicePlacementCondition.Y_MAX">Constant Field Values</a></dd>
 </dl>
 </li>
 </ul>
@@ -379,7 +379,7 @@ extends java.lang.Object</pre>
 <pre>private static final&nbsp;int X_MAX</pre>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../constant-values.html#progetto.game.DicePlacementCondition.X_MAX">Constant Field Values</a></dd>
+<dd><a href="../../constant-values.html#progetto.model.DicePlacementCondition.X_MAX">Constant Field Values</a></dd>
 </dl>
 </li>
 </ul>
@@ -425,7 +425,7 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>dice</h4>
-<pre>private final&nbsp;<a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a> dice</pre>
+<pre>private final&nbsp;<a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a> dice</pre>
 </li>
 </ul>
 </li>
@@ -436,13 +436,13 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="DicePlacementCondition-progetto.game.Dice-boolean-boolean-boolean-">
+<a name="DicePlacementCondition-progetto.model.Dice-boolean-boolean-boolean-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>DicePlacementCondition</h4>
-<pre>DicePlacementCondition(<a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a>&nbsp;dice,
+<pre>DicePlacementCondition(<a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a>&nbsp;dice,
                        boolean&nbsp;ignoreColor,
                        boolean&nbsp;ignoreValue,
                        boolean&nbsp;ignoreAdjacent)</pre>
@@ -470,7 +470,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>setIgnoreColor</h4>
-<pre><a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.game">DicePlacementCondition</a>&nbsp;setIgnoreColor(boolean&nbsp;ignoreCol)</pre>
+<pre><a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.model">DicePlacementCondition</a>&nbsp;setIgnoreColor(boolean&nbsp;ignoreCol)</pre>
 <div class="block">Set ignore Color constraints</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -486,7 +486,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>setIgnoreValue</h4>
-<pre><a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.game">DicePlacementCondition</a>&nbsp;setIgnoreValue(boolean&nbsp;ignoreVal)</pre>
+<pre><a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.model">DicePlacementCondition</a>&nbsp;setIgnoreValue(boolean&nbsp;ignoreVal)</pre>
 <div class="block">Set ignore Value constraints</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -502,7 +502,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>setIgnoreAdjacent</h4>
-<pre><a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.game">DicePlacementCondition</a>&nbsp;setIgnoreAdjacent(boolean&nbsp;ignoreAdj)</pre>
+<pre><a href="../../progetto/game/DicePlacementCondition.html" title="class in progetto.model">DicePlacementCondition</a>&nbsp;setIgnoreAdjacent(boolean&nbsp;ignoreAdj)</pre>
 <div class="block">Set ignore Adjacent constraints</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -518,7 +518,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getDice</h4>
-<pre>public&nbsp;<a href="../../progetto/game/Dice.html" title="class in progetto.game">Dice</a>&nbsp;getDice()</pre>
+<pre>public&nbsp;<a href="../../progetto/game/Dice.html" title="class in progetto.model">Dice</a>&nbsp;getDice()</pre>
 <div class="block">Get dice</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -568,7 +568,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="canBePlaced-int-int-progetto.game.PlayerBoard-">
+<a name="canBePlaced-int-int-progetto.model.PlayerBoard-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -576,7 +576,7 @@ extends java.lang.Object</pre>
 <h4>canBePlaced</h4>
 <pre>public&nbsp;boolean&nbsp;canBePlaced(int&nbsp;x,
                            int&nbsp;y,
-                           <a href="../../progetto/game/PlayerBoard.html" title="class in progetto.game">PlayerBoard</a>&nbsp;playerBoard)</pre>
+                           <a href="../../progetto/game/PlayerBoard.html" title="class in progetto.model">PlayerBoard</a>&nbsp;playerBoard)</pre>
 <div class="block">Method to verify if the dice can be placed in the selected position respecting the selected constraints</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -606,7 +606,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="verifyColor-int-int-progetto.game.WindowFrame-">
+<a name="verifyColor-int-int-progetto.model.WindowFrame-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -614,7 +614,7 @@ extends java.lang.Object</pre>
 <h4>verifyColor</h4>
 <pre>private&nbsp;boolean&nbsp;verifyColor(int&nbsp;x,
                             int&nbsp;y,
-                            <a href="../../progetto/game/WindowFrame.html" title="class in progetto.game">WindowFrame</a>&nbsp;windowFrame)</pre>
+                            <a href="../../progetto/game/WindowFrame.html" title="class in progetto.model">WindowFrame</a>&nbsp;windowFrame)</pre>
 <div class="block">Support method to verify if Color constraints are respected</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -626,7 +626,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="verifyValue-int-int-progetto.game.WindowFrame-">
+<a name="verifyValue-int-int-progetto.model.WindowFrame-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -634,7 +634,7 @@ extends java.lang.Object</pre>
 <h4>verifyValue</h4>
 <pre>private&nbsp;boolean&nbsp;verifyValue(int&nbsp;x,
                             int&nbsp;y,
-                            <a href="../../progetto/game/WindowFrame.html" title="class in progetto.game">WindowFrame</a>&nbsp;windowFrame)</pre>
+                            <a href="../../progetto/game/WindowFrame.html" title="class in progetto.model">WindowFrame</a>&nbsp;windowFrame)</pre>
 <div class="block">Support method to verify if Value constraints are respected</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -646,7 +646,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="verifyFirstDiceEdge-int-int-progetto.game.DicePlacedFrame-">
+<a name="verifyFirstDiceEdge-int-int-progetto.model.DicePlacedFrame-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -654,7 +654,7 @@ extends java.lang.Object</pre>
 <h4>verifyFirstDiceEdge</h4>
 <pre>private&nbsp;boolean&nbsp;verifyFirstDiceEdge(int&nbsp;x,
                                     int&nbsp;y,
-                                    <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
+                                    <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
 <div class="block">Support method to verify the first dice is positioned near the edge</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -666,7 +666,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="checkAdjacent-int-int-progetto.game.DicePlacedFrame-">
+<a name="checkAdjacent-int-int-progetto.model.DicePlacedFrame-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -674,7 +674,7 @@ extends java.lang.Object</pre>
 <h4>checkAdjacent</h4>
 <pre>private&nbsp;boolean&nbsp;checkAdjacent(int&nbsp;x,
                               int&nbsp;y,
-                              <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
+                              <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
 <div class="block">Support method to verify if Adjacent constraints are respected</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -686,7 +686,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="checkNearValue-int-int-progetto.game.DicePlacedFrame-">
+<a name="checkNearValue-int-int-progetto.model.DicePlacedFrame-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -694,7 +694,7 @@ extends java.lang.Object</pre>
 <h4>checkNearValue</h4>
 <pre>private&nbsp;boolean&nbsp;checkNearValue(int&nbsp;x,
                                int&nbsp;y,
-                               <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
+                               <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
 <div class="block">Support method to verify if near value constraints are respected</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -706,7 +706,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="checkNearColor-int-int-progetto.game.DicePlacedFrame-">
+<a name="checkNearColor-int-int-progetto.model.DicePlacedFrame-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -714,7 +714,7 @@ extends java.lang.Object</pre>
 <h4>checkNearColor</h4>
 <pre>private&nbsp;boolean&nbsp;checkNearColor(int&nbsp;x,
                                int&nbsp;y,
-                               <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
+                               <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
 <div class="block">Support method to verify if near color constraints are respected</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -726,7 +726,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="verifyNear-int-int-progetto.game.DicePlacedFrame-">
+<a name="verifyNear-int-int-progetto.model.DicePlacedFrame-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -734,7 +734,7 @@ extends java.lang.Object</pre>
 <h4>verifyNear</h4>
 <pre>private&nbsp;boolean&nbsp;verifyNear(int&nbsp;x,
                            int&nbsp;y,
-                           <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
+                           <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
 <div class="block">Support method to verify if new dice is near an other dice</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -746,7 +746,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="verifyNearValue-int-int-progetto.game.DicePlacedFrame-">
+<a name="verifyNearValue-int-int-progetto.model.DicePlacedFrame-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -754,7 +754,7 @@ extends java.lang.Object</pre>
 <h4>verifyNearValue</h4>
 <pre>private&nbsp;boolean&nbsp;verifyNearValue(int&nbsp;x,
                                 int&nbsp;y,
-                                <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
+                                <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
 <div class="block">Support method to verify if new dice is near an other dice with same Value</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -766,7 +766,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="verifyNearColor-int-int-progetto.game.DicePlacedFrame-">
+<a name="verifyNearColor-int-int-progetto.model.DicePlacedFrame-">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -774,7 +774,7 @@ extends java.lang.Object</pre>
 <h4>verifyNearColor</h4>
 <pre>private&nbsp;boolean&nbsp;verifyNearColor(int&nbsp;x,
                                 int&nbsp;y,
-                                <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.game">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
+                                <a href="../../progetto/game/DicePlacedFrame.html" title="class in progetto.model">DicePlacedFrame</a>&nbsp;dicePlacedFrame)</pre>
 <div class="block">Support method to verify if new dice is near an other dice with same Color</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -813,8 +813,8 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../progetto/game/DicePlacedFrameData.html" title="class in progetto.game"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../progetto/game/EndGameState.html" title="class in progetto.game"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/DicePlacedFrameData.html" title="class in progetto.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../progetto/game/EndGameState.html" title="class in progetto.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../index.html?progetto/game/DicePlacementCondition.html" target="_top">Frames</a></li>

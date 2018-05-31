@@ -4,8 +4,8 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import progetto.network.IEnforce;
 import progetto.network.ClientConnection;
+import progetto.network.IEnforce;
 import progetto.network.INetworkHandler;
 
 import static org.junit.Assert.assertEquals;
