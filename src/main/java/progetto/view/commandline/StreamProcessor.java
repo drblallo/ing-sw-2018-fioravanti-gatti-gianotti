@@ -9,15 +9,16 @@ public class StreamProcessor implements Runnable {
     private BufferedReader bin;
     private BufferedWriter bout;
 
-    private CommandProcessor comproc;
+    private ICommandProcessor comproc;
 
     private boolean isAlive;
+    private boolean isActive = true;
 
     private StringBuilder read = new StringBuilder();
 
     private static final Logger LOGGER = Logger.getLogger(StreamProcessor.class.getName());
 
-    public StreamProcessor(Reader rin, Writer rout, CommandProcessor comproc) {
+    public StreamProcessor(Reader rin, Writer rout, ICommandProcessor comproc) {
 
         this.comproc = comproc;
         bin = new BufferedReader(rin);
@@ -30,6 +31,11 @@ public class StreamProcessor implements Runnable {
 
         return isAlive;
 
+    }
+
+    public void setActive(boolean active)
+    {
+        isActive = active;
     }
 
     private void processCharacter () throws IOException {
@@ -65,13 +71,14 @@ public class StreamProcessor implements Runnable {
 
         String output;
 
-        output = comproc.execute(read.toString()) + '\n';
-
-        bout.write(output);
-        bout.flush();
+        if (isActive)
+        {
+            output = comproc.execute(read.toString()) + '\n';
+            bout.write(output);
+            bout.flush();
+        }
 
         read.delete(0, read.length());
-
     }
 
     public void run() {

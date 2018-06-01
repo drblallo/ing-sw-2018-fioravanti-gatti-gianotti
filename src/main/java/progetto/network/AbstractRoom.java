@@ -110,8 +110,9 @@ abstract class AbstractRoom implements Runnable
 		{
 			while (p.peekRequest() != null)
 			{
-				LOGGER.log(Level.FINE, "Evaluating player request ");
-				p.popRequest().execute(this, p.getHandler());
+				IRoomRequest request = p.popRequest();
+				LOGGER.log(Level.FINE, "Evaluating player request {0}", request.getClass().getSimpleName());
+				request.execute(this, p.getHandler());
 			}
 		}
 

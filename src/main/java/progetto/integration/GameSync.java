@@ -2,13 +2,15 @@ package progetto.integration;
 
 import progetto.controller.GameController;
 import progetto.model.AbstractGameAction;
+import progetto.network.IEnforce;
 import progetto.network.ISync;
+import progetto.utils.Callback;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractGameSync implements ISync
+public class GameSync implements ISync
 {
 	private GameController game = new GameController();
 
@@ -37,10 +39,6 @@ public abstract class AbstractGameSync implements ISync
 		return game.getModel().getCommandQueue().getPastItemCount();
 	}
 
-	public Serializable getItem(int index) {
-		return game.getModel().getCommandQueue().getPastItem(index);
-	}
-
 	public int getHash() {
 		return game.hashCode();
 	}
@@ -59,5 +57,15 @@ public abstract class AbstractGameSync implements ISync
 	protected GameController getGame()
 	{
 		return game;
+	}
+
+	@Override
+	public Callback<IEnforce> getEnforceCallback() {
+		throw new UnsupportedOperationException("YOU ARE NOT A SERVER");
+	}
+
+	@Override
+	public List<IEnforce> getNewPlayerEnforces() {
+		throw new UnsupportedOperationException("YOU ARE NOT A SERVER");
 	}
 }

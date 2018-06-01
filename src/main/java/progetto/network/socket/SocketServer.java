@@ -34,6 +34,7 @@ public final class SocketServer implements INetworkModule, Runnable {
 		}
 		try {
 			server.close();
+			LOGGER.log(Level.INFO, "Closing server");
 		} catch (IOException e) {
 			LOGGER.log(Level.WARNING, "Failed to close server socket: " + e.getMessage());
 		}

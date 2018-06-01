@@ -33,11 +33,6 @@ public interface ISync {
 	int getItemCount();
 
 	/**
-	 * @return the string received at index
-	 */
-	Serializable getItem(int index);
-
-	/**
 	 * @return latest hash
 	 */
 	int getHash();

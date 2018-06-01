@@ -28,7 +28,7 @@ public final class StartingPaneController extends AbstractClientStateController{
     @Override
     public void onPreShow(){
 
-        if(!getController().getGames().isEmpty()){
+        if(getController().getConnectionCount() != 0){
 
             continueButton.setDisable(false);
 

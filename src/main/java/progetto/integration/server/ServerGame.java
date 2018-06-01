@@ -1,7 +1,7 @@
 package progetto.integration.server;
 
 import progetto.controller.SetSeedAction;
-import progetto.integration.AbstractGameSync;
+import progetto.integration.GameSync;
 import progetto.model.*;
 import progetto.network.IEnforce;
 import progetto.network.ISync;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ServerGame extends AbstractGameSync implements  ISync
+public class ServerGame extends GameSync implements  ISync
 {
 	private List<IEnforce> dirtyDataItems = new ArrayList<>();
 

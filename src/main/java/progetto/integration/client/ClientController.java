@@ -2,9 +2,11 @@ package progetto.integration.client;
 
 import progetto.ServerMain;
 import progetto.controller.IGameController;
-import progetto.integration.client.view.IView;
+import progetto.integration.GameSync;
+import progetto.integration.client.view.AbstractView;
 import progetto.model.AbstractGameAction;
 import progetto.model.IModel;
+import progetto.network.ClientConnection;
 import progetto.network.INetworkClient;
 import progetto.network.RoomView;
 import progetto.network.ServerStateView;
@@ -19,9 +21,9 @@ import java.util.List;
 public class ClientController implements IGameController
 {
 
-    private ClientGame clientGame;
-    private final ExistingGames existingGames = new ExistingGames();
-    private List<IView> views = new ArrayList<>();
+    private ClientConnection clientGame;
+    private final List<ClientConnection> connections = new ArrayList<>();
+    private List<AbstractView> views = new ArrayList<>();
 
     private Callback<String> messageCallback = new Callback<>();
     private IObserver<String> messageObserver = (message -> messageCallback.call(message));
@@ -32,26 +34,33 @@ public class ClientController implements IGameController
     private Callback<ServerStateView> serverViewCallback = new Callback<>();
     private IObserver<ServerStateView> serverStateView = (message -> serverViewCallback.call(message));
 
-    public void setCurrentClientGame(ClientGame clientGame){
+    public void setCurrentClientGame(int index)
+    {
+        setCurrentClientGame(connections.get(index));
+    }
+
+    public void setCurrentClientGame(ClientConnection clientGame){
 
         if (clientGame != null) {
             clientGame.getMessageCallback().removeObserver(messageObserver);
             clientGame.getRoomViewCallback().removeObserver(roomViewIObserver);
-            clientGame.getServerViewCallback().removeObserver(serverStateView);
+            clientGame.getServerStateViewCallback().removeObserver(serverStateView);
         }
 
         this.clientGame = clientGame;
 
         if (clientGame != null)
         {
+        	if (!connections.contains(clientGame))
+        	    connections.add(clientGame);
             clientGame.getMessageCallback().addObserver(messageObserver);
             clientGame.getRoomViewCallback().addObserver(roomViewIObserver);
-            clientGame.getServerViewCallback().addObserver(serverStateView);
+            clientGame.getServerStateViewCallback().addObserver(serverStateView);
 
         }
 
-        for (IView v : views) {
-            v.setCurrentGame(clientGame);
+        for (AbstractView v : views) {
+            v.onGameChanged();
         }
     }
 
@@ -69,27 +78,22 @@ public class ClientController implements IGameController
 
     @Override
     public void sendAction(AbstractGameAction action) {
-            clientGame.sendAction(action);
+		clientGame.sendSynString(action);
     }
 
     @Override
     public void processAllPendingAction() {
-        clientGame.processAllPendingAction();
+    	//handled by the network
     }
 
     @Override
     public void processAction() {
-        clientGame.processAction();
+        //handled by the network
     }
 
     public IModel getModel()
     {
-        return clientGame.getModel();
-    }
-
-    public List<ClientGame> getGames()
-    {
-    	return existingGames.getExistingGamesList();
+        return clientGame.getProxy();
     }
 
     public boolean createConnection(String ip, boolean rmi)
@@ -104,54 +108,68 @@ public class ClientController implements IGameController
         if (!c.isRunning())
             return false;
 
-        ClientGame conn = new ClientGame(c);
-        conn.getClientConnection().fetchServerState();
-
-        existingGames.addClientGame(conn);
+        ClientConnection conn = new ClientConnection(c, new GameSync());
+        conn.fetchServerState();
 
         setCurrentClientGame(conn);
 
         return true;
     }
 
-    public void addView(IView view)
+    public void addView(AbstractView view)
     {
         views.add(view);
-        view.setController(this);
     }
 
     public RoomView getCurrentRoom()
     {
-        return clientGame.getClientConnection().getRoom();
+        return clientGame.getRoom();
     }
 
     public ServerStateView getCurrentServerState()
     {
-        return clientGame.getClientConnection().getServerState();
+        return clientGame.getServerState();
     }
 
     public void sendPrivateMessage(String message, int targetID)
     {
-        clientGame.getClientConnection().sendPrivateMessage(message, targetID);
+        clientGame.sendPrivateMessage(message, targetID);
     }
 
     public void pickChair(int chairID)
     {
-        clientGame.getClientConnection().pickChair(chairID);
+        clientGame.pickChair(chairID);
     }
 
     public void fetchCurrentState()
     {
-        clientGame.getClientConnection().fetchServerState();
+        clientGame.fetchServerState();
     }
 
     public void createGame(String gameName)
     {
-        clientGame.getClientConnection().createGame(gameName);
+        clientGame.createGame(gameName);
     }
 
     public void joinGame(int roomID, String playerName)
     {
-        clientGame.getClientConnection().joinGame(roomID, playerName);
+        clientGame.joinGame(roomID, playerName);
+    }
+
+    public String getNameOfConnection(int index)
+    {
+        return connections.get(index).getRoom().getRoomName();
+    }
+
+    public int getConnectionCount()
+    {
+        return connections.size();
+    }
+
+    public void disconnect()
+    {
+        clientGame.disconnect();
+        connections.remove(clientGame);
+        setCurrentClientGame(null);
     }
 }

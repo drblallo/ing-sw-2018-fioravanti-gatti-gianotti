@@ -3,9 +3,6 @@ package progetto.integration.client.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import progetto.integration.client.ClientGame;
-
-import java.util.List;
 
 public class ExistingGamesPaneController extends AbstractClientStateController{
 
@@ -20,14 +17,10 @@ public class ExistingGamesPaneController extends AbstractClientStateController{
 
         listView.getItems().clear();
 
-        List<ClientGame> clientGameList;
-
-        clientGameList = getController().getGames();
-
-        for(int i = 0; i< clientGameList.size(); i++)
+        for(int i = 0; i< getController().getConnectionCount(); i++)
         {
 
-            listView.getItems().add(i + " " + clientGameList.get(i).getClientConnection().getRoom().getRoomName());
+            listView.getItems().add(i + " " + getController().getNameOfConnection(i));
 
         }
 
@@ -44,8 +37,7 @@ public class ExistingGamesPaneController extends AbstractClientStateController{
 
         }
 
-        ClientGame clientGame =
-                getController().getGames().get(listView.getSelectionModel().getSelectedIndex());
+        int clientGame = listView.getSelectionModel().getSelectedIndex();
 
         getController().setCurrentClientGame(clientGame);
         getViewStateMachine().getStateFromName("GamePane.fxml").show();

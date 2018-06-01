@@ -3,7 +3,7 @@ package progetto;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import progetto.integration.client.ClientController;
-import progetto.integration.client.view.ClientCommandProcessor;
+import progetto.integration.client.view.CommandLineView;
 import progetto.integration.client.view.GUIView;
 
 
@@ -20,16 +20,14 @@ public class ClientMain extends Application {
     public synchronized void start(Stage primaryStage)
     {
         primaryStage.setTitle("Client Window");
-
         primaryStage.setMaximized(true);
 
 
         ClientController controller = new ClientController();
-
-        ClientCommandProcessor processor = new ClientCommandProcessor(controller);
-        GUIView view = new GUIView(primaryStage, processor);
-        controller.addView(view);
+        GUIView view = new GUIView(primaryStage, controller);
+        CommandLineView cl = new CommandLineView(controller);
         view.setVisible(true);
+        cl.setVisible(true);
 
     }
 
