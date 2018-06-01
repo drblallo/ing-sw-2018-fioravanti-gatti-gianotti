@@ -9,7 +9,7 @@ public final class ExistingGames {
 
     public List<ClientGame> getExistingGamesList(){
 
-        return clientGameArrayList;
+        return new ArrayList<>(clientGameArrayList);
 
     }
 

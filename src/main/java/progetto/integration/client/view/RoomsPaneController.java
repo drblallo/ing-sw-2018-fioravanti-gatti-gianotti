@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import progetto.network.ClientConnection;
 import progetto.network.ServerStateView;
 import progetto.utils.IObserver;
 
@@ -32,38 +31,20 @@ public class RoomsPaneController extends AbstractClientStateController{
 
     private IObserver<ServerStateView> serverStateViewIObserver = ogg -> Platform.runLater(this::update);
 
-
     @Override
     public void onPreShow(){
 
-        ClientConnection clientConnection = getController().getCurrentClientGame().getClientConnection();
-
-        if(clientConnection!=null){
-
-            clientConnection.getServerStateViewCallback().removeObserver(serverStateViewIObserver);
-
-        }
-
-        clientConnection = getController().getCurrentClientGame().getClientConnection();
-
-        clientConnection.getServerStateViewCallback().addObserver(serverStateViewIObserver);
-
+        getController().getServerViewCallback().addObserver(serverStateViewIObserver);
         update();
 
     }
 
     private void update(){
 
-        ClientConnection clientConnection = getController().getCurrentClientGame().getClientConnection();
 
         listView.getItems().clear();
 
-        if(getController().getCurrentClientGame()==null){
-
-            return;
-        }
-
-        ServerStateView serverStateView = clientConnection.getServerState();
+        ServerStateView serverStateView = getController().getCurrentServerState();
 
         simpleRoomStateList = serverStateView.asList();
 
@@ -78,16 +59,13 @@ public class RoomsPaneController extends AbstractClientStateController{
     @FXML
     public void onUpdateButtonClicked(){
 
-        ClientConnection clientConnection = getController().getCurrentClientGame().getClientConnection();
-
-        clientConnection.fetchServerState();
+        getController().fetchCurrentState();
 
     }
 
     @FXML
     public void onCreateButtonClicked(){
 
-        ClientConnection clientConnection = getController().getCurrentClientGame().getClientConnection();
 
         if(roomNameTextField.getText().length()==0){
 
@@ -96,9 +74,9 @@ public class RoomsPaneController extends AbstractClientStateController{
 
         }
 
-        clientConnection.createGame(roomNameTextField.getText());
+        getController().createGame(roomNameTextField.getText());
 
-        clientConnection.fetchServerState();
+        getController().fetchCurrentState();
 
         roomNameTextField.clear();
     }
@@ -106,7 +84,6 @@ public class RoomsPaneController extends AbstractClientStateController{
     @FXML
     public void onEnterButtonClicked(){
 
-        ClientConnection clientConnection = getController().getCurrentClientGame().getClientConnection();
 
         if(usernameTextField.getText().length()==0){
 
@@ -129,8 +106,9 @@ public class RoomsPaneController extends AbstractClientStateController{
 
         }
 
-        clientConnection.joinGame(simpleRoomStateList.get(listView.getSelectionModel().
-                getSelectedIndex()).roomID, usernameTextField.getText());
+        int roomID = simpleRoomStateList.get(listView.getSelectionModel().getSelectedIndex()).roomID;
+
+        getController().joinGame(roomID, usernameTextField.getText());
 
         getViewStateMachine().getStateFromName("GamePane.fxml").show();
     }

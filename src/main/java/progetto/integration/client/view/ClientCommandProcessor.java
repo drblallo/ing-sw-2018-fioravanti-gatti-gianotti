@@ -10,11 +10,11 @@ import progetto.view.commandline.*;
 
 public class ClientCommandProcessor extends StackCommandProcessor
 {
-	private final ClientController viewStateMachine;
+	private final ClientController controller;
 
-	public ClientCommandProcessor(ClientController viewStateMachine)
+	public ClientCommandProcessor(ClientController controller)
 	{
-		this.viewStateMachine = viewStateMachine;
+		this.controller = controller;
 	}
 
 	public void reaload()
@@ -26,7 +26,7 @@ public class ClientCommandProcessor extends StackCommandProcessor
 		StackableCommandProcessor root = new StackableCommandProcessor("root", this, "Main");
 		pushProcessor(root);
 
-		IGameController clientGame = viewStateMachine.getCurrentClientGame();
+		IGameController clientGame = controller;
 
 		registerCommand(new EchoCommand());
 		registerCommand(new HelpCommand(this));

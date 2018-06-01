@@ -3,6 +3,7 @@ package progetto;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import progetto.integration.client.ClientController;
+import progetto.integration.client.view.ClientCommandProcessor;
 import progetto.integration.client.view.GUIView;
 
 
@@ -24,7 +25,9 @@ public class ClientMain extends Application {
 
 
         ClientController controller = new ClientController();
-        GUIView view = new GUIView(primaryStage);
+
+        ClientCommandProcessor processor = new ClientCommandProcessor(controller);
+        GUIView view = new GUIView(primaryStage, processor);
         controller.addView(view);
         view.setVisible(true);
 

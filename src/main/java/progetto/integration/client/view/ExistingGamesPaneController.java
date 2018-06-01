@@ -22,7 +22,7 @@ public class ExistingGamesPaneController extends AbstractClientStateController{
 
         List<ClientGame> clientGameList;
 
-        clientGameList = getController().getExistingGames().getExistingGamesList();
+        clientGameList = getController().getGames();
 
         for(int i = 0; i< clientGameList.size(); i++)
         {
@@ -45,8 +45,7 @@ public class ExistingGamesPaneController extends AbstractClientStateController{
         }
 
         ClientGame clientGame =
-                getController().getExistingGames().getExistingGamesList().get(listView.getSelectionModel()
-                        .getSelectedIndex());
+                getController().getGames().get(listView.getSelectionModel().getSelectedIndex());
 
         getController().setCurrentClientGame(clientGame);
         getViewStateMachine().getStateFromName("GamePane.fxml").show();

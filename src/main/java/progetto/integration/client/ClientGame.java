@@ -2,17 +2,16 @@ package progetto.integration.client;
 
 import progetto.controller.IGameController;
 import progetto.integration.AbstractGameSync;
-import progetto.model.*;
-import progetto.network.ClientConnection;
-import progetto.network.IEnforce;
-import progetto.network.INetworkClient;
+import progetto.model.AbstractGameAction;
+import progetto.model.IModel;
+import progetto.network.*;
 import progetto.utils.Callback;
 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientGame extends AbstractGameSync implements IGameController, IModel
+public class ClientGame extends AbstractGameSync implements IGameController
 {
 	private ClientConnection clientConnection;
 	private static final Logger LOGGER = Logger.getLogger(ClientGame.class.getName());
@@ -44,27 +43,22 @@ public class ClientGame extends AbstractGameSync implements IGameController, IMo
 
 	@Override
 	public IModel getModel() {
-		return this;
+		return clientConnection.getProxy();
 	}
 
-	@Override
-	public DataContainer<CommandQueueData> getCommandQueue() {
-		return clientConnection.getProxy().getCommandQueue();
+	public Callback<String> getMessageCallback()
+	{
+		return clientConnection.getMessageCallback();
 	}
 
-	@Override
-	public DataContainer<RoundTrackData> getRoundTrack() {
-		return clientConnection.getProxy().getRoundTrack();
+	public Callback<RoomView> getRoomViewCallback()
+	{
+		return clientConnection.getRoomViewCallback();
 	}
 
-	@Override
-	public AbstractPlayerBoard getPlayerBoard(int index) {
-		return clientConnection.getProxy().getPlayerBoard(index);
-	}
-
-	@Override
-	public AbstractMainBoard getMainBoard() {
-		return clientConnection.getProxy().getMainBoard();
+	public Callback<ServerStateView> getServerViewCallback()
+	{
+		return clientConnection.getServerStateViewCallback();
 	}
 
 	@Override

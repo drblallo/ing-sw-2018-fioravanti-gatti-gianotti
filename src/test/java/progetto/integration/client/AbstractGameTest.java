@@ -80,7 +80,7 @@ public abstract class AbstractGameTest
 		wait(500);
 		Assert.assertEquals(
 				RoundState.class.getName(),
-				g.getMainBoard().getData().getGameState().getClass().getName());
+				g.getModel().getMainBoard().getData().getGameState().getClass().getName());
 		Assert.assertEquals(
 				RoundState.class.getName(),
 				g.getClientConnection().getProxy().getMainBoard().getData().getGameState().getClass().getName());
@@ -93,11 +93,11 @@ public abstract class AbstractGameTest
 
 
 
-		g.sendAction(new PickDiceAction(g.getMainBoard().getData().getCurrentPlayer(), 1));
-		g.sendAction(new PlaceDiceAction(g.getMainBoard().getData().getCurrentPlayer(), 0, 0, 0));
-		g.sendAction(new EndTurnAction(g.getMainBoard().getData().getCurrentPlayer()));
-		g.sendAction(new EndTurnAction(g.getMainBoard().getData().getCurrentPlayer()));
-		g.sendAction(new EndTurnAction(g.getMainBoard().getData().getCurrentPlayer()));
+		g.sendAction(new PickDiceAction(g.getModel().getMainBoard().getData().getCurrentPlayer(), 1));
+		g.sendAction(new PlaceDiceAction(g.getModel().getMainBoard().getData().getCurrentPlayer(), 0, 0, 0));
+		g.sendAction(new EndTurnAction(g.getModel().getMainBoard().getData().getCurrentPlayer()));
+		g.sendAction(new EndTurnAction(g.getModel().getMainBoard().getData().getCurrentPlayer()));
+		g.sendAction(new EndTurnAction(g.getModel().getMainBoard().getData().getCurrentPlayer()));
 		wait(500);
 
 

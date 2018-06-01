@@ -8,18 +8,16 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import progetto.integration.client.ClientGame;
+import progetto.integration.client.ClientController;
 import progetto.network.PlayerView;
 import progetto.network.RoomView;
 import progetto.utils.IObserver;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ChatPaneController {
 
-    private ClientGame clientGame;
+    private ClientController clientGame;
 
     private List<PlayerView> playerViewList;
 
@@ -39,42 +37,26 @@ public class ChatPaneController {
 
     private IObserver<String> stringIObserver = ogg -> Platform.runLater(()-> chatArea.appendText(ogg));
 
-    private static final Logger LOGGER = Logger.getLogger(ChatPaneController.class.getName());
 
-    public void onPreShow(ClientGame clientGame){
+    public void setUp(ClientController controller)
+    {
+    	clientGame = controller;
+        controller.getMessageCallback().addObserver(stringIObserver);
+        controller.getRoomViewCallback().addObserver(roomViewIObserver);
+    }
 
-        if(clientGame==null){
-
-            LOGGER.log(Level.SEVERE, "clientGame == null ");
-            return;
-
-        }
-
-        if(this.clientGame!=null){
-
-            clientGame.getClientConnection().getRoomViewCallback().removeObserver(roomViewIObserver);
-            clientGame.getClientConnection().getMessageCallback().removeObserver(stringIObserver);
-
-        }
-
-        this.clientGame = clientGame;
-
-        clientGame.getClientConnection().getRoomViewCallback().addObserver(roomViewIObserver);
-
-        clientGame.getClientConnection().getMessageCallback().addObserver(stringIObserver);
-
+    public void onPreShow()
+    {
         chatArea.clear();
-
         update();
-
-        }
+    }
 
     private void update(){
 
         int playerCount;
         RoomView roomView;
 
-        roomView = clientGame.getClientConnection().getRoom();
+        roomView = clientGame.getCurrentRoom();
 
         playerViewList = roomView.asList();
 
@@ -86,7 +68,7 @@ public class ChatPaneController {
 
         }
 
-        playerCount = clientGame.getMainBoard().getData().getPlayerCount();
+        playerCount = clientGame.getModel().getMainBoard().getData().getPlayerCount();
 
 
         chairs.getItems().clear();
@@ -115,7 +97,7 @@ public class ChatPaneController {
 
             for (PlayerView p : playerViewList) {
 
-                clientGame.getClientConnection().sendPrivateMessage(message + "\n", p.getId());
+                clientGame.sendPrivateMessage(message + "\n", p.getId());
 
             }
 
@@ -128,7 +110,7 @@ public class ChatPaneController {
 
         if (chairs.getSelectionModel().getSelectedItem()!=null){
 
-            clientGame.getClientConnection().pickChair(chairs.getSelectionModel().selectedItemProperty().get());
+            clientGame.pickChair(chairs.getSelectionModel().selectedItemProperty().get());
             update();
 
         }

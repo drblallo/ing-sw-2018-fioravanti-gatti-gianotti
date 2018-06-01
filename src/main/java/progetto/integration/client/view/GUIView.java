@@ -3,6 +3,7 @@ package progetto.integration.client.view;
 import javafx.stage.Stage;
 import progetto.integration.client.ClientController;
 import progetto.integration.client.ClientGame;
+import progetto.view.commandline.ICommandProcessor;
 import progetto.view.gui.GamePaneController;
 import progetto.view.gui.ViewStateMachine;
 
@@ -10,15 +11,17 @@ public class GUIView implements IView
 {
 
 	private ClientController controller;
+	private final ClientCommandProcessor commandProcessor;
 	private final ViewStateMachine viewStateMachine;
 	private boolean started = false;
 	private final Stage stage;
 
 
-	public GUIView(Stage primaryStage)
+	public GUIView(Stage primaryStage, ClientCommandProcessor processor)
 	{
 		viewStateMachine = new ViewStateMachine(primaryStage);
 		stage = primaryStage;
+		commandProcessor = processor;
 	}
 
 	public ViewStateMachine getViewStateMachine() {
@@ -68,6 +71,12 @@ public class GUIView implements IView
 	public void setCurrentGame(ClientGame game)
 	{
 		viewStateMachine.setCurrentGame(game);
+		commandProcessor.reaload();
+	}
+
+	public ICommandProcessor getCommandProcessor()
+	{
+		return commandProcessor;
 	}
 
 

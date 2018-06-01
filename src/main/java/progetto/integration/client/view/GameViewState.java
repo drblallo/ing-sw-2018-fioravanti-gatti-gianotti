@@ -33,6 +33,7 @@ public class GameViewState extends ViewState <GamePaneController> {
 
         chatPaneController = fxmlLoader.getController();
         getController().addChatPane(pane);
+        chatPaneController.setUp(view.getController());
 
     }
 
@@ -40,8 +41,8 @@ public class GameViewState extends ViewState <GamePaneController> {
     public void show(){
 
         super.show();
-        getController().onPreShow(guiView.getController().getClientCommandProcessor());
-        chatPaneController.onPreShow(guiView.getController().getCurrentClientGame());
+        getController().onPreShow(guiView.getCommandProcessor());
+        chatPaneController.onPreShow();
     }
 
 }
