@@ -25,11 +25,8 @@ public enum Color {
 			case GREEN:
 				string = "Verde";
 				break;
-			case PURPLE:
-				string = "Viola";
-				break;
 			default:
-				string = "Errore";
+				string = "Viola";
 		}
 		return string;
 	}

@@ -22,8 +22,8 @@ public abstract class AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCar
 	/**
 	 * Evaluate frame
 	 * @param dicePlacedFrame
-	 * @param rowsColumns true -> rows , false -> columns
-	 * @param valuesColors true -> values, false -> colors
+	 * @param rowsColumns true = rows , false = columns
+	 * @param valuesColors true = values, false = colors
 	 * @return n point
 	 */
 	public int evaluateFrame(DicePlacedFrame dicePlacedFrame, boolean rowsColumns, boolean valuesColors)
