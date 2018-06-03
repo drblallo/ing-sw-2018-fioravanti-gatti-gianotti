@@ -6,7 +6,7 @@ public class RoughingForcepsSetOperationAction  extends AbstractGameAction {
 
 	/**
 	 * Constructor
-	 * @param increaseDecrease  0 -> increase, 1 -> decrease
+	 * @param increaseDecrease  0 = increase, 1 = decrease
 	 */
 	RoughingForcepsSetOperationAction(int increaseDecrease)
 	{
