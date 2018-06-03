@@ -8,7 +8,7 @@ public class EndGameState extends AbstractGameState {
 	}
 
 	@Override
-	void apply(Game game) {
+	void apply(Model game) {
 		//fine gioco, calcolo punteggi
 	}
 }

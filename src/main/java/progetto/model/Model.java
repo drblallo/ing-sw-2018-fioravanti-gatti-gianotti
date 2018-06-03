@@ -4,7 +4,7 @@ package progetto.model;
 /**
  * Current state of the model
  */
-public class Game implements IModel{
+public class Model implements IModel{
 
 	public static final int MAX_NUM_PLAYERS = 4;
 
@@ -24,7 +24,7 @@ public class Game implements IModel{
 	/**
 	 * Constructor
 	 */
-	public Game()
+	public Model()
 	{
 		for(int i=0; i<MAX_NUM_PLAYERS; i++)
 		{

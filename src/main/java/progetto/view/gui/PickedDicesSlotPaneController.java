@@ -3,11 +3,11 @@ package progetto.view.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import progetto.model.DataContainer;
+import progetto.model.Container;
 import progetto.model.PickedDicesSlotData;
 
 public class PickedDicesSlotPaneController extends AbstractController <PickedDicesSlotData,
-        DataContainer<PickedDicesSlotData>> {
+		Container<PickedDicesSlotData>> {
 
     @FXML
     private ListView<Label> listView;

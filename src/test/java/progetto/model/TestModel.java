@@ -6,14 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 import progetto.controller.GameController;
 
-public class TestGame extends TestCase {
+public class TestModel extends TestCase {
 
-	Game game;
+	Model game;
 
 	@Before
 	public void setUp()
 	{
-		game = new Game();
+		game = new Model();
 	}
 
 	@Test

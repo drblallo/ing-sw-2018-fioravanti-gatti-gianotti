@@ -1,6 +1,6 @@
 package progetto.model;
 
-public abstract class AbstractMainBoard extends DataContainer<MainBoardData>
+public abstract class AbstractMainBoard extends Container<MainBoardData>
 {
 
 	public AbstractMainBoard(MainBoardData d)
@@ -11,5 +11,5 @@ public abstract class AbstractMainBoard extends DataContainer<MainBoardData>
 	 * Get extracted dices
 	 * @return extractedDices
 	 */
-	public abstract DataContainer<ExtractedDicesData> getExtractedDices();
+	public abstract Container<ExtractedDicesData> getExtractedDices();
 }

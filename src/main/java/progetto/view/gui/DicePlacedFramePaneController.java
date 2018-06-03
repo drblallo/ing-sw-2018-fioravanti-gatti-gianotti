@@ -3,11 +3,11 @@ package progetto.view.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import progetto.model.DataContainer;
+import progetto.model.Container;
 import progetto.model.DicePlacedFrameData;
 
 public class DicePlacedFramePaneController extends AbstractController <DicePlacedFrameData,
-        DataContainer<DicePlacedFrameData>> {
+		Container<DicePlacedFrameData>> {
 
     @FXML
     private Label number;

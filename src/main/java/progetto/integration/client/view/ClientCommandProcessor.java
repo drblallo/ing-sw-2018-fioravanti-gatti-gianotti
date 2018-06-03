@@ -3,10 +3,13 @@ package progetto.integration.client.view;
 import progetto.controller.*;
 import progetto.integration.client.ActionCommand;
 import progetto.integration.client.ClientController;
+import progetto.integration.client.StackableCommandProcessorBuilder;
 import progetto.model.AddWindowFrameCoupleAction;
 import progetto.model.EndTurnAction;
 import progetto.model.FrameSetAction;
-import progetto.view.commandline.*;
+import progetto.view.commandline.EchoCommand;
+import progetto.view.commandline.HelpCommand;
+import progetto.view.commandline.StackCommandProcessor;
 
 public class ClientCommandProcessor extends StackCommandProcessor
 {
@@ -23,10 +26,14 @@ public class ClientCommandProcessor extends StackCommandProcessor
 		while (peekCommandProcessor() != null)
 			popCommandProcessor();
 
-		StackableCommandProcessor root = new StackableCommandProcessor("root", this, "Main");
-		pushProcessor(root);
 
 		IGameController clientGame = controller;
+
+		new StackableCommandProcessorBuilder(this, controller)
+				.addNested("root", "main")
+				.addNested("SuchExample", "Ti sto mostrando tale spledido esempio")
+				.addReturn("indietro", "root")
+				.getStackCommandProcessor();
 
 		registerCommand(new EchoCommand());
 		registerCommand(new HelpCommand(this));
@@ -44,17 +51,5 @@ public class ClientCommandProcessor extends StackCommandProcessor
 		registerCommand(new ActionCommand(UseToolCardAction.class, clientGame));
 
 
-		StackableCommandProcessor s = new StackableCommandProcessor
-				(
-				"SuchExample",
-				this,
-				"Ti sto mostrando tale splendido esempio"
-				);
-
-		root.registerCommand(s);
-
-		PopCommand pop1 = new PopCommand(this, "indietro", "root");
-
-		s.registerCommand(pop1);
 	}
 }

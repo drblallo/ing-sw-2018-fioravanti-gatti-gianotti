@@ -45,12 +45,12 @@ public class TestAction {
 		AbstractGameAction action = new AbstractGameAction(-2) {
 
 			@Override
-			public boolean canBeExecuted(Game game) {
+			public boolean canBeExecuted(Model game) {
 				return false;
 			}
 
 			@Override
-			public void execute(Game game) {
+			public void execute(Model game) {
 
 			}
 		};

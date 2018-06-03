@@ -26,7 +26,7 @@ public class PlaceDiceAction extends AbstractExecutibleGameAction{
 	}
 
 	@Override
-	public boolean canBeExecuted(Game game)
+	public boolean canBeExecuted(Model game)
 	{
 		DicePlacementCondition dicePlacementCondition = game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getData().getDicePlacementCondition(nDice);
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
@@ -38,7 +38,7 @@ public class PlaceDiceAction extends AbstractExecutibleGameAction{
 	}
 
 	@Override
-	public void execute(Game game)
+	public void execute(Model game)
 	{
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 

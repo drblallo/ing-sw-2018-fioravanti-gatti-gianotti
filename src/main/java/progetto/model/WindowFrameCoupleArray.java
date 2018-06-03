@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class WindowFrameCoupleArray {
 
-	private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Model.class.getName());
 	private WindowFrameCoupleArrayInternal windowFrameCoupleArrayInternal = new WindowFrameCoupleArrayInternal();
 
 	private static final WindowFrameCoupleArray array = new WindowFrameCoupleArray();

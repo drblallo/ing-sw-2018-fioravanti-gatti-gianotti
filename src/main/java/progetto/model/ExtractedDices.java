@@ -3,7 +3,7 @@ package progetto.model;
 /**
  * Dices extracted by the player on the main board
  */
-public final class ExtractedDices extends DataContainer<ExtractedDicesData> {
+public final class ExtractedDices extends Container<ExtractedDicesData> {
 
 	public ExtractedDices()
 	{

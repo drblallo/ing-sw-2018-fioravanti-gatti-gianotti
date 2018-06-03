@@ -15,14 +15,14 @@ public class EndTurnAction extends AbstractGameAction
 	}
 
 	@Override
-	public boolean canBeExecuted(Game game)
+	public boolean canBeExecuted(Model game)
 	{
 		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
 				getCallerID() == game.getMainBoard().getData().getCurrentPlayer();
 	}
 
 	@Override
-	public void execute(Game game)
+	public void execute(Model game)
 	{
 		PickedDicesSlot pickedDicesSlot = game.getPlayerBoard(getCallerID()).getPickedDicesSlot();
 		ExtractedDices extractedDices = game.getMainBoard().getExtractedDices();

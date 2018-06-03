@@ -2,12 +2,12 @@ package progetto.controller;
 
 import progetto.model.AbstractGameState;
 import progetto.model.AbstractToolCardState;
-import progetto.model.Game;
+import progetto.model.Model;
 
 public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 	@Override
-	public boolean canBeExecuted(Game game)
+	public boolean canBeExecuted(Model game)
 	{
 		AbstractGameState gameState = game.getMainBoard().getData().getGameState();
 		AbstractToolCardState toolCardState;
@@ -25,7 +25,7 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 	}
 
 	@Override
-	public void execute(Game game)
+	public void execute(Model game)
 	{
 		AbstractGameState gameState = game.getMainBoard().getData().getGameState();
 		AbstractToolCardState toolCardState;

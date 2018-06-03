@@ -26,12 +26,12 @@ public class FrameSetAction extends AbstractGameAction {
 	}
 
 	@Override
-	public boolean canBeExecuted(Game game) {
+	public boolean canBeExecuted(Model game) {
 		return (game.getMainBoard().getData().getGameState().getClass() == FrameSelectionState.class);
 	}
 
 	@Override
-	public void execute(Game game)
+	public void execute(Model game)
 	{
 		LOGGER.log(Level.FINE, "WindowFrame {0}", selectedCouple);
 

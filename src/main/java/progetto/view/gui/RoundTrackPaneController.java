@@ -3,10 +3,10 @@ package progetto.view.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import progetto.model.DataContainer;
+import progetto.model.Container;
 import progetto.model.RoundTrackData;
 
-public class RoundTrackPaneController extends AbstractController<RoundTrackData, DataContainer<RoundTrackData>> {
+public class RoundTrackPaneController extends AbstractController<RoundTrackData, Container<RoundTrackData>> {
 
     @FXML
     private ListView<Label> listView;

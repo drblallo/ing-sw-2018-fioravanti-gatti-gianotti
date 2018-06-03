@@ -15,6 +15,6 @@ public abstract class AbstractGameState implements Serializable
 		return name;
 	}
 
-	void apply(Game game) {}
+	void apply(Model game) {}
 
 }

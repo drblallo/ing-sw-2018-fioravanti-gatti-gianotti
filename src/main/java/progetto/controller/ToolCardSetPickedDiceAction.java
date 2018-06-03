@@ -1,7 +1,7 @@
 package progetto.controller;
 
-import progetto.model.Game;
 import progetto.model.MainBoardData;
+import progetto.model.Model;
 import progetto.model.RoughingForcepsState;
 
 public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
@@ -21,7 +21,7 @@ public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
 	}
 
 	@Override
-	public boolean canBeExecuted(Game game) {
+	public boolean canBeExecuted(Model game) {
 		MainBoardData data = game.getMainBoard().getData();
 
 		return data.getGameState().getClass() == RoughingForcepsState.class &&
@@ -30,7 +30,7 @@ public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
 	}
 
 	@Override
-	public void execute(Game game) {
+	public void execute(Model game) {
 		game.getMainBoard().setParamToolCard("nDice", nDice);
 	}
 }

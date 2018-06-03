@@ -21,7 +21,7 @@ public class RoughingForcepsState extends AbstractToolCardState {
 	}
 
 	@Override
-	public void solve(Game game)
+	public void solve(Model game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
 		int nDice = map.get("nDice");

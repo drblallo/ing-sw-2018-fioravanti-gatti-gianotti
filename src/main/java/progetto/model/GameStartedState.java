@@ -7,7 +7,7 @@ public class GameStartedState extends AbstractGameState
 	}
 
 	@Override
-	void apply(Game game)
+	void apply(Model game)
 	{
 		//First player selection
 		int firstPlayer = game.getRNGenerator().getNextInt(game.getMainBoard().getData().getPlayerCount());

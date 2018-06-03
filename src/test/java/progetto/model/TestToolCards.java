@@ -10,12 +10,12 @@ import progetto.controller.UseToolCardAction;
 
 public class TestToolCards {
 
-	Game game;
+	Model game;
 
 	@Before
 	public void setUp()
 	{
-		game = new Game();
+		game = new Model();
 	}
 
 	@Test

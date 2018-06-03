@@ -14,14 +14,14 @@ public class RoughingForcepsSetOperationAction  extends AbstractGameAction {
 	}
 
 	@Override
-	public boolean canBeExecuted(Game game)
+	public boolean canBeExecuted(Model game)
 	{
 		return game.getMainBoard().getData().getGameState().getClass() == RoughingForcepsState.class &&
 				(increaseDecrease==0 || increaseDecrease==1);
 	}
 
 	@Override
-	public void execute(Game game)
+	public void execute(Model game)
 	{
 		game.getMainBoard().setParamToolCard("increaseDecrease", increaseDecrease);
 	}

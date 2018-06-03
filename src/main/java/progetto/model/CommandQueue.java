@@ -7,10 +7,10 @@ import java.util.LinkedList;
 /**
  * Command queue of the model
  */
-public class CommandQueue extends DataContainer<CommandQueueData> implements AbstractProcessor<AbstractGameAction> {
+public class CommandQueue extends Container<CommandQueueData> implements AbstractProcessor<AbstractGameAction> {
 
 
-	CommandQueue()
+	public CommandQueue()
 	{
 		super(new CommandQueueData(new ArrayList<>(), new LinkedList<>()));
 	}

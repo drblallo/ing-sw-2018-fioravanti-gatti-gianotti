@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  */
 public final class PlayerBoardData implements Serializable{
 
-	private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Model.class.getName());
 
 	private final WindowFrame windowFrame;
 	private final boolean windowFrameIsSet;

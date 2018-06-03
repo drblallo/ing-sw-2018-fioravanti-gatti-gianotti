@@ -48,7 +48,7 @@ public final class MainBoard extends AbstractMainBoard
 	 * Set gameState
 	 * @param state the new state of the model
 	 */
-	public void setGameState(AbstractGameState state)
+	void setGameState(AbstractGameState state)
 	{
 		setData(getData().setGameState(state));
 	}

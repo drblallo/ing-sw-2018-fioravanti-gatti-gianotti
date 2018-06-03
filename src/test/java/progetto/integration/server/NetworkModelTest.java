@@ -13,7 +13,7 @@ import progetto.network.NetworkServer;
 import progetto.network.socket.SocketServer;
 import progetto.utils.Waiter;
 
-public class NetworkGameTest
+public class NetworkModelTest
 {
 
 	private Waiter paul = new Waiter();

@@ -4,7 +4,7 @@ package progetto.model;
 /**
  * RoundTrack with advanced dice
  */
-public final class RoundTrack extends DataContainer<RoundTrackData> {
+public final class RoundTrack extends Container<RoundTrackData> {
 
 	RoundTrack()
 	{

@@ -18,8 +18,8 @@ public class CommandLineView extends AbstractView
 		commandProcessor = new ClientCommandProcessor(controller);
 		streamProcessor = new StreamProcessor
 				(
-				new InputStreamReader(System.in),
-				new OutputStreamWriter(System.out),
+				new InputStreamReader(System.in, java.nio.charset.Charset.defaultCharset()),
+				new OutputStreamWriter(System.out, java.nio.charset.Charset.defaultCharset()),
 				commandProcessor
 				);
 

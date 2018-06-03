@@ -4,7 +4,7 @@ package progetto.model;
 /**
  * Dices that still need to be placed that have been taken by the player
  */
-public final class PickedDicesSlot extends DataContainer<PickedDicesSlotData> {
+public final class PickedDicesSlot extends Container<PickedDicesSlotData> {
 
 	PickedDicesSlot()
 	{

@@ -16,7 +16,7 @@ public class FrameSelectionState extends AbstractGameState {
 	}
 
 	@Override
-	void apply(Game game) {
+	void apply(Model game) {
 
 		extractPrivateCards(game);
 
@@ -32,7 +32,7 @@ public class FrameSelectionState extends AbstractGameState {
 	 * Extract private objective cards
 	 * @param game
 	 */
-	private void extractPrivateCards(Game game)
+	private void extractPrivateCards(Model game)
 	{
 		ArrayList<Color> privateCards = new ArrayList<>();
 		privateCards.add(Color.YELLOW);
@@ -65,7 +65,7 @@ public class FrameSelectionState extends AbstractGameState {
 	 * Extract public objective cards
 	 * @param game
 	 */
-	private void extractPublicCards(Game game)
+	private void extractPublicCards(Model game)
 	{
 		ArrayList<AbstractPublicObjectiveCard> publicCards = new ArrayList<>();
 		publicCards.add(new RowsDifferentColorsPublicObjectiveCard());
@@ -97,7 +97,7 @@ public class FrameSelectionState extends AbstractGameState {
 	 * Extract window frame for every player
 	 * @param game
 	 */
-	private void extractWindowFrame(Game game)
+	private void extractWindowFrame(Model game)
 	{
 		List<WindowFrameCouple> windowFrameCouples = game.getMainBoard().getData().getWindowFrameCouples();
 		WindowFrameCouple[] couples;
@@ -128,7 +128,7 @@ public class FrameSelectionState extends AbstractGameState {
 	 * Extract tool cards
 	 * @param game
 	 */
-	private void extractToolCards(Game game)
+	private void extractToolCards(Model game)
 	{
 		ArrayList<AbstractToolCard> toolCards = new ArrayList<>();
 		toolCards.add(new RoughingForcepsToolCard());

@@ -6,7 +6,7 @@ public class StartRoundState extends AbstractGameState{
 	}
 
 	@Override
-	void apply(Game game) {
+	void apply(Model game) {
 
 		MainBoard mainBoard = game.getMainBoard();
 		int firstPlayer = mainBoard.getData().getCurrentFirstPlayer();

@@ -8,6 +8,6 @@ public abstract class AbstractToolCardState extends AbstractGameState{
 
 	public abstract boolean isEverythingSet(IModel game);
 
-	public abstract void solve(Game game);
+	public abstract void solve(Model game);
 
 }

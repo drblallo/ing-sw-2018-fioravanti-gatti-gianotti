@@ -19,7 +19,7 @@ public class AddWindowFrameCoupleAction extends AbstractGameAction
 	 * @return true if the model is in the pre model state
 	 */
 	@Override
-	public boolean canBeExecuted(Game game) {
+	public boolean canBeExecuted(Model game) {
 		return game.getMainBoard().getData().getGameState().getClass()==PreGameState.class;
 	}
 
@@ -28,7 +28,7 @@ public class AddWindowFrameCoupleAction extends AbstractGameAction
 	 * @param game the model in which we want to execute this command
 	 */
 	@Override
-	public void execute(Game game) {
+	public void execute(Model game) {
 		game.getMainBoard().addWindowFrameCouple(couple);
 	}
 }

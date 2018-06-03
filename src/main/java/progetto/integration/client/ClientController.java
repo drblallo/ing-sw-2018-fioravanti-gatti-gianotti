@@ -39,7 +39,7 @@ public class ClientController implements IGameController
         setCurrentClientGame(connections.get(index));
     }
 
-    public void setCurrentClientGame(ClientConnection clientGame){
+    private void setCurrentClientGame(ClientConnection clientGame){
 
         if (clientGame != null) {
             clientGame.getMessageCallback().removeObserver(messageObserver);

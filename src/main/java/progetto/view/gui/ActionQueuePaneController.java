@@ -4,12 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import progetto.model.CommandQueueData;
-import progetto.model.DataContainer;
+import progetto.model.Container;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ActionQueuePaneController extends AbstractController<CommandQueueData, DataContainer<CommandQueueData>>{
+public class ActionQueuePaneController extends AbstractController<CommandQueueData, Container<CommandQueueData>>{
 
     private static final Logger LOGGER = Logger.getLogger(ActionQueuePaneController.class.getName());
     @FXML

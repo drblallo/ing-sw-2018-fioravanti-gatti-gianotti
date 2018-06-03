@@ -4,12 +4,12 @@ import progetto.utils.AbstractObservable;
 
 import java.io.Serializable;
 
-public class DataContainer<T extends Serializable> extends AbstractObservable<T>
+public class Container<T extends Serializable> extends AbstractObservable<T>
 {
 
 	private T data;
 
-	public DataContainer(T base)
+	public Container(T base)
 	{
 		data = base;
 	}

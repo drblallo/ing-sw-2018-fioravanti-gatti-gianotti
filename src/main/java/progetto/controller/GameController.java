@@ -1,7 +1,7 @@
 package progetto.controller;
 
 import progetto.model.AbstractGameAction;
-import progetto.model.Game;
+import progetto.model.Model;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -11,7 +11,7 @@ public class GameController implements IGameController {
 
 	private static final Logger LOGGER = Logger.getLogger(GameController.class.getName());
 	private ArrayList<Integer> pastHashCodes = new ArrayList<>();
-	private Game game = new Game();
+	private Model game = new Model();
 
 	public GameController()
 	{
@@ -78,7 +78,7 @@ public class GameController implements IGameController {
 		return hashCode() == g.hashCode();
 	}
 
-	public Game getModel()
+	public Model getModel()
 	{
 		return game;
 	}

@@ -20,7 +20,7 @@ public class TestFrameSelection {
 	@Test
 	public void testPublicObjectiveCard4Player()
 	{
-		Game game = this.game.getModel();
+		Model game = this.game.getModel();
 		game.setState(new FrameSelectionState());
 		Assert.assertEquals(4, game.getMainBoard().getData().getPlayerCount());
 		List<AbstractPublicObjectiveCard> cards = game.getMainBoard().getData().getPublicObjectiveCards();
@@ -34,7 +34,7 @@ public class TestFrameSelection {
 	@Test
 	public void testPublicObjectiveCard1Player()
 	{
-		Game game = this.game.getModel();
+		Model game = this.game.getModel();
 		game.getMainBoard().setPlayerCount(1);
 		game.setState(new FrameSelectionState());
 		Assert.assertEquals(1, game.getMainBoard().getData().getPlayerCount());
@@ -48,7 +48,7 @@ public class TestFrameSelection {
 	@Test
 	public void testPrivateObjectiveCard4Player()
 	{
-		Game game = this.game.getModel();
+		Model game = this.game.getModel();
 		game.setState(new FrameSelectionState());
 		Assert.assertEquals(4, game.getMainBoard().getData().getPlayerCount());
 		List<AbstractPrivateObjectiveCard> privateObjectiveCardP0 = game.getPlayerBoard(0).getData().getPrivateObjectiveCard();
@@ -69,7 +69,7 @@ public class TestFrameSelection {
 	@Test
 	public void testPrivateObjectiveCard1Player()
 	{
-		Game game = this.game.getModel();
+		Model game = this.game.getModel();
 		game.getMainBoard().setPlayerCount(1);
 		game.setState(new FrameSelectionState());
 		Assert.assertEquals(1, game.getMainBoard().getData().getPlayerCount());

@@ -3,11 +3,11 @@ package progetto.view.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import progetto.model.DataContainer;
+import progetto.model.Container;
 import progetto.model.ExtractedDicesData;
 
 public class ExtractedDicesPaneController extends AbstractController<ExtractedDicesData,
-        DataContainer<ExtractedDicesData>> {
+		Container<ExtractedDicesData>> {
 
     @FXML
     private ListView listView;

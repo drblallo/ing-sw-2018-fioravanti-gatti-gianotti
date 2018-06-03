@@ -11,7 +11,7 @@ public class EndRoundState extends AbstractGameState
 	}
 
 	@Override
-	void apply(Game game) {
+	void apply(Model game) {
 
 		ExtractedDices extractedDices = game.getMainBoard().getExtractedDices();
 		MainBoard mainBoard = game.getMainBoard();

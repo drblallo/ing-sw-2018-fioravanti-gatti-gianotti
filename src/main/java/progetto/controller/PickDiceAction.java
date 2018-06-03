@@ -1,7 +1,7 @@
 package progetto.controller;
 
 import progetto.model.Dice;
-import progetto.model.Game;
+import progetto.model.Model;
 import progetto.model.RoundState;
 
 public class PickDiceAction extends AbstractExecutibleGameAction{
@@ -22,7 +22,7 @@ public class PickDiceAction extends AbstractExecutibleGameAction{
 	}
 
 	@Override
-	public boolean canBeExecuted(Game game) {
+	public boolean canBeExecuted(Model game) {
 
 		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
 				getCallerID() == game.getMainBoard().getData().getCurrentPlayer() &&
@@ -31,7 +31,7 @@ public class PickDiceAction extends AbstractExecutibleGameAction{
 	}
 
 	@Override
-	public void execute(Game game)
+	public void execute(Model game)
 	{
 		Dice dice = game.getMainBoard().getExtractedDices().removeDice(nDice);
 		game.getPlayerBoard(getCallerID()).getPickedDicesSlot().add(dice, false, false, false);
