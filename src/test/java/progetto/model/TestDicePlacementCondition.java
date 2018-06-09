@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.testfx.assertions.api.ColorAssert;
 
 public class TestDicePlacementCondition extends TestCase {
 
@@ -216,6 +217,17 @@ public class TestDicePlacementCondition extends TestCase {
 		dice = new Dice(Value.TWO, Color.BLUE);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, true, true, true);
 		Assert.assertFalse(dicePlacementCondition.canBePlaced(0, 1, playerBoard));
+
+	}
+
+	@Test
+	public void testChangeDice()
+	{
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(new Dice(Value.THREE, Color.PURPLE));
+		dicePlacementCondition = dicePlacementCondition.changeDice(new Dice(Value.TWO, Color.RED));
+
+		Assert.assertEquals(Value.TWO, dicePlacementCondition.getDice().getValue());
+		Assert.assertEquals(Color.RED, dicePlacementCondition.getDice().getColor());
 
 	}
 
