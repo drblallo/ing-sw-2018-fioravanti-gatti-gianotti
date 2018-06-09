@@ -2,11 +2,11 @@ package progetto.controller;
 
 import progetto.model.AbstractGameAction;
 
-public abstract class AbstractExecutibleGameAction extends AbstractGameAction{
+public abstract class AbstractExecutibleGameAction extends AbstractGameAction {
 
 	protected AbstractExecutibleGameAction()
 	{
-		super(-1);
+		super();
 	}
 
 	protected AbstractExecutibleGameAction(int callerID)

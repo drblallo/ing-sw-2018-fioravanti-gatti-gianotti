@@ -73,7 +73,7 @@ public class PlayerBoard extends AbstractPlayerBoard
 	 * @param couple couple to set
 	 * @param side side to set
 	 */
-	void setWindowFrame(int couple, int side)
+	public void setWindowFrame(int couple, int side)
 	{
 		setData(getData().setWindowFrame(couple, side));
 	}
@@ -81,7 +81,7 @@ public class PlayerBoard extends AbstractPlayerBoard
 	/**
 	 * Set player window frame (empty window frame)
 	 */
-	void setEmptyWindowFrame()
+	public void setEmptyWindowFrame()
 	{
 		setData(getData().setEmptyWindowFrame());
 	}
@@ -131,5 +131,10 @@ public class PlayerBoard extends AbstractPlayerBoard
 	void addPrivateObjectiveCard(AbstractPrivateObjectiveCard privateObjectiveCard)
 	{
 		setData(getData().addPrivateObjectiveCard(privateObjectiveCard));
+	}
+
+	public void setToken(int token)
+	{
+		setData(getData().setToken(token));
 	}
 }

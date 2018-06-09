@@ -16,6 +16,11 @@ public final class PickedDicesSlot extends Container<PickedDicesSlotData> {
 		setData(getData().add(dice, ignoreColor, ignoreValue, ignoreAdjacent));
 	}
 
+	public void add(Dice dice)
+	{
+		setData(getData().add(dice, false, false, false));
+	}
+
 	public int getNDices()
 	{
 		return getData().getNDices();
@@ -38,12 +43,12 @@ public final class PickedDicesSlot extends Container<PickedDicesSlotData> {
 		setData(getData().setIgnoreValue(index, ignoreValue));
 	}
 
-	void setIgnoreAdjacent(int index, boolean ignoreAdjacent)
+	public void setIgnoreAdjacent(int index, boolean ignoreAdjacent)
 	{
 		setData(getData().setIgnoreAdjacent(index, ignoreAdjacent));
 	}
 
-	void changeDice(int index, Dice dice)
+	public void changeDice(int index, Dice dice)
 	{
 		setData(getData().changeDice(index, dice));
 	}

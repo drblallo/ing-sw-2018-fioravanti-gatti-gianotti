@@ -1,4 +1,6 @@
-package progetto.model;
+package progetto.controller;
+
+import progetto.model.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +45,8 @@ public class FrameSetAction extends AbstractGameAction {
 			playerBoard.setEmptyWindowFrame();
 		}
 		playerBoard.setWindowFrame(selectedCouple, selectedSide);
+
+		playerBoard.setToken(playerBoard.getData().getWindowFrame().getFavorToken());
 
 		boolean allSet = true;
 

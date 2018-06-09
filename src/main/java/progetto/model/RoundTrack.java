@@ -28,7 +28,7 @@ public final class RoundTrack extends Container<RoundTrackData> {
 	 * @param newDice dice to add
 	 * @return changed dice
 	 */
-	Dice change(int index, int pos, Dice newDice)
+	public Dice change(int index, int pos, Dice newDice)
 	{
 		Dice dice = getData().getDice(index, pos);
 		setData(getData().change(index, pos, newDice));

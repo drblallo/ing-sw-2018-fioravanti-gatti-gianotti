@@ -2,13 +2,15 @@ package progetto.controller;
 
 import progetto.model.Model;
 import progetto.model.RoundState;
+import progetto.model.ToolCardState;
 
 public class UseToolCardAction extends AbstractExecutibleGameAction{
 
 	private final int nCard;
 
-	public UseToolCardAction(int nCard)
+	public UseToolCardAction(int player, int nCard)
 	{
+		super(player);
 		this.nCard = nCard;
 	}
 
@@ -21,12 +23,43 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(Model game)
 	{
-		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
-				game.getMainBoard().getData().getToolCards().size()>nCard && nCard >= 0;
+		if(game.getMainBoard().getData().getGameState().getClass() != RoundState.class ||
+				nCard>=game.getMainBoard().getData().getToolCards().size() || nCard < 0)
+		{
+			return false;
+		}
+
+		if(game.getMainBoard().getData().getPlayerCount() != 1)
+		{
+			int nCallToolCard = game.getMainBoard().getData().getNCallToolCard(nCard);
+			int playerToken = game.getPlayerBoard(getCallerID()).getData().getToken();
+			int askedToken = 1;
+
+			if (nCallToolCard > 0) {
+				askedToken++;
+			}
+
+			return playerToken >= askedToken;
+		}
+
+		return true;
+
 	}
 
 	@Override
-	public void execute(Model game) {
-		game.setState(game.getMainBoard().getData().getToolCards().get(nCard).getState());
+	public void execute(Model game)
+	{
+		int nCallToolCard = game.getMainBoard().getData().getNCallToolCard(nCard);
+		int askedToken = 1;
+		if(nCallToolCard>0)
+		{
+			askedToken++;
+		}
+
+		game.getMainBoard().setParamToolCard("token", askedToken);
+		game.getMainBoard().setParamToolCard("nCard", nCard);
+
+		game.setState(new ToolCardState(game.getMainBoard().getData().getToolCards().get(nCard).getIndex()));
+
 	}
 }

@@ -1,36 +1,29 @@
 package progetto.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Enum for available values
  */
 public enum Value {
-	ONE, TWO, THREE, FOUR, FIVE, SIX;
+	ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6);
 
-	@Override
-	public String toString()
-	{
-		String string;
-		switch (this)
-		{
-			case ONE:
-				string = "1";
-				break;
-			case TWO:
-				string = "2";
-				break;
-			case THREE:
-				string = "3";
-				break;
-			case FOUR:
-				string = "4";
-				break;
-			case FIVE:
-				string = "5";
-				break;
-			default:
-				string = "6";
+	private int v;
+
+	private static Map<Integer, Value> map = new HashMap<>();
+
+	static {
+		for (Value value : Value.values()) {
+			map.put(value.v, value);
 		}
-		return string;
+	}
+
+	Value(final int val) { v = val; }
+
+	public static Value valueOf(int value) {
+		return map.get(value);
 	}
 
 }
+

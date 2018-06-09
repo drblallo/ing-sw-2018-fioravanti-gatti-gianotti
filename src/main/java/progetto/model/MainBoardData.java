@@ -12,8 +12,9 @@ public final class MainBoardData implements Serializable {
 	private static final int STD_DIFFICULTY = 3;
 
 	private final List<WindowFrameCouple> windowFrameCouples;
-	private final List<AbstractToolCard> toolCards;
+	private final List<ToolCard> toolCards;
 	private final List<AbstractPublicObjectiveCard> publicObjectiveCards;
+	private final List<Integer> nCallToolCard;
 	private final int playerCount;
 	private final AbstractGameState gameState;
 	private final int currentFirstPlayer;
@@ -34,8 +35,11 @@ public final class MainBoardData implements Serializable {
 		ArrayList<WindowFrameCouple> tempW = new ArrayList<>();
 		windowFrameCouples = Collections.unmodifiableList(tempW);
 
-		ArrayList<AbstractToolCard> tempC = new ArrayList<>();
+		ArrayList<ToolCard> tempC = new ArrayList<>();
 		toolCards = Collections.unmodifiableList(tempC);
+
+		ArrayList<Integer> tempN = new ArrayList<>();
+		nCallToolCard = Collections.unmodifiableList(tempN);
 
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>();
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
@@ -47,38 +51,6 @@ public final class MainBoardData implements Serializable {
 		difficulty = STD_DIFFICULTY;
 
 		paramToolCard = Collections.unmodifiableMap(new HashMap<>());
-
-	}
-
-	/**
-	 * Constructor to change gameState
-	 * @param mainBoardData previous mainBoardData
-	 * @param gameState new gameState
-	 */
-	private MainBoardData(MainBoardData mainBoardData, AbstractGameState gameState)
-	{
-		this.playerCount = mainBoardData.playerCount;
-
-		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
-		windowFrameCouples = Collections.unmodifiableList(tempW);
-
-		ArrayList<AbstractToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
-		toolCards = Collections.unmodifiableList(tempC);
-
-		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
-		publicObjectiveCards = Collections.unmodifiableList(tempP);
-
-		this.gameState = gameState;
-
-		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-
-		this.currentPlayer = mainBoardData.currentPlayer;
-
-		this.currentRound = mainBoardData.currentRound;
-
-		this.difficulty = mainBoardData.difficulty;
-
-		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
 
@@ -95,91 +67,120 @@ public final class MainBoardData implements Serializable {
 		tempW.add(windowFrameCouple);
 		this.windowFrameCouples = Collections.unmodifiableList(tempW);
 
-		ArrayList<AbstractToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
+		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
 		toolCards = Collections.unmodifiableList(tempC);
+
+		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
+		nCallToolCard = Collections.unmodifiableList(tempN);
 
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
 		this.gameState = mainBoardData.gameState;
-
-		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-
-		this.currentPlayer = mainBoardData.currentPlayer;
-
-		this.currentRound = mainBoardData.currentRound;
-
 		this.difficulty = mainBoardData.difficulty;
-
+		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
+		this.currentPlayer = mainBoardData.currentPlayer;
+		this.currentRound = mainBoardData.currentRound;
 		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
 
 	/**
-	 * Constructor to add a ToolCard
+	 * Constructor to add or remove a ToolCard
 	 * @param mainBoardData previous mainBoardData
-	 * @param toolCard to add
+	 * @param toolCard list to set
 	 */
-	private MainBoardData(MainBoardData mainBoardData, AbstractToolCard toolCard)
+	private MainBoardData(MainBoardData mainBoardData, List<ToolCard> toolCard)
 	{
 		this.playerCount = mainBoardData.playerCount;
 
 		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
 		this.windowFrameCouples = Collections.unmodifiableList(tempW);
 
-		ArrayList<AbstractToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
-		tempC.add(toolCard);
+		ArrayList<ToolCard> tempC = new ArrayList<>(toolCard);
 		toolCards = Collections.unmodifiableList(tempC);
+
+		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
+		tempN.add(0);
+		nCallToolCard = Collections.unmodifiableList(tempN);
 
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
 		this.gameState = mainBoardData.gameState;
-
 		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-
 		this.currentPlayer = mainBoardData.currentPlayer;
-
 		this.currentRound = mainBoardData.currentRound;
-
 		this.difficulty = mainBoardData.difficulty;
-
 		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
 
 	/**
-	 * Constructor to set a new vaue of playerCount or currentFirstPlayer or CurrentPlayer or currentRound
+	 * Constructor to set a new value for different attributes
 	 * @param mainBoardData previous mainBoardData
 	 * @param playerCount new playerCount value
 	 * @param currentFirstPlayer new currentFirstPlayer value
 	 * @param currentPlayer new currentPlayer value
 	 * @param currentRound new currentRound value
+	 * @param difficulty new difficulty value
 	 */
-	private MainBoardData(MainBoardData mainBoardData, int playerCount, int currentFirstPlayer, int currentPlayer, int currentRound, int difficulty)
+	private MainBoardData(MainBoardData mainBoardData, int playerCount, int currentFirstPlayer, int currentPlayer,
+	                      int currentRound, int difficulty)
 	{
 		this.playerCount = playerCount;
 
 		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
 		windowFrameCouples = Collections.unmodifiableList(tempW);
 
-		ArrayList<AbstractToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
+		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
 		toolCards = Collections.unmodifiableList(tempC);
+
+		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
+		nCallToolCard = Collections.unmodifiableList(tempN);
 
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
-		this.gameState = mainBoardData.gameState;
-
 		this.currentFirstPlayer = currentFirstPlayer;
-
 		this.currentPlayer = currentPlayer;
-
 		this.currentRound = currentRound;
-
 		this.difficulty = difficulty;
 
+		this.gameState = mainBoardData.gameState;
 		this.paramToolCard = mainBoardData.paramToolCard;
+
+	}
+
+	/**
+	 * Constructor to set a new value for different attributes
+	 * @param mainBoardData previous mainBoardData
+	 * @param paramToolCard new HashMap
+	 * @param gameState new gameState
+	 */
+	private MainBoardData(MainBoardData mainBoardData, Map paramToolCard, AbstractGameState gameState)
+	{
+		this.playerCount = mainBoardData.playerCount;
+
+		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
+		windowFrameCouples = Collections.unmodifiableList(tempW);
+
+		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
+		toolCards = Collections.unmodifiableList(tempC);
+
+		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
+		nCallToolCard = Collections.unmodifiableList(tempN);
+
+		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
+		publicObjectiveCards = Collections.unmodifiableList(tempP);
+
+		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
+		this.currentPlayer = mainBoardData.currentPlayer;
+		this.currentRound = mainBoardData.currentRound;
+		this.difficulty = mainBoardData.difficulty;
+
+		this.gameState = gameState;
+		this.paramToolCard = paramToolCard;
 
 	}
 
@@ -195,59 +196,57 @@ public final class MainBoardData implements Serializable {
 		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
 		windowFrameCouples = Collections.unmodifiableList(tempW);
 
-		ArrayList<AbstractToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
+		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
 		toolCards = Collections.unmodifiableList(tempC);
+
+		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
+		nCallToolCard = Collections.unmodifiableList(tempN);
 
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		tempP.add(publicObjectiveCard);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
 		this.gameState = mainBoardData.gameState;
-
 		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-
 		this.currentPlayer = mainBoardData.currentPlayer;
-
 		this.currentRound = mainBoardData.currentRound;
-
 		this.difficulty = mainBoardData.difficulty;
-
 		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
 
 	/**
-	 * Constructor to change hashmap
+	 * Constructor to increment the number of usage of a tool card
 	 * @param mainBoardData previous mainBoardData
-	 * @param paramToolCard new hashmap
+	 * @param pos position of the user tool card
 	 */
-	private MainBoardData(MainBoardData mainBoardData, HashMap paramToolCard)
+	private MainBoardData(MainBoardData mainBoardData, int pos)
 	{
 		this.playerCount = mainBoardData.playerCount;
 
 		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
 		windowFrameCouples = Collections.unmodifiableList(tempW);
 
-		ArrayList<AbstractToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
+		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
 		toolCards = Collections.unmodifiableList(tempC);
+
+		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
+		int usage = tempN.remove(pos);
+		usage++;
+		tempN.add(pos, usage);
+		nCallToolCard = Collections.unmodifiableList(tempN);
 
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
 		this.gameState = mainBoardData.gameState;
-
 		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-
 		this.currentPlayer = mainBoardData.currentPlayer;
-
 		this.currentRound = mainBoardData.currentRound;
-
 		this.difficulty = mainBoardData.difficulty;
-
-		this.paramToolCard = paramToolCard;
+		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
-
 
 	/**
 	 * Get number of player
@@ -329,7 +328,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setGameState(AbstractGameState state)
 	{
-		return new MainBoardData(this, state);
+		return new MainBoardData(this, paramToolCard, state);
 	}
 
 	/**
@@ -349,7 +348,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setCurrentFirstPlayer(int currentFirstPlayer)
 	{
-		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound, difficulty);
+		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
 	}
 
 	/**
@@ -359,7 +358,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setCurrentPlayer(int currentPlayer)
 	{
-		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound, difficulty);
+		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
 	}
 
 	/**
@@ -369,7 +368,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setCurrentRound(int currentRound)
 	{
-		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer, currentRound, difficulty);
+		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
 	}
 
 	/**
@@ -395,7 +394,7 @@ public final class MainBoardData implements Serializable {
 	 * Get List of public objective cards
 	 * @return List of public objective cards
 	 */
-	public List<AbstractToolCard> getToolCards()
+	public List<ToolCard> getToolCards()
 	{
 		return new ArrayList<>(this.toolCards);
 	}
@@ -405,9 +404,11 @@ public final class MainBoardData implements Serializable {
 	 * @param toolCard to add
 	 * @return new MainBoardData with added toolCard
 	 */
-	MainBoardData addToolCard(AbstractToolCard toolCard)
+	MainBoardData addToolCard(ToolCard toolCard)
 	{
-		return new MainBoardData(this, toolCard);
+		ArrayList<ToolCard> tempC = new ArrayList<>(toolCards);
+		tempC.add(toolCard);
+		return new MainBoardData(this, tempC);
 	}
 
 	/**
@@ -417,8 +418,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setDifficulty(int difficulty)
 	{
-		return new MainBoardData(
-				this, playerCount, currentFirstPlayer, currentPlayer, currentRound, difficulty);
+		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
 	}
 
 
@@ -426,10 +426,10 @@ public final class MainBoardData implements Serializable {
 	{
 		HashMap<String, Integer> hs = new HashMap<>(paramToolCard);
 		hs.put(nameP, val);
-		return new MainBoardData(this, hs);
+		return new MainBoardData(this, hs, gameState);
 	}
 
-	Map<String, Integer> getParamToolCard()
+	public Map<String, Integer> getParamToolCard()
 	{
 		return paramToolCard;
 	}
@@ -437,7 +437,40 @@ public final class MainBoardData implements Serializable {
 	MainBoardData delParamToolCard()
 	{
 		HashMap<String, Integer> hs = new HashMap<>();
-		return new MainBoardData(this, hs);
+		return new MainBoardData(this, hs, gameState);
 	}
+
+	MainBoardData incNCallToolCard(int pos)
+	{
+		if(pos<0 || pos>=nCallToolCard.size())
+		{
+			return this;
+		}
+		return new MainBoardData(this, pos);
+
+	}
+
+	public Integer getNCallToolCard(int pos)
+	{
+		if(pos<0 || pos>=nCallToolCard.size())
+		{
+			return 0;
+		}
+		return nCallToolCard.get(pos);
+
+	}
+
+	/**
+	 * Remove one tool card from the main board
+	 * @param index of the toolCard to remove
+	 * @return new MainBoardData without selected toolCard
+	 */
+	MainBoardData removeToolCard(int index)
+	{
+		ArrayList<ToolCard> tempC = new ArrayList<>(toolCards);
+		tempC.remove(index);
+		return new MainBoardData(this, tempC);
+	}
+
 
 }

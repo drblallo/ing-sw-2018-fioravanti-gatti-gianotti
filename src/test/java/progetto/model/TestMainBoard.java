@@ -163,4 +163,38 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	@Test
+	public void testNCallToolCards()
+	{
+		mainBoard.addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", Color.PURPLE ,1));
+		Assert.assertEquals(0, (int)mainBoard.getData().getNCallToolCard(0));
+
+		mainBoard.incNCallToolCard(0);
+		Assert.assertEquals(1, (int)mainBoard.getData().getNCallToolCard(0));
+	}
+
+	@Test
+	public void testToolCards()
+	{
+		mainBoard.addToolCard(new ToolCard("", "", Color.YELLOW, 1));
+		Assert.assertEquals(1, mainBoard.getData().getToolCards().size());
+
+		mainBoard.removeToolCard(0);
+		Assert.assertEquals(0, mainBoard.getData().getToolCards().size());
+
+	}
+
+	@Test
+	public void testNCallToolCardFail()
+	{
+		mainBoard.addToolCard(new ToolCard("", "", Color.YELLOW, 1));
+
+		mainBoard.incNCallToolCard(-1);
+
+		Assert.assertEquals(0, (int)mainBoard.getData().getNCallToolCard(0));
+
+		Assert.assertEquals(0, (int)mainBoard.getData().getNCallToolCard(-1));
+
+	}
+
 }

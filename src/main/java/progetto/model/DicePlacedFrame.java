@@ -28,7 +28,7 @@ public final class DicePlacedFrame extends Container<DicePlacedFrameData> {
 	 * @param y pos vertical
 	 * @return the removed dice
 	 */
-	Dice removeDice(int y, int x)
+	public Dice removeDice(int y, int x)
 	{
 		Dice dice = getData().getDice(y, x);
 		setData(getData().removeDice(y, x));
