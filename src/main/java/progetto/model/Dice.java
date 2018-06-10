@@ -43,7 +43,7 @@ public final class Dice implements Serializable {
 	 * @param newValue
 	 * @return a new Dice with newValue as Value, same Color
 	 */
-	Dice setValue(Value newValue)
+	public Dice setValue(Value newValue)
 	{
 		return new Dice(newValue, color);
 	}
@@ -53,7 +53,7 @@ public final class Dice implements Serializable {
 	 * @param newColor
 	 * @return a new Dice with newColor as Color, same Value
 	 */
-	Dice setColor(Color newColor)
+	public Dice setColor(Color newColor)
 	{
 		return new Dice(value, newColor);
 	}
@@ -62,7 +62,7 @@ public final class Dice implements Serializable {
 	 * Increase dice Value
 	 * @return a new Dice with increased value
 	 */
-	Dice increaseValue()
+	public Dice increaseValue()
 	{
 		Dice dice = this;
 		switch (value)
@@ -92,7 +92,7 @@ public final class Dice implements Serializable {
 	 * Decrease dice Value
 	 * @return a new Dice with decreased value
 	 */
-	Dice decreaseValue()
+	public Dice decreaseValue()
 	{
 		Dice dice = this;
 		switch (value)
@@ -122,7 +122,7 @@ public final class Dice implements Serializable {
 	 * Flip dice
 	 * @return a new Dice with the value on the opposite side
 	 */
-	Dice flip()
+	public Dice flip()
 	{
 		Dice dice = this;
 		switch (value)

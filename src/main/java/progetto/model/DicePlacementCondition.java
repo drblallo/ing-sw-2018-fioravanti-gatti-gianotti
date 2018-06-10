@@ -49,6 +49,18 @@ public final class DicePlacementCondition implements Serializable{
 	}
 
 	/**
+	 * Constructor to add a dice
+	 * @param dice to add
+	 */
+	DicePlacementCondition(Dice dice)
+	{
+		this.dice = dice;
+		this.ignoreColor = false;
+		this.ignoreValue = false;
+		this.ignoreAdjacent = false;
+	}
+
+	/**
 	 * Set ignore Color constraints
 	 * @param ignoreCol boolean
 	 * @return new DicePlacementCondition (the previous with new ignoreColor value)
@@ -83,7 +95,7 @@ public final class DicePlacementCondition implements Serializable{
 	 * @param dice dice to set
 	 * @return new DicePlacementCondition (the previous with new ignoreAdjacent value)
 	 */
-	DicePlacementCondition changeDice(Dice dice)
+	public DicePlacementCondition changeDice(Dice dice)
 	{
 		return new DicePlacementCondition(dice, ignoreColor, ignoreValue, ignoreAdjacent);
 	}

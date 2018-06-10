@@ -130,19 +130,31 @@ public class FrameSelectionState extends AbstractGameState {
 	 */
 	private void extractToolCards(Model game)
 	{
-		ArrayList<AbstractToolCard> toolCards = new ArrayList<>();
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
-		toolCards.add(new RoughingForcepsToolCard());
+		ArrayList<ToolCard> toolCards = new ArrayList<>();
+		int i=1;
+		toolCards.add(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", Color.PURPLE ,i));
+		i++;
+		toolCards.add(new ToolCard("Pennello per Eglomise", "Muovi un qualsiasi dado nella tua vetrata ignorando le restrizioni di colore", Color.BLUE,i));
+		i++;
+		toolCards.add(new ToolCard("Alesatore per lamina di rame", "Muovi un qualsiasi dado nella tua vetrata ignorando le restrizioni di valore", Color.RED, i));
+		i++;
+		toolCards.add(new ToolCard("Lathekin", "Muovi esattamente due dadi, rispettando tutte le restrizioni di piazzamento", Color.YELLOW, i));
+		i++;
+		toolCards.add(new ToolCard("Taglierina circolare", "Dopo aver scelto un dado, scambia quel dado con un dado sul Tracciato dei Round", Color.GREEN, i));
+		i++;
+		toolCards.add(new ToolCard("Pennello per Pasta Salda", "Dopo aver scelto un dado, tira nuovamente quel dado\n" + "Se non puoi piazzarlo, riponilo nella Riserva", Color.PURPLE, i));
+		i++;
+		toolCards.add(new ToolCard("Martelletto", "Tira nuovamente tutti i dadi della Riserva\n" + "Questa carta può essera usata solo durante il tuo secondo turno, prima di scegliere il secondo dado", Color.BLUE, i));
+		i++;
+		toolCards.add(new ToolCard("Tenaglia a Rotelle", "Dopo il tuo primo turno scegli immediatamente un altro dado\n" + "Salta il tuo secondo turno in questo round", Color.RED, i));
+		i++;
+		toolCards.add(new ToolCard("Riga in Sughero", "Dopo aver scelto un dado, piazzalo in una casella che non sia adiacente a un altro dado\n" + "Devi rispettare tutte le restrizioni di piazzamento", Color.YELLOW, i));
+		i++;
+		toolCards.add(new ToolCard("Tampone Diamantato", "Dopo aver scelto un dado, giralo sulla faccia opposta", Color.GREEN, i));
+		i++;
+		toolCards.add(new ToolCard("Diluente per Pasta Salda", "Dopo aver scelto un dado, riponilo nel Sacchetto, poi pescane uno dal Sacchetto\n" + "Scegli il valore del nuovo dado e piazzalo, rispettando tutte le restrizioni di piazzamento", Color.PURPLE, i));
+		i++;
+		toolCards.add(new ToolCard("Taglierina Manuale", "Muovi fino a due dadi dello stesso colore di un solo dado sul Tracciato dei Round\n" + "Devi rispettare tutte le restrizioni di piazzamento", Color.BLUE, i));
 
 		int nPlayer = game.getMainBoard().getData().getPlayerCount();
 
@@ -150,13 +162,11 @@ public class FrameSelectionState extends AbstractGameState {
 		{
 			int difficulty = game.getMainBoard().getData().getDifficulty();
 
-			for(int i=0; i<difficulty; i++)
+			for(i=0; i<difficulty; i++)
 			{
 				game.getMainBoard().addToolCard(toolCards.remove(game.getRNGenerator().getNextInt(toolCards.size())));
 			}
-
 		}
-
 		else
 		{
 			game.getMainBoard().addToolCard(toolCards.remove(game.getRNGenerator().getNextInt(toolCards.size())));

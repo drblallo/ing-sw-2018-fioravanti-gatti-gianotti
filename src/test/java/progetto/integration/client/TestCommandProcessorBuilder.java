@@ -3,7 +3,7 @@ package progetto.integration.client;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import progetto.model.EndTurnAction;
+import progetto.controller.EndTurnAction;
 import progetto.view.commandline.EchoCommand;
 import progetto.view.commandline.ICommandProcessor;
 import progetto.view.commandline.StackCommandProcessor;

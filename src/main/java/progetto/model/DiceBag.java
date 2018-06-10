@@ -64,7 +64,7 @@ public final class DiceBag{
 	 * Add a dice to the bag (with Color color)
 	 * @param color
 	 */
-	void add(Color color)
+	public void add(Color color)
 	{
 		dices.add(color);
 	}

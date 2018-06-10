@@ -18,6 +18,8 @@ public final class PlayerBoardData implements Serializable{
 	private final boolean windowFrameIsSet;
 	private final List<AbstractPrivateObjectiveCard> privateObjectiveCards;
 
+	private final int token;
+
 	private final WindowFrameCouple[] extractedWindowFrameCouples;
 
 	/**
@@ -30,6 +32,7 @@ public final class PlayerBoardData implements Serializable{
 		windowFrameIsSet = false;
 		ArrayList<AbstractPrivateObjectiveCard> temp = new ArrayList<>();
 		privateObjectiveCards = Collections.unmodifiableList(temp);
+		token = 0;
 	}
 
 	/**
@@ -45,6 +48,8 @@ public final class PlayerBoardData implements Serializable{
 
 		ArrayList<AbstractPrivateObjectiveCard> temp = new ArrayList<>(playerBoardData.privateObjectiveCards);
 		this.privateObjectiveCards = Collections.unmodifiableList(temp);
+
+		this.token = playerBoardData.token;
 	}
 
 	/**
@@ -61,6 +66,21 @@ public final class PlayerBoardData implements Serializable{
 		ArrayList<AbstractPrivateObjectiveCard> temp = new ArrayList<>(playerBoardData.privateObjectiveCards);
 		temp.add(privateObjectiveCard);
 		this.privateObjectiveCards = Collections.unmodifiableList(temp);
+		this.token = playerBoardData.token;
+	}
+
+	/**
+	 * Constructor to set token
+	 * @param token token to set
+	 */
+	private PlayerBoardData(PlayerBoardData playerBoardData, int token)
+	{
+		this.windowFrame = playerBoardData.windowFrame;
+		this.extractedWindowFrameCouples = playerBoardData.extractedWindowFrameCouples;
+		this.windowFrameIsSet = playerBoardData.windowFrameIsSet;
+		ArrayList<AbstractPrivateObjectiveCard> temp = new ArrayList<>(playerBoardData.privateObjectiveCards);
+		this.privateObjectiveCards = Collections.unmodifiableList(temp);
+		this.token = token;
 	}
 
 	/**
@@ -123,7 +143,7 @@ public final class PlayerBoardData implements Serializable{
 		return new PlayerBoardData(this, windowFrame, extractedWindowFrameCouples, false);
 	}
 
-	boolean getWindowFrameIsSet()
+	public boolean getWindowFrameIsSet()
 	{
 		return windowFrameIsSet;
 	}
@@ -141,6 +161,16 @@ public final class PlayerBoardData implements Serializable{
 	PlayerBoardData addPrivateObjectiveCard(AbstractPrivateObjectiveCard privateObjectiveCard)
 	{
 		return new PlayerBoardData(this, privateObjectiveCard);
+	}
+
+	public int getToken()
+	{
+		return token;
+	}
+
+	public PlayerBoardData setToken(int token)
+	{
+		return new PlayerBoardData(this, token);
 	}
 
 }

@@ -1,4 +1,6 @@
-package progetto.model;
+package progetto.controller;
+
+		import progetto.model.*;
 
 public class EndTurnAction extends AbstractGameAction
 {
@@ -17,7 +19,8 @@ public class EndTurnAction extends AbstractGameAction
 	@Override
 	public boolean canBeExecuted(Model game)
 	{
-		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
+		return (game.getMainBoard().getData().getGameState().getClass() == RoundState.class ||
+				game.getMainBoard().getData().getGameState().getClass() == ToolCardState.class) &&
 				getCallerID() == game.getMainBoard().getData().getCurrentPlayer();
 	}
 
@@ -31,6 +34,12 @@ public class EndTurnAction extends AbstractGameAction
 		{
 			Dice dice = pickedDicesSlot.remove(0).getDice();
 			extractedDices.addDice(dice);
+		}
+
+		AbstractGameAction gameAction = new CancelToolCardUseAction(getCallerID());
+		if(gameAction.canBeExecuted(game))
+		{
+			gameAction.execute(game);
 		}
 
 		game.getMainBoard().delParamToolCard();

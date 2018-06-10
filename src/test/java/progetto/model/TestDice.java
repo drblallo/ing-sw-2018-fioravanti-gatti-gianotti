@@ -121,4 +121,12 @@ public class TestDice extends TestCase {
 
 	}
 
+	@Test
+	public void testToString()
+	{
+		Dice dice = new Dice(Value.TWO, Color.RED);
+		Assert.assertEquals(dice.getValue()+" "+dice.getColor(), dice.toString());
+
+	}
+
 }

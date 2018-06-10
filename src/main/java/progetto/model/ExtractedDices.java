@@ -14,7 +14,7 @@ public final class ExtractedDices extends Container<ExtractedDicesData> {
 	 * Add dice to extracted dices
 	 * @param newDice to add
 	 */
-	void addDice(Dice newDice)
+	public void addDice(Dice newDice)
 	{
 		setData(getData().addDice(newDice));
 	}

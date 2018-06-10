@@ -1,6 +1,7 @@
 package progetto.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Main gaming table
@@ -81,12 +82,21 @@ public final class MainBoard extends AbstractMainBoard
 	}
 
 	/**
-	 * Add a player in the queue of the round
-	 * @param i next player in round player queue
+	 * Remove a player from the queue and add it in first position
+	 * @param player id of the player to remove and to add in first position
 	 */
-	public void addPlayerQueue(Integer i)
+	public void changeNextPlayer(Integer player)
 	{
-		playerQueue.add(i);
+		for(int i=0; i<playerQueue.size(); i++)
+		{
+			if(playerQueue.get(i).equals(player))
+			{
+				playerQueue.remove(i);
+				playerQueue.add(0, player);
+				return;
+			}
+		}
+
 	}
 
 	/**
@@ -98,6 +108,24 @@ public final class MainBoard extends AbstractMainBoard
 		if(!playerQueue.isEmpty())
 			return playerQueue.remove(0);
 		return -1;
+	}
+
+	/**
+	 * Add a player in the queue of the round
+	 * @param i next player in round player queue
+	 */
+	public void addPlayerQueue(Integer i)
+	{
+		playerQueue.add(i);
+	}
+
+	/**
+	 * Get a list of players will play before finish the round
+	 * @return list
+	 */
+	public List getRoundPlayerList()
+	{
+		return new ArrayList<>(playerQueue);
 	}
 
 	/**
@@ -113,7 +141,7 @@ public final class MainBoard extends AbstractMainBoard
 	 * Add one tool card
 	 * @param toolCard to add
 	 */
-	public void addToolCard(AbstractToolCard toolCard)
+	public void addToolCard(ToolCard toolCard)
 	{
 		setData(getData().addToolCard(toolCard));
 	}
@@ -135,6 +163,16 @@ public final class MainBoard extends AbstractMainBoard
 	public void delParamToolCard()
 	{
 		setData(getData().delParamToolCard());
+	}
+
+	public void incNCallToolCard(int pos)
+	{
+		setData(getData().incNCallToolCard(pos));
+	}
+
+	public void removeToolCard(int index)
+	{
+		setData(getData().removeToolCard(index));
 	}
 
 }
