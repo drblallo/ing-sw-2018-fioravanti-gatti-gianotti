@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  */
 public final class PlayerBoardData implements Serializable{
 
-	private static final Logger LOGGER = Logger.getLogger(Model.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(PlayerBoardData.class.getName());
 
 	private final WindowFrame windowFrame;
 	private final boolean windowFrameIsSet;
@@ -137,12 +137,20 @@ public final class PlayerBoardData implements Serializable{
 		return new PlayerBoardData(this, windowFrame, extractedWindowFrameCouples, true);
 	}
 
-
+	/**
+	 * Set ExtractedWindowFrame
+	 * @param extractedWindowFrameCouples to set
+	 * @return new PlayerBoardData with the window frame set
+	 */
 	PlayerBoardData setExtractedWindowFrame(WindowFrameCouple[] extractedWindowFrameCouples)
 	{
 		return new PlayerBoardData(this, windowFrame, extractedWindowFrameCouples, false);
 	}
 
+	/**
+	 * Get windowFrameIsSet
+	 * @return windowFrameIsSet
+	 */
 	public boolean getWindowFrameIsSet()
 	{
 		return windowFrameIsSet;
@@ -157,17 +165,30 @@ public final class PlayerBoardData implements Serializable{
 		return new ArrayList<>(this.privateObjectiveCards);
 	}
 
-
+	/**
+	 * Add private objective card
+	 * @param privateObjectiveCard to add
+	 * @return new PlayerBoardData with added card
+	 */
 	PlayerBoardData addPrivateObjectiveCard(AbstractPrivateObjectiveCard privateObjectiveCard)
 	{
 		return new PlayerBoardData(this, privateObjectiveCard);
 	}
 
+	/**
+	 * Get number of token
+	 * @return number of token
+	 */
 	public int getToken()
 	{
 		return token;
 	}
 
+	/**
+	 * Set token
+	 * @param token to set
+	 * @return new PlayerBoardData with modified value
+	 */
 	public PlayerBoardData setToken(int token)
 	{
 		return new PlayerBoardData(this, token);

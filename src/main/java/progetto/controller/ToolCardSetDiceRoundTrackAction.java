@@ -4,6 +4,9 @@ import progetto.model.MainBoardData;
 import progetto.model.Model;
 import progetto.model.ToolCardState;
 
+/**
+ * Action to select a dice from round track
+ */
 public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameAction{
 
 	private final int round;
@@ -12,6 +15,9 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 	private static final int CARD5 = 5;
 	private static final int CARD12 = 12;
 
+	/**
+	 * Constructor without parameters
+	 */
 	public ToolCardSetDiceRoundTrackAction()
 	{
 		super();
@@ -20,6 +26,12 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 
 	}
 
+	/**
+	 * Constructor to set values
+	 * @param nPlayer callerID
+	 * @param round n round
+	 * @param nDiceRT n dice of selected round
+	 */
 	public ToolCardSetDiceRoundTrackAction(int nPlayer, int round, int nDiceRT)
 	{
 		super(nPlayer);
@@ -28,6 +40,11 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 
 	}
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game) {
 		MainBoardData data = game.getMainBoard().getData();
@@ -47,6 +64,10 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game) {
 		game.getMainBoard().setParamToolCard("round", round);

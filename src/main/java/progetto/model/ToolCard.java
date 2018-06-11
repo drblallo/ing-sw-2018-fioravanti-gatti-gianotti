@@ -2,6 +2,9 @@ package progetto.model;
 
 import java.io.Serializable;
 
+/**
+ * Tool card
+ */
 public class ToolCard implements Serializable {
 
 	private String name;
@@ -32,11 +35,19 @@ public class ToolCard implements Serializable {
 		return index + " " + color + " " + name + " " + effect;
 	}
 
+	/**
+	 * Get index of the card
+	 * @return index
+	 */
 	public int getIndex()
 	{
 		return index;
 	}
 
+	/**
+	 * Get color of the card
+	 * @return color
+	 */
 	public Color getColor() {
 		return color;
 	}

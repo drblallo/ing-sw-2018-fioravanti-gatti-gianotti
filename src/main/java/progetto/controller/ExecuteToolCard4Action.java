@@ -4,6 +4,9 @@ import progetto.model.*;
 
 import java.util.Map;
 
+/**
+ * Action to execute tool card 4
+ */
 public class ExecuteToolCard4Action extends AbstractExecutibleGameAction{
 
 	private static final String XPOS = "XPlacedDice";
@@ -12,17 +15,28 @@ public class ExecuteToolCard4Action extends AbstractExecutibleGameAction{
 	private static final String YPOS2 = "YPlacedDice2";
 	private static final int INDEX = 4;
 
-
+	/**
+	 * Constructor without parameters
+	 */
 	public ExecuteToolCard4Action()
 	{
 		super();
 	}
 
+	/**
+	 * Constructor to set callerID
+	 * @param nPlayer
+	 */
 	public ExecuteToolCard4Action(int nPlayer)
 	{
 		super(nPlayer);
 	}
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game)
 	{
@@ -50,6 +64,10 @@ public class ExecuteToolCard4Action extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{

@@ -4,20 +4,35 @@ import progetto.model.*;
 
 import java.util.List;
 
+/**
+ * Action to execute tool card 7
+ */
 public class ExecuteToolCard7Action extends AbstractExecutibleGameAction{
 
 	private static final int INDEX = 7;
 
+	/**
+	 * Constructor without parameters
+	 */
 	public ExecuteToolCard7Action()
 	{
 		super();
 	}
 
+	/**
+	 * Constructor to set callerID
+	 * @param nPlayer
+	 */
 	public ExecuteToolCard7Action(int nPlayer)
 	{
 		super(nPlayer);
 	}
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game)
 	{
@@ -50,6 +65,10 @@ public class ExecuteToolCard7Action extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{

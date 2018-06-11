@@ -5,7 +5,9 @@ package progetto.model;
  */
 public final class DicePlacedFrame extends Container<DicePlacedFrameData> {
 
-
+	/**
+	 * Constructor
+	 */
 	DicePlacedFrame()
 	{
 		super(new DicePlacedFrameData());

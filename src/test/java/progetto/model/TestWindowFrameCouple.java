@@ -5,15 +5,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class TestWindowFrameCouple extends TestCase {
 
-	WindowFrameCoupleArray windowFrameCoupleArray;
+	List<WindowFrameCouple> windowFrameCouples;
 	WindowFrameCouple windowFrameCouple;
 
 	@Before
 	public void setUp()
 	{
-		windowFrameCoupleArray = new WindowFrameCoupleArray();
+		windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
 		windowFrameCouple = new WindowFrameCouple();
 
 	}
@@ -29,7 +31,7 @@ public class TestWindowFrameCouple extends TestCase {
 	@Test
 	public void testGetter()
 	{
-		windowFrameCouple = windowFrameCoupleArray.getWindowFrameCouples().get(2);
+		windowFrameCouple = windowFrameCouples.get(2);
 
 		Assert.assertEquals(null, windowFrameCouple.getWindowFrame(0).getColorBond(0,0));
 		Assert.assertEquals(Color.BLUE, windowFrameCouple.getWindowFrame(0).getColorBond(3,0));

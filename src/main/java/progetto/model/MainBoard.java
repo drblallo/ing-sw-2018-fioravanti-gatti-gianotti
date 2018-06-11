@@ -8,15 +8,17 @@ import java.util.List;
  */
 public final class MainBoard extends AbstractMainBoard
 {
-	MainBoard()
-	{
-		super(new MainBoardData());
-	}
-
 	private final ExtractedDices extractedDices = new ExtractedDices();
 
 	private ArrayList<Integer> playerQueue = new ArrayList<>();
 
+	/**
+	 * Constructor
+	 */
+	MainBoard()
+	{
+		super(new MainBoardData());
+	}
 
 	/**
 	 * Get extracted dices
@@ -155,21 +157,37 @@ public final class MainBoard extends AbstractMainBoard
 		setData(getData().setDifficulty(difficulty));
 	}
 
+	/**
+	 * Set a parameter of a tool card
+	 * @param param new param
+	 * @param val new value
+	 */
 	public void setParamToolCard(String param, Integer val)
 	{
 		setData(getData().setParamToolCard(param, val));
 	}
 
+	/**
+	 * Delete all parameters of a tool card
+	 */
 	public void delParamToolCard()
 	{
 		setData(getData().delParamToolCard());
 	}
 
+	/**
+	 * Increase number of call of the tool card in position pos
+	 * @param pos position of the tool card
+	 */
 	public void incNCallToolCard(int pos)
 	{
 		setData(getData().incNCallToolCard(pos));
 	}
 
+	/**
+	 * Remove a tool card from main board
+	 * @param index index of the card to remove
+	 */
 	public void removeToolCard(int index)
 	{
 		setData(getData().removeToolCard(index));

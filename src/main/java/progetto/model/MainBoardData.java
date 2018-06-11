@@ -303,11 +303,19 @@ public final class MainBoardData implements Serializable {
 		return gameState;
 	}
 
+	/**
+	 * Get current round
+	 * @return current round
+	 */
 	public int getCurrentRound()
 	{
 		return currentRound;
 	}
 
+	/**
+	 * Get difficulty (single player)
+	 * @return difficulty
+	 */
 	public int getDifficulty()
 	{
 		return difficulty;
@@ -421,7 +429,12 @@ public final class MainBoardData implements Serializable {
 		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
 	}
 
-
+	/**
+	 * Add a parameter of a tool card
+	 * @param nameP new parameter
+	 * @param val new value
+	 * @return new MainBoardData with added parameter
+	 */
 	MainBoardData setParamToolCard(String nameP, Integer val)
 	{
 		HashMap<String, Integer> hs = new HashMap<>(paramToolCard);
@@ -429,17 +442,30 @@ public final class MainBoardData implements Serializable {
 		return new MainBoardData(this, hs, gameState);
 	}
 
+	/**
+	 * Get parameters
+	 * @return parameters of tool cards
+	 */
 	public Map<String, Integer> getParamToolCard()
 	{
 		return paramToolCard;
 	}
 
+	/**
+	 * Delete all parameters of tool cards
+	 * @return new MainBoardData without deleted parameters
+	 */
 	MainBoardData delParamToolCard()
 	{
 		HashMap<String, Integer> hs = new HashMap<>();
 		return new MainBoardData(this, hs, gameState);
 	}
 
+	/**
+	 * Increase number of call of the tool card in position pos
+	 * @param pos position of the tool card
+	 * @return new MainBoardData with modified number of call
+	 */
 	MainBoardData incNCallToolCard(int pos)
 	{
 		if(pos<0 || pos>=nCallToolCard.size())
@@ -450,6 +476,11 @@ public final class MainBoardData implements Serializable {
 
 	}
 
+	/**
+	 * Get number of call of tool card in position pos
+	 * @param pos position of the tool card
+	 * @return number of call
+	 */
 	public Integer getNCallToolCard(int pos)
 	{
 		if(pos<0 || pos>=nCallToolCard.size())

@@ -6,17 +6,20 @@ import progetto.controller.GameController;
 import progetto.controller.StartGameAction;
 import progetto.model.AddWindowFrameCoupleAction;
 import progetto.model.FrameSelectionState;
+import progetto.model.WindowFrameCouple;
 import progetto.model.WindowFrameCoupleArray;
+
+import java.util.List;
 
 public class TestActionCommand {
 	@Test
 	public void testActionCommand()
 	{
 		GameController game = new GameController();
-		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
-		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		List<WindowFrameCouple> windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		for(int i=0; i<windowFrameCouples.size(); i++)
 		{
-			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCouples.get(i)));
 		}
 		game.processAllPendingAction();
 		ActionCommand command = new ActionCommand(StartGameAction.class, game);

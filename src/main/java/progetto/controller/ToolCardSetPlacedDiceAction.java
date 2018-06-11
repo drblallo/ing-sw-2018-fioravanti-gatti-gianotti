@@ -6,6 +6,9 @@ import progetto.model.ToolCardState;
 
 import java.util.Map;
 
+/**
+ * Action to select a dice from placed dice frame
+ */
 public class ToolCardSetPlacedDiceAction extends AbstractExecutibleGameAction{
 
 	private final int x;
@@ -21,6 +24,9 @@ public class ToolCardSetPlacedDiceAction extends AbstractExecutibleGameAction{
 	private static final int CARD4 = 4;
 	private static final int CARD12 = 12;
 
+	/**
+	 * Constructor without parameters
+	 */
 	public ToolCardSetPlacedDiceAction()
 	{
 		super();
@@ -29,6 +35,12 @@ public class ToolCardSetPlacedDiceAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Constructor to set values
+	 * @param nPlayer callerID
+	 * @param y y - pos in dice placed frame
+	 * @param x x - pos in dice placed frame
+	 */
 	public ToolCardSetPlacedDiceAction(int nPlayer, int y, int x)
 	{
 		super(nPlayer);
@@ -37,6 +49,11 @@ public class ToolCardSetPlacedDiceAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game) {
 		MainBoardData data = game.getMainBoard().getData();
@@ -56,6 +73,10 @@ public class ToolCardSetPlacedDiceAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game) {
 

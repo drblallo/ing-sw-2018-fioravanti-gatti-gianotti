@@ -84,10 +84,10 @@ public class TestFrameSelection {
 	@Test
 	public void testFrameExtraction1Player()
 	{
-		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
-		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		List<WindowFrameCouple>  windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		for(int i=0; i<windowFrameCouples.size(); i++)
 		{
-			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCouples.get(i)));
 		}
 		game.processAllPendingAction();
 		game.getModel().getMainBoard().setPlayerCount(1);
@@ -97,22 +97,22 @@ public class TestFrameSelection {
 		Assert.assertFalse(game.getModel().getPlayerBoard(0).getData().getWindowFrameIsSet());
 		Assert.assertEquals(2, game.getModel().getPlayerBoard(0).getData().getExtractedWindowFrameCouplesWindowFrame().length);
 
-		WindowFrameCouple[] windowFrameCouples = game.getModel().getPlayerBoard(0).getData().getExtractedWindowFrameCouplesWindowFrame();
+		WindowFrameCouple[] windowFrameCouples2 = game.getModel().getPlayerBoard(0).getData().getExtractedWindowFrameCouplesWindowFrame();
 
-		Assert.assertEquals("Chromatic Splendor", windowFrameCouples[0].getWindowFrame(0).getName());
-		Assert.assertEquals("Comitas", windowFrameCouples[0].getWindowFrame(1).getName());
-		Assert.assertEquals("Fractal Drops", windowFrameCouples[1].getWindowFrame(0).getName());
-		Assert.assertEquals("Ripples of Light", windowFrameCouples[1].getWindowFrame(1).getName());
+		Assert.assertEquals("Chromatic Splendor", windowFrameCouples2[0].getWindowFrame(0).getName());
+		Assert.assertEquals("Comitas", windowFrameCouples2[0].getWindowFrame(1).getName());
+		Assert.assertEquals("Fractal Drops", windowFrameCouples2[1].getWindowFrame(0).getName());
+		Assert.assertEquals("Ripples of Light", windowFrameCouples2[1].getWindowFrame(1).getName());
 
 	}
 
 	@Test
 	public void testFrameExtraction4Player()
 	{
-		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
-		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		List<WindowFrameCouple>  windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		for(int i=0; i<windowFrameCouples.size(); i++)
 		{
-			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCouples.get(i)));
 		}
 		game.processAllPendingAction();
 		game.getModel().setState(new FrameSelectionState());
@@ -126,31 +126,31 @@ public class TestFrameSelection {
 
 		Assert.assertEquals(2, game.getModel().getPlayerBoard(0).getData().getExtractedWindowFrameCouplesWindowFrame().length);
 
-		WindowFrameCouple[] windowFrameCouples = game.getModel().getPlayerBoard(0).getData().getExtractedWindowFrameCouplesWindowFrame();
+		WindowFrameCouple[] windowFrameCouples2 = game.getModel().getPlayerBoard(0).getData().getExtractedWindowFrameCouplesWindowFrame();
 
-		Assert.assertEquals("Aurorae Mangnificus", windowFrameCouples[0].getWindowFrame(0).getName());
-		Assert.assertEquals("Aurora Sagradis", windowFrameCouples[0].getWindowFrame(1).getName());
-		Assert.assertEquals("Fractal Drops", windowFrameCouples[1].getWindowFrame(0).getName());
-		Assert.assertEquals("Ripples of Light", windowFrameCouples[1].getWindowFrame(1).getName());
+		Assert.assertEquals("Aurorae Mangnificus", windowFrameCouples2[0].getWindowFrame(0).getName());
+		Assert.assertEquals("Aurora Sagradis", windowFrameCouples2[0].getWindowFrame(1).getName());
+		Assert.assertEquals("Fractal Drops", windowFrameCouples2[1].getWindowFrame(0).getName());
+		Assert.assertEquals("Ripples of Light", windowFrameCouples2[1].getWindowFrame(1).getName());
 
 		Assert.assertEquals(2, game.getModel().getPlayerBoard(3).getData().getExtractedWindowFrameCouplesWindowFrame().length);
 
-		windowFrameCouples = game.getModel().getPlayerBoard(3).getData().getExtractedWindowFrameCouplesWindowFrame();
+		windowFrameCouples2 = game.getModel().getPlayerBoard(3).getData().getExtractedWindowFrameCouplesWindowFrame();
 
-		Assert.assertEquals("Chromatic Splendor", windowFrameCouples[0].getWindowFrame(0).getName());
-		Assert.assertEquals("Comitas", windowFrameCouples[0].getWindowFrame(1).getName());
-		Assert.assertEquals("Lux Mundi", windowFrameCouples[1].getWindowFrame(0).getName());
-		Assert.assertEquals("Lux Astram", windowFrameCouples[1].getWindowFrame(1).getName());
+		Assert.assertEquals("Chromatic Splendor", windowFrameCouples2[0].getWindowFrame(0).getName());
+		Assert.assertEquals("Comitas", windowFrameCouples2[0].getWindowFrame(1).getName());
+		Assert.assertEquals("Lux Mundi", windowFrameCouples2[1].getWindowFrame(0).getName());
+		Assert.assertEquals("Lux Astram", windowFrameCouples2[1].getWindowFrame(1).getName());
 
 	}
 
 	@Test
 	public void testFrameSelection1Player()
 	{
-		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
-		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		List<WindowFrameCouple>  windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		for(int i=0; i<windowFrameCouples.size(); i++)
 		{
-			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCouples.get(i)));
 		}
 		game.processAllPendingAction();
 		game.getModel().getMainBoard().setPlayerCount(1);
@@ -166,10 +166,10 @@ public class TestFrameSelection {
 	@Test
 	public void testFrameSelection4Player()
 	{
-		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
-		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		List<WindowFrameCouple>  windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		for(int i=0; i<windowFrameCouples.size(); i++)
 		{
-			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCouples.get(i)));
 		}
 		game.processAllPendingAction();
 		game.getModel().setState(new FrameSelectionState());
@@ -212,10 +212,10 @@ public class TestFrameSelection {
 	@Test
 	public void testFrameSelection1PlayerEmptyError()
 	{
-		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
-		for(int i=0; i<windowFrameCoupleArray.getWindowFrameCouples().size(); i++)
+		List<WindowFrameCouple>  windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		for(int i=0; i<windowFrameCouples.size(); i++)
 		{
-			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCoupleArray.getWindowFrameCouples().get(i)));
+			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCouples.get(i)));
 		}
 		game.processAllPendingAction();
 		game.getModel().getMainBoard().setPlayerCount(1);

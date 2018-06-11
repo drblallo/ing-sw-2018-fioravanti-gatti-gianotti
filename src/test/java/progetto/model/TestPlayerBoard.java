@@ -5,19 +5,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class TestPlayerBoard extends TestCase
 {
 
-	WindowFrameCoupleArray windowFrameCoupleArray;
+	List<WindowFrameCouple>  windowFrameCouples;
 	PlayerBoard playerBoard;
 	WindowFrame windowFrame;
 
 	@Before
 	public void setUp()
 	{
-		windowFrameCoupleArray = new WindowFrameCoupleArray();
+		windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
 		playerBoard = new PlayerBoard();
-		windowFrame = windowFrameCoupleArray.getWindowFrameCouples().get(1).getWindowFrame(0);
+		windowFrame = windowFrameCouples.get(1).getWindowFrame(0);
 		playerBoard.setWindowFrame(windowFrame);
 	}
 
@@ -111,8 +113,7 @@ public class TestPlayerBoard extends TestCase
 	@Test
 	public void testSetWindowFrameSide()
 	{
-
-		WindowFrameCouple windowFrameCouple = windowFrameCoupleArray.getWindowFrameCouples().get(5);
+		WindowFrameCouple windowFrameCouple = windowFrameCouples.get(5);
 		playerBoard.setWindowFrame(windowFrameCouple, 1);
 		Assert.assertEquals(windowFrameCouple.getWindowFrame(1), playerBoard.getData().getWindowFrame());
 

@@ -2,19 +2,26 @@ package progetto.controller;
 
 import progetto.model.*;
 
+/**
+ * Action to choose whether to increase or decrease the value of the dice
+ */
 public class ToolCardSetIncreaseDecreaseAction extends AbstractExecutibleGameAction{
 
 	private int increaseDecrease;
 
 	private static final int CARD1 = 1;
 
+	/**
+	 * Constructor without parameters
+	 */
 	public  ToolCardSetIncreaseDecreaseAction()
 	{
 		super();
 	}
 
 	/**
-	 * Constructor
+	 * Constructor to set values
+	 * @param nPlayer callerID
 	 * @param increaseDecrease  0 = increase, 1 = decrease
 	 */
 	public ToolCardSetIncreaseDecreaseAction(int nPlayer, int increaseDecrease)
@@ -23,6 +30,11 @@ public class ToolCardSetIncreaseDecreaseAction extends AbstractExecutibleGameAct
 		this.increaseDecrease = increaseDecrease;
 	}
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game)
 	{
@@ -43,6 +55,10 @@ public class ToolCardSetIncreaseDecreaseAction extends AbstractExecutibleGameAct
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{

@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.assertions.api.ColorAssert;
 
+import java.util.List;
+
 public class TestDicePlacementCondition extends TestCase {
 
 	WindowFrameCoupleArray windowFrameCoupleArray;
@@ -14,9 +16,9 @@ public class TestDicePlacementCondition extends TestCase {
 	@Before
 	public void setUp()
 	{
-		windowFrameCoupleArray = new WindowFrameCoupleArray();
+		List<WindowFrameCouple> windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
 		playerBoard = new PlayerBoard();
-		WindowFrame windowFrame = windowFrameCoupleArray.getWindowFrameCouples().get(1).getWindowFrame(0);
+		WindowFrame windowFrame = windowFrameCouples.get(1).getWindowFrame(0);
 		playerBoard.setWindowFrame(windowFrame);
 
 	}

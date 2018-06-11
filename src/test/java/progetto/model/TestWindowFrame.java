@@ -4,6 +4,8 @@ import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 public class TestWindowFrame extends TestCase {
 
 	WindowFrame windowFrame;
@@ -19,9 +21,9 @@ public class TestWindowFrame extends TestCase {
 	@Test
 	public void testGetter() {
 
-		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
-
-		windowFrame = windowFrameCoupleArray.getWindowFrameCouples().get(2).getWindowFrame(0);
+		List<WindowFrameCouple> windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		
+		windowFrame = windowFrameCouples.get(2).getWindowFrame(0);
 
 		Assert.assertEquals(null, windowFrame.getColorBond(0,0));
 		Assert.assertEquals(Color.BLUE, windowFrame.getColorBond(3,0));

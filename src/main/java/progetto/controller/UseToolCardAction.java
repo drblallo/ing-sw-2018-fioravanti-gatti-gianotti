@@ -4,22 +4,38 @@ import progetto.model.Model;
 import progetto.model.RoundState;
 import progetto.model.ToolCardState;
 
+/**
+ * Action to use tool card
+ */
 public class UseToolCardAction extends AbstractExecutibleGameAction{
 
 	private final int nCard;
 
-	public UseToolCardAction(int player, int nCard)
-	{
-		super(player);
-		this.nCard = nCard;
-	}
-
+	/**
+	 * Constructor without parameters
+	 */
 	public UseToolCardAction()
 	{
 		super(-1);
 		nCard = -1;
 	}
 
+	/**
+	 * Constructor to set values
+	 * @param player callerID
+	 * @param nCard tool card on the MainBoard to use
+	 */
+	public UseToolCardAction(int player, int nCard)
+	{
+		super(player);
+		this.nCard = nCard;
+	}
+
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game)
 	{
@@ -46,6 +62,10 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{

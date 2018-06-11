@@ -6,7 +6,9 @@ package progetto.model;
 public class PlayerBoard extends AbstractPlayerBoard
 {
 
-
+	/**
+	 * Constructor
+	 */
 	PlayerBoard()
 	{
 		super(new PlayerBoardData());
@@ -15,21 +17,37 @@ public class PlayerBoard extends AbstractPlayerBoard
 	private final DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
 	private final PickedDicesSlot pickedDicesSlot = new PickedDicesSlot();
 
+	/**
+	 * Get number of picked dices
+	 * @return number of picked dices
+	 */
 	public int getNPickedDices()
 	{
 		return pickedDicesSlot.getNDices();
 	}
 
+	/**
+	 * get pickedDicesSlot
+	 * @return pickedDicesSlot
+	 */
 	public PickedDicesSlot getPickedDicesSlot()
 	{
 		return pickedDicesSlot;
 	}
 
+	/**
+	 * Get dicePlacedFrame
+	 * @return dicePlacedFrame
+	 */
 	public DicePlacedFrame getDicePlacedFrame()
 	{
 		return dicePlacedFrame;
 	}
 
+	/**
+	 * get number of placed dices
+	 * @return get number of placed dices
+	 */
 	public int getNDicesPlaced()
 	{
 		return dicePlacedFrame.getData().getNDices();
@@ -128,11 +146,19 @@ public class PlayerBoard extends AbstractPlayerBoard
 		pickedDicesSlot.add(dice, false, false, false);
 	}
 
+	/**
+	 * Add a private objective card
+	 * @param privateObjectiveCard to add
+	 */
 	void addPrivateObjectiveCard(AbstractPrivateObjectiveCard privateObjectiveCard)
 	{
 		setData(getData().addPrivateObjectiveCard(privateObjectiveCard));
 	}
 
+	/**
+	 * Set token
+	 * @param token to set
+	 */
 	public void setToken(int token)
 	{
 		setData(getData().setToken(token));

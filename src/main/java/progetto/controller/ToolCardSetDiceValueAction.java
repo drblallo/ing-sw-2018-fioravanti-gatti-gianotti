@@ -4,6 +4,9 @@ import progetto.model.*;
 
 import java.util.Map;
 
+/**
+ * Action to set the value of the dice
+ */
 public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 
 	private final int value;
@@ -12,14 +15,21 @@ public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 	private static final String DB_CHANGED = "changedDiceDB";
 	private static final int CARD11 = 11;
 
-
+	/**
+	 * Constructor without parameters
+	 */
 	public ToolCardSetDiceValueAction()
 	{
 		super();
-		value = 0;
+		value = 1;
 
 	}
 
+	/**
+	 * Constructor to set values
+	 * @param nPlayer callerID
+	 * @param value new value for the dice (value int)
+	 */
 	public ToolCardSetDiceValueAction(int nPlayer, int value)
 	{
 		super(nPlayer);
@@ -27,6 +37,11 @@ public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Constructor to set values
+	 * @param nPlayer callerID
+	 * @param value new value for the dice (value Value)
+	 */
 	public ToolCardSetDiceValueAction(int nPlayer, Value value)
 	{
 		super(nPlayer);
@@ -34,6 +49,11 @@ public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game) {
 		MainBoardData data = game.getMainBoard().getData();
@@ -52,6 +72,10 @@ public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game) {
 		game.getMainBoard().setParamToolCard("value", value);
@@ -74,8 +98,6 @@ public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 			game.setState(new RoundState());
 
 		}
-
-
 
 	}
 

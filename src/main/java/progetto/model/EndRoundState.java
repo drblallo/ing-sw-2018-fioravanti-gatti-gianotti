@@ -1,15 +1,24 @@
 package progetto.model;
 
-
+/**
+ * State used at the end of a round
+ */
 public class EndRoundState extends AbstractGameState
 {
 	private static final int LAST_ROUND = 9;
 
+	/**
+	 * Constructor
+	 */
 	public EndRoundState()
 	{
 		super("End round");
 	}
 
+	/**
+	 * Execute state-related operations
+	 * @param game
+	 */
 	@Override
 	void apply(Model game) {
 

@@ -6,6 +6,9 @@ package progetto.model;
  */
 public final class RoundTrack extends Container<RoundTrackData> {
 
+	/**
+	 * Constructor
+	 */
 	RoundTrack()
 	{
 		super(new RoundTrackData());

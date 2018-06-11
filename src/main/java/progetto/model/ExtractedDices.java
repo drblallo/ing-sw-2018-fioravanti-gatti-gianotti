@@ -5,6 +5,9 @@ package progetto.model;
  */
 public final class ExtractedDices extends Container<ExtractedDicesData> {
 
+	/**
+	 * Constructor
+	 */
 	public ExtractedDices()
 	{
 		super(new ExtractedDicesData());

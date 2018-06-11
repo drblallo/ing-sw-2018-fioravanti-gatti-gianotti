@@ -3,55 +3,69 @@ package progetto.model;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 public class TestWindowFrameCoupleArray {
 
-	WindowFrameCoupleArray windowFrameCoupleArray;
+	List<WindowFrameCouple>  windowFrameCouples;
 
 	@Test
 	public void testRead()
 	{
-		windowFrameCoupleArray = new WindowFrameCoupleArray();
-		Assert.assertEquals(12, windowFrameCoupleArray.getWindowFrameCouples().size());
-		Assert.assertEquals("Water of Life", windowFrameCoupleArray.getWindowFrameCouples().get(0).getWindowFrame(0).getName());
-		Assert.assertEquals("Firmitas", windowFrameCoupleArray.getWindowFrameCouples().get(11).getWindowFrame(1).getName());
-		Assert.assertEquals(4, windowFrameCoupleArray.getWindowFrameCouples().get(5).getWindowFrame(1).getFavorToken());
-		Assert.assertEquals(Color.YELLOW, windowFrameCoupleArray.getWindowFrameCouples().get(1).getWindowFrame(1).getColorBond(1, 0));
-		Assert.assertEquals(Color.YELLOW, windowFrameCoupleArray.getWindowFrameCouples().get(2).getWindowFrame(0).getColorBond(3, 1));
+		windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		Assert.assertEquals(12, windowFrameCouples.size());
+		Assert.assertEquals("Water of Life", windowFrameCouples.get(0).getWindowFrame(0).getName());
+		Assert.assertEquals("Firmitas", windowFrameCouples.get(11).getWindowFrame(1).getName());
+		Assert.assertEquals(4, windowFrameCouples.get(5).getWindowFrame(1).getFavorToken());
+		Assert.assertEquals(Color.YELLOW, windowFrameCouples.get(1).getWindowFrame(1).getColorBond(1, 0));
+		Assert.assertEquals(Color.YELLOW, windowFrameCouples.get(2).getWindowFrame(0).getColorBond(3, 1));
 
 	}
 
 	@Test
 	public void testReadWithPath()
 	{
-		windowFrameCoupleArray = new WindowFrameCoupleArray("windowFrameCouples.json");
-		Assert.assertEquals(12, windowFrameCoupleArray.getWindowFrameCouples().size());
+		WindowFrameCoupleArray.getInstance().readWindowFrameCouples("windowFrameCouples.json");
+		windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		Assert.assertEquals(12, windowFrameCouples.size());
 
 	}
 
 	@Test
 	public void testReadFailFileNotFound()
 	{
-		windowFrameCoupleArray = new WindowFrameCoupleArray("windowFrameCouplesTest.json");
-		Assert.assertEquals(0, windowFrameCoupleArray.getWindowFrameCouples().size());
+		WindowFrameCoupleArray.getInstance().readWindowFrameCouples("windowFrameCouplesTest.json");
+		windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		Assert.assertEquals(12, windowFrameCouples.size());
 
 	}
 
 	@Test
 	public void testReadFailFileWithError()
 	{
-		windowFrameCoupleArray = new WindowFrameCoupleArray("src/test/windowFrameCouplesTest.json");
-		Assert.assertEquals(0, windowFrameCoupleArray.getWindowFrameCouples().size());
+		WindowFrameCoupleArray.getInstance().readWindowFrameCouples("src/test/windowFrameCouplesTest.json");
+		windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
+		Assert.assertEquals(12, windowFrameCouples.size());
 
 	}
 
 	@Test
 	public void testReadFailEmptyPath()
 	{
-		windowFrameCoupleArray = new WindowFrameCoupleArray("");
-		Assert.assertEquals(0, windowFrameCoupleArray.getWindowFrameCouples().size());
+		WindowFrameCoupleArray.getInstance().readWindowFrameCouples("");
+		windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
 
-		windowFrameCoupleArray.readWindowFrameCouples("");
-		Assert.assertEquals(0, windowFrameCoupleArray.getWindowFrameCouples().size());
+		Assert.assertEquals(12, windowFrameCouples.size());
+
+	}
+
+	@Test
+	public void testReturnInstance()
+	{
+		WindowFrameCoupleArray windowFrameCoupleArray = WindowFrameCoupleArray.getInstance();
+		WindowFrameCoupleArray windowFrameCoupleArray1 = WindowFrameCoupleArray.getInstance();
+
+		Assert.assertEquals(windowFrameCoupleArray, windowFrameCoupleArray1);
 
 	}
 

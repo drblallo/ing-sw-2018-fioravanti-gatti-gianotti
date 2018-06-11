@@ -7,6 +7,7 @@ public abstract class AbstractMainBoard extends Container<MainBoardData>
 	{
 		super(d);
 	}
+
 	/**
 	 * Get extracted dices
 	 * @return extractedDices

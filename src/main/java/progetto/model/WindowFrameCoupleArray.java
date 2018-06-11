@@ -9,50 +9,40 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Singleton
  * ArrayList of Window Frame Couples. Upload by file JSON using GSON.
  */
-public class WindowFrameCoupleArray {
+public final class WindowFrameCoupleArray {
 
-	private static final Logger LOGGER = Logger.getLogger(Model.class.getName());
+	private static WindowFrameCoupleArray instance = null;
+
 	private WindowFrameCoupleArrayInternal windowFrameCoupleArrayInternal = new WindowFrameCoupleArrayInternal();
 
-	private static final WindowFrameCoupleArray array = new WindowFrameCoupleArray();
-
-	public static List<WindowFrameCouple> getList()
-	{
-		return array.getWindowFrameCouples();
-	}
+	private static final Logger LOGGER = Logger.getLogger(WindowFrameCoupleArray.class.getName());
 
 	/**
 	 * Constructor
 	 */
-	public WindowFrameCoupleArray()
+	private WindowFrameCoupleArray()
 	{
 		String path = "windowFrameCouples.json";
 		readWindowFrameCouples(path);
 	}
 
-	/**
-	 * Constructor
-	 * @param path file path
-	 */
-	WindowFrameCoupleArray(String path)
+	public static synchronized WindowFrameCoupleArray getInstance()
 	{
-		if(path.isEmpty())
+		if(instance == null)
 		{
-			LOGGER.log(Level.SEVERE, "Wrong path");
+			instance = new WindowFrameCoupleArray();
 		}
-		else
-		{
-			readWindowFrameCouples(path);
-		}
+		return instance;
 	}
 
 	/**
 	 * Get list of window frame couples
 	 * @return
 	 */
-	public List<WindowFrameCouple> getWindowFrameCouples()
+	public List<WindowFrameCouple> getList()
 	{
 		return windowFrameCoupleArrayInternal.getWindowFrameCouples();
 	}
@@ -60,7 +50,7 @@ public class WindowFrameCoupleArray {
 	/**
 	 * Read window frame couples by file
 	 */
-	void readWindowFrameCouples(String path)
+	public void readWindowFrameCouples(String path)
 	{
 		if(path.isEmpty())
 		{

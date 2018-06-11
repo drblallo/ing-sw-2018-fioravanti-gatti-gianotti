@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * State used during frame selection
  *  Extraction of private cards
  *  Extraction of public cards
  *  Extraction of tool cards
@@ -15,6 +16,10 @@ public class FrameSelectionState extends AbstractGameState {
 		super("Frame selection");
 	}
 
+	/**
+	 * Execute state-related operations
+	 * @param game
+	 */
 	@Override
 	void apply(Model game) {
 

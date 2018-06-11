@@ -2,6 +2,9 @@ package progetto.controller;
 
 import progetto.model.*;
 
+/**
+ * Action to place a dice in placed window frame
+ */
 public class PlaceDiceAction extends AbstractExecutibleGameAction{
 
 	private int nDice;
@@ -9,6 +12,9 @@ public class PlaceDiceAction extends AbstractExecutibleGameAction{
 	private int x;
 	private int y;
 
+	/**
+	 * Constructor without parameters
+	 */
 	public PlaceDiceAction(){
 
 		super(-1);
@@ -17,6 +23,13 @@ public class PlaceDiceAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Constructor to set values
+	 * @param nPlayer callerID
+	 * @param nDice number of the picked dice to place
+	 * @param y y pos in window frame
+	 * @param x x pos in window frame
+	 */
 	public PlaceDiceAction(int nPlayer, int nDice, int y, int x)
 	{
 		super(nPlayer);
@@ -25,6 +38,11 @@ public class PlaceDiceAction extends AbstractExecutibleGameAction{
 		this.y = y;
 	}
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game)
 	{
@@ -37,6 +55,10 @@ public class PlaceDiceAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{

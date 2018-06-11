@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Action to execute a tool card
+ */
 public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 	private ArrayList<AbstractExecutibleGameAction> gameActionList = new ArrayList();
@@ -14,12 +17,18 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 	private static final String TOKEN = "token";
 	private static final String SPDICE = "SPDice";
 
-
+	/**
+	 * Constructor without parameters
+	 */
 	public ExecuteToolCardAction()
 	{
 		super();
 	}
 
+	/**
+	 * Constructor to set callerID
+	 * @param nPlayer
+	 */
 	public ExecuteToolCardAction(int nPlayer)
 	{
 		super(nPlayer);
@@ -37,6 +46,11 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 		gameActionList.add(new ExecuteToolCard12Action(getCallerID()));
 	}
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game)
 	{
@@ -57,6 +71,10 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{
@@ -85,8 +103,12 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 	}
 
-
-	AbstractGameAction setGameAction(Model game)
+	/**
+	 * Support method to set gameAction
+	 * @param game
+	 * @return gameAction
+	 */
+	private AbstractGameAction setGameAction(Model game)
 	{
 		List<ToolCard> cardList = game.getMainBoard().getData().getToolCards();
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();

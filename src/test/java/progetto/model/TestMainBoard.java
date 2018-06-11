@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class TestMainBoard extends TestCase {
 
 	MainBoard mainBoard;
@@ -127,12 +129,12 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testSetGetWindowFrameCouples()
 	{
-		WindowFrameCoupleArray windowFrameCoupleArray = new WindowFrameCoupleArray();
+		List<WindowFrameCouple> windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
 
-		WindowFrameCouple windowFrameCouple1 = windowFrameCoupleArray.getWindowFrameCouples().get(1);
+		WindowFrameCouple windowFrameCouple1 = windowFrameCouples.get(1);
 		mainBoard.addWindowFrameCouple(windowFrameCouple1);
 
-		WindowFrameCouple windowFrameCouple2 = windowFrameCoupleArray.getWindowFrameCouples().get(1);
+		WindowFrameCouple windowFrameCouple2 = windowFrameCouples.get(1);
 		mainBoard.addWindowFrameCouple(windowFrameCouple2);
 
 		assertEquals(windowFrameCouple1, mainBoard.getData().getWindowFrame(0));

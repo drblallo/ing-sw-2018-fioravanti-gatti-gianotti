@@ -4,22 +4,38 @@ import progetto.model.*;
 
 import java.util.Map;
 
+/**
+ * Action to set the dice to use to activate tool card in single player
+ */
 public class ToolCardSetSinglePlayerDiceAction extends AbstractExecutibleGameAction{
 
 	private final int nDice;
 
-	public ToolCardSetSinglePlayerDiceAction(int player, int nDice)
-	{
-		super(player);
-		this.nDice = nDice;
-	}
-
+	/**
+	 * Constructor without parameters
+	 */
 	public ToolCardSetSinglePlayerDiceAction()
 	{
 		super(-1);
 		nDice = -1;
 	}
 
+	/**
+	 * Constructor to set values
+	 * @param player callerID
+	 * @param nDice dice to use
+	 */
+	public ToolCardSetSinglePlayerDiceAction(int player, int nDice)
+	{
+		super(player);
+		this.nDice = nDice;
+	}
+
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game)
 	{
@@ -44,6 +60,10 @@ public class ToolCardSetSinglePlayerDiceAction extends AbstractExecutibleGameAct
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{

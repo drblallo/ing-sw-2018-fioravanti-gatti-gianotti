@@ -1,16 +1,26 @@
 package progetto.controller;
 
-		import progetto.model.*;
+import progetto.model.*;
 
-public class EndTurnAction extends AbstractGameAction
+/**
+ * Action to end turn
+ */
+public class EndTurnAction extends AbstractExecutibleGameAction
 {
 
+	/**
+	 * Constructor without parameters
+	 */
 	public EndTurnAction(){
 
 		super(-1);
 
 	}
 
+	/**
+	 * Constructor su set nPlayer
+	 * @param nPlayer
+	 */
 	public EndTurnAction(int nPlayer)
 	{
 		super(nPlayer);

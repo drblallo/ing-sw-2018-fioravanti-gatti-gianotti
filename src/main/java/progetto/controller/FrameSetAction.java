@@ -5,13 +5,19 @@ import progetto.model.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FrameSetAction extends AbstractGameAction {
+/**
+ * Action to set window frame at the begin of the game
+ */
+public class FrameSetAction extends AbstractExecutibleGameAction {
 
 	private final int selectedCouple;
 	private final int selectedSide;
 
 	private static final Logger LOGGER = Logger.getLogger(FrameSetAction.class.getName());
 
+	/**
+	 * Constructor without parameters
+	 */
 	public FrameSetAction(){
 
 		super(-1);
@@ -20,6 +26,12 @@ public class FrameSetAction extends AbstractGameAction {
 
 	}
 
+	/**
+	 * Constructor to set values
+	 * @param nPlayer  callerID
+	 * @param selectedCouple  selected window frame card
+	 * @param selectedSide selected side of the card
+	 */
 	public FrameSetAction(int nPlayer, int selectedCouple, int selectedSide)
 	{
 		super(nPlayer);
@@ -27,11 +39,20 @@ public class FrameSetAction extends AbstractGameAction {
 		this.selectedSide = selectedSide;
 	}
 
+	/**
+	 * Verify if the action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game) {
 		return (game.getMainBoard().getData().getGameState().getClass() == FrameSelectionState.class);
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{

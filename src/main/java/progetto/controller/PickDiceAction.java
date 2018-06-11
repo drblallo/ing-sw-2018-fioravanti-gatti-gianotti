@@ -4,10 +4,16 @@ import progetto.model.Dice;
 import progetto.model.Model;
 import progetto.model.RoundState;
 
+/**
+ * Action to pick a dice (from extracted to picked)
+ */
 public class PickDiceAction extends AbstractExecutibleGameAction{
 
 	private final int nDice;
 
+	/**
+	 * Constructor without parameters
+	 */
 	public PickDiceAction(){
 
 		super(-1);
@@ -15,12 +21,22 @@ public class PickDiceAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Constructor to set values
+	 * @param nPlayer callerID
+	 * @param nDice from ExtractedDices
+	 */
 	public PickDiceAction(int nPlayer, int nDice)
 	{
 		super(nPlayer);
 		this.nDice = nDice;
 	}
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game) {
 
@@ -30,6 +46,10 @@ public class PickDiceAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{

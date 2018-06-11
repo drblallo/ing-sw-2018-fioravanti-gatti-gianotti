@@ -115,7 +115,11 @@ public class Model implements IModel{
 		return rnGenerator.getSeed();
 	}
 
-
+	/**
+	 * Evaluate frame of player player
+	 * @param player player number
+	 * @return score
+	 */
 	public int evaluatePlayerFrame(int player)
 	{
 
@@ -201,6 +205,11 @@ public class Model implements IModel{
 
 	}
 
+	/**
+	 * Evaluate frame of player player (multi player game)
+	 * @param player
+	 * @return
+	 */
 	private int evaluateMultiPlayer(int player)
 	{
 		if(getPlayerBoard(player).getData().getPrivateObjectiveCard().size()!=1)

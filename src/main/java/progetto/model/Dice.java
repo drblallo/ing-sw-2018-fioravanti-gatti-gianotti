@@ -149,6 +149,10 @@ public final class Dice implements Serializable {
 		return dice;
 	}
 
+	/**
+	 * toString
+	 * @return
+	 */
 	public String toString(){
 
 		return getValue().toString() + " " + getColor().toString();

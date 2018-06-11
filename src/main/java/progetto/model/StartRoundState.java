@@ -1,10 +1,19 @@
 package progetto.model;
 
+/**
+ * State for the begin of the round
+ */
 public class StartRoundState extends AbstractGameState{
 	public StartRoundState() {
 		super("Start round");
 	}
 
+	/**
+	 * Execute state-related operations
+	 * start player queue
+	 * extract dices from diceBag
+	 * @param game
+	 */
 	@Override
 	void apply(Model game) {
 
@@ -12,7 +21,6 @@ public class StartRoundState extends AbstractGameState{
 		int firstPlayer = mainBoard.getData().getCurrentFirstPlayer();
 		int nPlayer = mainBoard.getData().getPlayerCount();
 
-		//start player queue
 		for(int i=1; i<nPlayer; i++)
 		{
 			mainBoard.addPlayerQueue((i+firstPlayer)%nPlayer);
@@ -21,8 +29,6 @@ public class StartRoundState extends AbstractGameState{
 		{
 			mainBoard.addPlayerQueue((i+firstPlayer)%nPlayer);
 		}
-
-		//extract dice from diceBag
 
 		if(nPlayer == 1)
 		{

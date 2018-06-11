@@ -70,7 +70,7 @@ public class ServerGame extends GameSync implements  ISync
 
 		sendItem(new SetSeedAction(0));
 
-		List<WindowFrameCouple> list = WindowFrameCoupleArray.getList();
+		List<WindowFrameCouple> list = WindowFrameCoupleArray.getInstance().getList();
 
 		for (WindowFrameCouple l : list)
 			sendItem(new AddWindowFrameCoupleAction(l));

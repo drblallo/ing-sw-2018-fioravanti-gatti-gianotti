@@ -21,6 +21,11 @@ public enum Value {
 
 	Value(final int val) { v = val; }
 
+	/**
+	 * Get Value from int
+	 * @param value int value
+	 * @return Value value
+	 */
 	public static Value valueOf(int value) {
 		return map.get(value);
 	}

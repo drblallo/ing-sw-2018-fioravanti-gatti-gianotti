@@ -9,16 +9,29 @@ import progetto.model.PreGameState;
  */
 public class StartGameAction extends AbstractExecutibleGameAction
 {
+
+	/**
+	 * Constructor
+	 */
 	public StartGameAction() {
 		super(-1);
 	}
 
 
+	/**
+	 * Verify if action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return result of the check
+	 */
 	@Override
 	public boolean canBeExecuted(Model game) {
 		return game.getMainBoard().getData().getGameState().getClass() == PreGameState.class;
 	}
 
+	/**
+	 * Execute action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game) {
 		game.setState(new FrameSelectionState());
