@@ -17,8 +17,8 @@ public class TestWindowFrameCoupleArray {
 		Assert.assertEquals("Water of Life", windowFrameCouples.get(0).getWindowFrame(0).getName());
 		Assert.assertEquals("Firmitas", windowFrameCouples.get(11).getWindowFrame(1).getName());
 		Assert.assertEquals(4, windowFrameCouples.get(5).getWindowFrame(1).getFavorToken());
-		Assert.assertEquals(Color.YELLOW, windowFrameCouples.get(1).getWindowFrame(1).getColorBond(1, 0));
-		Assert.assertEquals(Color.YELLOW, windowFrameCouples.get(2).getWindowFrame(0).getColorBond(3, 1));
+		Assert.assertEquals(GameColor.YELLOW, windowFrameCouples.get(1).getWindowFrame(1).getColorBond(1, 0));
+		Assert.assertEquals(GameColor.YELLOW, windowFrameCouples.get(2).getWindowFrame(0).getColorBond(3, 1));
 
 	}
 

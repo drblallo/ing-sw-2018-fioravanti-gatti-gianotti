@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane fx:id="myPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.GamePaneController">
+
+<AnchorPane fx:id="myPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.GamePaneController">
     <children>
       <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -51,7 +54,14 @@
                   </Tab>
                   <Tab fx:id="roundTrack" text="Round Track">
                      <content>
-                        <fx:include fx:id="roundTrackPane" source="RoundTrackPane.fxml" />
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <fx:include fx:id="roundTrackPane" source="RoundTrackPane.fxml" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="100.0" />
+                           </padding>
+                        </VBox>
                      </content>
                   </Tab>
                 <Tab text="Action Queue ">
@@ -59,7 +69,7 @@
                         <fx:include fx:id="actionQueuePane" source="ActionQueuePane.fxml" />
                      </content>
                 </Tab>
-                  <Tab fx:id="commandLinePane" text="Command Line">
+                  <Tab fx:id="commandLine" text="Command Line">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

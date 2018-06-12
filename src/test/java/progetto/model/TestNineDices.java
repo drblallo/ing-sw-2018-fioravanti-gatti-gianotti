@@ -27,7 +27,7 @@ public class TestNineDices extends TestCase {
 	@Test
 	public void testCopyConstructor()
 	{
-		nineDices = nineDices.addDice(new Dice(Value.FOUR, Color.GREEN));
+		nineDices = nineDices.addDice(new Dice(Value.FOUR, GameColor.GREEN));
 
 		NineDices nineDices1 = new NineDices(nineDices);
 
@@ -40,15 +40,15 @@ public class TestNineDices extends TestCase {
 	@Test
 	public void testGetDice()
 	{
-		Dice dice1 = new Dice(Value.FOUR, Color.GREEN);
+		Dice dice1 = new Dice(Value.FOUR, GameColor.GREEN);
 
 		nineDices = nineDices.addDice(dice1);
 
 		Assert.assertEquals(dice1, nineDices.getDice(0));
 
-		nineDices = nineDices.addDice(new Dice(Value.THREE, Color.PURPLE));
+		nineDices = nineDices.addDice(new Dice(Value.THREE, GameColor.PURPLE));
 
-		Assert.assertEquals(Color.PURPLE, nineDices.getDice(1).getColor());
+		Assert.assertEquals(GameColor.PURPLE, nineDices.getDice(1).getGameColor());
 		Assert.assertEquals(Value.THREE, nineDices.getDice(1).getValue());
 
 	}
@@ -65,23 +65,23 @@ public class TestNineDices extends TestCase {
 	@Test
 	public void testAddDice()
 	{
-		Dice dice1 = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice1 = new Dice(Value.ONE, GameColor.YELLOW);
 		nineDices = nineDices.addDice(dice1);
 		Assert.assertEquals(dice1, nineDices.getDice(0));
 
-		Dice dice2 = new Dice(Value.THREE, Color.BLUE);
+		Dice dice2 = new Dice(Value.THREE, GameColor.BLUE);
 		nineDices = nineDices.addDice(dice2);
 		Assert.assertEquals(dice2, nineDices.getDice(1));
 
-		Dice dice3 = new Dice(Value.FIVE, Color.RED);
+		Dice dice3 = new Dice(Value.FIVE, GameColor.RED);
 		nineDices = nineDices.addDice(dice3);
 		Assert.assertEquals(dice3, nineDices.getDice(2));
 
-		Dice dice4 = new Dice(Value.TWO, Color.GREEN);
+		Dice dice4 = new Dice(Value.TWO, GameColor.GREEN);
 		nineDices = nineDices.addDice(dice4);
 		Assert.assertEquals(dice4, nineDices.getDice(3));
 
-		Dice dice5 = new Dice(Value.SIX, Color.PURPLE);
+		Dice dice5 = new Dice(Value.SIX, GameColor.PURPLE);
 		nineDices = nineDices.addDice(dice5);
 		Assert.assertEquals(dice5, nineDices.getDice(4));
 
@@ -89,14 +89,14 @@ public class TestNineDices extends TestCase {
 
 	public void testIsFree()
 	{
-		Dice dice1 = new Dice(Value.FOUR, Color.GREEN);
+		Dice dice1 = new Dice(Value.FOUR, GameColor.GREEN);
 
 		Assert.assertTrue(nineDices.isFree(0));
 
 		nineDices = nineDices.addDice(dice1);
 		Assert.assertFalse(nineDices.isFree(0));
 
-		nineDices = nineDices.addDice(new Dice(Value.THREE, Color.PURPLE));
+		nineDices = nineDices.addDice(new Dice(Value.THREE, GameColor.PURPLE));
 
 		Assert.assertFalse(nineDices.isFree(1));
 
@@ -107,22 +107,22 @@ public class TestNineDices extends TestCase {
 	{
 		Assert.assertEquals(0, nineDices.getNumberOfDices());
 
-		nineDices = nineDices.addDice(new Dice(Value.ONE, Color.YELLOW));
+		nineDices = nineDices.addDice(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(1, nineDices.getNumberOfDices());
 
-		nineDices = nineDices.addDice(new Dice(Value.ONE, Color.YELLOW));
+		nineDices = nineDices.addDice(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(2, nineDices.getNumberOfDices());
 
-		nineDices = nineDices.addDice(new Dice(Value.ONE, Color.YELLOW));
+		nineDices = nineDices.addDice(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(3, nineDices.getNumberOfDices());
 
-		nineDices = nineDices.addDice(new Dice(Value.ONE, Color.YELLOW));
+		nineDices = nineDices.addDice(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(4, nineDices.getNumberOfDices());
 
-		nineDices = nineDices.addDice(new Dice(Value.ONE, Color.YELLOW));
+		nineDices = nineDices.addDice(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(5, nineDices.getNumberOfDices());
 
-		nineDices = nineDices.addDice(new Dice(Value.ONE, Color.YELLOW));
+		nineDices = nineDices.addDice(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(6, nineDices.getNumberOfDices());
 
 	}
@@ -130,10 +130,10 @@ public class TestNineDices extends TestCase {
 	@Test
 	public void testChangeDice()
 	{
-		Dice dice1 = new Dice(Value.ONE, Color.YELLOW);
-		Dice dice2 = new Dice(Value.TWO, Color.GREEN);
-		Dice dice3 = new Dice(Value.THREE, Color.PURPLE);
-		Dice dice4 = new Dice(Value.FOUR, Color.BLUE);
+		Dice dice1 = new Dice(Value.ONE, GameColor.YELLOW);
+		Dice dice2 = new Dice(Value.TWO, GameColor.GREEN);
+		Dice dice3 = new Dice(Value.THREE, GameColor.PURPLE);
+		Dice dice4 = new Dice(Value.FOUR, GameColor.BLUE);
 
 		nineDices = nineDices.addDice(dice1);
 		nineDices = nineDices.addDice(dice2);
@@ -153,14 +153,14 @@ public class TestNineDices extends TestCase {
 	{
 		NineDices nineDices1;
 
-		nineDices1 = nineDices.changeDice(0, new Dice(Value.ONE, Color.BLUE));
+		nineDices1 = nineDices.changeDice(0, new Dice(Value.ONE, GameColor.BLUE));
 
 		Assert.assertEquals(0, nineDices1.getNumberOfDices());
 		Assert.assertEquals(nineDices, nineDices1);
 
-		nineDices = nineDices.addDice(new Dice (Value.THREE, Color.GREEN));
+		nineDices = nineDices.addDice(new Dice (Value.THREE, GameColor.GREEN));
 
-		nineDices1 = nineDices.changeDice(1, new Dice(Value.TWO, Color.PURPLE));
+		nineDices1 = nineDices.changeDice(1, new Dice(Value.TWO, GameColor.PURPLE));
 		Assert.assertEquals(1, nineDices1.getNumberOfDices());
 		Assert.assertEquals(nineDices, nineDices1);
 

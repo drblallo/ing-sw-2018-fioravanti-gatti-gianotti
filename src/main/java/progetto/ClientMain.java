@@ -20,7 +20,7 @@ public class ClientMain extends Application {
     public synchronized void start(Stage primaryStage)
     {
         primaryStage.setTitle("Client Window");
-        primaryStage.setMaximized(true);
+        primaryStage.centerOnScreen();
 
 
         ClientController controller = new ClientController();

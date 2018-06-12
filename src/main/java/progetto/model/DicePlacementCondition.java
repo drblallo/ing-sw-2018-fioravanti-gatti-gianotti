@@ -230,7 +230,7 @@ public final class DicePlacementCondition implements Serializable{
 		{
 			return true;
 		}
-		return(!(windowFrame.getColorBond(y, x)!=null && windowFrame.getColorBond(y, x)!=dice.getColor()));
+		return(!(windowFrame.getColorBond(y, x)!=null && windowFrame.getColorBond(y, x)!=dice.getGameColor()));
 	}
 
 	/**
@@ -412,7 +412,7 @@ public final class DicePlacementCondition implements Serializable{
 		{
 			return true;
 		}
-		return (!(dicePlacedFrame.getData().getDice(y, x)!=null && (dice.getColor()==dicePlacedFrame.getData().getDice(y, x).getColor())));
+		return (!(dicePlacedFrame.getData().getDice(y, x)!=null && (dice.getGameColor()==dicePlacedFrame.getData().getDice(y, x).getGameColor())));
 	}
 
 }

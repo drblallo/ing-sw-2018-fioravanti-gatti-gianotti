@@ -63,7 +63,7 @@ public class TestRNGenerator extends TestCase {
 			dice1 = rng1.extractDice(db1);
 			dice2 = rng2.extractDice(db2);
 			//System.out.println("Extracted dice: \n\tColor: " + dice1.getColor() + "\n\tValue: " + dice1.getValue());
-			Assert.assertEquals(dice1.getColor(), dice2.getColor());
+			Assert.assertEquals(dice1.getGameColor(), dice2.getGameColor());
 			Assert.assertEquals(dice1.getValue(), dice2.getValue());
 		}
 	}
@@ -76,43 +76,43 @@ public class TestRNGenerator extends TestCase {
 		Dice dice;
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.BLUE, dice.getColor());
+		Assert.assertEquals(GameColor.BLUE, dice.getGameColor());
 		Assert.assertEquals(Value.TWO, dice.getValue());
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.BLUE, dice.getColor());
+		Assert.assertEquals(GameColor.BLUE, dice.getGameColor());
 		Assert.assertEquals(Value.THREE, dice.getValue());
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 		Assert.assertEquals(Value.TWO, dice.getValue());
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.GREEN, dice.getColor());
+		Assert.assertEquals(GameColor.GREEN, dice.getGameColor());
 		Assert.assertEquals(Value.FIVE, dice.getValue());
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.BLUE, dice.getColor());
+		Assert.assertEquals(GameColor.BLUE, dice.getGameColor());
 		Assert.assertEquals(Value.TWO, dice.getValue());
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.GREEN, dice.getColor());
+		Assert.assertEquals(GameColor.GREEN, dice.getGameColor());
 		Assert.assertEquals(Value.FIVE, dice.getValue());
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 		Assert.assertEquals(Value.FIVE, dice.getValue());
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.GREEN, dice.getColor());
+		Assert.assertEquals(GameColor.GREEN, dice.getGameColor());
 		Assert.assertEquals(Value.FIVE, dice.getValue());
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.GREEN, dice.getColor());
+		Assert.assertEquals(GameColor.GREEN, dice.getGameColor());
 		Assert.assertEquals(Value.SIX, dice.getValue());
 
 		dice = rng1.extractDice(db);
-		Assert.assertEquals(Color.RED, dice.getColor());
+		Assert.assertEquals(GameColor.RED, dice.getGameColor());
 		Assert.assertEquals(Value.THREE, dice.getValue());
 
 	}
@@ -121,7 +121,7 @@ public class TestRNGenerator extends TestCase {
 	public void testRollAgain()
 	{
 		RNGenerator rng = new RNGenerator(0);
-		Dice dice = new Dice(Value.FOUR, Color.RED);
+		Dice dice = new Dice(Value.FOUR, GameColor.RED);
 
 
 		dice=rng.rollAgain(dice);

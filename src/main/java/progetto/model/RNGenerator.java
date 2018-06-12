@@ -79,7 +79,7 @@ public final class RNGenerator {
 	public Dice rollAgain(Dice dice)
 	{
 		Value value = extractValue();
-		return new Dice(value, dice.getColor());
+		return new Dice(value, dice.getGameColor());
 	}
 
 	/**

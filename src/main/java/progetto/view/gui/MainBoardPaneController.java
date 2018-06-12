@@ -13,12 +13,11 @@ public class MainBoardPaneController extends AbstractController<MainBoardData, A
     @FXML
     private Label gameState;
 
+    @FXML
+    private Label currentPlayer;
 
     @FXML
     private ExtractedDicesPaneController extractedDicesPaneController;
-
-    @FXML
-    private Label currentPlayer;
 
     @Override
     protected void onObserverReplaced() {

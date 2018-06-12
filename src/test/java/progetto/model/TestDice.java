@@ -11,121 +11,121 @@ public class TestDice extends TestCase {
 	@Test
 	public void testConstructor()
 	{
-		dice = new Dice(Value.ONE, Color.YELLOW);
+		dice = new Dice(Value.ONE, GameColor.YELLOW);
 
 		Assert.assertEquals(Value.ONE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 	}
 
 	@Test
 	public void testSetter()
 	{
-		dice = new Dice(Value.ONE, Color.YELLOW);
+		dice = new Dice(Value.ONE, GameColor.YELLOW);
 
 		dice = dice.setValue(Value.TWO);
 		Assert.assertEquals(Value.TWO, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
-		dice = dice.setColor(Color.BLUE);
-		Assert.assertEquals(Color.BLUE, dice.getColor());
+		dice = dice.setGameColor(GameColor.BLUE);
+		Assert.assertEquals(GameColor.BLUE, dice.getGameColor());
 		Assert.assertEquals(Value.TWO, dice.getValue());
 	}
 
 	@Test
 	public void testIncreaseValue()
 	{
-		dice = new Dice(Value.ONE, Color.YELLOW);
+		dice = new Dice(Value.ONE, GameColor.YELLOW);
 
 		dice = dice.increaseValue();
 		Assert.assertEquals(Value.TWO, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.increaseValue();
 		Assert.assertEquals(Value.THREE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.increaseValue();
 		Assert.assertEquals(Value.FOUR, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.increaseValue();
 		Assert.assertEquals(Value.FIVE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.increaseValue();
 		Assert.assertEquals(Value.SIX, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.increaseValue();
 		Assert.assertEquals(Value.SIX, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 	}
 
 	@Test
 	public void testDecreaseValue()
 	{
-		dice = new Dice(Value.SIX, Color.YELLOW);
+		dice = new Dice(Value.SIX, GameColor.YELLOW);
 
 		dice = dice.decreaseValue();
 		Assert.assertEquals(Value.FIVE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.decreaseValue();
 		Assert.assertEquals(Value.FOUR, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.decreaseValue();
 		Assert.assertEquals(Value.THREE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.decreaseValue();
 		Assert.assertEquals(Value.TWO, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.decreaseValue();
 		Assert.assertEquals(Value.ONE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.decreaseValue();
 		Assert.assertEquals(Value.ONE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 	}
 
 	@Test
 	public void testFlip()
 	{
-		dice = new Dice(Value.ONE, Color.YELLOW);
+		dice = new Dice(Value.ONE, GameColor.YELLOW);
 
 		dice = dice.flip();
 		Assert.assertEquals(Value.SIX, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 		dice = dice.flip();
 		Assert.assertEquals(Value.ONE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.setValue(Value.TWO);
 		dice = dice.flip();
 		Assert.assertEquals(Value.FIVE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 		dice = dice.flip();
 		Assert.assertEquals(Value.TWO, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 		dice = dice.setValue(Value.THREE);
 		dice = dice.flip();
 		Assert.assertEquals(Value.FOUR, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 		dice = dice.flip();
 		Assert.assertEquals(Value.THREE, dice.getValue());
-		Assert.assertEquals(Color.YELLOW, dice.getColor());
+		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 
 	}
 
 	@Test
 	public void testToString()
 	{
-		Dice dice = new Dice(Value.TWO, Color.RED);
-		Assert.assertEquals(dice.getValue()+" "+dice.getColor(), dice.toString());
+		Dice dice = new Dice(Value.TWO, GameColor.RED);
+		Assert.assertEquals(dice.getValue()+" "+dice.getGameColor(), dice.toString());
 
 	}
 

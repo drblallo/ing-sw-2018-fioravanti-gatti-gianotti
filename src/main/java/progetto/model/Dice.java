@@ -7,17 +7,17 @@ import java.io.Serializable;
  */
 public final class Dice implements Serializable {
 	private final Value value;
-	private final Color color;
+	private final GameColor gameColor;
 
 	/**
 	 * Constructor
 	 * @param value
-	 * @param color
+	 * @param gameColor
 	 */
-	Dice(Value value, Color color)
+	Dice(Value value, GameColor gameColor)
 	{
 		this.value = value;
-		this.color = color;
+		this.gameColor = gameColor;
 	}
 
 	/**
@@ -33,9 +33,9 @@ public final class Dice implements Serializable {
 	 * Get color
 	 * @return color
 	 */
-	public Color getColor()
+	public GameColor getGameColor()
 	{
-		return color;
+		return gameColor;
 	}
 
 	/**
@@ -45,17 +45,17 @@ public final class Dice implements Serializable {
 	 */
 	public Dice setValue(Value newValue)
 	{
-		return new Dice(newValue, color);
+		return new Dice(newValue, gameColor);
 	}
 
 	/**
 	 * Set color
-	 * @param newColor
+	 * @param newGameColor
 	 * @return a new Dice with newColor as Color, same Value
 	 */
-	public Dice setColor(Color newColor)
+	public Dice setGameColor(GameColor newGameColor)
 	{
-		return new Dice(value, newColor);
+		return new Dice(value, newGameColor);
 	}
 
 	/**
@@ -68,19 +68,19 @@ public final class Dice implements Serializable {
 		switch (value)
 		{
 			case ONE:
-				dice = new Dice(Value.TWO, color);
+				dice = new Dice(Value.TWO, gameColor);
 				break;
 			case TWO:
-				dice = new Dice(Value.THREE, color);
+				dice = new Dice(Value.THREE, gameColor);
 				break;
 			case THREE:
-				dice = new Dice(Value.FOUR, color);
+				dice = new Dice(Value.FOUR, gameColor);
 				break;
 			case FOUR:
-				dice = new Dice(Value.FIVE, color);
+				dice = new Dice(Value.FIVE, gameColor);
 				break;
 			case FIVE:
-				dice = new Dice(Value.SIX, color);
+				dice = new Dice(Value.SIX, gameColor);
 				break;
 			case SIX:
 				break;
@@ -98,19 +98,19 @@ public final class Dice implements Serializable {
 		switch (value)
 		{
 			case SIX:
-				dice = new Dice(Value.FIVE, color);
+				dice = new Dice(Value.FIVE, gameColor);
 				break;
 			case FIVE:
-				dice = new Dice(Value.FOUR, color);
+				dice = new Dice(Value.FOUR, gameColor);
 				break;
 			case FOUR:
-				dice = new Dice(Value.THREE, color);
+				dice = new Dice(Value.THREE, gameColor);
 				break;
 			case THREE:
-				dice = new Dice(Value.TWO, color);
+				dice = new Dice(Value.TWO, gameColor);
 				break;
 			case TWO:
-				dice = new Dice(Value.ONE, color);
+				dice = new Dice(Value.ONE, gameColor);
 				break;
 			case ONE:
 				break;
@@ -128,22 +128,22 @@ public final class Dice implements Serializable {
 		switch (value)
 		{
 			case ONE:
-				dice = new Dice(Value.SIX, color);
+				dice = new Dice(Value.SIX, gameColor);
 				break;
 			case TWO:
-				dice = new Dice(Value.FIVE, color);
+				dice = new Dice(Value.FIVE, gameColor);
 				break;
 			case THREE:
-				dice = new Dice(Value.FOUR, color);
+				dice = new Dice(Value.FOUR, gameColor);
 				break;
 			case FOUR:
-				dice = new Dice(Value.THREE, color);
+				dice = new Dice(Value.THREE, gameColor);
 				break;
 			case FIVE:
-				dice = new Dice(Value.TWO, color);
+				dice = new Dice(Value.TWO, gameColor);
 				break;
 			case SIX:
-				dice = new Dice(Value.ONE, color);
+				dice = new Dice(Value.ONE, gameColor);
 				break;
 		}
 		return dice;
@@ -155,7 +155,7 @@ public final class Dice implements Serializable {
 	 */
 	public String toString(){
 
-		return getValue().toString() + " " + getColor().toString();
+		return getValue().toString() + " " + getGameColor().toString();
 
 	}
 

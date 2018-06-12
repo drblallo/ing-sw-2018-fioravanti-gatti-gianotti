@@ -31,8 +31,8 @@ public class TestDicePlacedFrame extends TestCase {
 	@Test
 	public void testGetDice()
 	{
-		Dice dice1 = new Dice(Value.FOUR, Color.GREEN);
-		Dice dice2 = new Dice (Value.TWO, Color.RED);
+		Dice dice1 = new Dice(Value.FOUR, GameColor.GREEN);
+		Dice dice2 = new Dice (Value.TWO, GameColor.RED);
 
 		dicePlacedFrame.addDice(dice1, 1, 2);
 		Assert.assertEquals(dice1, dicePlacedFrame.getData().getDice(1, 2));
@@ -60,9 +60,9 @@ public class TestDicePlacedFrame extends TestCase {
 	@Test
 	public void testAddDice()
 	{
-		Dice dice1 = new Dice(Value.FOUR, Color.GREEN);
-		Dice dice2 = new Dice (Value.TWO, Color.RED);
-		Dice dice3 = new Dice(Value.SIX, Color.PURPLE);
+		Dice dice1 = new Dice(Value.FOUR, GameColor.GREEN);
+		Dice dice2 = new Dice (Value.TWO, GameColor.RED);
+		Dice dice3 = new Dice(Value.SIX, GameColor.PURPLE);
 
 		dicePlacedFrame.addDice(dice1, 2, 2);
 		Assert.assertEquals(1, dicePlacedFrame.getData().getNDices());
@@ -108,9 +108,9 @@ public class TestDicePlacedFrame extends TestCase {
 	@Test
 	public void testAddDiceFail()
 	{
-		Dice dice1 = new Dice(Value.FOUR, Color.GREEN);
-		Dice dice2 = new Dice (Value.TWO, Color.RED);
-		Dice dice3 = new Dice(Value.SIX, Color.PURPLE);
+		Dice dice1 = new Dice(Value.FOUR, GameColor.GREEN);
+		Dice dice2 = new Dice (Value.TWO, GameColor.RED);
+		Dice dice3 = new Dice(Value.SIX, GameColor.PURPLE);
 
 		dicePlacedFrame.addDice(dice1, 3, 4);
 
@@ -133,9 +133,9 @@ public class TestDicePlacedFrame extends TestCase {
 	@Test
 	public void testRemove()
 	{
-		Dice dice1 = new Dice(Value.FOUR, Color.GREEN);
-		Dice dice2 = new Dice (Value.TWO, Color.RED);
-		Dice dice3 = new Dice(Value.SIX, Color.PURPLE);
+		Dice dice1 = new Dice(Value.FOUR, GameColor.GREEN);
+		Dice dice2 = new Dice (Value.TWO, GameColor.RED);
+		Dice dice3 = new Dice(Value.SIX, GameColor.PURPLE);
 
 		dicePlacedFrame.addDice(dice1, 2, 2);
 
@@ -163,7 +163,7 @@ public class TestDicePlacedFrame extends TestCase {
 	@Test
 	public void testRemoveFail()
 	{
-		Dice dice1 = new Dice(Value.FOUR, Color.GREEN);
+		Dice dice1 = new Dice(Value.FOUR, GameColor.GREEN);
 
 		dicePlacedFrame.addDice(dice1, 2, 2);
 

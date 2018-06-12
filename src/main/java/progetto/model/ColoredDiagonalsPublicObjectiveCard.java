@@ -48,7 +48,7 @@ public class ColoredDiagonalsPublicObjectiveCard extends AbstractPublicObjective
 	 */
 	private void checkDices(Dice dice1, Dice dice2)
 	{
-		if(dice1!=null && dice2!=null && dice1.getColor()==dice2.getColor())
+		if(dice1!=null && dice2!=null && dice1.getGameColor()==dice2.getGameColor())
 		{
 			if(!dices.contains(dice1))
 			{

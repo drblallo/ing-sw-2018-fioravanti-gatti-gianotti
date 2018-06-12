@@ -20,13 +20,13 @@ public class TestRowsDifferentValues {
 
 		RowsDifferentValuesPublicObjectiveCard rowsDifferentValuesPublicObjectiveCard = new RowsDifferentValuesPublicObjectiveCard();
 
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.YELLOW), 0, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.PURPLE), 2, 2);
-		dicePlacedFrame.addDice(new Dice(Value.ONE, Color.PURPLE), 3, 0);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.YELLOW), 3, 1);
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.GREEN), 3, 2);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.BLUE), 3, 3);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.RED), 3, 4);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.YELLOW), 0, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.PURPLE), 2, 2);
+		dicePlacedFrame.addDice(new Dice(Value.ONE, GameColor.PURPLE), 3, 0);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.YELLOW), 3, 1);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.GREEN), 3, 2);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.BLUE), 3, 3);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.RED), 3, 4);
 
 		Assert.assertEquals(5, rowsDifferentValuesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 
@@ -38,20 +38,20 @@ public class TestRowsDifferentValues {
 
 		RowsDifferentValuesPublicObjectiveCard rowsDifferentValuesPublicObjectiveCard = new RowsDifferentValuesPublicObjectiveCard();
 
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.YELLOW), 0, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.PURPLE), 2, 2);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.YELLOW), 0, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.PURPLE), 2, 2);
 
-		dicePlacedFrame.addDice(new Dice(Value.ONE, Color.PURPLE), 3, 0);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.YELLOW), 3, 1);
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.GREEN), 3, 2);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.BLUE), 3, 3);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.RED), 3, 4);
+		dicePlacedFrame.addDice(new Dice(Value.ONE, GameColor.PURPLE), 3, 0);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.YELLOW), 3, 1);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.GREEN), 3, 2);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.BLUE), 3, 3);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.RED), 3, 4);
 
-		dicePlacedFrame.addDice(new Dice(Value.SIX, Color.PURPLE), 1, 0);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.YELLOW), 1, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.GREEN), 1, 2);
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.BLUE), 1, 3);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.RED), 1, 4);
+		dicePlacedFrame.addDice(new Dice(Value.SIX, GameColor.PURPLE), 1, 0);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.YELLOW), 1, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.GREEN), 1, 2);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.BLUE), 1, 3);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.RED), 1, 4);
 
 		Assert.assertEquals(10, rowsDifferentValuesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 
@@ -63,12 +63,12 @@ public class TestRowsDifferentValues {
 
 		RowsDifferentValuesPublicObjectiveCard rowsDifferentValuesPublicObjectiveCard = new RowsDifferentValuesPublicObjectiveCard();
 
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.YELLOW), 0, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.PURPLE), 2, 2);
-		dicePlacedFrame.addDice(new Dice(Value.ONE, Color.PURPLE), 3, 1);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.GREEN), 3, 2);
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.BLUE), 3, 3);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.RED), 3, 4);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.YELLOW), 0, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.PURPLE), 2, 2);
+		dicePlacedFrame.addDice(new Dice(Value.ONE, GameColor.PURPLE), 3, 1);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.GREEN), 3, 2);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.BLUE), 3, 3);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.RED), 3, 4);
 
 		Assert.assertEquals(0, rowsDifferentValuesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 
@@ -80,14 +80,14 @@ public class TestRowsDifferentValues {
 
 		RowsDifferentValuesPublicObjectiveCard rowsDifferentValuesPublicObjectiveCard = new RowsDifferentValuesPublicObjectiveCard();
 
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.YELLOW), 0, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.PURPLE), 2, 2);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.YELLOW), 0, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.PURPLE), 2, 2);
 
-		dicePlacedFrame.addDice(new Dice(Value.ONE, Color.PURPLE), 3, 0);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.YELLOW), 3, 1);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.GREEN), 3, 2);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.BLUE), 3, 3);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.RED), 3, 4);
+		dicePlacedFrame.addDice(new Dice(Value.ONE, GameColor.PURPLE), 3, 0);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.YELLOW), 3, 1);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.GREEN), 3, 2);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.BLUE), 3, 3);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.RED), 3, 4);
 
 		Assert.assertEquals(0, rowsDifferentValuesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 

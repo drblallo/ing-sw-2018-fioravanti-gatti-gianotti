@@ -105,7 +105,7 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 	private boolean verifyPos(Model game, Dice dice, int yPos, int xPos)
 	{
 		Dice dice1 = game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(yPos, xPos);
-		return dice != null && dice1 != null && dice.getColor() == dice1.getColor();
+		return dice != null && dice1 != null && dice.getGameColor() == dice1.getGameColor();
 
 	}
 

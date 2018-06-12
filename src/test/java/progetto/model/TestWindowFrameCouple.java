@@ -34,7 +34,7 @@ public class TestWindowFrameCouple extends TestCase {
 		windowFrameCouple = windowFrameCouples.get(2);
 
 		Assert.assertEquals(null, windowFrameCouple.getWindowFrame(0).getColorBond(0,0));
-		Assert.assertEquals(Color.BLUE, windowFrameCouple.getWindowFrame(0).getColorBond(3,0));
+		Assert.assertEquals(GameColor.BLUE, windowFrameCouple.getWindowFrame(0).getColorBond(3,0));
 		Assert.assertEquals(Value.ONE, windowFrameCouple.getWindowFrame(0).getValueBond(2,4));
 		Assert.assertEquals(null, windowFrameCouple.getWindowFrame(0).getValueBond(1,1));
 		Assert.assertEquals(null, windowFrameCouple.getWindowFrame(0).getColorBond(1,1));
@@ -45,7 +45,7 @@ public class TestWindowFrameCouple extends TestCase {
 
 
 		Assert.assertEquals(null, windowFrameCouple.getWindowFrame(1).getColorBond(0,0));
-		Assert.assertEquals(Color.YELLOW, windowFrameCouple.getWindowFrame(1).getColorBond(3,0));
+		Assert.assertEquals(GameColor.YELLOW, windowFrameCouple.getWindowFrame(1).getColorBond(3,0));
 		Assert.assertEquals(Value.SIX, windowFrameCouple.getWindowFrame(1).getValueBond(2,4));
 		Assert.assertEquals(null, windowFrameCouple.getWindowFrame(1).getValueBond(1,1));
 		Assert.assertEquals(null, windowFrameCouple.getWindowFrame(1).getColorBond(1,1));

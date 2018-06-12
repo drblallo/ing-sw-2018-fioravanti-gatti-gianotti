@@ -104,7 +104,7 @@ public abstract class AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCar
 			{
 				if(dice[j]==null || dice[z]==null||
 						(valuesColors && dice[z].getValue()==dice[j].getValue()) ||
-						(!valuesColors && dice[z].getColor()==dice[j].getColor()))
+						(!valuesColors && dice[z].getGameColor()==dice[j].getGameColor()))
 				{
 					return false;
 				}
@@ -133,7 +133,7 @@ public abstract class AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCar
 			{
 				if(dice[j]==null || dice[z]==null||
 						(valuesColors && dice[z].getValue()==dice[j].getValue()) ||
-						(!valuesColors && dice[z].getColor()==dice[j].getColor()))
+						(!valuesColors && dice[z].getGameColor()==dice[j].getGameColor()))
 				{
 					return false;
 				}

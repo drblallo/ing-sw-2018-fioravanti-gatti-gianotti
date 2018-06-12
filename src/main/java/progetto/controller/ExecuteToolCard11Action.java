@@ -75,7 +75,7 @@ public class ExecuteToolCard11Action extends AbstractExecutibleGameAction{
 
 		Dice dice = dicePlacementCondition.getDice();
 
-		game.getDiceBag().add(dice.getColor());
+		game.getDiceBag().add(dice.getGameColor());
 
 		dice = game.getRNGenerator().extractDice(game.getDiceBag());
 

@@ -11,7 +11,7 @@ public final class WindowFrame implements Serializable {
 	private static final int MAX_NUMBER_OF_COLUMNS = 5;
 
 	private final Value[][] valueLimitationMatrix = new Value[MAX_NUMBER_OF_ROWS][MAX_NUMBER_OF_COLUMNS];
-	private final Color[][] colorLimitationMatrix = new Color[MAX_NUMBER_OF_ROWS][MAX_NUMBER_OF_COLUMNS];
+	private final GameColor[][] colorLimitationMatrix = new GameColor[MAX_NUMBER_OF_ROWS][MAX_NUMBER_OF_COLUMNS];
 	private final int favorToken;
 	private final String name;
 
@@ -48,7 +48,7 @@ public final class WindowFrame implements Serializable {
 	 * @param y pos vertical
 	 * @return Color bond of the card in the selected position
 	 */
-	public Color getColorBond(int y, int x)
+	public GameColor getColorBond(int y, int x)
 	{
 		return colorLimitationMatrix[y][x];
 	}

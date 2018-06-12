@@ -28,16 +28,16 @@ public class TestPlayerBoard extends TestCase
 	{
 		Assert.assertEquals(0, playerBoard.getNPickedDices());
 
-		playerBoard.addDiceToPickedSlot(new Dice(Value.ONE, Color.YELLOW));
+		playerBoard.addDiceToPickedSlot(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(1, playerBoard.getNPickedDices());
 
-		playerBoard.addDiceToPickedSlot(new Dice(Value.ONE, Color.YELLOW));
+		playerBoard.addDiceToPickedSlot(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(2, playerBoard.getNPickedDices());
 
-		playerBoard.addDiceToPickedSlot(new Dice(Value.ONE, Color.YELLOW));
+		playerBoard.addDiceToPickedSlot(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(3, playerBoard.getNPickedDices());
 
-		playerBoard.addDiceToPickedSlot(new Dice(Value.ONE, Color.YELLOW));
+		playerBoard.addDiceToPickedSlot(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertEquals(4, playerBoard.getNPickedDices());
 
 		playerBoard.getPickedDicesSlot().remove(0);
@@ -68,16 +68,16 @@ public class TestPlayerBoard extends TestCase
 	public void testNPlacedDices() {
 		Assert.assertEquals(0, playerBoard.getNDicesPlaced());
 
-		playerBoard.addDiceInPlacedFrame(new Dice(Value.ONE, Color.YELLOW), 0, 0);
+		playerBoard.addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
 		Assert.assertEquals(1, playerBoard.getNDicesPlaced());
 
-		playerBoard.addDiceInPlacedFrame(new Dice(Value.ONE, Color.YELLOW), 0, 1);
+		playerBoard.addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 1);
 		Assert.assertEquals(2, playerBoard.getNDicesPlaced());
 
-		playerBoard.addDiceInPlacedFrame(new Dice(Value.ONE, Color.YELLOW), 0, 2);
+		playerBoard.addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 2);
 		Assert.assertEquals(3, playerBoard.getNDicesPlaced());
 
-		playerBoard.addDiceInPlacedFrame(new Dice(Value.ONE, Color.YELLOW), 2, 2);
+		playerBoard.addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 2, 2);
 		Assert.assertEquals(4, playerBoard.getNDicesPlaced());
 
 		playerBoard.getDicePlacedFrame().removeDice(0, 0);
@@ -122,7 +122,7 @@ public class TestPlayerBoard extends TestCase
 	@Test
 	public void testGetRemovePlacedDice()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 		playerBoard.addDiceInPlacedFrame(dice, 0, 0);
 
 		Assert.assertEquals(dice, playerBoard.getDiceFromPlacedFrame(0, 0));
@@ -133,7 +133,7 @@ public class TestPlayerBoard extends TestCase
 	@Test
 	public void testAddRemoveDicePlacedFrame()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 
 		playerBoard.addDiceInPlacedFrame(dice, 0, 0);
 

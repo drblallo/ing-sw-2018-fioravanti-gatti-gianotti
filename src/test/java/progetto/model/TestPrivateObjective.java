@@ -12,15 +12,15 @@ public class TestPrivateObjective {
 	public void setUp()
 	{
 		dicePlacedFrame = new DicePlacedFrame();
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.YELLOW), 0, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.PURPLE), 2, 2);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.PURPLE), 3, 4);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.YELLOW), 0, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.PURPLE), 2, 2);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.PURPLE), 3, 4);
 	}
 
 	@Test
 	public void testPurpleShades()
 	{
-		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(Color.PURPLE);
+		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(GameColor.PURPLE);
 		Assert.assertEquals("Sfumature Viola Somma dei valori su tutti i dadi Viola" , colorShadesPrivateObjectiveCard.getToolTip());
 		Assert.assertEquals(9, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
@@ -28,28 +28,28 @@ public class TestPrivateObjective {
 	@Test
 	public void testYellowShades()
 	{
-		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(Color.YELLOW);
+		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(GameColor.YELLOW);
 		Assert.assertEquals(3, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
 	@Test
 	public void testBlueShades()
 	{
-		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(Color.BLUE);
+		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(GameColor.BLUE);
 		Assert.assertEquals(0, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
 	@Test
 	public void testRedShades()
 	{
-		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(Color.RED);
+		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(GameColor.RED);
 		Assert.assertEquals(0, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
 	@Test
 	public void testGreenShades()
 	{
-		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(Color.GREEN);
+		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(GameColor.GREEN);
 		Assert.assertEquals(0, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 

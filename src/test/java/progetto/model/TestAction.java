@@ -162,7 +162,7 @@ public class TestAction {
 		Assert.assertFalse(p.canBeExecuted(game.getModel()));
 		game.getModel().setState(new RoundState());
 		Assert.assertFalse(p.canBeExecuted(game.getModel()));
-		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.ONE, Color.YELLOW));
+		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.ONE, GameColor.YELLOW));
 		Assert.assertTrue(p.canBeExecuted(game.getModel()));
 		p = new PickDiceAction(1, 0);
 		Assert.assertFalse(p.canBeExecuted(game.getModel()));
@@ -179,7 +179,7 @@ public class TestAction {
 		Assert.assertFalse(p.canBeExecuted(game.getModel()));
 		game.getModel().setState(new RoundState());
 		Assert.assertFalse(p.canBeExecuted(game.getModel()));
-		game.getModel().getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.FOUR, Color.YELLOW), true, true, true);
+		game.getModel().getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.FOUR, GameColor.YELLOW), true, true, true);
 		Assert.assertTrue(p.canBeExecuted(game.getModel()));
 		game.sendAction(p);
 		game.processAction();
@@ -288,13 +288,13 @@ public class TestAction {
 
 		game.sendAction(new PickDiceAction(3, 0));
 		game.processAction();
-		Assert.assertEquals(Color.YELLOW, game.getModel().getPlayerBoard(3).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getColor());
+		Assert.assertEquals(GameColor.YELLOW, game.getModel().getPlayerBoard(3).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getGameColor());
 		Assert.assertEquals(Value.THREE, game.getModel().getPlayerBoard(3).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getValue());
 
 		game.sendAction(new PlaceDiceAction(3, 0, 1, 0));
 		game.processAction();
 		Assert.assertEquals(1, game.getModel().getPlayerBoard(3).getDicePlacedFrame().getData().getNDices());
-		Assert.assertEquals(Color.YELLOW, game.getModel().getPlayerBoard(3).getDicePlacedFrame().getData().getDice(1, 0).getColor());
+		Assert.assertEquals(GameColor.YELLOW, game.getModel().getPlayerBoard(3).getDicePlacedFrame().getData().getDice(1, 0).getGameColor());
 		Assert.assertEquals(Value.THREE, game.getModel().getPlayerBoard(3).getDicePlacedFrame().getData().getDice(1, 0).getValue());
 
 	}

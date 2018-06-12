@@ -26,7 +26,7 @@ public class TestWindowFrame extends TestCase {
 		windowFrame = windowFrameCouples.get(2).getWindowFrame(0);
 
 		Assert.assertEquals(null, windowFrame.getColorBond(0,0));
-		Assert.assertEquals(Color.BLUE, windowFrame.getColorBond(3,0));
+		Assert.assertEquals(GameColor.BLUE, windowFrame.getColorBond(3,0));
 		Assert.assertEquals(Value.ONE, windowFrame.getValueBond(2,4));
 		Assert.assertEquals(null, windowFrame.getValueBond(1,1));
 		Assert.assertEquals(null, windowFrame.getColorBond(1,1));

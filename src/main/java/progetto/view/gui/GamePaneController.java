@@ -38,10 +38,10 @@ public class GamePaneController extends AbstractStateController{
     private ActionQueuePaneController actionQueuePaneController;
 
     @FXML
-    private RoundTrackPaneController roundTrackPaneController;
+    private CommandLinePaneController commandLinePaneController;
 
     @FXML
-    private CommandLinePaneController commandLinePaneController;
+    private RoundTrackPaneController roundTrackPaneController;
 
     private PlayerBoardPaneController[] playerBoardPaneControllers =
             new PlayerBoardPaneController[MainBoardData.MAX_NUM_PLAYERS];
@@ -75,6 +75,8 @@ public class GamePaneController extends AbstractStateController{
         actionQueuePaneController.setObservable(game.getCommandQueue());
 
         roundTrackPaneController.setObservable(game.getRoundTrack());
+        roundTrackPaneController.setup();
+
 
         update();
 
@@ -121,7 +123,8 @@ public class GamePaneController extends AbstractStateController{
         }
 
         playerBoardPaneControllers[i] = fxmlLoader.getController();
-        playerBoardPaneControllers[i].setObservable(game.getPlayerBoard(i));
+        playerBoardPaneControllers[i].setObservers
+                (game.getPlayerBoard(i).getDicePlacedFrame(), game.getPlayerBoard(i));
 
         gridPane.add(pane, i/2, i%2);
 

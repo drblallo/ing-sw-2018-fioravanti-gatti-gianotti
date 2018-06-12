@@ -11,7 +11,7 @@ public final class DiceBag{
 
 	private static final int NUMBER_OF_DICES_PER_COLOR = 18;
 
-	private final ArrayList<Color> dices = new ArrayList<>();
+	private final ArrayList<GameColor> dices = new ArrayList<>();
 
 	private static final Logger LOGGER = Logger.getLogger(DiceBag.class.getName());
 
@@ -22,23 +22,23 @@ public final class DiceBag{
 	{
 		for(int i=0; i<NUMBER_OF_DICES_PER_COLOR; i++)
 		{
-			dices.add(Color.YELLOW);
+			dices.add(GameColor.YELLOW);
 		}
 		for(int i=0; i<NUMBER_OF_DICES_PER_COLOR; i++)
 		{
-			dices.add(Color.RED);
+			dices.add(GameColor.RED);
 		}
 		for(int i=0; i<NUMBER_OF_DICES_PER_COLOR; i++)
 		{
-			dices.add(Color.BLUE);
+			dices.add(GameColor.BLUE);
 		}
 		for(int i=0; i<NUMBER_OF_DICES_PER_COLOR; i++)
 		{
-			dices.add(Color.GREEN);
+			dices.add(GameColor.GREEN);
 		}
 		for(int i=0; i<NUMBER_OF_DICES_PER_COLOR; i++)
 		{
-			dices.add(Color.PURPLE);
+			dices.add(GameColor.PURPLE);
 		}
 	}
 
@@ -47,7 +47,7 @@ public final class DiceBag{
 	 * @param index position of the color to return
 	 * @return the color of the dice in position index and remove it
 	 */
-	Color draw(int index)
+	GameColor draw(int index)
 	{
 		try
 		{
@@ -62,11 +62,11 @@ public final class DiceBag{
 
 	/**
 	 * Add a dice to the bag (with Color color)
-	 * @param color
+	 * @param gameColor
 	 */
-	public void add(Color color)
+	public void add(GameColor gameColor)
 	{
-		dices.add(color);
+		dices.add(gameColor);
 	}
 
 	/**

@@ -48,7 +48,7 @@ public class ToolCardSetSinglePlayerDiceAction extends AbstractExecutibleGameAct
 
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
 		int nCard = map.get("nCard");
-		Color color = game.getMainBoard().getData().getToolCards().get(nCard).getColor();
+		GameColor gameColor = game.getMainBoard().getData().getToolCards().get(nCard).getGameColor();
 
 		Dice dice = game.getMainBoard().getExtractedDices().getData().getDice(nDice);
 		if(dice == null)
@@ -56,7 +56,7 @@ public class ToolCardSetSinglePlayerDiceAction extends AbstractExecutibleGameAct
 			return false;
 		}
 
-		return dice.getColor() == color;
+		return dice.getGameColor() == gameColor;
 
 	}
 

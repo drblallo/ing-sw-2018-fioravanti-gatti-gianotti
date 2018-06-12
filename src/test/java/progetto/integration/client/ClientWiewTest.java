@@ -82,7 +82,7 @@ public class ClientWiewTest extends ApplicationTest {
         clickOn("#sitButton");
         clickOn("#messageToSend");
         write("Hi\n");
-        clickOn("#commandLinePane");
+        clickOn("#commandLine");
         clickOn("#commandText");
         write("");
         clickOn("#sendButton");
@@ -97,12 +97,13 @@ public class ClientWiewTest extends ApplicationTest {
         write("PlaceDiceAction 0 0 3 4\n");
         clickOn("#otherPlayers");
         timoty.wait(1000);
-        clickOn("#commandLinePane");
+        clickOn("#commandLine");
         clickOn("#commandText");
         write("EndTurnAction 0\n");
         write("EndTurnAction 0\n");
         write("EndTurnAction 0\n");
         clickOn("#roundTrack");
+        moveTo("#round11");
         clickOn("#backButton");
         clickOn("#continueButton");
         clickOn("#backButton");

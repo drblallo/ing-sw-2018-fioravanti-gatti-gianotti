@@ -5,16 +5,16 @@ package progetto.model;
  */
 public class ColorShadesPrivateObjectiveCard extends AbstractPrivateObjectiveCard {
 
-	private Color color;
+	private GameColor gameColor;
 
 	/**
 	 * Constructor
-	 * @param color
+	 * @param gameColor
 	 */
-	ColorShadesPrivateObjectiveCard(Color color)
+	ColorShadesPrivateObjectiveCard(GameColor gameColor)
 	{
-		super("Sfumature " + color.toString(), "Somma dei valori su tutti i dadi " + color.toString());
-		this.color = color;
+		super("Sfumature " + gameColor.toString(), "Somma dei valori su tutti i dadi " + gameColor.toString());
+		this.gameColor = gameColor;
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class ColorShadesPrivateObjectiveCard extends AbstractPrivateObjectiveCar
 			for(int j=0; j<MAX_NUMBER_OF_COLUMNS; j++)
 			{
 				dice = dicePlacedFrameData.getDice(i, j);
-				if(dice!=null && dice.getColor() == color)
+				if(dice!=null && dice.getGameColor() == gameColor)
 				{
 					result = result + dice.getValue().ordinal()+1;
 				}

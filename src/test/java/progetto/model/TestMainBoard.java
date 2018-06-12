@@ -144,10 +144,10 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testGetSetExtractedDices()
 	{
-		Dice dice1 = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice1 = new Dice(Value.ONE, GameColor.YELLOW);
 		mainBoard.getExtractedDices().addDice(dice1);
 
-		Dice dice2 = new Dice(Value.TWO, Color.BLUE);
+		Dice dice2 = new Dice(Value.TWO, GameColor.BLUE);
 		mainBoard.getExtractedDices().addDice(dice2);
 
 		Assert.assertEquals(dice1, mainBoard.getExtractedDices().getData().getDice(0));
@@ -155,7 +155,7 @@ public class TestMainBoard extends TestCase {
 
 		Assert.assertEquals(2, mainBoard.getExtractedDices().getData().getNumberOfDices());
 
-		Dice dice3 = new Dice(Value.THREE, Color.GREEN);
+		Dice dice3 = new Dice(Value.THREE, GameColor.GREEN);
 
 		mainBoard.getExtractedDices().changeDice(1, dice3);
 
@@ -168,7 +168,7 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testNCallToolCards()
 	{
-		mainBoard.addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", Color.PURPLE ,1));
+		mainBoard.addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1));
 		Assert.assertEquals(0, (int)mainBoard.getData().getNCallToolCard(0));
 
 		mainBoard.incNCallToolCard(0);
@@ -178,7 +178,7 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testToolCards()
 	{
-		mainBoard.addToolCard(new ToolCard("", "", Color.YELLOW, 1));
+		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1));
 		Assert.assertEquals(1, mainBoard.getData().getToolCards().size());
 
 		mainBoard.removeToolCard(0);
@@ -189,7 +189,7 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testNCallToolCardFail()
 	{
-		mainBoard.addToolCard(new ToolCard("", "", Color.YELLOW, 1));
+		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1));
 
 		mainBoard.incNCallToolCard(-1);
 

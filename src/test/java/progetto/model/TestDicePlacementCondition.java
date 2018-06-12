@@ -4,7 +4,6 @@ import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.testfx.assertions.api.ColorAssert;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testGetSet()
 	{
-		Dice dice = new Dice(Value.FOUR, Color.GREEN);
+		Dice dice = new Dice(Value.FOUR, GameColor.GREEN);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, true, false);
 
 		Assert.assertEquals(dice, dicePlacementCondition.getDice());
@@ -46,7 +45,7 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionNearEdge()
 	{
-		Dice dice = new Dice(Value.FOUR, Color.GREEN);
+		Dice dice = new Dice(Value.FOUR, GameColor.GREEN);
 
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
@@ -58,7 +57,7 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionValueBondRespected()
 	{
-		Dice dice = new Dice(Value.FOUR, Color.GREEN);
+		Dice dice = new Dice(Value.FOUR, GameColor.GREEN);
 
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
@@ -70,7 +69,7 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionColorBondRespected()
 	{
-		Dice dice = new Dice(Value.FOUR, Color.GREEN);
+		Dice dice = new Dice(Value.FOUR, GameColor.GREEN);
 
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
@@ -82,11 +81,11 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionAdjacentBondRespected()
 	{
-		Dice dice = new Dice(Value.FOUR, Color.GREEN);
+		Dice dice = new Dice(Value.FOUR, GameColor.GREEN);
 
 		playerBoard.addDiceInPlacedFrame(dice, 0, 1);
 
-		dice = new Dice(Value.ONE, Color.YELLOW);
+		dice = new Dice(Value.ONE, GameColor.YELLOW);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
 		//Adjacent bond respected
@@ -97,7 +96,7 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionFailDiceNotNearEdge()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
@@ -109,7 +108,7 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionFailValueBondNotRespected()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
@@ -121,7 +120,7 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionFailColorBondNotRespected()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
@@ -133,7 +132,7 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionFailAdjacentBondNotRespected()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
@@ -149,7 +148,7 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionFailWrongPosition()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 
 		Assert.assertFalse(dicePlacementCondition.canBePlaced(5, 5, playerBoard));
@@ -159,9 +158,9 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionSameColorNear()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
-		dice = new Dice(Value.TWO, Color.YELLOW);
+		dice = new Dice(Value.TWO, GameColor.YELLOW);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 		Assert.assertFalse(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
 
@@ -170,9 +169,9 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionSameValueNear()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
-		dice = new Dice(Value.ONE, Color.BLUE);
+		dice = new Dice(Value.ONE, GameColor.BLUE);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, false);
 		Assert.assertFalse(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
 
@@ -181,9 +180,9 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionIgnoreColorBond()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
-		dice = new Dice(Value.TWO, Color.YELLOW);
+		dice = new Dice(Value.TWO, GameColor.YELLOW);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, true, false, false);
 		Assert.assertTrue(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
 
@@ -192,9 +191,9 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionIgnoreValueBond()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
-		dice = new Dice(Value.ONE, Color.BLUE);
+		dice = new Dice(Value.ONE, GameColor.BLUE);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, true, false);
 		Assert.assertTrue(dicePlacementCondition.canBePlaced(1, 1, playerBoard));
 
@@ -203,9 +202,9 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionIgnoreAdjacentBond()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
-		dice = new Dice(Value.TWO, Color.BLUE);
+		dice = new Dice(Value.TWO, GameColor.BLUE);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, false, false, true);
 		Assert.assertTrue(dicePlacementCondition.canBePlaced(3, 4, playerBoard));
 
@@ -214,9 +213,9 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testPlacementConditionFailTwoDiceSamePosition()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
 		playerBoard.getDicePlacedFrame().addDice(dice, 0, 1);
-		dice = new Dice(Value.TWO, Color.BLUE);
+		dice = new Dice(Value.TWO, GameColor.BLUE);
 		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(dice, true, true, true);
 		Assert.assertFalse(dicePlacementCondition.canBePlaced(0, 1, playerBoard));
 
@@ -225,11 +224,11 @@ public class TestDicePlacementCondition extends TestCase {
 	@Test
 	public void testChangeDice()
 	{
-		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(new Dice(Value.THREE, Color.PURPLE));
-		dicePlacementCondition = dicePlacementCondition.changeDice(new Dice(Value.TWO, Color.RED));
+		DicePlacementCondition dicePlacementCondition = new DicePlacementCondition(new Dice(Value.THREE, GameColor.PURPLE));
+		dicePlacementCondition = dicePlacementCondition.changeDice(new Dice(Value.TWO, GameColor.RED));
 
 		Assert.assertEquals(Value.TWO, dicePlacementCondition.getDice().getValue());
-		Assert.assertEquals(Color.RED, dicePlacementCondition.getDice().getColor());
+		Assert.assertEquals(GameColor.RED, dicePlacementCondition.getDice().getGameColor());
 
 	}
 

@@ -36,7 +36,7 @@ public class DifferentColorsPublicObjectiveCard extends AbstractPublicObjectiveC
 				dice = dicePlacedFrameData.getDice(i, j);
 				if(dice!=null)
 				{
-					nValues[dice.getColor().ordinal()]++;
+					nValues[dice.getGameColor().ordinal()]++;
 				}
 			}
 		}

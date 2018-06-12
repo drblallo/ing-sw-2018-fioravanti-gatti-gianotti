@@ -1,20 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<VBox spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.RoundTrackPaneController">
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.RoundTrackPaneController">
    <children>
-      <Label text="ROUND TRACK" underline="true">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <ListView fx:id="listView" />
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox fx:id="showingBox" maxHeight="84.0" maxWidth="750.0" minHeight="84.0" minWidth="750.0" prefHeight="84.0" prefWidth="750.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox fx:id="roundBox" maxHeight="84.0" maxWidth="750.0" minHeight="84.0" minWidth="750.0" prefHeight="84.0" prefWidth="750.0" spacing="10.0" style="-fx-background-color: black;">
+               <children>
+                  <ImageView fx:id="round11">
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="round21">
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="round31">
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@playerboard/WHITE-64.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
    </children>
-   <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-   </padding>
-</VBox>
+</AnchorPane>

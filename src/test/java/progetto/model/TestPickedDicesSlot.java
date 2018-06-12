@@ -28,10 +28,10 @@ public class TestPickedDicesSlot extends TestCase {
 	{
 		Assert.assertEquals(0, pickedDicesSlot.getNDices());
 
-		pickedDicesSlot.add(new Dice(Value.ONE, Color.YELLOW), false, false, false);
+		pickedDicesSlot.add(new Dice(Value.ONE, GameColor.YELLOW), false, false, false);
 		Assert.assertEquals(1, pickedDicesSlot.getNDices());
 
-		pickedDicesSlot.add(new Dice(Value.ONE, Color.YELLOW), false, false, false);
+		pickedDicesSlot.add(new Dice(Value.ONE, GameColor.YELLOW), false, false, false);
 		Assert.assertEquals(2, pickedDicesSlot.getNDices());
 
 		pickedDicesSlot.remove(0);
@@ -42,8 +42,8 @@ public class TestPickedDicesSlot extends TestCase {
 	@Test
 	public void testRemove()
 	{
-		Dice dice = new Dice(Value.ONE, Color.YELLOW);
-		Dice dice1 = new Dice(Value.TWO, Color.YELLOW);
+		Dice dice = new Dice(Value.ONE, GameColor.YELLOW);
+		Dice dice1 = new Dice(Value.TWO, GameColor.YELLOW);
 
 		pickedDicesSlot.add(dice, false, false, false);
 		Assert.assertEquals(dice, pickedDicesSlot.remove(0).getDice());
@@ -63,7 +63,7 @@ public class TestPickedDicesSlot extends TestCase {
 	{
 		Assert.assertNull(pickedDicesSlot.remove(0));
 
-		pickedDicesSlot.add(new Dice(Value.ONE, Color.YELLOW), false, false, false);
+		pickedDicesSlot.add(new Dice(Value.ONE, GameColor.YELLOW), false, false, false);
 
 		Assert.assertNull(pickedDicesSlot.remove(1));
 
@@ -72,7 +72,7 @@ public class TestPickedDicesSlot extends TestCase {
 	@Test
 	public void testSetIgnore()
 	{
-		pickedDicesSlot.add(new Dice(Value.ONE, Color.YELLOW), false, true, false);
+		pickedDicesSlot.add(new Dice(Value.ONE, GameColor.YELLOW), false, true, false);
 
 		pickedDicesSlot.setIgnoreColor(0, true);
 		Assert.assertTrue(pickedDicesSlot.getData().getDicePlacementCondition(0).getIgnoreColor());
@@ -104,11 +104,11 @@ public class TestPickedDicesSlot extends TestCase {
 	@Test
 	public void testChangeDice()
 	{
-		pickedDicesSlot.add(new Dice(Value.ONE, Color.YELLOW), false, false, false);
+		pickedDicesSlot.add(new Dice(Value.ONE, GameColor.YELLOW), false, false, false);
 
-		pickedDicesSlot.changeDice(0, new Dice(Value.THREE, Color.PURPLE));
+		pickedDicesSlot.changeDice(0, new Dice(Value.THREE, GameColor.PURPLE));
 		Assert.assertEquals(Value.THREE, pickedDicesSlot.getData().getDicePlacementCondition(0).getDice().getValue());
-		Assert.assertEquals(Color.PURPLE, pickedDicesSlot.getData().getDicePlacementCondition(0).getDice().getColor());
+		Assert.assertEquals(GameColor.PURPLE, pickedDicesSlot.getData().getDicePlacementCondition(0).getDice().getGameColor());
 
 	}
 

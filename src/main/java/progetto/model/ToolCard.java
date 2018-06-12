@@ -2,14 +2,11 @@ package progetto.model;
 
 import java.io.Serializable;
 
-/**
- * Tool card
- */
 public class ToolCard implements Serializable {
 
 	private String name;
 	private String effect;
-	private Color color;
+	private GameColor gameColor;
 	private int index;
 
 	/**
@@ -17,11 +14,11 @@ public class ToolCard implements Serializable {
 	 * @param name name of the card
 	 * @param effect effect of the card
 	 */
-	ToolCard(String name, String effect, Color color, int index)
+	ToolCard(String name, String effect, GameColor gameColor, int index)
 	{
 		this.name = name;
 		this.effect = effect;
-		this.color = color;
+		this.gameColor = gameColor;
 		this.index = index;
 	}
 
@@ -32,23 +29,15 @@ public class ToolCard implements Serializable {
 	public String getToolTip()
 	{
 		//return card name and effect description
-		return index + " " + color + " " + name + " " + effect;
+		return index + " " + gameColor + " " + name + " " + effect;
 	}
 
-	/**
-	 * Get index of the card
-	 * @return index
-	 */
 	public int getIndex()
 	{
 		return index;
 	}
 
-	/**
-	 * Get color of the card
-	 * @return color
-	 */
-	public Color getColor() {
-		return color;
+	public GameColor getGameColor() {
+		return gameColor;
 	}
 }

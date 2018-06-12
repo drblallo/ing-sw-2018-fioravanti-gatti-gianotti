@@ -21,13 +21,13 @@ public class TestDifferentShades {
 	@Test
 	public void testN0()
 	{
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.YELLOW), 0, 1);
-		dicePlacedFrame.addDice(new Dice(Value.ONE, Color.PURPLE), 2, 2);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.PURPLE), 3, 0);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.YELLOW), 1, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.GREEN), 2, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.BLUE), 3, 3);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.RED), 1, 4);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.YELLOW), 0, 1);
+		dicePlacedFrame.addDice(new Dice(Value.ONE, GameColor.PURPLE), 2, 2);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.PURPLE), 3, 0);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.YELLOW), 1, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.GREEN), 2, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.BLUE), 3, 3);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.RED), 1, 4);
 
 		Assert.assertEquals(0, differentShadesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
@@ -35,15 +35,15 @@ public class TestDifferentShades {
 	@Test
 	public void testN1()
 	{
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.YELLOW), 0, 1);
-		dicePlacedFrame.addDice(new Dice(Value.ONE, Color.PURPLE), 2, 2);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.PURPLE), 3, 0);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.YELLOW), 1, 1);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.GREEN), 2, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.BLUE), 3, 3);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.RED), 1, 4);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.RED), 0, 2);
-		dicePlacedFrame.addDice(new Dice(Value.SIX, Color.RED), 0, 3);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.YELLOW), 0, 1);
+		dicePlacedFrame.addDice(new Dice(Value.ONE, GameColor.PURPLE), 2, 2);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.PURPLE), 3, 0);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.YELLOW), 1, 1);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.GREEN), 2, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.BLUE), 3, 3);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.RED), 1, 4);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.RED), 0, 2);
+		dicePlacedFrame.addDice(new Dice(Value.SIX, GameColor.RED), 0, 3);
 
 		Assert.assertEquals(5, differentShadesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
@@ -51,25 +51,25 @@ public class TestDifferentShades {
 	@Test
 	public void testN2()
 	{
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.YELLOW), 0, 1);
-		dicePlacedFrame.addDice(new Dice(Value.ONE, Color.PURPLE), 2, 2);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.PURPLE), 3, 0);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.YELLOW), 1, 1);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.GREEN), 2, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.BLUE), 3, 3);
-		dicePlacedFrame.addDice(new Dice(Value.ONE, Color.RED), 1, 4);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.RED), 0, 2);
-		dicePlacedFrame.addDice(new Dice(Value.SIX, Color.RED), 0, 3);
-		dicePlacedFrame.addDice(new Dice(Value.TWO, Color.RED), 0, 4);
-		dicePlacedFrame.addDice(new Dice(Value.THREE, Color.RED), 1, 0);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.RED), 1, 2);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.RED), 1, 3);
-		dicePlacedFrame.addDice(new Dice(Value.FIVE, Color.RED), 2, 0);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.RED), 2, 3);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.RED), 2, 4);
-		dicePlacedFrame.addDice(new Dice(Value.SIX, Color.RED), 3, 1);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.RED), 3, 2);
-		dicePlacedFrame.addDice(new Dice(Value.FOUR, Color.RED), 3, 4);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.YELLOW), 0, 1);
+		dicePlacedFrame.addDice(new Dice(Value.ONE, GameColor.PURPLE), 2, 2);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.PURPLE), 3, 0);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.YELLOW), 1, 1);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.GREEN), 2, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.BLUE), 3, 3);
+		dicePlacedFrame.addDice(new Dice(Value.ONE, GameColor.RED), 1, 4);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.RED), 0, 2);
+		dicePlacedFrame.addDice(new Dice(Value.SIX, GameColor.RED), 0, 3);
+		dicePlacedFrame.addDice(new Dice(Value.TWO, GameColor.RED), 0, 4);
+		dicePlacedFrame.addDice(new Dice(Value.THREE, GameColor.RED), 1, 0);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.RED), 1, 2);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.RED), 1, 3);
+		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.RED), 2, 0);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.RED), 2, 3);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.RED), 2, 4);
+		dicePlacedFrame.addDice(new Dice(Value.SIX, GameColor.RED), 3, 1);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.RED), 3, 2);
+		dicePlacedFrame.addDice(new Dice(Value.FOUR, GameColor.RED), 3, 4);
 
 		Assert.assertEquals(10, differentShadesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
