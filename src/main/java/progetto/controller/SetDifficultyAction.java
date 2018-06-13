@@ -1,5 +1,6 @@
 package progetto.controller;
 
+import progetto.model.IModel;
 import progetto.model.Model;
 import progetto.model.PreGameState;
 
@@ -35,7 +36,7 @@ public class SetDifficultyAction extends AbstractExecutibleGameAction
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game) {
+	public boolean canBeExecuted(IModel game) {
 		return (game.getMainBoard().getData().getGameState().getClass() == PreGameState.class);
 	}
 

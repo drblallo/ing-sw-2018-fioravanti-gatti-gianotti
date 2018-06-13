@@ -34,7 +34,7 @@ public class ExecuteToolCard8Action extends AbstractExecutibleGameAction{
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		int currentPlayer = game.getMainBoard().getData().getCurrentPlayer();
 
@@ -48,7 +48,7 @@ public class ExecuteToolCard8Action extends AbstractExecutibleGameAction{
 
 
 
-		List<Integer> playerQueue = game.getMainBoard().getRoundPlayerList();
+		List<Integer> playerQueue = game.getMainBoard().getData().getRoundPlayerList();
 		int nPlayer = getCallerID();
 		boolean found = false;
 

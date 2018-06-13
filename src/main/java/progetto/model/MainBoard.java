@@ -1,6 +1,7 @@
 package progetto.model;
 
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ public final class MainBoard extends AbstractMainBoard
 {
 	private final ExtractedDices extractedDices = new ExtractedDices();
 
-	private ArrayList<Integer> playerQueue = new ArrayList<>();
+	private static final Logger LOGGER = Logger.getLogger(MainBoard.class.getName());
 
 	/**
 	 * Constructor
@@ -89,12 +90,14 @@ public final class MainBoard extends AbstractMainBoard
 	 */
 	public void changeNextPlayer(Integer player)
 	{
+		List<Integer> playerQueue = getData().getRoundPlayerList();
 		for(int i=0; i<playerQueue.size(); i++)
 		{
 			if(playerQueue.get(i).equals(player))
 			{
 				playerQueue.remove(i);
 				playerQueue.add(0, player);
+				setData(getData().setPlayerQueue(playerQueue));
 				return;
 			}
 		}
@@ -102,14 +105,17 @@ public final class MainBoard extends AbstractMainBoard
 	}
 
 	/**
-	 * Get the index of the next player
-	 * @return next player to play
+	 * Remove next player
 	 */
-	public Integer getNextPlayer()
+	public void removeNextPlayer()
 	{
+		List<Integer> playerQueue = getData().getRoundPlayerList();
 		if(!playerQueue.isEmpty())
-			return playerQueue.remove(0);
-		return -1;
+		{
+			playerQueue.remove(0);
+			setData(getData().setPlayerQueue(playerQueue));
+		}
+
 	}
 
 	/**
@@ -118,16 +124,9 @@ public final class MainBoard extends AbstractMainBoard
 	 */
 	public void addPlayerQueue(Integer i)
 	{
+		List<Integer> playerQueue = getData().getRoundPlayerList();
 		playerQueue.add(i);
-	}
-
-	/**
-	 * Get a list of players will play before finish the round
-	 * @return list
-	 */
-	public List getRoundPlayerList()
-	{
-		return new ArrayList<>(playerQueue);
+		setData(getData().setPlayerQueue(playerQueue));
 	}
 
 	/**
@@ -145,7 +144,27 @@ public final class MainBoard extends AbstractMainBoard
 	 */
 	public void addToolCard(ToolCard toolCard)
 	{
-		setData(getData().addToolCard(toolCard));
+		List<ToolCard> toolCardList = getData().getToolCards();
+		toolCardList.add(toolCard);
+		setData(getData().setToolCardList(toolCardList));
+	}
+
+	/**
+	 * Remove a tool card from main board
+	 * @param index index of the card to remove
+	 */
+	public void removeToolCard(int index)
+	{
+		List<ToolCard> toolCardList = getData().getToolCards();
+		try
+		{
+			toolCardList.remove(index);
+			setData(getData().setToolCardList(toolCardList));
+		} catch (Exception e)
+		{
+			LOGGER.log(Level.SEVERE,"Wrong index");
+		}
+
 	}
 
 	/**
@@ -184,13 +203,5 @@ public final class MainBoard extends AbstractMainBoard
 		setData(getData().incNCallToolCard(pos));
 	}
 
-	/**
-	 * Remove a tool card from main board
-	 * @param index index of the card to remove
-	 */
-	public void removeToolCard(int index)
-	{
-		setData(getData().removeToolCard(index));
-	}
 
 }

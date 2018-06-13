@@ -1,5 +1,6 @@
 package progetto.controller;
 
+import progetto.model.IModel;
 import progetto.model.Model;
 import progetto.model.PreGameState;
 
@@ -36,7 +37,7 @@ public class SetPlayerCountAction extends AbstractExecutibleGameAction
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game) {
+	public boolean canBeExecuted(IModel game) {
 		return (game.getMainBoard().getData().getGameState().getClass() == PreGameState.class &&
 			playerCount>=0 && playerCount<=MAX_N_PLAYERS);
 	}

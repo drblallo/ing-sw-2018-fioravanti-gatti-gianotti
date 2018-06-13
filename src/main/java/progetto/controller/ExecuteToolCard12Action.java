@@ -40,7 +40,7 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
 
@@ -102,14 +102,14 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 
 	}
 
-	private boolean verifyPos(Model game, Dice dice, int yPos, int xPos)
+	private boolean verifyPos(IModel game, Dice dice, int yPos, int xPos)
 	{
 		Dice dice1 = game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(yPos, xPos);
 		return dice != null && dice1 != null && dice.getGameColor() == dice1.getGameColor();
 
 	}
 
-	private boolean verifyParam(Model game)
+	private boolean verifyParam(IModel game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
 		int currentPlayer = game.getMainBoard().getData().getCurrentPlayer();

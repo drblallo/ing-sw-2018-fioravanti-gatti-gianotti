@@ -1,5 +1,6 @@
 package progetto.controller;
 
+import progetto.model.IModel;
 import progetto.model.Model;
 import progetto.model.RoundState;
 import progetto.model.ToolCardState;
@@ -37,7 +38,7 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		if(game.getMainBoard().getData().getGameState().getClass() != RoundState.class ||
 				nCard>=game.getMainBoard().getData().getToolCards().size() || nCard < 0)

@@ -19,7 +19,7 @@ public class AddWindowFrameCoupleAction extends AbstractGameAction
 	 * @return true if the model is in the pre model state
 	 */
 	@Override
-	public boolean canBeExecuted(Model game) {
+	public boolean canBeExecuted(IModel game) {
 		return game.getMainBoard().getData().getGameState().getClass()==PreGameState.class;
 	}
 

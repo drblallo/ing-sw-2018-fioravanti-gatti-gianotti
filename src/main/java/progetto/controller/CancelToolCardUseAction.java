@@ -32,7 +32,7 @@ public class CancelToolCardUseAction extends AbstractExecutibleGameAction
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		return game.getMainBoard().getData().getGameState().getClass() == ToolCardState.class &&
 				getCallerID() == game.getMainBoard().getData().getCurrentPlayer();

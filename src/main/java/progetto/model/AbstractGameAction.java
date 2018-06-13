@@ -52,7 +52,7 @@ public abstract class AbstractGameAction implements Serializable {
 	 * @param game the model in which this command should be executed
 	 * @return true if the current state of the model allow to use this command
 	 */
-	public abstract boolean canBeExecuted(Model game);
+	public abstract boolean canBeExecuted(IModel game);
 
 	/**
 	 * Execute action

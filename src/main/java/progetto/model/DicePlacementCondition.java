@@ -145,8 +145,19 @@ public final class DicePlacementCondition implements Serializable{
 	 */
 	public boolean canBePlaced(int y, int x, PlayerBoard playerBoard)
 	{
-		WindowFrame windowFrame = playerBoard.getData().getWindowFrame();
-		DicePlacedFrame dicePlacedFrame = playerBoard.getDicePlacedFrame();
+		return canBePlaced(y, x, playerBoard.getData().getWindowFrame(), playerBoard.getDicePlacedFrame().getData());
+	}
+
+	/**
+	 * Method to verify if the dice can be placed in the selected position respecting the selected constraints
+	 * @param x pos horizontal
+	 * @param y pos vertical
+	 * @param windowFrame used window frame
+	 * @param dicePlacedFrameData frame with placed dices
+	 * @return boolean (true: the dice can be placed, false: the dice can't be placed)
+	 */
+	public boolean canBePlaced(int y, int x, WindowFrame windowFrame, DicePlacedFrameData dicePlacedFrameData)
+	{
 
 		boolean ok = true;
 
@@ -156,7 +167,7 @@ public final class DicePlacementCondition implements Serializable{
 			ok = false;
 		}
 
-		else if(dicePlacedFrame.getData().getDice(y, x)!=null)    //Verify if the position y, x is free
+		else if(dicePlacedFrameData.getDice(y, x)!=null)    //Verify if the position y, x is free
 		{
 			LOGGER.log(Level.FINE, "Only one dice in a position");
 			ok = false;
@@ -168,7 +179,7 @@ public final class DicePlacementCondition implements Serializable{
 			ok = false;
 		}
 
-		else if(!verifyFirstDiceEdge(y, x, dicePlacedFrame))      //Verify first dice is positioned near the edge
+		else if(!verifyFirstDiceEdge(y, x, dicePlacedFrameData))      //Verify first dice is positioned near the edge
 		{
 			LOGGER.log(Level.FINE, "The first dice must be positioned near the edge");
 			ok = false;
@@ -180,19 +191,19 @@ public final class DicePlacementCondition implements Serializable{
 			ok = false;
 		}
 
-		else if(dicePlacedFrame.getData().getNDices()!=0 && !checkAdjacent(y, x, dicePlacedFrame))                //Verify the dice is positioned near an other dice (if it is not the first dice)
+		else if(dicePlacedFrameData.getNDices()!=0 && !checkAdjacent(y, x, dicePlacedFrameData))                //Verify the dice is positioned near an other dice (if it is not the first dice)
 		{
 			LOGGER.log(Level.FINE, "The dice must be positioned near an other dice");
 			ok = false;
 		}
 
-		else if(!checkNearValue(y, x, dicePlacedFrame))                        //Verify the dice is not positioned near a dice with the same value or color
+		else if(!checkNearValue(y, x, dicePlacedFrameData))                        //Verify the dice is not positioned near a dice with the same value or color
 		{
 			LOGGER.log(Level.FINE, "The dice can't be positioned near a dice with the same value");
 			ok = false;
 		}
 
-		else if(!checkNearColor(y, x, dicePlacedFrame))                        //Verify the dice is not positioned near a dice with the same value or color
+		else if(!checkNearColor(y, x, dicePlacedFrameData))                        //Verify the dice is not positioned near a dice with the same value or color
 		{
 			LOGGER.log(Level.FINE, "The dice can't be positioned near a dice with the same color");
 			ok = false;
@@ -253,12 +264,12 @@ public final class DicePlacementCondition implements Serializable{
 	 * Support method to verify the first dice is positioned near the edge
 	 * @param x pos horizontal
 	 * @param y pos vertical
-	 * @param dicePlacedFrame actual dice placed frame
+	 * @param dicePlacedFrameData actual dice placed frame
 	 * @return boolean
 	 */
-	private boolean verifyFirstDiceEdge(int y, int x, DicePlacedFrame dicePlacedFrame)
+	private boolean verifyFirstDiceEdge(int y, int x, DicePlacedFrameData dicePlacedFrameData)
 	{
-		if(dicePlacedFrame.getData().getNDices()==0)
+		if(dicePlacedFrameData.getNDices()==0)
 		{
 			return (x==0 || x==X_MAX || y==0 || y==Y_MAX);
 		}
@@ -269,10 +280,10 @@ public final class DicePlacementCondition implements Serializable{
 	 * Support method to verify if Adjacent constraints are respected
 	 * @param x pos horizontal
 	 * @param y pos vertical
-	 * @param dicePlacedFrame actual dice placed frame
+	 * @param dicePlacedFrameData actual dice placed frame
 	 * @return boolean
 	 */
-	private boolean checkAdjacent(int y, int x, DicePlacedFrame dicePlacedFrame)
+	private boolean checkAdjacent(int y, int x, DicePlacedFrameData dicePlacedFrameData)
 	{
 		if(ignoreAdjacent)
 		{
@@ -292,7 +303,7 @@ public final class DicePlacementCondition implements Serializable{
 
 		for (Couple c : couple)
 		{
-			if(verifyNear(y + c.getDy(), x + c.getDx(), dicePlacedFrame))
+			if(verifyNear(y + c.getDy(), x + c.getDx(), dicePlacedFrameData))
 			{
 				found = true;
 			}
@@ -305,10 +316,10 @@ public final class DicePlacementCondition implements Serializable{
 	 * Support method to verify if near value constraints are respected
 	 * @param x pos horizontal
 	 * @param y pos vertical
-	 * @param dicePlacedFrame actual dice placed frame
+	 * @param dicePlacedFrameData actual dice placed frame
 	 * @return boolean
 	 */
-	private boolean checkNearValue(int y, int x, DicePlacedFrame dicePlacedFrame)
+	private boolean checkNearValue(int y, int x, DicePlacedFrameData dicePlacedFrameData)
 	{
 		if(ignoreValue)
 		{
@@ -325,7 +336,7 @@ public final class DicePlacementCondition implements Serializable{
 
 		for (Couple c : couple)
 		{
-			if(!verifyNearValue(y + c.getDy(), x + c.getDx(), dicePlacedFrame))
+			if(!verifyNearValue(y + c.getDy(), x + c.getDx(), dicePlacedFrameData))
 			{
 				found = false;
 			}
@@ -338,10 +349,10 @@ public final class DicePlacementCondition implements Serializable{
 	 * Support method to verify if near color constraints are respected
 	 * @param x pos horizontal
 	 * @param y pos vertical
-	 * @param dicePlacedFrame actual dice placed frame
+	 * @param dicePlacedFrameData actual dice placed frame
 	 * @return boolean
 	 */
-	private boolean checkNearColor(int y, int x, DicePlacedFrame dicePlacedFrame)
+	private boolean checkNearColor(int y, int x, DicePlacedFrameData dicePlacedFrameData)
 	{
 		if(ignoreColor)
 		{
@@ -358,7 +369,7 @@ public final class DicePlacementCondition implements Serializable{
 
 		for (Couple c : couple)
 		{
-			if(!verifyNearColor(y + c.getDy(), x + c.getDx(), dicePlacedFrame))
+			if(!verifyNearColor(y + c.getDy(), x + c.getDx(), dicePlacedFrameData))
 			{
 				found = false;
 			}
@@ -371,48 +382,48 @@ public final class DicePlacementCondition implements Serializable{
 	 * Support method to verify if new dice is near an other dice
 	 * @param x pos horizontal
 	 * @param y pos vertical
-	 * @param dicePlacedFrame actual dice placed frame
+	 * @param dicePlacedFrameData actual dice placed frame
 	 * @return boolean
 	 */
-	private boolean verifyNear(int y, int x, DicePlacedFrame dicePlacedFrame)
+	private boolean verifyNear(int y, int x, DicePlacedFrameData dicePlacedFrameData)
 	{
 		if(x<0 || y<0 || x>X_MAX || y>Y_MAX)
 		{
 			return false;
 		}
-		return(dicePlacedFrame.getData().getDice(y, x)!=null);
+		return(dicePlacedFrameData.getDice(y, x)!=null);
 	}
 
 	/**
 	 * Support method to verify if new dice is near an other dice with same Value
 	 * @param x pos horizontal
 	 * @param y pos vertical
-	 * @param dicePlacedFrame actual dice placed frame
+	 * @param dicePlacedFrameData actual dice placed frame
 	 * @return boolean
 	 */
-	private boolean verifyNearValue(int y, int x, DicePlacedFrame dicePlacedFrame)
+	private boolean verifyNearValue(int y, int x, DicePlacedFrameData dicePlacedFrameData)
 	{
 		if(x<0 || y<0 || x>X_MAX || y>Y_MAX)
 		{
 			return true;
 		}
-		return(!(dicePlacedFrame.getData().getDice(y, x)!=null && (dice.getValue()==dicePlacedFrame.getData().getDice(y, x).getValue())));
+		return(!(dicePlacedFrameData.getDice(y, x)!=null && (dice.getValue()==dicePlacedFrameData.getDice(y, x).getValue())));
 	}
 
 	/**
 	 * Support method to verify if new dice is near an other dice with same Color
 	 * @param x pos horizontal
 	 * @param y pos vertical
-	 * @param dicePlacedFrame actual dice placed frame
+	 * @param dicePlacedFrameData actual dice placed frame
 	 * @return boolean
 	 */
-	private boolean verifyNearColor(int y, int x, DicePlacedFrame dicePlacedFrame)
+	private boolean verifyNearColor(int y, int x, DicePlacedFrameData dicePlacedFrameData)
 	{
 		if(x<0 || y<0 || x>X_MAX || y>Y_MAX)
 		{
 			return true;
 		}
-		return (!(dicePlacedFrame.getData().getDice(y, x)!=null && (dice.getGameColor()==dicePlacedFrame.getData().getDice(y, x).getGameColor())));
+		return (!(dicePlacedFrameData.getDice(y, x)!=null && (dice.getGameColor()==dicePlacedFrameData.getDice(y, x).getGameColor())));
 	}
 
 }

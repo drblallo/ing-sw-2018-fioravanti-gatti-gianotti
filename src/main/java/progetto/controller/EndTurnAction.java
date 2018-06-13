@@ -27,7 +27,7 @@ public class EndTurnAction extends AbstractExecutibleGameAction
 	}
 
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		return (game.getMainBoard().getData().getGameState().getClass() == RoundState.class ||
 				game.getMainBoard().getData().getGameState().getClass() == ToolCardState.class) &&
@@ -56,7 +56,8 @@ public class EndTurnAction extends AbstractExecutibleGameAction
 
 		MainBoard mainBoard = game.getMainBoard();
 
-		int nextPlayer = mainBoard.getNextPlayer();
+		int nextPlayer = mainBoard.getData().getNextPlayer();
+		mainBoard.removeNextPlayer();
 
 		if(nextPlayer == -1)
 		{

@@ -52,7 +52,7 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
 		if(!map.containsKey(N_CARD))
@@ -108,7 +108,7 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 	 * @param game
 	 * @return gameAction
 	 */
-	private AbstractGameAction setGameAction(Model game)
+	private AbstractGameAction setGameAction(IModel game)
 	{
 		List<ToolCard> cardList = game.getMainBoard().getData().getToolCards();
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();

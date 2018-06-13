@@ -38,7 +38,7 @@ public class ExecuteToolCard4Action extends AbstractExecutibleGameAction{
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
 		int currentPlayer = game.getMainBoard().getData().getCurrentPlayer();

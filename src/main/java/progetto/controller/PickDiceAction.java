@@ -1,6 +1,7 @@
 package progetto.controller;
 
 import progetto.model.Dice;
+import progetto.model.IModel;
 import progetto.model.Model;
 import progetto.model.RoundState;
 
@@ -38,7 +39,7 @@ public class PickDiceAction extends AbstractExecutibleGameAction{
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game) {
+	public boolean canBeExecuted(IModel game) {
 
 		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
 				getCallerID() == game.getMainBoard().getData().getCurrentPlayer() &&

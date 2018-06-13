@@ -1,5 +1,6 @@
 package progetto.controller;
 
+import progetto.model.IModel;
 import progetto.model.MainBoardData;
 import progetto.model.Model;
 import progetto.model.ToolCardState;
@@ -46,7 +47,7 @@ public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game) {
+	public boolean canBeExecuted(IModel game) {
 		MainBoardData data = game.getMainBoard().getData();
 
 		if(data.getGameState().getClass() != ToolCardState.class)
@@ -60,7 +61,7 @@ public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
 
 		return getCallerID()==game.getMainBoard().getData().getCurrentPlayer() &&
 				data.getGameState().getClass() == ToolCardState.class &&
-				game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getNDices() > nDice &&
+				game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getData().getNDices() > nDice &&
 				nDice >= 0 && verifyCards(index);
 	}
 

@@ -44,15 +44,17 @@ public class PlaceDiceAction extends AbstractExecutibleGameAction{
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		DicePlacementCondition dicePlacementCondition = game.getPlayerBoard(getCallerID())
 				.getPickedDicesSlot().getData().getDicePlacementCondition(nDice);
-		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
+		AbstractPlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
+		WindowFrame windowFrame = playerBoard.getData().getWindowFrame();
+		DicePlacedFrameData dicePlacedFrameData = playerBoard.getDicePlacedFrame().getData();
 
 		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
 				dicePlacementCondition!=null &&
-				dicePlacementCondition.canBePlaced(y, x, playerBoard);
+				dicePlacementCondition.canBePlaced(y, x, windowFrame, dicePlacedFrameData);
 
 	}
 

@@ -1,5 +1,6 @@
 package progetto.controller;
 
+import progetto.model.IModel;
 import progetto.model.MainBoardData;
 import progetto.model.Model;
 import progetto.model.ToolCardState;
@@ -46,7 +47,7 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game) {
+	public boolean canBeExecuted(IModel game) {
 		MainBoardData data = game.getMainBoard().getData();
 
 		if(data.getGameState().getClass() != ToolCardState.class)

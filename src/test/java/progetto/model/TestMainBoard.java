@@ -94,14 +94,22 @@ public class TestMainBoard extends TestCase {
 		mainBoard.addPlayerQueue(2);
 		mainBoard.addPlayerQueue(1);
 
-		Assert.assertEquals(1, (int)mainBoard.getNextPlayer());
-		Assert.assertEquals(2, (int)mainBoard.getNextPlayer());
-		Assert.assertEquals(3, (int)mainBoard.getNextPlayer());
-		Assert.assertEquals(0, (int)mainBoard.getNextPlayer());
-		Assert.assertEquals(0, (int)mainBoard.getNextPlayer());
-		Assert.assertEquals(3, (int)mainBoard.getNextPlayer());
-		Assert.assertEquals(2, (int)mainBoard.getNextPlayer());
-		Assert.assertEquals(1, (int)mainBoard.getNextPlayer());
+		Assert.assertEquals(1, (int)mainBoard.getData().getNextPlayer());
+		mainBoard.removeNextPlayer();
+		Assert.assertEquals(2, (int)mainBoard.getData().getNextPlayer());
+		mainBoard.removeNextPlayer();
+		Assert.assertEquals(3, (int)mainBoard.getData().getNextPlayer());
+		mainBoard.removeNextPlayer();
+		Assert.assertEquals(0, (int)mainBoard.getData().getNextPlayer());
+		mainBoard.removeNextPlayer();
+		Assert.assertEquals(0, (int)mainBoard.getData().getNextPlayer());
+		mainBoard.removeNextPlayer();
+		Assert.assertEquals(3, (int)mainBoard.getData().getNextPlayer());
+		mainBoard.removeNextPlayer();
+		Assert.assertEquals(2, (int)mainBoard.getData().getNextPlayer());
+		mainBoard.removeNextPlayer();
+		Assert.assertEquals(1, (int)mainBoard.getData().getNextPlayer());
+		mainBoard.removeNextPlayer();
 
 	}
 
@@ -115,14 +123,20 @@ public class TestMainBoard extends TestCase {
 		mainBoard.addPlayerQueue(1);
 		mainBoard.addPlayerQueue(0);
 
-		mainBoard.getNextPlayer();
-		mainBoard.getNextPlayer();
-		mainBoard.getNextPlayer();
-		mainBoard.getNextPlayer();
-		mainBoard.getNextPlayer();
-		mainBoard.getNextPlayer();
+		mainBoard.getData().getNextPlayer();
+		mainBoard.removeNextPlayer();
+		mainBoard.getData().getNextPlayer();
+		mainBoard.removeNextPlayer();
+		mainBoard.getData().getNextPlayer();
+		mainBoard.removeNextPlayer();
+		mainBoard.getData().getNextPlayer();
+		mainBoard.removeNextPlayer();
+		mainBoard.getData().getNextPlayer();
+		mainBoard.removeNextPlayer();
+		mainBoard.getData().getNextPlayer();
+		mainBoard.removeNextPlayer();
 
-		Assert.assertEquals(-1, (int)mainBoard.getNextPlayer());
+		Assert.assertEquals(-1, (int)mainBoard.getData().getNextPlayer());
 
 	}
 

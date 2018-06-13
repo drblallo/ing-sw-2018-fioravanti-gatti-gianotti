@@ -37,7 +37,7 @@ public class ToolCardSetSinglePlayerDiceAction extends AbstractExecutibleGameAct
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		if(game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class ||
 				nDice>=game.getMainBoard().getExtractedDices().getData().getNumberOfDices() || nDice < 0 ||

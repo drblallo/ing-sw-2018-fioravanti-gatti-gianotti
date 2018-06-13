@@ -1,5 +1,6 @@
 package progetto.controller;
 
+import progetto.model.IModel;
 import progetto.model.Model;
 import progetto.model.PreGameState;
 
@@ -26,7 +27,7 @@ public class SetSeedAction extends AbstractExecutibleGameAction
 	 * @return true if it's the pregame state , false otherwise
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		return (game.getMainBoard().getData().getGameState().getClass() == PreGameState.class);
 	}

@@ -22,6 +22,8 @@ public final class MainBoardData implements Serializable {
 	private final int currentRound;
 	private final int difficulty;
 
+	private List<Integer> playerQueue;
+
 	private final Map<String, Integer> paramToolCard;
 
 
@@ -40,6 +42,9 @@ public final class MainBoardData implements Serializable {
 
 		ArrayList<Integer> tempN = new ArrayList<>();
 		nCallToolCard = Collections.unmodifiableList(tempN);
+
+		ArrayList<Integer> tempQ = new ArrayList<>();
+		playerQueue = Collections.unmodifiableList(tempQ);
 
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>();
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
@@ -73,6 +78,9 @@ public final class MainBoardData implements Serializable {
 		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
 		nCallToolCard = Collections.unmodifiableList(tempN);
 
+		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
+		playerQueue = Collections.unmodifiableList(tempQ);
+
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
@@ -103,6 +111,42 @@ public final class MainBoardData implements Serializable {
 		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
 		tempN.add(0);
 		nCallToolCard = Collections.unmodifiableList(tempN);
+
+		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
+		publicObjectiveCards = Collections.unmodifiableList(tempP);
+
+		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
+		playerQueue = Collections.unmodifiableList(tempQ);
+
+		this.gameState = mainBoardData.gameState;
+		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
+		this.currentPlayer = mainBoardData.currentPlayer;
+		this.currentRound = mainBoardData.currentRound;
+		this.difficulty = mainBoardData.difficulty;
+		this.paramToolCard = mainBoardData.paramToolCard;
+
+	}
+
+	/**
+	 * Constructor to set PlayerQueue List
+	 * @param mainBoardData previous mainBoardData
+	 * @param playerQueue list to set
+	 */
+	private MainBoardData(List<Integer> playerQueue, MainBoardData mainBoardData)
+	{
+		this.playerCount = mainBoardData.playerCount;
+
+		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
+		this.windowFrameCouples = Collections.unmodifiableList(tempW);
+
+		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
+		toolCards = Collections.unmodifiableList(tempC);
+
+		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
+		tempN.add(0);
+		nCallToolCard = Collections.unmodifiableList(tempN);
+
+		this.playerQueue = Collections.unmodifiableList(playerQueue);
 
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
@@ -142,6 +186,9 @@ public final class MainBoardData implements Serializable {
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
+		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
+		playerQueue = Collections.unmodifiableList(tempQ);
+
 		this.currentFirstPlayer = currentFirstPlayer;
 		this.currentPlayer = currentPlayer;
 		this.currentRound = currentRound;
@@ -164,6 +211,9 @@ public final class MainBoardData implements Serializable {
 
 		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
 		windowFrameCouples = Collections.unmodifiableList(tempW);
+
+		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
+		playerQueue = Collections.unmodifiableList(tempQ);
 
 		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
 		toolCards = Collections.unmodifiableList(tempC);
@@ -198,6 +248,9 @@ public final class MainBoardData implements Serializable {
 
 		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
 		toolCards = Collections.unmodifiableList(tempC);
+
+		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
+		playerQueue = Collections.unmodifiableList(tempQ);
 
 		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
 		nCallToolCard = Collections.unmodifiableList(tempN);
@@ -235,6 +288,9 @@ public final class MainBoardData implements Serializable {
 		usage++;
 		tempN.add(pos, usage);
 		nCallToolCard = Collections.unmodifiableList(tempN);
+
+		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
+		playerQueue = Collections.unmodifiableList(tempQ);
 
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
@@ -408,15 +464,14 @@ public final class MainBoardData implements Serializable {
 	}
 
 	/**
-	 * Add one tool card to the main board
-	 * @param toolCard to add
-	 * @return new MainBoardData with added toolCard
+	 * Set toolCard list
+	 * @param tempC new ToolCard list
+	 * @return new MainBoardData with modified list
 	 */
-	MainBoardData addToolCard(ToolCard toolCard)
+	MainBoardData setToolCardList(List<ToolCard> tempC)
 	{
-		ArrayList<ToolCard> tempC = new ArrayList<>(toolCards);
-		tempC.add(toolCard);
 		return new MainBoardData(this, tempC);
+
 	}
 
 	/**
@@ -492,15 +547,35 @@ public final class MainBoardData implements Serializable {
 	}
 
 	/**
-	 * Remove one tool card from the main board
-	 * @param index of the toolCard to remove
-	 * @return new MainBoardData without selected toolCard
+	 * Get next player
+	 * @return next player
 	 */
-	MainBoardData removeToolCard(int index)
+	public Integer getNextPlayer()
 	{
-		ArrayList<ToolCard> tempC = new ArrayList<>(toolCards);
-		tempC.remove(index);
-		return new MainBoardData(this, tempC);
+		if(!playerQueue.isEmpty())
+		{
+			return playerQueue.get(0);
+		}
+		return -1;
+	}
+
+	/**
+	 * Add a player in the queue of the round
+	 * @param tempQ player list
+	 * @return new MainBoardData with modified player queue
+	 */
+	public MainBoardData setPlayerQueue(List<Integer> tempQ)
+	{
+		return new MainBoardData(tempQ, this);
+	}
+
+	/**
+	 * Get a list of players will play before finish the round
+	 * @return list
+	 */
+	public List getRoundPlayerList()
+	{
+		return new ArrayList<>(playerQueue);
 	}
 
 

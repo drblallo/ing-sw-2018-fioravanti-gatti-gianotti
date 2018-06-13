@@ -47,7 +47,7 @@ public class TestAction {
 		AbstractGameAction action = new AbstractGameAction(-2) {
 
 			@Override
-			public boolean canBeExecuted(Model game) {
+			public boolean canBeExecuted(IModel game) {
 				return false;
 			}
 
@@ -436,7 +436,9 @@ public class TestAction {
 		Assert.assertEquals(1, game.getModel().getMainBoard().getData().getCurrentRound());
 		for(int i=0; i<90; i++)
 		{
-			game.sendAction(new EndTurnAction(game.getModel().getMainBoard().getNextPlayer()));
+			Integer nextPlayer = game.getModel().getMainBoard().getData().getNextPlayer();
+			mainBoard.removeNextPlayer();
+			game.sendAction(new EndTurnAction(nextPlayer));
 			game.processAction();
 		}
 

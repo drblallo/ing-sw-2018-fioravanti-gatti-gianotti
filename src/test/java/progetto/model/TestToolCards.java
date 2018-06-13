@@ -999,12 +999,17 @@ public class TestToolCards {
 		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
 
 
-		Assert.assertEquals(0, (int)game.getMainBoard().getNextPlayer());
-		Assert.assertEquals(1, (int)game.getMainBoard().getNextPlayer());
-		Assert.assertEquals(2, (int)game.getMainBoard().getNextPlayer());
-		Assert.assertEquals(3, (int)game.getMainBoard().getNextPlayer());
-		Assert.assertEquals(4, (int)game.getMainBoard().getNextPlayer());
-		Assert.assertEquals(-1, (int)game.getMainBoard().getNextPlayer());
+		Assert.assertEquals(0, (int)game.getMainBoard().getData().getNextPlayer());
+		game.getMainBoard().removeNextPlayer();
+		Assert.assertEquals(1, (int)game.getMainBoard().getData().getNextPlayer());
+		game.getMainBoard().removeNextPlayer();
+		Assert.assertEquals(2, (int)game.getMainBoard().getData().getNextPlayer());
+		game.getMainBoard().removeNextPlayer();
+		Assert.assertEquals(3, (int)game.getMainBoard().getData().getNextPlayer());
+		game.getMainBoard().removeNextPlayer();
+		Assert.assertEquals(4, (int)game.getMainBoard().getData().getNextPlayer());
+		game.getMainBoard().removeNextPlayer();
+		Assert.assertEquals(-1, (int)game.getMainBoard().getData().getNextPlayer());
 
 	}
 

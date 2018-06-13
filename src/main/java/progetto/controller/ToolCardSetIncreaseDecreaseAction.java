@@ -36,7 +36,7 @@ public class ToolCardSetIncreaseDecreaseAction extends AbstractExecutibleGameAct
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		MainBoardData data = game.getMainBoard().getData();
 

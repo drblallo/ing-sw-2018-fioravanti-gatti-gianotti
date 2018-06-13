@@ -37,7 +37,7 @@ public class ExecuteToolCard5Action extends AbstractExecutibleGameAction{
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(Model game)
+	public boolean canBeExecuted(IModel game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
 		int currentPlayer = game.getMainBoard().getData().getCurrentPlayer();
@@ -56,7 +56,7 @@ public class ExecuteToolCard5Action extends AbstractExecutibleGameAction{
 		ToolCardState cardState = (ToolCardState)game.getMainBoard().getData().getGameState();
 
 		return cardState.getIndex() == INDEX && nDice >= 0 &&
-				game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getNDices()>nDice &&
+				game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getData().getNDices()>nDice &&
 				game.getRoundTrack().getData().getDice(round, nDiceRT) != null ;
 
 	}
