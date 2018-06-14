@@ -1,6 +1,6 @@
 package progetto.integration.client.view.cl;
 
-import progetto.model.AbstractPlayerBoard;
+import progetto.model.IPlayerBoard;
 
 public class ShowPlayerBoardCommand extends AbstractStateSwitcherCommand {
 
@@ -15,7 +15,7 @@ public class ShowPlayerBoardCommand extends AbstractStateSwitcherCommand {
 
     @Override
     protected void perform(String[] params) {
-        AbstractPlayerBoard plb = getModel().getPlayerBoard(nPlayer);
+        IPlayerBoard plb = getModel().getPlayerBoard(nPlayer);
         write(printer.printPlayerBoard(plb.getDicePlacedFrame().getData(), plb.getData().getWindowFrame()));
     }
 

@@ -8,8 +8,6 @@ import progetto.integration.client.view.cl.CommandLineView;
 import progetto.view.commandline.StreamProcessor;
 
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 
 
@@ -36,13 +34,7 @@ public class ClientMain extends Application {
         cl.setVisible(true);
         new Thread(cl).start();
         StreamProcessor streamProcessor =
-                new StreamProcessor(new InputStreamReader(System.in, Charset.defaultCharset()),
-                new OutputStreamWriter(new OutputStream() {
-                    @Override
-                    public void write(int b) {
-                        //write
-                    }
-                }), cl);
+        new StreamProcessor(new InputStreamReader(System.in, Charset.defaultCharset()), null, cl);
 
         new Thread(cl).start();
         new Thread(streamProcessor).start();

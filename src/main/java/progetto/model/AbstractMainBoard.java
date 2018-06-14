@@ -1,6 +1,6 @@
 package progetto.model;
 
-public abstract class AbstractMainBoard extends Container<MainBoardData>
+public abstract class AbstractMainBoard extends Container<MainBoardData> implements IMainBoard
 {
 
 	public AbstractMainBoard(MainBoardData d)

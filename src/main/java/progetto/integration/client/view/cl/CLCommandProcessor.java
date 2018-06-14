@@ -1,6 +1,5 @@
 package progetto.integration.client.view.cl;
 
-import progetto.model.AbstractGameState;
 import progetto.view.commandline.ICommand;
 import progetto.view.commandline.ICommandProcessor;
 
@@ -81,8 +80,7 @@ public class CLCommandProcessor implements ICommandProcessor{
 		currentState = state;
 		currentState.reloadObservers();
 		currentState.onApply();
-		if(currentState == state)
-			currentState.write(currentState.getMessage() + getContent()+"\n");
+
 	}
 
 	public AbstractCLViewState getCurrentState()
@@ -90,7 +88,7 @@ public class CLCommandProcessor implements ICommandProcessor{
 		return currentState;
 	}
 
-	public boolean checkValidity(AbstractGameState ogg)
+	public boolean checkValidity()
 	{
 		return currentState.isStillValid();
 	}

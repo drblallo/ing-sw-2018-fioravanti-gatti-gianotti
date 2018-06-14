@@ -5,6 +5,7 @@ import progetto.controller.PlaceDiceAction;
 public class PlaceDiceCommand extends AbstractStateSwitcherCommand {
 
     private int numberOfCommand;
+    private static final int NUMBER_OF_ARGUMENTS = 3;
 
     public PlaceDiceCommand(CommandLineView commandLineView, int numberOfCommand) {
         super(commandLineView, new RoundViewState(commandLineView));
@@ -14,7 +15,7 @@ public class PlaceDiceCommand extends AbstractStateSwitcherCommand {
     @Override
     protected void perform(String[] params) {
 
-        if(params.length == 3)
+        if(params.length == NUMBER_OF_ARGUMENTS)
             try {
                 int nDice = Integer.parseInt(params[0]);
                 int posX = Integer.parseInt(params[1]);

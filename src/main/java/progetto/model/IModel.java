@@ -1,9 +1,9 @@
 package progetto.model;
 
 public interface IModel {
-	Container<CommandQueueData> getCommandQueue();
-	Container<RoundTrackData> getRoundTrack();
-	Container<RoundInformationData> getRoundInformation();
-	AbstractPlayerBoard getPlayerBoard(int index);
-	AbstractMainBoard getMainBoard();
+	IContainer<CommandQueueData> getCommandQueue();
+	IContainer<RoundTrackData> getRoundTrack();
+	IContainer<RoundInformationData> getRoundInformation();
+	IPlayerBoard getPlayerBoard(int index);
+	IMainBoard getMainBoard();
 }

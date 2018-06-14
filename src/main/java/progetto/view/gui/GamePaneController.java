@@ -8,8 +8,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import progetto.model.AbstractMainBoard;
-import progetto.model.IModel;
 import progetto.model.MainBoardData;
+import progetto.model.ObservableModel;
 import progetto.utils.IObserver;
 import progetto.view.commandline.ICommandProcessor;
 
@@ -21,7 +21,7 @@ public class GamePaneController extends AbstractStateController{
 
     private static final Logger LOGGER = Logger.getLogger(GamePaneController.class.getName());
 
-    private IModel game = null;
+    private ObservableModel game = null;
 
     private int displayedPlayersCount = -1;
 
@@ -56,7 +56,7 @@ public class GamePaneController extends AbstractStateController{
 
         }
 
-        AbstractMainBoard mainBoard = getViewStateMachine().getCurrentGame().getModel().getMainBoard();
+        AbstractMainBoard mainBoard = getViewStateMachine().getCurrentGame().getObservable().getMainBoard();
 
         if(game != null){
 
@@ -64,7 +64,7 @@ public class GamePaneController extends AbstractStateController{
 
         }
 
-        game = getViewStateMachine().getCurrentGame().getModel();
+        game = getViewStateMachine().getCurrentGame().getObservable();
 
         mainBoard.addObserver(mainBoardIObserver);
 

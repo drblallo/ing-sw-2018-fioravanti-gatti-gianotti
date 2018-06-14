@@ -54,6 +54,11 @@ public class ClientControllerStub implements IClientController{
     }
 
     @Override
+    public ObservableModel getObservable() {
+        return controller.getModel();
+    }
+
+    @Override
     public boolean createConnection(String ip, boolean rmi) {
         return ip.equals("good");
     }

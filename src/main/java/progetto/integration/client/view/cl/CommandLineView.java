@@ -2,10 +2,8 @@ package progetto.integration.client.view.cl;
 
 import progetto.integration.client.IClientController;
 import progetto.integration.client.view.AbstractView;
-import progetto.model.AbstractMainBoard;
 import progetto.model.MainBoardData;
 import progetto.network.RoomView;
-import progetto.utils.IObserver;
 import progetto.view.commandline.IExecutible;
 
 import java.io.PrintStream;
@@ -20,8 +18,6 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 	private static final Logger LOGGER = Logger.getLogger(CommandLineView.class.getName());
 	private CLCommandProcessor currentState = new CLCommandProcessor();
 	private String playerName;
-	private AbstractMainBoard mainBoard;
-	private IObserver<MainBoardData> mainBoardDataIObserver = (ogg)-> checkValidity();
 	private RoomView oldRoomView;
 	private boolean isVisibile;
 	private PrintStream printStream;
@@ -34,7 +30,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 	{
 		runLater(()->
 		{
-			if (!currentState.checkValidity(getController().getModel().getMainBoard().getData().getGameState()))
+			if (!currentState.checkValidity())
 				enforceState(new GameTransitionState(this));
 		});
 	}
@@ -47,6 +43,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		playerName = "Luca";
 		setState(new DefaultViewState(this));
 		controller.getRoomViewCallback().addObserver(this::onRoomChanged);
+		controller.getObservable().getMainBoard().addObserver((ogg) -> checkValidity());
 	}
 
 	public boolean getIsRunning(){
@@ -61,19 +58,6 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 	@Override
 	public synchronized void onGameChanged() {
 
-		runLater( ()->
-		{
-			if (mainBoard != null)
-				mainBoard.removeObserver(mainBoardDataIObserver);
-
-			mainBoard = getController().getModel().getMainBoard();
-			mainBoard.addObserver(mainBoardDataIObserver);
-
-			currentState.getCurrentState().reloadObservers();
-
-			if (!currentState.checkValidity(mainBoard.getData().getGameState()))
-				enforceState(new GameTransitionState(this));
-		});
 	}
 
 	public void setPlayerName(String playerName){
@@ -112,6 +96,11 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 	void setState(AbstractCLViewState abstractCLViewState){
 
 		currentState.setCurrentState(abstractCLViewState);
+		if(currentState.getCurrentState() == abstractCLViewState)
+			currentState.getCurrentState().write(
+					currentState.getCurrentState().getMessage() + currentState.getContent()+"\n"
+			);
+
 		LOGGER.log(Level.FINE, "Current state is: {0}", getAbstractCLViewState().getClass().getSimpleName());
 	}
 

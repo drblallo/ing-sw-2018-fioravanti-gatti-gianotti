@@ -23,7 +23,7 @@ public class PreGameViewState extends AbstractCLViewState {
         getDifferenceDescriptors().add(
             new DifferenceDescriptor<>
             (
-                getView().getController().getModel().getMainBoard(),
+                getView().getController().getObservable().getMainBoard(),
                 (data1, data2) -> data1.getPlayerCount()!=data2.getPlayerCount(),
                 (oldData, newData) -> write("\nIl numero di giocatori è cambiato da " + oldData.getPlayerCount()
                         + " a " + newData.getPlayerCount() + "!\n")

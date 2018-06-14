@@ -1,7 +1,6 @@
 package progetto.view.gui;
 
 import progetto.model.Container;
-import progetto.utils.AbstractObservable;
 import progetto.utils.Callback;
 
 import java.io.Serializable;

@@ -4,7 +4,7 @@ package progetto.model;
 /**
  * Current state of the model
  */
-public class Model implements IModel{
+public class Model implements ObservableModel{
 
 	public static final int MAX_NUM_PLAYERS = 4;
 
