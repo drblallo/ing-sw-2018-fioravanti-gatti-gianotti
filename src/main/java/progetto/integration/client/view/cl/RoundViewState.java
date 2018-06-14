@@ -12,7 +12,7 @@ public class RoundViewState extends AbstractCLViewState {
     @Override
     public boolean isStillValid() {
         return getModel().getMainBoard().getData().getGameState().getClass() == RoundState.class
-                && getController().getChair() == getController().getModel().getMainBoard().getData().getCurrentPlayer();
+                && getController().getChair() == getController().getModel().getRoundInformation().getData().getCurrentPlayer();
     }
 
     @Override

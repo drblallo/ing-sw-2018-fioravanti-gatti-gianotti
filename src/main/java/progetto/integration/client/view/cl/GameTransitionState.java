@@ -30,7 +30,7 @@ public class GameTransitionState extends AbstractCLViewState {
             getView().setState(new FrameSelectionViewState(getView()));
 
         else if(abstractGameState.getClass() == RoundState.class &&
-                getController().getModel().getMainBoard().getData().getCurrentPlayer() == getController().getChair())
+                getController().getModel().getRoundInformation().getData().getCurrentPlayer() == getController().getChair())
             getView().setState(new RoundViewState(getView()));
 
         else if(abstractGameState.getClass() == RoundState.class)
