@@ -54,8 +54,10 @@ public class EndTurnAction extends AbstractExecutibleGameAction
 
 		game.getMainBoard().delParamToolCard();
 
-		MainBoard mainBoard = game.getMainBoard();
 		RoundInformation roundInformation = game.getRoundInformation();
+
+		roundInformation.setPickedDice(false);
+		roundInformation.setUsedToolCard(false);
 
 		int nextPlayer = roundInformation.getData().getNextPlayer();
 		roundInformation.removeNextPlayer();

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import progetto.controller.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestAction {
@@ -485,6 +486,80 @@ public class TestAction {
 		AbstractGameAction gameAction = new SetPlayerCountAction(5);
 		Assert.assertFalse(gameAction.canBeExecuted(game.getModel()));
 
+	}
+
+	@Test
+	public void testMaxOnePickedDice()
+	{
+		game.getModel().getMainBoard().setPlayerCount(1);
+		game.getModel().getRoundInformation().setCurrentPlayer(0);
+		game.getModel().setState(new RoundState());
+
+		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.ONE, GameColor.GREEN));
+		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.TWO, GameColor.RED));
+
+		AbstractGameAction gameAction = new PickDiceAction(0, 0);
+
+		Assert.assertTrue(gameAction.canBeExecuted(game.getModel()));
+		gameAction.execute(game.getModel());
+
+		Assert.assertFalse(gameAction.canBeExecuted(game.getModel()));
+
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game.getModel()));
+		gameAction.execute(game.getModel());
+
+		gameAction = new PickDiceAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game.getModel()));
+
+	}
+
+	@Test
+	public void testMaxOneToolCard()
+	{
+		game.getModel().getMainBoard().setPlayerCount(2);
+		game.getModel().getRoundInformation().setCurrentPlayer(0);
+		game.getModel().setState(new RoundState());
+		game.getModel().getPlayerBoard(0).setToken(10);
+
+		List<Class> actionList = new ArrayList<>();
+		game.getModel().getMainBoard().addToolCard(new ToolCard("", "", GameColor.GREEN, 1, actionList));
+
+		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.ONE, GameColor.GREEN));
+		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.THREE, GameColor.RED));
+
+		AbstractGameAction gameAction = new PickDiceAction(0, 0);
+
+		Assert.assertTrue(gameAction.canBeExecuted(game.getModel()));
+		gameAction.execute(game.getModel());
+
+		gameAction = new UseToolCardAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game.getModel()));
+		gameAction.execute(game.getModel());
+
+		gameAction = new UseToolCardAction(0, 0);
+		Assert.assertFalse(gameAction.canBeExecuted(game.getModel()));
+
+		gameAction = new ToolCardSetPickedDiceAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game.getModel()));
+		gameAction.execute(game.getModel());
+
+		gameAction = new ToolCardSetIncreaseDecreaseAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game.getModel()));
+		gameAction.execute(game.getModel());
+
+		gameAction = new ExecuteToolCardAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game.getModel()));
+		gameAction.execute(game.getModel());
+
+		Assert.assertEquals(9, game.getModel().getPlayerBoard(0).getData().getToken());
+
+		Assert.assertEquals(1, game.getModel().getPlayerBoard(0).getPickedDicesSlot().getNDices());
+		Assert.assertEquals(GameColor.GREEN, game.getModel().getPlayerBoard(0).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getGameColor());
+		Assert.assertEquals(Value.TWO, game.getModel().getPlayerBoard(0).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice().getValue());
+
+		gameAction = new UseToolCardAction(0, 0);
+		Assert.assertFalse(gameAction.canBeExecuted(game.getModel()));
 
 	}
 

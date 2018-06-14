@@ -41,7 +41,8 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 	public boolean canBeExecuted(IModel game)
 	{
 		if(game.getMainBoard().getData().getGameState().getClass() != RoundState.class ||
-				nCard>=game.getMainBoard().getData().getToolCards().size() || nCard < 0)
+				nCard>=game.getMainBoard().getData().getToolCards().size() || nCard < 0 ||
+				game.getRoundInformation().getData().getUsedToolCard())
 		{
 			return false;
 		}
