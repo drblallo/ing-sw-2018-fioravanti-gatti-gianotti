@@ -4,7 +4,10 @@ import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import progetto.controller.ToolCardSetIncreaseDecreaseAction;
+import progetto.controller.ToolCardSetPickedDiceAction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestMainBoard extends TestCase {
@@ -182,7 +185,10 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testNCallToolCards()
 	{
-		mainBoard.addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1));
+		List<Class> actionList = new ArrayList<>();
+		actionList.add(ToolCardSetPickedDiceAction.class);
+		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
+		mainBoard.addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1, actionList));
 		Assert.assertEquals(0, (int)mainBoard.getData().getNCallToolCard(0));
 
 		mainBoard.incNCallToolCard(0);
@@ -192,7 +198,8 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testToolCards()
 	{
-		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1));
+		List<Class> actionList = new ArrayList<>();
+		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1, actionList));
 		Assert.assertEquals(1, mainBoard.getData().getToolCards().size());
 
 		mainBoard.removeToolCard(0);
@@ -203,7 +210,8 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testNCallToolCardFail()
 	{
-		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1));
+		List<Class> actionList = new ArrayList<>();
+		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1, actionList));
 
 		mainBoard.incNCallToolCard(-1);
 
