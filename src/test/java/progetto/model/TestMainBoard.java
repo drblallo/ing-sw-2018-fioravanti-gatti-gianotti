@@ -13,36 +13,38 @@ import java.util.List;
 public class TestMainBoard extends TestCase {
 
 	MainBoard mainBoard;
+	RoundInformation roundInformation;
 
 	@Before
 	public void setUp()
 	{
 		mainBoard = new MainBoard();
+		roundInformation = new RoundInformation();
 	}
 
 	@Test
 	public void testSetGetCurrentFirstPlayer()
 	{
-		mainBoard.setCurrentFirstPlayer(1);
+		roundInformation.setCurrentFirstPlayer(1);
 
-		Assert.assertEquals(1, mainBoard.getData().getCurrentFirstPlayer());
+		Assert.assertEquals(1, roundInformation.getData().getCurrentFirstPlayer());
 
-		mainBoard.setCurrentFirstPlayer(2);
+		roundInformation.setCurrentFirstPlayer(2);
 
-		Assert.assertEquals(2, mainBoard.getData().getCurrentFirstPlayer());
+		Assert.assertEquals(2, roundInformation.getData().getCurrentFirstPlayer());
 
 	}
 
 	@Test
 	public void testSetGetCurrentPlayer()
 	{
-		mainBoard.setCurrentPlayer(0);
+		roundInformation.setCurrentPlayer(0);
 
-		Assert.assertEquals(0, mainBoard.getData().getCurrentPlayer());
+		Assert.assertEquals(0, roundInformation.getData().getCurrentPlayer());
 
-		mainBoard.setCurrentPlayer(1);
+		roundInformation.setCurrentPlayer(1);
 
-		Assert.assertEquals(1, mainBoard.getData().getCurrentPlayer());
+		Assert.assertEquals(1, roundInformation.getData().getCurrentPlayer());
 
 	}
 
@@ -62,13 +64,13 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testSetGetCurrentRound()
 	{
-		mainBoard.setCurrentRound(2);
+		roundInformation.setCurrentRound(2);
 
-		Assert.assertEquals(2, mainBoard.getData().getCurrentRound());
+		Assert.assertEquals(2, roundInformation.getData().getCurrentRound());
 
-		mainBoard.setCurrentRound(3);
+		roundInformation.setCurrentRound(3);
 
-		Assert.assertEquals(3, mainBoard.getData().getCurrentRound());
+		Assert.assertEquals(3, roundInformation.getData().getCurrentRound());
 
 	}
 
@@ -88,58 +90,58 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testPlayerQueue()
 	{
-		mainBoard.addPlayerQueue(1);
-		mainBoard.addPlayerQueue(2);
-		mainBoard.addPlayerQueue(3);
-		mainBoard.addPlayerQueue(0);
-		mainBoard.addPlayerQueue(0);
-		mainBoard.addPlayerQueue(3);
-		mainBoard.addPlayerQueue(2);
-		mainBoard.addPlayerQueue(1);
+		roundInformation.addPlayerQueue(1);
+		roundInformation.addPlayerQueue(2);
+		roundInformation.addPlayerQueue(3);
+		roundInformation.addPlayerQueue(0);
+		roundInformation.addPlayerQueue(0);
+		roundInformation.addPlayerQueue(3);
+		roundInformation.addPlayerQueue(2);
+		roundInformation.addPlayerQueue(1);
 
-		Assert.assertEquals(1, (int)mainBoard.getData().getNextPlayer());
-		mainBoard.removeNextPlayer();
-		Assert.assertEquals(2, (int)mainBoard.getData().getNextPlayer());
-		mainBoard.removeNextPlayer();
-		Assert.assertEquals(3, (int)mainBoard.getData().getNextPlayer());
-		mainBoard.removeNextPlayer();
-		Assert.assertEquals(0, (int)mainBoard.getData().getNextPlayer());
-		mainBoard.removeNextPlayer();
-		Assert.assertEquals(0, (int)mainBoard.getData().getNextPlayer());
-		mainBoard.removeNextPlayer();
-		Assert.assertEquals(3, (int)mainBoard.getData().getNextPlayer());
-		mainBoard.removeNextPlayer();
-		Assert.assertEquals(2, (int)mainBoard.getData().getNextPlayer());
-		mainBoard.removeNextPlayer();
-		Assert.assertEquals(1, (int)mainBoard.getData().getNextPlayer());
-		mainBoard.removeNextPlayer();
+		Assert.assertEquals(1, (int)roundInformation.getData().getNextPlayer());
+		roundInformation.removeNextPlayer();
+		Assert.assertEquals(2, (int)roundInformation.getData().getNextPlayer());
+		roundInformation.removeNextPlayer();
+		Assert.assertEquals(3, (int)roundInformation.getData().getNextPlayer());
+		roundInformation.removeNextPlayer();
+		Assert.assertEquals(0, (int)roundInformation.getData().getNextPlayer());
+		roundInformation.removeNextPlayer();
+		Assert.assertEquals(0, (int)roundInformation.getData().getNextPlayer());
+		roundInformation.removeNextPlayer();
+		Assert.assertEquals(3, (int)roundInformation.getData().getNextPlayer());
+		roundInformation.removeNextPlayer();
+		Assert.assertEquals(2, (int)roundInformation.getData().getNextPlayer());
+		roundInformation.removeNextPlayer();
+		Assert.assertEquals(1, (int)roundInformation.getData().getNextPlayer());
+		roundInformation.removeNextPlayer();
 
 	}
 
 	@Test
 	public void testPlayerQueueFail()
 	{
-		mainBoard.addPlayerQueue(0);
-		mainBoard.addPlayerQueue(1);
-		mainBoard.addPlayerQueue(2);
-		mainBoard.addPlayerQueue(2);
-		mainBoard.addPlayerQueue(1);
-		mainBoard.addPlayerQueue(0);
+		roundInformation.addPlayerQueue(0);
+		roundInformation.addPlayerQueue(1);
+		roundInformation.addPlayerQueue(2);
+		roundInformation.addPlayerQueue(2);
+		roundInformation.addPlayerQueue(1);
+		roundInformation.addPlayerQueue(0);
 
-		mainBoard.getData().getNextPlayer();
-		mainBoard.removeNextPlayer();
-		mainBoard.getData().getNextPlayer();
-		mainBoard.removeNextPlayer();
-		mainBoard.getData().getNextPlayer();
-		mainBoard.removeNextPlayer();
-		mainBoard.getData().getNextPlayer();
-		mainBoard.removeNextPlayer();
-		mainBoard.getData().getNextPlayer();
-		mainBoard.removeNextPlayer();
-		mainBoard.getData().getNextPlayer();
-		mainBoard.removeNextPlayer();
+		roundInformation.getData().getNextPlayer();
+		roundInformation.removeNextPlayer();
+		roundInformation.getData().getNextPlayer();
+		roundInformation.removeNextPlayer();
+		roundInformation.getData().getNextPlayer();
+		roundInformation.removeNextPlayer();
+		roundInformation.getData().getNextPlayer();
+		roundInformation.removeNextPlayer();
+		roundInformation.getData().getNextPlayer();
+		roundInformation.removeNextPlayer();
+		roundInformation.getData().getNextPlayer();
+		roundInformation.removeNextPlayer();
 
-		Assert.assertEquals(-1, (int)mainBoard.getData().getNextPlayer());
+		Assert.assertEquals(-1, (int)roundInformation.getData().getNextPlayer());
 
 	}
 

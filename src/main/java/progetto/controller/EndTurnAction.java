@@ -31,7 +31,7 @@ public class EndTurnAction extends AbstractExecutibleGameAction
 	{
 		return (game.getMainBoard().getData().getGameState().getClass() == RoundState.class ||
 				game.getMainBoard().getData().getGameState().getClass() == ToolCardState.class) &&
-				getCallerID() == game.getMainBoard().getData().getCurrentPlayer();
+				getCallerID() == game.getRoundInformation().getData().getCurrentPlayer();
 	}
 
 	@Override
@@ -55,9 +55,10 @@ public class EndTurnAction extends AbstractExecutibleGameAction
 		game.getMainBoard().delParamToolCard();
 
 		MainBoard mainBoard = game.getMainBoard();
+		RoundInformation roundInformation = game.getRoundInformation();
 
-		int nextPlayer = mainBoard.getData().getNextPlayer();
-		mainBoard.removeNextPlayer();
+		int nextPlayer = roundInformation.getData().getNextPlayer();
+		roundInformation.removeNextPlayer();
 
 		if(nextPlayer == -1)
 		{
@@ -65,7 +66,7 @@ public class EndTurnAction extends AbstractExecutibleGameAction
 		}
 		else
 		{
-			mainBoard.setCurrentPlayer(nextPlayer);
+			roundInformation.setCurrentPlayer(nextPlayer);
 			game.setState(new RoundState());
 		}
 

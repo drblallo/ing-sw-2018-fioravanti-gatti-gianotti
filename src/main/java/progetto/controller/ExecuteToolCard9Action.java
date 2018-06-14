@@ -38,7 +38,7 @@ public class ExecuteToolCard9Action extends AbstractExecutibleGameAction{
 	public boolean canBeExecuted(IModel game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int currentPlayer = game.getMainBoard().getData().getCurrentPlayer();
+		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
 		if(currentPlayer != getCallerID() || !map.containsKey(N_DICE) ||
 				game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class)

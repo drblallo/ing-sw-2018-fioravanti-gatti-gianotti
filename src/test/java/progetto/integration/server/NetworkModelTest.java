@@ -124,18 +124,18 @@ public class NetworkModelTest
 				game.getModel().getMainBoard().getData().getGameState().getClass().getName());
 
 		g.pickChair(
-				g.getModel().getMainBoard().getData().getCurrentPlayer()
+				g.getModel().getRoundInformation().getData().getCurrentPlayer()
 		);
 
 		wait(400);
 
 
 
-		game.sendAction(new PickDiceAction(game.getModel().getMainBoard().getData().getCurrentPlayer(), 1));
-		game.sendAction(new PlaceDiceAction(game.getModel().getMainBoard().getData().getCurrentPlayer(), 0, 0, 0));
-		game.sendAction(new EndTurnAction(game.getModel().getMainBoard().getData().getCurrentPlayer()));
-		game.sendAction(new EndTurnAction(game.getModel().getMainBoard().getData().getCurrentPlayer()));
-		game.sendAction(new EndTurnAction(game.getModel().getMainBoard().getData().getCurrentPlayer()));
+		game.sendAction(new PickDiceAction(game.getModel().getRoundInformation().getData().getCurrentPlayer(), 1));
+		game.sendAction(new PlaceDiceAction(game.getModel().getRoundInformation().getData().getCurrentPlayer(), 0, 0, 0));
+		game.sendAction(new EndTurnAction(game.getModel().getRoundInformation().getData().getCurrentPlayer()));
+		game.sendAction(new EndTurnAction(game.getModel().getRoundInformation().getData().getCurrentPlayer()));
+		game.sendAction(new EndTurnAction(game.getModel().getRoundInformation().getData().getCurrentPlayer()));
 		wait(500);
 
 	}

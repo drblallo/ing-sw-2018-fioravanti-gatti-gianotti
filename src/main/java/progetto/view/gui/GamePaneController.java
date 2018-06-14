@@ -70,7 +70,7 @@ public class GamePaneController extends AbstractStateController{
 
         commandLinePaneController.setCommandProcessor(commandProcessor);
 
-        mainBoardPaneController.setObservable(mainBoard);
+        mainBoardPaneController.onGameChanged(game);
 
         actionQueuePaneController.setObservable(game.getCommandQueue());
 

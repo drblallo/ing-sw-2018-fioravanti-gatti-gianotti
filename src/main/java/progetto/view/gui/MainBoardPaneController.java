@@ -2,10 +2,18 @@ package progetto.view.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import progetto.model.AbstractMainBoard;
-import progetto.model.MainBoardData;
+import progetto.model.*;
 
-public class MainBoardPaneController extends AbstractController<MainBoardData, AbstractMainBoard> {
+public class MainBoardPaneController {
+
+	private ComposableController<MainBoardData, AbstractMainBoard> mainBoard = new ComposableController<>();
+	private ComposableController<RoundInformationData, Container<RoundInformationData>> roundInfo = new ComposableController<>();
+
+	public MainBoardPaneController()
+	{
+		mainBoard.getOnModifiedCallback().addObserver((ogg) -> update());
+		roundInfo.getOnModifiedCallback().addObserver((ogg) -> update());
+	}
 
     @FXML
     private Label numberOfPlayers;
@@ -19,23 +27,24 @@ public class MainBoardPaneController extends AbstractController<MainBoardData, A
     @FXML
     private ExtractedDicesPaneController extractedDicesPaneController;
 
-    @Override
-    protected void onObserverReplaced() {
 
-        extractedDicesPaneController.setObservable(getObservable().getExtractedDices());
+    public void onGameChanged(IModel model) {
+
+    	mainBoard.setObservable(model.getMainBoard());
+    	roundInfo.setObservable(model.getRoundInformation());
+        extractedDicesPaneController.setObservable(model.getMainBoard().getExtractedDices());
 
     }
 
-    @Override
-    protected void update() {
+    private void update() {
 
-        MainBoardData mainBoardData = getObservable().getData();
+        MainBoardData mainBoardData = mainBoard.getLastData();
 
         numberOfPlayers.setText(Integer.toString(mainBoardData.getPlayerCount()));
 
         gameState.setText(mainBoardData.getGameState().getName());
 
-        currentPlayer.setText("" + mainBoardData.getCurrentPlayer());
+        currentPlayer.setText("" + roundInfo.getLastData().getCurrentPlayer());
 
     }
 }

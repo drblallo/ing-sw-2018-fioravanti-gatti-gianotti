@@ -112,7 +112,7 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 	private boolean verifyParam(IModel game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int currentPlayer = game.getMainBoard().getData().getCurrentPlayer();
+		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
 		return currentPlayer == getCallerID() && map.containsKey(XPOS) && map.containsKey(YPOS) &&
 				game.getMainBoard().getData().getGameState().getClass() == ToolCardState.class &&

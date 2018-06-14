@@ -26,6 +26,7 @@ public class ServerGame extends GameSync implements  ISync
 	private IObserver<PickedDicesSlotData>[] pikcObs = new IObserver[Model.MAX_NUM_PLAYERS];
 	private IObserver<DicePlacedFrameData>[] pldObs = new IObserver[Model.MAX_NUM_PLAYERS];
 	private IObserver<ExtractedDicesData> extObs  = ogg -> addItemEnforce(new ExtractedDicesEnforce(ogg));
+	private IObserver<RoundInformationData> ridObs  = ogg -> addItemEnforce(new RoundInformationEnforce(ogg));
 
 
 	@Override

@@ -235,8 +235,8 @@ public class TestAction {
 		game.sendAction(new FrameSetAction(3, -1, 0));
 		game.processAllPendingAction();
 
-		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getCurrentFirstPlayer());
-		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(3, game.getModel().getRoundInformation().getData().getCurrentFirstPlayer());
+		Assert.assertEquals(3, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 	}
 
 	@Test
@@ -284,7 +284,7 @@ public class TestAction {
 		game.sendAction(new FrameSetAction(3, -1, 0));
 		game.processAllPendingAction();
 
-		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(3, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 
 		game.sendAction(new PickDiceAction(3, 0));
 		game.processAction();
@@ -321,7 +321,7 @@ public class TestAction {
 
 		game.sendAction(new EndTurnAction(2));
 		game.processAction();
-		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(3, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 	}
 
 	@Test
@@ -356,7 +356,7 @@ public class TestAction {
 		game.processAction();
 
 		Dice dice = game.getModel().getMainBoard().getExtractedDices().getData().getDice(0);
-		Assert.assertEquals(0, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(0, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 		//pick dice
 		game.sendAction(new PickDiceAction(0, 0));
 		game.processAction();
@@ -389,6 +389,7 @@ public class TestAction {
 		WindowFrameCouple windowFrameCouple = windowFrameCouples.get(1);
 		WindowFrame windowFrame = windowFrameCouple.getWindowFrame(0);
 		MainBoard mainBoard = game.getModel().getMainBoard();
+		RoundInformation roundInformation = game.getModel().getRoundInformation();
 		mainBoard.setPlayerCount(4);
 		game.getModel().getPlayerBoard(0).setWindowFrame(windowFrame);
 		game.getModel().getPlayerBoard(1).setWindowFrame(windowFrame);
@@ -401,43 +402,43 @@ public class TestAction {
 		game.sendAction(new FrameSetAction(2, -1, 0));
 		game.sendAction(new FrameSetAction(3, -1, 0));
 		game.processAllPendingAction();
-		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(3, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 		game.sendAction(new PickDiceAction(3, 0));
 		game.processAction();
 		game.sendAction(new PlaceDiceAction(3, 0, 1, 0));
 		game.processAction();
 		game.sendAction(new EndTurnAction(3));
 		game.processAction();
-		Assert.assertEquals(0, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(0, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(0));
 		game.processAction();
 		game.sendAction(new EndTurnAction(1));
 		game.processAction();
-		Assert.assertEquals(2, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(2, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(2));
 		game.processAction();
-		Assert.assertEquals(2, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(2, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 		game.sendAction(new PickDiceAction(2, 1));
 		game.processAction();
 		game.sendAction(new EndTurnAction(2));
 		game.processAction();
-		Assert.assertEquals(1, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(1, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(1));
 		game.processAction();
-		Assert.assertEquals(0, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(0, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(0));
 		game.processAction();
-		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(3, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 		game.sendAction(new EndTurnAction(3));
 		game.processAction();
-		Assert.assertEquals(0, game.getModel().getMainBoard().getData().getCurrentPlayer());
+		Assert.assertEquals(0, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 		Assert.assertFalse(game.getModel().getRoundTrack().getData().isFree(0));
 		Assert.assertTrue(game.getModel().getRoundTrack().getData().isFree(1));
-		Assert.assertEquals(1, game.getModel().getMainBoard().getData().getCurrentRound());
+		Assert.assertEquals(1, game.getModel().getRoundInformation().getData().getCurrentRound());
 		for(int i=0; i<90; i++)
 		{
-			Integer nextPlayer = game.getModel().getMainBoard().getData().getNextPlayer();
-			mainBoard.removeNextPlayer();
+			Integer nextPlayer = game.getModel().getRoundInformation().getData().getNextPlayer();
+			roundInformation.removeNextPlayer();
 			game.sendAction(new EndTurnAction(nextPlayer));
 			game.processAction();
 		}

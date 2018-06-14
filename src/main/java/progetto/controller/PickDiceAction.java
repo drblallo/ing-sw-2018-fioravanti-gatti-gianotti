@@ -42,7 +42,7 @@ public class PickDiceAction extends AbstractExecutibleGameAction{
 	public boolean canBeExecuted(IModel game) {
 
 		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
-				getCallerID() == game.getMainBoard().getData().getCurrentPlayer() &&
+				getCallerID() == game.getRoundInformation().getData().getCurrentPlayer() &&
 				game.getMainBoard().getExtractedDices().getData().getDice(nDice) != null;
 
 	}

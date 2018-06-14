@@ -35,7 +35,7 @@ public class CancelToolCardUseAction extends AbstractExecutibleGameAction
 	public boolean canBeExecuted(IModel game)
 	{
 		return game.getMainBoard().getData().getGameState().getClass() == ToolCardState.class &&
-				getCallerID() == game.getMainBoard().getData().getCurrentPlayer();
+				getCallerID() == game.getRoundInformation().getData().getCurrentPlayer();
 	}
 
 	/**

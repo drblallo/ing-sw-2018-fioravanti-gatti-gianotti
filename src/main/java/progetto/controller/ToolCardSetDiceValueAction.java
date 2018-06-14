@@ -67,7 +67,7 @@ public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 
 		int index = toolCardState.getIndex();
 
-		return getCallerID()==game.getMainBoard().getData().getCurrentPlayer() &&
+		return getCallerID()==game.getRoundInformation().getData().getCurrentPlayer() &&
 				value>=1 && value<=MAX_VALUE && index == CARD11;
 
 	}

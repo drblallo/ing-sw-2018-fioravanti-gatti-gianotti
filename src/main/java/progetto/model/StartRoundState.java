@@ -18,16 +18,17 @@ public class StartRoundState extends AbstractGameState{
 	void apply(Model game) {
 
 		MainBoard mainBoard = game.getMainBoard();
-		int firstPlayer = mainBoard.getData().getCurrentFirstPlayer();
+		RoundInformation roundInformation = game.getRoundInformation();
+		int firstPlayer = roundInformation.getData().getCurrentFirstPlayer();
 		int nPlayer = mainBoard.getData().getPlayerCount();
 
 		for(int i=1; i<nPlayer; i++)
 		{
-			mainBoard.addPlayerQueue((i+firstPlayer)%nPlayer);
+			roundInformation.addPlayerQueue((i+firstPlayer)%nPlayer);
 		}
 		for(int i=nPlayer-1; i>=0; i--)
 		{
-			mainBoard.addPlayerQueue((i+firstPlayer)%nPlayer);
+			roundInformation.addPlayerQueue((i+firstPlayer)%nPlayer);
 		}
 
 		if(nPlayer == 1)

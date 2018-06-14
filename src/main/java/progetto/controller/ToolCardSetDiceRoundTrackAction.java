@@ -59,7 +59,7 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 
 		int index = toolCardState.getIndex();
 
-		return getCallerID()==game.getMainBoard().getData().getCurrentPlayer() &&
+		return getCallerID()==game.getRoundInformation().getData().getCurrentPlayer() &&
 				game.getRoundTrack().getData().getDice(round, nDiceRT)!=null &&
 				(index == CARD5 || index == CARD12);
 

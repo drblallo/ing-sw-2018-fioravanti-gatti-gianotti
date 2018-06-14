@@ -16,6 +16,8 @@ public class Model implements IModel{
 
 	private final MainBoard mainBoard = new MainBoard();
 
+	private final RoundInformation roundInformation = new RoundInformation();
+
 	private final DiceBag diceBag = new DiceBag();
 
 	private final RNGenerator rnGenerator = new RNGenerator(0);
@@ -67,6 +69,15 @@ public class Model implements IModel{
 	public MainBoard getMainBoard()
 	{
 		return mainBoard;
+	}
+
+	/**
+	 * Get roundInformation
+	 * @return roundInformation
+	 */
+	public RoundInformation getRoundInformation()
+	{
+		return roundInformation;
 	}
 
 	/**

@@ -59,7 +59,7 @@ public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
 
 		int index = toolCardState.getIndex();
 
-		return getCallerID()==game.getMainBoard().getData().getCurrentPlayer() &&
+		return getCallerID()==game.getRoundInformation().getData().getCurrentPlayer() &&
 				data.getGameState().getClass() == ToolCardState.class &&
 				game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getData().getNDices() > nDice &&
 				nDice >= 0 && verifyCards(index);

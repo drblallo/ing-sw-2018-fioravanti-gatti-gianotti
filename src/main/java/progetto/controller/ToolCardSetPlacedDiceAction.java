@@ -68,7 +68,7 @@ public class ToolCardSetPlacedDiceAction extends AbstractExecutibleGameAction{
 
 		int index = toolCardState.getIndex();
 
-		return getCallerID()==game.getMainBoard().getData().getCurrentPlayer() &&
+		return getCallerID()==game.getRoundInformation().getData().getCurrentPlayer() &&
 				game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(y, x)!=null &&
 				(index == CARD2 || index == CARD3 || index == CARD4 || index == CARD12);
 

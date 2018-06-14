@@ -50,7 +50,7 @@ public class ToolCardSetIncreaseDecreaseAction extends AbstractExecutibleGameAct
 		int index = toolCardState.getIndex();
 
 		return (increaseDecrease == 0 || increaseDecrease == 1) &&
-				getCallerID()==game.getMainBoard().getData().getCurrentPlayer() &&
+				getCallerID()==game.getRoundInformation().getData().getCurrentPlayer() &&
 				index == CARD1;
 
 	}

@@ -41,7 +41,7 @@ public class ExecuteToolCard4Action extends AbstractExecutibleGameAction{
 	public boolean canBeExecuted(IModel game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int currentPlayer = game.getMainBoard().getData().getCurrentPlayer();
+		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
 		if(currentPlayer != getCallerID() || !map.containsKey(XPOS) || !map.containsKey(YPOS)
 				|| !map.containsKey(XPOS2) || !map.containsKey(YPOS2) ||

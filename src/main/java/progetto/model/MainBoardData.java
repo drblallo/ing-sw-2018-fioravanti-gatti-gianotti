@@ -17,12 +17,7 @@ public final class MainBoardData implements Serializable {
 	private final List<Integer> nCallToolCard;
 	private final int playerCount;
 	private final AbstractGameState gameState;
-	private final int currentFirstPlayer;
-	private final int currentPlayer;
-	private final int currentRound;
 	private final int difficulty;
-
-	private List<Integer> playerQueue;
 
 	private final Map<String, Integer> paramToolCard;
 
@@ -43,16 +38,11 @@ public final class MainBoardData implements Serializable {
 		ArrayList<Integer> tempN = new ArrayList<>();
 		nCallToolCard = Collections.unmodifiableList(tempN);
 
-		ArrayList<Integer> tempQ = new ArrayList<>();
-		playerQueue = Collections.unmodifiableList(tempQ);
-
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>();
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
 		gameState = new PreGameState();
-		currentFirstPlayer = 0;
-		currentPlayer = 0;
-		currentRound = 1;
+
 		difficulty = STD_DIFFICULTY;
 
 		paramToolCard = Collections.unmodifiableMap(new HashMap<>());
@@ -78,17 +68,12 @@ public final class MainBoardData implements Serializable {
 		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
 		nCallToolCard = Collections.unmodifiableList(tempN);
 
-		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
-		playerQueue = Collections.unmodifiableList(tempQ);
-
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
 		this.gameState = mainBoardData.gameState;
 		this.difficulty = mainBoardData.difficulty;
-		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-		this.currentPlayer = mainBoardData.currentPlayer;
-		this.currentRound = mainBoardData.currentRound;
+
 		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
@@ -115,46 +100,8 @@ public final class MainBoardData implements Serializable {
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
-		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
-		playerQueue = Collections.unmodifiableList(tempQ);
-
 		this.gameState = mainBoardData.gameState;
-		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-		this.currentPlayer = mainBoardData.currentPlayer;
-		this.currentRound = mainBoardData.currentRound;
-		this.difficulty = mainBoardData.difficulty;
-		this.paramToolCard = mainBoardData.paramToolCard;
 
-	}
-
-	/**
-	 * Constructor to set PlayerQueue List
-	 * @param mainBoardData previous mainBoardData
-	 * @param playerQueue list to set
-	 */
-	private MainBoardData(List<Integer> playerQueue, MainBoardData mainBoardData)
-	{
-		this.playerCount = mainBoardData.playerCount;
-
-		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
-		this.windowFrameCouples = Collections.unmodifiableList(tempW);
-
-		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
-		toolCards = Collections.unmodifiableList(tempC);
-
-		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
-		tempN.add(0);
-		nCallToolCard = Collections.unmodifiableList(tempN);
-
-		this.playerQueue = Collections.unmodifiableList(playerQueue);
-
-		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
-		publicObjectiveCards = Collections.unmodifiableList(tempP);
-
-		this.gameState = mainBoardData.gameState;
-		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-		this.currentPlayer = mainBoardData.currentPlayer;
-		this.currentRound = mainBoardData.currentRound;
 		this.difficulty = mainBoardData.difficulty;
 		this.paramToolCard = mainBoardData.paramToolCard;
 
@@ -164,13 +111,9 @@ public final class MainBoardData implements Serializable {
 	 * Constructor to set a new value for different attributes
 	 * @param mainBoardData previous mainBoardData
 	 * @param playerCount new playerCount value
-	 * @param currentFirstPlayer new currentFirstPlayer value
-	 * @param currentPlayer new currentPlayer value
-	 * @param currentRound new currentRound value
 	 * @param difficulty new difficulty value
 	 */
-	private MainBoardData(MainBoardData mainBoardData, int playerCount, int currentFirstPlayer, int currentPlayer,
-	                      int currentRound, int difficulty)
+	private MainBoardData(MainBoardData mainBoardData, int playerCount, int difficulty)
 	{
 		this.playerCount = playerCount;
 
@@ -186,12 +129,6 @@ public final class MainBoardData implements Serializable {
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
-		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
-		playerQueue = Collections.unmodifiableList(tempQ);
-
-		this.currentFirstPlayer = currentFirstPlayer;
-		this.currentPlayer = currentPlayer;
-		this.currentRound = currentRound;
 		this.difficulty = difficulty;
 
 		this.gameState = mainBoardData.gameState;
@@ -212,9 +149,6 @@ public final class MainBoardData implements Serializable {
 		ArrayList<WindowFrameCouple> tempW = new ArrayList<>(mainBoardData.windowFrameCouples);
 		windowFrameCouples = Collections.unmodifiableList(tempW);
 
-		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
-		playerQueue = Collections.unmodifiableList(tempQ);
-
 		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
 		toolCards = Collections.unmodifiableList(tempC);
 
@@ -224,9 +158,6 @@ public final class MainBoardData implements Serializable {
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
-		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-		this.currentPlayer = mainBoardData.currentPlayer;
-		this.currentRound = mainBoardData.currentRound;
 		this.difficulty = mainBoardData.difficulty;
 
 		this.gameState = gameState;
@@ -249,9 +180,6 @@ public final class MainBoardData implements Serializable {
 		ArrayList<ToolCard> tempC = new ArrayList<>(mainBoardData.toolCards);
 		toolCards = Collections.unmodifiableList(tempC);
 
-		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
-		playerQueue = Collections.unmodifiableList(tempQ);
-
 		ArrayList<Integer> tempN = new ArrayList<>(mainBoardData.nCallToolCard);
 		nCallToolCard = Collections.unmodifiableList(tempN);
 
@@ -260,9 +188,7 @@ public final class MainBoardData implements Serializable {
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
 		this.gameState = mainBoardData.gameState;
-		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-		this.currentPlayer = mainBoardData.currentPlayer;
-		this.currentRound = mainBoardData.currentRound;
+
 		this.difficulty = mainBoardData.difficulty;
 		this.paramToolCard = mainBoardData.paramToolCard;
 
@@ -289,16 +215,11 @@ public final class MainBoardData implements Serializable {
 		tempN.add(pos, usage);
 		nCallToolCard = Collections.unmodifiableList(tempN);
 
-		ArrayList<Integer> tempQ = new ArrayList<>(mainBoardData.playerQueue);
-		playerQueue = Collections.unmodifiableList(tempQ);
-
 		ArrayList<AbstractPublicObjectiveCard> tempP = new ArrayList<>(mainBoardData.publicObjectiveCards);
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
 		this.gameState = mainBoardData.gameState;
-		this.currentFirstPlayer = mainBoardData.currentFirstPlayer;
-		this.currentPlayer = mainBoardData.currentPlayer;
-		this.currentRound = mainBoardData.currentRound;
+
 		this.difficulty = mainBoardData.difficulty;
 		this.paramToolCard = mainBoardData.paramToolCard;
 
@@ -311,24 +232,6 @@ public final class MainBoardData implements Serializable {
 	public int getPlayerCount()
 	{
 		return playerCount;
-	}
-
-	/**
-	 * Get current first player
-	 * @return current first player
-	 */
-	public int getCurrentFirstPlayer()
-	{
-		return currentFirstPlayer;
-	}
-
-	/**
-	 * Get current player
-	 * @return current player
-	 */
-	public int getCurrentPlayer()
-	{
-		return currentPlayer;
 	}
 
 	/**
@@ -360,15 +263,6 @@ public final class MainBoardData implements Serializable {
 	}
 
 	/**
-	 * Get current round
-	 * @return current round
-	 */
-	public int getCurrentRound()
-	{
-		return currentRound;
-	}
-
-	/**
 	 * Get difficulty (single player)
 	 * @return difficulty
 	 */
@@ -383,7 +277,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setPlayerCount(int playerCount)
 	{
-		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
+		return new MainBoardData(this, playerCount, difficulty);
 	}
 
 	/**
@@ -403,36 +297,6 @@ public final class MainBoardData implements Serializable {
 	MainBoardData addWindowFrameCouple(WindowFrameCouple windowFrameCouple)
 	{
 		return new MainBoardData(this, windowFrameCouple);
-	}
-
-	/**
-	 * Set current first player
-	 * @param currentFirstPlayer to set
-	 * @return new MainBoardData with modified currentFirstPlayer
-	 */
-	MainBoardData setCurrentFirstPlayer(int currentFirstPlayer)
-	{
-		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
-	}
-
-	/**
-	 * Set current player
-	 * @param currentPlayer to set
-	 * @return new MainBoardData with modified currentPlayer
-	 */
-	MainBoardData setCurrentPlayer(int currentPlayer)
-	{
-		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
-	}
-
-	/**
-	 * Set current round
-	 * @param currentRound to set
-	 * @return new MainBoardData with modified currentRound
-	 */
-	MainBoardData setCurrentRound(int currentRound)
-	{
-		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
 	}
 
 	/**
@@ -481,7 +345,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setDifficulty(int difficulty)
 	{
-		return new MainBoardData(this, playerCount, currentFirstPlayer, currentPlayer , currentRound, difficulty);
+		return new MainBoardData(this, playerCount, difficulty);
 	}
 
 	/**
@@ -544,38 +408,6 @@ public final class MainBoardData implements Serializable {
 		}
 		return nCallToolCard.get(pos);
 
-	}
-
-	/**
-	 * Get next player
-	 * @return next player
-	 */
-	public Integer getNextPlayer()
-	{
-		if(!playerQueue.isEmpty())
-		{
-			return playerQueue.get(0);
-		}
-		return -1;
-	}
-
-	/**
-	 * Add a player in the queue of the round
-	 * @param tempQ player list
-	 * @return new MainBoardData with modified player queue
-	 */
-	public MainBoardData setPlayerQueue(List<Integer> tempQ)
-	{
-		return new MainBoardData(tempQ, this);
-	}
-
-	/**
-	 * Get a list of players will play before finish the round
-	 * @return list
-	 */
-	public List getRoundPlayerList()
-	{
-		return new ArrayList<>(playerQueue);
 	}
 
 

@@ -36,7 +36,7 @@ public class ExecuteToolCard7Action extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		int currentPlayer = game.getMainBoard().getData().getCurrentPlayer();
+		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
 		if(currentPlayer != getCallerID() ||
 				game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class)
@@ -48,7 +48,7 @@ public class ExecuteToolCard7Action extends AbstractExecutibleGameAction{
 
 
 
-		List<Integer> playerQueue = game.getMainBoard().getData().getRoundPlayerList();
+		List<Integer> playerQueue = game.getRoundInformation().getData().getRoundPlayerList();
 		int nPlayer = getCallerID();
 
 		while(!playerQueue.isEmpty())

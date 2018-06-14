@@ -34,7 +34,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);;
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getMainBoard().setParamToolCard("nDice", 0);
 		game.getMainBoard().setParamToolCard("increaseDecrease", 0);
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.YELLOW));
@@ -68,7 +68,7 @@ public class TestToolCards {
 
 		game.setState(new ToolCardState(1));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.YELLOW), false, false, false);
 
 
@@ -100,7 +100,7 @@ public class TestToolCards {
 
 		game.setState(new ToolCardState(1));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.YELLOW));
 
 		AbstractGameAction supportAction = new ToolCardSetPickedDiceAction(0, 0);
@@ -133,12 +133,12 @@ public class TestToolCards {
 		game.setState(new FrameSelectionState());
 		game.setState(new ToolCardState(0));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 
 		AbstractGameAction supportAction = new ToolCardSetPickedDiceAction(0, 0);
 		Assert.assertFalse(supportAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(1);
+		game.getRoundInformation().setCurrentPlayer(1);
 
 		supportAction = new ToolCardSetIncreaseDecreaseAction(0, 0);
 		Assert.assertFalse(supportAction.canBeExecuted(game));
@@ -158,7 +158,7 @@ public class TestToolCards {
 		game.setState(new FrameSelectionState());
 		game.setState(new ToolCardState(5));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getRoundTrack().add(new Dice(Value.ONE, GameColor.YELLOW), 0);
 
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -181,7 +181,7 @@ public class TestToolCards {
 		game.setState(new FrameSelectionState());
 		game.setState(new ToolCardState(0));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getRoundTrack().add(new Dice(Value.ONE, GameColor.YELLOW), 0);
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
@@ -198,7 +198,7 @@ public class TestToolCards {
 		actionList.add(ToolCardSetPickedDiceAction.class);
 		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
 		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,11, actionList));
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getMainBoard().setPlayerCount(1);
 		game.getMainBoard().setGameState(new RoundState());
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);
@@ -220,7 +220,7 @@ public class TestToolCards {
 		actionList.add(ToolCardSetPickedDiceAction.class);
 		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
 		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,11, actionList));
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getMainBoard().setPlayerCount(1);
 		game.getMainBoard().setGameState(new RoundState());
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);
@@ -246,11 +246,11 @@ public class TestToolCards {
 
 		game.setState(new FrameSelectionState());
 		game.setState(new ToolCardState(0));
-		game.getMainBoard().setCurrentPlayer(1);
+		game.getRoundInformation().setCurrentPlayer(1);
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new RoundState());
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
@@ -263,7 +263,7 @@ public class TestToolCards {
 	public void testToolCardSelectPlacedDiceAction()
 	{
 		game.setState(new ToolCardState(2));
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
 
 		AbstractGameAction gameAction = new ToolCardSetPlacedDiceAction(0, 0 ,0);
@@ -286,7 +286,7 @@ public class TestToolCards {
 
 		game.setState(new FrameSelectionState());
 		game.setState(new ToolCardState(0));
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
@@ -302,7 +302,7 @@ public class TestToolCards {
 
 		game.setState(new FrameSelectionState());
 		game.setState(new ToolCardState(1));
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.YELLOW), false, false, false);
 
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -323,7 +323,7 @@ public class TestToolCards {
 
 		game.setState(new FrameSelectionState());
 		game.setState(new ToolCardState(0));
-		game.getMainBoard().setCurrentPlayer(1);
+		game.getRoundInformation().setCurrentPlayer(1);
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.YELLOW), false, false, false);
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
@@ -339,7 +339,7 @@ public class TestToolCards {
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
 		game.setState(new FrameSelectionState());
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getPlayerBoard(0).setToken(5);
 		gameAction = new UseToolCardAction(0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -387,7 +387,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new CancelToolCardUseAction();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(1));
 		game.getMainBoard().setParamToolCard("Test", 1);
 
@@ -406,7 +406,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard11Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(11));
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.TWO, GameColor.RED));
 
@@ -443,7 +443,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard11Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(11));
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.TWO, GameColor.RED));
 
@@ -473,7 +473,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard12Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(12));
 
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
@@ -520,7 +520,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard12Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(12));
 
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
@@ -558,7 +558,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard12Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(12));
 
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
@@ -591,7 +591,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard12Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(12));
 
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.RED), 0, 0);
@@ -626,7 +626,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard2Or3Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(2));
 
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
@@ -658,7 +658,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard2Or3Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(3));
 
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
@@ -690,7 +690,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard9Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(9));
 
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.YELLOW));
@@ -723,7 +723,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard9Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(9));
 
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.YELLOW));
@@ -753,7 +753,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard4Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(4));
 
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
@@ -790,7 +790,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard4Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(4));
 
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
@@ -831,7 +831,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard5Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(5));
 
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.RED));
@@ -868,7 +868,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard5Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(5));
 
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.RED));
@@ -907,7 +907,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard6Or10Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(6));
 
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.FIVE, GameColor.YELLOW));
@@ -935,7 +935,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard6Or10Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(10));
 
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.FIVE, GameColor.YELLOW));
@@ -963,7 +963,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard7Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(7));
 
 		game.getMainBoard().getExtractedDices().addDice(new Dice(Value.FIVE, GameColor.YELLOW));
@@ -1002,14 +1002,14 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard8Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(8));
 
-		game.getMainBoard().addPlayerQueue(1);
-		game.getMainBoard().addPlayerQueue(2);
-		game.getMainBoard().addPlayerQueue(3);
-		game.getMainBoard().addPlayerQueue(4);
-		game.getMainBoard().addPlayerQueue(0);
+		game.getRoundInformation().addPlayerQueue(1);
+		game.getRoundInformation().addPlayerQueue(2);
+		game.getRoundInformation().addPlayerQueue(3);
+		game.getRoundInformation().addPlayerQueue(4);
+		game.getRoundInformation().addPlayerQueue(0);
 
 		gameAction = new ExecuteToolCard8Action(0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -1020,17 +1020,17 @@ public class TestToolCards {
 		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
 
 
-		Assert.assertEquals(0, (int)game.getMainBoard().getData().getNextPlayer());
-		game.getMainBoard().removeNextPlayer();
-		Assert.assertEquals(1, (int)game.getMainBoard().getData().getNextPlayer());
-		game.getMainBoard().removeNextPlayer();
-		Assert.assertEquals(2, (int)game.getMainBoard().getData().getNextPlayer());
-		game.getMainBoard().removeNextPlayer();
-		Assert.assertEquals(3, (int)game.getMainBoard().getData().getNextPlayer());
-		game.getMainBoard().removeNextPlayer();
-		Assert.assertEquals(4, (int)game.getMainBoard().getData().getNextPlayer());
-		game.getMainBoard().removeNextPlayer();
-		Assert.assertEquals(-1, (int)game.getMainBoard().getData().getNextPlayer());
+		Assert.assertEquals(0, (int)game.getRoundInformation().getData().getNextPlayer());
+		game.getRoundInformation().removeNextPlayer();
+		Assert.assertEquals(1, (int)game.getRoundInformation().getData().getNextPlayer());
+		game.getRoundInformation().removeNextPlayer();
+		Assert.assertEquals(2, (int)game.getRoundInformation().getData().getNextPlayer());
+		game.getRoundInformation().removeNextPlayer();
+		Assert.assertEquals(3, (int)game.getRoundInformation().getData().getNextPlayer());
+		game.getRoundInformation().removeNextPlayer();
+		Assert.assertEquals(4, (int)game.getRoundInformation().getData().getNextPlayer());
+		game.getRoundInformation().removeNextPlayer();
+		Assert.assertEquals(-1, (int)game.getRoundInformation().getData().getNextPlayer());
 
 	}
 
@@ -1040,7 +1040,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCardAction();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getPlayerBoard(0).setToken(5);
 		game.setState(new RoundState());
 
@@ -1092,7 +1092,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCardAction();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getPlayerBoard(0).setToken(5);
 		game.setState(new RoundState());
 
@@ -1112,7 +1112,7 @@ public class TestToolCards {
 	{
 		game.getMainBoard().setPlayerCount(1);
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 
 		game.getPlayerBoard(0).setToken(0);
 
@@ -1180,7 +1180,7 @@ public class TestToolCards {
 	{
 		game.getMainBoard().setPlayerCount(1);
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 
 		game.getPlayerBoard(0).setToken(0);
 
@@ -1222,14 +1222,14 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard7Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		game.getMainBoard().setCurrentPlayer(0);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.setState(new ToolCardState(7));
 
-		game.getMainBoard().addPlayerQueue(1);
-		game.getMainBoard().addPlayerQueue(2);
-		game.getMainBoard().addPlayerQueue(2);
-		game.getMainBoard().addPlayerQueue(1);
-		game.getMainBoard().addPlayerQueue(0);
+		game.getRoundInformation().addPlayerQueue(1);
+		game.getRoundInformation().addPlayerQueue(2);
+		game.getRoundInformation().addPlayerQueue(2);
+		game.getRoundInformation().addPlayerQueue(1);
+		game.getRoundInformation().addPlayerQueue(0);
 
 		game.getMainBoard().getExtractedDices().addDice(new Dice(Value.FIVE, GameColor.YELLOW));
 		game.getMainBoard().getExtractedDices().addDice(new Dice(Value.TWO, GameColor.RED));

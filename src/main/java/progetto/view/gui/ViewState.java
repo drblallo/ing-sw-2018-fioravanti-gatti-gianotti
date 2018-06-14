@@ -25,7 +25,6 @@ public class ViewState<T extends AbstractStateController> {
             pane = fxmlLoader.load();
 
         }catch (IOException e){
-
             pane = null;
         }
 
