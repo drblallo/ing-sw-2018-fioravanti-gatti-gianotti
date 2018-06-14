@@ -98,4 +98,22 @@ public final class RoundInformation extends Container<RoundInformationData>
 		setData(getData().setPlayerQueue(playerQueue));
 	}
 
+	/**
+	 * Set picked dice
+	 * @param pickedDice new value
+	 */
+	public void setPickedDice(boolean pickedDice)
+	{
+		setData(getData().setPickedDice(pickedDice));
+	}
+
+	/**
+	 * Set used toolCard
+	 * @param usedToolCard new value
+	 */
+	public void setUsedToolCard(boolean usedToolCard)
+	{
+		setData(getData().setUsedToolCard(usedToolCard));
+	}
+
 }

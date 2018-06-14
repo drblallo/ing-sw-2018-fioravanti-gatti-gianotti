@@ -43,7 +43,8 @@ public class PickDiceAction extends AbstractExecutibleGameAction{
 
 		return game.getMainBoard().getData().getGameState().getClass() == RoundState.class &&
 				getCallerID() == game.getRoundInformation().getData().getCurrentPlayer() &&
-				game.getMainBoard().getExtractedDices().getData().getDice(nDice) != null;
+				game.getMainBoard().getExtractedDices().getData().getDice(nDice) != null &&
+				!game.getRoundInformation().getData().getPickedDice();
 
 	}
 
@@ -56,5 +57,6 @@ public class PickDiceAction extends AbstractExecutibleGameAction{
 	{
 		Dice dice = game.getMainBoard().getExtractedDices().removeDice(nDice);
 		game.getPlayerBoard(getCallerID()).getPickedDicesSlot().add(dice, false, false, false);
+		game.getRoundInformation().setPickedDice(true);
 	}
 }

@@ -15,7 +15,8 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 	private static final String YPOS2 = "YPlacedDice2";
 	private static final String ROUND = "round";
 	private static final String N_DICE_RT = "nDiceRT";
-	private static final int INDEX = 12;
+
+	private static final int CARD12 = 12;
 
 	/**
 	 * Constructor without parameters
@@ -49,23 +50,37 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 			return false;
 		}
 
-		int xPos = map.get(XPOS);
-		int yPos = map.get(YPOS);
-
 		int round = map.get(ROUND);
 		int nDiceRT = map.get(N_DICE_RT);
 
 		Dice diceRT = game.getRoundTrack().getData().getDice(round, nDiceRT);
 
-		if(map.containsKey(XPOS2) && map.containsKey(YPOS2) && !verifyPos(game, diceRT, map.get(YPOS2), map.get(XPOS2)))
-		{
-			return false;
+		int xPos = -1;
+		int yPos = -1;
+		Dice dice = null;
 
+		int xPos2 = -1;
+		int yPos2 = -1;
+		Dice dice2 = null;
+
+		if(map.containsKey(XPOS) && map.containsKey(YPOS))
+		{
+			xPos = map.get(XPOS);
+			yPos = map.get(YPOS);
+			dice = game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(yPos, xPos);
+		}
+
+		if(map.containsKey(XPOS2) && map.containsKey(YPOS2))
+		{
+			xPos2 = map.get(XPOS2);
+			yPos2 = map.get(YPOS2);
+			dice2 = game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(yPos2, xPos2);
 		}
 
 		ToolCardState cardState = (ToolCardState)game.getMainBoard().getData().getGameState();
 
-		return cardState.getIndex() == INDEX && verifyPos(game, diceRT, yPos, xPos);
+		return cardState.getIndex() == CARD12 && verifyDiceColor(diceRT, dice, dice2)
+				&& (!(dice==null && dice2==null));
 
 	}
 
@@ -77,13 +92,20 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 	public void execute(Model game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int xPos = map.get(XPOS);
-		int yPos = map.get(YPOS);
 
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 
-		Dice dice = playerBoard.getDicePlacedFrame().removeDice(yPos, xPos);
-		playerBoard.getPickedDicesSlot().add(dice, false, false, false);
+		Dice dice;
+
+		if(map.containsKey(XPOS) && map.containsKey(YPOS))
+		{
+			int xPos = map.get(XPOS);
+			int yPos = map.get(YPOS);
+
+			dice = playerBoard.getDicePlacedFrame().removeDice(yPos, xPos);
+			playerBoard.getPickedDicesSlot().add(dice, false, false, false);
+
+		}
 
 		if(map.containsKey(XPOS2) && map.containsKey(YPOS2))
 		{
@@ -102,22 +124,25 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 
 	}
 
-	private boolean verifyPos(IModel game, Dice dice, int yPos, int xPos)
-	{
-		Dice dice1 = game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(yPos, xPos);
-		return dice != null && dice1 != null && dice.getGameColor() == dice1.getGameColor();
-
-	}
-
 	private boolean verifyParam(IModel game)
 	{
 		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		return currentPlayer == getCallerID() && map.containsKey(XPOS) && map.containsKey(YPOS) &&
+		if(!(map.containsKey(XPOS) && map.containsKey(YPOS)) && !(map.containsKey(XPOS2) && map.containsKey(YPOS2)))
+		{
+			return false;
+		}
+
+		return currentPlayer == getCallerID() &&
 				game.getMainBoard().getData().getGameState().getClass() == ToolCardState.class &&
 				map.containsKey(ROUND) && map.containsKey(N_DICE_RT);
 
+	}
+
+	private boolean verifyDiceColor(Dice diceRT, Dice dice, Dice dice2)
+	{
+		return !((dice!=null && dice.getGameColor()!=diceRT.getGameColor()) || (dice2!=null && dice2.getGameColor()!=diceRT.getGameColor()));
 	}
 
 }

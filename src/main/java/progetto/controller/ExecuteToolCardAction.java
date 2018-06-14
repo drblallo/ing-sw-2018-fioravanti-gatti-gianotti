@@ -102,6 +102,8 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 			game.getMainBoard().incNCallToolCard(nCard);
 		}
 
+		game.getRoundInformation().setUsedToolCard(true);
+
 		gameAction.execute(game);
 
 	}

@@ -16,6 +16,9 @@ public final class RoundInformationData implements Serializable {
 
 	private List<Integer> playerQueue;
 
+	private final boolean pickedDice;
+	private final boolean usedToolCard;
+
 	/**
 	 * Constructor
 	 */
@@ -28,6 +31,9 @@ public final class RoundInformationData implements Serializable {
 		ArrayList<Integer> tempQ = new ArrayList<>();
 		playerQueue = Collections.unmodifiableList(tempQ);
 
+		pickedDice = false;
+		usedToolCard = false;
+
 	}
 
 	/**
@@ -37,11 +43,15 @@ public final class RoundInformationData implements Serializable {
 	 */
 	private RoundInformationData(RoundInformationData roundInformationData, List<Integer> playerQueue)
 	{
-		this.playerQueue = Collections.unmodifiableList(playerQueue);
+		ArrayList<Integer> tempQ = new ArrayList<>(playerQueue);
+		this.playerQueue = Collections.unmodifiableList(tempQ);
 
 		this.currentFirstPlayer = roundInformationData.currentFirstPlayer;
 		this.currentPlayer = roundInformationData.currentPlayer;
 		this.currentRound = roundInformationData.currentRound;
+
+		this.usedToolCard = roundInformationData.usedToolCard;
+		this.pickedDice = roundInformationData.pickedDice;
 
 	}
 
@@ -61,6 +71,29 @@ public final class RoundInformationData implements Serializable {
 		
 		ArrayList<Integer> tempQ = new ArrayList<>(roundInformationData.playerQueue);
 		playerQueue = Collections.unmodifiableList(tempQ);
+
+		this.usedToolCard = roundInformationData.usedToolCard;
+		this.pickedDice = roundInformationData.pickedDice;
+
+	}
+
+	/**
+	 * Constructor to set pickedDice and usedToolCard
+	 * @param roundInformationData previous roundInformationData
+	 * @param pickedDice new pickedDice value
+	 * @param usedToolCard new usedToolCard value
+	 */
+	private RoundInformationData(RoundInformationData roundInformationData, boolean pickedDice, boolean usedToolCard)
+	{
+		this.currentFirstPlayer = roundInformationData.currentFirstPlayer;
+		this.currentPlayer = roundInformationData.currentPlayer;
+		this.currentRound = roundInformationData.currentRound;
+
+		ArrayList<Integer> tempQ = new ArrayList<>(roundInformationData.playerQueue);
+		playerQueue = Collections.unmodifiableList(tempQ);
+
+		this.pickedDice = pickedDice;
+		this.usedToolCard = usedToolCard;
 
 	}
 
@@ -152,6 +185,44 @@ public final class RoundInformationData implements Serializable {
 	{
 		return new ArrayList<>(playerQueue);
 	}
+
+	/**
+	 * Get pickedDice
+	 * @return pickedDice
+	 */
+	public boolean getPickedDice()
+	{
+		return pickedDice;
+	}
+
+	/**
+	 * Get usedToolCard
+	 * @return usedToolCard
+	 */
+	public boolean getUsedToolCard()
+	{
+		return usedToolCard;
+	}
+
+	/**
+	 * Set pickedDice
+	 * @return new RoundInformationData with modified value
+	 */
+	public RoundInformationData setPickedDice(boolean pickedDice)
+	{
+		return new RoundInformationData(this, pickedDice, usedToolCard);
+	}
+
+	/**
+	 * Set usedToolCard
+	 * @return new RoundInformationData with modified value
+	 */
+	public RoundInformationData setUsedToolCard(boolean usedToolCard)
+	{
+		return new RoundInformationData(this, pickedDice, usedToolCard);
+	}
+
+
 
 
 }
