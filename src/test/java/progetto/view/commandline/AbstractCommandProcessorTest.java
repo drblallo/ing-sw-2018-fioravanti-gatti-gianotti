@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractCommandProcessorTest {
 
-    ICommandProcessor nuovo;
+    protected ICommandProcessor nuovo;
     String risposta;
 
 
@@ -20,7 +20,7 @@ public abstract class AbstractCommandProcessorTest {
     public void testMissingCommand(){
 
         risposta=nuovo.execute("Ciao");
-        assertEquals("Command not found, maybe you ment:", risposta);
+        assertEquals("Il comando selezionato non esiste, inserire un comando valido tra quelli proposti:\n", risposta);
 
     }
 

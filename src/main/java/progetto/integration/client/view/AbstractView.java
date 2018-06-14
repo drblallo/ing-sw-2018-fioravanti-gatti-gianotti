@@ -1,13 +1,13 @@
 package progetto.integration.client.view;
 
 
-import progetto.integration.client.ClientController;
+import progetto.integration.client.IClientController;
 
 public abstract class AbstractView {
 
-	private final ClientController controller;
+	private final IClientController controller;
 
-	public AbstractView(ClientController controller)
+	public AbstractView(IClientController controller)
 	{
 		this.controller = controller;
 		controller.addView(this);
@@ -15,7 +15,7 @@ public abstract class AbstractView {
 
 	public abstract void setVisible(boolean visible);
 
-	public ClientController getController()
+	public IClientController getController()
 	{
 		return controller;
 	}

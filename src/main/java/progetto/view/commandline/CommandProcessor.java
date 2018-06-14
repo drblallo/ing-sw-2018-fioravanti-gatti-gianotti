@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 public class CommandProcessor implements ICommandProcessor
 {
-
     private HashMap <String, ICommand> registered;
     private String name;
     private static final Logger LOGGER = Logger.getLogger(CommandProcessor.class.getName());
@@ -88,7 +87,7 @@ public class CommandProcessor implements ICommandProcessor
 
         ICommand toexecute;
         StringBuilder toreturn = new StringBuilder();
-        toreturn.append("Command not found, maybe you ment:");
+        toreturn.append("Il comando selezionato non esiste, inserire un comando valido tra quelli proposti:\n");
 
         if(registered.containsKey(command[0])){
 
@@ -101,21 +100,23 @@ public class CommandProcessor implements ICommandProcessor
             return toexecute.execute(null);
         }
 
-        List<ICommand> explore = new ArrayList<>(registered.values());
-
-        for(int i=0; i<explore.size();i++) {
-
-            if (explore.get(i).getName().startsWith(command[0])) {
-
-                toreturn.append('\n').append(explore.get(i).getName());
-
-            }
-
-        }
-
+        toreturn.append(getContent());
         return toreturn.toString();
 
         }
 
+    @Override
+    public String getContent() {
 
+        List<ICommand> explore = new ArrayList<>(registered.values());
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(int i=0; i<explore.size();i++) {
+
+            stringBuilder.append('\n').append(explore.get(i).getName()).append(" - ").append(explore.get(i).getHelp());
+        }
+
+        return stringBuilder.toString();
+
+    }
 }

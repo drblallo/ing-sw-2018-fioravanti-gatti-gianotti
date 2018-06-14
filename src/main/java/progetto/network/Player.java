@@ -25,7 +25,7 @@ public final class Player
 	 * @param playerName the name with which this player will be known
 	 * @param handler the sever connection that allow to send message to the client
 	 */
-	Player(String playerName, ServerConnection handler)
+	public Player(String playerName, ServerConnection handler)
 	{
 		this.playerName = playerName;
 		this.handler = handler;

@@ -27,7 +27,8 @@ public class GameSync implements ISync
 		AbstractGameAction action = (AbstractGameAction) s;
 		if (action == null)
 			return false;
-		return (action.canBeExecuted(game.getModel()) && (senderID == -1 || action.getCallerID() == senderID));
+		return (action.canBeExecuted(game.getModel()) && (senderID == -1 || action.getCallerID() == -1
+				|| action.getCallerID() == senderID));
 	}
 
 	@Override

@@ -2,9 +2,8 @@ package progetto.view.commandline;
 
 import org.junit.Assert;
 import org.junit.Test;
-import progetto.model.CommandQueue;
-import progetto.model.CommandQueueData;
 import progetto.controller.EndTurnAction;
+import progetto.model.*;
 
 public class TestDifferenceDescriptor {
 
@@ -17,7 +16,7 @@ public class TestDifferenceDescriptor {
 				(
 						commandQueue,
 						(data1, data2) -> data1.pastSize() != data2.pastSize(),
-						(oldData, newData) -> newData.pastSize()+""
+						(oldData, newData) -> newData.pastSize()
 				);
 
 		commandQueue.offer(new EndTurnAction());

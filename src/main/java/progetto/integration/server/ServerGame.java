@@ -16,16 +16,30 @@ import java.util.List;
 
 public class ServerGame extends GameSync implements  ISync
 {
-	private List<IEnforce> dirtyDataItems = new ArrayList<>();
+	private class DirtyTracker
+	{
+		public final IEnforce enforce;
+		public final int origin;
+
+		private DirtyTracker(IEnforce enforce, int origin)
+		{
+			this.enforce = enforce;
+			this.origin = origin;
+		}
+	}
+
+
+
+	private List<DirtyTracker> dirtyDataItems = new ArrayList<>();
 
 	private Callback<IEnforce> enforceCallback = new Callback<>();
-	private IObserver<RoundTrackData> rtdObs = ogg -> addItemEnforce(new RoundTrackEnforce(ogg));
-	private IObserver<MainBoardData> mainObs = ogg -> addItemEnforce(new MainBoardReplacementEnforce(ogg));
+	private IObserver<RoundTrackData> rtdObs = ogg -> addItemEnforce(new DirtyTracker(new RoundTrackEnforce(ogg), -1));
+	private IObserver<MainBoardData> mainObs = ogg -> addItemEnforce(new DirtyTracker(new MainBoardReplacementEnforce(ogg), 0));
 	private IObserver<PlayerBoardData>[] plbObs = new IObserver[Model.MAX_NUM_PLAYERS];
-	private IObserver<CommandQueueData> cmqObs = ogg -> addItemEnforce(new CommandQueueEnforce(ogg));
+	private IObserver<CommandQueueData> cmqObs = ogg -> addItemEnforce(new DirtyTracker(new CommandQueueEnforce(ogg), 1));
 	private IObserver<PickedDicesSlotData>[] pikcObs = new IObserver[Model.MAX_NUM_PLAYERS];
 	private IObserver<DicePlacedFrameData>[] pldObs = new IObserver[Model.MAX_NUM_PLAYERS];
-	private IObserver<ExtractedDicesData> extObs  = ogg -> addItemEnforce(new ExtractedDicesEnforce(ogg));
+	private IObserver<ExtractedDicesData> extObs  = ogg -> addItemEnforce(new DirtyTracker(new ExtractedDicesEnforce(ogg), 2));
 
 
 	@Override
@@ -34,18 +48,20 @@ public class ServerGame extends GameSync implements  ISync
 		dirtyDataItems.clear();
 		super.sendItem(s);
 
-		for (IEnforce f : dirtyDataItems)
-			enforceCallback.call(f);
+		for (DirtyTracker f : dirtyDataItems)
+			enforceCallback.call(f.enforce);
 	}
 
-	private void addItemEnforce(IEnforce f) {
+	private void addItemEnforce(DirtyTracker tracker) {
 
-		for (int a = 0; a < dirtyDataItems.size(); a++)
+		for (int a = dirtyDataItems.size() - 1; a > 0; a--)
 		{
-			if (dirtyDataItems.get(a).getClass() == f.getClass())
+			if (dirtyDataItems.get(a).origin == tracker.origin)
+			{
 				dirtyDataItems.remove(a);
+			}
 		}
-		dirtyDataItems.add(f);
+		dirtyDataItems.add(tracker);
 	}
 
 	ServerGame()
@@ -53,9 +69,9 @@ public class ServerGame extends GameSync implements  ISync
 		for (int a = 0; a < Model.MAX_NUM_PLAYERS; a++)
 		{
 			final int c = a;
-			plbObs[a] = ogg -> addItemEnforce(new PlayerBoardReplacementEnforce(ogg, c));
-			pikcObs[a] = ogg -> addItemEnforce(new PickedDicesSlotEnforce(ogg, c));
-			pldObs[a] = ogg -> addItemEnforce(new DicePlacedFrameEnforce(ogg, c));
+			plbObs[a] = ogg -> addItemEnforce(new DirtyTracker(new PlayerBoardReplacementEnforce(ogg, c), c + 3));
+			pikcObs[a] = ogg -> addItemEnforce(new DirtyTracker(new PickedDicesSlotEnforce(ogg, c), c + 3));
+			pldObs[a] = ogg -> addItemEnforce(new DirtyTracker(new DicePlacedFrameEnforce(ogg, c), c + 3));
 		}
 		clear();
 	}

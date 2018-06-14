@@ -19,9 +19,7 @@ public class ExistingGamesPaneController extends AbstractClientStateController{
 
         for(int i = 0; i< getController().getConnectionCount(); i++)
         {
-
             listView.getItems().add(i + " " + getController().getNameOfConnection(i));
-
         }
 
     }

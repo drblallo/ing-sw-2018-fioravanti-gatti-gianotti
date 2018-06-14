@@ -99,7 +99,7 @@ public class NetworkModelTest
 		ServerGame game = new ServerGame();
 		Assert.assertFalse(game.isItemGood(null, -1));
 
-		Assert.assertFalse(game.isItemGood(new StartGameAction(), 2));
+		Assert.assertTrue(game.isItemGood(new StartGameAction(), 2));
 	}
 
 	@Test

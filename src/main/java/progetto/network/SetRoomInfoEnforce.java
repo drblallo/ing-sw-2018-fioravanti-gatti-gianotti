@@ -4,6 +4,7 @@ package progetto.network;
  * Forces the client to update his room info
  */
 final class SetRoomInfoEnforce implements IEnforce {
+
 	private RoomView room;
 
 	/**

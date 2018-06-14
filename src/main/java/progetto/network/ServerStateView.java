@@ -36,7 +36,7 @@ public final class ServerStateView implements Serializable
 	 * @param roomID room id
 	 * @param playerSize player count
 	 */
-	void addRoom(String roomName, int roomID, int playerSize)
+	public void addRoom(String roomName, int roomID, int playerSize)
 	{
 		rooms.put(roomID, new SimpleRoomState(roomName, roomID, playerSize));
 	}

@@ -1,7 +1,6 @@
 package progetto.integration.client;
 
 import progetto.ServerMain;
-import progetto.controller.IGameController;
 import progetto.integration.GameSync;
 import progetto.integration.client.view.AbstractView;
 import progetto.model.AbstractGameAction;
@@ -18,9 +17,8 @@ import progetto.utils.IObserver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientController implements IGameController
+public class ClientController implements IClientController
 {
-
     private ClientConnection clientGame;
     private final List<ClientConnection> connections = new ArrayList<>();
     private List<AbstractView> views = new ArrayList<>();
@@ -39,7 +37,8 @@ public class ClientController implements IGameController
         setCurrentClientGame(connections.get(index));
     }
 
-    private void setCurrentClientGame(ClientConnection clientGame){
+    private void setCurrentClientGame(ClientConnection clientGame)
+    {
 
         if (clientGame != null) {
             clientGame.getMessageCallback().removeObserver(messageObserver);
@@ -93,6 +92,8 @@ public class ClientController implements IGameController
 
     public IModel getModel()
     {
+        if(clientGame == null)
+            return null;
         return clientGame.getProxy();
     }
 
@@ -165,6 +166,8 @@ public class ClientController implements IGameController
     {
         return connections.size();
     }
+
+    public int getChair(){return clientGame.getChair();}
 
     public void disconnect()
     {
