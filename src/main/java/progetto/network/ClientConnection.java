@@ -312,6 +312,13 @@ public final class ClientConnection implements Runnable
 		{
 			f.execute(this);
 		}
+
+		try
+		{
+			this.wait(NetworkSettings.THREAD_CHECK_RATE);
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "interrupted {0}", e.getMessage());
+		}
 	}
 
 	/**
