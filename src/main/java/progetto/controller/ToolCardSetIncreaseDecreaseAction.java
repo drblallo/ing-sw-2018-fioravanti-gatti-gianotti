@@ -1,6 +1,9 @@
 package progetto.controller;
 
-import progetto.model.*;
+import progetto.model.IModel;
+import progetto.model.MainBoardData;
+import progetto.model.Model;
+import progetto.model.ToolCardState;
 
 /**
  * Action to choose whether to increase or decrease the value of the dice

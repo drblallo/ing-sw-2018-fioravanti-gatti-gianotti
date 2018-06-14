@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class TestStreamProcessor {
 
     CommandProcessor comproc;
+    private final String response = "Il comando selezionato non esiste, inserire un comando valido tra quelli proposti:\n";
 
     @Before
     public void setup() {
@@ -53,7 +54,7 @@ public class TestStreamProcessor {
 
         stream.run();
 
-        assertEquals("Command not found, maybe you ment:\necho\n", out.getString());
+        assertEquals(response + comproc.getContent() + '\n', out.getString());
     }
 
     @Test
@@ -66,7 +67,7 @@ public class TestStreamProcessor {
 
         stream.run();
 
-        assertEquals("Command not found, maybe you ment:\n", out.getString());
+        assertEquals(response+"\n", out.getString());
 
     }
 
@@ -83,7 +84,7 @@ public class TestStreamProcessor {
 
         stream.run();
 
-        assertEquals("Command not found, maybe you ment:\n", out.getString());
+        assertEquals(response+comproc.getContent()+"\n", out.getString());
 
 
     }

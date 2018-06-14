@@ -41,7 +41,7 @@ public final class RoomView implements Serializable{
 
 	public PlayerView getPlayerOfChair(int playerChair)
 	{
-		if (playerChair <= 0)
+		if (playerChair < 0)
 			return null;
 
 		for (PlayerView pl : playerInfoList.values())
@@ -56,15 +56,24 @@ public final class RoomView implements Serializable{
 	 * @return the content of this object as a list
 	 */
 	public List<PlayerView> asList(){
-
 		ArrayList<PlayerView> playerViewArrayList = new ArrayList<>();
-
 		for(PlayerView r : playerInfoList.values()){
-
 			playerViewArrayList.add(r);
-
 		}
 		return playerViewArrayList;
+	}
 
+	@Override
+	public String toString() {
+
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("\nE' cambiata la disposizione dei giocatori sulle sedie!\nNuova disposizione:\n");
+		for(int i =0; i<4; i++ ){
+			if(getPlayerOfChair(i)!=null)
+				stringBuilder.append("Sedia ").append(i).append(": ").append(getPlayerOfChair(i).getName()).append('\n');
+			else
+				stringBuilder.append("Sedia ").append(i).append(": LIBERA").append('\n');
+		}
+		return stringBuilder.toString();
 	}
 }

@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import progetto.integration.client.ClientController;
+import progetto.integration.client.IClientController;
 import progetto.network.PlayerView;
 import progetto.network.RoomView;
 import progetto.utils.IObserver;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ChatPaneController {
 
-    private ClientController clientGame;
+    private IClientController clientGame;
 
     private List<PlayerView> playerViewList;
 
@@ -38,7 +38,7 @@ public class ChatPaneController {
     private IObserver<String> stringIObserver = ogg -> Platform.runLater(()-> chatArea.appendText(ogg));
 
 
-    public void setUp(ClientController controller)
+    public void setUp(IClientController controller)
     {
     	clientGame = controller;
         controller.getMessageCallback().addObserver(stringIObserver);

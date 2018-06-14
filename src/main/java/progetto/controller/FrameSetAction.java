@@ -35,6 +35,7 @@ public class FrameSetAction extends AbstractExecutibleGameAction {
 	public FrameSetAction(int nPlayer, int selectedCouple, int selectedSide)
 	{
 		super(nPlayer);
+
 		this.selectedCouple = selectedCouple;
 		this.selectedSide = selectedSide;
 	}

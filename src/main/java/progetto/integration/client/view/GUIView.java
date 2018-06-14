@@ -60,7 +60,6 @@ public class GUIView extends AbstractView
 	public void onGameChanged()
 	{
 		viewStateMachine.setCurrentGame(getController());
-		commandProcessor.reaload();
 	}
 
 	public ICommandProcessor getCommandProcessor()

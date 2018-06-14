@@ -1,19 +1,19 @@
 package progetto.integration.client.view;
 
-import progetto.integration.client.ClientController;
+import progetto.integration.client.IClientController;
 import progetto.view.gui.AbstractStateController;
 
 public abstract class AbstractClientStateController extends AbstractStateController {
 
-    private ClientController controller;
+    private IClientController controller;
 
-    public void setController(ClientController clientViewStateMachine){
+    public void setController(IClientController clientViewStateMachine){
 
         this.controller = clientViewStateMachine;
 
     }
 
-    public ClientController getController(){
+    public IClientController getController(){
 
         return controller;
 

@@ -1,6 +1,9 @@
 package progetto.controller;
 
-import progetto.model.*;
+import progetto.model.IModel;
+import progetto.model.Model;
+import progetto.model.RoundState;
+import progetto.model.ToolCardState;
 
 /**
  * Action to cancel the use of a tool card
