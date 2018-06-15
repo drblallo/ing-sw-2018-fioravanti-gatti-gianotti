@@ -3,7 +3,8 @@ package progetto.view.commandline;
 import org.junit.Assert;
 import org.junit.Test;
 import progetto.controller.EndTurnAction;
-import progetto.model.*;
+import progetto.model.CommandQueue;
+import progetto.model.CommandQueueData;
 
 public class TestDifferenceDescriptor {
 

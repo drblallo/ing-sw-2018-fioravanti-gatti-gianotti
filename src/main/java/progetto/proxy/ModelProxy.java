@@ -6,7 +6,7 @@ import progetto.model.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class ModelProxy implements IModel
+public class ModelProxy implements ObservableModel
 {
 	private MainBoardProxy mainBoardProxy = new MainBoardProxy();
 	private Container<RoundTrackData> roundTrackProxy = new Container<>(new RoundTrackData());
@@ -46,4 +46,27 @@ public class ModelProxy implements IModel
 		return mainBoardProxy;
 	}
 
+	public ModelProxy copy()
+	{
+		ModelProxy copy = new ModelProxy();
+		insertInto(copy);
+		return copy;
+	}
+
+	public void insertInto(ModelProxy destination)
+	{
+		for (int a = 0; a < Model.MAX_NUM_PLAYERS; a++) {
+			PlayerBoardProxy n = destination.getPlayerBoard(a);
+			PlayerBoardProxy o = getPlayerBoard(a);
+
+			n.setData(o);
+			n.getDicePlacedFrame().setData(o.getDicePlacedFrame());
+			n.getPickedDicesSlot().setData(o.getPickedDicesSlot());
+		}
+		destination.mainBoardProxy.setData(getMainBoard());
+		destination.mainBoardProxy.getExtractedDices().setData(getMainBoard().getExtractedDices());
+		destination.roundInformationProxy.setData(getRoundInformation());
+		destination.commandQueueProxy.setData(getCommandQueue());
+		destination.roundTrackProxy.setData(getRoundTrack());
+	}
 }

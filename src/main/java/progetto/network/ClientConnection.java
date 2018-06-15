@@ -24,15 +24,16 @@ public final class ClientConnection implements Runnable
 	private final ISync synchronizedObj;
 	private final Callback<ClientConnection> syncronizationFailedCallback = new Callback<>();
 
-
 	private final Callback<ServerStateView> serverStateViewCallback = new Callback<>();
 	private final Callback<RoomView> roomViewCallback = new Callback<>();
+	private final Callback<ModelProxy> actionEndedCallback = new Callback<>();
 
 	private final Queue<IEnforce> enforcesQueue = new ConcurrentLinkedQueue<>();
 	private final INetworkClient handler;
 	private ServerStateView serverState = new ServerStateView();
 	private int playerID = -1;
-	private final ModelProxy proxy = new ModelProxy();
+	private ModelProxy proxy = new ModelProxy();
+	private ModelProxy lastClone = new ModelProxy();
 
 	/**
 	 * creates a client connection. This will start the thread that processes the pending enforces sent by the server
@@ -51,6 +52,20 @@ public final class ClientConnection implements Runnable
 	public ModelProxy getProxy()
 	{
 		return proxy;
+	}
+
+	public void onActionResolved()
+	{
+		lastClone = proxy.copy();
+		actionEndedCallback.call(lastClone);
+	}
+
+	public ModelProxy getLastClone() {
+		return lastClone;
+	}
+
+	public Callback<ModelProxy> getActionEndedCallback() {
+		return actionEndedCallback;
 	}
 
 	public Callback<ServerStateView> getServerStateViewCallback() {
@@ -313,23 +328,26 @@ public final class ClientConnection implements Runnable
 			f.execute(this);
 		}
 
-		try
-		{
-			this.wait(NetworkSettings.THREAD_CHECK_RATE);
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "interrupted {0}", e.getMessage());
-		}
 	}
 
 	/**
 	 * while the underlying implementation is still running it keeps processing all the received enforces.
 	 */
-	public void run()
+	public synchronized void run()
 	{
 		Thread.currentThread().setName(getClass().getName()+" Thread");
 		while (isRunning())
 		{
 			processAllCommand();
+
+			try
+			{
+				this.wait(NetworkSettings.THREAD_CHECK_RATE);
+			}
+			catch (Exception e)
+			{
+				LOGGER.log(Level.SEVERE, "interrupted {0}", e.getMessage());
+			}
 		}
 	}
 }

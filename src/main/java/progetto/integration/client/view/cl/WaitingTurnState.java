@@ -22,7 +22,7 @@ public class WaitingTurnState extends AbstractCLViewState {
         getDifferenceDescriptors().add(
             new DifferenceDescriptor<>
             (
-                getView().getController().getModel().getRoundInformation(),
+                getView().getController().getObservable().getRoundInformation(),
                 (data1, data2) -> data2.getCurrentPlayer() == getView().getController().getChair(),
                 (oldData, newData) -> myTurn = false
             )

@@ -60,7 +60,7 @@ abstract class AbstractRoom implements Runnable
 	}
 
 	/**
-	 * insert a request in the queue of request that must be processed.
+	 * insertInto a request in the queue of request that must be processed.
 	 * @param request to be inserted
 	 */
 	final void offerRequest(AbstractServerRequest request)

@@ -2,6 +2,7 @@ package progetto.controller;
 
 import progetto.model.AbstractGameAction;
 import progetto.model.IModel;
+import progetto.model.ObservableModel;
 
 public interface IGameController
 {
@@ -9,4 +10,5 @@ public interface IGameController
 	void processAllPendingAction();
 	void processAction();
 	IModel getModel();
+	ObservableModel getObservable();
 }

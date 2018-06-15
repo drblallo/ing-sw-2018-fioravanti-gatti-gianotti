@@ -2,6 +2,7 @@ package progetto.controller;
 
 import progetto.model.AbstractGameAction;
 import progetto.model.Model;
+import progetto.model.ObservableModel;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -81,6 +82,11 @@ public class GameController implements IGameController {
 	public Model getModel()
 	{
 		return game;
+	}
+
+	@Override
+	public ObservableModel getObservable() {
+		return getModel();
 	}
 
 }

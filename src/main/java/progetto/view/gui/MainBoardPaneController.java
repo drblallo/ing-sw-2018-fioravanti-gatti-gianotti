@@ -11,8 +11,8 @@ public class MainBoardPaneController {
 
 	public MainBoardPaneController()
 	{
-		mainBoard.getOnModifiedCallback().addObserver((ogg) -> update());
-		roundInfo.getOnModifiedCallback().addObserver((ogg) -> update());
+		mainBoard.getOnModifiedCallback().addObserver(ogg -> update());
+		roundInfo.getOnModifiedCallback().addObserver(ogg -> update());
 	}
 
     @FXML
@@ -28,7 +28,7 @@ public class MainBoardPaneController {
     private ExtractedDicesPaneController extractedDicesPaneController;
 
 
-    public void onGameChanged(IModel model) {
+    public void onGameChanged(ObservableModel model) {
 
     	mainBoard.setObservable(model.getMainBoard());
     	roundInfo.setObservable(model.getRoundInformation());

@@ -4,7 +4,7 @@ import progetto.utils.AbstractObservable;
 
 import java.io.Serializable;
 
-public class Container<T extends Serializable> extends AbstractObservable<T>
+public class Container<T extends Serializable> extends AbstractObservable<T> implements IContainer<T>
 {
 
 	private T data;
@@ -21,8 +21,17 @@ public class Container<T extends Serializable> extends AbstractObservable<T>
 
 	public void setData(T data)
 	{
-		this.data = data;
-		change(data);
+		if (data != this.data) {
+			this.data = data;
+			change(data);
+		}
 	}
 
+	public void setData(Container<T> cont)
+	{
+		if (cont.getData() != data) {
+			data = cont.getData();
+			change(data);
+		}
+	}
 }

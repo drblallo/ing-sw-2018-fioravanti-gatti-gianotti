@@ -48,7 +48,7 @@ public class PlaceDiceAction extends AbstractExecutibleGameAction{
 	{
 		DicePlacementCondition dicePlacementCondition = game.getPlayerBoard(getCallerID())
 				.getPickedDicesSlot().getData().getDicePlacementCondition(nDice);
-		AbstractPlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
+		IPlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 		WindowFrame windowFrame = playerBoard.getData().getWindowFrame();
 		DicePlacedFrameData dicePlacedFrameData = playerBoard.getDicePlacedFrame().getData();
 

@@ -22,7 +22,7 @@ public class FrameSelectionViewState extends AbstractCLViewState {
             getDifferenceDescriptors().add(
                     new DifferenceDescriptor<>
                             (
-                                    getModel().getPlayerBoard(getController().getChair()),
+                                    getController().getObservable().getPlayerBoard(getController().getChair()),
                                     (data1, data2) -> true,
                                     (oldData, newData) -> write(new Printer().printWindowFrameChoices(newData))
                             ));

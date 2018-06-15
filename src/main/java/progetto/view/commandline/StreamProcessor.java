@@ -22,7 +22,8 @@ public class StreamProcessor implements Runnable {
 
         this.comproc = comproc;
         bin = new BufferedReader(rin);
-        bout = new BufferedWriter(rout);
+        if (rout != null)
+			bout = new BufferedWriter(rout);
         isAlive = true;
 
     }
@@ -61,8 +62,11 @@ public class StreamProcessor implements Runnable {
         if (isActive)
         {
             output = comproc.execute(read.toString()) + '\n';
-            bout.write(output);
-            bout.flush();
+            if (bout != null)
+            {
+                bout.write(output);
+                bout.flush();
+            }
         }
         read.delete(0, read.length());
     }

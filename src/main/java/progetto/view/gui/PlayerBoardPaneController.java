@@ -37,6 +37,7 @@ public class PlayerBoardPaneController {
         }
         playerBoard = newPlayerBoard;
         playerBoard.addObserver(playerBoardDataIObserver);
+
         pickedDicesSlotPaneController.setObservable(playerBoard.getPickedDicesSlot());
 
     }

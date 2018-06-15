@@ -1,7 +1,9 @@
 package progetto.model;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Immutable class with data of RoundInformation

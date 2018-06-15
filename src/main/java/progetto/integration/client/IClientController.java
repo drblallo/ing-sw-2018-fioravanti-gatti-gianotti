@@ -3,6 +3,7 @@ package progetto.integration.client;
 import progetto.controller.IGameController;
 import progetto.integration.client.view.AbstractView;
 import progetto.model.IModel;
+import progetto.model.ObservableModel;
 import progetto.network.RoomView;
 import progetto.network.ServerStateView;
 import progetto.utils.Callback;
@@ -16,6 +17,7 @@ public interface IClientController extends IGameController {
 	Callback<ServerStateView> getServerViewCallback();
 
 	IModel getModel();
+	ObservableModel getObservable();
 	boolean createConnection(String ip, boolean rmi);
 	void addView(AbstractView view);
 	RoomView getCurrentRoom();

@@ -4,9 +4,7 @@ package progetto.integration.server;
 import org.junit.*;
 import progetto.controller.*;
 import progetto.integration.client.ClientController;
-import progetto.controller.EndTurnAction;
 import progetto.model.FrameSelectionState;
-import progetto.controller.FrameSetAction;
 import progetto.model.RoundState;
 import progetto.network.INetworkModule;
 import progetto.network.NetworkServer;
@@ -101,6 +99,7 @@ public class NetworkModelTest
 
 		Assert.assertTrue(game.isItemGood(new StartGameAction(), 2));
 	}
+
 
 	@Test
 	public void testProxy()

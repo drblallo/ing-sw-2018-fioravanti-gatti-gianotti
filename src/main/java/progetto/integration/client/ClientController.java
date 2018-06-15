@@ -5,12 +5,14 @@ import progetto.integration.GameSync;
 import progetto.integration.client.view.AbstractView;
 import progetto.model.AbstractGameAction;
 import progetto.model.IModel;
+import progetto.model.ObservableModel;
 import progetto.network.ClientConnection;
 import progetto.network.INetworkClient;
 import progetto.network.RoomView;
 import progetto.network.ServerStateView;
 import progetto.network.rmi.RMIClient;
 import progetto.network.socket.SocketClient;
+import progetto.proxy.ModelProxy;
 import progetto.utils.Callback;
 import progetto.utils.IObserver;
 
@@ -32,6 +34,10 @@ public class ClientController implements IClientController
     private Callback<ServerStateView> serverViewCallback = new Callback<>();
     private IObserver<ServerStateView> serverStateView = (message -> serverViewCallback.call(message));
 
+    private IObserver<ModelProxy> proxyObserver = this::proxyChanged;
+    private ModelProxy fixedProxy = new ModelProxy();
+    private ModelProxy lastModel;
+
     public void setCurrentClientGame(int index)
     {
         setCurrentClientGame(connections.get(index));
@@ -44,6 +50,7 @@ public class ClientController implements IClientController
             clientGame.getMessageCallback().removeObserver(messageObserver);
             clientGame.getRoomViewCallback().removeObserver(roomViewIObserver);
             clientGame.getServerStateViewCallback().removeObserver(serverStateView);
+            clientGame.getActionEndedCallback().removeObserver(proxyObserver);
         }
 
         this.clientGame = clientGame;
@@ -55,12 +62,21 @@ public class ClientController implements IClientController
             clientGame.getMessageCallback().addObserver(messageObserver);
             clientGame.getRoomViewCallback().addObserver(roomViewIObserver);
             clientGame.getServerStateViewCallback().addObserver(serverStateView);
+            clientGame.getActionEndedCallback().addObserver(proxyObserver);
 
         }
 
-        for (AbstractView v : views) {
+        for (AbstractView v : views)
             v.onGameChanged();
-        }
+
+        if (clientGame  != null)
+			proxyChanged(clientGame.getLastClone());
+    }
+
+    private void proxyChanged(ModelProxy proxy)
+    {
+        lastModel = proxy;
+        proxy.insertInto(fixedProxy);
     }
 
     public Callback<String> getMessageCallback() {
@@ -92,9 +108,11 @@ public class ClientController implements IClientController
 
     public IModel getModel()
     {
-        if(clientGame == null)
-            return null;
-        return clientGame.getProxy();
+        return lastModel;
+    }
+
+    public ObservableModel getObservable() {
+        return fixedProxy;
     }
 
     public boolean createConnection(String ip, boolean rmi)

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ServerGame extends GameSync implements  ISync
 {
-	private class DirtyTracker
+	private final class DirtyTracker
 	{
 		public final IEnforce enforce;
 		public final int origin;
@@ -49,6 +49,8 @@ public class ServerGame extends GameSync implements  ISync
 
 		for (DirtyTracker f : dirtyDataItems)
 			enforceCallback.call(f.enforce);
+
+		enforceCallback.call(new DoneEnforce());
 	}
 
 	private void addItemEnforce(DirtyTracker tracker) {
@@ -108,6 +110,7 @@ public class ServerGame extends GameSync implements  ISync
 		getGame().getModel().getMainBoard().removeObserver(mainObs);
 		getGame().getModel().getMainBoard().getExtractedDices().removeObserver(extObs);
 		getGame().getModel().getCommandQueue().removeObserver(cmqObs);
+		getGame().getModel().getRoundInformation().removeObserver(inObs);
 		getGame().getModel().getRoundTrack().removeObserver(rtdObs);
 	}
 
@@ -124,6 +127,7 @@ public class ServerGame extends GameSync implements  ISync
 		getGame().getModel().getMainBoard().getExtractedDices().addObserver(extObs);
 		getGame().getModel().getCommandQueue().addObserver(cmqObs);
 		getGame().getModel().getRoundTrack().addObserver(rtdObs);
+		getGame().getModel().getRoundInformation().addObserver(inObs);
 	}
 
 	public List<IEnforce> getNewPlayerEnforces()
@@ -133,6 +137,7 @@ public class ServerGame extends GameSync implements  ISync
 		enforces.add(new ExtractedDicesEnforce(getGame().getModel().getMainBoard().getExtractedDices().getData()));
 		enforces.add(new CommandQueueEnforce(getGame().getModel().getCommandQueue().getData()));
 		enforces.add(new RoundTrackEnforce(getGame().getModel().getRoundTrack().getData()));
+		enforces.add(new RoundInformationEnforce(getGame().getModel().getRoundInformation().getData()));
 		for (int a = 0; a < Model.MAX_NUM_PLAYERS; a++)
 		{
 			enforces.add(new PlayerBoardReplacementEnforce(getGame().getModel().getPlayerBoard(a).getData(), a));
