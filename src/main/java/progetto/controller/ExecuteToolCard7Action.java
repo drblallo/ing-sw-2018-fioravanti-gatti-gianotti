@@ -81,9 +81,6 @@ public class ExecuteToolCard7Action extends AbstractExecutibleGameAction{
 			extractedDices.changeDice(i, game.getRNGenerator().rollAgain(dice));
 		}
 
-		game.getMainBoard().delParamToolCard();
-		game.setState(new RoundState());
-
 	}
 
 }

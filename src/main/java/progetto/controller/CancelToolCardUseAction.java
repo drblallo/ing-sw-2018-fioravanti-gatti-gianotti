@@ -1,9 +1,6 @@
 package progetto.controller;
 
-import progetto.model.IModel;
-import progetto.model.Model;
-import progetto.model.RoundState;
-import progetto.model.ToolCardState;
+import progetto.model.*;
 
 /**
  * Action to cancel the use of a tool card
@@ -48,7 +45,14 @@ public class CancelToolCardUseAction extends AbstractExecutibleGameAction
 	@Override
 	public void execute(Model game)
 	{
-		game.getMainBoard().delParamToolCard();
+		Dice dice = game.getRoundInformation().getData().getToolCardParameters().getDice();
+		if(dice != null)
+		{
+			game.getDiceBag().add(dice.getGameColor());
+		}
+
+		game.getRoundInformation().delParamToolCard();
+
 		game.setState(new RoundState());
 
 	}

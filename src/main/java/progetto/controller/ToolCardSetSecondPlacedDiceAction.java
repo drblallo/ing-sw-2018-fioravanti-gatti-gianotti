@@ -14,9 +14,6 @@ public class ToolCardSetSecondPlacedDiceAction extends AbstractExecutibleGameAct
 	private final int x;
 	private final int y;
 
-	private static final String XPOS2 = "XPlacedDice2";
-	private static final String YPOS2 = "YPlacedDice2";
-
 	private static final int CARD4 = 4;
 	private static final int CARD12 = 12;
 
@@ -76,8 +73,7 @@ public class ToolCardSetSecondPlacedDiceAction extends AbstractExecutibleGameAct
 	@Override
 	public void execute(Model game)
 	{
-		game.getMainBoard().setParamToolCard(YPOS2, y);
-		game.getMainBoard().setParamToolCard(XPOS2, x);
+		game.getRoundInformation().setYX2Values(y, x);
 
 	}
 

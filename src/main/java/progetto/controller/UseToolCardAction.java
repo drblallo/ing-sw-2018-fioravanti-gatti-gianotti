@@ -78,8 +78,8 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 			askedToken++;
 		}
 
-		game.getMainBoard().setParamToolCard("token", askedToken);
-		game.getMainBoard().setParamToolCard("nCard", nCard);
+		game.getRoundInformation().setToken(askedToken);
+		game.getRoundInformation().setNCard(nCard);
 
 		game.setState(new ToolCardState(game.getMainBoard().getData().getToolCards().get(nCard).getIndex()));
 

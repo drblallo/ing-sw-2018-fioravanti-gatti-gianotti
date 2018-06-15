@@ -7,7 +7,6 @@ import java.util.List;
  */
 public final class RoundInformation extends Container<RoundInformationData>
 {
-	private final ExtractedDices extractedDices = new ExtractedDices();
 
 	/**
 	 * Constructor
@@ -15,15 +14,6 @@ public final class RoundInformation extends Container<RoundInformationData>
 	 RoundInformation()
 	{
 		super(new  RoundInformationData());
-	}
-
-	/**
-	 * Get extracted dices
-	 * @return extractedDices
-	 */
-	public ExtractedDices getExtractedDices()
-	{
-		return extractedDices;
 	}
 
 	/**
@@ -114,6 +104,137 @@ public final class RoundInformation extends Container<RoundInformationData>
 	public void setUsedToolCard(boolean usedToolCard)
 	{
 		setData(getData().setUsedToolCard(usedToolCard));
+	}
+
+	/**
+	 * Set value
+	 * @param nCard
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setNCard(int nCard)
+	{
+		setData(getData().setNCard(nCard));
+	}
+
+	/**
+	 * Set value
+	 * @param token
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setToken(int token)
+	{
+		 setData(getData().setToken(token));
+	}
+
+	/**
+	 * Set value
+	 * @param sPDice
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setSPDice(int sPDice)
+	{
+		setData(getData().setSPDice(sPDice));
+	}
+
+	/**
+	 * Set value
+	 * @param nDice
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setNDice(int nDice)
+	{
+		setData(getData().setNDice(nDice));
+	}
+
+	/**
+	 * Set values
+	 * @param xPlacedDice
+	 * @param yPlacedDice
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setYXValues(int yPlacedDice, int xPlacedDice)
+	{
+		setData(getData().setYXValues(yPlacedDice, xPlacedDice));
+	}
+
+	/**
+	 * Set values
+	 * @param xPlacedDice2
+	 * @param yPlacedDice2
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setYX2Values(int yPlacedDice2, int xPlacedDice2)
+	{
+		setData(getData().setYX2Values(yPlacedDice2, xPlacedDice2));
+	}
+
+	/**
+	 * Set value
+	 * @param increaseDecrease
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setIncreaseDecrease(int increaseDecrease)
+	{
+		setData(getData().setIncreaseDecrease(increaseDecrease));
+	}
+
+	/**
+	 * Set value
+	 * @param value
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setValue(int value)
+	{
+		setData(getData().setValue(value));
+	}
+
+	/**
+	 * Set value
+	 * @param changedDiceDB
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setChangedDiceDB(int changedDiceDB)
+	{
+		setData(getData().setChangedDiceDB(changedDiceDB));
+	}
+
+	/**
+	 * Set value
+	 * @param round
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setRound(int round)
+	{
+		setData(getData().setRound(round));
+	}
+
+	/**
+	 * Set value
+	 * @param nDiceRT
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setNDiceRT(int nDiceRT)
+	{
+		setData(getData().setNDiceRT(nDiceRT));
+	}
+
+	/**
+	 * Set value
+	 * @param dice
+	 * @return new RoundInformationData with modified values
+	 */
+	public void setDice(Dice dice)
+	{
+		setData(getData().setDice(dice));
+	}
+
+	/**
+	 * Delete all parameters of tool cards
+	 * @return new MainBoardData without deleted parameters
+	 */
+	public void delParamToolCard()
+	{
+		setData(getData().delParamToolCard());
 	}
 
 }

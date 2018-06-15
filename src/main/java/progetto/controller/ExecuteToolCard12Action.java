@@ -2,19 +2,10 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to execute tool card 12
  */
 public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
-
-	private static final String XPOS = "XPlacedDice";
-	private static final String YPOS = "YPlacedDice";
-	private static final String XPOS2 = "XPlacedDice2";
-	private static final String YPOS2 = "YPlacedDice2";
-	private static final String ROUND = "round";
-	private static final String N_DICE_RT = "nDiceRT";
 
 	private static final int CARD12 = 12;
 
@@ -43,37 +34,33 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
 
 		if(!verifyParam(game))
 		{
 			return false;
 		}
 
-		int round = map.get(ROUND);
-		int nDiceRT = map.get(N_DICE_RT);
+		int round = roundInformationData.getToolCardParameters().getRound();
+		int nDiceRT = roundInformationData.getToolCardParameters().getNDiceRT();
 
 		Dice diceRT = game.getRoundTrack().getData().getDice(round, nDiceRT);
 
-		int xPos = -1;
-		int yPos = -1;
+		int xPos = roundInformationData.getToolCardParameters().getXPlacedDice();
+		int yPos = roundInformationData.getToolCardParameters().getYPlacedDice();
 		Dice dice = null;
 
-		int xPos2 = -1;
-		int yPos2 = -1;
+		int xPos2 = roundInformationData.getToolCardParameters().getXPlacedDice2();
+		int yPos2 = roundInformationData.getToolCardParameters().getYPlacedDice2();
 		Dice dice2 = null;
 
-		if(map.containsKey(XPOS) && map.containsKey(YPOS))
+		if(xPos!=-1 && yPos!=-1)
 		{
-			xPos = map.get(XPOS);
-			yPos = map.get(YPOS);
 			dice = game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(yPos, xPos);
 		}
 
-		if(map.containsKey(XPOS2) && map.containsKey(YPOS2))
+		if(xPos2!=-1 && yPos2!=-1)
 		{
-			xPos2 = map.get(XPOS2);
-			yPos2 = map.get(YPOS2);
 			dice2 = game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(yPos2, xPos2);
 		}
 
@@ -91,58 +78,61 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformation roundInformation = game.getRoundInformation();
 
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 
 		Dice dice;
 
-		if(map.containsKey(XPOS) && map.containsKey(YPOS))
-		{
-			int xPos = map.get(XPOS);
-			int yPos = map.get(YPOS);
+		int xPos = roundInformation.getData().getToolCardParameters().getXPlacedDice();
+		int yPos = roundInformation.getData().getToolCardParameters().getYPlacedDice();
 
+		if(xPos!=-1 && yPos!=-1)
+		{
 			dice = playerBoard.getDicePlacedFrame().removeDice(yPos, xPos);
 			playerBoard.getPickedDicesSlot().add(dice, false, false, false);
 
 		}
 
-		if(map.containsKey(XPOS2) && map.containsKey(YPOS2))
+		int xPos2 = roundInformation.getData().getToolCardParameters().getXPlacedDice2();
+		int yPos2 = roundInformation.getData().getToolCardParameters().getYPlacedDice2();
+
+		if(xPos2!=-1 && yPos2!=-1)
 		{
-			int xPos2 = map.get(XPOS2);
-			int yPos2 = map.get(YPOS2);
-
 			dice = playerBoard.getDicePlacedFrame().removeDice(yPos2, xPos2);
-
 			playerBoard.getPickedDicesSlot().add(dice, false, false, false);
 		}
-
-
-		game.getMainBoard().delParamToolCard();
-
-		game.setState(new RoundState());
 
 	}
 
 	private boolean verifyParam(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		if(!(map.containsKey(XPOS) && map.containsKey(YPOS)) && !(map.containsKey(XPOS2) && map.containsKey(YPOS2)))
+		int xPos = roundInformationData.getToolCardParameters().getXPlacedDice();
+		int yPos = roundInformationData.getToolCardParameters().getYPlacedDice();
+		int xPos2 = roundInformationData.getToolCardParameters().getXPlacedDice2();
+		int yPos2 = roundInformationData.getToolCardParameters().getYPlacedDice2();
+
+		if(xPos==-1 && yPos==-1 && xPos2==-1 && yPos2==-1)
 		{
 			return false;
 		}
 
+		int round = roundInformationData.getToolCardParameters().getRound();
+		int nDiceRT = roundInformationData.getToolCardParameters().getNDiceRT();
+
 		return currentPlayer == getCallerID() &&
 				game.getMainBoard().getData().getGameState().getClass() == ToolCardState.class &&
-				map.containsKey(ROUND) && map.containsKey(N_DICE_RT);
+				round!=-1 && nDiceRT!=-1;
 
 	}
 
 	private boolean verifyDiceColor(Dice diceRT, Dice dice, Dice dice2)
 	{
-		return !((dice!=null && dice.getGameColor()!=diceRT.getGameColor()) || (dice2!=null && dice2.getGameColor()!=diceRT.getGameColor()));
+		return !((dice!=null && dice.getGameColor()!=diceRT.getGameColor()) ||
+				(dice2!=null && dice2.getGameColor()!=diceRT.getGameColor()));
 	}
 
 }

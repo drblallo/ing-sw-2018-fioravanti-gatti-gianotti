@@ -2,15 +2,11 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to execute tool card 11
  */
 public class ExecuteToolCard11Action extends AbstractExecutibleGameAction{
 
-	private static final String N_DICE = "nDice";
-	private static final String DB_CHANGED = "changedDiceDB";
 	private static final int INDEX = 11;
 
 	/**
@@ -38,16 +34,16 @@ public class ExecuteToolCard11Action extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		if(currentPlayer != getCallerID() || !map.containsKey(N_DICE) ||
+		int nDice = roundInformationData.getToolCardParameters().getNDice();
+
+		if(currentPlayer != getCallerID() || nDice==-1 ||
 				game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class)
 		{
 			return false;
 		}
-
-		int nDice = map.get(N_DICE);
 
 		ToolCardState cardState = (ToolCardState)game.getMainBoard().getData().getGameState();
 
@@ -65,23 +61,11 @@ public class ExecuteToolCard11Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int nDice = map.get(N_DICE);
+		Dice dice = game.getRNGenerator().extractDice(game.getDiceBag());
 
-		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
+		game.getRoundInformation().setDice(dice);
 
-		DicePlacementCondition dicePlacementCondition = playerBoard.getPickedDicesSlot()
-				.getData().getDicePlacementCondition(nDice);
-
-		Dice dice = dicePlacementCondition.getDice();
-
-		game.getDiceBag().add(dice.getGameColor());
-
-		dice = game.getRNGenerator().extractDice(game.getDiceBag());
-
-		playerBoard.getPickedDicesSlot().changeDice(nDice, dice);
-
-		game.getMainBoard().setParamToolCard(DB_CHANGED, 0);
+		game.getRoundInformation().setChangedDiceDB(0);
 
 	}
 

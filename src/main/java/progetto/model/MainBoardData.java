@@ -19,8 +19,6 @@ public final class MainBoardData implements Serializable {
 	private final AbstractGameState gameState;
 	private final int difficulty;
 
-	private final Map<String, Integer> paramToolCard;
-
 
 	/**
 	 * Constructor
@@ -44,8 +42,6 @@ public final class MainBoardData implements Serializable {
 		gameState = new PreGameState();
 
 		difficulty = STD_DIFFICULTY;
-
-		paramToolCard = Collections.unmodifiableMap(new HashMap<>());
 
 	}
 
@@ -74,8 +70,6 @@ public final class MainBoardData implements Serializable {
 		this.gameState = mainBoardData.gameState;
 		this.difficulty = mainBoardData.difficulty;
 
-		this.paramToolCard = mainBoardData.paramToolCard;
-
 	}
 
 	/**
@@ -103,7 +97,6 @@ public final class MainBoardData implements Serializable {
 		this.gameState = mainBoardData.gameState;
 
 		this.difficulty = mainBoardData.difficulty;
-		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
 
@@ -132,17 +125,15 @@ public final class MainBoardData implements Serializable {
 		this.difficulty = difficulty;
 
 		this.gameState = mainBoardData.gameState;
-		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
 
 	/**
-	 * Constructor to set a new value for different attributes
+	 * Constructor to set a new value for game State
 	 * @param mainBoardData previous mainBoardData
-	 * @param paramToolCard new HashMap
 	 * @param gameState new gameState
 	 */
-	private MainBoardData(MainBoardData mainBoardData, Map paramToolCard, AbstractGameState gameState)
+	private MainBoardData(MainBoardData mainBoardData, AbstractGameState gameState)
 	{
 		this.playerCount = mainBoardData.playerCount;
 
@@ -161,7 +152,6 @@ public final class MainBoardData implements Serializable {
 		this.difficulty = mainBoardData.difficulty;
 
 		this.gameState = gameState;
-		this.paramToolCard = paramToolCard;
 
 	}
 
@@ -190,7 +180,6 @@ public final class MainBoardData implements Serializable {
 		this.gameState = mainBoardData.gameState;
 
 		this.difficulty = mainBoardData.difficulty;
-		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
 
@@ -221,7 +210,6 @@ public final class MainBoardData implements Serializable {
 		this.gameState = mainBoardData.gameState;
 
 		this.difficulty = mainBoardData.difficulty;
-		this.paramToolCard = mainBoardData.paramToolCard;
 
 	}
 
@@ -286,7 +274,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setGameState(AbstractGameState state)
 	{
-		return new MainBoardData(this, paramToolCard, state);
+		return new MainBoardData(this, state);
 	}
 
 	/**
@@ -346,38 +334,6 @@ public final class MainBoardData implements Serializable {
 	MainBoardData setDifficulty(int difficulty)
 	{
 		return new MainBoardData(this, playerCount, difficulty);
-	}
-
-	/**
-	 * Add a parameter of a tool card
-	 * @param nameP new parameter
-	 * @param val new value
-	 * @return new MainBoardData with added parameter
-	 */
-	MainBoardData setParamToolCard(String nameP, Integer val)
-	{
-		HashMap<String, Integer> hs = new HashMap<>(paramToolCard);
-		hs.put(nameP, val);
-		return new MainBoardData(this, hs, gameState);
-	}
-
-	/**
-	 * Get parameters
-	 * @return parameters of tool cards
-	 */
-	public Map<String, Integer> getParamToolCard()
-	{
-		return paramToolCard;
-	}
-
-	/**
-	 * Delete all parameters of tool cards
-	 * @return new MainBoardData without deleted parameters
-	 */
-	MainBoardData delParamToolCard()
-	{
-		HashMap<String, Integer> hs = new HashMap<>();
-		return new MainBoardData(this, hs, gameState);
 	}
 
 	/**

@@ -17,6 +17,8 @@ public final class RoundInformationData implements Serializable {
 	private final boolean pickedDice;
 	private final boolean usedToolCard;
 
+	private final ToolCardParameters toolCardParameters;
+
 	/**
 	 * Constructor
 	 */
@@ -31,6 +33,8 @@ public final class RoundInformationData implements Serializable {
 
 		pickedDice = false;
 		usedToolCard = false;
+
+		toolCardParameters = new ToolCardParameters();
 
 	}
 
@@ -51,6 +55,8 @@ public final class RoundInformationData implements Serializable {
 		this.usedToolCard = roundInformationData.usedToolCard;
 		this.pickedDice = roundInformationData.pickedDice;
 
+		this.toolCardParameters = roundInformationData.toolCardParameters;
+
 	}
 
 	/**
@@ -60,7 +66,7 @@ public final class RoundInformationData implements Serializable {
 	 * @param currentPlayer new currentPlayer value
 	 * @param currentRound new currentRound value
 	 */
-	private RoundInformationData(RoundInformationData roundInformationData, int currentFirstPlayer, 
+	private RoundInformationData(RoundInformationData roundInformationData, int currentFirstPlayer,
 	                             int currentPlayer, int currentRound)
 	{
 		this.currentFirstPlayer = currentFirstPlayer;
@@ -72,6 +78,8 @@ public final class RoundInformationData implements Serializable {
 
 		this.usedToolCard = roundInformationData.usedToolCard;
 		this.pickedDice = roundInformationData.pickedDice;
+
+		this.toolCardParameters = roundInformationData.toolCardParameters;
 
 	}
 
@@ -93,7 +101,174 @@ public final class RoundInformationData implements Serializable {
 		this.pickedDice = pickedDice;
 		this.usedToolCard = usedToolCard;
 
+		this.toolCardParameters = roundInformationData.toolCardParameters;
+
 	}
+
+	/**
+	 * Constructor to set tool card parameters
+	 * @param roundInformationData previous roundInformationData
+	 * @param toolCardParameters
+	 */
+	private RoundInformationData(RoundInformationData roundInformationData, ToolCardParameters toolCardParameters)
+	{
+		this.currentFirstPlayer = roundInformationData.currentFirstPlayer;
+		this.currentPlayer = roundInformationData.currentPlayer;
+		this.currentRound = roundInformationData.currentRound;
+
+		ArrayList<Integer> tempQ = new ArrayList<>(roundInformationData.playerQueue);
+		playerQueue = Collections.unmodifiableList(tempQ);
+
+		this.pickedDice = roundInformationData.pickedDice;
+		this.usedToolCard = roundInformationData.usedToolCard;
+
+		this.toolCardParameters = toolCardParameters;
+
+	}
+
+	/**
+	 * Get tool card parameters
+	 * @return
+	 */
+	public ToolCardParameters getToolCardParameters()
+	{
+		return toolCardParameters;
+	}
+
+	/**
+	 * Set value
+	 * @param nCard
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setNCard(int nCard)
+	{
+		ToolCardParameters parameters = toolCardParameters.setNCard(nCard);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set value
+	 * @param token
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setToken(int token)
+	{
+		ToolCardParameters parameters = toolCardParameters.setToken(token);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set value
+	 * @param sPDice
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setSPDice(int sPDice)
+	{
+		ToolCardParameters parameters = toolCardParameters.setSPDice(sPDice);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set value
+	 * @param nDice
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setNDice(int nDice)
+	{
+		ToolCardParameters parameters = toolCardParameters.setNDice(nDice);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set values
+	 * @param xPlacedDice
+	 * @param yPlacedDice
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setYXValues(int yPlacedDice, int xPlacedDice)
+	{
+		ToolCardParameters parameters = toolCardParameters.setYXValues(yPlacedDice, xPlacedDice);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set values
+	 * @param xPlacedDice2
+	 * @param yPlacedDice2
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setYX2Values(int yPlacedDice2, int xPlacedDice2)
+	{
+		ToolCardParameters parameters = toolCardParameters.setYX2Values(yPlacedDice2, xPlacedDice2);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set value
+	 * @param increaseDecrease
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setIncreaseDecrease(int increaseDecrease)
+	{
+		ToolCardParameters parameters = toolCardParameters.setIncreaseDecrease(increaseDecrease);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set value
+	 * @param value
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setValue(int value)
+	{
+		ToolCardParameters parameters = toolCardParameters.setValue(value);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set value
+	 * @param changedDiceDB
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setChangedDiceDB(int changedDiceDB)
+	{
+		ToolCardParameters parameters = toolCardParameters.setChangedDiceDB(changedDiceDB);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set value
+	 * @param round
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setRound(int round)
+	{
+		ToolCardParameters parameters = toolCardParameters.setRound(round);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set value
+	 * @param nDiceRT
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setNDiceRT(int nDiceRT)
+	{
+		ToolCardParameters parameters = toolCardParameters.setNDiceRT(nDiceRT);
+		return new RoundInformationData(this, parameters);
+	}
+
+	/**
+	 * Set value
+	 * @param dice
+	 * @return new RoundInformationData with modified values
+	 */
+	RoundInformationData setDice(Dice dice)
+	{
+		ToolCardParameters parameters = toolCardParameters.setDice(dice);
+		return new RoundInformationData(this, parameters);
+	}
+	
 
 	/**
 	 * Get current first player
@@ -220,7 +395,13 @@ public final class RoundInformationData implements Serializable {
 		return new RoundInformationData(this, pickedDice, usedToolCard);
 	}
 
-
-
+	/**
+	 * Delete all parameters of tool cards
+	 * @return new RoundInformationData with deleted parameters
+	 */
+	RoundInformationData delParamToolCard()
+	{
+		return new RoundInformationData(this, new ToolCardParameters());
+	}
 
 }

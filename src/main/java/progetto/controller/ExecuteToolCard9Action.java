@@ -2,14 +2,11 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to execute tool card 9
  */
 public class ExecuteToolCard9Action extends AbstractExecutibleGameAction{
 
-	private static final String N_DICE = "nDice";
 	private static final int CARD9 = 9;
 
 	/**
@@ -37,16 +34,16 @@ public class ExecuteToolCard9Action extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		if(currentPlayer != getCallerID() || !map.containsKey(N_DICE) ||
+		int nDice = roundInformationData.getToolCardParameters().getNDice();
+
+		if(currentPlayer != getCallerID() || nDice==-1 ||
 				game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class)
 		{
 			return false;
 		}
-
-		int nDice = map.get(N_DICE);
 
 		ToolCardState cardState = (ToolCardState)game.getMainBoard().getData().getGameState();
 
@@ -62,16 +59,12 @@ public class ExecuteToolCard9Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int nDice = map.get(N_DICE);
+		RoundInformation roundInformation = game.getRoundInformation();
+		int nDice = roundInformation.getData().getToolCardParameters().getNDice();
 
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 
 		playerBoard.getPickedDicesSlot().setIgnoreAdjacent(nDice, true);
-
-		game.getMainBoard().delParamToolCard();
-
-		game.setState(new RoundState());
 
 	}
 

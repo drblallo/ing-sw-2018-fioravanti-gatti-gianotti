@@ -2,8 +2,6 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to set the value of the dice
  */
@@ -11,9 +9,6 @@ public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 
 	private final int value;
 	private static final int MAX_VALUE = 6;
-	private static final String N_DICE = "nDice";
-	private static final String DB_CHANGED = "changedDiceDB";
-	private static final int CARD11 = 11;
 
 	/**
 	 * Constructor without parameters
@@ -58,17 +53,25 @@ public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 	public boolean canBeExecuted(IModel game) {
 		MainBoardData data = game.getMainBoard().getData();
 
-		if(data.getGameState().getClass() != ToolCardState.class)
+		if(data.getGameState().getClass() != RoundState.class)
 		{
 			return false;
 		}
 
-		ToolCardState toolCardState = (ToolCardState) data.getGameState();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
 
-		int index = toolCardState.getIndex();
+		int nDice = roundInformationData.getToolCardParameters().getNDice();
+		int dbChanged = roundInformationData.getToolCardParameters().getChangedDiceDB();
+		Dice dice = roundInformationData.getToolCardParameters().getDice();
+		DicePlacementCondition placementCondition = game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getData().getDicePlacementCondition(nDice);
+
+		if(dbChanged==-1 || nDice==-1 || dice==null || placementCondition==null)
+		{
+			return false;
+		}
 
 		return getCallerID()==game.getRoundInformation().getData().getCurrentPlayer() &&
-				value>=1 && value<=MAX_VALUE && index == CARD11;
+				value>=1 && value<=MAX_VALUE && game.getRoundInformation().getData().getToolCardParameters().getDice()!=null;
 
 	}
 
@@ -78,26 +81,22 @@ public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 	 */
 	@Override
 	public void execute(Model game) {
-		game.getMainBoard().setParamToolCard("value", value);
+		game.getRoundInformation().setValue(value);
 
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		ToolCardState cardState = (ToolCardState)game.getMainBoard().getData().getGameState();
-		if(cardState.getIndex()==CARD11 && map.containsKey(DB_CHANGED) && map.containsKey(N_DICE))
-		{
-			int nDice = map.get(N_DICE);
-			DicePlacementCondition placementCondition = game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getData().getDicePlacementCondition(nDice);
-			if(placementCondition != null)
-			{
-				Dice dice = placementCondition.getDice();
-				dice = dice.setValue(Value.valueOf(value));
-				game.getPlayerBoard(getCallerID()).getPickedDicesSlot().changeDice(nDice, dice);
+		RoundInformation roundInformation = game.getRoundInformation();
 
-			}
+		int nDice = roundInformation.getData().getToolCardParameters().getNDice();
+		Dice dice = game.getRoundInformation().getData().getToolCardParameters().getDice();
 
-			game.getMainBoard().delParamToolCard();
-			game.setState(new RoundState());
+		dice = dice.setValue(Value.valueOf(value));
 
-		}
+		DicePlacementCondition placementCondition = game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getData().getDicePlacementCondition(nDice);
+
+		game.getDiceBag().add(placementCondition.getDice().getGameColor());
+		game.getPlayerBoard(getCallerID()).getPickedDicesSlot().changeDice(nDice, dice);
+
+		game.getRoundInformation().setDice(null);
+
 
 	}
 

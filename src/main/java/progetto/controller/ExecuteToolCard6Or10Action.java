@@ -2,14 +2,11 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to execute tool card 6 or 10
  */
 public class ExecuteToolCard6Or10Action extends AbstractExecutibleGameAction{
 
-	private static final String N_DICE = "nDice";
 	private static final int CARD6 = 6;
 	private static final int CARD10 = 10;
 
@@ -38,10 +35,12 @@ public class ExecuteToolCard6Or10Action extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		if(currentPlayer != getCallerID() || !map.containsKey(N_DICE) ||
+		int nDice = roundInformationData.getToolCardParameters().getNDice();
+
+		if(currentPlayer != getCallerID() || nDice==-1 ||
 				game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class)
 		{
 			return false;
@@ -53,8 +52,6 @@ public class ExecuteToolCard6Or10Action extends AbstractExecutibleGameAction{
 		{
 			return false;
 		}
-
-		int nDice = map.get(N_DICE);
 
 		DicePlacementCondition dicePlacementCondition = game.getPlayerBoard(currentPlayer).getPickedDicesSlot().getData()
 				.getDicePlacementCondition(nDice);
@@ -70,8 +67,8 @@ public class ExecuteToolCard6Or10Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int nDice = map.get(N_DICE);
+		RoundInformation roundInformation = game.getRoundInformation();
+		int nDice = roundInformation.getData().getToolCardParameters().getNDice();
 
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 
@@ -91,9 +88,6 @@ public class ExecuteToolCard6Or10Action extends AbstractExecutibleGameAction{
 		}
 
 		playerBoard.getPickedDicesSlot().changeDice(nDice, dice);
-
-		game.getMainBoard().delParamToolCard();
-		game.setState(new RoundState());
 
 	}
 

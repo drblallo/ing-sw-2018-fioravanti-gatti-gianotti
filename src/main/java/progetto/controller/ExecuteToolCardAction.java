@@ -1,13 +1,9 @@
 package progetto.controller;
 
-import progetto.model.AbstractGameAction;
-import progetto.model.IModel;
-import progetto.model.Model;
-import progetto.model.ToolCard;
+import progetto.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Action to execute a tool card
@@ -16,9 +12,6 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 	private ArrayList<AbstractExecutibleGameAction> gameActionList = new ArrayList();
 
-	private static final String N_CARD = "nCard";
-	private static final String TOKEN = "token";
-	private static final String SPDICE = "SPDice";
 
 	/**
 	 * Constructor without parameters
@@ -57,8 +50,9 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		if(!map.containsKey(N_CARD))
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
+
+		if(roundInformationData.getToolCardParameters().getNCard() == -1)
 		{
 			return false;
 		}
@@ -83,18 +77,19 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 	{
 		AbstractGameAction gameAction = setGameAction(game);
 
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int nCard = map.get(N_CARD);
+
+		RoundInformation roundInformation = game.getRoundInformation();
+		int nCard = roundInformation.getData().getToolCardParameters().getNCard();
 
 		if(game.getMainBoard().getData().getPlayerCount() == 1)
 		{
-			int nDiceToRemove = map.get(SPDICE);
+			int nDiceToRemove = roundInformation.getData().getToolCardParameters().getSPDice();
 			game.getMainBoard().getExtractedDices().removeDice(nDiceToRemove);
 			game.getMainBoard().removeToolCard(nCard);
 		}
 		else
 		{
-			int tokenToRemove = map.get(TOKEN);
+			int tokenToRemove = roundInformation.getData().getToolCardParameters().getToken();
 			int playerToken = game.getPlayerBoard(getCallerID()).getData().getToken();
 
 			game.getPlayerBoard(getCallerID()).setToken(playerToken-tokenToRemove);
@@ -106,6 +101,8 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 		gameAction.execute(game);
 
+		game.setState(new RoundState());
+
 	}
 
 	/**
@@ -116,8 +113,9 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 	private AbstractGameAction setGameAction(IModel game)
 	{
 		List<ToolCard> cardList = game.getMainBoard().getData().getToolCards();
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int index = cardList.get(map.get(N_CARD)).getIndex();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
+		int nCard = roundInformationData.getToolCardParameters().getNCard();
+		int index = cardList.get(nCard).getIndex();
 
 		return gameActionList.get(index-1);
 

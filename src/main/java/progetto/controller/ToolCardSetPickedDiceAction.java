@@ -70,8 +70,9 @@ public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
 	 * @param game the model in which we want to execute this command
 	 */
 	@Override
-	public void execute(Model game) {
-		game.getMainBoard().setParamToolCard("nDice", nDice);
+	public void execute(Model game)
+	{
+		game.getRoundInformation().setNDice(nDice);
 	}
 
 	/**

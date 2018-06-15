@@ -2,17 +2,11 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to execute tool card 4
  */
 public class ExecuteToolCard4Action extends AbstractExecutibleGameAction{
 
-	private static final String XPOS = "XPlacedDice";
-	private static final String YPOS = "YPlacedDice";
-	private static final String XPOS2 = "XPlacedDice2";
-	private static final String YPOS2 = "YPlacedDice2";
 	private static final int INDEX = 4;
 
 	/**
@@ -40,21 +34,21 @@ public class ExecuteToolCard4Action extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		if(currentPlayer != getCallerID() || !map.containsKey(XPOS) || !map.containsKey(YPOS)
-				|| !map.containsKey(XPOS2) || !map.containsKey(YPOS2) ||
+		int xPos = roundInformationData.getToolCardParameters().getXPlacedDice();
+		int yPos = roundInformationData.getToolCardParameters().getYPlacedDice();
+
+		int xPos2 = roundInformationData.getToolCardParameters().getXPlacedDice2();
+		int yPos2 = roundInformationData.getToolCardParameters().getYPlacedDice2();
+
+		if(currentPlayer != getCallerID() || xPos==-1 || yPos==-1
+				|| xPos2==-1 || yPos2==-1 ||
 				game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class)
 		{
 			return false;
 		}
-
-		int xPos = map.get(XPOS);
-		int yPos = map.get(YPOS);
-
-		int xPos2 = map.get(XPOS2);
-		int yPos2 = map.get(YPOS2);
 
 		ToolCardState cardState = (ToolCardState)game.getMainBoard().getData().getGameState();
 
@@ -71,12 +65,12 @@ public class ExecuteToolCard4Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int xPos = map.get(XPOS);
-		int yPos = map.get(YPOS);
+		RoundInformation roundInformation = game.getRoundInformation();
+		int xPos = roundInformation.getData().getToolCardParameters().getXPlacedDice();
+		int yPos = roundInformation.getData().getToolCardParameters().getYPlacedDice();
 
-		int xPos2 = map.get(XPOS2);
-		int yPos2 = map.get(YPOS2);
+		int xPos2 = roundInformation.getData().getToolCardParameters().getXPlacedDice2();
+		int yPos2 = roundInformation.getData().getToolCardParameters().getYPlacedDice2();
 
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 
@@ -87,10 +81,6 @@ public class ExecuteToolCard4Action extends AbstractExecutibleGameAction{
 		dice = playerBoard.getDicePlacedFrame().removeDice(yPos2, xPos2);
 
 		playerBoard.getPickedDicesSlot().add(dice, false, false, false);
-
-		game.getMainBoard().delParamToolCard();
-
-		game.setState(new RoundState());
 
 	}
 

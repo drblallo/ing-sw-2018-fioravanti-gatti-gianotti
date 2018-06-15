@@ -71,8 +71,8 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 	 */
 	@Override
 	public void execute(Model game) {
-		game.getMainBoard().setParamToolCard("round", round);
-		game.getMainBoard().setParamToolCard("nDiceRT", nDiceRT);
+		game.getRoundInformation().setRound(round);
+		game.getRoundInformation().setNDiceRT(nDiceRT);
 	}
 
 }

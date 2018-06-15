@@ -2,15 +2,11 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to execute tool card 1
  */
 public class ExecuteToolCard1Action extends AbstractExecutibleGameAction{
 
-	private static final String N_DICE = "nDice";
-	private static final String INC_DEC = "increaseDecrease";
 	private static final int INDEX = 1;
 
 	/**
@@ -38,17 +34,18 @@ public class ExecuteToolCard1Action extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
+
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		if(currentPlayer != getCallerID() || !map.containsKey(N_DICE) || !map.containsKey(INC_DEC) ||
+		int nDice = roundInformationData.getToolCardParameters().getNDice();
+		int increaseDecrease = roundInformationData.getToolCardParameters().getIncreaseDecrease();
+
+		if(currentPlayer != getCallerID() || nDice==-1 || increaseDecrease==-1 ||
 				game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class)
 		{
 			return false;
 		}
-
-		int nDice = map.get(N_DICE);
-		int increaseDecrease = map.get(INC_DEC);
 
 		ToolCardState cardState = (ToolCardState)game.getMainBoard().getData().getGameState();
 
@@ -67,9 +64,10 @@ public class ExecuteToolCard1Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int nDice = map.get(N_DICE);
-		int increaseDecrease = map.get(INC_DEC);
+		RoundInformation roundInformation = game.getRoundInformation();
+
+		int nDice = roundInformation.getData().getToolCardParameters().getNDice();
+		int increaseDecrease = roundInformation.getData().getToolCardParameters().getIncreaseDecrease();
 
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 
@@ -88,9 +86,6 @@ public class ExecuteToolCard1Action extends AbstractExecutibleGameAction{
 		}
 
 		playerBoard.getPickedDicesSlot().changeDice(nDice, dice);
-
-		game.getMainBoard().delParamToolCard();
-		game.setState(new RoundState());
 
 	}
 

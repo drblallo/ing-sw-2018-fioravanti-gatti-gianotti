@@ -105,24 +105,6 @@ public final class MainBoard extends AbstractMainBoard
 	}
 
 	/**
-	 * Set a parameter of a tool card
-	 * @param param new param
-	 * @param val new value
-	 */
-	public void setParamToolCard(String param, Integer val)
-	{
-		setData(getData().setParamToolCard(param, val));
-	}
-
-	/**
-	 * Delete all parameters of a tool card
-	 */
-	public void delParamToolCard()
-	{
-		setData(getData().delParamToolCard());
-	}
-
-	/**
 	 * Increase number of call of the tool card in position pos
 	 * @param pos position of the tool card
 	 */

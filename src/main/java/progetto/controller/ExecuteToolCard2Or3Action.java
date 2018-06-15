@@ -2,15 +2,11 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to execute tool card 2 ore 3
  */
 public class ExecuteToolCard2Or3Action extends AbstractExecutibleGameAction{
 
-	private static final String XPOS = "XPlacedDice";
-	private static final String YPOS = "YPlacedDice";
 	private static final int CARD2 = 2;
 	private static final int CARD3 = 3;
 
@@ -39,17 +35,17 @@ public class ExecuteToolCard2Or3Action extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		if(currentPlayer != getCallerID() || !map.containsKey(XPOS) || !map.containsKey(YPOS) ||
+		int xPos = roundInformationData.getToolCardParameters().getXPlacedDice();
+		int yPos = roundInformationData.getToolCardParameters().getYPlacedDice();
+
+		if(currentPlayer != getCallerID() || xPos==-1 || yPos==-1 ||
 				game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class)
 		{
 			return false;
 		}
-
-		int xPos = map.get(XPOS);
-		int yPos = map.get(YPOS);
 
 		ToolCardState cardState = (ToolCardState)game.getMainBoard().getData().getGameState();
 
@@ -65,9 +61,9 @@ public class ExecuteToolCard2Or3Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int xPos = map.get(XPOS);
-		int yPos = map.get(YPOS);
+		RoundInformation roundInformation = game.getRoundInformation();
+		int xPos = roundInformation.getData().getToolCardParameters().getXPlacedDice();
+		int yPos = roundInformation.getData().getToolCardParameters().getYPlacedDice();
 
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 
@@ -83,9 +79,6 @@ public class ExecuteToolCard2Or3Action extends AbstractExecutibleGameAction{
 			playerBoard.getPickedDicesSlot().add(dice, false, true, false);
 		}
 
-		game.getMainBoard().delParamToolCard();
-
-		game.setState(new RoundState());
 
 	}
 

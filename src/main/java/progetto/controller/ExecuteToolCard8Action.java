@@ -2,7 +2,6 @@ package progetto.controller;
 
 import progetto.model.IModel;
 import progetto.model.Model;
-import progetto.model.RoundState;
 import progetto.model.ToolCardState;
 
 import java.util.List;
@@ -76,9 +75,6 @@ public class ExecuteToolCard8Action extends AbstractExecutibleGameAction{
 	public void execute(Model game)
 	{
 		game.getRoundInformation().changeNextPlayer(getCallerID());
-
-		game.getMainBoard().delParamToolCard();
-		game.setState(new RoundState());
 
 	}
 

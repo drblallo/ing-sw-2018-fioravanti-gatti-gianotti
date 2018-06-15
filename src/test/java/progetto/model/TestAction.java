@@ -563,4 +563,18 @@ public class TestAction {
 
 	}
 
+	@Test
+	public void testCancelToolCardUseAction()
+	{
+		game.getModel().getRoundInformation().setCurrentPlayer(0);
+
+		game.getModel().setState(new ToolCardState(0));
+		AbstractGameAction gameAction = new CancelToolCardUseAction();
+		Assert.assertFalse(gameAction.canBeExecuted(game.getModel()));
+
+		gameAction = new CancelToolCardUseAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game.getModel()));
+
+	}
+
 }

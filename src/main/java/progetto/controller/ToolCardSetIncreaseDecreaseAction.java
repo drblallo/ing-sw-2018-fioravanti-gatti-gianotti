@@ -65,7 +65,7 @@ public class ToolCardSetIncreaseDecreaseAction extends AbstractExecutibleGameAct
 	@Override
 	public void execute(Model game)
 	{
-		game.getMainBoard().setParamToolCard("increaseDecrease", increaseDecrease);
+		game.getRoundInformation().setIncreaseDecrease(increaseDecrease);
 	}
 
 }

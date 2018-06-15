@@ -13,9 +13,6 @@ public class ToolCardSetPlacedDiceAction extends AbstractExecutibleGameAction{
 	private final int x;
 	private final int y;
 
-	private static final String XPOS = "XPlacedDice";
-	private static final String YPOS = "YPlacedDice";
-
 	private static final int CARD2 = 2;
 	private static final int CARD3 = 3;
 	private static final int CARD4 = 4;
@@ -75,9 +72,9 @@ public class ToolCardSetPlacedDiceAction extends AbstractExecutibleGameAction{
 	 * @param game the model in which we want to execute this command
 	 */
 	@Override
-	public void execute(Model game) {
-		game.getMainBoard().setParamToolCard(YPOS, y);
-		game.getMainBoard().setParamToolCard(XPOS, x);
+	public void execute(Model game)
+	{
+		game.getRoundInformation().setYXValues(y, x);
 
 	}
 

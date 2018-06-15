@@ -35,8 +35,8 @@ public class TestToolCards {
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 		game.getRoundInformation().setCurrentPlayer(0);
-		game.getMainBoard().setParamToolCard("nDice", 0);
-		game.getMainBoard().setParamToolCard("increaseDecrease", 0);
+		game.getRoundInformation().setNDice(0);
+		game.getRoundInformation().setIncreaseDecrease(0);
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.YELLOW));
 		gameAction = new ExecuteToolCard1Action(0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -164,8 +164,8 @@ public class TestToolCards {
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
-		Assert.assertEquals(0, (int)game.getMainBoard().getData().getParamToolCard().get("round"));
-		Assert.assertEquals(0, (int)game.getMainBoard().getData().getParamToolCard().get("nDiceRT"));
+		Assert.assertEquals(0, (int)game.getRoundInformation().getData().getToolCardParameters().getRound());
+		Assert.assertEquals(0, (int)game.getRoundInformation().getData().getToolCardParameters().getNDiceRT());
 
 	}
 
@@ -186,8 +186,8 @@ public class TestToolCards {
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		Assert.assertFalse(game.getMainBoard().getData().getParamToolCard().containsKey("round"));
-		Assert.assertFalse(game.getMainBoard().getData().getParamToolCard().containsKey("nDiceRT"));
+		Assert.assertFalse(game.getRoundInformation().getData().getToolCardParameters().getRound() != -1);
+		Assert.assertFalse(game.getRoundInformation().getData().getToolCardParameters().getNDiceRT() != -1);
 
 	}
 
@@ -201,7 +201,18 @@ public class TestToolCards {
 		game.getRoundInformation().setCurrentPlayer(0);
 		game.getMainBoard().setPlayerCount(1);
 		game.getMainBoard().setGameState(new RoundState());
+
+		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.GREEN));
+
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
+		gameAction = new ToolCardSetPickedDiceAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
+		gameAction = new ExecuteToolCardAction(0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
@@ -209,7 +220,7 @@ public class TestToolCards {
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
-		Assert.assertEquals(1, (int)game.getMainBoard().getData().getParamToolCard().get("value"));
+		Assert.assertEquals(1, game.getRoundInformation().getData().getToolCardParameters().getValue());
 
 	}
 
@@ -223,7 +234,18 @@ public class TestToolCards {
 		game.getRoundInformation().setCurrentPlayer(0);
 		game.getMainBoard().setPlayerCount(1);
 		game.getMainBoard().setGameState(new RoundState());
+
+		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.GREEN));
+
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
+		gameAction = new ToolCardSetPickedDiceAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
+		gameAction = new ExecuteToolCardAction(0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
@@ -231,7 +253,7 @@ public class TestToolCards {
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
-		Assert.assertEquals(1, (int)game.getMainBoard().getData().getParamToolCard().get("value"));
+		Assert.assertEquals(1, game.getRoundInformation().getData().getToolCardParameters().getValue());
 
 	}
 
@@ -255,7 +277,7 @@ public class TestToolCards {
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		Assert.assertFalse(game.getMainBoard().getData().getParamToolCard().containsKey("value"));
+		Assert.assertFalse(game.getRoundInformation().getData().getToolCardParameters().getValue()!=-1);
 
 	}
 
@@ -270,8 +292,8 @@ public class TestToolCards {
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
-		Assert.assertEquals(0, (int)game.getMainBoard().getData().getParamToolCard().get("YPlacedDice"));
-		Assert.assertEquals(0, (int)game.getMainBoard().getData().getParamToolCard().get("XPlacedDice"));
+		Assert.assertEquals(0, game.getRoundInformation().getData().getToolCardParameters().getYPlacedDice());
+		Assert.assertEquals(0, game.getRoundInformation().getData().getToolCardParameters().getXPlacedDice());
 
 	}
 
@@ -286,8 +308,8 @@ public class TestToolCards {
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
-		Assert.assertEquals(0, (int)game.getMainBoard().getData().getParamToolCard().get("YPlacedDice2"));
-		Assert.assertEquals(0, (int)game.getMainBoard().getData().getParamToolCard().get("XPlacedDice2"));
+		Assert.assertEquals(0, game.getRoundInformation().getData().getToolCardParameters().getYPlacedDice2());
+		Assert.assertEquals(0, game.getRoundInformation().getData().getToolCardParameters().getXPlacedDice2());
 
 	}
 
@@ -306,8 +328,8 @@ public class TestToolCards {
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		Assert.assertFalse(game.getMainBoard().getData().getParamToolCard().containsKey("YPlacedDice"));
-		Assert.assertFalse(game.getMainBoard().getData().getParamToolCard().containsKey("XPlacedDice"));
+		Assert.assertFalse(game.getRoundInformation().getData().getToolCardParameters().getYPlacedDice()!=-1);
+		Assert.assertFalse(game.getRoundInformation().getData().getToolCardParameters().getXPlacedDice()!=-1);
 
 	}
 
@@ -326,8 +348,8 @@ public class TestToolCards {
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		Assert.assertFalse(game.getMainBoard().getData().getParamToolCard().containsKey("YPlacedDice2"));
-		Assert.assertFalse(game.getMainBoard().getData().getParamToolCard().containsKey("XPlacedDice2"));
+		Assert.assertFalse(game.getRoundInformation().getData().getToolCardParameters().getYPlacedDice2()!=-1);
+		Assert.assertFalse(game.getRoundInformation().getData().getToolCardParameters().getXPlacedDice2()!=-1);
 
 	}
 
@@ -344,7 +366,7 @@ public class TestToolCards {
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
-		Assert.assertEquals(0, (int)game.getMainBoard().getData().getParamToolCard().get("nDice"));
+		Assert.assertEquals(0, game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -364,7 +386,7 @@ public class TestToolCards {
 
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		Assert.assertFalse(game.getMainBoard().getData().getParamToolCard().containsKey("nDice"));
+		Assert.assertFalse(game.getRoundInformation().getData().getToolCardParameters().getNDice()!=-1);
 
 	}
 
@@ -418,25 +440,6 @@ public class TestToolCards {
 	}
 
 	@Test
-	public void testCancelToolCardUseAction()
-	{
-		AbstractGameAction gameAction = new CancelToolCardUseAction();
-		Assert.assertFalse(gameAction.canBeExecuted(game));
-
-		game.getRoundInformation().setCurrentPlayer(0);
-		game.setState(new ToolCardState(1));
-		game.getMainBoard().setParamToolCard("Test", 1);
-
-		gameAction = new CancelToolCardUseAction(0);
-		Assert.assertTrue(gameAction.canBeExecuted(game));
-		gameAction.execute(game);
-
-		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
-
-	}
-
-	@Test
 	public void testExecuteToolCard11Action()
 	{
 		AbstractGameAction gameAction = new ExecuteToolCard11Action();
@@ -455,21 +458,29 @@ public class TestToolCards {
 		gameAction.execute(game);
 
 		Dice dice = game.getPlayerBoard(0).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice();
-		Assert.assertEquals(GameColor.BLUE, dice.getGameColor());
+		Assert.assertEquals(GameColor.RED, dice.getGameColor());
 
 		Assert.assertEquals(ToolCardState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertFalse(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertNotEquals(-1, game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
+		Assert.assertEquals(GameColor.PURPLE, game.getRoundInformation().getData().getToolCardParameters().getDice().getGameColor());
+
+		game.setState(new RoundState());
 		gameAction = new ToolCardSetDiceValueAction(0, 3);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
 
 		dice = game.getPlayerBoard(0).getPickedDicesSlot().getData().getDicePlacementCondition(0).getDice();
-		Assert.assertEquals(GameColor.BLUE, dice.getGameColor());
+		Assert.assertEquals(GameColor.PURPLE, dice.getGameColor());
 		Assert.assertEquals(Value.THREE, dice.getValue());
+
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
+		Assert.assertEquals(-1, game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -543,8 +554,7 @@ public class TestToolCards {
 		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 		Assert.assertEquals(Value.TWO, dice.getValue());
 
-		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -683,13 +693,17 @@ public class TestToolCards {
 		Assert.assertFalse(dicePlacementCondition.getIgnoreAdjacent());
 		Assert.assertFalse(dicePlacementCondition.getIgnoreValue());
 
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
 	@Test
-	public void testExecuteToolCard3ActionAction()
+	public void testExecuteToolCard3Action()
 	{
 		AbstractGameAction gameAction = new ExecuteToolCard2Or3Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
@@ -715,8 +729,12 @@ public class TestToolCards {
 		Assert.assertFalse(dicePlacementCondition.getIgnoreAdjacent());
 		Assert.assertTrue(dicePlacementCondition.getIgnoreValue());
 
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -748,8 +766,12 @@ public class TestToolCards {
 		Assert.assertTrue(dicePlacementCondition.getIgnoreAdjacent());
 		Assert.assertFalse(dicePlacementCondition.getIgnoreValue());
 
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -815,8 +837,12 @@ public class TestToolCards {
 		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 		Assert.assertEquals(Value.TWO, dice.getValue());
 
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -893,8 +919,13 @@ public class TestToolCards {
 		Assert.assertEquals(GameColor.RED, dice.getGameColor());
 		Assert.assertEquals(Value.ONE, dice.getValue());
 
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -960,8 +991,12 @@ public class TestToolCards {
 		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 		Assert.assertEquals(Value.ONE, dice.getValue());
 
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -988,8 +1023,13 @@ public class TestToolCards {
 		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 		Assert.assertEquals(Value.TWO, dice.getValue());
 
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -1027,8 +1067,12 @@ public class TestToolCards {
 		Assert.assertEquals(GameColor.GREEN, dice.getGameColor());
 		Assert.assertEquals(Value.SIX, dice.getValue());
 
+		gameAction = new EndTurnAction(0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1, game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -1039,7 +1083,7 @@ public class TestToolCards {
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
 		game.getRoundInformation().setCurrentPlayer(0);
-		game.setState(new ToolCardState(8));
+		game.setState(new RoundState());
 
 		game.getRoundInformation().addPlayerQueue(1);
 		game.getRoundInformation().addPlayerQueue(2);
@@ -1047,13 +1091,20 @@ public class TestToolCards {
 		game.getRoundInformation().addPlayerQueue(4);
 		game.getRoundInformation().addPlayerQueue(0);
 
-		gameAction = new ExecuteToolCard8Action(0);
+		game.getPlayerBoard(0).setToken(10);
+		List<Class> actionList = new ArrayList<>();
+		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 8, actionList));
+		gameAction = new UseToolCardAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
+
+		gameAction = new ExecuteToolCardAction(0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
 
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 
 		Assert.assertEquals(0, (int)game.getRoundInformation().getData().getNextPlayer());
@@ -1116,7 +1167,7 @@ public class TestToolCards {
 		Assert.assertEquals(Value.TWO, dice.getValue());
 
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 		Assert.assertEquals(4, game.getPlayerBoard(0).getData().getToken());
 
@@ -1199,7 +1250,7 @@ public class TestToolCards {
 		Assert.assertEquals(Value.TWO, dice.getValue());
 
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 		Assert.assertEquals(0, game.getPlayerBoard(0).getData().getToken());
 
@@ -1280,14 +1331,13 @@ public class TestToolCards {
 	@Test
 	public void testParamToolCard()
 	{
-		game.getMainBoard().setParamToolCard("a", 1);
+		game.getRoundInformation().setNDice(1);
 
-		Assert.assertEquals(1, (int)game.getMainBoard().getData().getParamToolCard().get("a"));
+		Assert.assertEquals(1, game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
-		game.getMainBoard().setParamToolCard("a", 2);
+		game.getRoundInformation().setNDice(2);
 
-		Assert.assertEquals(2, (int)game.getMainBoard().getData().getParamToolCard().get("a"));
-		Assert.assertEquals(1, game.getMainBoard().getData().getParamToolCard().size());
+		Assert.assertEquals(2, game.getRoundInformation().getData().getToolCardParameters().getNDice());
 
 	}
 
@@ -1298,11 +1348,19 @@ public class TestToolCards {
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
 		game.getRoundInformation().setCurrentPlayer(0);
-		game.setState(new ToolCardState(12));
 
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.ONE, GameColor.YELLOW), 0, 0);
 		game.getPlayerBoard(0).addDiceInPlacedFrame(new Dice(Value.TWO, GameColor.BLUE), 0, 1);
 		game.getRoundTrack().add(new Dice(Value.THREE, GameColor.YELLOW), 0);
+
+		game.setState(new RoundState());
+
+		game.getPlayerBoard(0).setToken(10);
+		List<Class> actionList = new ArrayList<>();
+		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12, actionList));
+		gameAction = new UseToolCardAction(0, 0);
+		Assert.assertTrue(gameAction.canBeExecuted(game));
+		gameAction.execute(game);
 
 		gameAction = new ToolCardSetDiceRoundTrackAction(0, 0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -1312,7 +1370,7 @@ public class TestToolCards {
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
-		gameAction = new ExecuteToolCard12Action(0);
+		gameAction = new ExecuteToolCardAction(0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
@@ -1328,7 +1386,29 @@ public class TestToolCards {
 		Assert.assertEquals(Value.TWO, dice.getValue());
 
 		Assert.assertEquals(RoundState.class, game.getMainBoard().getData().getGameState().getClass());
-		Assert.assertTrue(game.getMainBoard().getData().getParamToolCard().isEmpty());
+		Assert.assertEquals(-1,game.getRoundInformation().getData().getToolCardParameters().getNDice());
+
+	}
+
+	@Test
+	public void testToolCardSetDiceValueActionFail()
+	{
+		game.getRoundInformation().setCurrentPlayer(0);
+		AbstractGameAction gameAction = new ToolCardSetDiceValueAction(0, 0);
+		Assert.assertFalse(gameAction.canBeExecuted(game));
+
+		game.setState(new RoundState());
+
+		game.getRoundInformation().setChangedDiceDB(0);
+		game.getRoundInformation().setNDice(0);
+		game.getRoundInformation().setDice(new Dice(Value.ONE, GameColor.GREEN));
+		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.GREEN));
+
+		gameAction = new ToolCardSetDiceValueAction(1, 1);
+		Assert.assertFalse(gameAction.canBeExecuted(game));
+
+		gameAction = new ToolCardSetDiceValueAction(0, 0);
+		Assert.assertFalse(gameAction.canBeExecuted(game));
 
 	}
 

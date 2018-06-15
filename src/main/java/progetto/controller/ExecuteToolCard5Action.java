@@ -2,16 +2,11 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to execute tool card 5
  */
 public class ExecuteToolCard5Action extends AbstractExecutibleGameAction{
 
-	private static final String N_DICE = "nDice";
-	private static final String ROUND = "round";
-	private static final String N_DICE_RT = "nDiceRT";
 	private static final int INDEX = 5;
 
 	/**
@@ -39,19 +34,19 @@ public class ExecuteToolCard5Action extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		if(currentPlayer != getCallerID() || !map.containsKey(N_DICE) || !map.containsKey(ROUND)
-				|| !map.containsKey(N_DICE_RT) ||
+		int nDice = roundInformationData.getToolCardParameters().getNDice();
+		int round = roundInformationData.getToolCardParameters().getRound();
+		int nDiceRT = roundInformationData.getToolCardParameters().getNDiceRT();
+
+		if(currentPlayer != getCallerID() || nDice==-1 || round==-1
+				|| nDiceRT==-1 ||
 				game.getMainBoard().getData().getGameState().getClass() != ToolCardState.class)
 		{
 			return false;
 		}
-
-		int nDice = map.get(N_DICE);
-		int round = map.get(ROUND);
-		int nDiceRT = map.get(N_DICE_RT);
 
 		ToolCardState cardState = (ToolCardState)game.getMainBoard().getData().getGameState();
 
@@ -68,10 +63,10 @@ public class ExecuteToolCard5Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int nDice = map.get(N_DICE);
-		int round = map.get(ROUND);
-		int nDiceRT = map.get(N_DICE_RT);
+		RoundInformation roundInformation = game.getRoundInformation();
+		int nDice = roundInformation.getData().getToolCardParameters().getNDice();
+		int round =roundInformation.getData().getToolCardParameters().getRound();
+		int nDiceRT = roundInformation.getData().getToolCardParameters().getNDiceRT();
 
 		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
 
@@ -82,10 +77,6 @@ public class ExecuteToolCard5Action extends AbstractExecutibleGameAction{
 		Dice dice1 = roundTrack.change(round, nDiceRT, dice);
 
 		playerBoard.getPickedDicesSlot().changeDice(nDice, dice1);
-
-		game.getMainBoard().delParamToolCard();
-
-		game.setState(new RoundState());
 
 	}
 

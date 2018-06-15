@@ -2,8 +2,6 @@ package progetto.controller;
 
 import progetto.model.*;
 
-import java.util.Map;
-
 /**
  * Action to set the dice to use to activate tool card in single player
  */
@@ -46,8 +44,9 @@ public class ToolCardSetSinglePlayerDiceAction extends AbstractExecutibleGameAct
 			return false;
 		}
 
-		Map<String, Integer> map = game.getMainBoard().getData().getParamToolCard();
-		int nCard = map.get("nCard");
+		RoundInformationData roundInformationData = game.getRoundInformation().getData();
+
+		int nCard = roundInformationData.getToolCardParameters().getNCard();
 		GameColor gameColor = game.getMainBoard().getData().getToolCards().get(nCard).getGameColor();
 
 		Dice dice = game.getMainBoard().getExtractedDices().getData().getDice(nDice);
@@ -67,7 +66,7 @@ public class ToolCardSetSinglePlayerDiceAction extends AbstractExecutibleGameAct
 	@Override
 	public void execute(Model game)
 	{
-		game.getMainBoard().setParamToolCard("SPDice", nDice);
+		game.getRoundInformation().setSPDice(nDice);
 
 	}
 }
