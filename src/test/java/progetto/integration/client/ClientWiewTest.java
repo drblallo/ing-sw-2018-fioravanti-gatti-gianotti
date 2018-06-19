@@ -19,7 +19,7 @@ import progetto.utils.Waiter;
 
 import static progetto.ServerMain.DEFAULT_PORT;
 
-public class ClientWiewTest extends ApplicationTest {
+public class ClientWiewTest{ /*extends ApplicationTest {
 
     private NetworkServer networkServer;
 
@@ -178,6 +178,6 @@ public class ClientWiewTest extends ApplicationTest {
         networkServer.stop();
 
         timoty.wait(500);
-    }
+    }*/
 
 }
