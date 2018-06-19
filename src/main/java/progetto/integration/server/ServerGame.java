@@ -41,6 +41,8 @@ public class ServerGame extends GameSync implements  ISync
 	private IObserver<DicePlacedFrameData>[] pldObs = new IObserver[Model.MAX_NUM_PLAYERS];
 	private IObserver<ExtractedDicesData> extObs  = ogg -> addItemEnforce(new DirtyTracker(new ExtractedDicesEnforce(ogg), 2));
 	private IObserver<RoundInformationData> inObs = ogg -> addItemEnforce(new DirtyTracker(new RoundInformationEnforce(ogg), -2));
+	private static final int PLAYER_BOARD_OFFSET = 1000;
+
 	@Override
 	public void sendItem(Serializable s)
 	{
@@ -70,9 +72,10 @@ public class ServerGame extends GameSync implements  ISync
 		for (int a = 0; a < Model.MAX_NUM_PLAYERS; a++)
 		{
 			final int c = a;
-			plbObs[a] = ogg -> addItemEnforce(new DirtyTracker(new PlayerBoardReplacementEnforce(ogg, c), c + 3));
-			pikcObs[a] = ogg -> addItemEnforce(new DirtyTracker(new PickedDicesSlotEnforce(ogg, c), c + 3));
-			pldObs[a] = ogg -> addItemEnforce(new DirtyTracker(new DicePlacedFrameEnforce(ogg, c), c + 3));
+			int offset = (1 + c)  * PLAYER_BOARD_OFFSET;
+			plbObs[a] = ogg -> addItemEnforce(new DirtyTracker(new PlayerBoardReplacementEnforce(ogg, c), offset));
+			pikcObs[a] = ogg -> addItemEnforce(new DirtyTracker(new PickedDicesSlotEnforce(ogg, c), offset + 1));
+			pldObs[a] = ogg -> addItemEnforce(new DirtyTracker(new DicePlacedFrameEnforce(ogg, c), offset + 2));
 		}
 		clear();
 	}

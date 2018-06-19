@@ -10,6 +10,7 @@ public final class RoomView implements Serializable{
 	private final Map<Integer, PlayerView> playerInfoList = new HashMap<>();
 	private final String roomName;
 	private final int roomID;
+	private static final int MAX_DISPLAYED_CHAIRS = 4;
 
 	public RoomView(String roomName, int roomID) {
 		this.roomName = roomName;
@@ -68,9 +69,12 @@ public final class RoomView implements Serializable{
 
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("\nE' cambiata la disposizione dei giocatori sulle sedie!\nNuova disposizione:\n");
-		for(int i =0; i<4; i++ ){
-			if(getPlayerOfChair(i)!=null)
-				stringBuilder.append("Sedia ").append(i).append(": ").append(getPlayerOfChair(i).getName()).append('\n');
+		for(int i =0; i< MAX_DISPLAYED_CHAIRS; i++ ){
+			PlayerView p = getPlayerOfChair(i);
+			if(p  != null)
+			{
+				stringBuilder.append("Sedia ").append(i).append(": ").append(p.getName()).append('\n');
+			}
 			else
 				stringBuilder.append("Sedia ").append(i).append(": LIBERA").append('\n');
 		}

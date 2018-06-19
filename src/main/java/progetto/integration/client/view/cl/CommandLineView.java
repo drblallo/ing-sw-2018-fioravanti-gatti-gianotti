@@ -43,7 +43,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		playerName = "Luca";
 		setState(new DefaultViewState(this));
 		controller.getRoomViewCallback().addObserver(this::onRoomChanged);
-		controller.getObservable().getMainBoard().addObserver((ogg) -> checkValidity());
+		controller.getObservable().getMainBoard().addObserver(ogg -> checkValidity());
 	}
 
 	public boolean getIsRunning(){
@@ -57,7 +57,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 
 	@Override
 	public synchronized void onGameChanged() {
-
+		//nothing to do when game changes
 	}
 
 	public void setPlayerName(String playerName){
@@ -87,6 +87,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 			}
 			catch (InterruptedException e)
 			{
+				Thread.currentThread().interrupt();
 				LOGGER.log(Level.SEVERE, "FAILED TO CLEAR QUEUE");
 				stop();
 			}
@@ -147,6 +148,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		}
 		catch (InterruptedException e)
 		{
+			Thread.currentThread().interrupt();
 			isRunning = false;
 			LOGGER.log(Level.SEVERE,"Something went wrong {0}", e.getMessage());
 		}
@@ -171,8 +173,9 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		{
 			queue.put(r);
 		}
-		catch (Exception e)
+		catch (InterruptedException e)
 		{
+			Thread.currentThread().interrupt();
 			isRunning = false;
 			LOGGER.log(Level.SEVERE,"Something went wrong {0}", e.getMessage());
 		}

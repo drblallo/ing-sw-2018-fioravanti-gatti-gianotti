@@ -35,6 +35,8 @@ public final class PlayerView implements Serializable{
 	 * @return the of the player represented by this object.
 	 */
 	public String getName() {
+		if (name == null)
+			return "null";
 		return name;
 	}
 
