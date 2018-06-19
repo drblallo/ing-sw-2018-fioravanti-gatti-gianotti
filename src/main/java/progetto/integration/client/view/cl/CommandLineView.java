@@ -87,6 +87,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 			}
 			catch (InterruptedException e)
 			{
+				Thread.currentThread().interrupt();
 				LOGGER.log(Level.SEVERE, "FAILED TO CLEAR QUEUE");
 				stop();
 			}
@@ -147,6 +148,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		}
 		catch (InterruptedException e)
 		{
+			Thread.currentThread().interrupt();
 			isRunning = false;
 			LOGGER.log(Level.SEVERE,"Something went wrong {0}", e.getMessage());
 		}
@@ -171,8 +173,9 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		{
 			queue.put(r);
 		}
-		catch (Exception e)
+		catch (InterruptedException e)
 		{
+			Thread.currentThread().interrupt();
 			isRunning = false;
 			LOGGER.log(Level.SEVERE,"Something went wrong {0}", e.getMessage());
 		}
