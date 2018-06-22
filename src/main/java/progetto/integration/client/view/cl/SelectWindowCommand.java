@@ -14,7 +14,7 @@ public class SelectWindowCommand extends AbstractStateSwitcherCommand {
     @Override
     protected void perform(String[] params) {
         getController().sendAction(new FrameSetAction(getController().getChair(),
-                (number-1)/2, (number-1)&2));
+                (number-1)/2, (number-1)%2));
     }
 
     @Override

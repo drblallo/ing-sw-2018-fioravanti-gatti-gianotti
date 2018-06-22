@@ -18,6 +18,6 @@ public class ConfirmExitState extends AbstractCLViewState {
 
     @Override
     public String getMessage() {
-        return "\nSei sicuro di voler abbandoare il gioco?\n";
+        return "\nSei sicuro di voler abbandoare la partita?\n";
     }
 }

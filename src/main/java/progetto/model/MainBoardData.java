@@ -322,14 +322,14 @@ public final class MainBoardData implements Serializable {
 	 * Get List of public objective cards
 	 * @return List of public objective cards
 	 */
-	List<AbstractPublicObjectiveCard> getPublicObjectiveCards()
+	public List<AbstractPublicObjectiveCard> getPublicObjectiveCards()
 	{
 		return new ArrayList<>(this.publicObjectiveCards);
 	}
 
 	/**
-	 * Get List of public objective cards
-	 * @return List of public objective cards
+	 * Get List of tool cards
+	 * @return List of tool cards
 	 */
 	public List<ToolCard> getToolCards()
 	{

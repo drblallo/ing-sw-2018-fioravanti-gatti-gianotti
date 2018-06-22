@@ -105,7 +105,7 @@ public class TestMoreThanOnePlayer {
         commandLineView.execute("1");
         clientControllerStub.sendAction(new FrameSetAction(1,0,0));
         commandLineView.processAllPendings();
-        commandLineView.execute("5");
+        commandLineView.execute("8");
         commandLineView.processAllPendings();
 
         Assert.assertEquals(WaitingTurnState.class, commandLineView.getAbstractCLViewState().getClass());
@@ -127,7 +127,7 @@ public class TestMoreThanOnePlayer {
         clientControllerStub.sendAction(new FrameSetAction(1,0,0));
         commandLineView.processAllPendings();
 
-        commandLineView.execute("5");
+        commandLineView.execute("8");
         commandLineView.processAllPendings();
 
         Assert.assertEquals(WaitingTurnState.class, commandLineView.getAbstractCLViewState().getClass());

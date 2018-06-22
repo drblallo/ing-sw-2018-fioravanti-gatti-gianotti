@@ -32,5 +32,6 @@ public interface IClientController extends IGameController {
 	int getConnectionCount();
 	int getChair();
 	void disconnect();
+	void shutDown();
 }
 

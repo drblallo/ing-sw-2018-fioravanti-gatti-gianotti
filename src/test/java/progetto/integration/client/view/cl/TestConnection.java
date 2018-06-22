@@ -18,7 +18,7 @@ public class TestConnection {
     @Before
     public void setup(){
         clientControllerStub = new ClientControllerStub();
-        commandLineView = new CommandLineView(clientControllerStub, null);
+        commandLineView = new CommandLineView(clientControllerStub, System.out);
     }
 
     @Test
@@ -187,7 +187,7 @@ public class TestConnection {
                 .getModel().getMainBoard().getData().getGameState().getClass());
         Assert.assertEquals(RoundViewState.class, commandLineView.getAbstractCLViewState().getClass());
 
-        commandLineView.execute("6");
+        commandLineView.execute("9");
         commandLineView.execute("1");
         commandLineView.processAllPendings();
 

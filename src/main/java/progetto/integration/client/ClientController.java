@@ -193,4 +193,11 @@ public class ClientController implements IClientController
         connections.remove(clientGame);
         setCurrentClientGame(null);
     }
+
+    public void shutDown() {
+        for(ClientConnection c : connections){
+            c.disconnect();
+        }
+        System.exit(0);
+    }
 }

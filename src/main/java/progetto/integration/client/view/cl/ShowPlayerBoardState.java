@@ -12,7 +12,7 @@ public class ShowPlayerBoardState extends AbstractCLViewState {
         Printer printer = new Printer();
         int numberOfPlayer = getView().getController().getModel().getMainBoard().getData().getPlayerCount();
         for(int i = 0; i<numberOfPlayer; i++){
-            registerCommand(new ShowPlayerBoardCommand(getView(), i, printer));
+            registerCommand(new ShowPlayerBoardCommand(getView(), i,i, printer, new RoundViewState(getView())));
         }
 
     }

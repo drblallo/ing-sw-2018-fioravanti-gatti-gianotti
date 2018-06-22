@@ -168,7 +168,7 @@ public final class PlayerBoardData implements Serializable{
 	 * Get List of private objective cards
 	 * @return List of public objective cards
 	 */
-	List<AbstractPrivateObjectiveCard> getPrivateObjectiveCard()
+	public List<AbstractPrivateObjectiveCard> getPrivateObjectiveCard()
 	{
 		return new ArrayList<>(this.privateObjectiveCards);
 	}

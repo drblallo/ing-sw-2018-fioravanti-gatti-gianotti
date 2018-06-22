@@ -1,141 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="550.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.PlayerBoardPaneController">
+
+
+<HBox spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.PlayerBoardPaneController">
    <children>
-      <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TilePane fx:id="tilePane" hgap="5.0" maxHeight="225.0" maxWidth="280.0" minHeight="225.0" minWidth="280.0" prefHeight="225.0" prefWidth="280.0" style="-fx-background-color: black;" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox>
-               <children>
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Label text="PLAYER BOARD " textFill="#e81d1d">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Region HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <AnchorPane maxHeight="280.0" maxWidth="350.0" minHeight="280.0" minWidth="350.0" prefHeight="280.0" prefWidth="350.0">
-               <children>
-                  <TilePane fx:id="tilePane" hgap="5.0" maxHeight="280.0" maxWidth="350.0" minHeight="280.0" minWidth="350.0" prefHeight="280.0" prefWidth="350.0" style="-fx-background-color: black;" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView>
-                           <image>
-                              <Image url="@playerboard/WHITE-64.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </TilePane>
-               </children>
-            </AnchorPane>
-            <fx:include fx:id="pickedDicesSlotPane" source="PickedDicesSlotPane.fxml" />
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@playerboard/WHITE-64.png" />
+               </image>
+            </ImageView>
          </children>
          <padding>
-            <Insets left="50.0" right="50.0" top="15.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
-      </VBox>
+      </TilePane>
+      <fx:include fx:id="pickedDicesSlotPane" source="PickedDicesSlotPane.fxml" />
    </children>
-</AnchorPane>
+</HBox>

@@ -96,7 +96,7 @@ public class TestGame {
     @Test
     public void testExitGameCommand(){
 
-        commandLineView.execute("6");
+        commandLineView.execute("9");
         commandLineView.processAllPendings();
 
         Assert.assertEquals(ConfirmExitState.class, commandLineView.getAbstractCLViewState().getClass());
@@ -106,9 +106,8 @@ public class TestGame {
 
         Assert.assertEquals(RoundViewState.class, commandLineView.getAbstractCLViewState().getClass());
 
-        commandLineView.execute("6");
+        commandLineView.execute("9");
         commandLineView.execute("1");
-        clientControllerStub.sendAction(new EndTurnAction(0));
         commandLineView.processAllPendings();
 
         Assert.assertEquals(DefaultViewState.class, commandLineView.getAbstractCLViewState().getClass());

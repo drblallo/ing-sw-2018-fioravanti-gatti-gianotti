@@ -131,6 +131,7 @@ public class ToolCardDeck {
 	private void getCard4List(List<Class> actionList)
 	{
 		actionList.add(ToolCardSetPlacedDiceAction.class);
+		actionList.add(ToolCardSetSecondPlacedDiceAction.class);
 
 	}
 
@@ -194,6 +195,7 @@ public class ToolCardDeck {
 	{
 		actionList.add(ToolCardSetDiceRoundTrackAction.class);
 		actionList.add(ToolCardSetPlacedDiceAction.class);
+		actionList.add(ToolCardSetSecondPlacedDiceAction.class);
 
 	}
 
