@@ -133,7 +133,7 @@ public class TestConnection {
 
         Assert.assertEquals(ChairSelectionState.class, commandLineView.getAbstractCLViewState().getClass());
 
-        commandLineView.execute("0");
+        commandLineView.execute("1");
         commandLineView.processAllPendings();
 
         Assert.assertEquals(PreGameViewState.class, commandLineView.getAbstractCLViewState().getClass());
@@ -171,7 +171,7 @@ public class TestConnection {
         commandLineView.execute("2 ciao");
         commandLineView.execute("2 1");
         commandLineView.execute("3");
-        commandLineView.execute("0");
+        commandLineView.execute("1");
         commandLineView.processAllPendings();
         commandLineView.execute("1");
         commandLineView.processAllPendings();

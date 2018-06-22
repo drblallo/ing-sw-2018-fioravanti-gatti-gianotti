@@ -4,11 +4,8 @@ import progetto.controller.ToolCardSetSinglePlayerDiceAction;
 
 public class SetSinglePlayerDiceAction extends AbstractCLViewCommand {
 
-    private int numberOfCommand;
-
-    public SetSinglePlayerDiceAction(CommandLineView commandLineView, int numberOfCommand) {
+    public SetSinglePlayerDiceAction(CommandLineView commandLineView) {
         super(commandLineView);
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -32,14 +29,9 @@ public class SetSinglePlayerDiceAction extends AbstractCLViewCommand {
     }
 
     @Override
-    public String getName() {
-        return numberOfCommand + "";
-    }
-
-    @Override
     public String getHelp() {
         return "Scegli il dado da sacrificare per usare la carta scelta " +
-                "(Formato: " + numberOfCommand + " <Numero del dado>) " +
+                "(Formato: " + getName()+ " <Numero del dado>) " +
                 "(NB: Il colore del dado deve corrispondere a quello indicato sulla carta)";
     }
 }

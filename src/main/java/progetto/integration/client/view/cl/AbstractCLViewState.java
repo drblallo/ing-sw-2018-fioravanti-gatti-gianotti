@@ -7,8 +7,6 @@ import progetto.view.commandline.DifferenceDescriptor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class AbstractCLViewState extends CommandProcessor
 {
@@ -20,6 +18,12 @@ public abstract class AbstractCLViewState extends CommandProcessor
     {
         super(name);
         view = cl;
+    }
+
+    public void registerCommand(AbstractCLViewCommand command)
+    {
+       command.setName(getCommandCount() + 1);
+       super.registerCommand(command);
     }
 
     public IClientController getController(){

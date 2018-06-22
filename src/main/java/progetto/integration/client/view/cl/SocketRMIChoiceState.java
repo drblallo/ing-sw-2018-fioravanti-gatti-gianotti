@@ -12,7 +12,7 @@ public class SocketRMIChoiceState extends AbstractCLViewState {
 
         registerCommand(new ConnectionCommand(getView(), true));
         registerCommand(new ConnectionCommand(getView(), false));
-        registerCommand(new ReturnCommand(getView(), new DefaultViewState(getView()), 3, "Indietro"));
+        registerCommand(new ReturnCommand(getView(), new DefaultViewState(getView()),"Indietro"));
 
     }
 

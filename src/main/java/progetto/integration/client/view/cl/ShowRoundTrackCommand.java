@@ -4,11 +4,8 @@ import progetto.model.RoundTrackData;
 
 public class ShowRoundTrackCommand extends AbstractCLViewCommand {
 
-    private int numberOfCommand;
-
-    public ShowRoundTrackCommand(CommandLineView commandLineView, int numberOfCommand) {
+    public ShowRoundTrackCommand(CommandLineView commandLineView) {
         super(commandLineView);
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -19,11 +16,6 @@ public class ShowRoundTrackCommand extends AbstractCLViewCommand {
         if(!roundTrackData.isFree(0))
             write(printer.printRoundTrack(roundTrackData));
         else write("Il tracciato dei round è ancora vuoto!");
-    }
-
-    @Override
-    public String getName() {
-        return numberOfCommand + "";
     }
 
     @Override

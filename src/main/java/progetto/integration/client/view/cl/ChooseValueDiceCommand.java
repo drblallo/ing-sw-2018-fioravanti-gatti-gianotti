@@ -4,12 +4,10 @@ import progetto.controller.ToolCardSetDiceValueAction;
 
 public class ChooseValueDiceCommand extends AbstractCLViewCommand {
 
-    private int numberOfCommand;
     private static final int MAX_VALUE = 6;
 
-    public ChooseValueDiceCommand(CommandLineView commandLineView, int numberOfCommand) {
+    public ChooseValueDiceCommand(CommandLineView commandLineView) {
         super(commandLineView);
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -40,12 +38,7 @@ public class ChooseValueDiceCommand extends AbstractCLViewCommand {
     }
 
     @Override
-    public String getName() {
-        return numberOfCommand + "";
-    }
-
-    @Override
     public String getHelp() {
-        return "Scegli il valore che vuoi assegnare al dado estratto (Formato: <" + numberOfCommand + " <Valore del dado>";
+        return "Scegli il valore che vuoi assegnare al dado estratto (Formato: <" + getName()+ " <Valore del dado>";
     }
 }

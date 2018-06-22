@@ -18,13 +18,8 @@ public class SelectWindowCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return number + "";
-    }
-
-    @Override
     public String getHelp() {
 
-        return "Scegli vetrata numero " + number;
+        return "Scegli vetrata numero " + getName();
     }
 }

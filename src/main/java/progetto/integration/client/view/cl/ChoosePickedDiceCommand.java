@@ -4,11 +4,8 @@ import progetto.controller.ToolCardSetPickedDiceAction;
 
 public class ChoosePickedDiceCommand extends AbstractCLViewCommand {
 
-    private int numberOfCommand;
-
-    public ChoosePickedDiceCommand(CommandLineView commandLineView, int numberOfCommand) {
+    public ChoosePickedDiceCommand(CommandLineView commandLineView) {
         super(commandLineView);
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -35,13 +32,8 @@ public class ChoosePickedDiceCommand extends AbstractCLViewCommand {
     }
 
     @Override
-    public String getName() {
-        return numberOfCommand + "";
-    }
-
-    @Override
     public String getHelp() {
-        return "Scegli il dado al quale vuoi applicare la carta " + "scelta (Formato: " + numberOfCommand +
+        return "Scegli il dado al quale vuoi applicare la carta " + "scelta (Formato: " + getName()+
                 " <Numero del dado scelto>";
     }
 }

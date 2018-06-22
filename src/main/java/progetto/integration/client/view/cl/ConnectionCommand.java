@@ -10,14 +10,6 @@ public class ConnectionCommand extends AbstractCLViewCommand {
     }
 
     @Override
-    public String getName() {
-
-        if(isRMI)
-           return "1";
-        return "2";
-    }
-
-    @Override
     public String getHelp() {
         if(isRMI)
             return "RMI (Formato: 1 <Indirizzo IP>)";

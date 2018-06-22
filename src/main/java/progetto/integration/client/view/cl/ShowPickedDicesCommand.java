@@ -4,11 +4,9 @@ import progetto.model.PickedDicesSlotData;
 
 public class ShowPickedDicesCommand extends AbstractCLViewCommand {
 
-    private int numberOfCommand;
 
-    public ShowPickedDicesCommand(CommandLineView commandLineView, int numberOfCommand) {
+    public ShowPickedDicesCommand(CommandLineView commandLineView) {
         super(commandLineView);
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -19,11 +17,6 @@ public class ShowPickedDicesCommand extends AbstractCLViewCommand {
                 .getPlayerBoard(getController().getChair()).getPickedDicesSlot().getData();
         if(pickedDicesSlotData.getNDices()!=0)
             write(printer.printDices(pickedDicesSlotData));
-    }
-
-    @Override
-    public String getName() {
-        return numberOfCommand + "";
     }
 
     @Override

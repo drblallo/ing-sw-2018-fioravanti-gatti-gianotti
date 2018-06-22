@@ -1,7 +1,5 @@
 package progetto.integration.client.view.cl;
 
-import progetto.model.ToolCard;
-
 public class ShowToolCardState extends AbstractCLViewState {
 
     public ShowToolCardState(CommandLineView cl) {
@@ -11,12 +9,8 @@ public class ShowToolCardState extends AbstractCLViewState {
     @Override
     public void onApply() {
 
-        int i = 0;
-        for (ToolCard toolCard: getModel().getMainBoard().getData().getToolCards()) {
+        for (int i = 0; i < getModel().getMainBoard().getData().getToolCards().size(); i++)
             registerCommand(new UseToolCardCommand(getView(), i));
-            i++;
-        }
-
     }
 
     @Override

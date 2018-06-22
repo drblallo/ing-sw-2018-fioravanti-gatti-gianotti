@@ -4,11 +4,8 @@ import progetto.controller.ExecuteToolCard1Action;
 
 public class SolveToolCardCommand extends AbstractCLViewCommand {
 
-    private int numberOfCommand;
-
-    public SolveToolCardCommand(CommandLineView commandLineView, int numberOfCommand) {
+    public SolveToolCardCommand(CommandLineView commandLineView) {
         super(commandLineView);
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -19,11 +16,6 @@ public class SolveToolCardCommand extends AbstractCLViewCommand {
             setState(new GameTransitionState(getCommandLineView()));
         }
         else write("Insiere tutti i dati necessari!");
-    }
-
-    @Override
-    public String getName() {
-        return numberOfCommand + "";
     }
 
     @Override

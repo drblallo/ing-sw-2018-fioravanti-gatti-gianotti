@@ -12,11 +12,6 @@ public class StartNewGameCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return "1";
-    }
-
-    @Override
     public String getHelp() {
         return "Inizia una nuova partita";
     }

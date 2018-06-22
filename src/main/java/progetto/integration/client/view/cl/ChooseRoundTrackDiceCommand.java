@@ -4,11 +4,8 @@ import progetto.controller.ToolCardSetDiceRoundTrackAction;
 
 public class ChooseRoundTrackDiceCommand extends AbstractCLViewCommand {
 
-    private int numberOfCommand;
-
-    public ChooseRoundTrackDiceCommand(CommandLineView commandLineView, int numberOfCommand) {
+    public ChooseRoundTrackDiceCommand(CommandLineView commandLineView) {
         super(commandLineView);
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -36,13 +33,8 @@ public class ChooseRoundTrackDiceCommand extends AbstractCLViewCommand {
     }
 
     @Override
-    public String getName() {
-        return numberOfCommand + "";
-    }
-
-    @Override
     public String getHelp() {
         return "Indica il dado del tracciato dei round che desideri prelevare " +
-                "(Formato: " + numberOfCommand + " <Numero del round> <Numero del dado>";
+                "(Formato: " + getName()+ " <Numero del round> <Numero del dado>";
     }
 }

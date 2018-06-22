@@ -4,11 +4,9 @@ import progetto.controller.PlaceDiceAction;
 
 public class PlaceDiceCommand extends AbstractStateSwitcherCommand {
 
-    private int numberOfCommand;
 
-    public PlaceDiceCommand(CommandLineView commandLineView, int numberOfCommand) {
+    public PlaceDiceCommand(CommandLineView commandLineView) {
         super(commandLineView, new RoundViewState(commandLineView));
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -33,11 +31,6 @@ public class PlaceDiceCommand extends AbstractStateSwitcherCommand {
             }
         else
 			write(toReturn);
-    }
-
-    @Override
-    public String getName() {
-        return numberOfCommand + "";
     }
 
     @Override

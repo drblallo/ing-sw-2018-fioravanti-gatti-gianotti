@@ -20,8 +20,8 @@ public class PlayerBoardPaneController {
     private ComposableController<PlayerBoardData, AbstractPlayerBoard> playerBoard = new ComposableController<>();
 
     public PlayerBoardPaneController(){
-        dicePlacedFrame.getOnModifiedCallback().addObserver(ogg -> updateDicePlacedFrame(ogg));
-        playerBoard.getOnModifiedCallback().addObserver(ogg -> updatePlayerBoard(ogg));
+        dicePlacedFrame.getOnModifiedCallback().addObserver(this::updateDicePlacedFrame);
+        playerBoard.getOnModifiedCallback().addObserver(this::updatePlayerBoard);
     }
 
     public void setObservers(ObservableModel model, int nPlayerBoard) {

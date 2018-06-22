@@ -6,12 +6,10 @@ import progetto.controller.ToolCardSetPickedDiceAction;
 public class IncreaseDecreseCommand extends AbstractCLViewCommand {
 
     private int increaseDecrese;
-    private int numberOfCommand;
 
-    public IncreaseDecreseCommand(CommandLineView commandLineView, int increseDecrese, int numberOfCommand) {
+    public IncreaseDecreseCommand(CommandLineView commandLineView, int increseDecrese) {
         super(commandLineView);
         this.increaseDecrese = increseDecrese;
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -20,11 +18,6 @@ public class IncreaseDecreseCommand extends AbstractCLViewCommand {
         getController().sendAction(new ToolCardSetPickedDiceAction(getController().getChair(), 0));
         getController().sendAction(new ToolCardSetIncreaseDecreaseAction(getController().getChair(), increaseDecrese));
 
-    }
-
-    @Override
-    public String getName() {
-        return numberOfCommand + "";
     }
 
     @Override

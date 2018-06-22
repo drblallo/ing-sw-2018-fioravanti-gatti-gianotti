@@ -19,7 +19,7 @@ public class EndRoundViewState extends AbstractCLViewState {
     @Override
     public void onApply() {
         registerCommand(new StartNewGameCommand(getView()));
-        registerCommand(new CloseGameCommand(getView(), 2));
+        registerCommand(new CloseGameCommand(getView()));
     }
 
     @Override

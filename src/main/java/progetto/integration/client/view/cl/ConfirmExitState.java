@@ -9,11 +9,8 @@ public class ConfirmExitState extends AbstractCLViewState {
     @Override
     public void onApply() {
 
-        int i = 1;
-        registerCommand(new ReturnCommand(getView(), new DefaultViewState(getView()), i, "Si"));
-        i++;
-        registerCommand(new ReturnCommand(getView(), new RoundViewState(getView()), i, "No"));
-
+        registerCommand(new ReturnCommand(getView(), new DefaultViewState(getView()), "Si"));
+        registerCommand(new ReturnCommand(getView(), new RoundViewState(getView()), "No"));
     }
 
     @Override

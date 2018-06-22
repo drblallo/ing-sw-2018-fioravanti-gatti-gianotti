@@ -7,11 +7,9 @@ import java.util.List;
 
 public class ShowObjectivesCommand extends AbstractStateSwitcherCommand {
 
-    private int numberOfCommand;
 
-    public ShowObjectivesCommand(CommandLineView commandLineView, int numberOfCommand) {
+    public ShowObjectivesCommand(CommandLineView commandLineView) {
         super(commandLineView, new RoundViewState(commandLineView));
-        this.numberOfCommand = numberOfCommand;
     }
 
     @Override
@@ -35,11 +33,6 @@ public class ShowObjectivesCommand extends AbstractStateSwitcherCommand {
         }
 
         write(stringBuilder.toString());
-    }
-
-    @Override
-    public String getName() {
-        return numberOfCommand + "";
     }
 
     @Override

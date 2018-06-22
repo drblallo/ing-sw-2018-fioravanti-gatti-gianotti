@@ -12,11 +12,6 @@ public class ContinueCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return "2";
-    }
-
-    @Override
     public String getHelp() {
         return "Continua partita";
     }

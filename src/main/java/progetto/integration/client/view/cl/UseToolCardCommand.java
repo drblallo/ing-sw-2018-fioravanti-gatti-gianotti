@@ -15,11 +15,6 @@ public class UseToolCardCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return numberOfCard + "";
-    }
-
-    @Override
     public String getHelp() {
         return getModel().getMainBoard().getData().getToolCards().get(numberOfCard).getToolTip();
     }

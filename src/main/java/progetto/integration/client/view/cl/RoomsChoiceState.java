@@ -11,17 +11,10 @@ public class RoomsChoiceState extends AbstractCLViewState {
     @Override
     public void onApply() {
 
-        int i = 0;
+        for (ServerStateView.SimpleRoomState s : getView().getController().getCurrentServerState().asList())
+            registerCommand(new JoinRoomCommand(getView(), s));
 
-        for (ServerStateView.SimpleRoomState s : getView().getController().getCurrentServerState().asList()
-             ) {
-
-            registerCommand(new JoinRoomCommand(getView(), i, s));
-            i++;
-
-        }
-
-        registerCommand(new ReturnCommand(getView(), new RoomsState(getView()), i, "Indietro"));
+        registerCommand(new ReturnCommand(getView(), new RoomsState(getView()), "Indietro"));
 
     }
 

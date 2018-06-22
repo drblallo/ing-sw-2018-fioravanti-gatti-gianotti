@@ -5,13 +5,10 @@ import progetto.controller.ToolCardSetSecondPlacedDiceAction;
 
 public class ChoosePlayerBoardDiceCommand extends AbstractCLViewCommand {
 
-    private int numberOfCommand;
     private int numberOfDice;
 
-    public ChoosePlayerBoardDiceCommand(CommandLineView commandLineView,
-                                        int numberOfCommand, int numberOfDice) {
+    public ChoosePlayerBoardDiceCommand(CommandLineView commandLineView, int numberOfDice) {
         super(commandLineView);
-        this.numberOfCommand = numberOfCommand;
         this.numberOfDice = numberOfDice;
     }
 
@@ -50,13 +47,8 @@ public class ChoosePlayerBoardDiceCommand extends AbstractCLViewCommand {
     }
 
     @Override
-    public String getName() {
-        return numberOfCommand + "";
-    }
-
-    @Override
     public String getHelp() {
         return "Digita la posizione del " + numberOfDice + "° dado della plancia da muovere " +
-                "(Formato: " + numberOfCommand + " <x> <y>)";
+                "(Formato: " + getName() + " <x> <y>)";
     }
 }

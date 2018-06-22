@@ -28,7 +28,7 @@ public class TestMoreThanOnePlayer {
         commandLineView.execute("1");
         commandLineView.execute("2 2");
         commandLineView.execute("3");
-        commandLineView.execute("0");
+        commandLineView.execute("1");
         commandLineView.processAllPendings();
     }
 

@@ -1,7 +1,9 @@
 package progetto.integration.client.view.cl;
 
 import progetto.controller.*;
+import progetto.model.IModel;
 import progetto.model.ToolCard;
+import progetto.model.ToolCardState;
 
 public class UseToolCardState extends AbstractCLViewState {
 
@@ -14,7 +16,9 @@ public class UseToolCardState extends AbstractCLViewState {
 
     @Override
     public boolean isStillValid() {
-        return getModel().getRoundInformation().getData().getCurrentPlayer() == getController().getChair();
+        IModel model = getModel();
+        return model.getMainBoard().getData().getGameState().getClass() == ToolCardState.class &&
+        model.getRoundInformation().getData().getCurrentPlayer() == getController().getChair() ;
     }
 
     @Override
@@ -23,52 +27,39 @@ public class UseToolCardState extends AbstractCLViewState {
         ToolCard toolCard = getModel().getMainBoard().getData().getToolCards().get(numberOfCard);
         getController().sendAction(new UseToolCardAction(getController().getChair(), numberOfCard));
 
-        int i = 1;
-        registerCommand(new ShowPickedDicesCommand(getView(), i));
-        i++;
-        registerCommand(new ShowPlayerBoardCommand(getView(), getController().getChair() ,i,
-                new Printer(), this));
-        i++;
-        registerCommand(new ShowRoundTrackCommand(getView(), i));
-        i++;
+        registerCommand(new ShowPickedDicesCommand(getView()));
+        registerCommand(new ShowPlayerBoardCommand(getView(), getController().getChair() , new Printer(), this));
+        registerCommand(new ShowRoundTrackCommand(getView()));
         for (Class c: toolCard.getCardAction()) {
 
             if(c == ToolCardSetSinglePlayerDiceAction.class &&
                     getModel().getMainBoard().getData().getPlayerCount() == 1){
-                registerCommand(new SetSinglePlayerDiceAction(getView(), i));
-                i++;
+                registerCommand(new SetSinglePlayerDiceAction(getView()));
             }
             else if(c == ToolCardSetPickedDiceAction.class){
-                registerCommand(new ChoosePickedDiceCommand(getView(), i));
-                i++;
+                registerCommand(new ChoosePickedDiceCommand(getView()));
             }
             else if(c == ToolCardSetIncreaseDecreaseAction.class){
-                registerCommand(new IncreaseDecreseCommand(getView(),0,i));
-                i++;
-                registerCommand(new IncreaseDecreseCommand(getView(), 1,i));
-                i++;
+                registerCommand(new IncreaseDecreseCommand(getView(),0));
+                registerCommand(new IncreaseDecreseCommand(getView(), 1));
             }
             else if(c == ToolCardSetPlacedDiceAction.class){
-                registerCommand(new ChoosePlayerBoardDiceCommand(getView(), i,1));
-                i++;
+                registerCommand(new ChoosePlayerBoardDiceCommand(getView(), 1));
             }
             else if(c == ToolCardSetDiceRoundTrackAction.class){
-                registerCommand(new ChooseRoundTrackDiceCommand(getView(), i));
-                i++;
+                registerCommand(new ChooseRoundTrackDiceCommand(getView()));
             }
             else if(c == ToolCardSetSecondPlacedDiceAction.class){
-                registerCommand(new ChoosePlayerBoardDiceCommand(getView(), i, 2));
-                i++;
+                registerCommand(new ChoosePlayerBoardDiceCommand(getView(), 2));
             }
             else if (c == ToolCardSetDiceValueAction.class){
-                registerCommand(new ChooseValueDiceCommand(getView(), i));
+                registerCommand(new ChooseValueDiceCommand(getView()));
             }
 
         }
 
-        registerCommand(new SolveToolCardCommand(getView(), i));
-        i++;
-        registerCommand(new CancelUseOfToolCardCommand(getView(),i));
+        registerCommand(new SolveToolCardCommand(getView()));
+        registerCommand(new CancelUseOfToolCardCommand(getView()));
 
     }
 

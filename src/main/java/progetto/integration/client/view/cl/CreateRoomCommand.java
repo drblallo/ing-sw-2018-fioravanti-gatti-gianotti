@@ -21,11 +21,6 @@ public class CreateRoomCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return "1";
-    }
-
-    @Override
     public String getHelp() {
         return "Crea una nuova stanza (Formato: 1 <NomeStanza>)";
     }

@@ -13,7 +13,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * A server game is a game structure that will send action to the underlying game and will provide to the room
+ * the list of enforce that must be sent to the players
+ */
 public class ServerGame extends GameSync implements  ISync
 {
 	private final class DirtyTracker
@@ -43,6 +46,10 @@ public class ServerGame extends GameSync implements  ISync
 	private IObserver<RoundInformationData> inObs = ogg -> addItemEnforce(new DirtyTracker(new RoundInformationEnforce(ogg), -2));
 	private static final int PLAYER_BOARD_OFFSET = 1000;
 
+	/**
+	 * Send s to the game, process it and call the enforce callback
+	 * @param s must be a game action, otherwise it will fail.
+	 */
 	@Override
 	public void sendItem(Serializable s)
 	{
@@ -55,6 +62,10 @@ public class ServerGame extends GameSync implements  ISync
 		enforceCallback.call(new DoneEnforce());
 	}
 
+	/**
+	 * check if the enforce that must be added is already present, if it is erases the last one.
+	 * @param tracker the tracker to be added
+	 */
 	private void addItemEnforce(DirtyTracker tracker) {
 
 		for (int a = dirtyDataItems.size() - 1; a > 0; a--)
@@ -67,6 +78,9 @@ public class ServerGame extends GameSync implements  ISync
 		dirtyDataItems.add(tracker);
 	}
 
+	/**
+	 * creates a default server game
+	 */
 	ServerGame()
 	{
 		for (int a = 0; a < Model.MAX_NUM_PLAYERS; a++)
@@ -80,6 +94,9 @@ public class ServerGame extends GameSync implements  ISync
 		clear();
 	}
 
+	/**
+	 * reset this server game
+	 */
 	public void clear()
 	{
 		if (getGame() != null)
@@ -96,11 +113,18 @@ public class ServerGame extends GameSync implements  ISync
 			sendItem(new AddWindowFrameCoupleAction(l));
 	}
 
+	/**
+	 *
+	 * @return the callback that is called every time something changes in the model.
+	 */
 	@Override
 	public Callback<IEnforce> getEnforceCallback() {
 		return enforceCallback;
 	}
 
+	/**
+	 * detach of the observer from the current model
+	 */
 	private void detachObservers()
 	{
 		for (int a = 0; a < Model.MAX_NUM_PLAYERS; a++)
@@ -117,6 +141,9 @@ public class ServerGame extends GameSync implements  ISync
 		getGame().getModel().getRoundTrack().removeObserver(rtdObs);
 	}
 
+	/**
+	 * attach the observers to the current model
+	 */
 	private void attachObservers()
 	{
 		for (int a = 0; a < Model.MAX_NUM_PLAYERS; a++)
@@ -133,6 +160,10 @@ public class ServerGame extends GameSync implements  ISync
 		getGame().getModel().getRoundInformation().addObserver(inObs);
 	}
 
+	/**
+	 *
+	 * @return the list of enforces that must be sent to the new players
+	 */
 	public List<IEnforce> getNewPlayerEnforces()
 	{
 		List<IEnforce> enforces = new ArrayList<>();
