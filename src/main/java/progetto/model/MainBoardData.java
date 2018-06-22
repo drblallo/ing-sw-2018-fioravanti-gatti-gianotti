@@ -19,6 +19,8 @@ public final class MainBoardData implements Serializable {
 	private final AbstractGameState gameState;
 	private final int difficulty;
 
+	private final int singlePlayerTarget;
+
 
 	/**
 	 * Constructor
@@ -42,6 +44,8 @@ public final class MainBoardData implements Serializable {
 		gameState = new PreGameState();
 
 		difficulty = STD_DIFFICULTY;
+
+		singlePlayerTarget = 0;
 
 	}
 
@@ -69,6 +73,7 @@ public final class MainBoardData implements Serializable {
 
 		this.gameState = mainBoardData.gameState;
 		this.difficulty = mainBoardData.difficulty;
+		this.singlePlayerTarget = mainBoardData.singlePlayerTarget;
 
 	}
 
@@ -95,8 +100,8 @@ public final class MainBoardData implements Serializable {
 		publicObjectiveCards = Collections.unmodifiableList(tempP);
 
 		this.gameState = mainBoardData.gameState;
-
 		this.difficulty = mainBoardData.difficulty;
+		this.singlePlayerTarget = mainBoardData.singlePlayerTarget;
 
 	}
 
@@ -106,7 +111,7 @@ public final class MainBoardData implements Serializable {
 	 * @param playerCount new playerCount value
 	 * @param difficulty new difficulty value
 	 */
-	private MainBoardData(MainBoardData mainBoardData, int playerCount, int difficulty)
+	private MainBoardData(MainBoardData mainBoardData, int playerCount, int difficulty, int singlePlayerTarget)
 	{
 		this.playerCount = playerCount;
 
@@ -125,6 +130,7 @@ public final class MainBoardData implements Serializable {
 		this.difficulty = difficulty;
 
 		this.gameState = mainBoardData.gameState;
+		this.singlePlayerTarget = singlePlayerTarget;
 
 	}
 
@@ -153,6 +159,8 @@ public final class MainBoardData implements Serializable {
 
 		this.gameState = gameState;
 
+		this.singlePlayerTarget = mainBoardData.singlePlayerTarget;
+
 	}
 
 	/**
@@ -180,6 +188,8 @@ public final class MainBoardData implements Serializable {
 		this.gameState = mainBoardData.gameState;
 
 		this.difficulty = mainBoardData.difficulty;
+
+		this.singlePlayerTarget = mainBoardData.singlePlayerTarget;
 
 	}
 
@@ -211,6 +221,8 @@ public final class MainBoardData implements Serializable {
 
 		this.difficulty = mainBoardData.difficulty;
 
+		this.singlePlayerTarget = mainBoardData.singlePlayerTarget;
+
 	}
 
 	/**
@@ -220,6 +232,15 @@ public final class MainBoardData implements Serializable {
 	public int getPlayerCount()
 	{
 		return playerCount;
+	}
+
+	/**
+	 * Get single player target score
+	 * @return single player target score
+	 */
+	public int getSinglePlayerTarget()
+	{
+		return singlePlayerTarget;
 	}
 
 	/**
@@ -265,7 +286,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setPlayerCount(int playerCount)
 	{
-		return new MainBoardData(this, playerCount, difficulty);
+		return new MainBoardData(this, playerCount, difficulty, singlePlayerTarget);
 	}
 
 	/**
@@ -333,7 +354,7 @@ public final class MainBoardData implements Serializable {
 	 */
 	MainBoardData setDifficulty(int difficulty)
 	{
-		return new MainBoardData(this, playerCount, difficulty);
+		return new MainBoardData(this, playerCount, difficulty, singlePlayerTarget);
 	}
 
 	/**
@@ -364,6 +385,16 @@ public final class MainBoardData implements Serializable {
 		}
 		return nCallToolCard.get(pos);
 
+	}
+
+	/**
+	 * Set singlePlayerTarget
+	 * @param singlePlayerTarget to set
+	 * @return new MainBoardData with modified singlePlayerTarget
+	 */
+	MainBoardData setSinglePlayerTarget(int singlePlayerTarget)
+	{
+		return new MainBoardData(this, playerCount, difficulty, singlePlayerTarget);
 	}
 
 

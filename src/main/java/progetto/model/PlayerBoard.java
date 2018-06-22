@@ -163,4 +163,13 @@ public class PlayerBoard extends AbstractPlayerBoard
 	{
 		setData(getData().setToken(token));
 	}
+
+	/**
+	 * Set score
+	 * @param score to set
+	 */
+	public void setScore(int score)
+	{
+		setData(getData().setScore(score));
+	}
 }
