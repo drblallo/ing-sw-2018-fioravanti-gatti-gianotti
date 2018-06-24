@@ -465,6 +465,22 @@ public class TestAction {
 	}
 
 	@Test
+	public void testSetDifficultyActionWrongDifficultyLevel()
+	{
+		game.sendAction(new SetPlayerCountAction(1));
+		game.processAction();
+
+		game.sendAction(new SetDifficultyAction(0));
+		game.processAction();
+		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getDifficulty());
+
+		game.sendAction(new SetDifficultyAction(6));
+		game.processAction();
+		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getDifficulty());
+
+	}
+
+	@Test
 	public void testSetDifficultyActionFail()
 	{
 		game.getModel().setState(new RoundState());

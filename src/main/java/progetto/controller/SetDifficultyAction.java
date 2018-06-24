@@ -9,6 +9,9 @@ import progetto.model.PreGameState;
  */
 public class SetDifficultyAction extends AbstractExecutibleGameAction
 {
+	private static final int MAX_DIFF = 5;
+	private static final int MIN_DIFF = 1;
+
 	private final int difficulty;
 
 	/**
@@ -36,8 +39,9 @@ public class SetDifficultyAction extends AbstractExecutibleGameAction
 	 * @return result of the check
 	 */
 	@Override
-	public boolean canBeExecuted(IModel game) {
-		return (game.getMainBoard().getData().getGameState().getClass() == PreGameState.class);
+	public boolean canBeExecuted(IModel game)
+	{
+		return difficulty>=MIN_DIFF && difficulty<=MAX_DIFF && game.getMainBoard().getData().getGameState().getClass() == PreGameState.class;
 	}
 
 	/**
