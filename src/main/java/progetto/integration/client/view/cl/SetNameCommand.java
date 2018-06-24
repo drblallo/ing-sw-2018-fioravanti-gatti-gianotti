@@ -20,11 +20,6 @@ public class SetNameCommand extends AbstractCLViewCommand {
     }
 
     @Override
-    public String getName() {
-        return "3";
-    }
-
-    @Override
     public String getHelp() {
         return "Inserisci nome (Formato: 3 <Nome>)";
     }

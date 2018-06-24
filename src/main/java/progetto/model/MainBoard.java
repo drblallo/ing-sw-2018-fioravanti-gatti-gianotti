@@ -113,5 +113,14 @@ public final class MainBoard extends AbstractMainBoard
 		setData(getData().incNCallToolCard(pos));
 	}
 
+	/**
+	 * Set single player target score
+	 * @param singlePlayerTarget to set
+	 */
+	public void setSinglePlayerTarget(int singlePlayerTarget)
+	{
+		setData(getData().setSinglePlayerTarget(singlePlayerTarget));
+	}
+
 
 }

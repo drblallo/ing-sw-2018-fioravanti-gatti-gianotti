@@ -70,7 +70,7 @@ public class GamePaneController extends AbstractStateController{
 
         commandLinePaneController.setCommandProcessor(commandProcessor);
 
-        mainBoardPaneController.onGameChanged(game);
+        mainBoardPaneController.setObservers(game);
 
         actionQueuePaneController.setObservable(game.getCommandQueue());
 
@@ -124,7 +124,7 @@ public class GamePaneController extends AbstractStateController{
 
         playerBoardPaneControllers[i] = fxmlLoader.getController();
         playerBoardPaneControllers[i].setObservers
-                (game.getPlayerBoard(i).getDicePlacedFrame(), game.getPlayerBoard(i));
+              (game, i);
 
         gridPane.add(pane, i/2, i%2);
 

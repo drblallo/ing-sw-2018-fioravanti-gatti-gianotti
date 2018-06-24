@@ -20,6 +20,12 @@ public abstract class AbstractCLViewState extends CommandProcessor
         view = cl;
     }
 
+    public void registerCommand(AbstractCLViewCommand command)
+    {
+       command.setName(getCommandCount() + 1);
+       super.registerCommand(command);
+    }
+
     public IClientController getController(){
         return view.getController();
     }

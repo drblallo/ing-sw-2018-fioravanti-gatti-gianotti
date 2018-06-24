@@ -9,15 +9,12 @@ public class ConfirmExitState extends AbstractCLViewState {
     @Override
     public void onApply() {
 
-        int i = 1;
-        registerCommand(new ReturnCommand(getView(), new DefaultViewState(getView()), i, "Si"));
-        i++;
-        registerCommand(new ReturnCommand(getView(), new RoundViewState(getView()), i, "No"));
-
+        registerCommand(new ReturnCommand(getView(), new DefaultViewState(getView()), "Si"));
+        registerCommand(new ReturnCommand(getView(), new RoundViewState(getView()), "No"));
     }
 
     @Override
     public String getMessage() {
-        return "\nSei sicuro di voler abbandoare il gioco?\n";
+        return "\nSei sicuro di voler abbandoare la partita?\n";
     }
 }

@@ -9,11 +9,10 @@ public class ContinueGameState extends AbstractCLViewState{
     @Override
     public void onApply() {
 
-        int i;
-        for (i=0; i<getController().getConnectionCount(); i++){
-            registerCommand(new ContinueGameCommand(getView(), i+1));
-        }
-        registerCommand(new ReturnCommand(getView(), new DefaultViewState(getView()), i+1, "Indietro"));
+        for (int i = 0; i < getController().getConnectionCount(); i++)
+            registerCommand(new ContinueGameCommand(getView(), i));
+
+        registerCommand(new ReturnCommand(getView(), new DefaultViewState(getView()),"Indietro"));
     }
 
     @Override

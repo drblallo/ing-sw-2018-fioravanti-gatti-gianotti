@@ -33,11 +33,8 @@ public class WaitingTurnState extends AbstractCLViewState {
     @Override
     public void onApply() {
 
-        int i = 1;
-
-        registerCommand(new ShowPlayerBoardRequestCommand(getView(), i));
-        i++;
-        registerCommand(new ReturnCommand(getView(), new ConfirmExitState(getView()), i, "Esci dal gioco"));
+        registerCommand(new ShowPlayerBoardRequestCommand(getView()));
+        registerCommand(new ReturnCommand(getView(), new ConfirmExitState(getView()), "Esci dal gioco"));
 
     }
 

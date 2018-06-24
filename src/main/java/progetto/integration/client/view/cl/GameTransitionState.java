@@ -1,9 +1,6 @@
 package progetto.integration.client.view.cl;
 
-import progetto.model.AbstractGameState;
-import progetto.model.FrameSelectionState;
-import progetto.model.PreGameState;
-import progetto.model.RoundState;
+import progetto.model.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +32,8 @@ public class GameTransitionState extends AbstractCLViewState {
 
         else if(abstractGameState.getClass() == RoundState.class)
             getView().setState(new WaitingTurnState(getView()));
+        else if(abstractGameState.getClass() == EndGameState.class)
+            getView().setState(new EndRoundViewState(getView()));
     }
 
     @Override

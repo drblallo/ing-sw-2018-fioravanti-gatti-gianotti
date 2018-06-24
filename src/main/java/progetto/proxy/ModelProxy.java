@@ -69,4 +69,5 @@ public class ModelProxy implements ObservableModel
 		destination.commandQueueProxy.setData(getCommandQueue());
 		destination.roundTrackProxy.setData(getRoundTrack());
 	}
+
 }

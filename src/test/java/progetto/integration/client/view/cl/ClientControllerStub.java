@@ -143,4 +143,9 @@ public class ClientControllerStub implements IClientController{
     public void processAction() {
 
     }
+
+    @Override
+    public void shutDown() {
+
+    }
 }

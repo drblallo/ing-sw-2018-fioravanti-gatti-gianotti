@@ -12,11 +12,6 @@ public class ShowRoomCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return "2";
-    }
-
-    @Override
     public String getHelp() {
         return "Entra in una stanza esistente";
     }

@@ -11,16 +11,11 @@ public class ContinueGameCommand extends AbstractStateSwitcherCommand {
 
     @Override
     protected void perform(String[] params) {
-        getController().setCurrentClientGame(numberOfConnection-1);
-    }
-
-    @Override
-    public String getName() {
-        return numberOfConnection + "";
+        getController().setCurrentClientGame(numberOfConnection);
     }
 
     @Override
     public String getHelp() {
-        return getController().getNameOfConnection(numberOfConnection-1);
+        return getController().getNameOfConnection(numberOfConnection);
     }
 }

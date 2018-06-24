@@ -12,25 +12,23 @@ public class RoundViewState extends AbstractCLViewState {
     @Override
     public boolean isStillValid() {
         return getModel().getMainBoard().getData().getGameState().getClass() == RoundState.class
-                && getController().getChair() == getController().getModel().getRoundInformation().getData().getCurrentPlayer();
+                && getController().getChair() == getController().getModel()
+                .getRoundInformation().getData().getCurrentPlayer();
     }
 
     @Override
     public void onApply() {
 
-        int i = 1;
-        registerCommand(new ShowDicesCommand(getView(), i));
-        i++;
-        registerCommand(new ShowPlayerBoardRequestCommand(getView(),i));
-        i++;
-        registerCommand(new PlaceDiceCommand(getView(),i));
-        i++;
-        registerCommand(new ShowPickedDicesCommand(getView(), i));
-        i++;
-        registerCommand(new EndTurnCommand(getView(),i));
-        i++;
-        registerCommand(new ReturnCommand(getView(), new ConfirmExitState(getView()), i, "Esci dal gioco"));
-
+        registerCommand(new ShowDicesCommand(getView()));
+        registerCommand(new ShowPlayerBoardRequestCommand(getView()));
+        registerCommand(new PlaceDiceCommand(getView()));
+        registerCommand(new ShowPickedDicesCommand(getView()));
+        registerCommand(new ShowToolCardsCommand(getView()));
+        registerCommand(new ShowObjectivesCommand(getView()));
+        registerCommand(new ShowRoundTrackCommand(getView()));
+        registerCommand(new EndTurnCommand(getView()));
+        registerCommand(new ReturnCommand(getView(), new ConfirmExitState(getView()), "Esci dalla partita"));
+        registerCommand(new CloseGameCommand(getView()));
     }
 
     @Override

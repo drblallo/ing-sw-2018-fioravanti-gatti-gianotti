@@ -7,11 +7,6 @@ public class NewGameCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return "1";
-    }
-
-    @Override
     public String getHelp() {
         return "Nuova partita";
     }

@@ -19,6 +19,7 @@ public class PickedDicesSlotPaneController extends AbstractController <PickedDic
 
         PickedDicesSlotData pickedDicesSlotData = getObservable().getData();
         Dice dice;
+        ImageView imageView = new ImageView();
 
         tilePane.getChildren().clear();
         TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
@@ -26,9 +27,10 @@ public class PickedDicesSlotPaneController extends AbstractController <PickedDic
         for(int i=0; i<pickedDicesSlotData.getNDices(); i++){
 
             dice = pickedDicesSlotData.getDicePlacementCondition(i).getDice();
+            imageView.setImage(textureDatabase.getDice(dice.getGameColor(),
+                    dice.getValue().ordinal()+1));
 
-            tilePane.getChildren().add(new ImageView(textureDatabase.getDice(dice.getGameColor(),
-                    dice.getValue().ordinal()+1)));
+            tilePane.getChildren().add(imageView);
         }
     }
 }

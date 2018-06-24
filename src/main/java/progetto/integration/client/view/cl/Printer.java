@@ -19,8 +19,8 @@ public class Printer {
     private static final int FRAME_HORIZONTAL_DIMENSION = 40;
     private static final int FRAME_VERTICAL_DIMENSION = 28;
     private static final int FAVOUR_TOKENS_POSITION = 18;
-    private static final int CELLS_HORIZONTAL_DISTANCE = 8;
-    private static final int CELLS_VERTICAL_DISTANCE = 7;
+    private static final int CELLS_HORIZONTAL_DIMENSION = 8;
+    private static final int CELLS_VERTICAL_DIMENSION = 7;
     private static final int SECOND_FRAME_HORIZONTALE_POSITION = 50;
     private static final int WINDOWFRAME_VERTICAL_DISTANCE = 5;
     private static final int SECOND_WINDOWFRAME_VERTICAL_POSITION = 35;
@@ -30,6 +30,7 @@ public class Printer {
     private static final int NUMBER_OF_VERTICAL_LINES = 6;
     private static final int NUMBER_OF_HORIZONTAL_LINES = 5;
     private static final int RADIX = 10;
+    private static final int MAX_N_DICES_ROUNDTRACK = 9;
     private Character[][] window;
     private ArrayList<Character[][]> numbers;
     private ArrayList<Character[][]> colors;
@@ -93,10 +94,10 @@ public class Printer {
         for(int i = 0; i<DicePlacedFrameData.MAX_NUMBER_OF_ROWS; i++){
             for(int j = 0; j<DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS; j++){
                 prepareDice(windowFrame.getValueBond(i,j), windowFrame.getColorBond(i,j), x,y);
-                x = x + CELLS_HORIZONTAL_DISTANCE;
+                x = x + CELLS_HORIZONTAL_DIMENSION;
             }
             x = firstX;
-            y = y + CELLS_VERTICAL_DISTANCE;
+            y = y + CELLS_VERTICAL_DIMENSION;
         }
     }
 
@@ -127,10 +128,10 @@ public class Printer {
                 if(dicePlacedFrameData.getDice(i,j)!=null)
                 prepareDice(dicePlacedFrameData.getDice(i,j).getValue(),
                         dicePlacedFrameData.getDice(i,j).getGameColor(), x,y);
-                x = x + CELLS_HORIZONTAL_DISTANCE;
+                x = x + CELLS_HORIZONTAL_DIMENSION;
             }
             x = firstX;
-            y = y + CELLS_VERTICAL_DISTANCE;
+            y = y + CELLS_VERTICAL_DIMENSION;
         }
 
     }
@@ -177,23 +178,23 @@ public class Printer {
 
     public String printDices(ExtractedDicesData extractedDicesData){
 
-        windowHorizontal = (CELLS_HORIZONTAL_DISTANCE+1)*extractedDicesData.getNumberOfDices();
-        windowVertical = CELLS_VERTICAL_DISTANCE;
+        windowHorizontal = (CELLS_HORIZONTAL_DIMENSION +1)*extractedDicesData.getNumberOfDices();
+        windowVertical = CELLS_VERTICAL_DIMENSION;
         initializeWindow();
         int x = 0;
 
         for(int i = 0; i< extractedDicesData.getNumberOfDices(); i++){
             prepareNumberOfDice(i,x,0);
             prepareDice(extractedDicesData.getDice(i).getValue(), extractedDicesData.getDice(i).getGameColor(),x,1);
-            x = x + CELLS_HORIZONTAL_DISTANCE + 1;
+            x = x + CELLS_HORIZONTAL_DIMENSION + 1;
         }
         return print();
     }
 
     public String printDices(PickedDicesSlotData pickedDicesSlotData){
 
-        windowHorizontal = (CELLS_HORIZONTAL_DISTANCE+1)*pickedDicesSlotData.getNDices();
-        windowVertical = CELLS_VERTICAL_DISTANCE;
+        windowHorizontal = (CELLS_HORIZONTAL_DIMENSION +1)*pickedDicesSlotData.getNDices();
+        windowVertical = CELLS_VERTICAL_DIMENSION;
         initializeWindow();
         int x = 0;
 
@@ -201,11 +202,67 @@ public class Printer {
             prepareNumberOfDice(i,x,0);
             prepareDice(pickedDicesSlotData.getDicePlacementCondition(i).getDice().getValue(),
                     pickedDicesSlotData.getDicePlacementCondition(i).getDice().getGameColor(),x,1);
-            x = x + CELLS_HORIZONTAL_DISTANCE+1;
+            x = x + CELLS_HORIZONTAL_DIMENSION +1;
         }
         return print();
     }
 
+    public String printRoundTrack(RoundTrackData roundTrackData){
+
+        int i = 0;
+        while (!roundTrackData.isFree(i)){
+            i++;
+        }
+        windowHorizontal = (CELLS_HORIZONTAL_DIMENSION + 1)*MAX_N_DICES_ROUNDTRACK;
+        windowVertical = (CELLS_VERTICAL_DIMENSION + 3)*i;
+
+        //System.out.println("ho inizializzato una finestra di dimensione " + windowHorizontal + ' ' + windowVertical);
+
+        initializeWindow();
+        int x;
+        int y = 0;
+        int k;
+
+        for (int j = 0; j<i; j++){
+            x=0;
+            printNumberOfRound(j+1, x,y);
+            y = y+2;
+            k = 0;
+
+            //System.out.println("ho stampato il numero del round e mi trovo in pos " + x + ' ' + y);
+            while (roundTrackData.getDice(j,k)!=null){
+                prepareNumberOfDice(k,x,y);
+                y = y+2;
+                //System.out.println("ho stampato il numero di dado e sono in posizione " + x + ' ' + y);
+                prepareDice(roundTrackData.getDice(j,k).getValue(),
+                        roundTrackData.getDice(j,k).getGameColor(), x,y);
+                x = x + CELLS_HORIZONTAL_DIMENSION;
+                k++;
+                y = y-2;
+            }
+            y = y + CELLS_VERTICAL_DIMENSION;
+        }
+
+        return print();
+    }
+
+    private void printNumberOfRound(int i, int x, int y){
+        window[x][y] = 'R';
+        x++;
+        window[x][y] = 'o';
+        x++;
+        window[x][y] = 'u';
+        x++;
+        window[x][y] = 'n';
+        x++;
+        window[x][y] = 'd';
+        x = x+2;
+        window[x][y] = 'N';
+        x++;
+        window[x][y] = '°';
+        x++;
+        window[x][y] = Character.forDigit(i, RADIX);
+    }
 
     private void prepareNumberOfWindowFrame(int x, int y, char numero){
 
@@ -231,11 +288,11 @@ public class Printer {
         window[x][y] = 'r';
         x++;
         window[x][y] = 'o';
-        x++;
+        x = x +2;
         window[x][y] = 'd';
         x++;
         window[x][y] = 'i';
-        x++;
+        x = x+2;
         window[x][y] = 'g';
         x++;
         window[x][y] = 'e';
@@ -316,7 +373,7 @@ public class Printer {
                 window[x][y] = '|';
                 y++;
             }
-            x = x +CELLS_HORIZONTAL_DISTANCE;
+            x = x + CELLS_HORIZONTAL_DIMENSION;
             y = firstY;
         }
     }
@@ -329,7 +386,7 @@ public class Printer {
                 window[x][y] = '-';
                 x++;
             }
-            y = y +CELLS_VERTICAL_DISTANCE;
+            y = y + CELLS_VERTICAL_DIMENSION;
             x = firstX;
         }
     }

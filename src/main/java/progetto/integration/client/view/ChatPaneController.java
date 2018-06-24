@@ -15,6 +15,10 @@ import progetto.utils.IObserver;
 
 import java.util.List;
 
+/**
+ * this is the class that handles the chat pane fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class ChatPaneController {
 
     private IClientController clientGame;
@@ -37,7 +41,10 @@ public class ChatPaneController {
 
     private IObserver<String> stringIObserver = ogg -> Platform.runLater(()-> chatArea.appendText(ogg));
 
-
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param controller the controller that will be observed
+     */
     public void setUp(IClientController controller)
     {
     	clientGame = controller;
@@ -45,12 +52,19 @@ public class ChatPaneController {
         controller.getRoomViewCallback().addObserver(roomViewIObserver);
     }
 
+    /**
+     * called every time this window is displayed
+     * reset the chat area
+     */
     public void onPreShow()
     {
         chatArea.clear();
         update();
     }
 
+    /**
+     * displayes all the players in the room.
+     */
     private void update(){
 
         int playerCount;
@@ -86,6 +100,9 @@ public class ChatPaneController {
 
     }
 
+    /**
+     * called when enter is pressed
+     */
     @FXML
     private void onEnterKeyPressed(KeyEvent keyEvent){
 
@@ -105,6 +122,9 @@ public class ChatPaneController {
 
     }
 
+    /**
+     * when the player clicks on the button it tries to take a chair
+     */
     @FXML
     private void onSitButtonPressed(){
 

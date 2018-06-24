@@ -7,6 +7,7 @@ import progetto.view.commandline.ICommand;
 public abstract class AbstractCLViewCommand implements ICommand{
 
     private CommandLineView commandLineView;
+    private int index = -1;
 
     public AbstractCLViewCommand(CommandLineView commandLineView){
         this.commandLineView = commandLineView;
@@ -32,6 +33,15 @@ public abstract class AbstractCLViewCommand implements ICommand{
         return "";
     }
 
+    public final void setName(int index)
+    {
+        this.index = index;
+    }
+
+    @Override
+    public final String getName() {
+        return index+"";
+    }
 
     protected void setState(AbstractCLViewState state)
     {

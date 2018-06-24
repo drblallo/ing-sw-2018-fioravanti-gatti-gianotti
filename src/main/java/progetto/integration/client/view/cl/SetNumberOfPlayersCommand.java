@@ -31,11 +31,6 @@ public class SetNumberOfPlayersCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return "2";
-    }
-
-    @Override
     public String getHelp() {
         return "Camabia il numero di giocatori (Formato: 2 <Numero di giocatori desiderato>)";
     }

@@ -19,6 +19,11 @@ public class CommandProcessor implements ICommandProcessor
 
     }
 
+    public int getCommandCount()
+    {
+        return registered.values().size();
+    }
+
     public String getName() {
         return name;
     }

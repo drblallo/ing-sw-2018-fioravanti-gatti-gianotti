@@ -17,11 +17,6 @@ public class PickDiceCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return numberOfDice + "";
-    }
-
-    @Override
     public String getHelp() {
         return "Prendi il dado numero " + numberOfDice;
     }

@@ -7,7 +7,8 @@ import progetto.model.*;
 public class MainBoardPaneController {
 
 	private ComposableController<MainBoardData, AbstractMainBoard> mainBoard = new ComposableController<>();
-	private ComposableController<RoundInformationData, Container<RoundInformationData>> roundInfo = new ComposableController<>();
+	private ComposableController<RoundInformationData, Container<RoundInformationData>> roundInfo
+            = new ComposableController<>();
 
 	public MainBoardPaneController()
 	{
@@ -28,7 +29,7 @@ public class MainBoardPaneController {
     private ExtractedDicesPaneController extractedDicesPaneController;
 
 
-    public void onGameChanged(ObservableModel model) {
+    public void setObservers(ObservableModel model) {
 
     	mainBoard.setObservable(model.getMainBoard());
     	roundInfo.setObservable(model.getRoundInformation());

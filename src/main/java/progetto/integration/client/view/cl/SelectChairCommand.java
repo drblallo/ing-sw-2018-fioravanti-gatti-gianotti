@@ -12,11 +12,6 @@ public class SelectChairCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return "3";
-    }
-
-    @Override
     public String getHelp() {
         return "Seleziona una sedia";
     }

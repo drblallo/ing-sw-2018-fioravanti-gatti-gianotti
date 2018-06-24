@@ -38,6 +38,7 @@ public class ClientMain extends Application {
 
         new Thread(cl).start();
         new Thread(streamProcessor).start();
+
     }
 
 }

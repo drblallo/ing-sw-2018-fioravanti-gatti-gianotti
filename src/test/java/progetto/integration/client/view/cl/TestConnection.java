@@ -18,7 +18,7 @@ public class TestConnection {
     @Before
     public void setup(){
         clientControllerStub = new ClientControllerStub();
-        commandLineView = new CommandLineView(clientControllerStub, null);
+        commandLineView = new CommandLineView(clientControllerStub, System.out);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class TestConnection {
 
         Assert.assertEquals(ChairSelectionState.class, commandLineView.getAbstractCLViewState().getClass());
 
-        commandLineView.execute("0");
+        commandLineView.execute("1");
         commandLineView.processAllPendings();
 
         Assert.assertEquals(PreGameViewState.class, commandLineView.getAbstractCLViewState().getClass());
@@ -171,7 +171,7 @@ public class TestConnection {
         commandLineView.execute("2 ciao");
         commandLineView.execute("2 1");
         commandLineView.execute("3");
-        commandLineView.execute("0");
+        commandLineView.execute("1");
         commandLineView.processAllPendings();
         commandLineView.execute("1");
         commandLineView.processAllPendings();
@@ -187,7 +187,7 @@ public class TestConnection {
                 .getModel().getMainBoard().getData().getGameState().getClass());
         Assert.assertEquals(RoundViewState.class, commandLineView.getAbstractCLViewState().getClass());
 
-        commandLineView.execute("6");
+        commandLineView.execute("9");
         commandLineView.execute("1");
         commandLineView.processAllPendings();
 

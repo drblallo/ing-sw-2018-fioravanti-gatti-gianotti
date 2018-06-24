@@ -1,16 +1,12 @@
 package progetto.view.gui;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import progetto.model.*;
-import progetto.utils.IObserver;
 
 public class PlayerBoardPaneController {
 
-    private Container<DicePlacedFrameData> dicePlacedFrame;
-    private AbstractPlayerBoard playerBoard;
     private WindowFrame windowFrame;
 
     @FXML
@@ -19,26 +15,21 @@ public class PlayerBoardPaneController {
     @FXML
     private PickedDicesSlotPaneController pickedDicesSlotPaneController;
 
-    private IObserver<DicePlacedFrameData> dicePlacedFrameDataIObserver =
-            ogg -> Platform.runLater(() -> updateDicePlacedFrame(ogg));
-    private IObserver<PlayerBoardData> playerBoardDataIObserver =
-            ogg -> Platform.runLater(() -> updatePlayerBoard(ogg));
+    private ComposableController<DicePlacedFrameData, Container<DicePlacedFrameData>>
+            dicePlacedFrame = new ComposableController<>();
+    private ComposableController<PlayerBoardData, AbstractPlayerBoard> playerBoard = new ComposableController<>();
 
-    public void setObservers(Container<DicePlacedFrameData> newDicePlacedFrame, AbstractPlayerBoard newPlayerBoard) {
+    public PlayerBoardPaneController(){
+        dicePlacedFrame.getOnModifiedCallback().addObserver(this::updateDicePlacedFrame);
+        playerBoard.getOnModifiedCallback().addObserver(this::updatePlayerBoard);
+    }
 
-        if (dicePlacedFrame != null) {
-            dicePlacedFrame.removeObserver(dicePlacedFrameDataIObserver);
-        }
-        dicePlacedFrame = newDicePlacedFrame;
-        dicePlacedFrame.addObserver(dicePlacedFrameDataIObserver);
+    public void setObservers(ObservableModel model, int nPlayerBoard) {
 
-        if (playerBoard != null) {
-            playerBoard.removeObserver(playerBoardDataIObserver);
-        }
-        playerBoard = newPlayerBoard;
-        playerBoard.addObserver(playerBoardDataIObserver);
+        playerBoard.setObservable(model.getPlayerBoard(nPlayerBoard));
+        dicePlacedFrame.setObservable(model.getPlayerBoard(nPlayerBoard).getDicePlacedFrame());
 
-        pickedDicesSlotPaneController.setObservable(playerBoard.getPickedDicesSlot());
+        pickedDicesSlotPaneController.setObservable(model.getPlayerBoard(nPlayerBoard).getPickedDicesSlot());
 
     }
 

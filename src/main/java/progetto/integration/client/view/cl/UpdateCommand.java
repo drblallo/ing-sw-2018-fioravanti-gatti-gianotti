@@ -13,11 +13,6 @@ public class UpdateCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return "3";
-    }
-
-    @Override
     public String getHelp() {
         return "Aggiorna elenco stanze";
     }

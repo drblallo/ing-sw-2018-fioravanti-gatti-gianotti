@@ -5,8 +5,6 @@ import progetto.view.commandline.DifferenceDescriptor;
 
 public class PreGameViewState extends AbstractCLViewState {
 
-    private static final int RETURN_COMMAND = 4;
-
     public PreGameViewState(CommandLineView view) {
         super("PreGameViewState", view
         );
@@ -38,7 +36,7 @@ public class PreGameViewState extends AbstractCLViewState {
         registerCommand(new SetNumberOfPlayersCommand(getView()));
         registerCommand(new SelectChairCommand(getView()));
         registerCommand(new ReturnCommand(getView(),
-                new DefaultViewState(getView()), RETURN_COMMAND, "Indietro"));
+                new DefaultViewState(getView()), "Indietro"));
 
 
     }

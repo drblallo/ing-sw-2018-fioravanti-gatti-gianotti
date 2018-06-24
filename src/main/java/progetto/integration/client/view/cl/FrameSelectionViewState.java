@@ -32,9 +32,9 @@ public class FrameSelectionViewState extends AbstractCLViewState {
     @Override
     public void onApply()
     {
-
-        for (int i = 1; i< NUMBER_OF_WINDOW+1; i++)
-            registerCommand(new SelectWindowCommand(getView(), i));
+        if (getView().getController().getChair() >= 0)
+            for (int i = 1; i< NUMBER_OF_WINDOW+1; i++)
+                registerCommand(new SelectWindowCommand(getView(), i));
 	}
 
 

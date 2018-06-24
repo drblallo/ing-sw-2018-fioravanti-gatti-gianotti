@@ -28,11 +28,11 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 
 	private void checkValidity()
 	{
-		runLater(()->
-		{
-			if (!currentState.checkValidity())
-				enforceState(new GameTransitionState(this));
-		});
+		if (!currentState.checkValidity()) {
+			LOGGER.log(Level.SEVERE, "current state was invalid");
+			clearQueue();
+			setState(new GameTransitionState(this));
+		}
 	}
 
 	public CommandLineView(IClientController controller, PrintStream printStream)
@@ -43,7 +43,6 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		playerName = "Luca";
 		setState(new DefaultViewState(this));
 		controller.getRoomViewCallback().addObserver(this::onRoomChanged);
-		controller.getObservable().getMainBoard().addObserver((ogg) -> checkValidity());
 	}
 
 	public boolean getIsRunning(){
@@ -57,7 +56,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 
 	@Override
 	public synchronized void onGameChanged() {
-
+		//nothing to do when game changes
 	}
 
 	public void setPlayerName(String playerName){
@@ -66,15 +65,6 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 
 	public String getPlayerName(){
 		return playerName;
-	}
-
-	public void enforceState(AbstractCLViewState abstractCLViewState)
-	{
-		runLater(() ->
-		{
-			clearQueue();
-			setState(abstractCLViewState);
-		});
 	}
 
 	private void clearQueue()
@@ -134,7 +124,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 
 	@Override
 	public String execute(String params) {
-		runLater( () -> getAbstractCLViewState().execute(params));
+		runLater( () -> write(getAbstractCLViewState().execute(params)+"\n"));
 		return "";
 	}
 
@@ -145,6 +135,7 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 			Runnable runnable = queue.poll(TIMEOUT, TimeUnit.MILLISECONDS);
 			if (runnable!=null)
 				runnable.run();
+			checkValidity();
 		}
 		catch (InterruptedException e)
 		{
@@ -155,9 +146,9 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 	}
 
 	void processAllPendings(){
-		do
+		do {
 			processPending();
-		while (queue.peek() != null);
+		}while (queue.peek() != null);
 
 	}
 

@@ -11,9 +11,9 @@ public class ChairSelectionState extends AbstractCLViewState {
     @Override
     public void onApply() {
 
-        RoomView roomView = getView().getController().getCurrentRoom();
+        RoomView roomView = getController().getCurrentRoom();
 
-        int numberOfPlayers = getView().getController().getModel().getMainBoard().getData().getPlayerCount();
+        int numberOfPlayers = getModel().getMainBoard().getData().getPlayerCount();
 
         int i;
         for(i = 0; i < numberOfPlayers; i++)
@@ -24,7 +24,7 @@ public class ChairSelectionState extends AbstractCLViewState {
 
         }
 
-        registerCommand(new ReturnCommand(getView(), new PreGameViewState(getView()), i, "Indietro"));
+        registerCommand(new ReturnCommand(getView(), new PreGameViewState(getView()), "Indietro"));
 
     }
 

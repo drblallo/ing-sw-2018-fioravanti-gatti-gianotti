@@ -16,11 +16,6 @@ public class SitOnChairCommand extends AbstractStateSwitcherCommand {
     }
 
     @Override
-    public String getName() {
-        return chair + "";
-    }
-
-    @Override
     public String getHelp() {
         return "Sedia numero " + chair;
     }
