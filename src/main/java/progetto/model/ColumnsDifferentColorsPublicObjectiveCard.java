@@ -5,12 +5,14 @@ package progetto.model;
  */
 public class ColumnsDifferentColorsPublicObjectiveCard extends AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCard {
 
+	private static final int CARD_ID = 1;
+
 	/**
 	 * Constructor
 	 */
 	ColumnsDifferentColorsPublicObjectiveCard()
 	{
-		super("Colori diversi - colonna", "Colonne senza colori ripetuti");
+		super("Colori diversi - colonna", "Colonne senza colori ripetuti", CARD_ID);
 	}
 
 	/**

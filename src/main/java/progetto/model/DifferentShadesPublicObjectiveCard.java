@@ -7,12 +7,13 @@ public class DifferentShadesPublicObjectiveCard extends AbstractPublicObjectiveC
 
 	private static final int N_VALUES = 6;
 	private static final int N_POINT = 5;
+	private static final int CARD_ID = 7;
 
 	/**
 	 * Constructor
 	 */
 	DifferentShadesPublicObjectiveCard() {
-		super("Sfumature Diverse", "Set di dadi di ogni valore ovunque");
+		super("Sfumature Diverse", "Set di dadi di ogni valore ovunque", CARD_ID);
 	}
 
 	/**

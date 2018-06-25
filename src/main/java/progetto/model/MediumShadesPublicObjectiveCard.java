@@ -5,12 +5,14 @@ package progetto.model;
  */
 public class MediumShadesPublicObjectiveCard extends AbstractValueShadesPublicObjectiveCard {
 
+	private static final int CARD_ID = 5;
+
 	/**
 	 * Constructor
 	 */
 	MediumShadesPublicObjectiveCard()
 	{
-		super("Sfumature Medie", "Set di 3 & 4 ovunque");
+		super("Sfumature Medie", "Set di 3 & 4 ovunque", CARD_ID);
 	}
 
 	/**

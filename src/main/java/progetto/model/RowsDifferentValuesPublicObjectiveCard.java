@@ -5,12 +5,14 @@ package progetto.model;
  */
 public class RowsDifferentValuesPublicObjectiveCard extends AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCard {
 
+	private static final int CARD_ID = 2;
+
 	/**
 	 * Constructor
 	 */
 	RowsDifferentValuesPublicObjectiveCard()
 	{
-		super("Sfumature diverse - riga", "Righe senza sfumature ripetute");
+		super("Sfumature diverse - riga", "Righe senza sfumature ripetute", CARD_ID);
 	}
 
 	/**

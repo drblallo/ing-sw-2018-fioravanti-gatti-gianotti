@@ -14,9 +14,10 @@ public abstract class AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCar
 	 * Constructor
 	 * @param name
 	 * @param effect
+	 * @param cardID
 	 */
-	AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCard(String name, String effect) {
-		super(name, effect);
+	AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCard(String name, String effect, int cardID) {
+		super(name, effect, cardID);
 	}
 
 	/**

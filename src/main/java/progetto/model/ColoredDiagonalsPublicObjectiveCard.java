@@ -8,12 +8,13 @@ import java.util.ArrayList;
 public class ColoredDiagonalsPublicObjectiveCard extends AbstractPublicObjectiveCard {
 
 	private ArrayList<Dice> dices;
+	private static final int CARD_ID = 8;
 
 	/**
 	 * Constructor
 	 */
 	ColoredDiagonalsPublicObjectiveCard() {
-		super("Diagonali Colorate", "Numero di dadi dello stesso colore diagonalmente adiacenti");
+		super("Diagonali Colorate", "Numero di dadi dello stesso colore diagonalmente adiacenti", CARD_ID);
 	}
 
 	/**

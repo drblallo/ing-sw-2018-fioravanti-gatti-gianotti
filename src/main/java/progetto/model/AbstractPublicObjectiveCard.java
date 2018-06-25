@@ -9,10 +9,11 @@ public abstract class AbstractPublicObjectiveCard extends AbstractObjectiveCard 
 	 * Constructor
 	 * @param name
 	 * @param effect
+	 * @param cardID
 	 */
-	AbstractPublicObjectiveCard(String name, String effect)
+	AbstractPublicObjectiveCard(String name, String effect, int cardID)
 	{
-		super(name, effect);
+		super(name, effect, cardID);
 	}
 
 }

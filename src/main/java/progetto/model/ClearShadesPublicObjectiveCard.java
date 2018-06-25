@@ -5,12 +5,14 @@ package progetto.model;
  */
 public class ClearShadesPublicObjectiveCard extends AbstractValueShadesPublicObjectiveCard {
 
+	private static final int CARD_ID = 4;
+
 	/**
 	 * Constructor
 	 */
 	ClearShadesPublicObjectiveCard()
 	{
-		super("Sfumature Chiare", "Set di 1 & 2 ovunque");
+		super("Sfumature Chiare", "Set di 1 & 2 ovunque", CARD_ID);
 	}
 
 	/**

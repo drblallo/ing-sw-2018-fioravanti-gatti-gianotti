@@ -75,6 +75,24 @@ public class TestEndGame {
 	}
 
 	@Test
+	public void testCardID()
+	{
+		game.getMainBoard().addPublicObjectiveCards(new ColoredDiagonalsPublicObjectiveCard());
+		game.getMainBoard().addPublicObjectiveCards(new ColumnsDifferentColorsPublicObjectiveCard());
+
+		game.getPlayerBoard(0).addPrivateObjectiveCard(new ColorShadesPrivateObjectiveCard(GameColor.YELLOW));
+		game.getPlayerBoard(0).addPrivateObjectiveCard(new ColorShadesPrivateObjectiveCard(GameColor.GREEN));
+
+
+		Assert.assertEquals(0, game.getPlayerBoard(0).getData().getPrivateObjectiveCard().get(0).getCardID());
+		Assert.assertEquals(3, game.getPlayerBoard(0).getData().getPrivateObjectiveCard().get(1).getCardID());
+
+		Assert.assertEquals(8, game.getMainBoard().getData().getPublicObjectiveCards().get(0).getCardID());
+		Assert.assertEquals(1, game.getMainBoard().getData().getPublicObjectiveCards().get(1).getCardID());
+
+	}
+
+	@Test
 	public void testEvaluatePlayerFrameMultiPlayer()
 	{
 		game.getMainBoard().setPlayerCount(4);

@@ -11,9 +11,10 @@ public abstract class AbstractValueShadesPublicObjectiveCard extends  AbstractPu
 	 * Constructor
 	 * @param name
 	 * @param effect
+	 * @param cardID
 	 */
-	AbstractValueShadesPublicObjectiveCard(String name, String effect) {
-		super(name, effect);
+	AbstractValueShadesPublicObjectiveCard(String name, String effect, int cardID) {
+		super(name, effect, cardID);
 	}
 
 	/**

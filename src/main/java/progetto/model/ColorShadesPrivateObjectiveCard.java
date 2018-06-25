@@ -13,7 +13,7 @@ public class ColorShadesPrivateObjectiveCard extends AbstractPrivateObjectiveCar
 	 */
 	ColorShadesPrivateObjectiveCard(GameColor gameColor)
 	{
-		super("Sfumature " + gameColor.toString(), "Somma dei valori su tutti i dadi " + gameColor.toString());
+		super("Sfumature " + gameColor.toString(), "Somma dei valori su tutti i dadi " + gameColor.toString(), gameColor.ordinal());
 		this.gameColor = gameColor;
 	}
 
