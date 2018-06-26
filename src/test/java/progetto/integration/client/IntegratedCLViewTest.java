@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import progetto.ClientMain;
 import progetto.integration.client.view.cl.CommandLineView;
 import progetto.integration.client.view.cl.RoundViewState;
 import progetto.integration.server.ServerGameFactory;
@@ -12,9 +11,6 @@ import progetto.network.NetworkServer;
 import progetto.network.rmi.RMIModule;
 import progetto.network.socket.SocketServer;
 import progetto.utils.Waiter;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class IntegratedCLViewTest {
 	private NetworkServer networkServer;

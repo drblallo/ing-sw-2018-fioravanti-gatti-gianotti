@@ -6,9 +6,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewState<T extends AbstractStateController> {
 
+    private static final Logger LOGGER = Logger.getLogger(ViewState.class.getName());
     private ViewStateMachine viewStateMachine;
     private Scene scene;
     private T controller;
@@ -25,6 +28,7 @@ public class ViewState<T extends AbstractStateController> {
             pane = fxmlLoader.load();
 
         }catch (IOException e){
+            LOGGER.log(Level.SEVERE, "Failed to load {0}", e.getMessage());
             pane = null;
         }
 
@@ -37,15 +41,11 @@ public class ViewState<T extends AbstractStateController> {
     }
 
     public String getFxmlName() {
-
         return fxmlName;
-
     }
 
     public T getController(){
-
         return controller;
-
     }
 
     public void show(){
@@ -58,9 +58,6 @@ public class ViewState<T extends AbstractStateController> {
     }
 
     protected void onHide(){
-
         //
-
     }
-
 }

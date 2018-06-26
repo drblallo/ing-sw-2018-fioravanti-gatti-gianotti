@@ -2,47 +2,49 @@ package progetto.view.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
-import progetto.model.Container;
+import javafx.scene.layout.VBox;
+import progetto.integration.client.view.GUIView;
 import progetto.model.Dice;
 import progetto.model.RoundTrackData;
 
 
-public class RoundTrackPaneController extends AbstractController<RoundTrackData, Container<RoundTrackData>>{
+public class RoundTrackPaneController {
 
     @FXML
     private HBox showingBox;
     @FXML
     private HBox roundBox;
-    private RoundTrackData roundTrackData;
+    @FXML
+    private VBox vBox;
     private TextureDatabase textureDatabase;
+    private static final int DICE_DIMENSION = 55;
+    private GUIView view;
 
-    public void setup(){
+    public void setup(GUIView view){
+
+        this.view = view;
+        view.getController().getObservable().getRoundTrack().addObserver(ogg -> update());
 
         ImageView imageView;
-
         for(int i=0; i< RoundTrackData.NUMBER_OF_ROUNDS; i++){
             imageView = (ImageView) roundBox.getChildren().get(i);
             final int d = i;
             imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> showDices(d));
-            imageView.addEventHandler(MouseEvent.MOUSE_EXITED, event -> clearDices());
         }
 
         textureDatabase = TextureDatabase.getTextureDatabase();
+        vBox.addEventHandler(MouseEvent.MOUSE_EXITED, event -> clearDices());
 
     }
 
-    @Override
-    protected void update() {
+    private void update() {
 
-        RoundTrackData newRoundTrackData = getObservable().getData();
-        if(roundTrackData == newRoundTrackData || newRoundTrackData == null){
-            return;
-        }
-
-        roundTrackData = newRoundTrackData;
-
+        RoundTrackData roundTrackData = view.getViewStateMachine().getModel().getRoundTrack().getData();
         ImageView imageView;
         Dice dice;
 
@@ -57,13 +59,28 @@ public class RoundTrackPaneController extends AbstractController<RoundTrackData,
 
     @FXML
     private void showDices(int nRound){
+        clearDices();
+        RoundTrackData roundTrackData = view.getController().getModel().getRoundTrack().getData();
         if(!roundTrackData.isFree(nRound)){
             int j=0;
             Dice dice;
             while (roundTrackData.getDice(nRound,j)!=null){
                 dice = roundTrackData.getDice(nRound,j);
-                showingBox.getChildren().add(new ImageView(textureDatabase
-                        .getDice(dice.getGameColor(), dice.getValue().ordinal()+1)));
+                ImageView imageView = new ImageView(textureDatabase.getDice(dice.getGameColor(),
+                        dice.getValue().ordinal()+1));
+                imageView.setFitHeight(DICE_DIMENSION);
+                imageView.setFitWidth(DICE_DIMENSION);
+                final String toTransfer = "" + j;
+                imageView.setOnDragDetected(event -> {
+                    Dragboard dragboard = imageView.startDragAndDrop(TransferMode.ANY);
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString(toTransfer);
+                    content.putImage(imageView.getImage());
+                    dragboard.setContent(content);
+
+                    event.consume();
+                });
+                showingBox.getChildren().add(imageView);
                 j++;
             }
         }

@@ -1,30 +1,43 @@
 package progetto.view.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.TilePane;
-import progetto.model.Container;
+import javafx.scene.layout.HBox;
+import progetto.controller.PickDiceAction;
+import progetto.integration.client.view.GUIView;
 import progetto.model.Dice;
 import progetto.model.ExtractedDicesData;
 
-public class ExtractedDicesPaneController extends AbstractController<ExtractedDicesData,
-		Container<ExtractedDicesData>> {
+public class ExtractedDicesPaneController {
 
     @FXML
-    private TilePane tilePane;
+    private HBox hBox;
+    private static final int DICE_DIMENSION = 55;
+    private GUIView view;
 
-    @Override
-    protected void update() {
+    public void setup(GUIView view){
+        this.view = view;
+        view.getController().getObservable().getMainBoard().getExtractedDices()
+                .addObserver(ogg -> Platform.runLater(this::update));
+    }
 
-        ExtractedDicesData extractedDicesData = getObservable().getData();
-        tilePane.getChildren().clear();
+    private void update() {
+        ExtractedDicesData extractedDicesData = view.getController().getModel()
+                .getMainBoard().getExtractedDices().getData();
+        hBox.getChildren().clear();
         TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
         Dice dice;
         for(int i=0; i<extractedDicesData.getNumberOfDices(); i++){
             dice = extractedDicesData.getDice(i);
-            tilePane.getChildren().add(new ImageView(textureDatabase
-                    .getDice(dice.getGameColor(), dice.getValue().ordinal()+1)));
+            ImageView imageView = new ImageView(textureDatabase
+                    .getDice(dice.getGameColor(), dice.getValue().ordinal()+1));
+            imageView.setFitHeight(DICE_DIMENSION);
+            imageView.setFitWidth(DICE_DIMENSION);
+            final int d = i;
+            imageView.setOnMouseClicked(event -> view.getController().sendAction
+                    (new PickDiceAction(view.getController().getChair(), d)));
+            hBox.getChildren().add(imageView);
         }
-
     }
 }

@@ -39,10 +39,8 @@ public class GameViewState extends ViewState <GamePaneController> {
 
     @Override
     public void show(){
-
         super.show();
         getController().onPreShow(guiView.getCommandProcessor());
         chatPaneController.onPreShow();
     }
-
 }

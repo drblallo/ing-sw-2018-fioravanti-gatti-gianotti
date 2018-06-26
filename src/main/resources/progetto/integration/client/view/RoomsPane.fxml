@@ -3,36 +3,45 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<AnchorPane fx:id="anchorPane" prefHeight="453.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.integration.client.view.RoomsPaneController">
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="anchorPane" prefHeight="453.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.integration.client.view.RoomsPaneController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox>
                <children>
-                  <Label text="Stanze" textFill="#bc07ed" underline="true">
+                  <Label text="Stanze" underline="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                      <padding>
                         <Insets top="10.0" />
                      </padding>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="update" mnemonicParsing="false" onAction="#onUpdateButtonClicked" text="Aggiorna">
+                  <Button fx:id="update" mnemonicParsing="false" onAction="#onUpdateButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Aggiorna">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
                   </Button>
                </children>
             </HBox>
-            <ListView fx:id="listView" />
+            <ListView fx:id="listView" opacity="0.8" style="-fx-background-color: wheat; -fx-border-color: black;" />
             <HBox prefHeight="100.0" prefWidth="200.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <TextField fx:id="roomNameTextField" promptText="Nome stanza" />
-                  <Button fx:id="createRoom" mnemonicParsing="false" onAction="#onCreateButtonClicked" text="Crea stanza" />
+                  <TextField fx:id="roomNameTextField" promptText="Nome stanza" style="-fx-background-color: wheat; -fx-border-color: black;">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font></TextField>
+                  <Button fx:id="createRoom" mnemonicParsing="false" onAction="#onCreateButtonClicked" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="Crea stanza">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font></Button>
                </children>
                <padding>
                   <Insets bottom="10.0" />
@@ -41,26 +50,32 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label fx:id="errorLabel" textFill="RED">
+                  <Label fx:id="errorLabel" style="-fx-background-color: wheat;">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <TextField fx:id="usernameTextField" promptText="Username" />
-                  <Button fx:id="enterButton" mnemonicParsing="false" onAction="#onEnterButtonClicked" prefHeight="25.0" prefWidth="68.0" text="Entra" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="usernameTextField" promptText="Username" style="-fx-background-color: wheat; -fx-border-color: black;">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font></TextField>
+                  <Button fx:id="enterButton" mnemonicParsing="false" onAction="#onEnterButtonClicked" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="Entra">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font></Button>
                </children>
             </HBox>
             <HBox layoutX="20.0" layoutY="398.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label fx:id="errorLabel2" textFill="RED">
+                  <Label fx:id="errorLabel2" style="-fx-background-color: wheat;">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                   </Label>
                </children>

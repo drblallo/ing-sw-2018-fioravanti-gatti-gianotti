@@ -1,51 +1,48 @@
 package progetto.view.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import progetto.model.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import progetto.integration.client.view.GUIView;
+import progetto.model.IModel;
+import progetto.model.MainBoardData;
+import progetto.model.PreGameState;
 
 public class MainBoardPaneController {
 
-	private ComposableController<MainBoardData, AbstractMainBoard> mainBoard = new ComposableController<>();
-	private ComposableController<RoundInformationData, Container<RoundInformationData>> roundInfo
-            = new ComposableController<>();
-
-	public MainBoardPaneController()
-	{
-		mainBoard.getOnModifiedCallback().addObserver(ogg -> update());
-		roundInfo.getOnModifiedCallback().addObserver(ogg -> update());
-	}
-
     @FXML
     private Label numberOfPlayers;
-
     @FXML
     private Label gameState;
-
     @FXML
     private Label currentPlayer;
-
+    @FXML
+    private HBox mainHBox;
+    @FXML
+    private AnchorPane preGameAnchorPane;
     @FXML
     private ExtractedDicesPaneController extractedDicesPaneController;
+    private GUIView view;
 
-
-    public void setObservers(ObservableModel model) {
-
-    	mainBoard.setObservable(model.getMainBoard());
-    	roundInfo.setObservable(model.getRoundInformation());
-        extractedDicesPaneController.setObservable(model.getMainBoard().getExtractedDices());
-
+    public void setup(GUIView view){
+        this.view = view;
+        extractedDicesPaneController.setup(view);
+        view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
+        view.getController().getObservable().getRoundInformation().addObserver(ogg -> Platform.runLater(this::update));
     }
 
     private void update() {
 
-        MainBoardData mainBoardData = mainBoard.getLastData();
-
+        IModel model = view.getController().getModel();
+        MainBoardData mainBoardData = model.getMainBoard().getData();
+        if (mainBoardData.getGameState().getClass()!=PreGameState.class
+                && mainHBox.getChildren().contains(preGameAnchorPane))
+            mainHBox.getChildren().remove(preGameAnchorPane);
         numberOfPlayers.setText(Integer.toString(mainBoardData.getPlayerCount()));
-
         gameState.setText(mainBoardData.getGameState().getName());
-
-        currentPlayer.setText("" + roundInfo.getLastData().getCurrentPlayer());
+        currentPlayer.setText("" + model.getRoundInformation().getData().getCurrentPlayer());
 
     }
 }

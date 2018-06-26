@@ -47,7 +47,7 @@ public class RoomsPaneController extends AbstractClientStateController{
         ServerStateView serverStateView = getController().getCurrentServerState();
         simpleRoomStateList = serverStateView.asList();
         for (ServerStateView.SimpleRoomState s: simpleRoomStateList) {
-            listView.getItems().add(s.roomName + " " + s.playerSize);
+            listView.getItems().add(s.roomName + " - Ci sono " + s.playerSize + " partecipanti");
         }
     }
 

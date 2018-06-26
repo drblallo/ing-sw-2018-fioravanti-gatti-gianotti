@@ -4,31 +4,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane fx:id="myPane" prefHeight="263.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.integration.client.view.ExistingGamesPaneController">
+<AnchorPane fx:id="anchorPane" prefHeight="438.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.integration.client.view.ExistingGamesPaneController">
    <children>
       <VBox prefHeight="450.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox>
                <children>
-                  <Label text="Partite aperte: ">
+                  <Label text="Partite aperte: " underline="true">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Indietro" />
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Indietro">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="25.0" />
+                     </font></Button>
                </children>
             </HBox>
-            <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="listView" prefHeight="300.0" prefWidth="389.0" style="-fx-background-color: wheat; -fx-border-color: black;" />
             <HBox spacing="10.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label fx:id="errorLabel" textFill="#ff0202">
+                  <Label fx:id="errorLabel" style="-fx-background-color: wheat;">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                   </Label>
-                  <Button fx:id="selectButton" mnemonicParsing="false" onAction="#onSelectButtonClicked" text="Seleziona" />
+                  <Button fx:id="selectButton" mnemonicParsing="false" onAction="#onSelectButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Seleziona">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="25.0" />
+                     </font></Button>
                </children>
             </HBox>
          </children>

@@ -41,7 +41,7 @@ public class ClientController implements IClientController
 
     private IObserver<ModelProxy> proxyObserver = this::proxyChanged;
     private ModelProxy fixedProxy = new ModelProxy();
-    private ModelProxy lastModel;
+    private ModelProxy lastModel = new ModelProxy();
 
     /**
      * set the current game. The current game is the one that will be observed

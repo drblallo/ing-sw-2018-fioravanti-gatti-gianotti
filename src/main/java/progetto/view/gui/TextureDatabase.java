@@ -5,10 +5,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import progetto.model.GameColor;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class TextureDatabase {
 
@@ -17,10 +14,16 @@ public final class TextureDatabase {
     private static final int MIN_DICE_NUMBER = 1;
     private static final int MAX_DICE_NUMBER = 6;
     private static final String PLAYERBOARD = "playerboard/";
+    private static final String PRIVATE_OBJECTIVES = "private/private-objective-";
+    private static final String FORMAT = ".png";
     private static final double IMAGE_ADAPTER = 1.5;
+    private static final int NUMBER_OF_PRIVATE_OBJECTIVES = 5;
+    private static final int NUMBER_OF_PUBLIC_OBJECTIVES = 10;
     private Map<GameColor, Image> colors;
     private Map<GameColor, List<Image>> dices;
     private ArrayList<Image> numbers;
+    private ArrayList<Image> privateObjectives;
+    private Map<String, Image> publicObjectives;
     private Image white;
 
 
@@ -33,12 +36,22 @@ public final class TextureDatabase {
         loadNumbers();
         dices = new EnumMap<>(GameColor.class);
         loadDices();
+        privateObjectives = new ArrayList<>();
+        loadPrivateObjectives();
+        publicObjectives = new HashMap<>();
+        loadPublicObjectives();
 
     }
 
     public static TextureDatabase getTextureDatabase(){
         return textureDatabase;
     }
+
+    public Image getPrivateObjective(int i){
+        return privateObjectives.get(i);
+    }
+
+    public Image getPublicObjective(int i){return publicObjectives.get(i);}
 
     public Image getDice(GameColor gameColor, int number){
 
@@ -55,6 +68,17 @@ public final class TextureDatabase {
         else imageToBeReturned = dices.get(gameColor).get(number-1);
         return imageToBeReturned;
 
+    }
+    private void loadPrivateObjectives(){
+        for(int i = 0; i<NUMBER_OF_PRIVATE_OBJECTIVES;i++){
+            privateObjectives.add(new Image(getClass().getResourceAsStream(PRIVATE_OBJECTIVES + (i+1) + FORMAT)));
+        }
+    }
+
+    private void loadPublicObjectives(){
+        for (int i = 0; i< NUMBER_OF_PUBLIC_OBJECTIVES; i++){
+            //
+        }
     }
 
     private void loadColors(){

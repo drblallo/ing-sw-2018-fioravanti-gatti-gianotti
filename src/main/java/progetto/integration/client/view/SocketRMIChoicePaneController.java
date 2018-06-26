@@ -52,7 +52,7 @@ public class SocketRMIChoicePaneController extends AbstractClientStateController
 
         if (!success)
         {
-            errorMessage.setText("Failed to connect");
+            errorMessage.setText("Connessione fallita");
             return;
         }
 

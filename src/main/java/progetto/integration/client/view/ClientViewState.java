@@ -8,6 +8,7 @@ public class ClientViewState<T extends AbstractClientStateController> extends Vi
 
         super(view.getViewStateMachine(), fxml, c);
         getController().setController(view.getController());
+
     }
 
 

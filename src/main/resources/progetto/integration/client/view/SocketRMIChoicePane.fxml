@@ -13,7 +13,7 @@
                   <Region HBox.hgrow="ALWAYS" />
                   <Label text="Inserisci l'indirizzo IP:" textAlignment="CENTER">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
@@ -24,7 +24,7 @@
                   <Region HBox.hgrow="ALWAYS" />
                   <TextField fx:id="iPAddress" prefHeight="25.0" prefWidth="248.0" promptText="IP address.." text="127.0.0.1">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="Imprint MT Shadow" size="25.0" />
                      </font></TextField>
                   <Region HBox.hgrow="ALWAYS" />
                </children>
@@ -35,9 +35,9 @@
             <HBox layoutX="20.0" layoutY="60.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label fx:id="errorMessage" textFill="#f20606">
+                  <Label fx:id="errorMessage" style="-fx-background-color: wheat;" underline="true">
                      <font>
-                        <Font name="System Bold Italic" size="20.0" />
+                        <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
@@ -51,7 +51,7 @@
                   <Region HBox.hgrow="ALWAYS" />
                   <Label text="Seleziona il tipo di connessione:">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Imprint MT Shadow" size="26.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="40.0" />
@@ -70,12 +70,12 @@
                               <Insets bottom="10.0" />
                            </padding>
                            <font>
-                              <Font size="17.0" />
+                              <Font name="Imprint MT Shadow" size="20.0" />
                            </font>
                         </CheckBox>
                         <CheckBox fx:id="rmi" mnemonicParsing="false" onAction="#onRmiBoxSelected" text="RMI">
                            <font>
-                              <Font size="17.0" />
+                              <Font name="Imprint MT Shadow" size="20.0" />
                            </font></CheckBox>
                      </children>
                   </VBox>
@@ -88,19 +88,19 @@
             <HBox>
                <children>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="connectButton" mnemonicParsing="false" onAction="#onConnectButtonClicked" text="Connect">
+                  <Button fx:id="connectButton" mnemonicParsing="false" onAction="#onConnectButtonClicked" style="-fx-background-color: wheat; -fx-border-color: BLACK;" text="Connettiti">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Imprint MT Shadow" size="24.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
          </children>
          <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+            <Insets bottom="60.0" left="10.0" right="10.0" top="50.0" />
          </padding>
       </VBox>
    </children>

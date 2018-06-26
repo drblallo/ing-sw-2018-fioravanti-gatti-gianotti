@@ -1,78 +1,190 @@
 package progetto.view.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
+import progetto.controller.PlaceDiceAction;
+import progetto.integration.client.view.GUIView;
 import progetto.model.*;
+import progetto.network.PlayerView;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlayerBoardPaneController {
 
-    private WindowFrame windowFrame;
-
+    private TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
     @FXML
     private TilePane tilePane;
-
     @FXML
     private PickedDicesSlotPaneController pickedDicesSlotPaneController;
+    @FXML
+    private Label nameOfPlayer;
+    @FXML
+    private HBox topBox;
+    @FXML
+    private Button chooseWindowFrame;
+    private int numberOfPlayerBoard;
+    private static final Logger LOGGER = Logger.getLogger(PlayerBoardPaneController.class.getName());
+    private GUIView view;
 
-    private ComposableController<DicePlacedFrameData, Container<DicePlacedFrameData>>
-            dicePlacedFrame = new ComposableController<>();
-    private ComposableController<PlayerBoardData, AbstractPlayerBoard> playerBoard = new ComposableController<>();
-
-    public PlayerBoardPaneController(){
-        dicePlacedFrame.getOnModifiedCallback().addObserver(this::updateDicePlacedFrame);
-        playerBoard.getOnModifiedCallback().addObserver(this::updatePlayerBoard);
-    }
-
-    public void setObservers(ObservableModel model, int nPlayerBoard) {
-
-        playerBoard.setObservable(model.getPlayerBoard(nPlayerBoard));
-        dicePlacedFrame.setObservable(model.getPlayerBoard(nPlayerBoard).getDicePlacedFrame());
-
-        pickedDicesSlotPaneController.setObservable(model.getPlayerBoard(nPlayerBoard).getPickedDicesSlot());
-
-    }
-
-    private void updatePlayerBoard(PlayerBoardData playerBoardData) {
-
-        WindowFrame newWindowFrame = playerBoardData.getWindowFrame();
-        if (newWindowFrame == windowFrame || newWindowFrame == null) {
-            return;
+    public static Pane getPlayerBoard(int numberOfPlayerBoard, GUIView view){
+        Pane pane;
+        FXMLLoader fxmlLoader = new FXMLLoader(GamePaneController.class.getResource("PlayerBoardPane.fxml"));
+        try{
+            pane = fxmlLoader.load();
+        }catch (IOException e){
+            pane = null;
+            LOGGER.log(Level.SEVERE, e.getMessage());
         }
+        PlayerBoardPaneController playerBoardPaneControllers = fxmlLoader.getController();
+        playerBoardPaneControllers.setup(view, numberOfPlayerBoard);
+        return pane;
+    }
 
-        windowFrame = newWindowFrame;
-        TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
+    public void setup(GUIView view, int numberOfPlayerBoard){
+        this.view = view;
+        this.numberOfPlayerBoard = numberOfPlayerBoard;
+        topBox.getChildren().remove(chooseWindowFrame);
+        view.getController().getObservable().getPlayerBoard(numberOfPlayerBoard)
+                .addObserver(ogg-> Platform.runLater(this::updatePlayerBoard));
+        view.getController().getObservable().getPlayerBoard(numberOfPlayerBoard).getDicePlacedFrame()
+                .addObserver(ogg -> Platform.runLater(this::updateDicePlacedFrame));
+        pickedDicesSlotPaneController.setup(view, numberOfPlayerBoard);
+
         ImageView imageView;
 
-        for (int i = 0; i < DicePlacedFrameData.MAX_NUMBER_OF_ROWS; i++) {
-            for (int j = 0; j < DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS; j++) {
+        for (int y = 0; y < DicePlacedFrameData.MAX_NUMBER_OF_ROWS; y++) {
+            for (int x = 0; x < DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS; x++) {
                 imageView = (ImageView) tilePane.getChildren()
-                        .get(i*DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS +j);
+                        .get(y*DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS +x);
+                final int finalY = y;
+                final int finalX = x;
+                imageView.setOnDragOver(event -> onDragOver(event, finalY, finalX));
+                imageView.setOnDragDropped(event -> onDragDropped(event, finalY, finalX));
+                setWindowFrameCell(y,x, imageView);
+            }
+        }
 
-                if (windowFrame.getColorBond(i, j) != null) {
-                    imageView.setImage(textureDatabase.getDice(windowFrame.getColorBond(i, j), -1));
-                } else if (windowFrame.getValueBond(i, j) != null) {
-                    imageView.setImage(textureDatabase.getDice(null,
-                            windowFrame.getValueBond(i, j).ordinal() + 1));
-                }
+        updatePlayerBoard();
+        updateDicePlacedFrame();
+
+    }
+
+    private void onDragDropped(DragEvent event, int y, int x){
+        String recived = event.getDragboard().getString();
+        int numberOfDice = Integer.parseInt(recived);
+        view.getController().sendAction(new PlaceDiceAction(view.getController().getChair(),
+                numberOfDice, y, x));
+    }
+
+    private void onDragOver(DragEvent event, int y, int x){
+        if(event.getDragboard().hasString()){
+            String recived = event.getDragboard().getString();
+            int numberOfDice = Integer.parseInt(recived);
+            if (new PlaceDiceAction(view.getController().getChair(), numberOfDice, y, x)
+                    .canBeExecuted(view.getController().getModel())){
+                event.acceptTransferModes(TransferMode.COPY);
             }
         }
     }
 
-    private void updateDicePlacedFrame(DicePlacedFrameData dicePlacedFrameData){
-        TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
-        ImageView imageView;
+    private void updateChooseWindowFrameButton(PlayerBoardData playerBoardData)
+    {
+        if(!playerBoardData.getWindowFrameIsSet() && numberOfPlayerBoard == view.getController().getChair())
+        {
+            if (!topBox.getChildren().contains(chooseWindowFrame))
+                topBox.getChildren().add(chooseWindowFrame);
+        }
+        else topBox.getChildren().remove(chooseWindowFrame);
 
-        for (int i = 0; i < DicePlacedFrameData.MAX_NUMBER_OF_ROWS; i++) {
-            for (int j = 0; j < DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS; j++) {
-                    if(dicePlacedFrameData.getDice(i,j)!=null){
-                        imageView = (ImageView) tilePane.getChildren()
-                                .get(i*DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS +j);
+    }
+
+    private void updatePlayerBoard() {
+
+        IModel model = view.getController().getModel();
+        PlayerBoardData playerBoardData = model.getPlayerBoard(numberOfPlayerBoard).getData();
+        PlayerView currentPlayer = view.getController().getCurrentRoom().getPlayerOfChair(numberOfPlayerBoard);
+
+        if (currentPlayer != null)
+            nameOfPlayer.setText(numberOfPlayerBoard +":" + currentPlayer.getName());
+        else nameOfPlayer.setText(numberOfPlayerBoard + "");
+        updateChooseWindowFrameButton(playerBoardData);
+
+        ImageView imageView;
+        for (int y = 0; y < DicePlacedFrameData.MAX_NUMBER_OF_ROWS; y++) {
+            for (int x = 0; x < DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS; x++) {
+                imageView = (ImageView) tilePane.getChildren()
+                        .get(y*DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS +x);
+                setWindowFrameCell(y,x,imageView);
+            }
+        }
+
+    }
+
+    private void updateDicePlacedFrame(){
+
+        DicePlacedFrameData dicePlacedFrameData = view.getController().getModel().getPlayerBoard(numberOfPlayerBoard)
+                .getDicePlacedFrame().getData();
+        ImageView imageView;
+        for (int y = 0; y < DicePlacedFrameData.MAX_NUMBER_OF_ROWS; y++) {
+            for (int x = 0; x < DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS; x++) {
+                imageView = (ImageView) tilePane.getChildren()
+                        .get(y*DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS +x);
+                    if(dicePlacedFrameData.getDice(y,x)!=null){
                         imageView.setImage(textureDatabase.getDice
-                                (dicePlacedFrameData.getDice(i,j).getGameColor(),
-                                        dicePlacedFrameData.getDice(i,j).getValue().ordinal()+1 ));
+                                (dicePlacedFrameData.getDice(y,x).getGameColor(),
+                                        dicePlacedFrameData.getDice(y,x).getValue().ordinal()+1 ));}
+                    else setWindowFrameCell(y,x,imageView);
                 }
             }
+        }
+
+    private void setWindowFrameCell(int y, int x, ImageView imageView){
+
+        WindowFrame windowFrame = view.getController().getModel().getPlayerBoard(numberOfPlayerBoard)
+                .getData().getWindowFrame();
+        if (windowFrame.getColorBond(y, x) != null) {
+            imageView.setImage(textureDatabase.getDice(windowFrame.getColorBond(y, x), -1));
+        } else if (windowFrame.getValueBond(y, x) != null) {
+            imageView.setImage(textureDatabase.getDice(null,
+                    windowFrame.getValueBond(y, x).ordinal() + 1));
+        }
+        else imageView.setImage(textureDatabase.getDice(null, -1));
+    }
+
+    @FXML
+    private void onChooseWindowFrameClicked(){
+
+        IModel model = view.getController().getModel();
+
+        if(model.getMainBoard().getData().getGameState().getClass()==FrameSelectionState.class) {
+            FXMLLoader fxmlLoader = new FXMLLoader(PlayerBoardPaneController
+                    .class.getResource("ChooseWindowFramePane.fxml"));
+            Pane pane;
+            try {
+                pane = fxmlLoader.load();
+            } catch (IOException e) {
+                pane = null;
+            }
+            ChooseWindowFramePaneController chooseWindowFramePaneController = fxmlLoader.getController();
+            chooseWindowFramePaneController.setup(model
+                    .getPlayerBoard(numberOfPlayerBoard).getData(), view.getController() );
+            Stage stage = new Stage();
+            stage.setScene(new Scene(pane));
+            stage.setTitle("Scelta vetrata");
+            stage.show();
         }
     }
 }

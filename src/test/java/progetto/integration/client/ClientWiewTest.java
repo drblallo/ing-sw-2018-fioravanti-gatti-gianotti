@@ -46,7 +46,7 @@ public class ClientWiewTest extends ApplicationTest {
 
     }
 
-    @Test
+    /*@Test
     public void testFirst() {
 
         clickOn("#newGame");
@@ -121,7 +121,7 @@ public class ClientWiewTest extends ApplicationTest {
         timoty.wait(500);
         Assert.assertTrue(true);
 
-    }
+    } */
 
     @Test
     public void testNoClientConnection(){

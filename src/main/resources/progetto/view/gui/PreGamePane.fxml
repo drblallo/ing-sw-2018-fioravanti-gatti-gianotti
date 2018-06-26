@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="preGameAnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.PreGamePaneController">
+   <children>
+      <VBox fx:id="preGameVBox" layoutX="10.0" layoutY="10.0" spacing="10.0">
+         <children>
+            <HBox spacing="10.0">
+               <children>
+                  <Label text="Cambia numero di giocatori: ">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="numberOfPlayersChoice" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: wheat; -fx-border-color: BLACK;">
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ChoiceBox>
+                  <Label text="(  Numero attuale di giocatori: ">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentNumberOfPlayers" text="4">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text=")">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox spacing="10.0">
+               <children>
+                  <Label text="Se vuoi partecipare al gioco prendi posto su una delle sedie disponibili: ">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="numberOfChairChoice" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: wheat; -fx-border-color: BLACK;">
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ChoiceBox>
+                  <Button mnemonicParsing="false" onAction="#onSitButtonPressed" style="-fx-background-color: wheat; -fx-border-color: BLACK;" text="Siediti">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="15.0" />
+                     </font>
+                  </Button>
+                  <Label text="(  Ora sei seduto sulla sedia:  ">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentNumberOfChair" text="-1">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text=")">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label depthTest="DISABLE" style="-fx-background-color: wheat;" text="ATTENZIONE: Una volta iniziata la partita non è più possibile cambiare il numero di giocatori!">
+               <font>
+                  <Font name="Imprint MT Shadow" size="20.0" />
+               </font>
+            </Label>
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#onStartGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: BLACK;" text="Inizia partita">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
