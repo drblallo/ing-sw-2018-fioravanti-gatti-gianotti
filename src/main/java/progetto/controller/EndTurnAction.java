@@ -40,6 +40,15 @@ public class EndTurnAction extends AbstractExecutibleGameAction
 		PickedDicesSlot pickedDicesSlot = game.getPlayerBoard(getCallerID()).getPickedDicesSlot();
 		ExtractedDices extractedDices = game.getMainBoard().getExtractedDices();
 
+		Dice toolCardDice = game.getRoundInformation().getData().getToolCardParameters().getDice();
+
+		if(toolCardDice != null)
+		{
+			game.getRoundInformation().setDice(null);
+			pickedDicesSlot.add(game.getRNGenerator().rollAgain(toolCardDice));
+
+		}
+
 		while(pickedDicesSlot.getData().getNDices()>0)
 		{
 			Dice dice = pickedDicesSlot.remove(0).getDice();

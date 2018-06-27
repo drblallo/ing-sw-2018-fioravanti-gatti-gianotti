@@ -61,7 +61,17 @@ public class ExecuteToolCard11Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Dice dice = game.getRNGenerator().extractDice(game.getDiceBag());
+		DiceBag diceBag = game.getDiceBag();
+		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
+		int nDice = game.getRoundInformation().getData().getToolCardParameters().getNDice();
+
+		Dice dice = playerBoard.getPickedDicesSlot().remove(nDice).getDice();
+
+		GameColor color = dice.getGameColor();
+
+		diceBag.add(color);
+
+		dice = game.getRNGenerator().extractDice(game.getDiceBag());
 
 		game.getRoundInformation().setDice(dice);
 
