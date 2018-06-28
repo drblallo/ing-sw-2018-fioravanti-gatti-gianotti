@@ -538,8 +538,7 @@ public class TestAction {
 		game.getModel().setState(new RoundState());
 		game.getModel().getPlayerBoard(0).setToken(10);
 
-		List<Class> actionList = new ArrayList<>();
-		game.getModel().getMainBoard().addToolCard(new ToolCard("", "", GameColor.GREEN, 1, actionList));
+		game.getModel().getMainBoard().addToolCard(new ToolCard("", "", GameColor.GREEN, 1));
 
 		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.ONE, GameColor.GREEN));
 		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.THREE, GameColor.RED));

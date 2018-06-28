@@ -93,6 +93,11 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Some tool cards works only if it is the first or the second turn of the player
+	 * @param game game
+	 * @return canBeUsed
+	 */
 	private boolean canBeUsed(IModel game)
 	{
 		int cardIndex = game.getMainBoard().getData().getToolCards().get(nCard).getIndex();

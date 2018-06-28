@@ -13,9 +13,6 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 	private final int round;
 	private final int nDiceRT;
 
-	private static final int CARD5 = 5;
-	private static final int CARD12 = 12;
-
 	/**
 	 * Constructor without parameters
 	 */
@@ -55,13 +52,8 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 			return false;
 		}
 
-		ToolCardState toolCardState = (ToolCardState) data.getGameState();
-
-		int index = toolCardState.getIndex();
-
 		return getCallerID()==game.getRoundInformation().getData().getCurrentPlayer() &&
-				game.getRoundTrack().getData().getDice(round, nDiceRT)!=null &&
-				(index == CARD5 || index == CARD12);
+				game.getRoundTrack().getData().getDice(round, nDiceRT)!=null ;
 
 	}
 

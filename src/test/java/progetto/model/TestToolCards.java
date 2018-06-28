@@ -21,10 +21,7 @@ public class TestToolCards {
 	@Test
 	public void testToolCardStateFailWrongCaller()
 	{
-		List<Class> actionList = new ArrayList<>();
-		actionList.add(ToolCardSetPickedDiceAction.class);
-		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
-		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1));
 
 		AbstractGameState state = new FrameSelectionState();
 		game.setState(state);
@@ -40,10 +37,7 @@ public class TestToolCards {
 	@Test
 	public void testToolCardState()
 	{
-		List<Class> actionList = new ArrayList<>();
-		actionList.add(ToolCardSetPickedDiceAction.class);
-		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
-		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1));
 
 		AbstractGameState state = new FrameSelectionState();
 		game.setState(state);
@@ -66,10 +60,7 @@ public class TestToolCards {
 	@Test
 	public void testToolTip()
 	{
-		List<Class> actionList = new ArrayList<>();
-		actionList.add(ToolCardSetPickedDiceAction.class);
-		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
-		ToolCard toolCard = new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1, actionList);
+		ToolCard toolCard = new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1);
 		Assert.assertEquals("1 Viola Pinza Sgrossatrice Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", toolCard.getToolTip());
 
 	}
@@ -80,10 +71,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard1Action(0);
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		List<Class> actionList = new ArrayList<>();
-		actionList.add(ToolCardSetPickedDiceAction.class);
-		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
-		ToolCard toolCard = new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1, actionList);
+		ToolCard toolCard = new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1);
 
 		game.setState(new ToolCardState(1));
 
@@ -112,10 +100,7 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new ExecuteToolCard1Action(0);
 		Assert.assertFalse(gameAction.canBeExecuted(game));
 
-		List<Class> actionList = new ArrayList<>();
-		actionList.add(ToolCardSetPickedDiceAction.class);
-		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
-		ToolCard toolCard = new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1, actionList);
+		ToolCard toolCard = new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1);
 
 		game.setState(new ToolCardState(1));
 
@@ -213,10 +198,7 @@ public class TestToolCards {
 	@Test
 	public void testToolCardSelectDiceValueAction()
 	{
-		List<Class> actionList = new ArrayList<>();
-		actionList.add(ToolCardSetPickedDiceAction.class);
-		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
-		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,11, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,11));
 		game.getRoundInformation().setCurrentPlayer(0);
 		game.getMainBoard().setPlayerCount(1);
 		game.getMainBoard().setGameState(new RoundState());
@@ -246,10 +228,7 @@ public class TestToolCards {
 	@Test
 	public void testToolCardSelectDiceValueActionValue()
 	{
-		List<Class> actionList = new ArrayList<>();
-		actionList.add(ToolCardSetPickedDiceAction.class);
-		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
-		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,11, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,11));
 		game.getRoundInformation().setCurrentPlayer(0);
 		game.getMainBoard().setPlayerCount(1);
 		game.getMainBoard().setGameState(new RoundState());
@@ -1157,8 +1136,7 @@ public class TestToolCards {
 		game.getRoundInformation().addPlayerQueue(0);
 
 		game.getPlayerBoard(0).setToken(10);
-		List<Class> actionList = new ArrayList<>();
-		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 8, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 8));
 		gameAction = new UseToolCardAction(0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
@@ -1196,8 +1174,7 @@ public class TestToolCards {
 		game.getPlayerBoard(0).setToken(5);
 		game.setState(new RoundState());
 
-		List<Class> actionList = new ArrayList<>();
-		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12));
 
 		gameAction = new UseToolCardAction(0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -1248,8 +1225,7 @@ public class TestToolCards {
 		game.getPlayerBoard(0).setToken(5);
 		game.setState(new RoundState());
 
-		List<Class> actionList = new ArrayList<>();
-		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12));
 
 		game.getMainBoard().incNCallToolCard(0);
 
@@ -1275,8 +1251,7 @@ public class TestToolCards {
 		game.getMainBoard().getExtractedDices().addDice(new Dice(Value.THREE, GameColor.BLUE));
 		game.getMainBoard().getExtractedDices().addDice(new Dice(Value.FOUR, GameColor.GREEN));
 
-		List<Class> actionList = new ArrayList<>();
-		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12));
 
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -1343,8 +1318,7 @@ public class TestToolCards {
 		game.getMainBoard().getExtractedDices().addDice(new Dice(Value.THREE, GameColor.BLUE));
 		game.getMainBoard().getExtractedDices().addDice(new Dice(Value.FOUR, GameColor.GREEN));
 
-		List<Class> actionList = new ArrayList<>();
-		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12));
 
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -1421,8 +1395,7 @@ public class TestToolCards {
 		game.setState(new RoundState());
 
 		game.getPlayerBoard(0).setToken(10);
-		List<Class> actionList = new ArrayList<>();
-		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12, actionList));
+		game.getMainBoard().addToolCard(new ToolCard("", "", GameColor.YELLOW, 12));
 		gameAction = new UseToolCardAction(0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
@@ -1477,5 +1450,21 @@ public class TestToolCards {
 
 	}
 
+	@Test
+	public void testToolCardActionList()
+	{
+		List<Class> list5 = ToolCardActionList.getInstance().getList(5);
+
+		Assert.assertEquals(2, list5.size());
+		Assert.assertEquals(ToolCardSetPickedDiceAction.class, list5.get(0));
+		Assert.assertEquals(ToolCardSetDiceRoundTrackAction.class, list5.get(1));
+
+		list5.remove(0);
+		Assert.assertEquals(1, list5.size());
+
+		list5 = ToolCardActionList.getInstance().getList(5);
+		Assert.assertEquals(2, list5.size());
+
+	}
 
 }

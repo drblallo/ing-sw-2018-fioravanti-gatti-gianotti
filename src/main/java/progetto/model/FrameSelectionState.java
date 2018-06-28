@@ -135,7 +135,7 @@ public class FrameSelectionState extends AbstractGameState {
 	 */
 	private void extractToolCards(Model game)
 	{
-		ToolCardDeck toolCardDeck = new ToolCardDeck(game);
+		ToolCardDeck toolCardDeck = new ToolCardDeck();
 
 		int nPlayer = game.getMainBoard().getData().getPlayerCount();
 

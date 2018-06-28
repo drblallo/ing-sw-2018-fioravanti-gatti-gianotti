@@ -3,6 +3,7 @@ package progetto.integration.client.view.cl;
 import progetto.controller.*;
 import progetto.model.IModel;
 import progetto.model.ToolCard;
+import progetto.model.ToolCardActionList;
 import progetto.model.ToolCardState;
 
 public class UseToolCardState extends AbstractCLViewState {
@@ -30,7 +31,7 @@ public class UseToolCardState extends AbstractCLViewState {
         registerCommand(new ShowPickedDicesCommand(getView()));
         registerCommand(new ShowPlayerBoardCommand(getView(), getController().getChair() , new Printer(), this));
         registerCommand(new ShowRoundTrackCommand(getView()));
-        for (Class c: toolCard.getCardAction()) {
+        for (Class c: ToolCardActionList.getInstance().getList(toolCard.getIndex())) {
 
             if(c == ToolCardSetSinglePlayerDiceAction.class &&
                     getModel().getMainBoard().getData().getPlayerCount() == 1){

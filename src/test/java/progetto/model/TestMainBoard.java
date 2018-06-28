@@ -187,10 +187,7 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testNCallToolCards()
 	{
-		List<Class> actionList = new ArrayList<>();
-		actionList.add(ToolCardSetPickedDiceAction.class);
-		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
-		mainBoard.addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1, actionList));
+		mainBoard.addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1));
 		Assert.assertEquals(0, (int)mainBoard.getData().getNCallToolCard(0));
 
 		mainBoard.incNCallToolCard(0);
@@ -200,8 +197,7 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testToolCards()
 	{
-		List<Class> actionList = new ArrayList<>();
-		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1, actionList));
+		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1));
 		Assert.assertEquals(1, mainBoard.getData().getToolCards().size());
 
 		mainBoard.removeToolCard(0);
@@ -212,8 +208,7 @@ public class TestMainBoard extends TestCase {
 	@Test
 	public void testNCallToolCardFail()
 	{
-		List<Class> actionList = new ArrayList<>();
-		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1, actionList));
+		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1));
 
 		mainBoard.incNCallToolCard(-1);
 
