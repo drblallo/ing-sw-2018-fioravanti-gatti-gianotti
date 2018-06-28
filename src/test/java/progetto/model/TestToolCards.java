@@ -19,6 +19,25 @@ public class TestToolCards {
 	}
 
 	@Test
+	public void testToolCardStateFailWrongCaller()
+	{
+		List<Class> actionList = new ArrayList<>();
+		actionList.add(ToolCardSetPickedDiceAction.class);
+		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
+		game.getMainBoard().addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1, actionList));
+
+		AbstractGameState state = new FrameSelectionState();
+		game.setState(state);
+		state = new RoundState();
+		game.setState(state);
+		game.getRoundInformation().setCurrentPlayer(1);
+		game.getPlayerBoard(0).setToken(5);
+		AbstractGameAction gameAction = new UseToolCardAction(0, 0);;
+		Assert.assertFalse(gameAction.canBeExecuted(game));
+
+	}
+
+	@Test
 	public void testToolCardState()
 	{
 		List<Class> actionList = new ArrayList<>();
@@ -30,11 +49,11 @@ public class TestToolCards {
 		game.setState(state);
 		state = new RoundState();
 		game.setState(state);
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getPlayerBoard(0).setToken(5);
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);;
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
-		game.getRoundInformation().setCurrentPlayer(0);
 		game.getRoundInformation().setNDice(0);
 		game.getRoundInformation().setIncreaseDecrease(0);
 		game.getPlayerBoard(0).getPickedDicesSlot().add(new Dice(Value.ONE, GameColor.YELLOW));
@@ -421,6 +440,7 @@ public class TestToolCards {
 	{
 		game.setState(new FrameSelectionState());
 		game.setState(new RoundState());
+		game.getRoundInformation().setCurrentPlayer(0);
 		game.getPlayerBoard(0).setToken(5);
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
