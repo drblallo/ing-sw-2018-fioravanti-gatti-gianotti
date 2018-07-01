@@ -59,7 +59,7 @@ public class GameController implements IGameController {
 
 	public int getHash(int index)
 	{
-		return pastHashCodes.get(index);
+		return 0;
 	}
 
 	@Override
