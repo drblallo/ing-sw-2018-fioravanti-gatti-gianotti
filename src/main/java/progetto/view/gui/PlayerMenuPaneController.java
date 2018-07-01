@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import progetto.controller.EndTurnAction;
-import progetto.integration.client.view.GUIView;
 import progetto.model.Container;
 import progetto.model.PlayerBoardData;
 import progetto.utils.IObserver;
@@ -13,6 +12,8 @@ public class PlayerMenuPaneController {
 
     @FXML
     private Label numberOfTokens;
+    @FXML
+    private Label currentPlayer;
 
     private GUIView view;
     private IObserver<PlayerBoardData> playerObserver = ogg -> Platform.runLater(this::updatePlayerBoard);
@@ -22,6 +23,9 @@ public class PlayerMenuPaneController {
     public void setup(GUIView view){
         this.view = view;
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::onRoomChanged));
+        view.getController().getObservable().getRoundInformation()
+                .addObserver(ogg -> Platform.runLater(this::updateCurrentPlayer) );
+        AlertTurnBoxPaneController.setup();
     }
 
     private void onRoomChanged()
@@ -44,6 +48,15 @@ public class PlayerMenuPaneController {
             numberOfTokens.setText(playerBoardData.getToken() + "");
     }
 
+    private void updateCurrentPlayer(){
+        int newCurrentPlayer = view.getController().getModel().getRoundInformation().getData().getCurrentPlayer();
+        if (Integer.parseInt(currentPlayer.getText())!=newCurrentPlayer){
+            currentPlayer.setText(newCurrentPlayer + "");
+            if (newCurrentPlayer == view.getController().getChair())
+                AlertTurnBoxPaneController.display();
+        }
+    }
+
     @FXML
     private void onEndTurnButtonClicked(){
         if (view.getController().getChair()!=-1)
@@ -52,7 +65,7 @@ public class PlayerMenuPaneController {
 
     @FXML
     private void onShowOtherPlayersButtonClicked(){
-        view.getViewStateMachine().getStateFromName("OtherPlayersPane.fxml").show();
+        view.getViewStateMachine().getStateFromName("OtherPlayersPane.fxml").show(true);
     }
 
 }

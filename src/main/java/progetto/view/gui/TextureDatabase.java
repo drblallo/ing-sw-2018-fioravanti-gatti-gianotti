@@ -5,7 +5,10 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import progetto.model.GameColor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 public final class TextureDatabase {
 
@@ -14,16 +17,21 @@ public final class TextureDatabase {
     private static final int MIN_DICE_NUMBER = 1;
     private static final int MAX_DICE_NUMBER = 6;
     private static final String PLAYERBOARD = "playerboard/";
-    private static final String PRIVATE_OBJECTIVES = "private/private-objective-";
+    private static final String PRIVATE_OBJECTIVES = "private/small-private-objective-";
+    private static final String PUBLIC_OBJECTIVES = "public/small-public-objective-";
+    private static final String TOOLCARDS_PATH = "toolcard/small-toolcard_";
+    private static final String BACK = "back";
     private static final String FORMAT = ".png";
     private static final double IMAGE_ADAPTER = 1.5;
     private static final int NUMBER_OF_PRIVATE_OBJECTIVES = 5;
     private static final int NUMBER_OF_PUBLIC_OBJECTIVES = 10;
+    private static final int NUMBER_OF_TOOL_CARDS = 12;
     private Map<GameColor, Image> colors;
     private Map<GameColor, List<Image>> dices;
     private ArrayList<Image> numbers;
     private ArrayList<Image> privateObjectives;
-    private Map<String, Image> publicObjectives;
+    private ArrayList<Image> publicObjectives;
+    private ArrayList<Image> toolCards;
     private Image white;
 
 
@@ -38,9 +46,10 @@ public final class TextureDatabase {
         loadDices();
         privateObjectives = new ArrayList<>();
         loadPrivateObjectives();
-        publicObjectives = new HashMap<>();
+        publicObjectives = new ArrayList<>();
         loadPublicObjectives();
-
+        toolCards = new ArrayList<>();
+        loadToolCards();
     }
 
     public static TextureDatabase getTextureDatabase(){
@@ -52,6 +61,8 @@ public final class TextureDatabase {
     }
 
     public Image getPublicObjective(int i){return publicObjectives.get(i);}
+
+    public Image getToolCard(int i ){return toolCards.get(i-1);}
 
     public Image getDice(GameColor gameColor, int number){
 
@@ -69,16 +80,26 @@ public final class TextureDatabase {
         return imageToBeReturned;
 
     }
+
+    private void loadToolCards(){
+        for (int i = 1; i< NUMBER_OF_TOOL_CARDS+1; i++){
+            toolCards.add(new Image(getClass().getResourceAsStream(TOOLCARDS_PATH + i + FORMAT)));
+        }
+        toolCards.add(new Image(getClass().getResourceAsStream(TOOLCARDS_PATH + BACK + FORMAT)));
+    }
+
     private void loadPrivateObjectives(){
         for(int i = 0; i<NUMBER_OF_PRIVATE_OBJECTIVES;i++){
-            privateObjectives.add(new Image(getClass().getResourceAsStream(PRIVATE_OBJECTIVES + (i+1) + FORMAT)));
+            privateObjectives.add(new Image(getClass().getResourceAsStream(PRIVATE_OBJECTIVES + i + FORMAT)));
         }
+        privateObjectives.add(new Image(getClass().getResourceAsStream(PRIVATE_OBJECTIVES + BACK + FORMAT)));
     }
 
     private void loadPublicObjectives(){
         for (int i = 0; i< NUMBER_OF_PUBLIC_OBJECTIVES; i++){
-            //
+            publicObjectives.add(new Image(getClass().getResourceAsStream(PUBLIC_OBJECTIVES + i + FORMAT )));
         }
+        publicObjectives.add(new Image(getClass().getResourceAsStream(PUBLIC_OBJECTIVES + BACK + FORMAT)));
     }
 
     private void loadColors(){

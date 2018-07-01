@@ -2,13 +2,10 @@ package progetto.view.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import progetto.integration.client.view.GUIView;
+import progetto.controller.ToolCardSetDiceRoundTrackAction;
 import progetto.model.Dice;
 import progetto.model.RoundTrackData;
 
@@ -70,15 +67,13 @@ public class RoundTrackPaneController {
                         dice.getValue().ordinal()+1));
                 imageView.setFitHeight(DICE_DIMENSION);
                 imageView.setFitWidth(DICE_DIMENSION);
-                final String toTransfer = "" + j;
-                imageView.setOnDragDetected(event -> {
-                    Dragboard dragboard = imageView.startDragAndDrop(TransferMode.ANY);
-                    ClipboardContent content = new ClipboardContent();
-                    content.putString(toTransfer);
-                    content.putImage(imageView.getImage());
-                    dragboard.setContent(content);
+                final int i = j;
 
-                    event.consume();
+                imageView.setOnMouseClicked(event -> {
+                    ToolCardSetDiceRoundTrackAction toolCardSetDiceRoundTrackAction =
+                            new ToolCardSetDiceRoundTrackAction(view.getController().getChair(), nRound, i);
+                    if(toolCardSetDiceRoundTrackAction.canBeExecuted(view.getController().getModel()))
+                        view.getController().sendAction(toolCardSetDiceRoundTrackAction);
                 });
                 showingBox.getChildren().add(imageView);
                 j++;

@@ -3,7 +3,7 @@ package progetto.integration.server;
 
 import org.junit.*;
 import progetto.controller.*;
-import progetto.integration.client.ClientController;
+import progetto.ClientController;
 import progetto.model.FrameSelectionState;
 import progetto.model.RoundState;
 import progetto.network.INetworkModule;
@@ -115,9 +115,6 @@ public class NetworkModelTest
 		Assert.assertEquals(
 				"room",
 				g.getCurrentRoom().getRoomName());
-		Assert.assertEquals(
-				RoundState.class.getName(),
-				game.getModel().getMainBoard().getData().getGameState().getClass().getName());
 		Assert.assertEquals(
 				RoundState.class.getName(),
 				game.getModel().getMainBoard().getData().getGameState().getClass().getName());

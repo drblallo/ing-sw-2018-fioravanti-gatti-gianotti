@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane maxHeight="55.0" maxWidth="575.0" minHeight="55.0" minWidth="575.0" prefHeight="55.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.ExtractedDicesPaneController">
+
+<AnchorPane maxHeight="120.0" maxWidth="315.0" minHeight="120.0" minWidth="315.0" prefHeight="120.0" prefWidth="315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.ExtractedDicesPaneController">
    <children>
-      <HBox fx:id="hBox" layoutX="10.0" layoutY="10.0" maxHeight="55.0" minHeight="55.0" prefHeight="55.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <TilePane fx:id="tilePane" hgap="10.0" layoutX="10.0" layoutY="10.0" maxHeight="120.0" maxWidth="315.0" minHeight="120.0" minWidth="315.0" prefHeight="120.0" prefWidth="315.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

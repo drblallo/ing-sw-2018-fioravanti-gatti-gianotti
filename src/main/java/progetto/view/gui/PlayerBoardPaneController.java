@@ -8,13 +8,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import progetto.controller.PlaceDiceAction;
-import progetto.integration.client.view.GUIView;
+import progetto.controller.ToolCardSetPlacedDiceAction;
+import progetto.controller.ToolCardSetSecondPlacedDiceAction;
 import progetto.model.*;
 import progetto.network.PlayerView;
 
@@ -60,7 +63,7 @@ public class PlayerBoardPaneController {
         view.getController().getObservable().getPlayerBoard(numberOfPlayerBoard)
                 .addObserver(ogg-> Platform.runLater(this::updatePlayerBoard));
         view.getController().getObservable().getPlayerBoard(numberOfPlayerBoard).getDicePlacedFrame()
-                .addObserver(ogg -> Platform.runLater(this::updateDicePlacedFrame));
+            .addObserver(ogg -> Platform.runLater(this::updateDicePlacedFrame));
         pickedDicesSlotPaneController.setup(view, numberOfPlayerBoard);
 
         ImageView imageView;
@@ -73,6 +76,7 @@ public class PlayerBoardPaneController {
                 final int finalX = x;
                 imageView.setOnDragOver(event -> onDragOver(event, finalY, finalX));
                 imageView.setOnDragDropped(event -> onDragDropped(event, finalY, finalX));
+                imageView.setOnMouseClicked(event -> onMouseClicked(event, finalY, finalX));
                 setWindowFrameCell(y,x, imageView);
             }
         }
@@ -80,6 +84,22 @@ public class PlayerBoardPaneController {
         updatePlayerBoard();
         updateDicePlacedFrame();
 
+    }
+
+    private void onMouseClicked(MouseEvent event, int y, int x){
+        IModel model = view.getController().getModel();
+        int currentChair = view.getController().getChair();
+
+        AbstractGameAction toolCardSetPlacedDiceAction;
+
+        if (!model.getRoundInformation().getData().getToolCardParameters().isFirstDiceSet())
+            toolCardSetPlacedDiceAction = new ToolCardSetPlacedDiceAction(currentChair, y,x);
+        else toolCardSetPlacedDiceAction = new ToolCardSetSecondPlacedDiceAction(currentChair, y, x);
+
+        if (toolCardSetPlacedDiceAction.canBeExecuted(view.getController().getModel()))
+            view.getController().sendAction(toolCardSetPlacedDiceAction);
+
+        event.consume();
     }
 
     private void onDragDropped(DragEvent event, int y, int x){
@@ -118,18 +138,10 @@ public class PlayerBoardPaneController {
         PlayerView currentPlayer = view.getController().getCurrentRoom().getPlayerOfChair(numberOfPlayerBoard);
 
         if (currentPlayer != null)
-            nameOfPlayer.setText(numberOfPlayerBoard +":" + currentPlayer.getName());
-        else nameOfPlayer.setText(numberOfPlayerBoard + "");
+            nameOfPlayer.setText(currentPlayer.getName());
+        else nameOfPlayer.setText("Giocatore: " + numberOfPlayerBoard);
         updateChooseWindowFrameButton(playerBoardData);
-
-        ImageView imageView;
-        for (int y = 0; y < DicePlacedFrameData.MAX_NUMBER_OF_ROWS; y++) {
-            for (int x = 0; x < DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS; x++) {
-                imageView = (ImageView) tilePane.getChildren()
-                        .get(y*DicePlacedFrameData.MAX_NUMBER_OF_COLUMNS +x);
-                setWindowFrameCell(y,x,imageView);
-            }
-        }
+        updateDicePlacedFrame();
 
     }
 
@@ -182,6 +194,7 @@ public class PlayerBoardPaneController {
             chooseWindowFramePaneController.setup(model
                     .getPlayerBoard(numberOfPlayerBoard).getData(), view.getController() );
             Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(pane));
             stage.setTitle("Scelta vetrata");
             stage.show();

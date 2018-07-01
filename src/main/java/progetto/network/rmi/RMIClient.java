@@ -163,7 +163,7 @@ public final class RMIClient implements INetworkClient, Runnable{
 	 */
 	public void run()
 	{
-		Thread.currentThread().setName(getClass().getName()+" Thread");
+		Thread.currentThread().setName("RMI Thread");
 		while (isRunning())
 			sendFirstPending();
 	}

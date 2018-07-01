@@ -8,7 +8,7 @@ import progetto.model.*;
 public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 
 	private final int value;
-	private static final int MAX_VALUE = 6;
+	public static final int MAX_VALUE = 6;
 
 	/**
 	 * Constructor without parameters

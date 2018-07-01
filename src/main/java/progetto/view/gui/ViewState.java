@@ -1,8 +1,10 @@
 package progetto.view.gui;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,7 +38,6 @@ public class ViewState<T extends AbstractStateController> {
         this.viewStateMachine = viewStateMachine;
         controller = fxmlLoader.getController();
         controller.setViewStateMachine(viewStateMachine);
-        controller.setup();
 
     }
 
@@ -48,13 +49,19 @@ public class ViewState<T extends AbstractStateController> {
         return controller;
     }
 
-    public void show(){
+    public void show(boolean maximized){
         controller.onPreShow();
         Stage stage = viewStateMachine.getStage();
         stage.setScene(scene);
+        if (maximized) {
+            Rectangle2D rectangle2D = Screen.getPrimary().getVisualBounds();
+            stage.setX(rectangle2D.getMinX());
+            stage.setY(rectangle2D.getMinY());
+            stage.setWidth(rectangle2D.getWidth());
+            stage.setHeight(rectangle2D.getHeight());
+        }
         viewStateMachine.setCurrentViewState(this);
         stage.show();
-
     }
 
     protected void onHide(){

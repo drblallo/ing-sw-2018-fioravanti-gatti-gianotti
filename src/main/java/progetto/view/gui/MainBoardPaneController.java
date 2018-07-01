@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import progetto.integration.client.view.GUIView;
 import progetto.model.IModel;
 import progetto.model.MainBoardData;
 import progetto.model.PreGameState;

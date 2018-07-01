@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="mainBox" prefHeight="131.0" prefWidth="449.0" spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.AlertExitBoxPaneController">
+   <children>
+      <HBox>
+         <children>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="Sicuro di volere abbandonare il gioco?">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox spacing="50.0">
+         <children>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#onYesButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="Sì">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onNoButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="No">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+            </Button>
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+</VBox>

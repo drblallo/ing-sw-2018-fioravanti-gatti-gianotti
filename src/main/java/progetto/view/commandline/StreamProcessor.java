@@ -72,6 +72,7 @@ public class StreamProcessor implements Runnable {
     }
 
     public void run() {
+        Thread.currentThread().setName("Stream procesor thread");
         while(isAlive) {
             try {
                 processCharacter();

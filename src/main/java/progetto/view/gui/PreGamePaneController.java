@@ -6,7 +6,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import progetto.controller.SetPlayerCountAction;
 import progetto.controller.StartGameAction;
-import progetto.integration.client.view.GUIView;
 import progetto.model.AbstractMainBoard;
 import progetto.model.MainBoardData;
 import progetto.network.RoomView;
@@ -48,8 +47,10 @@ public class PreGamePaneController {
 
     private void updateMainBoard() {
         MainBoardData mainBoardData = view.getController().getModel().getMainBoard().getData();
-        if (mainBoardData.getPlayerCount() != Integer.parseInt(currentNumberOfPlayers.getText()))
+        if (mainBoardData.getPlayerCount() != Integer.parseInt(currentNumberOfPlayers.getText())){
             currentNumberOfPlayers.setText(mainBoardData.getPlayerCount() + "");
+            Platform.runLater(()->updateRoomView(view.getController().getCurrentRoom()));
+        }
     }
 
     private void updateRoomView(RoomView roomView){

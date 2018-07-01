@@ -1,9 +1,8 @@
 package progetto.view.gui;
 
 import javafx.stage.Stage;
+import progetto.IClientController;
 import progetto.controller.IGameController;
-import progetto.integration.client.IClientController;
-import progetto.integration.client.view.GUIView;
 import progetto.model.IModel;
 import progetto.model.ObservableModel;
 

@@ -135,7 +135,7 @@ public class ClientWiewTest extends ApplicationTest {
         Assert.assertTrue(true);
     }
 
-    @Test
+    /*@Test
     public void testTwoGame(){
 
         clickOn("#newGame");
@@ -165,7 +165,7 @@ public class ClientWiewTest extends ApplicationTest {
         clickOn("#enterButton");
 
         Assert.assertTrue(true);
-    }
+    } */
 
     @After
     public void tearDown() throws Exception {

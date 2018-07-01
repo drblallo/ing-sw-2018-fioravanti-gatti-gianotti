@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.ChatPaneController">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onReturnButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Indietro">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="25.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" />
+               </padding>
+            </HBox>
+            <Label text="Utenti nella stanza:">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </Label>
+            <HBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <ListView fx:id="listView" prefHeight="430.0" prefWidth="192.0" style="-fx-background-color: wheat; -fx-border-color: black;" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="chatArea" editable="false" style="-fx-background-color: wheat; -fx-border-color: black;" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font></TextArea>
+                  <AnchorPane />
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </HBox>
+            <TextField fx:id="messageToSend" onKeyPressed="#onEnterKeyPressed" promptText="Scrivi qualcosa..">
+               <VBox.margin>
+                  <Insets left="15.0" right="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+            </TextField>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

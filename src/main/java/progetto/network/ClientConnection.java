@@ -46,7 +46,9 @@ public final class ClientConnection implements Runnable
 		synchronizedObj = ogg;
 		handler.getEnforceCallback().addObserver(enforcesQueue::add);
 
-		new Thread(this).start();
+		Thread t = new Thread(this);
+		t.setName("Client connection");
+		t.start();
 	}
 
 	public ModelProxy getProxy()

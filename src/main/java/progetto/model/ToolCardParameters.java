@@ -151,6 +151,14 @@ public final class ToolCardParameters implements Serializable {
 		return nDice;
 	}
 
+	public boolean isFirstDiceSet(){
+		return getXPlacedDice() >= 0;
+	}
+
+	public boolean isSecondDiceSet(){
+		return getXPlacedDice2()>=0;
+	}
+
 	public int getYPlacedDice() {
 		return yPlacedDice;
 	}

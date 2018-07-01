@@ -13,10 +13,8 @@ public class MainBoardProxy extends AbstractMainBoard
 		super(new MainBoardData());
 	}
 
-	private Container<ExtractedDicesData> extractedDices = new Container<>(new ExtractedDicesData());
-
-
-	public Container<ExtractedDicesData> getExtractedDices() {
+	private final Container<ExtractedDicesData> extractedDices = new Container<>(new ExtractedDicesData());
+	public final Container<ExtractedDicesData> getExtractedDices() {
 		return extractedDices;
 	}
 

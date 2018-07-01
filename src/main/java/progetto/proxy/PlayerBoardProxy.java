@@ -5,8 +5,8 @@ import progetto.model.*;
 public class PlayerBoardProxy extends AbstractPlayerBoard
 {
 
-	private Container<PickedDicesSlotData> pickedDicesSlotData = new Container<>(new PickedDicesSlotData());
-	private Container<DicePlacedFrameData> dicePlacedFrameData = new Container<>(new DicePlacedFrameData());
+	private final Container<PickedDicesSlotData> pickedDicesSlotData = new Container<>(new PickedDicesSlotData());
+	private final Container<DicePlacedFrameData> dicePlacedFrameData = new Container<>(new DicePlacedFrameData());
 
 	public PlayerBoardProxy()
 	{

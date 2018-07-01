@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="500.0" maxWidth="356.0" minHeight="500.0" minWidth="356.0" prefHeight="500.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.UseToolCardPaneController">
+   <children>
+      <VBox layoutX="140.0" layoutY="162.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox spacing="5.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="cardImage" fitHeight="245.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true" />
+                        <Region HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="placedDice1" text="Costo: ">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="tokens">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text=" punti favore">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="toDoVBox" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+               <children>
+                  <HBox fx:id="chooseDiceFromRoundTrack">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="roundDiceLabel" text="Scegli un dado dal tracciato dei round">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="roundTrackDice" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="setDiceValue" spacing="5.0">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label text="Scegli il valore del dado: ">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="valueOfDice" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: wheat; -fx-border-color: black;" />
+                        <Region HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="increaseDiceValue" spacing="5.0">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label text="Cambia il valore del dado:">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="increasedDiceValue" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: wheat; -fx-border-color: black;" />
+                        <Region HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="chooseDiceFromPicked">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="pickedDiceLabel" text="Scegli un dado tra quelli della riserva">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="extractedDicesDice" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="chooseDiceFromPlaced">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="placedDiceLabel" text="Scegli un dado tra quelli piazzati">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="firstPlacedDice" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="chooseSecondDiceFromPlaced">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="secondPlacedDiceLabel" text="Scegli un altro dado tra quelli piazzati">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="secondPlacedDice" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#onCancelButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Annulla">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="25.0" />
+                     </font>
+                  </Button>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#onConfirmButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Conferma">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="25.0" />
+                     </font>
+                  </Button>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

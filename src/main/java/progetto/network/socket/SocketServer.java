@@ -57,7 +57,7 @@ public final class SocketServer implements INetworkModule, Runnable {
 		LOGGER.log(Level.INFO, "Opened a socket server");
 		Thread serverThread;
 		serverThread = new Thread(this);
-		serverThread.setName(getClass().getName()+" Thread");
+		serverThread.setName("Socket Thread");
 		serverThread.start();
 		LOGGER.info("Started a socket server");
 	}

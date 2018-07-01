@@ -8,11 +8,11 @@ import java.util.LinkedList;
 
 public class ModelProxy implements ObservableModel
 {
-	private MainBoardProxy mainBoardProxy = new MainBoardProxy();
-	private Container<RoundTrackData> roundTrackProxy = new Container<>(new RoundTrackData());
-	private Container<RoundInformationData> roundInformationProxy = new Container<>(new RoundInformationData());
-	private PlayerBoardProxy[] playerBoardProxy = new PlayerBoardProxy[Model.MAX_NUM_PLAYERS];
-	private Container<CommandQueueData> commandQueueProxy = new Container<>(
+	private final MainBoardProxy mainBoardProxy = new MainBoardProxy();
+	private final Container<RoundTrackData> roundTrackProxy = new Container<>(new RoundTrackData());
+	private final Container<RoundInformationData> roundInformationProxy = new Container<>(new RoundInformationData());
+	private final PlayerBoardProxy[] playerBoardProxy = new PlayerBoardProxy[Model.MAX_NUM_PLAYERS];
+	private final Container<CommandQueueData> commandQueueProxy = new Container<>(
 			new CommandQueueData(new ArrayList<>(), new LinkedList<>()));
 
 	public ModelProxy()

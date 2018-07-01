@@ -5,9 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.TilePane;
-import progetto.integration.client.view.GUIView;
+import progetto.controller.ToolCardSetPickedDiceAction;
 import progetto.model.Dice;
 import progetto.model.PickedDicesSlotData;
 
@@ -44,17 +45,32 @@ public class PickedDicesSlotPaneController {
             imageView.setFitWidth(DICE_DIMENSION);
             imageView.setFitHeight(DICE_DIMENSION);
             final String toTransfer = "" + i;
-            imageView.setOnDragDetected(event -> {
-                Dragboard dragboard = imageView.startDragAndDrop(TransferMode.ANY);
-                ClipboardContent content = new ClipboardContent();
-                content.putString(toTransfer);
-                content.putImage(imageView.getImage());
-                dragboard.setContent(content);
-
-                event.consume();
-            });
+            final int j = i;
+            imageView.setOnDragDetected(event -> onDragDetected(event, imageView, toTransfer));
+            imageView.setOnMouseClicked(event -> onMouseClicked(event, j));
 
             tilePane.getChildren().add(imageView);
         }
+    }
+
+
+    private void onMouseClicked(MouseEvent event, int i){
+        ToolCardSetPickedDiceAction toolCardSetPickedDiceAction = new ToolCardSetPickedDiceAction(
+                view.getController().getChair(), i);
+        if (toolCardSetPickedDiceAction.canBeExecuted(view.getController().getModel()))
+            view.getController().sendAction(toolCardSetPickedDiceAction);
+
+        event.consume();
+    }
+
+    private void onDragDetected(MouseEvent event, ImageView imageView, String toTransfer){
+
+        Dragboard dragboard = imageView.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent content = new ClipboardContent();
+        content.putString(toTransfer);
+        content.putImage(imageView.getImage());
+        dragboard.setContent(content);
+
+        event.consume();
     }
 }

@@ -25,7 +25,6 @@ public class NetworkServer
 	public NetworkServer(ISyncFactory fac)
 	{
 		factory = fac;
-		serverState = new ServerState(factory);
 	}
 
 	/**
@@ -62,7 +61,9 @@ public class NetworkServer
 		running = true;
 
 		serverState = new ServerState(factory);
-		new Thread(serverState).start();
+		Thread t = new Thread(serverState);
+		t.setName("Sagrada server thread");
+		t.start();
 
 		LOGGER.fine("starting all modules");
 		for (INetworkModule module : modules)

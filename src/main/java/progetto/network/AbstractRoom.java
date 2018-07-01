@@ -137,7 +137,6 @@ abstract class AbstractRoom implements Runnable
 	 */
 	public final void run()
 	{
-		Thread.currentThread().setName("Room Thread "+getRoomID());
 		while (isAlive)
 		{
 			processAllCommand();

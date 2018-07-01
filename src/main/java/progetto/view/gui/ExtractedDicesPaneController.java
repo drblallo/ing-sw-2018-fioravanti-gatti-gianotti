@@ -3,16 +3,15 @@ package progetto.view.gui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.TilePane;
 import progetto.controller.PickDiceAction;
-import progetto.integration.client.view.GUIView;
 import progetto.model.Dice;
 import progetto.model.ExtractedDicesData;
 
 public class ExtractedDicesPaneController {
 
     @FXML
-    private HBox hBox;
+    private TilePane tilePane;
     private static final int DICE_DIMENSION = 55;
     private GUIView view;
 
@@ -25,7 +24,7 @@ public class ExtractedDicesPaneController {
     private void update() {
         ExtractedDicesData extractedDicesData = view.getController().getModel()
                 .getMainBoard().getExtractedDices().getData();
-        hBox.getChildren().clear();
+        tilePane.getChildren().clear();
         TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
         Dice dice;
         for(int i=0; i<extractedDicesData.getNumberOfDices(); i++){
@@ -37,7 +36,7 @@ public class ExtractedDicesPaneController {
             final int d = i;
             imageView.setOnMouseClicked(event -> view.getController().sendAction
                     (new PickDiceAction(view.getController().getChair(), d)));
-            hBox.getChildren().add(imageView);
+            tilePane.getChildren().add(imageView);
         }
     }
 }

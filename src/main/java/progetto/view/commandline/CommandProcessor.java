@@ -74,8 +74,12 @@ public class CommandProcessor implements ICommandProcessor
     }
 
     public List<ICommand> getList(){
-
-        return new ArrayList<>(registered.values());
+        List<ICommand> toBeReturned = new ArrayList<>(registered.values());
+        toBeReturned.sort((o1, o2) -> {
+            if (o1.getName().length()!=o2.getName().length())
+                return o1.getName().length() - o2.getName().length();
+            else return o1.getName().compareTo(o2.getName()); });
+        return toBeReturned;
     }
 
     public String execute(String params) {
@@ -113,7 +117,7 @@ public class CommandProcessor implements ICommandProcessor
     @Override
     public String getContent() {
 
-        List<ICommand> explore = new ArrayList<>(registered.values());
+        List<ICommand> explore = getList();
         StringBuilder stringBuilder = new StringBuilder();
 
         for(int i=0; i<explore.size();i++) {

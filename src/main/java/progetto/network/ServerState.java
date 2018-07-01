@@ -29,7 +29,9 @@ public final class ServerState implements Runnable
 	{
 		WaitingRoom waitingRoom = new WaitingRoom();
 		rooms.put(-1, waitingRoom);
-		new Thread(waitingRoom).start();
+		Thread t = new Thread(waitingRoom);
+		t.setName("Waiting room thread");
+		t.start();
 		this.factory = factory;
 	}
 
@@ -44,7 +46,9 @@ public final class ServerState implements Runnable
 		rooms.put(lastID, room);
 		lastID++;
 		LOGGER.log(Level.FINE,"spawning a new room");
-		new Thread(room).start();
+		Thread t = new Thread(room);
+		t.setName("Room Thread: "+lastID);
+		t.start();
 	}
 
 
