@@ -213,6 +213,8 @@ public class TestToolCards {
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
 
+		game.getRoundInformation().setSPDice(0);
+
 		gameAction = new ExecuteToolCardAction(0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
@@ -238,6 +240,8 @@ public class TestToolCards {
 		AbstractGameAction gameAction = new UseToolCardAction(0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
 		gameAction.execute(game);
+
+		game.getRoundInformation().setSPDice(0);
 
 		gameAction = new ToolCardSetPickedDiceAction(0, 0);
 		Assert.assertTrue(gameAction.canBeExecuted(game));
@@ -1453,18 +1457,31 @@ public class TestToolCards {
 	@Test
 	public void testToolCardActionList()
 	{
-		List<Class> list5 = ToolCardActionList.getInstance().getList(5);
+		List<Class> list = ToolCardActionList.getInstance().getList(5);
 
-		Assert.assertEquals(2, list5.size());
-		Assert.assertEquals(ToolCardSetPickedDiceAction.class, list5.get(0));
-		Assert.assertEquals(ToolCardSetDiceRoundTrackAction.class, list5.get(1));
+		Assert.assertEquals(2, list.size());
+		Assert.assertEquals(ToolCardSetPickedDiceAction.class, list.get(0));
+		Assert.assertEquals(ToolCardSetDiceRoundTrackAction.class, list.get(1));
 
-		list5.remove(0);
-		Assert.assertEquals(1, list5.size());
+		list.remove(0);
+		Assert.assertEquals(1, list.size());
 
-		list5 = ToolCardActionList.getInstance().getList(5);
-		Assert.assertEquals(2, list5.size());
+		list = ToolCardActionList.getInstance().getList(5);
+		Assert.assertEquals(2, list.size());
 
+		list = ToolCardActionList.getInstance().getList(12);
+		Assert.assertEquals(3, list.size());
+
+	}
+
+	@Test
+	public void testToolCardActionListFail()
+	{
+		List<Class> list = ToolCardActionList.getInstance().getList(13);
+		Assert.assertEquals(0, list.size());
+
+		list = ToolCardActionList.getInstance().getList(0);
+		Assert.assertEquals(0, list.size());
 	}
 
 }

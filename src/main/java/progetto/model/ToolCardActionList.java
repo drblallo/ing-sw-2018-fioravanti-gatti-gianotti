@@ -39,11 +39,14 @@ public final class ToolCardActionList {
 	 */
 	public List<Class> getList(int index)
 	{
-		if(index<1 || index>=list.size())
+		try
+		{
+			return new ArrayList<>(list.get(index-1));
+		}
+		catch (IndexOutOfBoundsException e)
 		{
 			return new ArrayList<>();
 		}
-		return new ArrayList<>(list.get(index-1));
 	}
 
 
