@@ -1,17 +1,19 @@
-package progetto.integration.server;
+package progetto;
 
+import progetto.controller.EndTurnAction;
 import progetto.controller.SetSeedAction;
-import progetto.integration.GameSync;
+import progetto.controller.StartGameAction;
 import progetto.model.*;
 import progetto.network.IEnforce;
 import progetto.network.ISync;
-import progetto.proxy.*;
+import progetto.network.proxy.*;
 import progetto.utils.Callback;
 import progetto.utils.IObserver;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A server game is a game structure that will send action to the underlying game and will provide to the room
@@ -33,6 +35,7 @@ public class ServerGame extends GameSync implements  ISync
 
 
 
+	private long lastTimer = -1;
 	private List<DirtyTracker> dirtyDataItems = new ArrayList<>();
 
 	private Callback<IEnforce> enforceCallback = new Callback<>();
@@ -45,6 +48,8 @@ public class ServerGame extends GameSync implements  ISync
 	private IObserver<ExtractedDicesData> extObs  = ogg -> addItemEnforce(new DirtyTracker(new ExtractedDicesEnforce(ogg), 2));
 	private IObserver<RoundInformationData> inObs = ogg -> addItemEnforce(new DirtyTracker(new RoundInformationEnforce(ogg), -2));
 	private static final int PLAYER_BOARD_OFFSET = 1000;
+	private int lastPlayerSaw = -1;
+	private long allertTime = -1;
 
 	/**
 	 * Send s to the game, process it and call the enforce callback
@@ -81,7 +86,7 @@ public class ServerGame extends GameSync implements  ISync
 	/**
 	 * creates a default server game
 	 */
-	ServerGame()
+	public ServerGame()
 	{
 		for (int a = 0; a < Model.MAX_NUM_PLAYERS; a++)
 		{
@@ -111,6 +116,52 @@ public class ServerGame extends GameSync implements  ISync
 
 		for (WindowFrameCouple l : list)
 			sendItem(new AddWindowFrameCoupleAction(l));
+	}
+
+	/**
+	 * check timers and triggers time outs
+	 */
+	@Override
+	public String update() {
+		if (lastTimer == -1)
+		{
+			lastTimer = System.currentTimeMillis();
+			return "";
+		}
+
+		long estimatedElapsed = System.currentTimeMillis() - lastTimer;
+		if (getGame().getModel().getMainBoard().getData().getGameState().getClass() == PreGameState.class)
+		{
+			if (estimatedElapsed > Settings.getSettings().getGameStartTimeOut())
+			{
+				sendItem(new StartGameAction());
+				lastTimer = System.currentTimeMillis();
+				return "Tempo scaduto, inizia la partita\n";
+			}
+		}
+		else
+		{
+			if (lastPlayerSaw == getGame().getModel().getRoundInformation().getData().getCurrentPlayer())
+			{
+				if (estimatedElapsed > Settings.getSettings().getGameStartTimeOut()) {
+					sendItem(new EndTurnAction(lastPlayerSaw));
+					lastTimer = System.currentTimeMillis();
+					return "Tempo scaduto, nuovo turno\n";
+				}
+			}
+			else
+			{
+				lastPlayerSaw = getGame().getModel().getRoundInformation().getData().getCurrentPlayer();
+				lastTimer = System.currentTimeMillis();
+			}
+		}
+
+		if (System.currentTimeMillis() - allertTime > Settings.getSettings().getAllertTime())
+		{
+			allertTime = System.currentTimeMillis();
+			return "sono passati "+Settings.getSettings().getAllertTime()+" millisecondi\n";
+		}
+		return "";
 	}
 
 	/**

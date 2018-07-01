@@ -1,6 +1,6 @@
 package progetto.network;
 
-import progetto.proxy.ModelProxy;
+import progetto.network.proxy.ModelProxy;
 import progetto.utils.Callback;
 
 import java.io.Serializable;
@@ -27,6 +27,7 @@ public final class ClientConnection implements Runnable
 	private final Callback<ServerStateView> serverStateViewCallback = new Callback<>();
 	private final Callback<RoomView> roomViewCallback = new Callback<>();
 	private final Callback<ModelProxy> actionEndedCallback = new Callback<>();
+	private final Callback<ClientConnection> connectionClosedCallback = new Callback<>();
 
 	private final Queue<IEnforce> enforcesQueue = new ConcurrentLinkedQueue<>();
 	private final INetworkClient handler;
@@ -76,6 +77,10 @@ public final class ClientConnection implements Runnable
 
 	public Callback<RoomView> getRoomViewCallback() {
 		return roomViewCallback;
+	}
+
+	public Callback<ClientConnection> getConnectionClosedCallback() {
+		return connectionClosedCallback;
 	}
 
 	/**
@@ -351,5 +356,6 @@ public final class ClientConnection implements Runnable
 				LOGGER.log(Level.SEVERE, "interrupted {0}", e.getMessage());
 			}
 		}
+		connectionClosedCallback.call(this);
 	}
 }

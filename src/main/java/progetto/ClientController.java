@@ -1,6 +1,5 @@
 package progetto;
 
-import progetto.integration.GameSync;
 import progetto.model.AbstractGameAction;
 import progetto.model.IModel;
 import progetto.model.ObservableModel;
@@ -10,7 +9,7 @@ import progetto.network.RoomView;
 import progetto.network.ServerStateView;
 import progetto.network.rmi.RMIClient;
 import progetto.network.socket.SocketClient;
-import progetto.proxy.ModelProxy;
+import progetto.network.proxy.ModelProxy;
 import progetto.utils.Callback;
 import progetto.utils.IObserver;
 
@@ -72,8 +71,6 @@ public class ClientController implements IClientController
         if (clientGame != null)
         {
             LOGGER.log(Level.FINE, "Switiching game to {0}", newClientGame.getRoom().getRoomName());
-        	if (!connections.contains(clientGame))
-        	    connections.add(clientGame);
 
             clientGame.getMessageCallback().addObserver(messageObserver);
             clientGame.getRoomViewCallback().addObserver(roomViewIObserver);
@@ -177,9 +174,9 @@ public class ClientController implements IClientController
 
         INetworkClient c;
         if (rmi)
-            c = new RMIClient(ip);
+            c = new RMIClient(ip, Settings.getSettings().getRmiPort());
         else
-            c = new SocketClient(ip, ServerMain.DEFAULT_PORT);
+            c = new SocketClient(ip, Settings.getSettings().getSocketPort());
 
         if (!c.isRunning())
             return false;
@@ -187,6 +184,13 @@ public class ClientController implements IClientController
         ClientConnection conn = new ClientConnection(c, new GameSync());
         conn.fetchServerState();
 
+        connections.add(conn);
+        conn.getConnectionClosedCallback().addObserver(game ->
+        {
+            connections.remove(game);
+            if (clientGame == game)
+                setCurrentClientGame(null);
+        });
         setCurrentClientGame(conn);
 
         return true;

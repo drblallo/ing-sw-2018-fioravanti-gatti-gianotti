@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import progetto.ClientController;
 import progetto.view.commandline.CommandLineView;
-import progetto.integration.server.ServerGameFactory;
+import progetto.ServerGameFactory;
 import progetto.network.NetworkServer;
 import progetto.network.rmi.RMIModule;
 import progetto.network.socket.SocketServer;

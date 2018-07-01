@@ -1,4 +1,4 @@
-package progetto.integration;
+package progetto;
 
 import progetto.controller.GameController;
 import progetto.model.AbstractGameAction;
@@ -16,6 +16,12 @@ import java.util.List;
 public class GameSync implements ISync
 {
 	private GameController game = new GameController();
+
+	@Override
+	public String update()
+	{
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * process a game action
@@ -98,7 +104,7 @@ public class GameSync implements ISync
 
 	/**
 	 *
-	 * @return this should only be called on the client side
+	 * @return this should only be called on the server side
 	 */
 	@Override
 	public Callback<IEnforce> getEnforceCallback() {
@@ -107,7 +113,7 @@ public class GameSync implements ISync
 
 	/**
 	 *
-	 * @return this should only be called on the client side.
+	 * @return this should only be called on the server side.
 	 */
 	@Override
 	public List<IEnforce> getNewPlayerEnforces() {

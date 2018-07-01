@@ -12,6 +12,11 @@ import java.util.List;
 public interface ISync {
 
 	/**
+	 * called every update loop
+	 */
+	String update();
+
+	/**
 	 * Send the string to process
 	 */
 	void sendItem(Serializable s);

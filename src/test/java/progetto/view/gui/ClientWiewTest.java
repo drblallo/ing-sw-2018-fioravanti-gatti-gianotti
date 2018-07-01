@@ -1,4 +1,4 @@
-package progetto.integration.client;
+package progetto.view.gui;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -10,14 +10,13 @@ import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import progetto.ClientMain;
-import progetto.integration.server.ServerGameFactory;
+import progetto.ServerGameFactory;
+import progetto.Settings;
 import progetto.network.NetworkServer;
 import progetto.network.localconnection.LocalConnectionModule;
 import progetto.network.rmi.RMIModule;
 import progetto.network.socket.SocketServer;
 import progetto.utils.Waiter;
-
-import static progetto.ServerMain.DEFAULT_PORT;
 
 public class ClientWiewTest extends ApplicationTest {
 
@@ -30,8 +29,8 @@ public class ClientWiewTest extends ApplicationTest {
 
         networkServer = new NetworkServer(new ServerGameFactory());
 
-        networkServer.addModules(new RMIModule());
-        networkServer.addModules(new SocketServer(DEFAULT_PORT));
+        networkServer.addModules(new RMIModule(Settings.getSettings().getRmiPort()));
+        networkServer.addModules(new SocketServer(Settings.getSettings().getSocketPort()));
         networkServer.addModules(new LocalConnectionModule());
         networkServer.start();
         ApplicationTest.launch(ClientMain.class);

@@ -13,6 +13,11 @@ public class SyncStub implements ISync {
 	private int full = 0;
 	private Callback<IEnforce> enforceCallback = new Callback<>();
 
+	@Override
+	public String update() {
+		return null;
+	}
+
 	public synchronized void sendItem(Serializable s) {
 		ls.add((String) s);
 		full = full + ((String)s).length();

@@ -16,12 +16,18 @@ import java.util.logging.Logger;
  */
 public final class RMIModule implements INetworkModule {
 
-	public static final int RMI_PORT = 8528;
 	private static final Logger LOGGER = Logger.getLogger(RMIModule.class.getName());
 	private static Registry registry = null;
 	private final RMIRemoteLogger rmilogger = new RMIRemoteLogger(this);
 	private final Callback<INetworkHandler> palyerJoinedCallback = new Callback<>();
 	private boolean isRunning = false;
+	private final int port;
+
+
+	public RMIModule(int port)
+	{
+		this.port = port;
+	}
 
 	/**
 	 * the registry is a resource, since there can be only one, therefore is treated as a singleton
@@ -30,7 +36,7 @@ public final class RMIModule implements INetworkModule {
 	 */
 	private synchronized Registry getRegistry() throws RemoteException {
 		if (registry == null) {
-			registry = LocateRegistry.createRegistry(RMI_PORT);
+			registry = LocateRegistry.createRegistry(port);
 		}
 		return registry;
 	}
@@ -61,7 +67,7 @@ public final class RMIModule implements INetworkModule {
 
 		isRunning = true;
 		try {
-			IRemoteLogger stub = (IRemoteLogger) UnicastRemoteObject.exportObject(rmilogger, RMI_PORT);
+			IRemoteLogger stub = (IRemoteLogger) UnicastRemoteObject.exportObject(rmilogger, port);
 			getRegistry().rebind("test", stub);
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "FAILED TO START RMI NETWORK MODULE: {0}", e.getMessage());

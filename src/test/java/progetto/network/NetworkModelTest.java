@@ -1,7 +1,10 @@
-package progetto.integration.server;
+package progetto.network;
 
 
 import org.junit.*;
+import progetto.ServerGame;
+import progetto.ServerGameFactory;
+import progetto.Settings;
 import progetto.controller.*;
 import progetto.ClientController;
 import progetto.model.FrameSelectionState;
@@ -16,7 +19,7 @@ public class NetworkModelTest
 
 	private Waiter paul = new Waiter();
 	private static NetworkServer server = new NetworkServer(new ServerGameFactory());
-	private static INetworkModule module = new SocketServer(8527);
+	private static INetworkModule module = new SocketServer(Settings.getSettings().getSocketPort());
 	private ClientController game =new ClientController();
 
 	@BeforeClass

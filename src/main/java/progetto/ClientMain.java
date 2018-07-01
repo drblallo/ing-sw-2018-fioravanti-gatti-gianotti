@@ -23,6 +23,7 @@ public class ClientMain extends Application {
     @Override
     public synchronized void start(Stage primaryStage)
     {
+        Settings.getSettings();
         primaryStage.setTitle("Client Window");
         primaryStage.setOnCloseRequest(event -> {
             event.consume();

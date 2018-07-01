@@ -1,4 +1,4 @@
-package progetto.proxy;
+package progetto.network.proxy;
 
 import progetto.network.ClientConnection;
 import progetto.network.IEnforce;

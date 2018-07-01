@@ -119,6 +119,12 @@ abstract class AbstractRoom implements Runnable
 		while (roomRequests.peek() != null) //evaluate directly received by the room
 			roomRequests.poll().execute(this, null);
 
+		if (syncOgg != null) {
+			String s = syncOgg.update();
+			if (s != null && s.length() != 0)
+				broadcast(s);
+		}
+
 		try
 		{
 			Thread.sleep(NetworkSettings.THREAD_CHECK_RATE); //goes to sleep for a while

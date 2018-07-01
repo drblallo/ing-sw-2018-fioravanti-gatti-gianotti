@@ -1,5 +1,6 @@
 package progetto.network.rmi;
 
+import progetto.Settings;
 import progetto.network.IEnforce;
 import progetto.network.INetworkClient;
 import progetto.network.IRoomRequest;
@@ -28,10 +29,10 @@ public final class RMIClient implements INetworkClient, Runnable{
 	 * Creates the client from the provided ip
 	 * @param ip the ip where the server is located.
 	 */
-	public RMIClient(String ip) {
+	public RMIClient(String ip, int port) {
 		try {
 			LOGGER.log(Level.FINE, "creating module");
-			Registry registry = LocateRegistry.getRegistry(ip, RMIModule.RMI_PORT);
+			Registry registry = LocateRegistry.getRegistry(ip, port);
 
 			IRemoteLogger stub = (IRemoteLogger) registry.lookup("test");
 			RMIRemoteClientSession local = new RMIRemoteClientSession();
