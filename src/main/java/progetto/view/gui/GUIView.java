@@ -1,5 +1,6 @@
 package progetto.view.gui;
 
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import progetto.AbstractView;
 import progetto.ClientController;
@@ -54,7 +55,12 @@ public class GUIView extends AbstractView
 	{
 		if (getController().thereIsGame())
 			viewStateMachine.setCurrentGame(getController());
-		else viewStateMachine.getStateFromName("StartingPane.fxml").show(false);
+		else
+		{
+			Platform.runLater(
+					()->viewStateMachine.getStateFromName("StartingPane.fxml").show(false)
+			);
+		}
 	}
 
 }

@@ -19,7 +19,7 @@ final class RMIRemoteServerSession extends UnicastRemoteObject implements IRemot
 	private final transient Callback<IRoomRequest> requestCallback = new Callback<>();
 	private final transient Callback<RMIRemoteServerSession> connectionClosedCallback = new Callback<>();
 	private long pings;
-	Timer timer = new Timer();
+	private final transient Timer timer = new Timer();
 
 	RMIRemoteServerSession() throws RemoteException
 	{

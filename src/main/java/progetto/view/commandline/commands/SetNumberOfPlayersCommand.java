@@ -2,7 +2,6 @@ package progetto.view.commandline.commands;
 
 import progetto.controller.SetPlayerCountAction;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.states.GameTransitionState;
 
 public class SetNumberOfPlayersCommand extends AbstractCLViewCommand {
 

@@ -89,7 +89,7 @@ public abstract class AbstractMessageExchangeTest extends AbstractNetworkTestStu
 		cl.joinGame(-1, "noName");
 		wait(LONG_WAIT);
 		assertEquals(0, cl.getRoom().getPlayerCount());
-		assertEquals(null, networkServer.getRoomView(roomID).getPlayer(cl.getPlayerID()));
+		assertEquals(null, networkServer.getRoomView(roomID));
 	}
 
 	@Test

@@ -124,7 +124,6 @@ public final class ServerState implements Runnable
 	 */
 	private void deleteRoom(int roomID)
 	{
-		System.out.println("trying to delete room");
 		AbstractRoom r = getRoom(roomID);
 
 		if (r != null)

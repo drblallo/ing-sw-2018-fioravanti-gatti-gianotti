@@ -45,8 +45,8 @@ public class ClientWiewTest extends ApplicationTest {
 
     }
 
-    @Test
-    public void aTest(){}
+ //   @Test
+//    public void aTest(){}
 
     /*@Test
     public void testFirst() {

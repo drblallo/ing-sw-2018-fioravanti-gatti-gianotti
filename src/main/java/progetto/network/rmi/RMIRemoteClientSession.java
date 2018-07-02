@@ -6,7 +6,6 @@ import progetto.utils.Callback;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -20,7 +19,7 @@ final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemot
 	private final transient Callback<String> messageCallback = new Callback<>();
 	private final transient Callback<IEnforce> enforceCallback = new Callback<>();
 	private final transient Callback<IRemoteClientSession> connectionClosedCallback = new Callback<>();
-	private final Timer timer = new Timer();
+	private final transient Timer timer = new Timer();
 	private int pings = 0;
 
 	RMIRemoteClientSession() throws RemoteException {

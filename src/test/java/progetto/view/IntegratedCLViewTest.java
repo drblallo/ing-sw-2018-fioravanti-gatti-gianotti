@@ -33,8 +33,8 @@ public class IntegratedCLViewTest {
 		timoty.wait(100);
 	}
 
-	@Test
-	public void aTest(){}
+//	@Test
+//	public void aTest(){}
 
 	@After
 	public void after()
