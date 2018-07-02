@@ -13,7 +13,7 @@
    <children>
       <VBox prefHeight="183.0" prefWidth="235.0" spacing="5.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onChatButtonClicked" prefHeight="50.0" prefWidth="349.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="Chat">
+            <Button fx:id="chatButton" mnemonicParsing="false" onAction="#onChatButtonClicked" prefHeight="50.0" prefWidth="349.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="Chat">
                <font>
                   <Font name="Imprint MT Shadow" size="25.0" />
                </font>

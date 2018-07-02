@@ -59,7 +59,9 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 		AbstractGameAction gameAction = setGameAction(game);
 
-		if(gameAction == null)
+		if(gameAction == null ||
+				(game.getMainBoard().getData().getPlayerCount()==1 &&
+						roundInformationData.getToolCardParameters().getSPDice()==-1))
 		{
 			return false;
 		}

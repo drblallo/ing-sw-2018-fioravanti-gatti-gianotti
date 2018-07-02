@@ -35,7 +35,6 @@ public class RoundViewState extends AbstractCLViewState {
         registerCommand(new EndTurnCommand(getView()));
         registerCommand(new SelectChairCommand(getView()));
         registerCommand(new ReturnCommand(getView(), new ConfirmExitState(getView()), "Esci dalla partita"));
-        registerCommand(new CloseGameCommand(getView()));
     }
 
     @Override

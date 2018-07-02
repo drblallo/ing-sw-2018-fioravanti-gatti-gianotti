@@ -1,6 +1,7 @@
 package progetto.view.commandline.states;
 
 import progetto.view.commandline.CommandLineView;
+import progetto.view.commandline.commands.CloseGameCommand;
 import progetto.view.commandline.commands.ContinueCommand;
 import progetto.view.commandline.commands.NewGameCommand;
 import progetto.view.commandline.commands.SetNameCommand;
@@ -21,6 +22,7 @@ public class DefaultViewState extends AbstractCLViewState {
 		registerCommand(new NewGameCommand(getView()));
 		registerCommand(new ContinueCommand(getView()));
 		registerCommand(new SetNameCommand(getView()));
+		registerCommand(new CloseGameCommand(getView()));
 
 	}
 

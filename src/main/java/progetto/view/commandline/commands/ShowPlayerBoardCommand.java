@@ -19,8 +19,10 @@ public class ShowPlayerBoardCommand extends AbstractStateSwitcherCommand {
 
     @Override
     protected void perform(String[] params) {
-        IPlayerBoard plb = getModel().getPlayerBoard(nPlayer);
-        write(printer.printPlayerBoard(plb.getDicePlacedFrame().getData(), plb.getData().getWindowFrame()));
+        IPlayerBoard playerBoard = getModel().getPlayerBoard(nPlayer);
+        write(printer.printPlayerBoard(playerBoard.getDicePlacedFrame().getData(),
+                playerBoard.getData().getWindowFrame(),
+                getModel().getMainBoard().getData().getPlayerCount() == 1));
     }
 
     @Override

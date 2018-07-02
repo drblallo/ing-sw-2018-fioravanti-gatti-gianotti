@@ -25,20 +25,22 @@ public class UseToolCardState extends AbstractCLViewState {
     @Override
     public void onApply() {
 
-        int numberOfCard = getModel().getRoundInformation().getData().getToolCardParameters().getNCard();
-        ToolCard toolCard = getModel().getMainBoard().getData().getToolCards().get(numberOfCard);
+        IModel model = getModel();
+
+        int numberOfCard = model.getRoundInformation().getData().getToolCardParameters().getNCard();
+        ToolCard toolCard = model.getMainBoard().getData().getToolCards().get(numberOfCard);
         getController().sendAction(new UseToolCardAction(getController().getChair(), numberOfCard));
+
+        if (model.getMainBoard().getData().getPlayerCount() == 1)
+            registerCommand(new SetSinglePlayerDiceAction(getView()));
 
         registerCommand(new ShowPickedDicesCommand(getView()));
         registerCommand(new ShowPlayerBoardCommand(getView(), getController().getChair() , new Printer(), this));
         registerCommand(new ShowRoundTrackCommand(getView()));
+
         for (Class c: ToolCardActionList.getInstance().getList(toolCard.getIndex())) {
 
-            if(c == ToolCardSetSinglePlayerDiceAction.class &&
-                    getModel().getMainBoard().getData().getPlayerCount() == 1){
-                registerCommand(new SetSinglePlayerDiceAction(getView()));
-            }
-            else if(c == ToolCardSetPickedDiceAction.class){
+            if(c == ToolCardSetPickedDiceAction.class){
                 registerCommand(new ChoosePickedDiceCommand(getView()));
             }
             else if(c == ToolCardSetIncreaseDecreaseAction.class){
@@ -67,9 +69,15 @@ public class UseToolCardState extends AbstractCLViewState {
 
     @Override
     public String getMessage() {
-        return "\nInserisci tutti i dati necessari per utilizzare la carta da te selezionata: !\n" +
-                getModel().getMainBoard().getData().getToolCards().get(
-                        getModel().getRoundInformation().getData().getToolCardParameters().getNCard())
-                        .getToolTip() + '\n';
+        StringBuilder toReturn = new StringBuilder();
+        IModel model = getModel();
+        ToolCard toolCard = model.getMainBoard().getData().getToolCards().get(
+                model.getRoundInformation().getData().getToolCardParameters().getNCard());
+        toReturn.append("\nInserisci tutti i dati necessari per utilizzare la carta da te selezionata: !\n")
+                .append( toolCard.getToolTip()).append("\n");
+        if (getModel().getMainBoard().getData().getPlayerCount()!=1)
+            toReturn.append("Costo: ").append(model.getMainBoard().getData().getNCallToolCard(toolCard.getIndex()))
+                    .append(" punti favore\n");
+        return toReturn.toString();
     }
 }

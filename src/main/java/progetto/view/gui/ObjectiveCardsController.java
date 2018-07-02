@@ -19,7 +19,6 @@ public class ObjectiveCardsController {
     private IObserver<PlayerBoardData> playerBoardDataIObserver = ogg -> Platform.runLater(this::update);
     private static final int BACK_PRIVATE_OBJECTIVE = 5;
     private static final int BACK_PUBLIC_OBJECTIVE = 10;
-    private static final int NUMBER_OF_PUBLIC_OBJECTIVES = 3;
 
     public void setup(GUIView view){
 
@@ -44,37 +43,44 @@ public class ObjectiveCardsController {
         List<AbstractPublicObjectiveCard> abstractPublicObjectiveCards =
                 model.getMainBoard().getData().getPublicObjectiveCards();
 
-        ImageView imageView;
-        if (abstractPublicObjectiveCards.isEmpty()){
-            for (int i = 1; i<NUMBER_OF_PUBLIC_OBJECTIVES + 1;i++){
-                imageView = (ImageView) objectiveCardsTilePane.getChildren().get(i);
+        int position = 1;
+        int numberOfPublicObjectives = 3;
+        if (model.getMainBoard().getData().getPlayerCount() == 1){
+            position = 2;
+            numberOfPublicObjectives = 2;
+        }
+
+        for (int i = 0; i<numberOfPublicObjectives; i++){
+            ImageView imageView = (ImageView) objectiveCardsTilePane.getChildren().get(position);
+            if (abstractPublicObjectiveCards.isEmpty()){
                 if (imageView.getImage()!=textureDatabase.getPublicObjective(BACK_PUBLIC_OBJECTIVE))
                     imageView.setImage(textureDatabase.getPublicObjective(BACK_PUBLIC_OBJECTIVE));
             }
-        }
-        else {
-            for (int i = 1; i < NUMBER_OF_PUBLIC_OBJECTIVES + 1; i++) {
-                imageView = (ImageView) objectiveCardsTilePane.getChildren().get(i);
-                AbstractPublicObjectiveCard abstractPublicObjectiveCard = abstractPublicObjectiveCards.get(i - 1);
-                if (imageView.getImage() != textureDatabase.getPublicObjective(abstractPublicObjectiveCard.getCardID()))
-                    imageView.setImage(textureDatabase.getPublicObjective(abstractPublicObjectiveCard.getCardID()));
-            }
+            else if (imageView.getImage() != textureDatabase.getPublicObjective(i))
+                imageView.setImage(textureDatabase.getPublicObjective(abstractPublicObjectiveCards.get(i).getCardID()));
+            position ++;
         }
     }
 
     private void updatePrivateObjective(IModel model, int playerChair, TextureDatabase textureDatabase){
         List<AbstractPrivateObjectiveCard> abstractPrivateObjectiveCardList
                 = model.getPlayerBoard(playerChair).getData().getPrivateObjectiveCard();
-        ImageView imageView = ((ImageView)objectiveCardsTilePane.getChildren().get(0));
-        if (abstractPrivateObjectiveCardList.isEmpty()){
-            if (imageView.getImage()!=textureDatabase.getPrivateObjective(BACK_PRIVATE_OBJECTIVE))
-                imageView.setImage(textureDatabase.getPrivateObjective(BACK_PRIVATE_OBJECTIVE));
+            int numberOfPrivateObjectives = 1;
+            if (model.getMainBoard().getData().getPlayerCount() == 1)
+                numberOfPrivateObjectives = 2;
+
+            for (int i = 0; i<numberOfPrivateObjectives; i++){
+                ImageView imageView = ((ImageView) objectiveCardsTilePane.getChildren().get(i));
+                if (abstractPrivateObjectiveCardList.isEmpty()){
+                    if (imageView.getImage() != textureDatabase.getPrivateObjective(BACK_PRIVATE_OBJECTIVE))
+                        imageView.setImage(textureDatabase.getPrivateObjective(BACK_PRIVATE_OBJECTIVE));}
+                else {
+                    if (imageView.getImage() != textureDatabase.getPrivateObjective
+                            (abstractPrivateObjectiveCardList.get(i).getCardID()))
+                        imageView.setImage(textureDatabase.getPrivateObjective
+                                (abstractPrivateObjectiveCardList.get(i).getCardID()));
         }
-        else if (imageView.getImage() != textureDatabase.getPrivateObjective
-                (abstractPrivateObjectiveCardList.get(0).getCardID())){
-            imageView.setImage(textureDatabase.getPrivateObjective
-                    (abstractPrivateObjectiveCardList.get(0).getCardID()));
-        }
+            }
     }
 
     private void onRoomViewChanged(){

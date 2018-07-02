@@ -52,6 +52,16 @@ public class UseToolCardPaneController {
     private Label placedDiceLabel;
     @FXML
     private Label secondPlacedDiceLabel;
+    @FXML
+    private Label singlePlayerLabel;
+    @FXML
+    private ImageView singlePlayerDice;
+    @FXML
+    private HBox chooseSinglePlayerDice;
+    @FXML
+    private HBox tokensHBox;
+    @FXML
+    private VBox topVBox;
     private GUIView view;
     private TextureDatabase textureDatabase;
     private static final int DICE_DIMENSION = 55;
@@ -63,6 +73,7 @@ public class UseToolCardPaneController {
         view.getController().getObservable().getRoundInformation().addObserver(ogg -> Platform.runLater(this::update));
 
         toDoVBox.getChildren().clear();
+        topVBox.getChildren().removeAll(tokensHBox, chooseSinglePlayerDice);
 
         for (int i = 1; i < ToolCardSetDiceValueAction.MAX_VALUE + 1; i++)
             valueOfDice.getItems().add(i);
@@ -113,7 +124,13 @@ public class UseToolCardPaneController {
 
     private void addRequestedActions(List<Class> toolCardActionList, IModel model){
         toDoVBox.getChildren().clear();
+        topVBox.getChildren().removeAll(tokensHBox, chooseSinglePlayerDice);
+        clearDices();
+
         ToolCardParameters toolCardParameters = model.getRoundInformation().getData().getToolCardParameters();
+        if (model.getMainBoard().getData().getPlayerCount() == 1)
+            setSinglePlayerDiceAction(toolCardParameters, model);
+        else topVBox.getChildren().add(tokensHBox);
         for (Class c : toolCardActionList) {
 
             if (c == ToolCardSetDiceRoundTrackAction.class) {
@@ -137,6 +154,16 @@ public class UseToolCardPaneController {
         }
     }
 
+    private void setSinglePlayerDiceAction(ToolCardParameters toolCardParameters, IModel model){
+        topVBox.getChildren().add(chooseSinglePlayerDice);
+        if (toolCardParameters.getSPDice()>=0){
+            Dice dice = model.getMainBoard().getExtractedDices().getData().getDice(toolCardParameters.getSPDice());
+            loadDice(singlePlayerDice, dice);
+            singlePlayerLabel.setText("Hai scelto dai dadi piazzati: ");
+        }
+        else singlePlayerLabel.setText("Secgli il dado da sacrificare: ");
+    }
+
     private void toolCardSetSecondDiceAction(ToolCardParameters toolCardParameters, IModel model){
         toDoVBox.getChildren().add(chooseSecondDiceFromPlaced);
         if (toolCardParameters.isSecondDiceSet()){
@@ -153,7 +180,7 @@ public class UseToolCardPaneController {
         if (toolCardParameters.isFirstDiceSet()) {
             Dice dice = model.getPlayerBoard(view.getController().getChair()).getDicePlacedFrame()
                     .getData().getDice(toolCardParameters.getYPlacedDice(), toolCardParameters.getXPlacedDice());
-            loadDice(secondPlacedDice, dice);
+            loadDice(firstPlacedDice, dice);
             placedDiceLabel.setText("Hai scelto dai dadi piazzati: ");
         }
         else placedDiceLabel.setText("Scegli un dado tra quelli piazzati");
@@ -198,6 +225,7 @@ public class UseToolCardPaneController {
         clearDice(extractedDicesDice);
         clearDice(firstPlacedDice);
         clearDice(secondPlacedDice);
+        clearDice(singlePlayerDice);
     }
 
     @FXML

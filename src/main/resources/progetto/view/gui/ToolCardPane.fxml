@@ -7,15 +7,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="500.0" maxWidth="356.0" minHeight="500.0" minWidth="356.0" prefHeight="500.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.ToolCardPaneController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.ToolCardPaneController">
    <children>
-      <TilePane fx:id="toolCardTilePane" hgap="5.0" maxHeight="500.0" maxWidth="356.0" minHeight="500.0" minWidth="356.0" prefHeight="500.0" prefWidth="356.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="mainBox">
          <children>
-            <ImageView fitHeight="245.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="245.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="245.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true" />
-            <fx:include fx:id="changeDiceValuePane" source="ChangeDiceValuePaneController.fxml" />
+            <TilePane fx:id="toolCardTilePane" hgap="5.0" maxHeight="500.0" maxWidth="356.0" minHeight="500.0" minWidth="356.0" prefHeight="500.0" prefWidth="356.0" vgap="5.0">
+               <children>
+                  <ImageView fitHeight="245.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="245.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="245.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true" />
+                  <fx:include fx:id="changeDiceValuePane" source="ChangeDiceValuePaneController.fxml" />
+               </children>
+            </TilePane>
+            <VBox fx:id="extraToolCardVBox" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <ImageView fitHeight="245.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="245.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
          </children>
-      </TilePane>
+      </HBox>
    </children>
 </AnchorPane>

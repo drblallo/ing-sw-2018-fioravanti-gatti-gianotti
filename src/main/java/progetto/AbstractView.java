@@ -36,4 +36,5 @@ public abstract class AbstractView {
 	 * method that is called every time the current game changes
 	 */
 	public abstract void onGameChanged();
+
 }

@@ -20,6 +20,12 @@ public class ShowToolCardState extends AbstractCLViewState {
 
     @Override
     public String getMessage() {
-        return "\nScegliere quale carta utilizzare tra quelle proposte:\n";
+
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append("\nScegliere quale carta utilizzare tra quelle proposte:\n");
+        if (getModel().getMainBoard().getData().getPlayerCount() != 1)
+            toReturn.append("Hai " + getModel().getPlayerBoard(getController().getChair()).getData().getToken()
+            + "punti favore\n");
+        return toReturn.toString();
     }
 }

@@ -1,7 +1,8 @@
-package progetto.view.gui;
+package progetto.view;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import progetto.ClientController;
 import progetto.view.commandline.CommandLineView;
 import progetto.ServerGameFactory;
@@ -21,7 +22,7 @@ public class IntegratedCLViewTest {
 	public void before()
 	{
 		networkServer = new NetworkServer(new ServerGameFactory());
-		networkServer.addModules(new RMIModule());
+		networkServer.addModules(new RMIModule(8527));
 		networkServer.addModules(new SocketServer(8527));
 		networkServer.start();
 		timoty.wait(100);
@@ -31,6 +32,9 @@ public class IntegratedCLViewTest {
 		new Thread(view).start();
 		timoty.wait(100);
 	}
+
+	@Test
+	public void aTest(){}
 
 	@After
 	public void after()

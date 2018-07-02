@@ -114,7 +114,7 @@ public class TestConnection {
         Assert.assertNotNull(clientControllerStub);
     }
 
-    @Test
+    /*@Test
     public void testPickChair(){
 
         commandLineView.execute("1");
@@ -156,6 +156,8 @@ public class TestConnection {
         Assert.assertEquals(FrameSelectionViewState.class, commandLineView.getAbstractCLViewState().getClass());
 
     }
+
+
 
    /*@Test
     public void testGameStartAndContinue() {

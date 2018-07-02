@@ -33,6 +33,6 @@ public class SetSinglePlayerDiceAction extends AbstractCLViewCommand {
     public String getHelp() {
         return "Scegli il dado da sacrificare per usare la carta scelta " +
                 "(Formato: " + getName()+ " <Numero del dado>) " +
-                "(NB: Il colore del dado deve corrispondere a quello indicato sulla carta)";
+                "(NB: Il colore del dado deve corrispondere a quello indicato sulla carta)\n";
     }
 }

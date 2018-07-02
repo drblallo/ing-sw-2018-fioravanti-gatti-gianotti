@@ -3,12 +3,11 @@ package progetto.view.commandline.states;
 import progetto.model.PreGameState;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.DifferenceDescriptor;
-import progetto.view.commandline.commands.ReturnCommand;
-import progetto.view.commandline.commands.SelectChairCommand;
-import progetto.view.commandline.commands.SetNumberOfPlayersCommand;
-import progetto.view.commandline.commands.StartGameCommand;
+import progetto.view.commandline.commands.*;
 
 public class PreGameViewState extends AbstractCLViewState {
+
+    private int currentPlayerCount;
 
     public PreGameViewState(CommandLineView view) {
         super("PreGameViewState", view
@@ -17,7 +16,8 @@ public class PreGameViewState extends AbstractCLViewState {
 
     @Override
     public boolean isStillValid() {
-        return getModel().getMainBoard().getData().getGameState().getClass() == PreGameState.class;
+        return (getModel().getMainBoard().getData().getGameState().getClass() == PreGameState.class) &&
+                (currentPlayerCount == getModel().getMainBoard().getData().getPlayerCount());
     }
 
     @Override
@@ -37,8 +37,11 @@ public class PreGameViewState extends AbstractCLViewState {
     @Override
     public void onApply() {
 
+        currentPlayerCount = getModel().getMainBoard().getData().getPlayerCount();
         registerCommand(new StartGameCommand(getView()));
         registerCommand(new SetNumberOfPlayersCommand(getView()));
+        if (getModel().getMainBoard().getData().getPlayerCount() == 1)
+            registerCommand(new SetSinglePlayerDifficultyCommand(getView()));
         registerCommand(new SelectChairCommand(getView()));
         registerCommand(new ReturnCommand(getView(),
                 new DefaultViewState(getView()), "Indietro"));
