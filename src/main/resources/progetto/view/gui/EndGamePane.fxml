@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="387.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.EndGamePaneController">
+<AnchorPane fx:id="myPane" prefHeight="387.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.EndGamePaneController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -51,20 +51,20 @@
                   <Region HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <TextArea fx:id="score" editable="false">
+            <TextArea fx:id="score" editable="false" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;">
                <font>
                   <Font name="Imprint MT Shadow" size="25.0" />
                </font>
             </TextArea>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onMenuButtonClicked" text="Menu principale">
+                  <Button mnemonicParsing="false" onAction="#onMenuButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Menu principale">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                   </Button>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onTurnOffButtonClicked" text="Spegni">
+                  <Button mnemonicParsing="false" onAction="#onTurnOffButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Spegni">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>

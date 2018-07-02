@@ -2,6 +2,7 @@ package progetto.view.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -28,12 +29,11 @@ public class RoomsPaneController extends AbstractClientStateController{
     @FXML
     private TextField usernameTextField;
     private IObserver<ServerStateView> serverStateViewIObserver = ogg -> Platform.runLater(this::update);
-    private static final int BACKGROUND_SIZE = 300;
 
     @Override
     public void onPreShow(){
         Image image = new Image(getClass().getResourceAsStream("toolcard_large.png"));
-        BackgroundSize backgroundSize = new BackgroundSize(BACKGROUND_SIZE,BACKGROUND_SIZE,true,true,true,false);
+        BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,true,true,true,false);
         BackgroundImage backgroundImage = new BackgroundImage(image,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);

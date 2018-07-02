@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -19,7 +20,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="newGame" mnemonicParsing="false" onAction="#onNewGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Nuova partita">
+                  <Button fx:id="newGame" mnemonicParsing="false" onAction="#onNewGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Nuova partita">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font></Button>
@@ -29,7 +30,7 @@
             <HBox layoutX="25.0" layoutY="25.0">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="continueButton" disable="true" mnemonicParsing="false" onAction="#onContinueButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Continua partita">
+                  <Button fx:id="continueButton" disable="true" mnemonicParsing="false" onAction="#onContinueButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Continua partita">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font></Button>
@@ -39,7 +40,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onExitGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Esci dal gioco">
+                  <Button mnemonicParsing="false" onAction="#onExitGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Esci dal gioco">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>

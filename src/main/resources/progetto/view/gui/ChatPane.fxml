@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.ChatPaneController">
+<AnchorPane fx:id="myPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.ChatPaneController">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" onAction="#onReturnButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Indietro">
+                  <Button mnemonicParsing="false" onAction="#onReturnButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Indietro">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
@@ -34,10 +34,10 @@
                <children>
                   <HBox HBox.hgrow="ALWAYS">
                      <children>
-                        <ListView fx:id="listView" prefHeight="430.0" prefWidth="192.0" style="-fx-background-color: wheat; -fx-border-color: black;" HBox.hgrow="ALWAYS" />
+                        <ListView fx:id="listView" prefHeight="430.0" prefWidth="192.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
-                  <TextArea fx:id="chatArea" editable="false" style="-fx-background-color: wheat; -fx-border-color: black;" HBox.hgrow="ALWAYS">
+                  <TextArea fx:id="chatArea" editable="false" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Imprint MT Shadow" size="20.0" />
                      </font></TextArea>
@@ -47,7 +47,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </padding>
             </HBox>
-            <TextField fx:id="messageToSend" onKeyPressed="#onEnterKeyPressed" promptText="Scrivi qualcosa..">
+            <TextField fx:id="messageToSend" onKeyPressed="#onEnterKeyPressed" promptText="Scrivi qualcosa.." style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;">
                <VBox.margin>
                   <Insets left="15.0" right="30.0" />
                </VBox.margin>

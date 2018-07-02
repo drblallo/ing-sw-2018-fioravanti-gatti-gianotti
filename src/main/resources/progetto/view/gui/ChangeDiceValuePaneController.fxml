@@ -67,7 +67,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <ChoiceBox fx:id="chooseNumberOfDice" prefHeight="39.0" prefWidth="50.0" />
+                  <ChoiceBox fx:id="chooseNumberOfDice" prefHeight="39.0" prefWidth="50.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 1;" />
                   <Region HBox.hgrow="ALWAYS" />
                </children>
                <padding>
@@ -77,7 +77,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onChooseButtonClicked" text="Scegli">
+                  <Button mnemonicParsing="false" onAction="#onChooseButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 1;" text="Scegli">
                      <font>
                         <Font name="Imprint MT Shadow" size="20.0" />
                      </font>

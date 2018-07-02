@@ -122,7 +122,9 @@ public class PlayerBoardPaneController {
 
     private void updateChooseWindowFrameButton(PlayerBoardData playerBoardData)
     {
-        if(!playerBoardData.getWindowFrameIsSet() && numberOfPlayerBoard == view.getController().getChair())
+        if(!playerBoardData.getWindowFrameIsSet() && numberOfPlayerBoard == view.getController().getChair()
+                &&view.getController().getModel().getMainBoard().getData().getGameState().getClass()
+                == FrameSelectionState.class)
         {
             if (!topBox.getChildren().contains(chooseWindowFrame))
                 topBox.getChildren().add(chooseWindowFrame);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -13,7 +14,7 @@
       <HBox>
          <children>
             <Region HBox.hgrow="ALWAYS" />
-            <Label text="Sicuro di volere abbandonare il gioco?">
+            <Label style="-fx-background-color: wheat;" text="Sicuro di volere abbandonare il gioco?">
                <font>
                   <Font name="Imprint MT Shadow" size="25.0" />
                </font>
@@ -24,12 +25,12 @@
       <HBox spacing="50.0">
          <children>
             <Region HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#onYesButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="Sì">
+            <Button mnemonicParsing="false" onAction="#onYesButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Sì">
                <font>
                   <Font name="Imprint MT Shadow" size="25.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onNoButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="No">
+            <Button mnemonicParsing="false" onAction="#onNoButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="No">
                <font>
                   <Font name="Imprint MT Shadow" size="25.0" />
                </font>

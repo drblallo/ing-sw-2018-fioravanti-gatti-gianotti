@@ -3,6 +3,7 @@ package progetto.view.gui;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -52,7 +53,6 @@ public class ViewState<T extends AbstractStateController> {
     public void show(boolean maximized){
         controller.onPreShow();
         Stage stage = viewStateMachine.getStage();
-        stage.setScene(scene);
         if (maximized) {
             Rectangle2D rectangle2D = Screen.getPrimary().getVisualBounds();
             stage.setX(rectangle2D.getMinX());
@@ -60,7 +60,12 @@ public class ViewState<T extends AbstractStateController> {
             stage.setWidth(rectangle2D.getWidth());
             stage.setHeight(rectangle2D.getHeight());
         }
+        else {
+            stage.sizeToScene();
+            stage.centerOnScreen();
+        }
         viewStateMachine.setCurrentViewState(this);
+        stage.setScene(scene);
         stage.show();
     }
 

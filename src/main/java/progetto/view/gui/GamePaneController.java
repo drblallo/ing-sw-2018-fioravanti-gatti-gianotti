@@ -2,6 +2,8 @@ package progetto.view.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import progetto.model.*;
 
@@ -47,6 +49,15 @@ public class GamePaneController extends AbstractClientStateController{
     @Override
     public void setup() {
         super.setup();
+
+        Image image = new Image(getClass().getResourceAsStream("background.jpg"));
+        BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,
+                true,true,true,false);
+        BackgroundImage backgroundImage = new BackgroundImage(image,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background background = new Background(backgroundImage);
+        myPane.setBackground(background);
+
         extractedDicesPaneController.setup(getViewStateMachine().getGuiView());
         playerMenuPaneController.setup(getViewStateMachine().getGuiView());
         roundTrackPaneController.setup(getViewStateMachine().getGuiView());
