@@ -55,6 +55,7 @@
                   <fx:include fx:id="preGamePane" source="PreGamePane.fxml" />
                </children>
             </VBox>
+            <Region VBox.vgrow="ALWAYS" />
             <VBox fx:id="roundVBox">
                <children>
                   <HBox fx:id="roundMenuHBox">

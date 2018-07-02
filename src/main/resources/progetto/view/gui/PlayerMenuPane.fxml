@@ -10,9 +10,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainVBox" prefHeight="139.0" prefWidth="235.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.PlayerMenuPaneController">
+<VBox fx:id="mainVBox" maxHeight="175.0" maxWidth="238.0" minHeight="175.0" minWidth="238.0" prefHeight="175.0" prefWidth="238.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.PlayerMenuPaneController">
    <children>
-      <Button maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#onShowOtherPlayersButtonClicked" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: wheat; -fx-border-color: BLACK;" text="Vedi altri giocatori">
+      <Region VBox.vgrow="ALWAYS" />
+      <Button fx:id="showOtherPlayersButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#onShowOtherPlayersButtonClicked" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: wheat; -fx-border-color: BLACK;" text="Vedi altri giocatori">
          <font>
             <Font name="Imprint MT Shadow" size="25.0" />
          </font>

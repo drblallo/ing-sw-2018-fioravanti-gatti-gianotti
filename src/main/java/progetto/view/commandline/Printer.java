@@ -74,15 +74,17 @@ public class Printer {
      * Prepare a windowFrame to be printed on the command line
      * @param windowFrame windowFrame to prepare
      */
-    private void prepareWindowFrame(WindowFrame windowFrame, int x, int y){
+    private void prepareWindowFrame(WindowFrame windowFrame, int x, int y, boolean isSinglePlayer){
         if(windowFrame == null){
             LOGGER.log(Level.SEVERE, "Recived null windowFrame");
             return;
         }
         printName(true, x,y);
-        printTokens(x,y);
-        window[x+FAVOUR_TOKENS_POSITION][y+WINDOW_VERTICAL_DIMENSION-1] =
-                Character.forDigit(windowFrame.getFavorToken(),RADIX);
+        if (!isSinglePlayer) {
+            printTokens(x, y);
+            window[x + FAVOUR_TOKENS_POSITION][y + WINDOW_VERTICAL_DIMENSION - 1] =
+                    Character.forDigit(windowFrame.getFavorToken(), RADIX);
+        }
         y = y + 2;
         printBox(x,y);
 
@@ -141,20 +143,21 @@ public class Printer {
      * @param dicePlacedFrameData dicePlacedFrameData associated to the PlayerBoard
      * @param windowFrame windowFrame associated to the PlayerBoard
      */
-    public String printPlayerBoard(DicePlacedFrameData dicePlacedFrameData, WindowFrame windowFrame){
+    public String printPlayerBoard(DicePlacedFrameData dicePlacedFrameData,
+                                   WindowFrame windowFrame, boolean isSinglePlayer){
 
         windowHorizontal = WINDOW_HORIZONTAL_DIMENSION;
         windowVertical = WINDOW_VERTICAL_DIMENSION;
         initializeWindow();
 
-        prepareWindowFrame(windowFrame,0,0);
+        prepareWindowFrame(windowFrame,0,0, isSinglePlayer);
         prepareDicePlacedFrame(dicePlacedFrameData);
 
         return print();
 
     }
 
-    public String printWindowFrameChoices(PlayerBoardData playerBoardData){
+    public String printWindowFrameChoices(PlayerBoardData playerBoardData, boolean isSinglePlayer){
 
         windowHorizontal = WINDOW_HORIZONTAL_DIMENSION;
         windowVertical = WINDOW_VERTICAL_DIMENSION*2 +WINDOWFRAME_VERTICAL_DISTANCE;
@@ -162,14 +165,14 @@ public class Printer {
 
         WindowFrameCouple[] windowFrameCouple = playerBoardData.getExtractedWindowFrameCouplesWindowFrame();
 
-        prepareWindowFrame(windowFrameCouple[0].getWindowFrame(0),0,0);
+        prepareWindowFrame(windowFrameCouple[0].getWindowFrame(0),0,0, isSinglePlayer);
         prepareNumberOfWindowFrame(0,0,'1');
-        prepareWindowFrame(windowFrameCouple[0].getWindowFrame(1), SECOND_FRAME_HORIZONTALE_POSITION,0);
+        prepareWindowFrame(windowFrameCouple[0].getWindowFrame(1), SECOND_FRAME_HORIZONTALE_POSITION,0, isSinglePlayer);
         prepareNumberOfWindowFrame(SECOND_FRAME_HORIZONTALE_POSITION,0,'2');
-        prepareWindowFrame(windowFrameCouple[1].getWindowFrame(0),0,SECOND_WINDOWFRAME_VERTICAL_POSITION);
+        prepareWindowFrame(windowFrameCouple[1].getWindowFrame(0),0,SECOND_WINDOWFRAME_VERTICAL_POSITION, isSinglePlayer);
         prepareNumberOfWindowFrame(0,SECOND_WINDOWFRAME_VERTICAL_POSITION,'3');
         prepareWindowFrame(windowFrameCouple[1].getWindowFrame(1),
-                SECOND_FRAME_HORIZONTALE_POSITION,SECOND_WINDOWFRAME_VERTICAL_POSITION);
+                SECOND_FRAME_HORIZONTALE_POSITION,SECOND_WINDOWFRAME_VERTICAL_POSITION, isSinglePlayer);
         prepareNumberOfWindowFrame(SECOND_FRAME_HORIZONTALE_POSITION,SECOND_WINDOWFRAME_VERTICAL_POSITION,'4');
 
 

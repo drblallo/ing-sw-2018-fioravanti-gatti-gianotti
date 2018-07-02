@@ -1,6 +1,5 @@
 package progetto.network.rmi;
 
-import progetto.Settings;
 import progetto.network.IEnforce;
 import progetto.network.INetworkClient;
 import progetto.network.IRoomRequest;

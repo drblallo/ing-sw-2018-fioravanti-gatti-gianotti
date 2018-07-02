@@ -27,7 +27,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label text="Ha vinto ">
+                  <Label text="Hai ">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
@@ -43,7 +43,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label text="Classifica:">
+                  <Label text="Risultati:">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
@@ -58,13 +58,13 @@
             </TextArea>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="onMenuButtonClicked" mnemonicParsing="false" text="Menu principale">
+                  <Button mnemonicParsing="false" onAction="#onMenuButtonClicked" text="Menu principale">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                   </Button>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="onTurnOffButtonClicked" mnemonicParsing="false" text="Spegni">
+                  <Button mnemonicParsing="false" onAction="#onTurnOffButtonClicked" text="Spegni">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>

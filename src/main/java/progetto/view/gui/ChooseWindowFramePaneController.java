@@ -20,8 +20,13 @@ public class ChooseWindowFramePaneController {
 
     @FXML
     private TilePane mainPane;
+    private GUIView view;
 
-    public void setup(PlayerBoardData playerBoardData, IClientController clientController) {
+
+    public void setup(PlayerBoardData playerBoardData, IClientController clientController, GUIView view) {
+
+        this.view = view;
+
         for (int i = 0; i< MainBoardData.MAX_NUM_PLAYERS; i++){
             AnchorPane currentContainer = (AnchorPane) mainPane.getChildren().get(i);
             VBox currentWindow = (VBox) currentContainer.getChildren().get(0);
@@ -56,7 +61,16 @@ public class ChooseWindowFramePaneController {
             }
         }
         HBox hBox = (HBox) currentWindow.getChildren().get(1);
+        Label favourPointsLabel = (Label) hBox.getChildren().get(1);
         Label numberOfTokens = (Label) hBox.getChildren().get(2);
-        numberOfTokens.setText(windowFrame.getFavorToken() + "");
+
+        if (view.getController().getModel().getMainBoard().getData().getPlayerCount() != 1){
+            favourPointsLabel.setText("Punti favore: ");
+            numberOfTokens.setText(windowFrame.getFavorToken() + "");
+        }
+        else {
+            favourPointsLabel.setText("");
+            numberOfTokens.setText("");
+        }
     }
 }

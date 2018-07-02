@@ -7,9 +7,9 @@ import progetto.network.ClientConnection;
 import progetto.network.INetworkClient;
 import progetto.network.RoomView;
 import progetto.network.ServerStateView;
+import progetto.network.proxy.ModelProxy;
 import progetto.network.rmi.RMIClient;
 import progetto.network.socket.SocketClient;
-import progetto.network.proxy.ModelProxy;
 import progetto.utils.Callback;
 import progetto.utils.IObserver;
 
@@ -312,4 +312,6 @@ public class ClientController implements IClientController
         }
         System.exit(0);
     }
+
+    public boolean thereIsGame(){return clientGame!=null;}
 }

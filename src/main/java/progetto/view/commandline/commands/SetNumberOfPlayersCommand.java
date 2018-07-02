@@ -4,16 +4,16 @@ import progetto.controller.SetPlayerCountAction;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.states.GameTransitionState;
 
-public class SetNumberOfPlayersCommand extends AbstractStateSwitcherCommand {
+public class SetNumberOfPlayersCommand extends AbstractCLViewCommand {
 
     private static final int MAX_NUMBER_OF_PLAYERS = 4;
 
     public SetNumberOfPlayersCommand(CommandLineView commandLineView) {
-        super(commandLineView, new GameTransitionState(commandLineView));
+        super(commandLineView);
     }
 
     @Override
-    protected void perform(String[] params) {
+    public void exec(String[] params) {
 
         int numberOfPlayers;
 
@@ -23,7 +23,7 @@ public class SetNumberOfPlayersCommand extends AbstractStateSwitcherCommand {
             numberOfPlayers = -1;
         }
 
-        if(numberOfPlayers < 2 || numberOfPlayers > MAX_NUMBER_OF_PLAYERS){
+        if(numberOfPlayers < 1 || numberOfPlayers > MAX_NUMBER_OF_PLAYERS){
             write("Inserire un numero di giocatori valido!\n");
             return;
         }

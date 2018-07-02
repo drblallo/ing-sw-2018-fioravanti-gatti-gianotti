@@ -13,7 +13,6 @@ import progetto.utils.IObserver;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A server game is a game structure that will send action to the underlying game and will provide to the room
@@ -110,7 +109,7 @@ public class ServerGame extends GameSync implements  ISync
 		super.clear();
 		attachObservers();
 
-		sendItem(new SetSeedAction(1));
+		sendItem(new SetSeedAction(0));
 
 		List<WindowFrameCouple> list = WindowFrameCoupleArray.getInstance().getList();
 

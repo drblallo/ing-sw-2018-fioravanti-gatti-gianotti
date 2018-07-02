@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import progetto.controller.PickDiceAction;
+import progetto.controller.ToolCardSetSinglePlayerDiceAction;
 import progetto.model.Dice;
 import progetto.model.ExtractedDicesData;
 
@@ -34,8 +35,12 @@ public class ExtractedDicesPaneController {
             imageView.setFitHeight(DICE_DIMENSION);
             imageView.setFitWidth(DICE_DIMENSION);
             final int d = i;
-            imageView.setOnMouseClicked(event -> view.getController().sendAction
-                    (new PickDiceAction(view.getController().getChair(), d)));
+            imageView.setOnMouseClicked(event -> {
+                view.getController().sendAction
+                        (new PickDiceAction(view.getController().getChair(), d));
+                view.getController().sendAction
+                        (new ToolCardSetSinglePlayerDiceAction(view.getController().getChair(), d));
+            });
             tilePane.getChildren().add(imageView);
         }
     }

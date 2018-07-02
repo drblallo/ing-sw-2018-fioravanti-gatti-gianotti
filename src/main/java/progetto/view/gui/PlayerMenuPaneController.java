@@ -2,7 +2,10 @@ package progetto.view.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import progetto.controller.EndTurnAction;
 import progetto.model.Container;
 import progetto.model.PlayerBoardData;
@@ -14,7 +17,13 @@ public class PlayerMenuPaneController {
     private Label numberOfTokens;
     @FXML
     private Label currentPlayer;
-
+    @FXML
+    private VBox mainVBox;
+    @FXML
+    private HBox tokensHBox;
+    @FXML
+    private Button showOtherPlayersButton;
+    private int lastPlayerCount = -1;
     private GUIView view;
     private IObserver<PlayerBoardData> playerObserver = ogg -> Platform.runLater(this::updatePlayerBoard);
     private Container<PlayerBoardData> playerBoard;
@@ -25,6 +34,7 @@ public class PlayerMenuPaneController {
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::onRoomChanged));
         view.getController().getObservable().getRoundInformation()
                 .addObserver(ogg -> Platform.runLater(this::updateCurrentPlayer) );
+        view.getController().getObservable().getMainBoard().addObserver(ogg -> updateMainBoard());
         AlertTurnBoxPaneController.setup();
     }
 
@@ -39,6 +49,21 @@ public class PlayerMenuPaneController {
             playerBoard = view.getController().getObservable().getPlayerBoard(currentChair);
             playerBoard.addObserver(playerObserver);
             updatePlayerBoard();
+        }
+    }
+
+    private void updateMainBoard(){
+        int currentPlayerCount = view.getController().getModel().getMainBoard().getData().getPlayerCount();
+        if(currentPlayerCount!=lastPlayerCount){
+            if(currentPlayerCount == 1){
+                mainVBox.getChildren().remove(tokensHBox);
+                mainVBox.getChildren().removeAll(showOtherPlayersButton);
+            }
+            else if(lastPlayerCount == 1){
+                mainVBox.getChildren().add(tokensHBox);
+                mainVBox.getChildren().add(showOtherPlayersButton);
+            }
+            lastPlayerCount = currentPlayerCount;
         }
     }
 

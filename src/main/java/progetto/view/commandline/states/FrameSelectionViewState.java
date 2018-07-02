@@ -27,7 +27,8 @@ public class FrameSelectionViewState extends AbstractCLViewState {
                             (
                                     getController().getObservable().getPlayerBoard(getController().getChair()),
                                     (data1, data2) -> true,
-                                    (oldData, newData) -> write(new Printer().printWindowFrameChoices(newData))
+                                    (oldData, newData) -> write(new Printer().printWindowFrameChoices(newData,
+                                            getModel().getMainBoard().getData().getPlayerCount() == 1))
                             ));
         }
     }
@@ -49,7 +50,8 @@ public class FrameSelectionViewState extends AbstractCLViewState {
         if(getModel().getPlayerBoard(getController().getChair()).getData()
                 .getExtractedWindowFrameCouplesWindowFrame()!=null)
              string = string + new Printer().printWindowFrameChoices
-                (getModel().getPlayerBoard(getController().getChair()).getData());
+                (getModel().getPlayerBoard(getController().getChair()).getData(),
+                        getModel().getMainBoard().getData().getPlayerCount() == 1);
 
         return string;
     }

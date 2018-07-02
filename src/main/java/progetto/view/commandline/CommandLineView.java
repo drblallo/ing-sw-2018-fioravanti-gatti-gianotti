@@ -58,7 +58,8 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 
 	@Override
 	public synchronized void onGameChanged() {
-		//nothing to do when game changes
+		if (!getController().thereIsGame())
+			setState(new DefaultViewState(this));
 	}
 
 	public void setPlayerName(String playerName){

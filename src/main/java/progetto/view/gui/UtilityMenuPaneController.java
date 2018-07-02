@@ -2,6 +2,7 @@ package progetto.view.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import progetto.network.RoomView;
 
@@ -10,10 +11,13 @@ public class UtilityMenuPaneController {
     private GUIView view;
     @FXML
     private ChoiceBox<Integer> chairs;
+    @FXML
+    private Button chatButton;
 
     public void setup(GUIView view){
         this.view = view;
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::updateChairs));
+        view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::isSinglePlayer));
     }
 
     @FXML
@@ -38,6 +42,16 @@ public class UtilityMenuPaneController {
                 chairs.getItems().add(i);
             }
         }
+    }
+
+    private void isSinglePlayer(){
+        int numberOfPlayers = view.getController().getModel().getMainBoard().getData().getPlayerCount();
+        if (numberOfPlayers == 1){
+            if (!chatButton.isDisabled())
+                chatButton.setDisable(true);
+        }
+        else if (chatButton.isDisabled())
+            chatButton.setDisable(false);
     }
 
     /**

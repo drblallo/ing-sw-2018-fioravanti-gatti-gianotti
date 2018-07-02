@@ -148,4 +148,9 @@ public class ClientControllerStub implements IClientController{
     public void shutDown() {
 
     }
+
+    @Override
+    public boolean thereIsGame() {
+        return false;
+    }
 }

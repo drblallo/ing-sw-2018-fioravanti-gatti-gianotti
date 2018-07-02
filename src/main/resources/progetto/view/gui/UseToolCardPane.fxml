@@ -13,7 +13,7 @@
    <children>
       <VBox layoutX="140.0" layoutY="162.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox spacing="5.0">
+            <VBox fx:id="topVBox" spacing="5.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -22,7 +22,7 @@
                         <Region HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
-                  <HBox>
+                  <HBox fx:id="tokensHBox">
                      <children>
                         <Region HBox.hgrow="ALWAYS" />
                         <Label fx:id="placedDice1" text="Costo: ">
@@ -43,8 +43,37 @@
                         <Region HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
+                  <HBox fx:id="chooseSinglePlayerDice">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="singlePlayerLabel" text="Scegli il dado da sacrificare: ">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="20.0" />
+                           </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <ImageView fx:id="singlePlayerDice" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#onCancelButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Annulla">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="25.0" />
+                     </font>
+                  </Button>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#onConfirmButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Conferma">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="25.0" />
+                     </font>
+                  </Button>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
             <VBox fx:id="toDoVBox" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
                   <HBox fx:id="chooseDiceFromRoundTrack">
@@ -127,23 +156,6 @@
                   <Insets top="5.0" />
                </padding>
             </VBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onCancelButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Annulla">
-                     <font>
-                        <Font name="Imprint MT Shadow" size="25.0" />
-                     </font>
-                  </Button>
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onConfirmButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black;" text="Conferma">
-                     <font>
-                        <Font name="Imprint MT Shadow" size="25.0" />
-                     </font>
-                  </Button>
-                  <Region HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
          </children>
       </VBox>
    </children>

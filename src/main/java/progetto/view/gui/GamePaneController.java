@@ -111,7 +111,9 @@ public class GamePaneController extends AbstractClientStateController{
             mainVBox.getChildren().remove(preGameVBox);
             if (!mainVBox.getChildren().contains(roundVBox))
                 mainVBox.getChildren().add(roundVBox);
-        }else getViewStateMachine().getStateFromName("EndGamePane.fxml").show(false);
+        }else {
+            getViewStateMachine().getStateFromName("EndGamePane.fxml").show(false);
+        }
     }
 
     private void addPlayerBoard(int i){

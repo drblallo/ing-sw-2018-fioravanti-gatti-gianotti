@@ -192,7 +192,7 @@ public class PlayerBoardPaneController {
             }
             ChooseWindowFramePaneController chooseWindowFramePaneController = fxmlLoader.getController();
             chooseWindowFramePaneController.setup(model
-                    .getPlayerBoard(numberOfPlayerBoard).getData(), view.getController() );
+                    .getPlayerBoard(numberOfPlayerBoard).getData(), view.getController(), view);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(pane));
