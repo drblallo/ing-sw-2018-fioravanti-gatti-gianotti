@@ -187,6 +187,7 @@ public class ClientController implements IClientController
         connections.add(conn);
         conn.getConnectionClosedCallback().addObserver(game ->
         {
+            System.out.println("closed connection");
             connections.remove(game);
             if (clientGame == game)
                 setCurrentClientGame(null);

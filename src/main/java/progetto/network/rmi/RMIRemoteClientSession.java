@@ -1,10 +1,14 @@
 package progetto.network.rmi;
 
 import progetto.network.IEnforce;
+import progetto.network.NetworkSettings;
 import progetto.utils.Callback;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Time;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,8 +20,23 @@ final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemot
 	private final transient Callback<String> messageCallback = new Callback<>();
 	private final transient Callback<IEnforce> enforceCallback = new Callback<>();
 	private final transient Callback<IRemoteClientSession> connectionClosedCallback = new Callback<>();
+	private final Timer timer = new Timer();
+	private int pings = 0;
 
 	RMIRemoteClientSession() throws RemoteException {
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				pings++;
+				if (pings >= NetworkSettings.MAX_TIME_TO_LIVE_SKIPPED)
+					close();
+			}
+		}, NetworkSettings.DEFAULT_TIME_TO_LIVE, NetworkSettings.DEFAULT_TIME_TO_LIVE);
+	}
+
+	public void ping()
+	{
+		pings = 0;
 	}
 
 	/**
@@ -25,7 +44,7 @@ final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemot
 	 */
 	public void sayGoodBye() {
 		LOGGER.fine("tried to disconnect");
-		getConnectionLostCallback().call(this);
+		close();
 	}
 
 	/**
@@ -35,6 +54,16 @@ final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemot
 	public void sendMessage(final String message) {
 		LOGGER.fine("received message ");
 		messageCallback.call(message);
+	}
+
+	/**
+	 * tears down the connection
+	 */
+	private void close()
+	{
+		getConnectionLostCallback().call(this);
+		timer.purge();
+		timer.cancel();
 	}
 
 	/**

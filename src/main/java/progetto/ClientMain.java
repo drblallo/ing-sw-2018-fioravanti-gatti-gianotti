@@ -15,7 +15,7 @@ public class ClientMain extends Application {
 
     public static void main(String[] args){
 
-        ServerMain.main(args);
+        //ServerMain.main(args);
         launch(args);
 
     }

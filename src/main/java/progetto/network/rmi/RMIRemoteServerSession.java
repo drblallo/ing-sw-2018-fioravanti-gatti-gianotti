@@ -1,10 +1,13 @@
 package progetto.network.rmi;
 
 import progetto.network.IRoomRequest;
+import progetto.network.NetworkSettings;
 import progetto.utils.Callback;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,17 +18,43 @@ final class RMIRemoteServerSession extends UnicastRemoteObject implements IRemot
 	private static final Logger LOGGER = Logger.getLogger(RMIRemoteServerSession.class.getName());
 	private final transient Callback<IRoomRequest> requestCallback = new Callback<>();
 	private final transient Callback<RMIRemoteServerSession> connectionClosedCallback = new Callback<>();
+	private long pings;
+	Timer timer = new Timer();
 
-	RMIRemoteServerSession() throws RemoteException {
+	RMIRemoteServerSession() throws RemoteException
+	{
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run()
+			{
+				pings++;
+				if (pings > NetworkSettings.MAX_TIME_TO_LIVE_SKIPPED)
+					close();
+			}
+		},
+		NetworkSettings.DEFAULT_TIME_TO_LIVE,
+		NetworkSettings.DEFAULT_TIME_TO_LIVE);
+	}
+
+	private void close()
+	{
+		timer.cancel();
+		timer.purge();
+		connectionClosedCallback.call(this);
+	}
+
+
+	public void ping()
+	{
+		pings = 0;
 	}
 
 	/**
 	 * notifies the client that the connection is getting closed
 	 */
 	public void sayGoodBye() {
-		final RMIRemoteServerSession s = this;
 		LOGGER.fine("tried to disconnect");
-		connectionClosedCallback.call(s);
+		close();
 	}
 
 	/**

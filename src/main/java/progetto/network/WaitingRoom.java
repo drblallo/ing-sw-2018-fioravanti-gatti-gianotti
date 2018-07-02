@@ -23,6 +23,11 @@ final class WaitingRoom extends AbstractRoom
 	}
 
 	@Override
+	boolean canBeDeleted() {
+		return false;
+	}
+
+	@Override
 	RoomView getView()
 	{
 		return new RoomView(name, getRoomID());

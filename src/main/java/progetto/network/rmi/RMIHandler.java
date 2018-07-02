@@ -3,10 +3,13 @@ package progetto.network.rmi;
 import progetto.network.IEnforce;
 import progetto.network.INetworkHandler;
 import progetto.network.IRoomRequest;
+import progetto.network.NetworkSettings;
 import progetto.utils.Callback;
 
 import java.rmi.RemoteException;
 import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +23,7 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 	private boolean isDead = false;
 	private Callback<IRoomRequest> requestCallback;
 	private Queue<IEnforce> pendingEnforce = new ConcurrentLinkedQueue<>();
+	private final Timer timer = new Timer();
 
 	/**
 	 * creates a new instance
@@ -36,6 +40,27 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 			}
 		);
 		new Thread(this).start();
+		startTimer();
+	}
+
+	private void startTimer()
+	{
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				sendPing();
+			}
+		}, NetworkSettings.DEFAULT_TIME_TO_LIVE, NetworkSettings.DEFAULT_TIME_TO_LIVE);
+	}
+
+	private void sendPing()
+	{
+		try {
+			session.ping();
+		} catch (RemoteException e) {
+			LOGGER.log(Level.SEVERE, "Failed to ping {0}", e.getMessage());
+			tearDown();
+		}
 	}
 
 	/**
@@ -110,6 +135,8 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 	 */
 	private void tearDown() {
 		isDead = true;
+		timer.cancel();
+		timer.purge();
 	}
 
 	/**

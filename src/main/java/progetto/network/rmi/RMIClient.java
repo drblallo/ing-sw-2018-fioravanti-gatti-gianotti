@@ -1,14 +1,17 @@
 package progetto.network.rmi;
 
-import progetto.Settings;
 import progetto.network.IEnforce;
 import progetto.network.INetworkClient;
 import progetto.network.IRoomRequest;
+import progetto.network.NetworkSettings;
 import progetto.utils.Callback;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +27,7 @@ public final class RMIClient implements INetworkClient, Runnable{
 	private Callback<IEnforce> enforceCallback;
 	private Callback<String> messageCallback;
 	private Queue<IRoomRequest> pendingRequests = new ConcurrentLinkedQueue<>();
+	private final Timer timer = new Timer();
 
 	/**
 	 * Creates the client from the provided ip
@@ -41,10 +45,42 @@ public final class RMIClient implements INetworkClient, Runnable{
 			messageCallback = local.getMessageCallback();
 
 			session = stub.login(local);
+			startTimer();
 			new Thread(this).start();
 
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "FAILED TO CREATE RMI NETWORK MODULE: {0}", e.getMessage());
+			teardown();
+		}
+	}
+
+	/**
+	 * stats the ping timer
+	 */
+	private void startTimer()
+	{
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				pingOtherSide();
+			}
+		},
+				NetworkSettings.DEFAULT_TIME_TO_LIVE,
+				NetworkSettings.DEFAULT_TIME_TO_LIVE);
+	}
+
+	/**
+	 * tries to reset other side time to live
+	 */
+	private void pingOtherSide()
+	{
+		try
+		{
+			session.ping();
+		}
+		catch (RemoteException e)
+		{
+			LOGGER.log(Level.WARNING, "received exception {0}", e.getMessage());
 			teardown();
 		}
 	}
@@ -55,6 +91,8 @@ public final class RMIClient implements INetworkClient, Runnable{
 	private void teardown() {
 		LOGGER.log(Level.FINE, "tearing down ");
 		isAlive = false;
+		timer.purge();
+		timer.cancel();
 
 		synchronized (this)
 		{

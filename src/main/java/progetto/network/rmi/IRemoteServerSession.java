@@ -22,4 +22,10 @@ interface IRemoteServerSession extends Remote {
 	 * @throws RemoteException all remote exceptions are thrown
 	 */
 	void sendRequest(IRoomRequest request) throws RemoteException;
+
+	/**
+	 * notifies that a new a ping has been received from the client
+	 * @throws RemoteException all remote exceptions are thrown
+	 */
+	void ping() throws RemoteException;
 }

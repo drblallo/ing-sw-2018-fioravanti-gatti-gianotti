@@ -28,6 +28,7 @@ abstract class AbstractRoom implements Runnable
 	private final Queue<AbstractServerRequest> reqQueue = new ConcurrentLinkedQueue<>();
 	private final Queue<IRoomRequest> roomRequests = new ConcurrentLinkedQueue<>();
 	private final ISync syncOgg;
+	private boolean markedForDeletion = false;
 
 	abstract void setPlayerReady(int playerID, boolean ready);
 	abstract void setPlayerChair(int playerID, int newChair);
@@ -39,6 +40,11 @@ abstract class AbstractRoom implements Runnable
 	final int getRoomID()
 	{
 		return id;
+	}
+
+	boolean canBeDeleted()
+	{
+		return markedForDeletion;
 	}
 
 	/**
@@ -187,6 +193,7 @@ abstract class AbstractRoom implements Runnable
 	{
 		Player info = new Player(playerName, handler);
 		players.put(handler.getPlayerID(), info);
+		markedForDeletion = false;
 		notifyChange();
 		if (getSyncOgg() != null)
 			handler.onRoomChanged(getSyncOgg());
@@ -207,6 +214,8 @@ abstract class AbstractRoom implements Runnable
 	{
 		LOGGER.fine("Player removed from room");
 		players.remove(playerID);
+		if (getPlayerCount() == 0)
+			markedForDeletion = true;
 		notifyChange();
 	}
 

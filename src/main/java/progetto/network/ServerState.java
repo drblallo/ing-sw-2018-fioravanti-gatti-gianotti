@@ -124,13 +124,15 @@ public final class ServerState implements Runnable
 	 */
 	private void deleteRoom(int roomID)
 	{
+		System.out.println("trying to delete room");
 		AbstractRoom r = getRoom(roomID);
 
 		if (r != null)
+		{
 			r.stop();
-
-		LOGGER.log(Level.FINE, "room deleted");
-		rooms.remove(r);
+			rooms.remove(r.getRoomID());
+			LOGGER.log(Level.FINE, "room deleted");
+		}
 	}
 
 	void stop()
@@ -154,6 +156,9 @@ public final class ServerState implements Runnable
 			{
 				while (r.peekRequest() != null)
 						r.popRequest().execute(this, r);
+
+				if (r.canBeDeleted())
+					deleteRoom(r.getRoomID());
 			}
 
 			Thread.sleep(NetworkSettings.THREAD_CHECK_RATE);
