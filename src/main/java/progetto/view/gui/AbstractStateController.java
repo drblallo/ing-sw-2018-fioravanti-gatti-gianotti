@@ -1,36 +1,48 @@
 package progetto.view.gui;
 
+import progetto.IClientController;
 import progetto.model.IModel;
-import progetto.model.ObservableModel;
 
+/**
+ * This is the abstract class that is extended by javafx controllers that are aware of the controller
+ */
 public abstract class AbstractStateController {
 
-    private ViewStateMachine viewStateMachine;
+	private StateManager stateManager;
 
-    public void setViewStateMachine(ViewStateMachine viewStateMachine){
-        this.viewStateMachine = viewStateMachine;
-    }
+	public void setStateManager(StateManager stateManager){
+		this.stateManager = stateManager;
+	}
 
-    public ViewStateMachine getViewStateMachine(){
-        return viewStateMachine;
-    }
+	public StateManager getStateManager(){
+		return stateManager;
+	}
 
-    public IModel getModel()
-    {
-        return viewStateMachine.getModel();
-    }
+	public IModel getModel()
+	{
+		return stateManager.getModel();
+	}
 
-    public ObservableModel getObsModel()
-    {
-        return viewStateMachine.getObsModel();
-    }
+	public void onPreShow(){
+		//
+	}
 
-    public void onPreShow(){
-        //
-    }
+	public void setup(){
+		//
+	}
 
-    public void setup(){
-        //
-    }
+	public GUIView getView() {
+		return stateManager.getGuiView();
+	}
 
+	public IClientController getController() {
+		return getView().getController();
+	}
+
+	public int getChair()
+	{
+		return getController().getChair();
+	}
 }
+
+

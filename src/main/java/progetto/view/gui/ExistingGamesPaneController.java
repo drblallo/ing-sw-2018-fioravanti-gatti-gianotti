@@ -6,7 +6,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-public class ExistingGamesPaneController extends AbstractClientStateController{
+public class ExistingGamesPaneController extends AbstractStateController {
 
     @FXML
     private ListView<String> listView;
@@ -40,11 +40,11 @@ public class ExistingGamesPaneController extends AbstractClientStateController{
         }
         int clientGame = listView.getSelectionModel().getSelectedIndex();
         getController().setCurrentClientGame(clientGame);
-        getViewStateMachine().getStateFromName("GamePane.fxml").show(true);
+        getStateManager().getStateFromName("GamePane.fxml").show(true);
     }
 
     @FXML
     private void onBackButtonClicked(){
-        getViewStateMachine().getStateFromName("StartingPane.fxml").show(false);
+        getStateManager().getStateFromName("StartingPane.fxml").show(false);
     }
 }

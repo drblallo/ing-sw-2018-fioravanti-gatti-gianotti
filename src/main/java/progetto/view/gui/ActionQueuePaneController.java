@@ -13,7 +13,7 @@ import progetto.network.RoomView;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ActionQueuePaneController{
+public class ActionQueuePaneController extends AbstractController{
 
     private static final Logger LOGGER = Logger.getLogger(ActionQueuePaneController.class.getName());
     @FXML
@@ -24,19 +24,18 @@ public class ActionQueuePaneController{
     private Label numberOfPendingActions;
     @FXML
     private TextArea otherPlayersActions;
-    private GUIView view;
 
-
-    public void setup(GUIView view){
-        this.view = view;
+    @Override
+    public void setUp(GUIView view){
+        super.setUp(view);
         view.getController().getObservable().getCommandQueue().addObserver(ogg -> update());
     }
 
     protected void update(){
 
         LOGGER.log(Level.FINE, "Reloading");
-        CommandQueueData commandQueueData = view.getController().getModel().getCommandQueue().getData();
-        RoomView roomView = view.getController().getCurrentRoom();
+        CommandQueueData commandQueueData = getModel().getCommandQueue().getData();
+        RoomView roomView = getController().getCurrentRoom();
         AbstractGameAction abstractGameAction = commandQueueData.getPastItem(0);
         String nameOfCaller;
         if (roomView.getPlayerOfChair(abstractGameAction.getCallerID()).getName()!=null){
@@ -44,7 +43,7 @@ public class ActionQueuePaneController{
         }
         else nameOfCaller = "Giocatore n° " + abstractGameAction.getCallerID();
 
-        if (abstractGameAction.getCallerID()!=view.getController().getChair()){
+        if (abstractGameAction.getCallerID() != getController().getChair()){
             if (abstractGameAction.getClass() == ExecuteToolCardAction.class){
                 otherPlayersActions.appendText(nameOfCaller + "ha usato la carta: "
                         + abstractGameAction.getClass().getName());

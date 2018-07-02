@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PlayerBoardPaneController {
+public class PlayerBoardPaneController extends AbstractController{
 
     private TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
     @FXML
@@ -40,7 +40,6 @@ public class PlayerBoardPaneController {
     private Button chooseWindowFrame;
     private int numberOfPlayerBoard;
     private static final Logger LOGGER = Logger.getLogger(PlayerBoardPaneController.class.getName());
-    private GUIView view;
 
     public static Pane getPlayerBoard(int numberOfPlayerBoard, GUIView view){
         Pane pane;
@@ -57,7 +56,7 @@ public class PlayerBoardPaneController {
     }
 
     public void setup(GUIView view, int numberOfPlayerBoard){
-        this.view = view;
+    	super.setUp(view);
         this.numberOfPlayerBoard = numberOfPlayerBoard;
         topBox.getChildren().remove(chooseWindowFrame);
         view.getController().getObservable().getPlayerBoard(numberOfPlayerBoard)
@@ -87,8 +86,8 @@ public class PlayerBoardPaneController {
     }
 
     private void onMouseClicked(MouseEvent event, int y, int x){
-        IModel model = view.getController().getModel();
-        int currentChair = view.getController().getChair();
+        IModel model = getController().getModel();
+        int currentChair = getController().getChair();
 
         AbstractGameAction toolCardSetPlacedDiceAction;
 
@@ -96,8 +95,8 @@ public class PlayerBoardPaneController {
             toolCardSetPlacedDiceAction = new ToolCardSetPlacedDiceAction(currentChair, y,x);
         else toolCardSetPlacedDiceAction = new ToolCardSetSecondPlacedDiceAction(currentChair, y, x);
 
-        if (toolCardSetPlacedDiceAction.canBeExecuted(view.getController().getModel()))
-            view.getController().sendAction(toolCardSetPlacedDiceAction);
+        if (toolCardSetPlacedDiceAction.canBeExecuted(getController().getModel()))
+            getController().sendAction(toolCardSetPlacedDiceAction);
 
         event.consume();
     }
@@ -105,16 +104,15 @@ public class PlayerBoardPaneController {
     private void onDragDropped(DragEvent event, int y, int x){
         String recived = event.getDragboard().getString();
         int numberOfDice = Integer.parseInt(recived);
-        view.getController().sendAction(new PlaceDiceAction(view.getController().getChair(),
-                numberOfDice, y, x));
+        getController().sendAction(new PlaceDiceAction(getController().getChair(), numberOfDice, y, x));
     }
 
     private void onDragOver(DragEvent event, int y, int x){
         if(event.getDragboard().hasString()){
             String recived = event.getDragboard().getString();
             int numberOfDice = Integer.parseInt(recived);
-            if (new PlaceDiceAction(view.getController().getChair(), numberOfDice, y, x)
-                    .canBeExecuted(view.getController().getModel())){
+            if (new PlaceDiceAction(getController().getChair(), numberOfDice, y, x)
+                    .canBeExecuted(getController().getModel())){
                 event.acceptTransferModes(TransferMode.COPY);
             }
         }
@@ -122,7 +120,7 @@ public class PlayerBoardPaneController {
 
     private void updateChooseWindowFrameButton(PlayerBoardData playerBoardData)
     {
-        if(!playerBoardData.getWindowFrameIsSet() && numberOfPlayerBoard == view.getController().getChair())
+        if(!playerBoardData.getWindowFrameIsSet() && numberOfPlayerBoard == getController().getChair())
         {
             if (!topBox.getChildren().contains(chooseWindowFrame))
                 topBox.getChildren().add(chooseWindowFrame);
@@ -133,9 +131,9 @@ public class PlayerBoardPaneController {
 
     private void updatePlayerBoard() {
 
-        IModel model = view.getController().getModel();
+        IModel model = getController().getModel();
         PlayerBoardData playerBoardData = model.getPlayerBoard(numberOfPlayerBoard).getData();
-        PlayerView currentPlayer = view.getController().getCurrentRoom().getPlayerOfChair(numberOfPlayerBoard);
+        PlayerView currentPlayer = getController().getCurrentRoom().getPlayerOfChair(numberOfPlayerBoard);
 
         if (currentPlayer != null)
             nameOfPlayer.setText(currentPlayer.getName());
@@ -147,7 +145,7 @@ public class PlayerBoardPaneController {
 
     private void updateDicePlacedFrame(){
 
-        DicePlacedFrameData dicePlacedFrameData = view.getController().getModel().getPlayerBoard(numberOfPlayerBoard)
+        DicePlacedFrameData dicePlacedFrameData = getController().getModel().getPlayerBoard(numberOfPlayerBoard)
                 .getDicePlacedFrame().getData();
         ImageView imageView;
         for (int y = 0; y < DicePlacedFrameData.MAX_NUMBER_OF_ROWS; y++) {
@@ -165,7 +163,7 @@ public class PlayerBoardPaneController {
 
     private void setWindowFrameCell(int y, int x, ImageView imageView){
 
-        WindowFrame windowFrame = view.getController().getModel().getPlayerBoard(numberOfPlayerBoard)
+        WindowFrame windowFrame = getController().getModel().getPlayerBoard(numberOfPlayerBoard)
                 .getData().getWindowFrame();
         if (windowFrame.getColorBond(y, x) != null) {
             imageView.setImage(textureDatabase.getDice(windowFrame.getColorBond(y, x), -1));
@@ -179,7 +177,7 @@ public class PlayerBoardPaneController {
     @FXML
     private void onChooseWindowFrameClicked(){
 
-        IModel model = view.getController().getModel();
+        IModel model = getController().getModel();
 
         if(model.getMainBoard().getData().getGameState().getClass()==FrameSelectionState.class) {
             FXMLLoader fxmlLoader = new FXMLLoader(PlayerBoardPaneController
@@ -192,7 +190,7 @@ public class PlayerBoardPaneController {
             }
             ChooseWindowFramePaneController chooseWindowFramePaneController = fxmlLoader.getController();
             chooseWindowFramePaneController.setup(model
-                    .getPlayerBoard(numberOfPlayerBoard).getData(), view.getController(), view);
+                    .getPlayerBoard(numberOfPlayerBoard).getData(), getController(), getView());
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(pane));

@@ -11,18 +11,18 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ViewState<T extends AbstractStateController> {
+public class State<T extends AbstractStateController> {
 
-    private static final Logger LOGGER = Logger.getLogger(ViewState.class.getName());
-    private ViewStateMachine viewStateMachine;
+    private static final Logger LOGGER = Logger.getLogger(State.class.getName());
+    private StateManager stateManager;
     private Scene scene;
     private T controller;
     private String fxmlName;
 
-    public ViewState(ViewStateMachine viewStateMachine, String fxml, Class c){
+    public State(StateManager stateManager, String fxml, Class c){
 
         fxmlName = fxml;
-        viewStateMachine.addViewState(this);
+        stateManager.addViewState(this);
         Pane pane;
         FXMLLoader fxmlLoader = new FXMLLoader(c.getResource(fxmlName));
         try {
@@ -35,9 +35,10 @@ public class ViewState<T extends AbstractStateController> {
         }
 
         scene = new Scene(pane);
-        this.viewStateMachine = viewStateMachine;
+        this.stateManager = stateManager;
         controller = fxmlLoader.getController();
-        controller.setViewStateMachine(viewStateMachine);
+        controller.setStateManager(stateManager);
+        getController().setup();
 
     }
 
@@ -51,7 +52,7 @@ public class ViewState<T extends AbstractStateController> {
 
     public void show(boolean maximized){
         controller.onPreShow();
-        Stage stage = viewStateMachine.getStage();
+        Stage stage = stateManager.getStage();
         stage.setScene(scene);
         if (maximized) {
             Rectangle2D rectangle2D = Screen.getPrimary().getVisualBounds();
@@ -60,11 +61,13 @@ public class ViewState<T extends AbstractStateController> {
             stage.setWidth(rectangle2D.getWidth());
             stage.setHeight(rectangle2D.getHeight());
         }
-        viewStateMachine.setCurrentViewState(this);
+        stateManager.setCurrentState(this);
         stage.show();
     }
 
     protected void onHide(){
         //
     }
+
+
 }

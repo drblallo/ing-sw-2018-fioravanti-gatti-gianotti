@@ -13,16 +13,15 @@ import progetto.model.Dice;
 import progetto.model.PickedDicesSlotData;
 
 
-public class PickedDicesSlotPaneController {
+public class PickedDicesSlotPaneController extends AbstractController{
 
     @FXML
     private TilePane tilePane;
     private static final int DICE_DIMENSION = 55;
-    private GUIView view;
     private int numberOfPlayerboard;
 
     public void setup(GUIView view, int i){
-        this.view = view;
+    	super.setUp(view);
         numberOfPlayerboard = i;
         view.getController().getObservable().getPlayerBoard(i).getPickedDicesSlot()
                 .addObserver(ogg -> Platform.runLater(this::update));
@@ -31,7 +30,7 @@ public class PickedDicesSlotPaneController {
     private void update() {
 
         PickedDicesSlotData pickedDicesSlotData =
-                view.getController().getModel().getPlayerBoard(numberOfPlayerboard).getPickedDicesSlot().getData();
+                getController().getModel().getPlayerBoard(numberOfPlayerboard).getPickedDicesSlot().getData();
         Dice dice;
 
         tilePane.getChildren().clear();
@@ -56,9 +55,9 @@ public class PickedDicesSlotPaneController {
 
     private void onMouseClicked(MouseEvent event, int i){
         ToolCardSetPickedDiceAction toolCardSetPickedDiceAction = new ToolCardSetPickedDiceAction(
-                view.getController().getChair(), i);
-        if (toolCardSetPickedDiceAction.canBeExecuted(view.getController().getModel()))
-            view.getController().sendAction(toolCardSetPickedDiceAction);
+                getController().getChair(), i);
+        if (toolCardSetPickedDiceAction.canBeExecuted(getController().getModel()))
+            getController().sendAction(toolCardSetPickedDiceAction);
 
         event.consume();
     }

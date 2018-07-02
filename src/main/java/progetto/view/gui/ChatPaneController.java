@@ -16,7 +16,7 @@ import java.util.List;
  * this is the class that handles the chat pane fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
  */
-public class ChatPaneController extends AbstractClientStateController{
+public class ChatPaneController extends AbstractStateController {
 
     private List<PlayerView> playerViewList;
     @FXML
@@ -84,6 +84,6 @@ public class ChatPaneController extends AbstractClientStateController{
 
     @FXML
     private void onReturnButtonClicked(){
-        getViewStateMachine().getStateFromName("GamePane.fxml").show(true);
+        getStateManager().getStateFromName("GamePane.fxml").show(true);
     }
 }

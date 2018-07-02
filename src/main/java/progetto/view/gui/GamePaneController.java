@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.*;
 import progetto.model.*;
 
-public class GamePaneController extends AbstractClientStateController{
+public class GamePaneController extends AbstractStateController {
 
     private int displayedPlayersCount = -1;
     private int lastChair = -1;
@@ -47,20 +47,20 @@ public class GamePaneController extends AbstractClientStateController{
     @Override
     public void setup() {
         super.setup();
-        extractedDicesPaneController.setup(getViewStateMachine().getGuiView());
-        playerMenuPaneController.setup(getViewStateMachine().getGuiView());
-        roundTrackPaneController.setup(getViewStateMachine().getGuiView());
-        preGamePaneController.setup(getViewStateMachine().getGuiView());
-        objectiveCardsPaneController.setup(getViewStateMachine().getGuiView());
-        toolCardPaneController.setup(getViewStateMachine().getGuiView());
-        useToolCardPaneController.setup(getViewStateMachine().getGuiView());
-        utilityMenuPaneController.setup(getViewStateMachine().getGuiView());
+        extractedDicesPaneController.setUp(getStateManager().getGuiView());
+        playerMenuPaneController.setUp(getStateManager().getGuiView());
+        roundTrackPaneController.setUp(getStateManager().getGuiView());
+        preGamePaneController.setUp(getStateManager().getGuiView());
+        objectiveCardsPaneController.setUp(getStateManager().getGuiView());
+        toolCardPaneController.setUp(getStateManager().getGuiView());
+        useToolCardPaneController.setUp(getStateManager().getGuiView());
+        utilityMenuPaneController.setUp(getStateManager().getGuiView());
         mainVBox.getChildren().removeAll(preGameVBox, roundVBox);
         toolCardVBox.getChildren().clear();
 
-        getViewStateMachine().getObsModel().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
-        getViewStateMachine().getClientController().getRoomViewCallback().addObserver(ogg -> {
-            if(getViewStateMachine().getClientController().getChair()!=lastChair){
+        getStateManager().getObsModel().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
+        getStateManager().getClientController().getRoomViewCallback().addObserver(ogg -> {
+            if(getStateManager().getClientController().getChair()!=lastChair){
                 Platform.runLater(this::update);
             }
         });
@@ -72,7 +72,7 @@ public class GamePaneController extends AbstractClientStateController{
         whatToShow(model);
 
         int currentNumberOfPlayer = model.getMainBoard().getData().getPlayerCount();
-        int currentChair = getViewStateMachine().getClientController().getChair();
+        int currentChair = getChair();
 
         if (model.getRoundInformation().getData().getCurrentPlayer() == lastChair &&
                 model.getMainBoard().getData().getGameState().getClass() == ToolCardState.class){
@@ -112,7 +112,7 @@ public class GamePaneController extends AbstractClientStateController{
             if (!mainVBox.getChildren().contains(roundVBox))
                 mainVBox.getChildren().add(roundVBox);
         }else {
-            getViewStateMachine().getStateFromName("EndGamePane.fxml").show(false);
+            getStateManager().getStateFromName("EndGamePane.fxml").show(false);
         }
     }
 
@@ -121,7 +121,7 @@ public class GamePaneController extends AbstractClientStateController{
         Region region1 = new Region();
         hBox.getChildren().add(region1);
         HBox.setHgrow(region1, Priority.ALWAYS);
-        Pane pane = PlayerBoardPaneController.getPlayerBoard(i, getViewStateMachine().getGuiView());
+        Pane pane = PlayerBoardPaneController.getPlayerBoard(i, getStateManager().getGuiView());
         hBox.getChildren().add(pane);
         Region region2 = new Region();
         hBox.getChildren().add(region2);

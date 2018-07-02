@@ -8,7 +8,7 @@ import progetto.ClientController;
 public class GUIView extends AbstractView
 {
 
-	private final ViewStateMachine viewStateMachine;
+	private final StateManager stateManager;
 	private boolean started = false;
 	private final Stage stage;
 
@@ -16,12 +16,12 @@ public class GUIView extends AbstractView
 	public GUIView(Stage primaryStage, ClientController controller)
 	{
 		super(controller);
-		viewStateMachine = new ViewStateMachine(primaryStage, this);
+		stateManager = new StateManager(primaryStage, this);
 		stage = primaryStage;
 	}
 
-	public ViewStateMachine getViewStateMachine() {
-		return viewStateMachine;
+	public StateManager getStateManager() {
+		return stateManager;
 	}
 
 	@Override
@@ -29,20 +29,19 @@ public class GUIView extends AbstractView
 		if (!started)
 		{
 			started = true;
-			ClientViewState<StartingPaneController> startingPaneControllerViewState =
-					new ClientViewState<>(this, "StartingPane.fxml", StartingPaneController.class);
+			State<StartingPaneController> startingPaneControllerViewState =
+					new State<>(stateManager, "StartingPane.fxml", StartingPaneController.class);
 			startingPaneControllerViewState.show(false);
-			new ClientViewState<SocketRMIChoicePaneController>(this,
+			new State<SocketRMIChoicePaneController>(stateManager,
 					"SocketRMIChoicePane.fxml", SocketRMIChoicePaneController.class);
-			new ClientViewState<ExistingGamesPaneController>(this,
+			new State<ExistingGamesPaneController>(stateManager,
 					"ExistingGamesPane.fxml", ExistingGamesPaneController.class);
-			new ClientViewState<RoomsPaneController>(this,
-					"RoomsPane.fxml", RoomsPaneController.class);
-			new ClientViewState<OtherPlayersPaneController>(this,
+			new State<RoomsPaneController>(stateManager, "RoomsPane.fxml", RoomsPaneController.class);
+			new State<OtherPlayersPaneController>(stateManager,
 					"OtherPlayersPane.fxml", OtherPlayersPaneController.class);
-			new ClientViewState<ChatPaneController>(this, "ChatPane.fxml", ChatPaneController.class);
-			new ClientViewState<GamePaneController>(this, "GamePane.fxml", GamePaneController.class);
-			new ClientViewState<EndGamePaneController>(this, "EndGamePane.fxml", EndGamePaneController.class);
+			new State<ChatPaneController>(stateManager, "ChatPane.fxml", ChatPaneController.class);
+			new State<GamePaneController>(stateManager, "GamePane.fxml", GamePaneController.class);
+			new State<EndGamePaneController>(stateManager, "EndGamePane.fxml", EndGamePaneController.class);
 		}
 
 		if (visible)
@@ -54,11 +53,11 @@ public class GUIView extends AbstractView
 	public void onGameChanged()
 	{
 		if (getController().thereIsGame())
-			viewStateMachine.setCurrentGame(getController());
+			stateManager.setCurrentGame(getController());
 		else
 		{
 			Platform.runLater(
-					()->viewStateMachine.getStateFromName("StartingPane.fxml").show(false)
+					()-> stateManager.getStateFromName("StartingPane.fxml").show(false)
 			);
 		}
 	}

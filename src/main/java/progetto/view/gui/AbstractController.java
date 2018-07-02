@@ -1,32 +1,32 @@
 package progetto.view.gui;
 
-import javafx.application.Platform;
-import progetto.utils.AbstractObservable;
-import progetto.utils.IObserver;
+import progetto.IClientController;
+import progetto.model.IModel;
 
-public abstract class AbstractController <U, T extends AbstractObservable <U>> {
+public abstract class AbstractController {
+	private GUIView view;
 
-    private T observable;
-    private IObserver<U> iObserver = ogg -> Platform.runLater(this::update);
+	public GUIView getView() {
+		return view;
+	}
 
-    public final void setObservable(T newObservable){
-        if(observable!=null){
-            observable.removeObserver(iObserver);
-        }
-        observable = newObservable;
-        observable.addObserver(iObserver);
-        onObserverReplaced();
-        Platform.runLater(this::update);
-    }
+	public void setUp(GUIView view)
+	{
+		this.view = view;
+	}
 
-    protected void onObserverReplaced(){
-        //Le classi derivate possono estenderla se vogliono
-    }
+	public IClientController getController()
+	{
+		return view.getController();
+	}
 
-    protected T getObservable(){
-        return observable;
-    }
+	public IModel getModel()
+	{
+		return getController().getModel();
+	}
 
-    protected abstract void update();
-
+	public int getChair()
+	{
+		return getController().getChair();
+	}
 }

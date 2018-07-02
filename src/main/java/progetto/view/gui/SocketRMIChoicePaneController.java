@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-public class SocketRMIChoicePaneController extends AbstractClientStateController{
+public class SocketRMIChoicePaneController extends AbstractStateController {
 
     @FXML
     private Label errorMessage;
@@ -56,7 +56,7 @@ public class SocketRMIChoicePaneController extends AbstractClientStateController
             return;
         }
 
-        getViewStateMachine().getStateFromName("RoomsPane.fxml").show(false);
+        getStateManager().getStateFromName("RoomsPane.fxml").show(false);
 
     }
 

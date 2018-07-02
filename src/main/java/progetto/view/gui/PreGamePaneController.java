@@ -13,7 +13,7 @@ import progetto.model.MainBoardData;
 import progetto.network.RoomView;
 import progetto.utils.IObserver;
 
-public class PreGamePaneController {
+public class PreGamePaneController extends AbstractController{
 
     @FXML
     private Label currentNumberOfPlayers;
@@ -30,10 +30,7 @@ public class PreGamePaneController {
     @FXML
     private HBox difficultyHBox;
     private static final int MAX_DIFFICULTY = 5;
-    private GUIView view;
     private IObserver<RoomView> roomViewIObserver = ogg -> Platform.runLater(()->updateRoomView(ogg));
-    private ComposableController<MainBoardData, AbstractMainBoard> mainBoardComposableController =
-            new ComposableController<>();
 
     @FXML
     public void initialize(){
@@ -43,15 +40,14 @@ public class PreGamePaneController {
         for (int i = 1; i<MAX_DIFFICULTY + 1; i++){
             difficultyChoice.getItems().add(i);
         }
-        mainBoardComposableController.getOnModifiedCallback().addObserver
-                (ogg -> Platform.runLater(this::updateMainBoard));
         playerAndDifficultyHBox.getChildren().remove(difficultyHBox);
     }
 
-    public void setup(GUIView view){
-        this.view = view;
+    @Override
+    public void setUp(GUIView view){
+        super.setUp(view);
 
-        mainBoardComposableController.setObservable(view.getController().getObservable().getMainBoard());
+        view.getController().getObservable().getMainBoard().addObserver((ogg) -> Platform.runLater(this::updateMainBoard));
         view.getController().getRoomViewCallback().addObserver(roomViewIObserver);
         numberOfPlayersChoice.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> view.getController().sendAction(new SetPlayerCountAction(newValue)) );
@@ -61,7 +57,7 @@ public class PreGamePaneController {
       }
 
     private void updateMainBoard() {
-        MainBoardData mainBoardData = view.getController().getModel().getMainBoard().getData();
+        MainBoardData mainBoardData = getModel().getMainBoard().getData();
         int playerCount = mainBoardData.getPlayerCount();
         if (playerCount == 1 ){
             if(!playerAndDifficultyHBox.getChildren().contains(difficultyHBox))
@@ -70,30 +66,30 @@ public class PreGamePaneController {
         else playerAndDifficultyHBox.getChildren().remove(difficultyHBox);
         if (playerCount != Integer.parseInt(currentNumberOfPlayers.getText())){
             currentNumberOfPlayers.setText(mainBoardData.getPlayerCount() + "");
-            Platform.runLater(()->updateRoomView(view.getController().getCurrentRoom()));
+            Platform.runLater(()->updateRoomView(getController().getCurrentRoom()));
         }
     }
 
     private void updateRoomView(RoomView roomView){
             numberOfChairChoice.getItems().clear();
             numberOfChairChoice.getItems().add(-1);
-            MainBoardData mainBoardData = view.getController().getModel().getMainBoard().getData();
+            MainBoardData mainBoardData = getModel().getMainBoard().getData();
             for (int i = 0; i < mainBoardData.getPlayerCount(); i++) {
                 if (roomView.getPlayerOfChair(i) == null)
                     numberOfChairChoice.getItems().add(i);
-            currentNumberOfChair.setText(view.getController().getChair()+ "");
+            currentNumberOfChair.setText(getController().getChair()+ "");
         }
     }
 
     @FXML
     private void onStartGameButtonClicked(){
-        view.getController().sendAction(new StartGameAction());
+        getController().sendAction(new StartGameAction());
     }
 
     @FXML
     private void onSitButtonPressed(){
         if(numberOfChairChoice.getSelectionModel().getSelectedItem()!=null)
-            view.getController().pickChair(numberOfChairChoice.getSelectionModel().getSelectedItem());
+            getController().pickChair(numberOfChairChoice.getSelectionModel().getSelectedItem());
     }
 
 }

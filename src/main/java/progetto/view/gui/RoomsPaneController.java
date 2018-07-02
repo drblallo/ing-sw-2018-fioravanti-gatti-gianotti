@@ -12,7 +12,7 @@ import progetto.utils.IObserver;
 
 import java.util.List;
 
-public class RoomsPaneController extends AbstractClientStateController{
+public class RoomsPaneController extends AbstractStateController {
 
     private List<ServerStateView.SimpleRoomState> simpleRoomStateList;
     @FXML
@@ -80,7 +80,7 @@ public class RoomsPaneController extends AbstractClientStateController{
             }
         int roomID = simpleRoomStateList.get(listView.getSelectionModel().getSelectedIndex()+1).roomID;
         getController().joinGame(roomID, usernameTextField.getText());
-        getViewStateMachine().getStateFromName("GamePane.fxml").show(true);
+        getStateManager().getStateFromName("GamePane.fxml").show(true);
     }
 
 }

@@ -11,7 +11,7 @@ import progetto.model.Container;
 import progetto.model.PlayerBoardData;
 import progetto.utils.IObserver;
 
-public class PlayerMenuPaneController {
+public class PlayerMenuPaneController extends AbstractController{
 
     @FXML
     private Label numberOfTokens;
@@ -24,13 +24,13 @@ public class PlayerMenuPaneController {
     @FXML
     private Button showOtherPlayersButton;
     private int lastPlayerCount = -1;
-    private GUIView view;
     private IObserver<PlayerBoardData> playerObserver = ogg -> Platform.runLater(this::updatePlayerBoard);
     private Container<PlayerBoardData> playerBoard;
     private int lastChair = -2;
 
-    public void setup(GUIView view){
-        this.view = view;
+    @Override
+    public void setUp(GUIView view){
+    	super.setUp(view);
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::onRoomChanged));
         view.getController().getObservable().getRoundInformation()
                 .addObserver(ogg -> Platform.runLater(this::updateCurrentPlayer) );
@@ -40,20 +40,20 @@ public class PlayerMenuPaneController {
 
     private void onRoomChanged()
     {
-        int currentChair = Math.max(view.getController().getChair(), 0);
+        int currentChair = Math.max(getController().getChair(), 0);
         if (currentChair != lastChair)
         {
             lastChair = currentChair;
             if (playerBoard!=null)
                 playerBoard.removeObserver(playerObserver);
-            playerBoard = view.getController().getObservable().getPlayerBoard(currentChair);
+            playerBoard = getController().getObservable().getPlayerBoard(currentChair);
             playerBoard.addObserver(playerObserver);
             updatePlayerBoard();
         }
     }
 
     private void updateMainBoard(){
-        int currentPlayerCount = view.getController().getModel().getMainBoard().getData().getPlayerCount();
+        int currentPlayerCount = getModel().getMainBoard().getData().getPlayerCount();
         if(currentPlayerCount!=lastPlayerCount){
             if(currentPlayerCount == 1){
                 mainVBox.getChildren().remove(tokensHBox);
@@ -68,29 +68,29 @@ public class PlayerMenuPaneController {
     }
 
     private void updatePlayerBoard() {
-        PlayerBoardData playerBoardData = view.getController().getModel().getPlayerBoard(lastChair).getData();
+        PlayerBoardData playerBoardData = getModel().getPlayerBoard(lastChair).getData();
         if(playerBoardData.getToken()!=Integer.parseInt(numberOfTokens.getText()))
             numberOfTokens.setText(playerBoardData.getToken() + "");
     }
 
     private void updateCurrentPlayer(){
-        int newCurrentPlayer = view.getController().getModel().getRoundInformation().getData().getCurrentPlayer();
+        int newCurrentPlayer = getModel().getRoundInformation().getData().getCurrentPlayer();
         if (Integer.parseInt(currentPlayer.getText())!=newCurrentPlayer){
             currentPlayer.setText(newCurrentPlayer + "");
-            if (newCurrentPlayer == view.getController().getChair())
+            if (newCurrentPlayer == getController().getChair())
                 AlertTurnBoxPaneController.display();
         }
     }
 
     @FXML
     private void onEndTurnButtonClicked(){
-        if (view.getController().getChair()!=-1)
-            view.getController().sendAction(new EndTurnAction(view.getController().getChair()));
+        if (getController().getChair()!=-1)
+            getController().sendAction(new EndTurnAction(getController().getChair()));
     }
 
     @FXML
     private void onShowOtherPlayersButtonClicked(){
-        view.getViewStateMachine().getStateFromName("OtherPlayersPane.fxml").show(true);
+        getView().getStateManager().getStateFromName("OtherPlayersPane.fxml").show(true);
     }
 
 }

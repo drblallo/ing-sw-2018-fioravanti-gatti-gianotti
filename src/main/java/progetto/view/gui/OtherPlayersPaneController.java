@@ -6,7 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
-public class OtherPlayersPaneController extends AbstractClientStateController {
+public class OtherPlayersPaneController extends AbstractStateController {
 
     @FXML
     private HBox otherPlayersHBox;
@@ -16,18 +16,18 @@ public class OtherPlayersPaneController extends AbstractClientStateController {
     private TextArea otherPlayersActions; */
 
     @Override
-    public void setViewStateMachine(ViewStateMachine viewStateMachine)
+    public void setStateManager(StateManager stateManager)
     {
-       super.setViewStateMachine(viewStateMachine);
-       getViewStateMachine().getClientController().getRoomViewCallback()
+       super.setStateManager(stateManager);
+       getStateManager().getClientController().getRoomViewCallback()
                .addObserver(ogg -> Platform.runLater(this::update));
-       getViewStateMachine().getObsModel().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
+       getStateManager().getObsModel().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
        //getViewStateMachine().getObsModel().getCommandQueue().addObserver(ogg -> updateOtherPlayersActions());
     }
 
     private void update() {
-        int numberOfPlayers = getViewStateMachine().getModel().getMainBoard().getData().getPlayerCount();
-        int currentChair = getViewStateMachine().getClientController().getChair();
+        int numberOfPlayers = getStateManager().getModel().getMainBoard().getData().getPlayerCount();
+        int currentChair = getChair();
         if (numberOfPlayers != displayedNumberOfPlayers || currentChair != myChair) {
             displayedNumberOfPlayers = numberOfPlayers;
             myChair = currentChair;
@@ -38,7 +38,7 @@ public class OtherPlayersPaneController extends AbstractClientStateController {
             for (int i = 0; i < displayedNumberOfPlayers; i++){
                 if (i!=myChair) {
                     otherPlayersHBox.getChildren().add(PlayerBoardPaneController
-                            .getPlayerBoard(i, getViewStateMachine().getGuiView()));
+                            .getPlayerBoard(i, getStateManager().getGuiView()));
                     Region newRegion = new Region();
                     otherPlayersHBox.getChildren().add(newRegion);
                     HBox.setHgrow(newRegion, Priority.ALWAYS);
@@ -72,6 +72,6 @@ public class OtherPlayersPaneController extends AbstractClientStateController {
 
     @FXML
     private void onBackButtonClicked(){
-        getViewStateMachine().getStateFromName("GamePane.fxml").show(true);
+        getStateManager().getStateFromName("GamePane.fxml").show(true);
     }
 }

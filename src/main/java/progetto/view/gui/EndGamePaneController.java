@@ -12,7 +12,7 @@ import progetto.view.PlayerRanking;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class EndGamePaneController extends AbstractClientStateController{
+public class EndGamePaneController extends AbstractStateController {
 
     @FXML
     private Label winner;
@@ -27,7 +27,7 @@ public class EndGamePaneController extends AbstractClientStateController{
     }
 
     private void update(){
-        IModel model = getViewStateMachine().getGuiView().getController().getModel();
+        IModel model = getModel();
         score.clear();
         if (model.getMainBoard().getData().getPlayerCount()!=1)
             multiPlayerScore(model);
@@ -52,7 +52,7 @@ public class EndGamePaneController extends AbstractClientStateController{
             else winner.setText(YOU_LOSE);
         }
 
-        RoomView roomView = getViewStateMachine().getGuiView().getController().getCurrentRoom();
+        RoomView roomView = getStateManager().getGuiView().getController().getCurrentRoom();
 
         for (int i = 0; i<playerRankingArrayList.size(); i++){
             score.appendText((i+1) + "° Classificato: ");
@@ -79,7 +79,7 @@ public class EndGamePaneController extends AbstractClientStateController{
 
     @FXML
     private void onMenuButtonClicked(){
-        getViewStateMachine().getStateFromName("StartingPane.fxml").show(false);
+        getStateManager().getStateFromName("StartingPane.fxml").show(false);
     }
 
     @FXML

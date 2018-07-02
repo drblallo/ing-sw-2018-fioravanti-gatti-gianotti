@@ -9,22 +9,21 @@ import progetto.controller.ToolCardSetSinglePlayerDiceAction;
 import progetto.model.Dice;
 import progetto.model.ExtractedDicesData;
 
-public class ExtractedDicesPaneController {
+public class ExtractedDicesPaneController extends AbstractController{
 
     @FXML
     private TilePane tilePane;
     private static final int DICE_DIMENSION = 55;
-    private GUIView view;
 
-    public void setup(GUIView view){
-        this.view = view;
+    @Override
+    public void setUp(GUIView view){
+    	super.setUp(view);
         view.getController().getObservable().getMainBoard().getExtractedDices()
                 .addObserver(ogg -> Platform.runLater(this::update));
     }
 
     private void update() {
-        ExtractedDicesData extractedDicesData = view.getController().getModel()
-                .getMainBoard().getExtractedDices().getData();
+        ExtractedDicesData extractedDicesData = getModel().getMainBoard().getExtractedDices().getData();
         tilePane.getChildren().clear();
         TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
         Dice dice;
@@ -36,10 +35,8 @@ public class ExtractedDicesPaneController {
             imageView.setFitWidth(DICE_DIMENSION);
             final int d = i;
             imageView.setOnMouseClicked(event -> {
-                view.getController().sendAction
-                        (new PickDiceAction(view.getController().getChair(), d));
-                view.getController().sendAction
-                        (new ToolCardSetSinglePlayerDiceAction(view.getController().getChair(), d));
+                getController().sendAction(new PickDiceAction(getChair(), d));
+                getController().sendAction(new ToolCardSetSinglePlayerDiceAction(getChair(), d));
             });
             tilePane.getChildren().add(imageView);
         }

@@ -11,7 +11,7 @@ import progetto.model.Dice;
 import progetto.model.ToolCardParameters;
 
 
-public class ChangeDiceValuePaneController {
+public class ChangeDiceValuePaneController extends AbstractController{
 
     private static final int MAX_VALUE_OF_DICE = 6;
     @FXML
@@ -22,17 +22,16 @@ public class ChangeDiceValuePaneController {
     private AnchorPane anchorPane;
     @FXML
     private VBox myPane;
-    private GUIView view;
 
-    public void setup(GUIView view){
-        this.view = view;
+    public void setUp(GUIView view){
+    	super.setUp(view);
         view.getController().getObservable().getRoundInformation().addObserver(ogg -> Platform.runLater(this::update));
         for (int i = 1; i<MAX_VALUE_OF_DICE+1; i++)
             chooseNumberOfDice.getItems().add(i);
     }
 
     private void update(){
-        ToolCardParameters toolCardParameters = view.getController().getModel().getRoundInformation()
+        ToolCardParameters toolCardParameters = getModel().getRoundInformation()
                 .getData().getToolCardParameters();
         if (toolCardParameters.getDice() != null){
             if (!anchorPane.getChildren().contains(myPane))
@@ -53,8 +52,7 @@ public class ChangeDiceValuePaneController {
     @FXML
     private void onChooseButtonClicked(){
         int newValue = chooseNumberOfDice.getSelectionModel().getSelectedItem();
-        view.getController().sendAction(new ToolCardSetDiceValueAction(
-                view.getController().getChair(),  newValue));
+        getController().sendAction(new ToolCardSetDiceValueAction(getChair(),  newValue));
     }
 
 }

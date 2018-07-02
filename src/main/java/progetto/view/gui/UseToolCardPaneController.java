@@ -12,7 +12,7 @@ import progetto.model.*;
 
 import java.util.List;
 
-public class UseToolCardPaneController {
+public class UseToolCardPaneController extends AbstractController{
 
     @FXML
     private HBox chooseDiceFromRoundTrack;
@@ -62,13 +62,13 @@ public class UseToolCardPaneController {
     private HBox tokensHBox;
     @FXML
     private VBox topVBox;
-    private GUIView view;
     private TextureDatabase textureDatabase;
     private static final int DICE_DIMENSION = 55;
 
 
-    public void setup(GUIView view) {
-        this.view = view;
+    @Override
+    public void setUp(GUIView view) {
+    	super.setUp(view);
         textureDatabase = TextureDatabase.getTextureDatabase();
         view.getController().getObservable().getRoundInformation().addObserver(ogg -> Platform.runLater(this::update));
 
@@ -102,9 +102,9 @@ public class UseToolCardPaneController {
 
     private void update() {
 
-        IModel model = view.getController().getModel();
+        IModel model = getModel();
         if (model.getMainBoard().getData().getGameState().getClass() != ToolCardState.class ||
-                model.getRoundInformation().getData().getCurrentPlayer() != view.getController().getChair())
+                model.getRoundInformation().getData().getCurrentPlayer() != getController().getChair())
             return;
 
         ToolCardParameters toolCardParameters = model.getRoundInformation().getData().getToolCardParameters();
@@ -167,7 +167,7 @@ public class UseToolCardPaneController {
     private void toolCardSetSecondDiceAction(ToolCardParameters toolCardParameters, IModel model){
         toDoVBox.getChildren().add(chooseSecondDiceFromPlaced);
         if (toolCardParameters.isSecondDiceSet()){
-            Dice dice = model.getPlayerBoard(view.getController().getChair()).getDicePlacedFrame()
+            Dice dice = model.getPlayerBoard(getController().getChair()).getDicePlacedFrame()
                     .getData().getDice(toolCardParameters.getYPlacedDice2(), toolCardParameters.getXPlacedDice2());
             loadDice(secondPlacedDice, dice);
             secondPlacedDiceLabel.setText("Hai scelto dai dadi piazzati:");
@@ -178,7 +178,7 @@ public class UseToolCardPaneController {
     private void toolCardSetPlacedDiceAction(ToolCardParameters toolCardParameters, IModel model) {
         toDoVBox.getChildren().add(chooseDiceFromPlaced);
         if (toolCardParameters.isFirstDiceSet()) {
-            Dice dice = model.getPlayerBoard(view.getController().getChair()).getDicePlacedFrame()
+            Dice dice = model.getPlayerBoard(getController().getChair()).getDicePlacedFrame()
                     .getData().getDice(toolCardParameters.getYPlacedDice(), toolCardParameters.getXPlacedDice());
             loadDice(firstPlacedDice, dice);
             placedDiceLabel.setText("Hai scelto dai dadi piazzati: ");
@@ -189,7 +189,7 @@ public class UseToolCardPaneController {
     private void toolCardSetPickedDiceAction(ToolCardParameters toolCardParameters, IModel model) {
         toDoVBox.getChildren().add(chooseDiceFromPicked);
         if (toolCardParameters.getNDice() >= 0) {
-            Dice dice = model.getPlayerBoard(view.getController().getChair()).getPickedDicesSlot()
+            Dice dice = model.getPlayerBoard(getController().getChair()).getPickedDicesSlot()
                     .getData().getDicePlacementCondition(toolCardParameters.getNDice()).getDice();
             loadDice(extractedDicesDice, dice);
             pickedDiceLabel.setText("Hai scelto dalla riserva: ");
@@ -230,24 +230,24 @@ public class UseToolCardPaneController {
 
     @FXML
     private void onCancelButtonClicked() {
-        IModel model = view.getController().getModel();
+        IModel model = getModel();
         if (model.getMainBoard().getData().getGameState().getClass() != ToolCardState.class ||
-                model.getRoundInformation().getData().getCurrentPlayer() != view.getController().getChair())
+                model.getRoundInformation().getData().getCurrentPlayer() != getController().getChair())
             return;
         clearDices();
-        view.getController().sendAction(new CancelToolCardUseAction(view.getController().getChair()));
+        getController().sendAction(new CancelToolCardUseAction(getController().getChair()));
     }
 
     @FXML
     private void onConfirmButtonClicked() {
-        IModel model = view.getController().getModel();
+        IModel model = getController().getModel();
         if (model.getMainBoard().getData().getGameState().getClass() != ToolCardState.class ||
-                model.getRoundInformation().getData().getCurrentPlayer() != view.getController().getChair())
+                model.getRoundInformation().getData().getCurrentPlayer() != getController().getChair())
             return;
-        ExecuteToolCardAction executeToolCard1Action = new ExecuteToolCardAction(view.getController().getChair());
+        ExecuteToolCardAction executeToolCard1Action = new ExecuteToolCardAction(getController().getChair());
         if (executeToolCard1Action.canBeExecuted(model)) {
             clearDices();
-            view.getController().sendAction(executeToolCard1Action);
+            getController().sendAction(executeToolCard1Action);
         }
     }
 }

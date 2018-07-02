@@ -9,7 +9,7 @@ import progetto.model.IModel;
 import progetto.model.MainBoardData;
 import progetto.model.PreGameState;
 
-public class MainBoardPaneController {
+public class MainBoardPaneController extends AbstractController{
 
     @FXML
     private Label numberOfPlayers;
@@ -23,18 +23,18 @@ public class MainBoardPaneController {
     private AnchorPane preGameAnchorPane;
     @FXML
     private ExtractedDicesPaneController extractedDicesPaneController;
-    private GUIView view;
 
-    public void setup(GUIView view){
-        this.view = view;
-        extractedDicesPaneController.setup(view);
+    @Override
+    public void setUp(GUIView view){
+    	super.setUp(view);
+        extractedDicesPaneController.setUp(view);
         view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
         view.getController().getObservable().getRoundInformation().addObserver(ogg -> Platform.runLater(this::update));
     }
 
     private void update() {
 
-        IModel model = view.getController().getModel();
+        IModel model = getController().getModel();
         MainBoardData mainBoardData = model.getMainBoard().getData();
         if (mainBoardData.getGameState().getClass()!=PreGameState.class
                 && mainHBox.getChildren().contains(preGameAnchorPane))

@@ -10,7 +10,7 @@ import progetto.model.Dice;
 import progetto.model.RoundTrackData;
 
 
-public class RoundTrackPaneController {
+public class RoundTrackPaneController extends AbstractController{
 
     @FXML
     private HBox showingBox;
@@ -20,11 +20,11 @@ public class RoundTrackPaneController {
     private VBox vBox;
     private TextureDatabase textureDatabase;
     private static final int DICE_DIMENSION = 55;
-    private GUIView view;
 
-    public void setup(GUIView view){
+    @Override
+    public void setUp(GUIView view){
 
-        this.view = view;
+    	super.setUp(view);
         view.getController().getObservable().getRoundTrack().addObserver(ogg -> update());
 
         ImageView imageView;
@@ -41,7 +41,7 @@ public class RoundTrackPaneController {
 
     private void update() {
 
-        RoundTrackData roundTrackData = view.getViewStateMachine().getModel().getRoundTrack().getData();
+        RoundTrackData roundTrackData = getModel().getRoundTrack().getData();
         ImageView imageView;
         Dice dice;
 
@@ -57,7 +57,7 @@ public class RoundTrackPaneController {
     @FXML
     private void showDices(int nRound){
         clearDices();
-        RoundTrackData roundTrackData = view.getController().getModel().getRoundTrack().getData();
+        RoundTrackData roundTrackData = getModel().getRoundTrack().getData();
         if(!roundTrackData.isFree(nRound)){
             int j=0;
             Dice dice;
@@ -71,9 +71,9 @@ public class RoundTrackPaneController {
 
                 imageView.setOnMouseClicked(event -> {
                     ToolCardSetDiceRoundTrackAction toolCardSetDiceRoundTrackAction =
-                            new ToolCardSetDiceRoundTrackAction(view.getController().getChair(), nRound, i);
-                    if(toolCardSetDiceRoundTrackAction.canBeExecuted(view.getController().getModel()))
-                        view.getController().sendAction(toolCardSetDiceRoundTrackAction);
+                            new ToolCardSetDiceRoundTrackAction(getChair(), nRound, i);
+                    if(toolCardSetDiceRoundTrackAction.canBeExecuted(getModel()))
+                        getController().sendAction(toolCardSetDiceRoundTrackAction);
                 });
                 showingBox.getChildren().add(imageView);
                 j++;

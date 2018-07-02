@@ -11,7 +11,7 @@ import progetto.model.ToolCard;
 
 import java.util.List;
 
-public class ToolCardPaneController {
+public class ToolCardPaneController extends AbstractController{
 
     @FXML
     private TilePane toolCardTilePane;
@@ -24,11 +24,11 @@ public class ToolCardPaneController {
     private ChangeDiceValuePaneController changeDiceValuePaneController;
     private static final int STANDARD_NUMBER_OF_TOOL_CARDS = 3;
     private static final int BACK_TOOL_CARD = 13;
-    private GUIView view;
 
-    public void setup(GUIView view){
-        this.view = view;
-        changeDiceValuePaneController.setup(view);
+    @Override
+    public void setUp(GUIView view){
+    	super.setUp(view);
+        changeDiceValuePaneController.setUp(view);
         for (int i = 0; i< STANDARD_NUMBER_OF_TOOL_CARDS; i++){
             ImageView imageView = (ImageView) toolCardTilePane.getChildren().get(i);
             final int j = i;
@@ -43,14 +43,13 @@ public class ToolCardPaneController {
     }
 
     private void onMouseClicked(int i){
-        UseToolCardAction useToolCardAction = new UseToolCardAction(
-                view.getController().getChair(), i);
-        if (useToolCardAction.canBeExecuted(view.getController().getModel()))
-            view.getController().sendAction(useToolCardAction);
+        UseToolCardAction useToolCardAction = new UseToolCardAction(getController().getChair(), i);
+        if (useToolCardAction.canBeExecuted(getController().getModel()))
+            getController().sendAction(useToolCardAction);
     }
 
     private void update(){
-        IModel model = view.getController().getModel();
+        IModel model = getController().getModel();
         List<ToolCard> toolCardList = model.getMainBoard().getData().getToolCards();
         TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
 

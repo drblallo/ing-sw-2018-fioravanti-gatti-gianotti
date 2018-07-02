@@ -9,20 +9,19 @@ import progetto.utils.IObserver;
 
 import java.util.List;
 
-public class ObjectiveCardsController {
+public class ObjectiveCardsController extends AbstractController{
 
     @FXML
     private TilePane objectiveCardsTilePane;
-    private GUIView view;
     private int myOldChair = -2;
     private Container<PlayerBoardData> playerBoardDataContainer;
     private IObserver<PlayerBoardData> playerBoardDataIObserver = ogg -> Platform.runLater(this::update);
     private static final int BACK_PRIVATE_OBJECTIVE = 5;
     private static final int BACK_PUBLIC_OBJECTIVE = 10;
 
-    public void setup(GUIView view){
-
-        this.view = view;
+    @Override
+    public void setUp(GUIView view){
+        super.setUp(view);
 
         view.getController().getObservable().getMainBoard().addObserver(ogg -> update());
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::onRoomViewChanged));
@@ -31,8 +30,8 @@ public class ObjectiveCardsController {
     private void update(){
 
         TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
-        IModel model = view.getController().getModel();
-        int playerChair = Math.max(0, view.getController().getChair());
+        IModel model = getController().getModel();
+        int playerChair = Math.max(0, getController().getChair());
 
         updatePrivateObjective(model, playerChair, textureDatabase);
         updatePublicObjectives(model, textureDatabase);
@@ -84,13 +83,13 @@ public class ObjectiveCardsController {
     }
 
     private void onRoomViewChanged(){
-        int newChair = Math.max(view.getController().getChair(), 0);
+        int newChair = Math.max(getController().getChair(), 0);
         if (myOldChair != newChair)
         {
             myOldChair = newChair;
             if (playerBoardDataContainer != null)
                 playerBoardDataContainer.removeObserver(playerBoardDataIObserver);
-            playerBoardDataContainer = view.getController().getObservable().getPlayerBoard(newChair);
+            playerBoardDataContainer = getController().getObservable().getPlayerBoard(newChair);
             playerBoardDataContainer.addObserver(playerBoardDataIObserver);
             update();
         }

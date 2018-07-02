@@ -33,14 +33,11 @@ public class ChooseWindowFramePaneController {
             showWindowFrame(currentWindow, playerBoardData.getExtractedWindowFrameCouplesWindowFrame()[i/2]
                     .getWindowFrame(i%2));
             final int j = i;
-            currentWindow.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    clientController.sendAction(new FrameSetAction
-                            (clientController.getChair(), j/2, j%2));
-                    mainPane.getScene().getWindow().hide();
-                }
-            });
+            currentWindow.setOnMouseClicked(event -> {
+				clientController.sendAction(new FrameSetAction
+						(clientController.getChair(), j/2, j%2));
+				mainPane.getScene().getWindow().hide();
+			});
         }
     }
 

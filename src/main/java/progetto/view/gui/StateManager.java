@@ -8,15 +8,15 @@ import progetto.model.ObservableModel;
 
 import java.util.HashMap;
 
-public class ViewStateMachine {
+public class StateManager {
 
     private Stage stage;
-    private ViewState currentViewState;
-    private HashMap<String, ViewState> stateHashMap = new HashMap<>();
+    private State currentState;
+    private HashMap<String, State> stateHashMap = new HashMap<>();
     private IGameController currentGame;
     private GUIView guiView;
 
-    public ViewStateMachine(Stage stage, GUIView guiView){
+    public StateManager(Stage stage, GUIView guiView){
         this.stage = stage;
         this.guiView = guiView;
     }
@@ -37,21 +37,21 @@ public class ViewStateMachine {
         return stage;
     }
 
-    void setCurrentViewState(ViewState currentViewState){
-        if(this.currentViewState!=null){
-            this.currentViewState.onHide();
+    void setCurrentState(State currentState){
+        if(this.currentState !=null){
+            this.currentState.onHide();
         }
-        this.currentViewState = currentViewState;
+        this.currentState = currentState;
 
     }
 
-    public void addViewState(ViewState viewState){
-        stateHashMap.put(viewState.getFxmlName(), viewState);
+    public void addViewState(State state){
+        stateHashMap.put(state.getFxmlName(), state);
     }
 
-    public <T extends AbstractStateController> ViewState<T> getStateFromName(String nameState) {
+    public <T extends AbstractStateController> State<T> getStateFromName(String nameState) {
         if (stateHashMap.containsKey(nameState)) {
-            return (ViewState<T>) stateHashMap.get(nameState);
+            return (State<T>) stateHashMap.get(nameState);
         }
         return null;
     }

@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-public final class StartingPaneController extends AbstractClientStateController{
+public final class StartingPaneController extends AbstractStateController {
 
     @FXML
     private AnchorPane myPane;
@@ -12,11 +12,11 @@ public final class StartingPaneController extends AbstractClientStateController{
     private Button continueButton;
     @FXML
     public void onNewGameButtonClicked(){
-        getViewStateMachine().<SocketRMIChoicePaneController>getStateFromName("SocketRMIChoicePane.fxml").show(false);
+        getStateManager().<SocketRMIChoicePaneController>getStateFromName("SocketRMIChoicePane.fxml").show(false);
     }
     @FXML
     public void onContinueButtonClicked(){
-        getViewStateMachine().<ExistingGamesPaneController>getStateFromName("ExistingGamesPane.fxml").show(false);
+        getStateManager().<ExistingGamesPaneController>getStateFromName("ExistingGamesPane.fxml").show(false);
     }
 
     @FXML
