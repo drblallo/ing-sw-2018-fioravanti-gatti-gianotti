@@ -24,7 +24,7 @@ public class ClientMain extends Application {
     public synchronized void start(Stage primaryStage)
     {
         Settings.getSettings();
-        primaryStage.setTitle("Client Window");
+        primaryStage.setTitle("Sagrada");
         primaryStage.setOnCloseRequest(event -> {
             event.consume();
             AlertExitBoxPaneController.display();

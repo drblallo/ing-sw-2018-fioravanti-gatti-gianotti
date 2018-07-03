@@ -2,13 +2,12 @@ package progetto.view.gui;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import progetto.IClientController;
 import progetto.controller.FrameSetAction;
 import progetto.model.DicePlacedFrameData;
@@ -26,6 +25,14 @@ public class ChooseWindowFramePaneController {
     public void setup(PlayerBoardData playerBoardData, IClientController clientController, GUIView view) {
 
         this.view = view;
+
+        Image image = new Image(GamePaneController.class.getResourceAsStream("background.jpg"));
+        BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,
+                true,true,true,false);
+        BackgroundImage backgroundImage = new BackgroundImage(image,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background background = new Background(backgroundImage);
+        mainPane.setBackground(background);
 
         for (int i = 0; i< MainBoardData.MAX_NUM_PLAYERS; i++){
             AnchorPane currentContainer = (AnchorPane) mainPane.getChildren().get(i);

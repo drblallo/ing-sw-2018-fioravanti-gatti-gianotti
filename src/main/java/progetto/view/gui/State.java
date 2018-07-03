@@ -53,7 +53,6 @@ public class State<T extends AbstractStateController> {
     public void show(boolean maximized){
         controller.onPreShow();
         Stage stage = stateManager.getStage();
-        stage.setScene(scene);
         if (maximized) {
             Rectangle2D rectangle2D = Screen.getPrimary().getVisualBounds();
             stage.setX(rectangle2D.getMinX());
@@ -61,13 +60,16 @@ public class State<T extends AbstractStateController> {
             stage.setWidth(rectangle2D.getWidth());
             stage.setHeight(rectangle2D.getHeight());
         }
-        stateManager.setCurrentState(this);
+        else {
+            stage.sizeToScene();
+            stage.centerOnScreen();
+        }
+		stateManager.setCurrentState(this);
+        stage.setScene(scene);
         stage.show();
     }
 
     protected void onHide(){
         //
     }
-
-
 }

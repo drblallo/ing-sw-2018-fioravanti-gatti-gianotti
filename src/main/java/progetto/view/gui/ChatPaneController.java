@@ -2,11 +2,14 @@ package progetto.view.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.*;
 import progetto.network.PlayerView;
 import progetto.network.RoomView;
 
@@ -25,6 +28,8 @@ public class ChatPaneController extends AbstractStateController {
     private TextArea chatArea;
     @FXML
     private TextField messageToSend;
+    @FXML
+    private AnchorPane myPane;
 
     /**
      * set up this object, it is equivalent to a constructor since there is no access to it
@@ -32,6 +37,14 @@ public class ChatPaneController extends AbstractStateController {
     @Override
     public void setup()
     {
+        Image image = new Image(GamePaneController.class.getResourceAsStream("background.jpg"));
+        BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,
+                true,true,true,false);
+        BackgroundImage backgroundImage = new BackgroundImage(image,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background background = new Background(backgroundImage);
+        myPane.setBackground(background);
+
         getController().getMessageCallback().addObserver(ogg -> Platform.runLater(()->chatArea.appendText(ogg)));
         getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::update));
     }

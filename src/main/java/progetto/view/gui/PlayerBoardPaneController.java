@@ -120,7 +120,9 @@ public class PlayerBoardPaneController extends AbstractController{
 
     private void updateChooseWindowFrameButton(PlayerBoardData playerBoardData)
     {
-        if(!playerBoardData.getWindowFrameIsSet() && numberOfPlayerBoard == getController().getChair())
+        if(!playerBoardData.getWindowFrameIsSet() && numberOfPlayerBoard == getChair()
+                &&getModel().getMainBoard().getData().getGameState().getClass()
+                == FrameSelectionState.class)
         {
             if (!topBox.getChildren().contains(chooseWindowFrame))
                 topBox.getChildren().add(chooseWindowFrame);

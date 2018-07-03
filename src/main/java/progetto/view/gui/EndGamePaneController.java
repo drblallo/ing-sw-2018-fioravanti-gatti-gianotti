@@ -2,8 +2,11 @@ package progetto.view.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import progetto.model.IModel;
 import progetto.network.PlayerView;
 import progetto.network.RoomView;
@@ -18,8 +21,21 @@ public class EndGamePaneController extends AbstractStateController {
     private Label winner;
     @FXML
     private TextArea score;
+    @FXML
+    private AnchorPane myPane;
     private static final String YOU_WIN = "vinto!";
     private static final String YOU_LOSE = "perso";
+
+    @Override
+    public void setup() {
+        Image image = new Image(GamePaneController.class.getResourceAsStream("toolcard_large.png"));
+        BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,
+                true,true,true,false);
+        BackgroundImage backgroundImage = new BackgroundImage(image,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background background = new Background(backgroundImage);
+        myPane.setBackground(background);
+    }
 
     @Override
     public void onPreShow(){

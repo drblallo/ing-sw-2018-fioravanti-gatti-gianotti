@@ -20,7 +20,7 @@
                         <Font name="Imprint MT Shadow" size="20.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="numberOfPlayersChoice" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: wheat; -fx-border-color: BLACK;">
+                  <ChoiceBox fx:id="numberOfPlayersChoice" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;">
                      <effect>
                         <Blend />
                      </effect>
@@ -47,7 +47,7 @@
                               <Font name="Imprint MT Shadow" size="20.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="difficultyChoice" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: wheat; -fx-border-color: BLACK;">
+                        <ChoiceBox fx:id="difficultyChoice" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;">
                            <effect>
                               <Blend />
                            </effect>
@@ -66,12 +66,12 @@
                         <Font name="Imprint MT Shadow" size="20.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="numberOfChairChoice" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: wheat; -fx-border-color: BLACK;">
+                  <ChoiceBox fx:id="numberOfChairChoice" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;">
                      <effect>
                         <Blend />
                      </effect>
                   </ChoiceBox>
-                  <Button mnemonicParsing="false" onAction="#onSitButtonPressed" style="-fx-background-color: wheat; -fx-border-color: BLACK;" text="Siediti">
+                  <Button mnemonicParsing="false" onAction="#onSitButtonPressed" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Siediti">
                      <font>
                         <Font name="Imprint MT Shadow" size="15.0" />
                      </font>
@@ -93,15 +93,15 @@
                   </Label>
                </children>
             </HBox>
-            <Label depthTest="DISABLE" style="-fx-background-color: wheat;" text="ATTENZIONE: Una volta iniziata la partita non è più possibile cambiare il numero di giocatori!">
+            <Label depthTest="DISABLE" text="ATTENZIONE: Una volta iniziata la partita non è più possibile cambiare il numero di giocatori!" underline="true">
                <font>
-                  <Font name="Imprint MT Shadow" size="20.0" />
+                  <Font name="Imprint MT Shadow" size="25.0" />
                </font>
             </Label>
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onStartGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: BLACK;" text="Inizia partita">
+                  <Button mnemonicParsing="false" onAction="#onStartGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Inizia partita">
                      <font>
                         <Font name="Imprint MT Shadow" size="20.0" />
                      </font>

@@ -2,12 +2,14 @@ package progetto.view.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
+import javafx.scene.control.Control;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 
-public class OtherPlayersPaneController extends AbstractStateController {
+public class OtherPlayersPaneController extends AbstractClientStateController {
 
+    @FXML
+    private AnchorPane myPane;
     @FXML
     private HBox otherPlayersHBox;
     private int displayedNumberOfPlayers = -1;
@@ -16,18 +18,26 @@ public class OtherPlayersPaneController extends AbstractStateController {
     private TextArea otherPlayersActions; */
 
     @Override
-    public void setStateManager(StateManager stateManager)
-    {
-       super.setStateManager(stateManager);
-       getStateManager().getClientController().getRoomViewCallback()
-               .addObserver(ogg -> Platform.runLater(this::update));
-       getStateManager().getObsModel().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
-       //getViewStateMachine().getObsModel().getCommandQueue().addObserver(ogg -> updateOtherPlayersActions());
+    public void setup() {
+
+
+        Image image = new Image(getClass().getResourceAsStream("background.jpg"));
+        BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,
+                true,true,true,false);
+        BackgroundImage backgroundImage = new BackgroundImage(image,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background background = new Background(backgroundImage);
+        myPane.setBackground(background);
+
+        getViewStateMachine().getClientController().getRoomViewCallback()
+                .addObserver(ogg -> Platform.runLater(this::update));
+        getViewStateMachine().getObsModel().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
+        //getViewStateMachine().getObsModel().getCommandQueue().addObserver(ogg -> updateOtherPlayersActions());
     }
 
     private void update() {
-        int numberOfPlayers = getStateManager().getModel().getMainBoard().getData().getPlayerCount();
-        int currentChair = getChair();
+        int numberOfPlayers = getViewStateMachine().getModel().getMainBoard().getData().getPlayerCount();
+        int currentChair = getViewStateMachine().getClientController().getChair();
         if (numberOfPlayers != displayedNumberOfPlayers || currentChair != myChair) {
             displayedNumberOfPlayers = numberOfPlayers;
             myChair = currentChair;
@@ -38,7 +48,7 @@ public class OtherPlayersPaneController extends AbstractStateController {
             for (int i = 0; i < displayedNumberOfPlayers; i++){
                 if (i!=myChair) {
                     otherPlayersHBox.getChildren().add(PlayerBoardPaneController
-                            .getPlayerBoard(i, getStateManager().getGuiView()));
+                            .getPlayerBoard(i, getViewStateMachine().getGuiView()));
                     Region newRegion = new Region();
                     otherPlayersHBox.getChildren().add(newRegion);
                     HBox.setHgrow(newRegion, Priority.ALWAYS);
@@ -72,6 +82,6 @@ public class OtherPlayersPaneController extends AbstractStateController {
 
     @FXML
     private void onBackButtonClicked(){
-        getStateManager().getStateFromName("GamePane.fxml").show(true);
+        getViewStateMachine().getStateFromName("GamePane.fxml").show(true);
     }
 }
