@@ -15,16 +15,15 @@ import progetto.model.MainBoardData;
 import progetto.model.PlayerBoardData;
 import progetto.model.WindowFrame;
 
-public class ChooseWindowFramePaneController {
+public class ChooseWindowFramePaneController extends AbstractController {
 
     @FXML
     private TilePane mainPane;
-    private GUIView view;
 
 
     public void setup(PlayerBoardData playerBoardData, IClientController clientController, GUIView view) {
 
-        this.view = view;
+    	super.setUp(view);
 
         Image image = new Image(GamePaneController.class.getResourceAsStream("background.jpg"));
         BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,
@@ -68,7 +67,7 @@ public class ChooseWindowFramePaneController {
         Label favourPointsLabel = (Label) hBox.getChildren().get(1);
         Label numberOfTokens = (Label) hBox.getChildren().get(2);
 
-        if (view.getController().getModel().getMainBoard().getData().getPlayerCount() != 1){
+        if (getModel().getMainBoard().getData().getPlayerCount() != 1){
             favourPointsLabel.setText("Punti favore: ");
             numberOfTokens.setText(windowFrame.getFavorToken() + "");
         }
