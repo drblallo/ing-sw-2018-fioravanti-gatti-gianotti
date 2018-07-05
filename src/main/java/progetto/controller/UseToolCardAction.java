@@ -47,6 +47,8 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 	{
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
+		System.out.println("USE TOOL CARD");
+
 		if(currentPlayer != getCallerID() ||
 				game.getMainBoard().getData().getGameState().getClass() != RoundState.class ||
 				nCard>=game.getMainBoard().getData().getToolCards().size() || nCard < 0 ||
@@ -54,6 +56,8 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 		{
 			return false;
 		}
+
+		boolean tokenEnough = true;
 
 		if(game.getMainBoard().getData().getPlayerCount() != 1)
 		{
@@ -65,10 +69,11 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 				askedToken++;
 			}
 
-			return playerToken >= askedToken;
+			tokenEnough = playerToken >= askedToken;
+
 		}
 
-		return canBeUsed(game);
+		return tokenEnough && check7(game) && check8(game);
 
 	}
 
@@ -94,29 +99,45 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 	}
 
 	/**
-	 * Some tool cards works only if it is the first or the second turn of the player
+	 * Tool card 7 works only if it is the second turn of the player
 	 * @param game game
 	 * @return canBeUsed
 	 */
-	private boolean canBeUsed(IModel game)
+	private boolean check7(IModel game)
 	{
 		int cardIndex = game.getMainBoard().getData().getToolCards().get(nCard).getIndex();
-
+		System.out.println("CHECK CARTA 7");
 		if(cardIndex == INDEX7)
 		{
 			List<Integer> playerQueue = game.getRoundInformation().getData().getRoundPlayerList();
 			int nPlayer = getCallerID();
-
+			System.out.println("CONTROLLO CARTA 7");
 			while(!playerQueue.isEmpty())
 			{
 				int nextP = playerQueue.remove(0);
 				if (nextP == nPlayer)   //check second turn of the player
 				{
+					System.out.println("NON PUOI USARE QUESTA CARTA");
 					return false;
 				}
 			}
+
 		}
-		else if(cardIndex == INDEX8)
+
+		return true;
+
+	}
+
+	/**
+	 * Tool card 8 works only if it is the first turn of the player
+	 * @param game game
+	 * @return canBeUsed
+	 */
+	private boolean check8(IModel game)
+	{
+		int cardIndex = game.getMainBoard().getData().getToolCards().get(nCard).getIndex();
+
+		if(cardIndex == INDEX8)
 		{
 			List<Integer> playerQueue = game.getRoundInformation().getData().getRoundPlayerList();
 			int nPlayer = getCallerID();
@@ -127,10 +148,10 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 				int nextP = playerQueue.remove(0);
 				if (nextP == nPlayer)   //check first turn of the player
 				{
-					found = true;
+					return true;
 				}
 			}
-			return found;
+			return false;
 		}
 
 		return true;
