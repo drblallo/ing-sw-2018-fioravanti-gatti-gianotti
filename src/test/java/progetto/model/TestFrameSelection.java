@@ -8,6 +8,9 @@ import progetto.controller.GameController;
 
 import java.util.List;
 
+/**
+ * Test frame selection state
+ */
 public class TestFrameSelection {
 
 	GameController game;
@@ -18,6 +21,9 @@ public class TestFrameSelection {
 		game = new GameController();
 	}
 
+	/**
+	 * Test to verify extraction of public objective cards (MultiPlayer)
+	 */
 	@Test
 	public void testPublicObjectiveCard4Player()
 	{
@@ -32,6 +38,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test to verify extraction of public objective cards (Single Player)
+	 */
 	@Test
 	public void testPublicObjectiveCard1Player()
 	{
@@ -46,6 +55,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test to verify extraction of private objective cards (MultiPlayer)
+	 */
 	@Test
 	public void testPrivateObjectiveCard4Player()
 	{
@@ -67,6 +79,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test to verify extraction of private objective cards (single player)
+	 */
 	@Test
 	public void testPrivateObjectiveCard1Player()
 	{
@@ -81,6 +96,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test to verify extraction of window frame cards (single player)
+	 */
 	@Test
 	public void testFrameExtraction1Player()
 	{
@@ -106,6 +124,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test to verify extraction of window frame cards (MultiPlayer)
+	 */
 	@Test
 	public void testFrameExtraction4Player()
 	{
@@ -144,6 +165,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test - frame selection  (single player)
+	 */
 	@Test
 	public void testFrameSelection1Player()
 	{
@@ -163,6 +187,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test - frame selection (MultiPlayer)
+	 */
 	@Test
 	public void testFrameSelection4Player()
 	{
@@ -195,6 +222,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test - frame selection - empty window frame (Single player)
+	 */
 	@Test
 	public void testFrameSelection1PlayerEmptyWindowFrame()
 	{
@@ -209,6 +239,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test - frame selection - empty window frame (MultiPlayer)
+	 */
 	@Test
 	public void testFrameSelection1PlayerEmptyError()
 	{

@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import java.util.List;
 
+/**
+ * Test dice placement condition
+ */
 public class TestDicePlacementCondition extends TestCase {
 
 	WindowFrameCoupleArray windowFrameCoupleArray;
@@ -22,6 +25,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test getter and setter
+	 */
 	@Test
 	public void testGetSet()
 	{
@@ -42,6 +48,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add first dice near a edge
+	 */
 	@Test
 	public void testPlacementConditionNearEdge()
 	{
@@ -54,6 +63,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice, value bond is respected
+	 */
 	@Test
 	public void testPlacementConditionValueBondRespected()
 	{
@@ -66,6 +78,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice, color bond is respected
+	 */
 	@Test
 	public void testPlacementConditionColorBondRespected()
 	{
@@ -78,6 +93,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice, adjacent bond is respected
+	 */
 	@Test
 	public void testPlacementConditionAdjacentBondRespected()
 	{
@@ -93,6 +111,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice - fail - first dice must be near a edge
+	 */
 	@Test
 	public void testPlacementConditionFailDiceNotNearEdge()
 	{
@@ -105,6 +126,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice - fail - value bond not respected
+	 */
 	@Test
 	public void testPlacementConditionFailValueBondNotRespected()
 	{
@@ -117,6 +141,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice - fail - color bond not respected
+	 */
 	@Test
 	public void testPlacementConditionFailColorBondNotRespected()
 	{
@@ -129,6 +156,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice - fail - adjacent bond not respected
+	 */
 	@Test
 	public void testPlacementConditionFailAdjacentBondNotRespected()
 	{
@@ -145,6 +175,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice - fail - wrong index
+	 */
 	@Test
 	public void testPlacementConditionFailWrongPosition()
 	{
@@ -155,6 +188,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice - fail - dices with same color can't be near
+	 */
 	@Test
 	public void testPlacementConditionSameColorNear()
 	{
@@ -166,6 +202,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice - fail - dices with same value can't be near
+	 */
 	@Test
 	public void testPlacementConditionSameValueNear()
 	{
@@ -177,6 +216,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice with ignore color bond
+	 */
 	@Test
 	public void testPlacementConditionIgnoreColorBond()
 	{
@@ -188,6 +230,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice with ignore value bond
+	 */
 	@Test
 	public void testPlacementConditionIgnoreValueBond()
 	{
@@ -199,6 +244,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice with ignore adjacent bond
+	 */
 	@Test
 	public void testPlacementConditionIgnoreAdjacentBond()
 	{
@@ -210,6 +258,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice - fail - in the selected position there is already a dice
+	 */
 	@Test
 	public void testPlacementConditionFailTwoDiceSamePosition()
 	{
@@ -221,6 +272,9 @@ public class TestDicePlacementCondition extends TestCase {
 
 	}
 
+	/**
+	 * Test change dice
+	 */
 	@Test
 	public void testChangeDice()
 	{

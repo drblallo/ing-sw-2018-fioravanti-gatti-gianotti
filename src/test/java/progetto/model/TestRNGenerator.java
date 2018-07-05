@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test random generator
+ */
 public class TestRNGenerator extends TestCase {
 
 	RNGenerator rnGenerator;
@@ -15,12 +18,18 @@ public class TestRNGenerator extends TestCase {
 		rnGenerator = new RNGenerator(0);
 	}
 
+	/**
+	 * Test constructor
+	 */
 	@Test
 	public void testConstructor()
 	{
 		Assert.assertEquals(0, rnGenerator.getSeed());
 	}
 
+	/**
+	 * Test get random values with seed
+	 */
 	@Test
 	public void testRandomWithSeed()
 	{
@@ -48,6 +57,9 @@ public class TestRNGenerator extends TestCase {
 
 	}
 
+	/**
+	 * Test extract random value
+	 */
 	@Test
 	public void testExtract()
 	{
@@ -68,6 +80,9 @@ public class TestRNGenerator extends TestCase {
 		}
 	}
 
+	/**
+	 * Test platform independent
+	 */
 	@Test
 	public void testPlatformIndependent()
 	{
@@ -117,6 +132,9 @@ public class TestRNGenerator extends TestCase {
 
 	}
 
+	/**
+	 * Test method to roll again a dice
+	 */
 	@Test
 	public void testRollAgain()
 	{

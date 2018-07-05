@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test PickedDicesSlot class
+ */
 public class TestPickedDicesSlot extends TestCase {
 
 	PickedDicesSlot pickedDicesSlot;
@@ -15,6 +18,9 @@ public class TestPickedDicesSlot extends TestCase {
 		pickedDicesSlot = new PickedDicesSlot();
 	}
 
+	/**
+	 * Test constructor
+	 */
 	@Test
 	public void testConstructor()
 	{
@@ -23,6 +29,9 @@ public class TestPickedDicesSlot extends TestCase {
 		Assert.assertNull(pickedDicesSlot.getData().getDicePlacementCondition(1));
 	}
 
+	/**
+	 * Test get number of picked dices
+	 */
 	@Test
 	public void testGetNDices()
 	{
@@ -39,6 +48,9 @@ public class TestPickedDicesSlot extends TestCase {
 
 	}
 
+	/**
+	 * Test remove dice
+	 */
 	@Test
 	public void testRemove()
 	{
@@ -58,6 +70,9 @@ public class TestPickedDicesSlot extends TestCase {
 
 	}
 
+	/**
+	 * Test remove dice - fail - dice not added
+	 */
 	@Test
 	public void testRemoveFail()
 	{
@@ -69,6 +84,9 @@ public class TestPickedDicesSlot extends TestCase {
 
 	}
 
+	/**
+	 * Test set ignore color/value/adjacent to a picked dice
+	 */
 	@Test
 	public void testSetIgnore()
 	{
@@ -85,6 +103,9 @@ public class TestPickedDicesSlot extends TestCase {
 
 	}
 
+	/**
+	 * Test set ignore color/value/adjacent to a picked dice - fail - dice non added
+	 */
 	@Test
 	public void testSetIgnoreFail()
 	{
@@ -101,6 +122,9 @@ public class TestPickedDicesSlot extends TestCase {
 
 	}
 
+	/**
+	 * Test change picked dice
+	 */
 	@Test
 	public void testChangeDice()
 	{

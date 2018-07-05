@@ -4,11 +4,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test different shades public objective cards
+ */
 public class TestDifferentShades {
 
 	DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
 	DifferentShadesPublicObjectiveCard differentShadesPublicObjectiveCard;
-
 
 	@Before
 	public void setUp()
@@ -17,7 +19,9 @@ public class TestDifferentShades {
 		differentShadesPublicObjectiveCard = new DifferentShadesPublicObjectiveCard();
 	}
 
-
+	/**
+	 * Test - no set of dices with different values
+	 */
 	@Test
 	public void testN0()
 	{
@@ -32,6 +36,9 @@ public class TestDifferentShades {
 		Assert.assertEquals(0, differentShadesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
+	/**
+	 * Test - one set of dices with different colors
+	 */
 	@Test
 	public void testN1()
 	{
@@ -48,6 +55,9 @@ public class TestDifferentShades {
 		Assert.assertEquals(5, differentShadesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
+	/**
+	 * Test - two set of dices with different colors
+	 */
 	@Test
 	public void testN2()
 	{

@@ -15,6 +15,9 @@ public class TestDicePlacedFrame extends TestCase {
 		dicePlacedFrame = new DicePlacedFrame();
 	}
 
+	/**
+	 * Test constructor
+	 */
 	@Test
 	public void testCostructor()
 	{
@@ -28,6 +31,9 @@ public class TestDicePlacedFrame extends TestCase {
 		}
 	}
 
+	/**
+	 * Test get dice from dice placed frame
+	 */
 	@Test
 	public void testGetDice()
 	{
@@ -57,6 +63,9 @@ public class TestDicePlacedFrame extends TestCase {
 		Assert.assertNull(dicePlacedFrame.getData().getDice(5, 3));
 	}
 
+	/**
+	 * Test add 3 dices to dicePlacedFrame
+	 */
 	@Test
 	public void testAddDice()
 	{
@@ -105,6 +114,9 @@ public class TestDicePlacedFrame extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice - fail - wrong index
+	 */
 	@Test
 	public void testAddDiceFail()
 	{
@@ -130,6 +142,9 @@ public class TestDicePlacedFrame extends TestCase {
 
 	}
 
+	/**
+	 * Test remove dice from placed frame
+	 */
 	@Test
 	public void testRemove()
 	{
@@ -160,6 +175,9 @@ public class TestDicePlacedFrame extends TestCase {
 
 	}
 
+	/**
+	 * Test remove dice from placed frame - fail - dice not added
+	 */
 	@Test
 	public void testRemoveFail()
 	{

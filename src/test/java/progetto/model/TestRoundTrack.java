@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test roundTrack class
+ */
 public class TestRoundTrack extends TestCase {
 
 	RoundTrack roundTrack;
@@ -15,6 +18,9 @@ public class TestRoundTrack extends TestCase {
 		roundTrack = new RoundTrack();
 	}
 
+	/**
+	 * Test constructor
+	 */
 	@Test
 	public void testConstructor()
 	{
@@ -25,6 +31,9 @@ public class TestRoundTrack extends TestCase {
 		}
 	}
 
+	/**
+	 * Test isFree method to verify if a position is free
+	 */
 	@Test
 	public void testIsFree()
 	{
@@ -38,6 +47,9 @@ public class TestRoundTrack extends TestCase {
 		Assert.assertTrue(roundTrack.getData().isFree(1));
 	}
 
+	/**
+	 * Test get first free position
+	 */
 	@Test
 	public void testFirstFreePosition()
 	{
@@ -75,6 +87,9 @@ public class TestRoundTrack extends TestCase {
 
 	}
 
+	/**
+	 * Test add a dice to RoundTrack
+	 */
 	@Test
 	public void testAdd()
 	{
@@ -94,6 +109,9 @@ public class TestRoundTrack extends TestCase {
 		Assert.assertEquals(dice2, roundTrack.getData().getDice(1, 0));
 	}
 
+	/**
+	 * Test add dice - fail - wrong index
+	 */
 	@Test
 	public void testAddFail()
 	{
@@ -104,6 +122,9 @@ public class TestRoundTrack extends TestCase {
 
 	}
 
+	/**
+	 * Test change dice in roundTrack
+	 */
 	@Test
 	public void testChange()
 	{
@@ -129,6 +150,9 @@ public class TestRoundTrack extends TestCase {
 
 	}
 
+	/**
+	 * Test change dice in roundTrack - fail - dice not added
+	 */
 	@Test
 	public void testChangeFail()
 	{
@@ -143,6 +167,9 @@ public class TestRoundTrack extends TestCase {
 
 	}
 
+	/**
+	 * Test get dice from roundTrack
+	 */
 	public void testGetDice() {
 
 		roundTrack.add(new Dice(Value.THREE, GameColor.PURPLE), 0);

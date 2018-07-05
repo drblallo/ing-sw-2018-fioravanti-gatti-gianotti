@@ -8,6 +8,9 @@ import progetto.controller.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test tool cards
+ */
 public class TestToolCards {
 
 	Model game;
@@ -18,6 +21,9 @@ public class TestToolCards {
 		game = new Model();
 	}
 
+	/**
+	 * Test toolCardState - fail - wrong caller
+	 */
 	@Test
 	public void testToolCardStateFailWrongCaller()
 	{
@@ -34,6 +40,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test toolCardState
+	 */
 	@Test
 	public void testToolCardState()
 	{
@@ -57,6 +66,9 @@ public class TestToolCards {
 	}
 
 
+	/**
+	 * Test get toolTip
+	 */
 	@Test
 	public void testToolTip()
 	{
@@ -65,6 +77,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test execute tool card RoughingForceps Action - increase
+	 */
 	@Test
 	public void testExecuteRoughingForcepsToolCardAction()
 	{
@@ -94,6 +109,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test execute tool card RoughingForceps Action - decrease
+	 */
 	@Test
 	public void testExecuteRoughingForcepsToolCardActionDec()
 	{
@@ -125,6 +143,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test execute tool card RoughingForceps Action - fail - canBeExecuted false
+	 */
 	@Test
 	public void testExecuteRoughingForcepsToolCardActionFail()
 	{
@@ -151,6 +172,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to select dice from roundTrack
+	 */
 	@Test
 	public void testToolCardSelectDiceRoundTrackAction()
 	{
@@ -173,6 +197,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to select dice from roundTrack - fail - canBeExecuted false
+	 */
 	@Test
 	public void testToolCardSelectDiceRoundTrackActionFail()
 	{
@@ -195,6 +222,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to set dice value
+	 */
 	@Test
 	public void testToolCardSelectDiceValueAction()
 	{
@@ -227,6 +257,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to set dice value
+	 */
 	@Test
 	public void testToolCardSelectDiceValueActionValue()
 	{
@@ -259,6 +292,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to select dice value - fail - canBeExecuted false
+	 */
 	@Test
 	public void testToolCardSelectDiceValueActionFail()
 	{
@@ -283,6 +319,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to select a dice from placed frame
+	 */
 	@Test
 	public void testToolCardSetPlacedDiceAction()
 	{
@@ -299,6 +338,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to select second dice from placed frame
+	 */
 	@Test
 	public void testToolCardSetSecondPlacedDiceAction()
 	{
@@ -315,6 +357,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to select dice from placed frame - fail - canBeExecuted false
+	 */
 	@Test
 	public void testToolCardSetPlacedDiceActionFail()
 	{
@@ -335,6 +380,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to select second dice from placed frame - fail - canBeExecuted false
+	 */
 	@Test
 	public void testToolCardSetSecondPlacedDiceActionFail()
 	{
@@ -355,6 +403,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to select picked dice
+	 */
 	@Test
 	public void testToolCardSetPickedDiceAction()
 	{
@@ -372,6 +423,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to select picked dice - fail - canBeExecuted false
+	 */
 	@Test
 	public void testToolCardSetPickedDiceActionFail()
 	{
@@ -392,6 +446,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to use a tool card
+	 */
 	@Test
 	public void testUseToolCardAction()
 	{
@@ -410,6 +467,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to choose if increase or decrease the value of the dice
+	 */
 	@Test
 	public void testToolCardSetIncreaseDecreaseActionFail()
 	{
@@ -418,6 +478,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test get tool card ToolTip
+	 */
 	@Test
 	public void testCardIndexColorToolTip()
 	{
@@ -442,6 +505,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 11
+	 */
 	@Test
 	public void testExecuteToolCard11Action()
 	{
@@ -490,6 +556,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 11 - fail - canBeExecuted false
+	 */
 	@Test
 	public void testExecuteToolCard11ActionEndTurnAction()
 	{
@@ -532,6 +601,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 11 - fail  - canBeExecuted false
+	 */
 	@Test
 	public void testExecuteToolCard11ActionFail()
 	{
@@ -562,6 +634,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 12
+	 */
 	@Test
 	public void testExecuteToolCard12Action()
 	{
@@ -606,8 +681,9 @@ public class TestToolCards {
 
 	}
 
-
-
+	/**
+	 * Test action to execute tool card 12 - fail - canBeExecuted false
+	 */
 	@Test
 	public void testExecuteToolCard12ActionFail()
 	{
@@ -646,6 +722,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 12 - fail - canBeExecuted false - dices with no same color
+	 */
 	@Test
 	public void testExecuteToolCard12ActionDifferentColorFail()
 	{
@@ -679,6 +758,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 12 - fail - canBeExecuted false - dices with no same color
+	 */
 	@Test
 	public void testExecuteToolCard12ActionDifferentColor2Fail()
 	{
@@ -712,10 +794,11 @@ public class TestToolCards {
 
 	}
 
-
-
+	/**
+	 * Test action to execute tool card 2
+	 */
 	@Test
-	public void testExecuteToolCard2ActionAction()
+	public void testExecuteToolCard2Action()
 	{
 		AbstractGameAction gameAction = new ExecuteToolCard2Or3Action();
 		Assert.assertFalse(gameAction.canBeExecuted(game));
@@ -750,6 +833,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 3
+	 */
 	@Test
 	public void testExecuteToolCard3Action()
 	{
@@ -786,6 +872,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 9
+	 */
 	@Test
 	public void testExecuteToolCard9ActionAction()
 	{
@@ -823,6 +912,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 9 - fail - canBeExecuted false
+	 */
 	@Test
 	public void testExecuteToolCard9ActionActionFail()
 	{
@@ -853,6 +945,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 4
+	 */
 	@Test
 	public void testExecuteToolCard4Action()
 	{
@@ -894,6 +989,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 4 - fail - canBeExecuted false
+	 */
 	@Test
 	public void testExecuteToolCard4ActionFail()
 	{
@@ -935,6 +1033,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 5
+	 */
 	@Test
 	public void testExecuteToolCard5Action()
 	{
@@ -977,6 +1078,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 5 - fail - canBeExecuted false
+	 */
 	@Test
 	public void testExecuteToolCard5ActionFail()
 	{
@@ -1016,6 +1120,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 6
+	 */
 	@Test
 	public void testExecuteToolCard6Action()
 	{
@@ -1048,6 +1155,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 10
+	 */
 	@Test
 	public void testExecuteToolCard10Action()
 	{
@@ -1081,6 +1191,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 7
+	 */
 	@Test
 	public void testExecuteToolCard7Action()
 	{
@@ -1124,6 +1237,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 8
+	 */
 	@Test
 	public void testExecuteToolCard8Action()
 	{
@@ -1168,6 +1284,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card in use
+	 */
 	@Test
 	public void testExecuteToolCardAction()
 	{
@@ -1219,6 +1338,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test use tool card - two token asked
+	 */
 	@Test
 	public void testUseToolCardAction2TokenAsked()
 	{
@@ -1239,6 +1361,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test use of tool card in single player
+	 */
 	@Test
 	public void testSinglePlayer()
 	{
@@ -1305,7 +1430,9 @@ public class TestToolCards {
 
 	}
 
-
+	/**
+	 * Test use tool card in single player - fail - canBeExecuted false
+	 */
 	@Test
 	public void testSinglePlayerFail()
 	{
@@ -1346,6 +1473,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 7 - fail - canBeExecuted false
+	 */
 	@Test
 	public void testExecuteToolCard7ActionFail()
 	{
@@ -1371,6 +1501,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test tool card parameters
+	 */
 	@Test
 	public void testParamToolCard()
 	{
@@ -1384,6 +1517,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to execute tool card 12 - two dices to move
+	 */
 	@Test
 	public void testExecuteToolCard12SecondAction()
 	{
@@ -1432,6 +1568,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test action to set dice value - fail - canBeExecuted false
+	 */
 	@Test
 	public void testToolCardSetDiceValueActionFail()
 	{
@@ -1454,6 +1593,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test get list of actions for toolCards
+	 */
 	@Test
 	public void testToolCardActionList()
 	{
@@ -1474,6 +1616,9 @@ public class TestToolCards {
 
 	}
 
+	/**
+	 * Test get list of actions for toolCards - fail - wrong index
+	 */
 	@Test
 	public void testToolCardActionListFail()
 	{

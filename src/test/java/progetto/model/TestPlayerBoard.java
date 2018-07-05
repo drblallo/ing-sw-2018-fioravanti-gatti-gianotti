@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import java.util.List;
 
+/**
+ * Test playerBoard class
+ */
 public class TestPlayerBoard extends TestCase
 {
 
@@ -23,6 +26,9 @@ public class TestPlayerBoard extends TestCase
 		playerBoard.setWindowFrame(windowFrame);
 	}
 
+	/**
+	 * Test get number of picked dices
+	 */
 	@Test
 	public void testGetNPickedDices()
 	{
@@ -54,6 +60,9 @@ public class TestPlayerBoard extends TestCase
 
 	}
 
+	/**
+	 * Test get number of picked dices - fail - not added dices
+	 */
 	@Test
 	public void testGetNPickedDicesFail()
 	{
@@ -64,6 +73,9 @@ public class TestPlayerBoard extends TestCase
 
 	}
 
+	/**
+	 * Test get number of placed dices
+	 */
 	@Test
 	public void testNPlacedDices() {
 		Assert.assertEquals(0, playerBoard.getNDicesPlaced());
@@ -94,6 +106,9 @@ public class TestPlayerBoard extends TestCase
 
 	}
 
+	/**
+	 * Test get number of placed dices - fail - no dices
+	 */
 	@Test
 	public void testGetNPlacedDicesFail()
 	{
@@ -102,6 +117,9 @@ public class TestPlayerBoard extends TestCase
 
 	}
 
+	/**
+	 * Test set windowFrame
+	 */
 	@Test
 	public void testSetWindowFrame()
 	{
@@ -110,6 +128,9 @@ public class TestPlayerBoard extends TestCase
 
 	}
 
+	/**
+	 * Test set windowFrame side
+	 */
 	@Test
 	public void testSetWindowFrameSide()
 	{
@@ -119,6 +140,9 @@ public class TestPlayerBoard extends TestCase
 
 	}
 
+	/**
+	 * Test get and remove placed dice from placed frame
+	 */
 	@Test
 	public void testGetRemovePlacedDice()
 	{
@@ -130,6 +154,9 @@ public class TestPlayerBoard extends TestCase
 		Assert.assertEquals(0, playerBoard.getNDicesPlaced());
 	}
 
+	/**
+	 * Test and and remove add and remove dice from placed frame
+	 */
 	@Test
 	public void testAddRemoveDicePlacedFrame()
 	{
@@ -146,6 +173,21 @@ public class TestPlayerBoard extends TestCase
 		Assert.assertEquals(0, playerBoard.getNDicesPlaced());
 
 		Assert.assertNull(playerBoard.getDicePlacedFrame().getData().getDice(0,0));
+
+	}
+
+	/**
+	 * Test get private objective card id (from PlayerBoard)
+	 */
+	@Test
+	public void testCardID()
+	{
+		playerBoard.addPrivateObjectiveCard(new ColorShadesPrivateObjectiveCard(GameColor.YELLOW));
+		playerBoard.addPrivateObjectiveCard(new ColorShadesPrivateObjectiveCard(GameColor.GREEN));
+
+
+		Assert.assertEquals(0, playerBoard.getData().getPrivateObjectiveCard().get(0).getCardID());
+		Assert.assertEquals(3, playerBoard.getData().getPrivateObjectiveCard().get(1).getCardID());
 
 	}
 

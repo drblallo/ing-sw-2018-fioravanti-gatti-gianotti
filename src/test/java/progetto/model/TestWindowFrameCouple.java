@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import java.util.List;
 
+/**
+ * Test WindowFrameCouple class
+ */
 public class TestWindowFrameCouple extends TestCase {
 
 	List<WindowFrameCouple> windowFrameCouples;
@@ -20,6 +23,9 @@ public class TestWindowFrameCouple extends TestCase {
 
 	}
 
+	/**
+	 * Test constructor
+	 */
 	@Test
 	public void testConstructor()
 	{
@@ -28,6 +34,9 @@ public class TestWindowFrameCouple extends TestCase {
 
 	}
 
+	/**
+	 * Test getter
+	 */
 	@Test
 	public void testGetter()
 	{
@@ -56,6 +65,9 @@ public class TestWindowFrameCouple extends TestCase {
 
 	}
 
+	/**
+	 * Test getter - fail - wrong parameter
+	 */
 	@Test
 	public void testGetterFail()
 	{
