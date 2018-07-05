@@ -7,6 +7,7 @@ import org.junit.Test;
 import progetto.controller.EndTurnAction;
 import progetto.controller.FrameSetAction;
 import progetto.controller.StartGameAction;
+import progetto.model.EndGameState;
 import progetto.view.commandline.states.FrameSelectionViewState;
 import progetto.view.commandline.states.RoundViewState;
 import progetto.view.commandline.states.WaitingState;
@@ -68,9 +69,109 @@ public class TestMoreThanOnePlayer {
         Assert.assertEquals(FrameSelectionState.class, clientControllerStub.getModel()
                 .getMainBoard().getData().getGameState().getClass());
         Assert.assertEquals(FrameSelectionViewState.class, commandLineView.getAbstractCLViewState().getClass());
-
     }
 
+    @Test
+    public void testEndGame(){
+        commandLineView.execute("1");
+        commandLineView.execute("1");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new FrameSetAction(1,0,0));
+        commandLineView.processAllPendings();
+
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        commandLineView.execute("8");
+        commandLineView.processAllPendings();
+        clientControllerStub.sendAction(new EndTurnAction(1));
+        commandLineView.processAllPendings();
+
+        Assert.assertEquals(EndGameState.class, clientControllerStub.getModel().getMainBoard()
+                .getData().getGameState().getClass());
+    }
 
     @Test
     public void testShowAnotherPlayerPlayerBoard(){

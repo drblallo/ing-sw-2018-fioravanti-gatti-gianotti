@@ -31,6 +31,7 @@ public class GameTransitionState extends AbstractCLViewState {
         AbstractGameState abstractGameState = getModel().getMainBoard().getData().getGameState();
 
         LOGGER.log(Level.INFO, "GameTransitionState - Actual state:  " + abstractGameState.getName());
+
         if(abstractGameState.getClass() == PreGameState.class)
             getView().setState(new PreGameViewState(getView()));
         else if(abstractGameState.getClass() == FrameSelectionState.class)

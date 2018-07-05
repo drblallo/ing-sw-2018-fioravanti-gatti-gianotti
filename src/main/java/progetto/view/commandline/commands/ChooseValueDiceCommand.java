@@ -36,14 +36,12 @@ public class ChooseValueDiceCommand extends AbstractStateSwitcherCommand {
         }
         try {
             int value = Integer.parseInt(args[0]);
-            if(value>0 && value <= MAX_VALUE){
                 ToolCardSetDiceValueAction toolCardSetDiceValueAction =
                         new ToolCardSetDiceValueAction(getController().getChair(), value);
                 if(toolCardSetDiceValueAction.canBeExecuted(getModel())){
                     getController().sendAction(toolCardSetDiceValueAction);
                 }
                 else write(toReturn);
-            }
 
         }catch (NumberFormatException e ){
             write(toReturn);

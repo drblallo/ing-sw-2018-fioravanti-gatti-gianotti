@@ -10,6 +10,7 @@ import progetto.controller.SetSeedAction;
 import progetto.model.RoundState;
 import progetto.model.ToolCardState;
 import progetto.view.commandline.states.RoundViewState;
+import progetto.view.commandline.states.ShowToolCardState;
 import progetto.view.commandline.states.UseToolCardState;
 
 public class TestToolCardMultiPlayerSeed3 {
@@ -77,6 +78,7 @@ public class TestToolCardMultiPlayerSeed3 {
         commandLineView.execute("6 0 0");
         commandLineView.execute("\n");
         commandLineView.processAllPendings();
+        commandLineView.execute("7 7 7");
         commandLineView.execute("7 0 2");
         commandLineView.execute("\n");
         commandLineView.processAllPendings();
@@ -97,7 +99,9 @@ public class TestToolCardMultiPlayerSeed3 {
         commandLineView.execute("1");
         commandLineView.processAllPendings();
 
-        Assert.assertTrue(true);
+        Assert.assertEquals(RoundState.class, commandLineView.getController().getModel().getMainBoard().getData()
+                .getGameState().getClass());
+        Assert.assertEquals(ShowToolCardState.class, commandLineView.getAbstractCLViewState().getClass());
     }
 
     @After

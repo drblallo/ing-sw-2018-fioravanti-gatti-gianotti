@@ -50,15 +50,16 @@ public class ChatPaneController extends AbstractStateController {
     }
 
     /**
-     * called every time this window is displayed
+     * called when the observed game change
      * reset the chat area
      */
     @Override
-    public void onPreShow()
+    public void onGameChanged()
     {
         chatArea.clear();
-        update();
     }
+
+
 
     /**
      * called when the current room changes

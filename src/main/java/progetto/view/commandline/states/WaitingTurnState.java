@@ -1,5 +1,9 @@
 package progetto.view.commandline.states;
 
+import progetto.model.AbstractGameState;
+import progetto.model.RoundState;
+import progetto.model.ToolCard;
+import progetto.model.ToolCardState;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.DifferenceDescriptor;
 import progetto.view.commandline.commands.ReturnCommand;
@@ -26,7 +30,10 @@ public class WaitingTurnState extends AbstractCLViewState {
      */
     @Override
     public boolean isStillValid() {
-        return notMyTurn;
+        AbstractGameState abstractGameState = getView().getController().getModel().getMainBoard()
+                .getData().getGameState();
+        return notMyTurn && ((abstractGameState.getClass() == RoundState.class) ||
+        abstractGameState.getClass() == ToolCardState.class);
     }
 
     /**

@@ -42,6 +42,11 @@ public class State<T extends AbstractStateController> {
 
     }
 
+    public void onGameChanged()
+    {
+        controller.onGameChanged();
+    }
+
     public String getFxmlName() {
         return fxmlName;
     }

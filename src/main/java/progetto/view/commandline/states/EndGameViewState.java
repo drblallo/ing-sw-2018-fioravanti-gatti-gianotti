@@ -10,6 +10,7 @@ import progetto.view.commandline.commands.CloseGameCommand;
 import progetto.view.commandline.commands.StartNewGameCommand;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -95,6 +96,7 @@ public class EndGameViewState extends AbstractCLViewState {
             playerRankingArrayList.add(new PlayerRanking(i, getModel().getPlayerBoard(i).getData().getScore()));
         }
         playerRankingArrayList.sort(Comparator.comparingInt(PlayerRanking::getRanking));
+        Collections.reverse(playerRankingArrayList);
 
         if (getController().getChair()!=-1) {
             if (playerRankingArrayList.get(0).getNumberOfPlayer() == getController().getChair())
@@ -116,11 +118,8 @@ public class EndGameViewState extends AbstractCLViewState {
             playerView = roomView.getPlayer(playerRankingArrayList.get(i).getNumberOfPlayer());
             if (playerView!=null && playerView.getName()!=null)
                 result.append(playerView.getName());
-            else result.append("giocatore numero " + playerRankingArrayList.get(i).getNumberOfPlayer());
+            else result.append("Giocatore numero " + playerRankingArrayList.get(i).getNumberOfPlayer());
             result.append(" con " + playerRankingArrayList.get(i).getRanking() + " punti\n");
-            result.append((i + 1) + "° Classifcato: Giocatore numero "
-                    + playerRankingArrayList.get(i).getNumberOfPlayer() + " con punteggio di " +
-                    playerRankingArrayList.get(i).getRanking() + '\n');
         }
 
         return result;

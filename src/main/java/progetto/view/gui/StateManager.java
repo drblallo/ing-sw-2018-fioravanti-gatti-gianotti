@@ -36,6 +36,12 @@ public class StateManager {
 
     }
 
+    public void onGameChanged(){
+        for (State s: stateHashMap.values()) {
+                s.onGameChanged();
+            }
+    }
+
     public void addViewState(State state){
         stateHashMap.put(state.getFxmlName(), state);
     }

@@ -68,6 +68,7 @@ public class TestToolCardMultiPlayerSeed4 {
 
         commandLineView.execute("1");
         commandLineView.execute("1 aa");
+        commandLineView.execute("1 7");
         commandLineView.execute("1 6");
         commandLineView.processAllPendings();
 

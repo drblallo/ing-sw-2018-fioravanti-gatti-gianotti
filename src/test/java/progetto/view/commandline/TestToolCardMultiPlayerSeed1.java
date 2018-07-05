@@ -63,10 +63,12 @@ public class TestToolCardMultiPlayerSeed1 {
                 .getMainBoard().getData().getGameState().getClass());
         Assert.assertEquals(UseToolCardState.class, commandLineView.getAbstractCLViewState().getClass());
 
+        commandLineView.execute("5 1");
         commandLineView.execute("5 0");
         commandLineView.execute("6");
         commandLineView.execute("6 a a v");
         commandLineView.execute("6 a bb");
+        commandLineView.execute("6 2 2");
         commandLineView.execute("6 0 0");
         commandLineView.execute("\n");
         commandLineView.processAllPendings();

@@ -51,14 +51,13 @@ public class ChoosePlayerBoardDiceCommand extends AbstractCLViewCommand {
                     getController().sendAction(toolCardSetPlacedDiceAction);
                 else write(toReturn);
             }
-            else if (numberOfDice == 2){
+            else {
                 ToolCardSetSecondPlacedDiceAction toolCardSetSecondPlacedDiceAction =
                         new ToolCardSetSecondPlacedDiceAction(getController().getChair(), posY, posX);
                 if (toolCardSetSecondPlacedDiceAction.canBeExecuted(getModel()))
                     getController().sendAction(toolCardSetSecondPlacedDiceAction);
                 else write(toReturn);
             }
-            else write(toReturn);
         }catch (NumberFormatException e ){
             write(toReturn);
         }

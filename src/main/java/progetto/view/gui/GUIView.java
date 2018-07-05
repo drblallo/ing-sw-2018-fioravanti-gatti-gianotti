@@ -52,6 +52,7 @@ public class GUIView extends AbstractView
 
 	public void onGameChanged()
 	{
+		stateManager.onGameChanged();
 		if (!getController().thereIsGame())
 		{
 			Platform.runLater(

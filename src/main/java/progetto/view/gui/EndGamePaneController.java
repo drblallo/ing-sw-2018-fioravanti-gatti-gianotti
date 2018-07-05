@@ -13,6 +13,7 @@ import progetto.network.RoomView;
 import progetto.view.PlayerRanking;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -67,6 +68,7 @@ public class EndGamePaneController extends AbstractStateController {
             playerRankingArrayList.add(new PlayerRanking(i, model.getPlayerBoard(i).getData().getScore()));
         }
         playerRankingArrayList.sort(Comparator.comparingInt(PlayerRanking::getRanking));
+        Collections.reverse(playerRankingArrayList);
 
         if (getController().getChair()!=-1){
             if (playerRankingArrayList.get(0).getNumberOfPlayer() == getController().getChair())

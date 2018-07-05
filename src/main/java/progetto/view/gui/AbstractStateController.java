@@ -31,6 +31,11 @@ public abstract class AbstractStateController {
 		//
 	}
 
+	public void onGameChanged()
+	{
+		//nothing to do on default
+	}
+
 	public GUIView getView() {
 		return stateManager.getGuiView();
 	}

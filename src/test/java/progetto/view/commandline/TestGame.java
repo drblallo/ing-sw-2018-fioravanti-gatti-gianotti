@@ -62,6 +62,7 @@ public class TestGame {
         commandLineView.processAllPendings();
         commandLineView.execute("3 1");
         commandLineView.execute("3 ciao cc dd");
+        commandLineView.execute("3 0 7 7");
         commandLineView.execute("3 0 0 1");
         commandLineView.processAllPendings();
 
@@ -132,6 +133,7 @@ public class TestGame {
 
         commandLineView.execute("1");
         commandLineView.execute("1 ff");
+        commandLineView.execute("1 5");
         commandLineView.execute("1 0");
         commandLineView.execute("\n");
         commandLineView.processAllPendings();
