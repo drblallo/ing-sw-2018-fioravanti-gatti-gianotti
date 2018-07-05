@@ -3,5 +3,6 @@
   "rmiPort": 8528,
   "gameStartTimeOut": 300000,
   "playerTurnTimeOut": 300000,
-  "allertTime" : 5000
+  "allertTime" : 5000,
+  "myIP" :  "127.0.0.1"
 }

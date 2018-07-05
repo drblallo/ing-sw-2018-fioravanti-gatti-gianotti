@@ -332,7 +332,9 @@ public final class ClientConnection implements Runnable
 		IEnforce f;
 		while ((f = enforcesQueue.poll()) != null)
 		{
+			LOGGER.log(Level.FINE, "processing a command");
 			f.execute(this);
+			LOGGER.log(Level.FINE, "done processing a command");
 		}
 
 	}
