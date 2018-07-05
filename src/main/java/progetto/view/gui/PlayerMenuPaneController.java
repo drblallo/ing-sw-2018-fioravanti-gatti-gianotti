@@ -11,6 +11,10 @@ import progetto.model.Container;
 import progetto.model.PlayerBoardData;
 import progetto.utils.IObserver;
 
+/**
+ * this is the class that handles the player menu fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class PlayerMenuPaneController extends AbstractController{
 
     @FXML
@@ -28,6 +32,10 @@ public class PlayerMenuPaneController extends AbstractController{
     private Container<PlayerBoardData> playerBoard;
     private int lastChair = -2;
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     */
     @Override
     public void setUp(GUIView view){
     	super.setUp(view);
@@ -38,6 +46,10 @@ public class PlayerMenuPaneController extends AbstractController{
         AlertTurnBoxPaneController.setup();
     }
 
+    /**
+     * called when the current room changes
+     * update user infos
+     */
     private void onRoomChanged()
     {
         int currentChair = Math.max(getController().getChair(), 0);
@@ -52,6 +64,11 @@ public class PlayerMenuPaneController extends AbstractController{
         }
     }
 
+    /**
+     * called when main board changes
+     * change the scene if a multi player game turns into a single player one or if a single player
+     * game turns into a multi player one
+     */
     private void updateMainBoard(){
         int currentPlayerCount = getModel().getMainBoard().getData().getPlayerCount();
         if(currentPlayerCount!=lastPlayerCount){
@@ -67,12 +84,20 @@ public class PlayerMenuPaneController extends AbstractController{
         }
     }
 
+    /**
+     * called when the player board of the user changes
+     * update the user's number of tokens
+     */
     private void updatePlayerBoard() {
         PlayerBoardData playerBoardData = getModel().getPlayerBoard(lastChair).getData();
         if(playerBoardData.getToken()!=Integer.parseInt(numberOfTokens.getText()))
             numberOfTokens.setText(playerBoardData.getToken() + "");
     }
 
+    /**
+     * called when some round information changes
+     * update the current player
+     */
     private void updateCurrentPlayer(){
         int newCurrentPlayer = getModel().getRoundInformation().getData().getCurrentPlayer();
         if (Integer.parseInt(currentPlayer.getText())!=newCurrentPlayer){
@@ -82,12 +107,20 @@ public class PlayerMenuPaneController extends AbstractController{
         }
     }
 
+    /**
+     * called when endTurnButton is clicked
+     * Sent an EndTurnAction to the controller
+     */
     @FXML
     private void onEndTurnButtonClicked(){
         if (getController().getChair()!=-1)
             getController().sendAction(new EndTurnAction(getController().getChair()));
     }
 
+    /**
+     * called when showOtherPlayersButton is clicked
+     * change the scene to Other Players
+     */
     @FXML
     private void onShowOtherPlayersButtonClicked(){
         getView().getStateManager().getStateFromName("OtherPlayersPane.fxml").show(true);

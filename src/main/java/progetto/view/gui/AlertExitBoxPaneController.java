@@ -11,13 +11,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller of the stage shown when the user want to leave the game
+ */
 public class AlertExitBoxPaneController {
 
-    private static GUIView view;
+    private GUIView view;
     private static Stage alertStage;
 
+    /**
+     * load the AlertExitBoxPane and prepare it to be shown
+     * @param guiView
+     */
     public static synchronized void setup(GUIView guiView){
-        view = guiView;
         FXMLLoader fxmlLoader = new FXMLLoader(AlertExitBoxPaneController.class
                 .getResource("AlertExitBoxPane.fxml"));
         Pane pane;
@@ -26,6 +32,9 @@ public class AlertExitBoxPaneController {
         } catch (IOException e) {
             pane = null;
         }
+
+        AlertExitBoxPaneController alertExitBoxPaneController = fxmlLoader.getController();
+        alertExitBoxPaneController.setView(guiView);
         alertStage = new Stage();
         alertStage.initModality(Modality.APPLICATION_MODAL);
         alertStage.setScene(new Scene(pane));
@@ -41,15 +50,34 @@ public class AlertExitBoxPaneController {
 
     }
 
+    /**
+     * set the current gui view
+     * @param view the current gui view
+     */
+    public void setView(GUIView view){
+        this.view = view;
+    }
+
+    /**
+     * show the AlertExitBoxPane
+     */
     public static void display(){
         alertStage.showAndWait();
     }
 
+    /**
+     * called when noButton is clicked
+     * close the AlertExitBox stage
+     */
     @FXML
     private void onNoButtonClicked(){
         alertStage.close();
     }
 
+    /**
+     * called when de yesButton is clicked
+     * close the game
+     */
     @FXML
     private void onYesButtonClicked(){
         view.getController().shutDown();

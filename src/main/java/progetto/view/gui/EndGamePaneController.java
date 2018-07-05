@@ -15,6 +15,10 @@ import progetto.view.PlayerRanking;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * this is the class that handles the choose end game fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class EndGamePaneController extends AbstractStateController {
 
     @FXML
@@ -26,6 +30,9 @@ public class EndGamePaneController extends AbstractStateController {
     private static final String YOU_WIN = "vinto!";
     private static final String YOU_LOSE = "perso";
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     */
     @Override
     public void setup() {
         Image image = new Image(GamePaneController.class.getResourceAsStream("toolcard_large.png"));
@@ -37,12 +44,12 @@ public class EndGamePaneController extends AbstractStateController {
         myPane.setBackground(background);
     }
 
+    /**
+     * called every time this window is displayed
+     * update results
+     */
     @Override
     public void onPreShow(){
-        Platform.runLater(this::update);
-    }
-
-    private void update(){
         IModel model = getModel();
         score.clear();
         if (model.getMainBoard().getData().getPlayerCount()!=1)
@@ -50,6 +57,10 @@ public class EndGamePaneController extends AbstractStateController {
         else singlePlayerScore(model);
     }
 
+    /**
+     * calculate the result of a multi player game
+     * @param model current model
+     */
     private void multiPlayerScore(IModel model){
         ArrayList<PlayerRanking> playerRankingArrayList = new ArrayList<>();
         for (int i = 0; i < model.getMainBoard().getData().getPlayerCount(); i++) {
@@ -83,6 +94,10 @@ public class EndGamePaneController extends AbstractStateController {
         }
     }
 
+    /**
+     * calculate the result of a single player game
+     * @param model current model
+     */
     private void singlePlayerScore(IModel model){
         int target = model.getMainBoard().getData().getSinglePlayerTarget();
         int actualScore = model.getPlayerBoard(0).getData().getScore();
@@ -93,11 +108,19 @@ public class EndGamePaneController extends AbstractStateController {
         else winner.setText(YOU_LOSE);
     }
 
+    /**
+     * called when menuButton is clicked
+     * change the scene to Starting Pane
+     */
     @FXML
     private void onMenuButtonClicked(){
         getStateManager().getStateFromName("StartingPane.fxml").show(false);
     }
 
+    /**
+     * called when turnOffButton is clicked
+     * show the AlertExitBox stage
+     */
     @FXML
     private void onTurnOffButtonClicked(){
         AlertExitBoxPaneController.display();

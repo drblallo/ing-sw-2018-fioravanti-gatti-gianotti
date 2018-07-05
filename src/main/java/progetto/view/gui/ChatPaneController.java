@@ -61,7 +61,8 @@ public class ChatPaneController extends AbstractStateController {
     }
 
     /**
-     * displayes all the players in the room.
+     * called when the current room changes
+     * displayes all the players in the room and update the available chairs
      */
     private void update(){
         RoomView roomView;
@@ -81,6 +82,7 @@ public class ChatPaneController extends AbstractStateController {
 
     /**
      * called when enter is pressed
+     * send the written message to the other players
      */
     @FXML
     private void onEnterKeyPressed(KeyEvent keyEvent){
@@ -94,7 +96,10 @@ public class ChatPaneController extends AbstractStateController {
         }
     }
 
-
+    /**
+     * called when returnButton is clicked
+     * change the scene to game pane
+     */
     @FXML
     private void onReturnButtonClicked(){
         getStateManager().getStateFromName("GamePane.fxml").show(true);

@@ -23,7 +23,7 @@ public class TestMoreThanOnePlayer {
     public void setup(){
 
         clientControllerStub = new ClientControllerStub();
-        commandLineView = new CommandLineView(clientControllerStub, null);
+        commandLineView = new CommandLineView(clientControllerStub, System.out);
 
         commandLineView.execute("1");
         commandLineView.execute("2 good");
@@ -35,7 +35,7 @@ public class TestMoreThanOnePlayer {
         commandLineView.execute("1");
         commandLineView.processAllPendings();
     }
-/*
+
     @Test
     public void testWaitingState(){
 
@@ -58,7 +58,7 @@ public class TestMoreThanOnePlayer {
                 .getModel().getMainBoard().getData().getGameState().getClass());
         Assert.assertEquals(RoundViewState.class, commandLineView.getAbstractCLViewState().getClass());
     }
-       */
+
     @Test
     public void testAnotherPlayerStartGame(){
 
@@ -71,7 +71,7 @@ public class TestMoreThanOnePlayer {
 
     }
 
-    /*
+
     @Test
     public void testShowAnotherPlayerPlayerBoard(){
 
@@ -81,7 +81,7 @@ public class TestMoreThanOnePlayer {
         clientControllerStub.sendAction(new FrameSetAction(1,0,0));
         commandLineView.processAllPendings();
         commandLineView.execute("2");
-        commandLineView.execute("1");
+        commandLineView.execute("2");
         commandLineView.processAllPendings();
 
         Assert.assertEquals(RoundViewState.class, commandLineView.getAbstractCLViewState().getClass());
@@ -136,7 +136,7 @@ public class TestMoreThanOnePlayer {
         commandLineView.processAllPendings();
 
         Assert.assertEquals(WaitingTurnState.class, commandLineView.getAbstractCLViewState().getClass());
-    } */
+    }
 
     @After
     public void after(){commandLineView.stop();}

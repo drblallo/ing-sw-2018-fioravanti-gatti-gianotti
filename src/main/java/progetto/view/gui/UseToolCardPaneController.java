@@ -12,6 +12,10 @@ import progetto.model.*;
 
 import java.util.List;
 
+/**
+ * this is the class that handles the use tool card fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class UseToolCardPaneController extends AbstractController{
 
     @FXML
@@ -21,7 +25,7 @@ public class UseToolCardPaneController extends AbstractController{
     @FXML
     private ChoiceBox<Integer> valueOfDice;
     @FXML
-    private HBox increaseDiceValue;
+    private HBox increaseDiceValueHBox;
     @FXML
     private ChoiceBox<Integer> increasedDiceValue;
     @FXML
@@ -65,7 +69,10 @@ public class UseToolCardPaneController extends AbstractController{
     private TextureDatabase textureDatabase;
     private static final int DICE_DIMENSION = 55;
 
-
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     */
     @Override
     public void setUp(GUIView view) {
     	super.setUp(view);
@@ -100,6 +107,10 @@ public class UseToolCardPaneController extends AbstractController{
 
     }
 
+    /**
+     * called when some round information changes
+     * update the imageView of the activated card and its required number of tokens
+     */
     private void update() {
 
         IModel model = getModel();
@@ -122,6 +133,12 @@ public class UseToolCardPaneController extends AbstractController{
         addRequestedActions(toolCardActionList, model);
     }
 
+    /**
+     * called when round information changes
+     * update the state of resolution of the activated card
+     * @param toolCardActionList list of actions needed by the activated card
+     * @param model current model
+     */
     private void addRequestedActions(List<Class> toolCardActionList, IModel model){
         toDoVBox.getChildren().clear();
         topVBox.getChildren().removeAll(tokensHBox, chooseSinglePlayerDice);
@@ -140,7 +157,7 @@ public class UseToolCardPaneController extends AbstractController{
                 toDoVBox.getChildren().add(setDiceValue);
             }
             if (c == ToolCardSetIncreaseDecreaseAction.class) {
-                toDoVBox.getChildren().add(increasedDiceValue);
+                toDoVBox.getChildren().add(increaseDiceValueHBox);
             }
             if (c == ToolCardSetPickedDiceAction.class) {
                 toolCardSetPickedDiceAction(toolCardParameters, model);
@@ -154,6 +171,11 @@ public class UseToolCardPaneController extends AbstractController{
         }
     }
 
+    /**
+     * update the state of the action SetSinglePlayerDiceAction
+     * @param toolCardParameters list of parameters of the activated tool card
+     * @param model current model
+     */
     private void setSinglePlayerDiceAction(ToolCardParameters toolCardParameters, IModel model){
         topVBox.getChildren().add(chooseSinglePlayerDice);
         if (toolCardParameters.getSPDice()>=0){
@@ -164,6 +186,11 @@ public class UseToolCardPaneController extends AbstractController{
         else singlePlayerLabel.setText("Secgli il dado da sacrificare: ");
     }
 
+    /**
+     * update the state of the action ToolCardSetSecondDiceAction
+     * @param toolCardParameters list of parameters of the activated tool card
+     * @param model current model
+     */
     private void toolCardSetSecondDiceAction(ToolCardParameters toolCardParameters, IModel model){
         toDoVBox.getChildren().add(chooseSecondDiceFromPlaced);
         if (toolCardParameters.isSecondDiceSet()){
@@ -175,6 +202,11 @@ public class UseToolCardPaneController extends AbstractController{
         else secondPlacedDiceLabel.setText("Scegli un altro dado tra quelli piazzati");
     }
 
+    /**
+     * update the state of the action ToolCardSetPlacedDiceAction
+     * @param toolCardParameters list of parameters of the activated tool card
+     * @param model current model
+     */
     private void toolCardSetPlacedDiceAction(ToolCardParameters toolCardParameters, IModel model) {
         toDoVBox.getChildren().add(chooseDiceFromPlaced);
         if (toolCardParameters.isFirstDiceSet()) {
@@ -186,6 +218,11 @@ public class UseToolCardPaneController extends AbstractController{
         else placedDiceLabel.setText("Scegli un dado tra quelli piazzati");
     }
 
+    /**
+     * update the state of the action ToolCardSetPickedDiceAction
+     * @param toolCardParameters list of parameters of the activated tool card
+     * @param model current model
+     */
     private void toolCardSetPickedDiceAction(ToolCardParameters toolCardParameters, IModel model) {
         toDoVBox.getChildren().add(chooseDiceFromPicked);
         if (toolCardParameters.getNDice() >= 0) {
@@ -196,6 +233,11 @@ public class UseToolCardPaneController extends AbstractController{
         } else pickedDiceLabel.setText("Scegli un dado tra quelli della riserva");
     }
 
+    /**
+     * update the state of the action ToolCardSetDiceRoundTrackAction
+     * @param toolCardParameters list of parameters of the activated tool card
+     * @param model current model
+     */
     private void toolCardSetDiceRoundTrackAction(ToolCardParameters toolCardParameters, IModel model) {
         toDoVBox.getChildren().add(chooseDiceFromRoundTrack);
         if (toolCardParameters.getNDiceRT()>= 0) {
@@ -206,6 +248,11 @@ public class UseToolCardPaneController extends AbstractController{
         } else roundDiceLabel.setText("Scegli un dado dal tracciato dei round");
     }
 
+    /**
+     * load the image of a dice
+     * @param imageView imageView whose image will be set
+     * @param dice dice to show
+     */
     private void loadDice(ImageView imageView, Dice dice){
         if (imageView.getImage()!=textureDatabase.getDice(dice.getGameColor(), dice.getValue().ordinal()+1)){
             imageView.setFitHeight(DICE_DIMENSION);
@@ -214,12 +261,20 @@ public class UseToolCardPaneController extends AbstractController{
         }
     }
 
+    /**
+     * remove the image of a dice and minimize the imageView
+     * @param imageView imageView to minimize
+     */
     private void clearDice(ImageView imageView){
         imageView.setImage(null);
         imageView.setFitWidth(0);
         imageView.setFitHeight(0);
     }
 
+    /**
+     * called when the user exits from ToolCardState
+     * minimize al the imageView
+     */
     private void clearDices(){
         clearDice(roundTrackDice);
         clearDice(extractedDicesDice);
@@ -228,6 +283,10 @@ public class UseToolCardPaneController extends AbstractController{
         clearDice(singlePlayerDice);
     }
 
+    /**
+     * called when cancelButton is clicked
+     * cancel the use of a tool card
+     */
     @FXML
     private void onCancelButtonClicked() {
         IModel model = getModel();
@@ -238,16 +297,20 @@ public class UseToolCardPaneController extends AbstractController{
         getController().sendAction(new CancelToolCardUseAction(getController().getChair()));
     }
 
+    /**
+     * called when confirmButton is clicked
+     * if possible send an ExecuteToolCardAction to the controller
+     */
     @FXML
     private void onConfirmButtonClicked() {
         IModel model = getController().getModel();
         if (model.getMainBoard().getData().getGameState().getClass() != ToolCardState.class ||
                 model.getRoundInformation().getData().getCurrentPlayer() != getController().getChair())
             return;
-        ExecuteToolCardAction executeToolCard1Action = new ExecuteToolCardAction(getController().getChair());
-        if (executeToolCard1Action.canBeExecuted(model)) {
+        ExecuteToolCardAction executeToolCardAction = new ExecuteToolCardAction(getController().getChair());
+        if (executeToolCardAction.canBeExecuted(model)) {
             clearDices();
-            getController().sendAction(executeToolCard1Action);
+            getController().sendAction(executeToolCardAction);
         }
     }
 }

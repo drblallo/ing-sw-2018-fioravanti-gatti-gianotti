@@ -7,6 +7,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import progetto.model.*;
 
+/**
+ * this is the class that handles the game fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class GamePaneController extends AbstractStateController {
 
     private int displayedPlayersCount = -1;
@@ -46,6 +50,9 @@ public class GamePaneController extends AbstractStateController {
     @FXML
     private UtilityMenuPaneController utilityMenuPaneController;
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     */
     @Override
     public void setup() {
         super.setup();
@@ -77,6 +84,9 @@ public class GamePaneController extends AbstractStateController {
         });
     }
 
+    /**
+     * add and remove components according to the state of the game
+     */
     private void update(){
         IModel model = getModel();
 
@@ -112,12 +122,18 @@ public class GamePaneController extends AbstractStateController {
 
     }
 
+    /**
+     * decide what to show according to the state of the game
+     * @param model current model
+     */
     private void whatToShow(IModel model){
         AbstractGameState abstractGameState = model.getMainBoard().getData().getGameState();
         if(abstractGameState.getClass() == PreGameState.class){
             mainVBox.getChildren().remove(roundVBox);
-            if (!mainVBox.getChildren().contains(preGameVBox))
+            if (!mainVBox.getChildren().contains(preGameVBox)) {
                 mainVBox.getChildren().add(preGameVBox);
+                preGamePaneController.onPreShow();
+            }
         }else if (abstractGameState.getClass() != EndGameState.class){
             mainVBox.getChildren().remove(preGameVBox);
             if (!mainVBox.getChildren().contains(roundVBox))
@@ -127,6 +143,10 @@ public class GamePaneController extends AbstractStateController {
         }
     }
 
+    /**
+     * show the playerboard of the user or the playerboard of the player 0 if the user is not a player
+     * @param i
+     */
     private void addPlayerBoard(int i){
         hBox.getChildren().clear();
         Region region1 = new Region();

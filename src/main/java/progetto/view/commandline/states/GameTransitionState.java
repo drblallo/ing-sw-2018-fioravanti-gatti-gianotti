@@ -6,14 +6,25 @@ import progetto.view.commandline.CommandLineView;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Particular stage where during the game the right state is selected
+ * This is the state where the command line view goes when a state become "not still valid"
+ */
 public class GameTransitionState extends AbstractCLViewState {
 
     private static final Logger LOGGER = Logger.getLogger(GameTransitionState.class.getName());
 
+    /**
+     * public constructor
+     * @param view the command line view that this state will be applied to
+     */
     public GameTransitionState(CommandLineView view) {
         super("game transition state", view);
     }
 
+    /**
+     * Check the game state from the model and set as a consequence the right state of the command line view
+     */
     @Override
     public void onApply() {
 
@@ -35,6 +46,10 @@ public class GameTransitionState extends AbstractCLViewState {
             getView().setState(new EndGameViewState(getView()));
     }
 
+    /**
+     * Does not perform anything
+     * @return nothing
+     */
     @Override
     public String getMessage() {
         return "";

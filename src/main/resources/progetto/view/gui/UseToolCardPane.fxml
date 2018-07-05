@@ -100,7 +100,7 @@
                         <Region HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
-                  <HBox fx:id="increaseDiceValue" spacing="5.0">
+                  <HBox fx:id="increaseDiceValueHBox" spacing="5.0">
                      <children>
                         <Region HBox.hgrow="ALWAYS" />
                         <Label text="Cambia il valore del dado:">

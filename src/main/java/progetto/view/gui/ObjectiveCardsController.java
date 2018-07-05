@@ -9,6 +9,10 @@ import progetto.utils.IObserver;
 
 import java.util.List;
 
+/**
+ * this is the class that handles the objective cards fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class ObjectiveCardsController extends AbstractController{
 
     @FXML
@@ -19,6 +23,10 @@ public class ObjectiveCardsController extends AbstractController{
     private static final int BACK_PRIVATE_OBJECTIVE = 5;
     private static final int BACK_PUBLIC_OBJECTIVE = 10;
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     */
     @Override
     public void setUp(GUIView view){
         super.setUp(view);
@@ -27,6 +35,10 @@ public class ObjectiveCardsController extends AbstractController{
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::onRoomViewChanged));
     }
 
+    /**
+     * called when main board changes
+     * load objective cards
+     */
     private void update(){
 
         TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
@@ -37,6 +49,11 @@ public class ObjectiveCardsController extends AbstractController{
         updatePublicObjectives(model, textureDatabase);
     }
 
+    /**
+     * load public objectives
+     * @param model current model
+     * @param textureDatabase texture database to use
+     */
     private void updatePublicObjectives(IModel model, TextureDatabase textureDatabase){
 
         List<AbstractPublicObjectiveCard> abstractPublicObjectiveCards =
@@ -61,6 +78,12 @@ public class ObjectiveCardsController extends AbstractController{
         }
     }
 
+    /**
+     * load private objectives
+     * @param model current model
+     * @param playerChair chair of the player whose private objectives need to be loaded
+     * @param textureDatabase texture database to use
+     */
     private void updatePrivateObjective(IModel model, int playerChair, TextureDatabase textureDatabase){
         List<AbstractPrivateObjectiveCard> abstractPrivateObjectiveCardList
                 = model.getPlayerBoard(playerChair).getData().getPrivateObjectiveCard();
@@ -82,6 +105,9 @@ public class ObjectiveCardsController extends AbstractController{
             }
     }
 
+    /**
+     * change the observed playerboard
+     */
     private void onRoomViewChanged(){
         int newChair = Math.max(getController().getChair(), 0);
         if (myOldChair != newChair)

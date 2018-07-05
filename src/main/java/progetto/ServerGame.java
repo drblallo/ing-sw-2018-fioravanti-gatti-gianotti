@@ -114,7 +114,7 @@ public class ServerGame extends GameSync implements  ISync
 		super.clear();
 		attachObservers();
 
-		sendItem(new SetSeedAction(0));
+		sendItem(new SetSeedAction(3));
 
 		List<WindowFrameCouple> list = WindowFrameCoupleArray.getInstance().getList();
 

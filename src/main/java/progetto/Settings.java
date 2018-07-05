@@ -53,7 +53,8 @@ public class Settings {
 			LOGGER.log(Level.SEVERE, "Empty path");
 		}
 
-		try(InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(path), java.nio.charset.Charset.defaultCharset()))
+		try(InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(path),
+				java.nio.charset.Charset.defaultCharset()))
 		{
 			Gson gson = new Gson();
 			settings = gson.fromJson(inputStreamReader, Settings.class);

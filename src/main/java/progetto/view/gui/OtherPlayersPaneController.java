@@ -6,6 +6,10 @@ import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+/**
+ * this is the class that handles the other players fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class OtherPlayersPaneController extends AbstractStateController {
 
     @FXML
@@ -17,9 +21,11 @@ public class OtherPlayersPaneController extends AbstractStateController {
     /*@FXML
     private TextArea otherPlayersActions; */
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     */
     @Override
     public void setup() {
-
 
         Image image = new Image(getClass().getResourceAsStream("background.jpg"));
         BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,
@@ -35,6 +41,9 @@ public class OtherPlayersPaneController extends AbstractStateController {
         //getViewStateMachine().getObsModel().getCommandQueue().addObserver(ogg -> updateOtherPlayersActions());
     }
 
+    /**
+     * update and show the playerboard of the other players
+     */
     private void update() {
         int numberOfPlayers = getModel().getMainBoard().getData().getPlayerCount();
         int currentChair = getChair();
@@ -79,6 +88,10 @@ public class OtherPlayersPaneController extends AbstractStateController {
         }
     } */
 
+    /**
+     * called when backButton is clicked
+     * change the scene to Game Pane
+     */
     @FXML
     private void onBackButtonClicked(){
         getView().getStateManager().getStateFromName("GamePane.fxml").show(true);

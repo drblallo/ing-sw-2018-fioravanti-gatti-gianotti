@@ -6,19 +6,33 @@ import progetto.view.commandline.DifferenceDescriptor;
 import progetto.view.commandline.Printer;
 import progetto.view.commandline.commands.SelectWindowCommand;
 
+/**
+ * State where the user can choose his window frame at the beginning of a game
+ */
 public class FrameSelectionViewState extends AbstractCLViewState {
 
     private static final int NUMBER_OF_WINDOW = 4;
 
+    /**
+     * public constructor
+     * @param view the command line view that this state will be applied to
+     */
     public FrameSelectionViewState(CommandLineView view) {
         super("frame selection view state", view);
     }
 
+     /**
+     * Check if this state is still valid
+     * @return if this state is still valid
+     */
     @Override
     public boolean isStillValid() {
         return getModel().getMainBoard().getData().getGameState().getClass() == FrameSelectionState.class;
     }
 
+    /**
+     * add difference descriptors to this state
+     */
     @Override
     public void addObservers() {
         if (getView().getController().getChair() >= 0) {
@@ -33,6 +47,9 @@ public class FrameSelectionViewState extends AbstractCLViewState {
         }
     }
 
+    /**
+     * load the commands associated to this stage
+     */
     @Override
     public void onApply()
     {
@@ -41,7 +58,10 @@ public class FrameSelectionViewState extends AbstractCLViewState {
                 registerCommand(new SelectWindowCommand(getView(), i));
 	}
 
-
+    /**
+     * Return a message associated to this stage
+     * @return a message associated to this stage
+     */
     @Override
     public String getMessage() {
         if(getController().getChair()<0)

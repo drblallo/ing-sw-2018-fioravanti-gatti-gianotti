@@ -7,15 +7,22 @@ import progetto.view.commandline.commands.NewGameCommand;
 import progetto.view.commandline.commands.SetNameCommand;
 
 /**
- * First menu shown at the beginning of a game
+ * First state shown at the beginning of the program
  */
 public class DefaultViewState extends AbstractCLViewState {
 
+	/**
+	 * public constructor
+	 * @param view the command line view that this state will be applied to
+	 */
     public DefaultViewState(CommandLineView view)
     {
         super("Default view state", view);
     }
 
+	/**
+	 * load the commands associated to this stage
+	 */
 	@Override
 	public void onApply(){
 
@@ -26,6 +33,10 @@ public class DefaultViewState extends AbstractCLViewState {
 
 	}
 
+	/**
+	 * returns a message associated to this stage
+	 * @return a message associated to this stage
+	 */
 	@Override
 	public String getMessage(){
 

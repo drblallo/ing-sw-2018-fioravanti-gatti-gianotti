@@ -6,6 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import progetto.network.RoomView;
 
+/**
+ * this is the class that handles the utility menu fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class UtilityMenuPaneController extends AbstractController{
 
     @FXML
@@ -13,6 +17,10 @@ public class UtilityMenuPaneController extends AbstractController{
     @FXML
     private Button chatButton;
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     */
     @Override
     public void setUp(GUIView view){
     	super.setUp(view);
@@ -20,16 +28,28 @@ public class UtilityMenuPaneController extends AbstractController{
         view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::isSinglePlayer));
     }
 
+    /**
+     * called when menuButton is clicked
+     * changes the scene to Starting Pane
+     */
     @FXML
     private void onMenuButtonClicked(){
         getView().getStateManager().getStateFromName("StartingPane.fxml").show(false);
     }
 
+    /**
+     * called when chatButton is clicked
+     * changes the scene to Chat Pane
+     */
     @FXML
     private void onChatButtonClicked(){
         getView().getStateManager().getStateFromName("ChatPane.fxml").show(true);
     }
 
+    /**
+     * called when current rooms changes
+     * update available chairs
+     */
     private void updateChairs(){
         RoomView roomView = getController().getCurrentRoom();
         int playerCount = getController().getModel().getMainBoard().getData().getPlayerCount();
@@ -44,6 +64,10 @@ public class UtilityMenuPaneController extends AbstractController{
         }
     }
 
+    /**
+     * called when main board changes
+     * if the game is in single player mode remove chatButton
+     */
     private void isSinglePlayer(){
         int numberOfPlayers = getController().getModel().getMainBoard().getData().getPlayerCount();
         if (numberOfPlayers == 1){
@@ -55,7 +79,8 @@ public class UtilityMenuPaneController extends AbstractController{
     }
 
     /**
-     * when the player clicks on the button it tries to take a chair
+     * called when sitButton is clicked
+     * the user pick the selected chair
      */
     @FXML
     private void onSitButtonPressed(){

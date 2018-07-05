@@ -7,12 +7,22 @@ import progetto.view.commandline.commands.ReturnCommand;
 
 import java.util.List;
 
+/**
+ * State where the user can see the existing rooms and join one of them
+ */
 public class RoomsChoiceState extends AbstractCLViewState {
 
+    /**
+     * public constructor
+     * @param view the command line view that this state will be applied to
+     */
     public RoomsChoiceState(CommandLineView view) {
-        super("rooms choise state", view);
+        super("rooms choice state", view);
     }
 
+    /**
+     * load the commands associated to this stage
+     */
     @Override
     public void onApply() {
 
@@ -24,6 +34,10 @@ public class RoomsChoiceState extends AbstractCLViewState {
 
     }
 
+    /**
+     * Return a message associated to this stage
+     * @return a message associated to this stage
+     */
     @Override
     public String getMessage() {
 

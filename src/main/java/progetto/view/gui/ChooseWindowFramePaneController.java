@@ -15,13 +15,19 @@ import progetto.model.MainBoardData;
 import progetto.model.PlayerBoardData;
 import progetto.model.WindowFrame;
 
+/**
+ * this is the class that handles the choose window frame fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class ChooseWindowFramePaneController {
 
     @FXML
     private TilePane mainPane;
     private GUIView view;
 
-
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     */
     public void setup(PlayerBoardData playerBoardData, IClientController clientController, GUIView view) {
 
         this.view = view;
@@ -48,6 +54,11 @@ public class ChooseWindowFramePaneController {
         }
     }
 
+    /**
+     * load a possibile window frame for the user
+     * @param currentWindow the box in which the window frame has to be loaded
+     * @param windowFrame the window frame to load
+     */
     private void showWindowFrame(VBox currentWindow, WindowFrame windowFrame) {
         TilePane currentWindowFrame = (TilePane) currentWindow.getChildren().get(0);
         TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();

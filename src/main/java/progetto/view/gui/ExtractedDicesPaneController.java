@@ -9,12 +9,20 @@ import progetto.controller.ToolCardSetSinglePlayerDiceAction;
 import progetto.model.Dice;
 import progetto.model.ExtractedDicesData;
 
+/**
+ * this is the class that handles the extracted dices fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class ExtractedDicesPaneController extends AbstractController{
 
     @FXML
     private TilePane tilePane;
     private static final int DICE_DIMENSION = 55;
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     */
     @Override
     public void setUp(GUIView view){
     	super.setUp(view);
@@ -22,6 +30,9 @@ public class ExtractedDicesPaneController extends AbstractController{
                 .addObserver(ogg -> Platform.runLater(this::update));
     }
 
+    /**
+     * displayes all the extracted dices
+     */
     private void update() {
         ExtractedDicesData extractedDicesData = getModel().getMainBoard().getExtractedDices().getData();
         tilePane.getChildren().clear();

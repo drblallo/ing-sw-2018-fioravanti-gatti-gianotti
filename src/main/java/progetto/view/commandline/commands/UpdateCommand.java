@@ -3,18 +3,30 @@ package progetto.view.commandline.commands;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.states.RoomsState;
 
-public class UpdateCommand extends AbstractStateSwitcherCommand {
+/**
+ * Command to update the list of the existing rooms
+ */
+public class UpdateCommand extends AbstractCLViewCommand {
 
-    public UpdateCommand(CommandLineView commandLineView) {
-        super(commandLineView, new RoomsState(commandLineView) {
-        });
-    }
+    /**
+     * public constructo
+     * @param commandLineView the command line view that this command will modify
+     */
+    public UpdateCommand(CommandLineView commandLineView) { super(commandLineView); }
 
+    /**
+     * update the list of the existing rooms
+     * @param params input not needed
+     */
     @Override
-    protected void perform(String[] params) {
+    public void exec(String[] params) {
         getCommandLineView().getController().fetchCurrentState();
     }
 
+    /**
+     * Return infos about what this command does
+     * @return infos about what this command does
+     */
     @Override
     public String getHelp() {
         return "Aggiorna elenco stanze";

@@ -15,6 +15,12 @@ public class SetSinglePlayerDifficultyCommand extends AbstractCLViewCommand {
     public void exec(String[] args) {
 
         int difficulty;
+        if (args == null || args.length == 0){
+            write("\nInserire un livello di difficoltà valido!");
+            return;
+        }
+
+
         try {
             difficulty = Integer.parseInt(args[0]);
         }catch (NumberFormatException e){

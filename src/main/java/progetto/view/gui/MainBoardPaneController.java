@@ -9,6 +9,9 @@ import progetto.model.IModel;
 import progetto.model.MainBoardData;
 import progetto.model.PreGameState;
 
+/**
+ * deprecated
+ */
 public class MainBoardPaneController extends AbstractController{
 
     @FXML

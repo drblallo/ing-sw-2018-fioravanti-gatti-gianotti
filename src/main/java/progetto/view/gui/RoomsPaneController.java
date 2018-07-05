@@ -13,6 +13,10 @@ import progetto.utils.IObserver;
 
 import java.util.List;
 
+/**
+ * this is the class that handles the rooms fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class RoomsPaneController extends AbstractStateController {
 
     private List<ServerStateView.SimpleRoomState> simpleRoomStateList;
@@ -30,18 +34,34 @@ public class RoomsPaneController extends AbstractStateController {
     private TextField usernameTextField;
     private IObserver<ServerStateView> serverStateViewIObserver = ogg -> Platform.runLater(this::update);
 
-    @Override
-    public void onPreShow(){
+    /**
+     * called when the fxml is loaded for the first time
+     * load the background
+     */
+    @FXML
+    public void initialize(){
         Image image = new Image(getClass().getResourceAsStream("toolcard_large.png"));
         BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,true,true,true,false);
         BackgroundImage backgroundImage = new BackgroundImage(image,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
         anchorPane.setBackground(background);
+    }
+
+    /**
+     * called every time this window is displayed
+     * questo onPreShow non sono sicura abbia senso chiedi
+     */
+    @Override
+    public void onPreShow(){
         getController().getServerViewCallback().addObserver(serverStateViewIObserver);
         update();
     }
 
+    /**
+     * called when rooms change
+     * update showed rooms
+     */
     private void update(){
         listView.getItems().clear();
         ServerStateView serverStateView = getController().getCurrentServerState();
@@ -52,11 +72,19 @@ public class RoomsPaneController extends AbstractStateController {
         }
     }
 
+    /**
+     * called when updateButton is clicked
+     * update showed rooms
+     */
     @FXML
     public void onUpdateButtonClicked(){
         getController().fetchCurrentState();
     }
 
+    /**
+     * called when createButton is clicked
+     * create, if possible, a new room
+     */
     @FXML
     public void onCreateButtonClicked(){
         if(roomNameTextField.getText().length()==0){
@@ -68,6 +96,10 @@ public class RoomsPaneController extends AbstractStateController {
         roomNameTextField.clear();
     }
 
+    /**
+     * called when enterButton is clicked
+     * enter, if possible, in the selected room and change scene to Game Pane
+     */
     @FXML
     public void onEnterButtonClicked(){
         if(usernameTextField.getText().length()==0){

@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import progetto.model.RoundState;
 import progetto.view.commandline.states.*;
 import progetto.model.FrameSelectionState;
 import progetto.model.PreGameState;
@@ -114,7 +115,7 @@ public class TestConnection {
         Assert.assertNotNull(clientControllerStub);
     }
 
-    /*@Test
+    @Test
     public void testPickChair(){
 
         commandLineView.execute("1");
@@ -140,6 +141,7 @@ public class TestConnection {
 
     }
 
+
     @Test
     public void testNoPickChair(){
 
@@ -159,7 +161,7 @@ public class TestConnection {
 
 
 
-   /*@Test
+   @Test
     public void testGameStartAndContinue() {
 
         commandLineView.execute("1");
@@ -189,7 +191,7 @@ public class TestConnection {
                 .getModel().getMainBoard().getData().getGameState().getClass());
         Assert.assertEquals(RoundViewState.class, commandLineView.getAbstractCLViewState().getClass());
 
-        commandLineView.execute("9");
+        commandLineView.execute("10");
         commandLineView.execute("1");
         commandLineView.processAllPendings();
 
@@ -212,8 +214,28 @@ public class TestConnection {
         Assert.assertEquals(RoundState.class, clientControllerStub.getModel()
                 .getMainBoard().getData().getGameState().getClass());
         Assert.assertEquals(RoundViewState.class, commandLineView.getAbstractCLViewState().getClass());
+    }
 
-    }*/
+    @Test
+    public void testSinglePlayerDifficulty(){
+        commandLineView.execute("1");
+        commandLineView.execute("1 good");
+        commandLineView.processAllPendings();
+        commandLineView.execute("1 test");
+        commandLineView.execute("2");
+        commandLineView.execute("1");
+        commandLineView.processAllPendings();
+        commandLineView.execute("2 1");
+        commandLineView.processAllPendings();
+        commandLineView.execute("3 6");
+        commandLineView.execute("3");
+        commandLineView.execute("3 ff");
+        commandLineView.execute("3 1");
+        commandLineView.processAllPendings();
+
+        Assert.assertEquals(1, commandLineView.getController().getModel().getMainBoard()
+                .getData().getDifficulty());
+    }
 
 
     @After

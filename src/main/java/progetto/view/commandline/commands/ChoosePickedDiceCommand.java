@@ -5,12 +5,24 @@ import progetto.model.Dice;
 import progetto.model.ToolCardParameters;
 import progetto.view.commandline.CommandLineView;
 
+/**
+ * Command to select the dice from the picked ones to use with a tool card
+ */
 public class ChoosePickedDiceCommand extends AbstractCLViewCommand {
 
+    /**
+     * public constructor
+     * @param commandLineView the command line view that this command will modifiy
+     */
     public ChoosePickedDiceCommand(CommandLineView commandLineView) {
         super(commandLineView);
     }
 
+    /**
+     * if args contains a valid number of dice, check if a ToolCardSetPickedDiceAction can be executed and
+     * if positive send the action to the controller
+     * @param args input by the user, it should be the number of the picked dice
+     */
     @Override
     public void exec(String[] args) {
         String toReturn = "Inserire una numero valido!";
@@ -34,6 +46,11 @@ public class ChoosePickedDiceCommand extends AbstractCLViewCommand {
         }
     }
 
+    /**
+     * if the dice has not been selected yet returns infos about what this command does and how the input
+     * should be written, else return a memo of which dice has been selected
+     * @return infos about the command according to the state of the tool card
+     */
     @Override
     public String getHelp() {
 
@@ -41,10 +58,10 @@ public class ChoosePickedDiceCommand extends AbstractCLViewCommand {
         if (toolCardParameters.getNDice()>=0){
             Dice dice = getModel().getPlayerBoard(getController().getChair()).getPickedDicesSlot()
                     .getData().getDicePlacementCondition(toolCardParameters.getNDice()).getDice();
-            return  "Hai scelto il " + dice.toString();
+            return  "Hai scelto dai tuoi dadi presi il " + dice.toString();
         }
 
-        return "Scegli il dado al quale vuoi applicare la carta scelta (Formato: " + getName()+
+        return "Scegli il dado, tra quelli presi, al quale vuoi applicare la carta scelta (Formato: " + getName()+
                 " <Numero del dado scelto>";
     }
 }

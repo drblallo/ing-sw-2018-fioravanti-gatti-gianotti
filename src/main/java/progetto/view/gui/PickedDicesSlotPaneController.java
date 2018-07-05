@@ -12,7 +12,10 @@ import progetto.controller.ToolCardSetPickedDiceAction;
 import progetto.model.Dice;
 import progetto.model.PickedDicesSlotData;
 
-
+/**
+ * this is the class that handles the picked dices slot fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class PickedDicesSlotPaneController extends AbstractController{
 
     @FXML
@@ -20,6 +23,11 @@ public class PickedDicesSlotPaneController extends AbstractController{
     private static final int DICE_DIMENSION = 55;
     private int numberOfPlayerboard;
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     * @param i the playerboard associated to this controller
+     */
     public void setup(GUIView view, int i){
     	super.setUp(view);
         numberOfPlayerboard = i;
@@ -27,6 +35,10 @@ public class PickedDicesSlotPaneController extends AbstractController{
                 .addObserver(ogg -> Platform.runLater(this::update));
     }
 
+    /**
+     *called when the picked dices of the player board associated change
+     * show the current picked dices of the player board
+     */
     private void update() {
 
         PickedDicesSlotData pickedDicesSlotData =
@@ -53,6 +65,12 @@ public class PickedDicesSlotPaneController extends AbstractController{
     }
 
 
+    /**
+     * called when the user clicks on a dice among the ones in the picked dices slot
+     * if possible send a ToolCardSetPickedDiceAction to the controller
+     * @param event click on the dice
+     * @param i number of the dice associated to the event
+     */
     private void onMouseClicked(MouseEvent event, int i){
         ToolCardSetPickedDiceAction toolCardSetPickedDiceAction = new ToolCardSetPickedDiceAction(
                 getController().getChair(), i);
@@ -62,6 +80,12 @@ public class PickedDicesSlotPaneController extends AbstractController{
         event.consume();
     }
 
+    /**
+     * called when the user starts a drag on a dice
+     * @param event starting drag the dice
+     * @param imageView imageView containing the image of the dice associated to the event
+     * @param toTransfer string containing the number of the dice associated to the event
+     */
     private void onDragDetected(MouseEvent event, ImageView imageView, String toTransfer){
 
         Dragboard dragboard = imageView.startDragAndDrop(TransferMode.ANY);

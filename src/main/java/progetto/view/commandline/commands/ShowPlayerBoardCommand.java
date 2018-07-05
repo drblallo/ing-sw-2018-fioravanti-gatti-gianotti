@@ -5,11 +5,21 @@ import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.Printer;
 import progetto.view.commandline.states.AbstractCLViewState;
 
+/**
+ * Command to show the playerboard of a player
+ */
 public class ShowPlayerBoardCommand extends AbstractStateSwitcherCommand {
 
     private int nPlayer;
     private Printer printer;
 
+    /**
+     * public constructor
+     * @param commandLineView the command line view that this command will modify
+     * @param nPlayer the number of the player of which the command will show the playerboard
+     * @param printer the printer to use
+     * @param abstractCLViewState the state where to go after showing the playerboard
+     */
     public ShowPlayerBoardCommand(CommandLineView commandLineView, int nPlayer,
                                   Printer printer, AbstractCLViewState abstractCLViewState) {
         super(commandLineView, abstractCLViewState);
@@ -17,6 +27,10 @@ public class ShowPlayerBoardCommand extends AbstractStateSwitcherCommand {
         this.printer = printer;
     }
 
+    /**
+     * Show the playerboard of the player passed in the constructor
+     * @param params no input needed
+     */
     @Override
     protected void perform(String[] params) {
         IPlayerBoard playerBoard = getModel().getPlayerBoard(nPlayer);
@@ -25,6 +39,10 @@ public class ShowPlayerBoardCommand extends AbstractStateSwitcherCommand {
                 getModel().getMainBoard().getData().getPlayerCount() == 1));
     }
 
+    /**
+     * Return infos about what playerboard this command shows
+     * @return infos about what playerboard this command shows
+     */
     @Override
     public String getHelp() {
         if(nPlayer == getController().getChair())

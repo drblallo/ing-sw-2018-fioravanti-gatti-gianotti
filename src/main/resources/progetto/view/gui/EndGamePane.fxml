@@ -16,7 +16,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label text="La partita è terminata!">
+                  <Label style="-fx-background-color: wheat;" text="La partita è terminata!">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
@@ -27,12 +27,12 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label text="Hai ">
+                  <Label style="-fx-background-color: wheat;" text="Hai ">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="winner">
+                  <Label fx:id="winner" style="-fx-background-color: wheat;">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
@@ -43,7 +43,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label text="Risultati:">
+                  <Label style="-fx-background-color: wheat;" text="Risultati:">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>

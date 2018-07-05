@@ -25,6 +25,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * this is the class that handles the player board fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class PlayerBoardPaneController extends AbstractController{
 
     private TextureDatabase textureDatabase = TextureDatabase.getTextureDatabase();
@@ -41,6 +45,12 @@ public class PlayerBoardPaneController extends AbstractController{
     private int numberOfPlayerBoard;
     private static final Logger LOGGER = Logger.getLogger(PlayerBoardPaneController.class.getName());
 
+    /**
+     *
+     * @param numberOfPlayerBoard number of the player board required
+     * @param view the current gui view
+     * @return a pane containing the player board required
+     */
     public static Pane getPlayerBoard(int numberOfPlayerBoard, GUIView view){
         Pane pane;
         FXMLLoader fxmlLoader = new FXMLLoader(GamePaneController.class.getResource("PlayerBoardPane.fxml"));
@@ -55,6 +65,11 @@ public class PlayerBoardPaneController extends AbstractController{
         return pane;
     }
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     * @param numberOfPlayerBoard the number of the player board associated to this controller
+     */
     public void setup(GUIView view, int numberOfPlayerBoard){
     	super.setUp(view);
         this.numberOfPlayerBoard = numberOfPlayerBoard;
@@ -85,6 +100,13 @@ public class PlayerBoardPaneController extends AbstractController{
 
     }
 
+    /**
+     * called when the user clicks on a dice among the placed ones
+     * if possible send a ToolCardSetPlacedDiceAction or a ToolCardSetSecondPlacedDiceAction to the controller
+     * @param event click on the dice
+     * @param y y position of the dice clicked
+     * @param x x position of the dice clicked
+     */
     private void onMouseClicked(MouseEvent event, int y, int x){
         IModel model = getController().getModel();
         int currentChair = getController().getChair();
@@ -101,12 +123,24 @@ public class PlayerBoardPaneController extends AbstractController{
         event.consume();
     }
 
+    /**
+     * called when the user end drag and drop on a node (which is an imageView)
+     * @param event end drag and drop
+     * @param y y position of the associated node
+     * @param x x position of the associated node
+     */
     private void onDragDropped(DragEvent event, int y, int x){
         String recived = event.getDragboard().getString();
         int numberOfDice = Integer.parseInt(recived);
         getController().sendAction(new PlaceDiceAction(getController().getChair(), numberOfDice, y, x));
     }
 
+    /**
+     * called when the user is passing over a node (during drag & drop)
+     * @param event passing over a node
+     * @param y y position of the associated node
+     * @param x x position of the associated node
+     */
     private void onDragOver(DragEvent event, int y, int x){
         if(event.getDragboard().hasString()){
             String recived = event.getDragboard().getString();
@@ -118,8 +152,12 @@ public class PlayerBoardPaneController extends AbstractController{
         }
     }
 
-    private void updateChooseWindowFrameButton(PlayerBoardData playerBoardData)
+    /**
+     * Add or remove chooseWindowFrameButton according to the state of the game
+     */
+    private void updateChooseWindowFrameButton()
     {
+        PlayerBoardData playerBoardData = getModel().getPlayerBoard(numberOfPlayerBoard).getData();
         if(!playerBoardData.getWindowFrameIsSet() && numberOfPlayerBoard == getChair()
                 &&getModel().getMainBoard().getData().getGameState().getClass()
                 == FrameSelectionState.class)
@@ -131,20 +169,24 @@ public class PlayerBoardPaneController extends AbstractController{
 
     }
 
+    /**
+     * update the player board associated to this controller
+     */
     private void updatePlayerBoard() {
 
-        IModel model = getController().getModel();
-        PlayerBoardData playerBoardData = model.getPlayerBoard(numberOfPlayerBoard).getData();
         PlayerView currentPlayer = getController().getCurrentRoom().getPlayerOfChair(numberOfPlayerBoard);
 
         if (currentPlayer != null)
             nameOfPlayer.setText(currentPlayer.getName());
         else nameOfPlayer.setText("Giocatore: " + numberOfPlayerBoard);
-        updateChooseWindowFrameButton(playerBoardData);
+        updateChooseWindowFrameButton();
         updateDicePlacedFrame();
 
     }
 
+    /**
+     * update the dice placed on the player board associated to this controller
+     */
     private void updateDicePlacedFrame(){
 
         DicePlacedFrameData dicePlacedFrameData = getController().getModel().getPlayerBoard(numberOfPlayerBoard)
@@ -163,6 +205,12 @@ public class PlayerBoardPaneController extends AbstractController{
             }
         }
 
+    /**
+     * set as image of a cell the image of the corresponding dice in the window frame
+     * @param y y position of the cell
+     * @param x x position of the cell
+     * @param imageView imageView to set
+     */
     private void setWindowFrameCell(int y, int x, ImageView imageView){
 
         WindowFrame windowFrame = getController().getModel().getPlayerBoard(numberOfPlayerBoard)
@@ -176,6 +224,10 @@ public class PlayerBoardPaneController extends AbstractController{
         else imageView.setImage(textureDatabase.getDice(null, -1));
     }
 
+    /**
+     * called when chooseWindowFrameButton is clicked
+     * show the scene containing the 4 possible window frames for the user
+     */
     @FXML
     private void onChooseWindowFrameClicked(){
 

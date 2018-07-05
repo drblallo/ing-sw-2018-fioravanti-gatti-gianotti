@@ -11,6 +11,10 @@ import progetto.model.ToolCard;
 
 import java.util.List;
 
+/**
+ * this is the class that handles the tool card fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class ToolCardPaneController extends AbstractController{
 
     @FXML
@@ -25,6 +29,10 @@ public class ToolCardPaneController extends AbstractController{
     private static final int STANDARD_NUMBER_OF_TOOL_CARDS = 3;
     private static final int BACK_TOOL_CARD = 13;
 
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     */
     @Override
     public void setUp(GUIView view){
     	super.setUp(view);
@@ -42,12 +50,20 @@ public class ToolCardPaneController extends AbstractController{
         view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
     }
 
+    /**
+     * called when the imageView of a card is clicked
+     * @param i position of the card in the main board
+     */
     private void onMouseClicked(int i){
         UseToolCardAction useToolCardAction = new UseToolCardAction(getController().getChair(), i);
         if (useToolCardAction.canBeExecuted(getController().getModel()))
             getController().sendAction(useToolCardAction);
     }
 
+    /**
+     * called when main board changes
+     * update displayed cards
+     */
     private void update(){
         IModel model = getController().getModel();
         List<ToolCard> toolCardList = model.getMainBoard().getData().getToolCards();
@@ -55,22 +71,37 @@ public class ToolCardPaneController extends AbstractController{
 
         updateToolCards(model, toolCardList, textureDatabase);
         displayedToolCards = model.getMainBoard().getData().getToolCards().size();
-        //FAI SCHERMATA FINALE E CONTROLLA PURE I BOTTONI DELLA SCHERMATA FINALE
-        //PRIMA DI FARE TUTTE QUESTE COSE PULLA LA ROBA DI MIKE!
     }
 
+    /**
+     * update single or multi player tool cards
+     * @param model current model
+     * @param toolCardList list of current tool cards
+     * @param textureDatabase texture database to use
+     */
     private void updateToolCards(IModel model, List<ToolCard> toolCardList, TextureDatabase textureDatabase){
         if (model.getMainBoard().getData().getPlayerCount()!=1)
             updateToolCardsMultiPlayer(toolCardList, textureDatabase);
         else updateToolCardSinglePlayer(model, toolCardList, textureDatabase);
     }
 
+    /**
+     * update multi player tool cards
+     * @param toolCardList list of current tool cards
+     * @param textureDatabase texture database to use
+     */
     private void updateToolCardsMultiPlayer(List<ToolCard> toolCardList, TextureDatabase textureDatabase){
         if (mainBox.getChildren().contains(extraToolCardVBox))
             mainBox.getChildren().removeAll(extraToolCardVBox);
         loadStandardToolCards(STANDARD_NUMBER_OF_TOOL_CARDS, toolCardList, textureDatabase);
     }
 
+    /**
+     * update single player tool cards
+     * @param model current model
+     * @param toolCardList list of current tool cards
+     * @param textureDatabase texture database to use
+     */
     private void updateToolCardSinglePlayer(IModel model, List<ToolCard> toolCardList, TextureDatabase textureDatabase){
         int currentToolCards;
         if (model.getMainBoard().getData().getGameState().getClass() == PreGameState.class)
@@ -101,6 +132,12 @@ public class ToolCardPaneController extends AbstractController{
         displayedToolCards = currentToolCards;
     }
 
+    /**
+     * update the first 3 tool cards in the main board
+     * @param currentToolCards current number of tool cards
+     * @param toolCardList list of current tool cards
+     * @param textureDatabase texture database to use
+     */
     private void loadStandardToolCards(int currentToolCards, List<ToolCard> toolCardList,
                                        TextureDatabase textureDatabase){
         ImageView imageView;
@@ -121,6 +158,12 @@ public class ToolCardPaneController extends AbstractController{
         }
     }
 
+    /**
+     * update the extra tool cards in the main board ( used only in single player mode )
+     * @param currentToolCards current number of tool cards
+     * @param toolCardList list of current tool cards
+     * @param textureDatabase texture database to use
+     */
     private void loadExtraToolCards(int currentToolCards, List<ToolCard> toolCardList,
                                     TextureDatabase textureDatabase){
         ImageView imageView;

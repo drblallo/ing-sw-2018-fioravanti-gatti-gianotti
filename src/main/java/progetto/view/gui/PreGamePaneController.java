@@ -13,6 +13,10 @@ import progetto.model.MainBoardData;
 import progetto.network.RoomView;
 import progetto.utils.IObserver;
 
+/**
+ * this is the class that handles the pre game fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ */
 public class PreGamePaneController extends AbstractController{
 
     @FXML
@@ -30,8 +34,20 @@ public class PreGamePaneController extends AbstractController{
     @FXML
     private HBox difficultyHBox;
     private static final int MAX_DIFFICULTY = 5;
-    private IObserver<RoomView> roomViewIObserver = ogg -> Platform.runLater(()->updateRoomView(ogg));
 
+    /**
+     * called every time this pane is shown
+     * clear selected items
+     */
+    public void onPreShow(){
+        numberOfPlayersChoice.getSelectionModel().clearSelection();
+        difficultyChoice.getSelectionModel().clearSelection();
+    }
+
+    /**
+     * called when the fxml is loaded for the first time
+     * setup ChoiceBoxes
+     */
     @FXML
     public void initialize(){
         for (int i = 0; i< MainBoardData.MAX_NUM_PLAYERS; i++){
@@ -43,19 +59,34 @@ public class PreGamePaneController extends AbstractController{
         playerAndDifficultyHBox.getChildren().remove(difficultyHBox);
     }
 
+
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     */
     @Override
     public void setUp(GUIView view){
         super.setUp(view);
 
-        view.getController().getObservable().getMainBoard().addObserver((ogg) -> Platform.runLater(this::updateMainBoard));
-        view.getController().getRoomViewCallback().addObserver(roomViewIObserver);
+        view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::updateMainBoard));
+        view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(()->updateRoomView(ogg)));
         numberOfPlayersChoice.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> view.getController().sendAction(new SetPlayerCountAction(newValue)) );
+                (observable, oldValue, newValue) -> {
+                    if (newValue!=null)
+                        view.getController().sendAction(new SetPlayerCountAction(newValue));
+                } );
         difficultyChoice.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> view.getController().sendAction(new SetDifficultyAction(newValue))
+                (observable, oldValue, newValue) -> {
+                    if (newValue!=null)
+                        view.getController().sendAction(new SetDifficultyAction(newValue));
+                }
         );
       }
 
+    /**
+     * called when main board changes
+     * update the possible options, which are different if there will be a single or a multi player game
+      */
     private void updateMainBoard() {
         MainBoardData mainBoardData = getModel().getMainBoard().getData();
         int playerCount = mainBoardData.getPlayerCount();
@@ -70,6 +101,10 @@ public class PreGamePaneController extends AbstractController{
         }
     }
 
+    /**
+     * update when the current room changes
+     * @param roomView update the available chairs
+     */
     private void updateRoomView(RoomView roomView){
             numberOfChairChoice.getItems().clear();
             numberOfChairChoice.getItems().add(-1);
@@ -81,11 +116,19 @@ public class PreGamePaneController extends AbstractController{
         }
     }
 
+    /**
+     * called when startGameButton is clicked
+     * send a StartGameAction to the controller
+     */
     @FXML
     private void onStartGameButtonClicked(){
         getController().sendAction(new StartGameAction());
     }
 
+    /**
+     * called when sitButton is clicked
+     * pick the selected chair
+     */
     @FXML
     private void onSitButtonPressed(){
         if(numberOfChairChoice.getSelectionModel().getSelectedItem()!=null)

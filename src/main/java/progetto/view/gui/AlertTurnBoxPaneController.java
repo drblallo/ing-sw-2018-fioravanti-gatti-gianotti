@@ -11,10 +11,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller of the stage shown when the user become the current player
+ */
 public class AlertTurnBoxPaneController {
 
     private static Stage alertStage;
 
+    /**
+     * load the AlertTurnBoxPane
+     */
     public static synchronized void setup(){
         FXMLLoader fxmlLoader = new FXMLLoader(AlertExitBoxPaneController.class
                 .getResource("AlertTurnBoxPane.fxml"));
@@ -39,10 +45,17 @@ public class AlertTurnBoxPaneController {
 
     }
 
+    /**
+     * show the AlertTurnBoxPane
+     */
     public static void display(){
         alertStage.showAndWait();
     }
 
+    /**
+     * called when the okButton is clicked
+     * close the AlertTurnBox stage
+     */
     @FXML
     private void onOkButtonClicked(){
         alertStage.close();

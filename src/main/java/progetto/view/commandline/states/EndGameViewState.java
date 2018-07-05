@@ -12,26 +12,43 @@ import progetto.view.commandline.commands.StartNewGameCommand;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * State shown at the end of a game
+ */
 public class EndGameViewState extends AbstractCLViewState {
 
+    private static final String YOU_WIN = "HAI VINTO!!\n\n";
+    private static final String YOU_LOSE = "HAI PERSO\n\n";
+    /**
+     * public constructor
+     * @param cl the command line view that this state will be applied to
+     */
     public EndGameViewState(CommandLineView cl) {
         super("End round view state", cl);
     }
 
-    private static final String YOU_WIN = "HAI VINTO!!\n\n";
-    private static final String YOU_LOSE = "HAI PERSO\n\n";
-
+    /**
+     * Check if this state is still valid
+     * @return if this state is still valid
+     */
     @Override
     public boolean isStillValid() {
         return getModel().getMainBoard().getData().getGameState().getClass() == EndGameState.class;
     }
 
+    /**
+     * load the commands associated to this stage
+     */
     @Override
     public void onApply() {
         registerCommand(new StartNewGameCommand(getView()));
         registerCommand(new CloseGameCommand(getView()));
     }
 
+    /**
+     * Return the result of the game and ask to the user what he want to do
+     * @return the result of the game and ask to the user what he want to do
+     */
     @Override
     public String getMessage() {
 
@@ -45,6 +62,10 @@ public class EndGameViewState extends AbstractCLViewState {
         return result.toString();
     }
 
+    /**
+     * Calculate the result of a single player game
+     * @return the result of a single player game
+     */
     private StringBuilder singlePlayerScore(){
         IModel model = getModel();
         StringBuilder result = new StringBuilder();
@@ -61,6 +82,10 @@ public class EndGameViewState extends AbstractCLViewState {
         return result;
     }
 
+    /**
+     * Calculate the result of a multi player game
+     * @return the result of a multi player game
+     */
     private StringBuilder multiPlayerScore(){
 
         StringBuilder result = new StringBuilder();
