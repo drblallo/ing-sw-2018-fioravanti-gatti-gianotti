@@ -15,6 +15,7 @@ import progetto.model.MainBoardData;
 import progetto.model.PlayerBoardData;
 import progetto.model.WindowFrame;
 
+public class ChooseWindowFramePaneController extends AbstractController {
 /**
  * this is the class that handles the choose window frame fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
@@ -23,14 +24,13 @@ public class ChooseWindowFramePaneController {
 
     @FXML
     private TilePane mainPane;
-    private GUIView view;
 
     /**
      * set up this object, it is equivalent to a constructor since there is no access to it
      */
     public void setup(PlayerBoardData playerBoardData, IClientController clientController, GUIView view) {
 
-        this.view = view;
+    	super.setUp(view);
 
         Image image = new Image(GamePaneController.class.getResourceAsStream("background.jpg"));
         BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,
@@ -79,7 +79,7 @@ public class ChooseWindowFramePaneController {
         Label favourPointsLabel = (Label) hBox.getChildren().get(1);
         Label numberOfTokens = (Label) hBox.getChildren().get(2);
 
-        if (view.getController().getModel().getMainBoard().getData().getPlayerCount() != 1){
+        if (getModel().getMainBoard().getData().getPlayerCount() != 1){
             favourPointsLabel.setText("Punti favore: ");
             numberOfTokens.setText(windowFrame.getFavorToken() + "");
         }

@@ -13,7 +13,6 @@ public class StateManager {
     private Stage stage;
     private State currentState;
     private HashMap<String, State> stateHashMap = new HashMap<>();
-    private IGameController currentGame;
     private GUIView guiView;
 
     public StateManager(Stage stage, GUIView guiView){
@@ -23,14 +22,6 @@ public class StateManager {
 
     public GUIView getGuiView() {
         return guiView;
-    }
-
-    public IGameController getCurrentGame() {
-        return currentGame;
-    }
-
-    public void setCurrentGame(IGameController currentGame) {
-        this.currentGame = currentGame;
     }
 
     public Stage getStage() {

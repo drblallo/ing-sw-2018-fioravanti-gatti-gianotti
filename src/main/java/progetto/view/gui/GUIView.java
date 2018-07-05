@@ -52,9 +52,7 @@ public class GUIView extends AbstractView
 
 	public void onGameChanged()
 	{
-		if (getController().thereIsGame())
-			stateManager.setCurrentGame(getController());
-		else
+		if (!getController().thereIsGame())
 		{
 			Platform.runLater(
 					()-> stateManager.getStateFromName("StartingPane.fxml").show(false)

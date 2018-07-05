@@ -5,6 +5,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import progetto.model.GameColor;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -42,8 +43,8 @@ public final class TextureDatabase {
      * load all the images
      */
     private TextureDatabase(){
+        white = new Image(getClass().getResourceAsStream(PLAYERBOARD + "WHITE" + DIMENSION));
 
-        white = new Image(getClass().getResourceAsStream(PLAYERBOARD + "/WHITE" + DIMENSION));
         colors = new EnumMap<>(GameColor.class);
         loadColors();
         numbers = new ArrayList<>();
