@@ -45,7 +45,7 @@
                   <Region HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#onMenuButtonClicked" prefHeight="50.0" prefWidth="349.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Menu principale">
+            <Button fx:id="menuButton" mnemonicParsing="false" onAction="#onMenuButtonClicked" prefHeight="50.0" prefWidth="349.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Menu principale">
                <font>
                   <Font name="Imprint MT Shadow" size="25.0" />
                </font>

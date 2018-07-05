@@ -244,7 +244,7 @@ public class PlayerBoardPaneController extends AbstractController{
             }
             ChooseWindowFramePaneController chooseWindowFramePaneController = fxmlLoader.getController();
             chooseWindowFramePaneController.setup(model
-                    .getPlayerBoard(numberOfPlayerBoard).getData(), getController(), getView());
+                    .getPlayerBoard(numberOfPlayerBoard).getData(), getView());
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(pane));

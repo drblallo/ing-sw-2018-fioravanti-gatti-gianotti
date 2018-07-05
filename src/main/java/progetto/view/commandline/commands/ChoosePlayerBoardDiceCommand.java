@@ -5,11 +5,12 @@ import progetto.controller.ToolCardSetSecondPlacedDiceAction;
 import progetto.model.Dice;
 import progetto.model.ToolCardParameters;
 import progetto.view.commandline.CommandLineView;
+import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to select the dice from the playerBoard to use with a tool card
  */
-public class ChoosePlayerBoardDiceCommand extends AbstractCLViewCommand {
+public class ChoosePlayerBoardDiceCommand extends AbstractStateSwitcherCommand {
 
     private int numberOfDice;
 
@@ -19,7 +20,7 @@ public class ChoosePlayerBoardDiceCommand extends AbstractCLViewCommand {
      * @param numberOfDice the number of the dice to select (1 = first dice, 2 = second dice)
      */
     public ChoosePlayerBoardDiceCommand(CommandLineView commandLineView, int numberOfDice) {
-        super(commandLineView);
+        super(commandLineView, new GameTransitionState(commandLineView));
         this.numberOfDice = numberOfDice;
     }
 
@@ -32,7 +33,7 @@ public class ChoosePlayerBoardDiceCommand extends AbstractCLViewCommand {
      * @param args input by the user, it should be a valid position of a dice placed on the playerboard
      */
     @Override
-    public void exec(String[] args) {
+    protected void perform(String[] args) {
 
         String toReturn = "Digitare una posizione valida!";
 

@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test public objective card - Colored diagonals
+ */
 public class TestColoredDiagonals {
 
 	DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
@@ -14,6 +17,9 @@ public class TestColoredDiagonals {
 		dicePlacedFrame = new DicePlacedFrame();
 	}
 
+	/**
+	 * Case no colored diagonals
+	 */
 	@Test
 	public void testNoColoredDiagonals()
 	{
@@ -48,6 +54,9 @@ public class TestColoredDiagonals {
 
 	}
 
+	/**
+	 * Case no dices
+	 */
 	@Test
 	public void testNoDices()
 	{
@@ -57,6 +66,9 @@ public class TestColoredDiagonals {
 
 	}
 
+	/**
+	 * case max number of dices
+	 */
 	@Test
 	public void testMaxNDices()
 	{
@@ -91,6 +103,9 @@ public class TestColoredDiagonals {
 
 	}
 
+	/**
+	 * Case one diagonal
+	 */
 	@Test
 	public void testOneDiagonal()
 	{
@@ -125,6 +140,9 @@ public class TestColoredDiagonals {
 
 	}
 
+	/**
+	 * case two diagonals
+	 */
 	@Test
 	public void testTwoDiagonal()
 	{

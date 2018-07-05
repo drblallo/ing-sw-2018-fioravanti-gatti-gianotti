@@ -1,5 +1,6 @@
 package progetto.network.rmi;
 
+import progetto.Settings;
 import progetto.network.IEnforce;
 import progetto.network.INetworkClient;
 import progetto.network.IRoomRequest;
@@ -34,9 +35,11 @@ public final class RMIClient implements INetworkClient, Runnable{
 	 * @param ip the ip where the server is located.
 	 */
 	public RMIClient(String ip, int port) {
+		Logger.getLogger(RMIClient.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
+		Logger.getLogger(RMIClient.class.getPackage().getName()).setLevel(Level.ALL);
 		try {
 			LOGGER.log(Level.FINE, "creating module");
-			System.setProperty("java.rmi.server.hostname", ip);
+			System.setProperty("java.rmi.server.hostname", Settings.getSettings().getMyIP());
 			Registry registry = LocateRegistry.getRegistry(ip, port);
 
 			LOGGER.log(Level.FINE, "fetched registry on ip: {0}", ip);
@@ -55,7 +58,7 @@ public final class RMIClient implements INetworkClient, Runnable{
 			new Thread(this).start();
 
 		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "FAILED TO CREATE RMI NETWORK MODULE: {0}", e.getMessage());
+			LOGGER.log(Level.SEVERE, "FAILED TO CREATE RMI NETWORK CLIENT: {0}", e.getMessage());
 			teardown();
 		}
 		LOGGER.log(Level.FINE, "created connection");

@@ -4,18 +4,19 @@ import progetto.controller.ToolCardSetPickedDiceAction;
 import progetto.model.Dice;
 import progetto.model.ToolCardParameters;
 import progetto.view.commandline.CommandLineView;
+import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to select the dice from the picked ones to use with a tool card
  */
-public class ChoosePickedDiceCommand extends AbstractCLViewCommand {
+public class ChoosePickedDiceCommand extends AbstractStateSwitcherCommand {
 
     /**
      * public constructor
      * @param commandLineView the command line view that this command will modifiy
      */
     public ChoosePickedDiceCommand(CommandLineView commandLineView) {
-        super(commandLineView);
+        super(commandLineView, new GameTransitionState(commandLineView));
     }
 
     /**
@@ -24,7 +25,7 @@ public class ChoosePickedDiceCommand extends AbstractCLViewCommand {
      * @param args input by the user, it should be the number of the picked dice
      */
     @Override
-    public void exec(String[] args) {
+    protected void perform(String[] args) {
         String toReturn = "Inserire una numero valido!";
 
         if(args == null || args.length == 0){

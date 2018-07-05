@@ -45,22 +45,6 @@ public class PreGamePaneController extends AbstractController{
     }
 
     /**
-     * called when the fxml is loaded for the first time
-     * setup ChoiceBoxes
-     */
-    @FXML
-    public void initialize(){
-        for (int i = 0; i< MainBoardData.MAX_NUM_PLAYERS; i++){
-            numberOfPlayersChoice.getItems().add(i+1);
-        }
-        for (int i = 1; i<MAX_DIFFICULTY + 1; i++){
-            difficultyChoice.getItems().add(i);
-        }
-        playerAndDifficultyHBox.getChildren().remove(difficultyHBox);
-    }
-
-
-    /**
      * set up this object, it is equivalent to a constructor since there is no access to it
      * @param view the current gui view
      */
@@ -68,6 +52,13 @@ public class PreGamePaneController extends AbstractController{
     public void setUp(GUIView view){
         super.setUp(view);
 
+        for (int i = 0; i< MainBoardData.MAX_NUM_PLAYERS; i++){
+            numberOfPlayersChoice.getItems().add(i+1);
+        }
+        for (int i = 1; i<MAX_DIFFICULTY + 1; i++){
+            difficultyChoice.getItems().add(i);
+        }
+        playerAndDifficultyHBox.getChildren().remove(difficultyHBox);
         view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::updateMainBoard));
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(()->updateRoomView(ogg)));
         numberOfPlayersChoice.getSelectionModel().selectedItemProperty().addListener(

@@ -33,8 +33,8 @@ public class SocketRMIChoicePaneController extends AbstractStateController {
      * called when the fxml is loaded for the first time
      * load the background
      */
-    @FXML
-    public void initialize() {
+    @Override
+    public void setup() {
 
         Image image = new Image(getClass().getResourceAsStream("toolcard_large.png"));
         BackgroundSize backgroundSize = new BackgroundSize(BACKGROUND_SIZE,BACKGROUND_SIZE,true,true,true,false);

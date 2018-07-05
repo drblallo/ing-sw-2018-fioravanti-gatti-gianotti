@@ -18,7 +18,7 @@
             <Font name="Imprint MT Shadow" size="25.0" />
          </font>
       </Button>
-      <Button maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#onEndTurnButtonClicked" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: wheat; -fx-border-color: BLACK; -fx-border-width: 2;" text="Finisci turno">
+      <Button fx:id="endTurnButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#onEndTurnButtonClicked" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: wheat; -fx-border-color: BLACK; -fx-border-width: 2;" text="Finisci turno">
          <font>
             <Font name="Imprint MT Shadow" size="25.0" />
          </font>

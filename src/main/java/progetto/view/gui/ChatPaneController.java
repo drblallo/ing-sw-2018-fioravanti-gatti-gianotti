@@ -59,8 +59,6 @@ public class ChatPaneController extends AbstractStateController {
         chatArea.clear();
     }
 
-
-
     /**
      * called when the current room changes
      * displayes all the players in the room and update the available chairs

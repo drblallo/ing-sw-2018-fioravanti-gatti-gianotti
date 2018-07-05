@@ -21,8 +21,8 @@ public final class StartingPaneController extends AbstractStateController {
      * called when the fxml is loaded for the first time
      * load the background
      */
-    @FXML
-    public void initialize(){
+    @Override
+    public void setup(){
         Image image = new Image(getClass().getResourceAsStream("toolcard_large.png"));
         BackgroundSize backgroundSize = new BackgroundSize(Control.USE_COMPUTED_SIZE,Control.USE_COMPUTED_SIZE,
                 true,true,true,false);

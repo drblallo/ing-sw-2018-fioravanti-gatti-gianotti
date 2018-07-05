@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test public objective card - Columns different values
+ */
 public class TestColumnsDifferentValues {
 
 	DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
@@ -14,6 +17,9 @@ public class TestColumnsDifferentValues {
 		dicePlacedFrame = new DicePlacedFrame();
 	}
 
+	/**
+	 * Case one complete columns
+	 */
 	@Test
 	public void testOneCompleteColumn()
 	{
@@ -32,6 +38,9 @@ public class TestColumnsDifferentValues {
 
 	}
 
+	/**
+	 * Case two complete columns
+	 */
 	@Test
 	public void testTwoCompleteColumns()
 	{
@@ -55,6 +64,9 @@ public class TestColumnsDifferentValues {
 
 	}
 
+	/**
+	 * Case no complete columns
+	 */
 	@Test
 	public void testNotCompleteColumns()
 	{
@@ -72,6 +84,9 @@ public class TestColumnsDifferentValues {
 
 	}
 
+	/**
+	 * Case no columns with different values
+	 */
 	@Test
 	public void testNotDifferent()
 	{

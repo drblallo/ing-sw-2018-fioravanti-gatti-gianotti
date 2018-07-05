@@ -31,6 +31,7 @@ public class Settings {
 	private int rmiPort;
 	private int gameStartTimeOut;
 	private int playerTurnTImeOut;
+	private String myIP;
 
 	public int getAllertTime() {
 		return allertTime;
@@ -66,5 +67,9 @@ public class Settings {
 			System.exit(-1);
 		}
 
+	}
+
+	public String getMyIP() {
+		return myIP;
 	}
 }

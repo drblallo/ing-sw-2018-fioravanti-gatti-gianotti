@@ -1,5 +1,6 @@
 package progetto.network.rmi;
 
+import progetto.Settings;
 import progetto.network.INetworkHandler;
 import progetto.network.INetworkModule;
 import progetto.utils.Callback;
@@ -26,6 +27,7 @@ public final class RMIModule implements INetworkModule {
 
 	public RMIModule(int port)
 	{
+		System.setProperty("java.rmi.server.hostname", Settings.getSettings().getMyIP());
 		this.port = port;
 	}
 

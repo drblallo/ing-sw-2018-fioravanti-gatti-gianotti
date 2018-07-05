@@ -4,18 +4,19 @@ import progetto.controller.ToolCardSetSinglePlayerDiceAction;
 import progetto.model.Dice;
 import progetto.model.IModel;
 import progetto.view.commandline.CommandLineView;
+import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to select the dice to sacrifice to use a tool card in single player mode
  */
-public class SetSinglePlayerDiceAction extends AbstractCLViewCommand {
+public class SetSinglePlayerDiceAction extends AbstractStateSwitcherCommand {
 
     /**
      * public constructor
      * @param commandLineView the command line view that this command will modify
      */
     public SetSinglePlayerDiceAction(CommandLineView commandLineView) {
-        super(commandLineView);
+        super(commandLineView, new GameTransitionState(commandLineView));
     }
 
     /**
@@ -24,7 +25,7 @@ public class SetSinglePlayerDiceAction extends AbstractCLViewCommand {
      * @param args input by the user, it should be a valid position of a dice to sacrifice among the extracted ones
      */
     @Override
-    public void exec(String[] args) {
+    protected void perform(String[] args) {
         String toReturn = "Inserire un numero valido!";
         if(args == null || args.length == 0){
          write(toReturn);

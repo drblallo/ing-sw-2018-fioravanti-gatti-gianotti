@@ -26,7 +26,7 @@ public class ChooseWindowFramePaneController extends AbstractController {
     /**
      * set up this object, it is equivalent to a constructor since there is no access to it
      */
-    public void setup(PlayerBoardData playerBoardData, IClientController clientController, GUIView view) {
+    public void setup(PlayerBoardData playerBoardData, GUIView view) {
 
     	super.setUp(view);
 
@@ -45,8 +45,8 @@ public class ChooseWindowFramePaneController extends AbstractController {
                     .getWindowFrame(i%2));
             final int j = i;
             currentWindow.setOnMouseClicked(event -> {
-				clientController.sendAction(new FrameSetAction
-						(clientController.getChair(), j/2, j%2));
+                getController().sendAction(new FrameSetAction
+						(getController().getChair(), j/2, j%2));
 				mainPane.getScene().getWindow().hide();
 			});
         }

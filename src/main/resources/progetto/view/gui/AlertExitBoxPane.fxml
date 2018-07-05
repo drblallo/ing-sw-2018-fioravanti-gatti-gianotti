@@ -25,7 +25,7 @@
       <HBox spacing="50.0">
          <children>
             <Region HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#onYesButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Sì">
+            <Button fx:id="yesButton" mnemonicParsing="false" onAction="#onYesButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Sì">
                <font>
                   <Font name="Imprint MT Shadow" size="25.0" />
                </font>

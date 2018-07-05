@@ -62,8 +62,10 @@ final class RMIRemoteServerSession extends UnicastRemoteObject implements IRemot
 	 * @param request the request to be sent
 	 */
 	public void sendRequest(final IRoomRequest request) {
-		LOGGER.log(Level.FINE, "sending request {0}", request.getClass().getName());
+		LOGGER.log(Level.FINE, "sending request to handler {0}", request.getClass().getName());
+
 		requestCallback.call(request);
+		LOGGER.log(Level.FINE, "evaluated request");
 	}
 
 	/**

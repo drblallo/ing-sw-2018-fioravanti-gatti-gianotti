@@ -4,6 +4,9 @@ import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Test support class Couple
+ */
 public class TestCouple extends TestCase{
 
 	@Test

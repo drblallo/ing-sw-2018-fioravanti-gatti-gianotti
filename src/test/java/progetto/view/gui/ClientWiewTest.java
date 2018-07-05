@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.testfx.api.FxRobotException;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import progetto.ClientMain;
@@ -46,7 +47,7 @@ public class ClientWiewTest extends ApplicationTest {
     }
 
     @Test
-    public void testSinglePlayer() {
+    public void testGeneral() {
 
         clickOn("#sagradaImageView");
         clickOn("#newGame");
@@ -87,20 +88,29 @@ public class ClientWiewTest extends ApplicationTest {
         clickOn("#sitButton");
         clickOn("#chooseWindowFrame");
         clickOn("#firstWIndow");
-        clickOn("#okButton");
+        timoty.wait(1000);
+        try{
+            clickOn("#okButton");
+        }catch (FxRobotException exception){
+            //
+        }
         clickOn("#chatButton");
         clickOn("#messageToSend");
         write("aaa\n");
         clickOn("#returnButton");
+        clickOn("#showOtherPlayersButton");
+        clickOn("#returnButton");
+        clickOn("#menuButton");
+        clickOn("#exitGameButton");
 
-        timoty.wait(500);
         Assert.assertTrue(true);
 
     }
 
-    /*@Test
+    @Test
     public void testNoClientConnection(){
 
+        clickOn("#sagradaImageView");
         clickOn("#newGame");
         clickOn("#iPAddress");
         write("0.0.0.0");
@@ -108,31 +118,95 @@ public class ClientWiewTest extends ApplicationTest {
         clickOn("#connectButton");
 
         Assert.assertTrue(true);
-    } */
+    }
 
-    /*@Test
-    public void testTwoGame(){
-
+    @Test
+    public void testEndGameSinglePlayer(){
+        clickOn("#sagradaImageView");
         clickOn("#newGame");
         clickOn("#connectButton");
         clickOn("#roomNameTextField");
         write("Room1");
         clickOn("#createRoom");
         clickOn("#usernameTextField");
-        write("Luca");
+        write("Federica");
         clickOn("#listView");
         type(KeyCode.DOWN);
         type(KeyCode.DOWN);
         clickOn("#enterButton");
-        clickOn("#backButton");
+        clickOn("#numberOfPlayersChoice");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#difficultyChoice");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#numberOfChairChoice");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#sitButton");
+        clickOn("#startGameButton");
+        clickOn("#chooseWindowFrame");
+        clickOn("#firstWIndow");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
+        clickOn("#endTurnButton");
 
+    }
+
+    @Test
+    public void testTwoGame(){
+
+        clickOn("#sagradaImageView");
+        clickOn("#newGame");
+        clickOn("#connectButton");
+        clickOn("#roomNameTextField");
+        write("Room1");
+        clickOn("#createRoom");
+        clickOn("#usernameTextField");
+        write("Federica");
+        clickOn("#listView");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        clickOn("#enterButton");
+        clickOn("#numberOfPlayersChoice");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#difficultyChoice");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#numberOfChairChoice");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#sitButton");
+        clickOn("#startGameButton");
+        timoty.wait(500);
+        clickOn("#menuButton");
         clickOn("#newGame");
         clickOn("#connectButton");
         clickOn("#roomNameTextField");
         write("Room2");
         clickOn("#createRoom");
         clickOn("#usernameTextField");
-        write("Luca");
+        write("Federica");
         clickOn("#listView");
         type(KeyCode.DOWN);
         type(KeyCode.DOWN);
@@ -140,13 +214,14 @@ public class ClientWiewTest extends ApplicationTest {
         clickOn("#enterButton");
 
         Assert.assertTrue(true);
-    } */
+    }
 
     @After
     public void tearDown() throws Exception {
 
         timoty.wait(500);
 
+        FxToolkit.hideStage();
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});

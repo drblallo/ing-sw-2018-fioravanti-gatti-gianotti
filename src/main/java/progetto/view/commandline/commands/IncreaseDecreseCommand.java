@@ -4,11 +4,12 @@ import progetto.controller.ToolCardSetIncreaseDecreaseAction;
 import progetto.controller.ToolCardSetPickedDiceAction;
 import progetto.model.ToolCardParameters;
 import progetto.view.commandline.CommandLineView;
+import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to increase or decrease the value of a dice when permitted by a tool card
  */
-public class IncreaseDecreseCommand extends AbstractCLViewCommand {
+public class IncreaseDecreseCommand extends AbstractStateSwitcherCommand {
 
     private int increaseDecrese;
 
@@ -20,7 +21,7 @@ public class IncreaseDecreseCommand extends AbstractCLViewCommand {
      *                       increaseDecrease == 1, decrease )
      */
     public IncreaseDecreseCommand(CommandLineView commandLineView, int increseDecrese) {
-        super(commandLineView);
+        super(commandLineView, new GameTransitionState(commandLineView));
         this.increaseDecrese = increseDecrese;
     }
 
@@ -29,7 +30,7 @@ public class IncreaseDecreseCommand extends AbstractCLViewCommand {
      * @param params no input needed
      */
     @Override
-    public void exec(String[] params) {
+    protected void perform(String[] params) {
         getController().sendAction(new ToolCardSetIncreaseDecreaseAction(getController().getChair(), increaseDecrese));
     }
 

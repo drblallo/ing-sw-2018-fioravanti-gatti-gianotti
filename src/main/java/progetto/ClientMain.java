@@ -2,6 +2,7 @@ package progetto;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import progetto.network.rmi.RMIClient;
 import progetto.network.rmi.RMIHandler;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.StreamProcessor;
@@ -18,7 +19,10 @@ public class ClientMain extends Application {
 
     public static void main(String[] args){
 
-        ServerMain.main(args);
+       // Logger.getLogger(RMIClient.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
+        //Logger.getLogger(RMIClient.class.getPackage().getName()).setLevel(Level.ALL);
+        //Logger.getLogger(RMIClient.class.getPackage().getName()).getParent().setLevel(Level.ALL);
+        //ServerMain.main(args);
         launch(args);
 
     }
@@ -26,8 +30,6 @@ public class ClientMain extends Application {
     @Override
     public synchronized void start(Stage primaryStage)
     {
-       // Logger.getLogger(RMIHandler.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
-        //Logger.getLogger(RMIHandler.class.getPackage().getName()).setLevel(Level.ALL);
 
         Settings.getSettings();
         primaryStage.setTitle("Sagrada");

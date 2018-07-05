@@ -40,7 +40,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onExitGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Esci dal gioco">
+                  <Button fx:id="exitGameButton" mnemonicParsing="false" onAction="#onExitGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Esci dal gioco">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>
