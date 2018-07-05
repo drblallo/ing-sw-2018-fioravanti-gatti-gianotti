@@ -13,6 +13,8 @@ import progetto.utils.IObserver;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Timer;
 
 /**
  * A server game is a game structure that will send action to the underlying game and will provide to the room
@@ -114,7 +116,8 @@ public class ServerGame extends GameSync implements  ISync
 		super.clear();
 		attachObservers();
 
-		sendItem(new SetSeedAction(3));
+		Random random = new Random();
+		sendItem(new SetSeedAction(random.nextInt()));
 
 		List<WindowFrameCouple> list = WindowFrameCoupleArray.getInstance().getList();
 
