@@ -14,4 +14,5 @@ interface IRemoteLogger extends Remote {
 	 * @throws RemoteException all remote exceptions are thrown
 	 */
 	IRemoteServerSession login(IRemoteClientSession remote) throws RemoteException;
+
 }

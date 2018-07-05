@@ -36,22 +36,29 @@ public final class RMIClient implements INetworkClient, Runnable{
 	public RMIClient(String ip, int port) {
 		try {
 			LOGGER.log(Level.FINE, "creating module");
+			System.setProperty("java.rmi.server.hostname", ip);
 			Registry registry = LocateRegistry.getRegistry(ip, port);
 
+			LOGGER.log(Level.FINE, "fetched registry on ip: {0}", ip);
 			IRemoteLogger stub = (IRemoteLogger) registry.lookup("test");
+			LOGGER.log(Level.FINE, "found stub");
+
 			RMIRemoteClientSession local = new RMIRemoteClientSession();
 			local.getConnectionLostCallback().addObserver(ogg -> teardown());
 			enforceCallback = local.getEnforceCallback();
 			messageCallback = local.getMessageCallback();
 
+			LOGGER.log(Level.FINE, "Trying to login in {0}", stub);
+
 			session = stub.login(local);
-			startTimer();
+			LOGGER.log(Level.FINE, "login success");
 			new Thread(this).start();
 
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "FAILED TO CREATE RMI NETWORK MODULE: {0}", e.getMessage());
 			teardown();
 		}
+		LOGGER.log(Level.FINE, "created connection");
 	}
 
 	/**
@@ -61,7 +68,8 @@ public final class RMIClient implements INetworkClient, Runnable{
 	{
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
-			public void run() {
+			public void run()
+			{
 				pingOtherSide();
 			}
 		},
@@ -76,6 +84,7 @@ public final class RMIClient implements INetworkClient, Runnable{
 	{
 		try
 		{
+			LOGGER.log(Level.FINE, "ping");
 			session.ping();
 		}
 		catch (RemoteException e)
@@ -203,6 +212,8 @@ public final class RMIClient implements INetworkClient, Runnable{
 	public void run()
 	{
 		Thread.currentThread().setName("RMI Thread");
+		LOGGER.log(Level.FINE, "Starting rmi thread");
+		startTimer();
 		while (isRunning())
 			sendFirstPending();
 	}

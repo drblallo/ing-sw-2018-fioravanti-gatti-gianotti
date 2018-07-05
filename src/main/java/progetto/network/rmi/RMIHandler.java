@@ -40,7 +40,7 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 			}
 		);
 		new Thread(this).start();
-		startTimer();
+
 	}
 
 	private void startTimer()
@@ -56,6 +56,7 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 	private void sendPing()
 	{
 		try {
+			LOGGER.log(Level.FINE, "ping");
 			session.ping();
 		} catch (RemoteException e) {
 			LOGGER.log(Level.SEVERE, "Failed to ping {0}", e.getMessage());
@@ -185,6 +186,8 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 	public void run()
 	{
 		Thread.currentThread().setName(getClass().getName()+" Thread");
+		LOGGER.log(Level.FINE, "Started rmi handler thread");
+		startTimer();
 		while (isRunning())
 			sendFirstPending();
 

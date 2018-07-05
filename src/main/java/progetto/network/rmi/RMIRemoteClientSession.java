@@ -20,12 +20,13 @@ final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemot
 	private final transient Callback<IEnforce> enforceCallback = new Callback<>();
 	private final transient Callback<IRemoteClientSession> connectionClosedCallback = new Callback<>();
 	private final transient Timer timer = new Timer();
-	private int pings = 0;
+	private transient int pings = 0;
 
 	RMIRemoteClientSession() throws RemoteException {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
+				LOGGER.log(Level.FINE, "local tick");
 				pings++;
 				if (pings >= NetworkSettings.MAX_TIME_TO_LIVE_SKIPPED)
 					close();
