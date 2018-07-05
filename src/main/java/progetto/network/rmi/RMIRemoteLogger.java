@@ -1,6 +1,7 @@
 package progetto.network.rmi;
 
 import java.rmi.RemoteException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -20,6 +21,7 @@ final class RMIRemoteLogger implements IRemoteLogger {
 		final RMIRemoteServerSession local = new RMIRemoteServerSession();
 
 		new Thread(() -> {
+			LOGGER.log(Level.FINE, "trying to add player");
 			RMIHandler handler = new RMIHandler(remote, local);
 			server.getPlayerJoinedCallback().call(handler);
 		}).start();
