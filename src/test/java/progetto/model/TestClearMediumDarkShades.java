@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test public objective card - clear/medium/dark shades
+ */
 public class TestClearMediumDarkShades {
 
 	DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
@@ -14,9 +17,11 @@ public class TestClearMediumDarkShades {
 		dicePlacedFrame = new DicePlacedFrame();
 	}
 
-
+	/**
+	 * Test clear shades case 1
+	 */
 	@Test
-	public void testClearShades0()
+	public void testClearShades1()
 	{
 		ClearShadesPublicObjectiveCard clearShadesPublicObjectiveCard = new ClearShadesPublicObjectiveCard();
 
@@ -31,6 +36,9 @@ public class TestClearMediumDarkShades {
 		Assert.assertEquals(0, clearShadesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
+	/**
+	 * Test clear shades case2
+	 */
 	@Test
 	public void testClearShades2()
 	{
@@ -47,8 +55,11 @@ public class TestClearMediumDarkShades {
 		Assert.assertEquals(4, clearShadesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
+	/**
+	 * Test dark shades - case 1
+	 */
 	@Test
-	public void testDarkShades0()
+	public void testDarkShades1()
 	{
 		DarkShadesPublicObjectiveCard darkShadesPublicObjectiveCard = new DarkShadesPublicObjectiveCard();
 
@@ -63,9 +74,11 @@ public class TestClearMediumDarkShades {
 		Assert.assertEquals(0, darkShadesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
-
+	/**
+	 * Test dark shades case 2
+	 */
 	@Test
-	public void testDarkShades1()
+	public void testDarkShades2()
 	{
 		DarkShadesPublicObjectiveCard darkShadesPublicObjectiveCard = new DarkShadesPublicObjectiveCard();
 
@@ -80,6 +93,9 @@ public class TestClearMediumDarkShades {
 		Assert.assertEquals(2, darkShadesPublicObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
+	/**
+	 * Test medium shades case 1
+	 */
 	@Test
 	public void testMediumShades3()
 	{
