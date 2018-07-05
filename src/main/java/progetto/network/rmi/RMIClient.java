@@ -107,7 +107,6 @@ public final class RMIClient implements INetworkClient, Runnable{
 		{
 			notifyAll();
 		}
-		throw new NullPointerException();
 	}
 
 	/**
