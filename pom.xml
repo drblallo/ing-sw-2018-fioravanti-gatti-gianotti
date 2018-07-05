@@ -51,7 +51,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>progetto.ClientMain</mainClass>
+                            <mainClass>progetto.ServerMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -69,10 +69,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <finalName>client-${project.artifactId}</finalName>
+                    <finalName>server-${project.artifactId}</finalName>
                     <archive>
                         <manifest>
-                            <mainClass>progetto.ClientMain</mainClass>
+                            <mainClass>progetto.ServerMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
