@@ -37,7 +37,7 @@
       </HBox>
       <TilePane fx:id="tilePane" hgap="5.0" maxHeight="245.0" maxWidth="305.0" minHeight="245.0" minWidth="305.0" prefHeight="245.0" prefWidth="305.0" style="-fx-background-color: black;" vgap="5.0">
          <children>
-            <ImageView fitHeight="55.0" fitWidth="55.0">
+            <ImageView fx:id="image00" fitHeight="55.0" fitWidth="55.0">
                <image>
                   <Image url="@playerboard/WHITE-64.png" />
                </image>

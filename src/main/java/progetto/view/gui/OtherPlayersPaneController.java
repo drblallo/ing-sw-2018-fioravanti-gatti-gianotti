@@ -18,8 +18,6 @@ public class OtherPlayersPaneController extends AbstractStateController {
     private HBox otherPlayersHBox;
     private int displayedNumberOfPlayers = -1;
     private int myChair = -2;
-    /*@FXML
-    private TextArea otherPlayersActions; */
 
     /**
      * set up this object, it is equivalent to a constructor since there is no access to it
@@ -38,7 +36,6 @@ public class OtherPlayersPaneController extends AbstractStateController {
         getController().getRoomViewCallback()
                 .addObserver(ogg -> Platform.runLater(this::update));
         getView().getStateManager().getObsModel().getMainBoard().addObserver(ogg -> Platform.runLater(this::update));
-        //getViewStateMachine().getObsModel().getCommandQueue().addObserver(ogg -> updateOtherPlayersActions());
     }
 
     /**
@@ -64,29 +61,6 @@ public class OtherPlayersPaneController extends AbstractStateController {
             }
         }
     }
-
-    /*private void updateOtherPlayersActions(){
-        CommandQueueData commandQueueData = getController().getModel().getCommandQueue().getData();
-        RoomView roomView = getController().getCurrentRoom();
-        AbstractGameAction abstractGameAction = commandQueueData.getPastItem(0);
-        if (abstractGameAction == null || abstractGameAction.getCallerID() == -1)
-            return;
-        String nameOfCaller;
-        if (roomView.getPlayerOfChair(abstractGameAction.getCallerID()).getName()!=null){
-            nameOfCaller = roomView.getPlayerOfChair(abstractGameAction.getCallerID()).getName();
-        }
-        else nameOfCaller = "Giocatore n° " + abstractGameAction.getCallerID();
-
-        if (abstractGameAction.getCallerID()!= getController().getChair()){
-            if (abstractGameAction.getClass() == ExecuteToolCardAction.class){
-                otherPlayersActions.appendText(nameOfCaller + "ha usato la carta: "
-                + abstractGameAction.getName());
-            }
-            else if (abstractGameAction.getClass() == PlaceDiceAction.class){
-                otherPlayersActions.appendText(nameOfCaller + "ha piazzato un dado");
-            }
-        }
-    } */
 
     /**
      * called when backButton is clicked

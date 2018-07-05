@@ -37,7 +37,7 @@
                         <Blend />
                      </effect>
                   </ChoiceBox>
-                  <Button mnemonicParsing="false" onAction="#onSitButtonPressed" prefHeight="50.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Siediti">
+                  <Button fx:id="sitButton" mnemonicParsing="false" onAction="#onSitButtonPressed" prefHeight="50.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Siediti">
                      <font>
                         <Font name="Imprint MT Shadow" size="15.0" />
                      </font>

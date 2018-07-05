@@ -71,7 +71,7 @@
                         <Blend />
                      </effect>
                   </ChoiceBox>
-                  <Button mnemonicParsing="false" onAction="#onSitButtonPressed" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Siediti">
+                  <Button fx:id="sitButton" mnemonicParsing="false" onAction="#onSitButtonPressed" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Siediti">
                      <font>
                         <Font name="Imprint MT Shadow" size="15.0" />
                      </font>
@@ -101,7 +101,7 @@
             <HBox>
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#onStartGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Inizia partita">
+                  <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#onStartGameButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Inizia partita">
                      <font>
                         <Font name="Imprint MT Shadow" size="20.0" />
                      </font>

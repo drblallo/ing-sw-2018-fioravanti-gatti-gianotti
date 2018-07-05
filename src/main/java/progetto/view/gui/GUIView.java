@@ -29,9 +29,11 @@ public class GUIView extends AbstractView
 		if (!started)
 		{
 			started = true;
+			State<SagradaPaneController> sagradaPaneControllerState =
+					new State<>(stateManager, "SagradaPane.fxml", SagradaPaneController.class);
+			sagradaPaneControllerState.show(false);
 			State<StartingPaneController> startingPaneControllerViewState =
 					new State<>(stateManager, "StartingPane.fxml", StartingPaneController.class);
-			startingPaneControllerViewState.show(false);
 			new State<SocketRMIChoicePaneController>(stateManager,
 					"SocketRMIChoicePane.fxml", SocketRMIChoicePaneController.class);
 			new State<ExistingGamesPaneController>(stateManager,

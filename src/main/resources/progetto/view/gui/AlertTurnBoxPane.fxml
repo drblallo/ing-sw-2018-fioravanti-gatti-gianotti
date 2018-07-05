@@ -24,7 +24,7 @@
       <HBox>
          <children>
             <Region HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#onOkButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Ok">
+            <Button fx:id="okButton" mnemonicParsing="false" onAction="#onOkButtonClicked" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Ok">
                <font>
                   <Font name="Imprint MT Shadow" size="25.0" />
                </font>

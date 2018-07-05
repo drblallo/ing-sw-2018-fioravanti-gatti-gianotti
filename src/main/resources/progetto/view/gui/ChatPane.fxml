@@ -12,7 +12,7 @@
          <children>
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" onAction="#onReturnButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Indietro">
+                  <Button fx:id="returnButton" mnemonicParsing="false" onAction="#onReturnButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Indietro">
                      <font>
                         <Font name="Imprint MT Shadow" size="25.0" />
                      </font>

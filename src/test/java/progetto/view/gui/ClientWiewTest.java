@@ -45,12 +45,10 @@ public class ClientWiewTest extends ApplicationTest {
 
     }
 
- //   @Test
-//    public void aTest(){}
+    @Test
+    public void testSinglePlayer() {
 
-    /*@Test
-    public void testFirst() {
-
+        clickOn("#sagradaImageView");
         clickOn("#newGame");
         clickOn("#rmi");
         clickOn("#rmi");
@@ -63,67 +61,42 @@ public class ClientWiewTest extends ApplicationTest {
         clickOn("#createRoom");
         clickOn("#enterButton");
         clickOn("#usernameTextField");
-        write("Luca");
+        write("Federica");
         clickOn("#enterButton");
         clickOn("#update");
         clickOn("#listView");
         type(KeyCode.DOWN);
         clickOn("#enterButton");
+        clickOn("#numberOfPlayersChoice");
         type(KeyCode.DOWN);
-        clickOn("#listView");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#numberOfChairChoice");
         type(KeyCode.DOWN);
         type(KeyCode.DOWN);
-        clickOn("#enterButton");
-        clickOn("#chatPane");
-        clickOn("#chairs");
+        type(KeyCode.ENTER);
         clickOn("#sitButton");
+        timoty.wait(500);
+        clickOn("#startGameButton");
+        clickOn("#chooseWindowFrame");
+        clickOn("#firstWIndow");
         clickOn("#chairs");
         type(KeyCode.DOWN);
         type(KeyCode.DOWN);
         type(KeyCode.ENTER);
         clickOn("#sitButton");
+        clickOn("#chooseWindowFrame");
+        clickOn("#firstWIndow");
+        clickOn("#okButton");
+        clickOn("#chatButton");
         clickOn("#messageToSend");
-        write("Hi\n");
-        clickOn("#commandLine");
-        clickOn("#commandText");
-        write("");
-        clickOn("#sendButton");
-        clickOn("#commandText");
-        write("SetPlayerCountAction 0 1\n");
-        write("StartGameAction 0\n");
-        write("FrameSetAction 0 0 0\n");
-        write("PickDiceAction 0 1\n");
-        write("PlaceDiceAction 0 0 0 0\n");
-        write("PlaceDiceAction 0 0 0 4\n");
-        write("PlaceDiceAction 0 0 3 0\n");
-        write("PlaceDiceAction 0 0 3 4\n");
-        clickOn("#otherPlayers");
-        timoty.wait(1000);
-        clickOn("#commandLine");
-        clickOn("#commandText");
-        write("EndTurnAction 0\n");
-        write("EndTurnAction 0\n");
-        write("EndTurnAction 0\n");
-        clickOn("#roundTrack");
-        moveTo("#round11");
-        clickOn("#backButton");
-        clickOn("#continueButton");
-        clickOn("#backButton");
-        clickOn("#continueButton");
-        clickOn("#selectButton");
-        clickOn("#listView");
-        type(KeyCode.DOWN);
-        clickOn("#selectButton");
-        clickOn("#backButton");
-        clickOn("#newGame");
-        clickOn("#rmi");
-        clickOn("#connectButton");
-
+        write("aaa\n");
+        clickOn("#returnButton");
 
         timoty.wait(500);
         Assert.assertTrue(true);
 
-    } */
+    }
 
     /*@Test
     public void testNoClientConnection(){
