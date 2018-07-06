@@ -12,7 +12,11 @@ public class GUIView extends AbstractView
 	private boolean started = false;
 	private final Stage stage;
 
-
+	/**
+	 * public constructor
+	 * @param primaryStage stage to use
+	 * @param controller current client controller
+	 */
 	public GUIView(Stage primaryStage, ClientController controller)
 	{
 		super(controller);
@@ -20,10 +24,19 @@ public class GUIView extends AbstractView
 		stage = primaryStage;
 	}
 
+	/**
+	 *
+	 * @return current state manager
+	 */
 	public StateManager getStateManager() {
 		return stateManager;
 	}
 
+	/**
+	 * the first time it is called loads all fxml files, then show and hide the guiView according to
+	 * the boolean received
+	 * @param visible true if the controller wishes you to be visible, false otherwise
+	 */
 	@Override
 	public void setVisible(boolean visible) {
 		if (!started)
@@ -52,6 +65,9 @@ public class GUIView extends AbstractView
 			stage.hide();
 	}
 
+	/**
+	 * call onGameChanged on the state manager, if there isn't an opened game change the scene to Starting Pane
+	 */
 	public void onGameChanged()
 	{
 		stateManager.onGameChanged();
@@ -62,5 +78,4 @@ public class GUIView extends AbstractView
 			);
 		}
 	}
-
 }

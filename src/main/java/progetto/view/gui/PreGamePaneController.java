@@ -102,11 +102,10 @@ public class PreGamePaneController extends AbstractController{
             numberOfChairChoice.getItems().clear();
             numberOfChairChoice.getItems().add(-1);
             MainBoardData mainBoardData = getModel().getMainBoard().getData();
-            for (int i = 0; i < mainBoardData.getPlayerCount(); i++) {
+            for (int i = 0; i < mainBoardData.getPlayerCount(); i++)
                 if (roomView.getPlayerOfChair(i) == null)
                     numberOfChairChoice.getItems().add(i);
             currentNumberOfChair.setText(getController().getChair()+ "");
-        }
             numberOfPlayersChoice.setValue(-1);
     }
 
