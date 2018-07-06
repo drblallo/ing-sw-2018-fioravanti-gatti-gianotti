@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /**
  * Class to create Deck of ToolCards.
  * Each cards has also a list of available actions
+ * @author Michele
  */
 public class ToolCardDeck {
 

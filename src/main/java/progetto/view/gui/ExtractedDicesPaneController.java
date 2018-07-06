@@ -12,6 +12,7 @@ import progetto.model.ExtractedDicesData;
 /**
  * this is the class that handles the extracted dices fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
 public class ExtractedDicesPaneController extends AbstractController{
 

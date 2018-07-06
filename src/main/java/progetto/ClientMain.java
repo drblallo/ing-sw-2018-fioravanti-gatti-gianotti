@@ -10,7 +10,6 @@ import progetto.view.gui.GUIView;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-
 public class ClientMain extends Application {
 
     public static void main(String[] args){

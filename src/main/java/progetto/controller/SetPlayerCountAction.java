@@ -6,6 +6,7 @@ import progetto.model.PreGameState;
 
 /**
  * Action to set number of players of the game
+ * @author Michele
  */
 public class SetPlayerCountAction extends AbstractExecutibleGameAction
 {

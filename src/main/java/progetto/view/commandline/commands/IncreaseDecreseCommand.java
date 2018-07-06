@@ -7,6 +7,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to increase or decrease the value of a dice when permitted by a tool card
+ * @author Federica
  */
 public class IncreaseDecreseCommand extends AbstractStateSwitcherCommand {
 

@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 
 /**
  * The rmi implementation of INetworkClient.
+ * @author Massimo
  *
  */
 public final class RMIClient implements INetworkClient, Runnable{

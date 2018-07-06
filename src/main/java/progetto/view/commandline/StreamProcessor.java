@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Federica
+ */
 public class StreamProcessor implements Runnable {
 
     private BufferedReader bin;

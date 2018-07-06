@@ -13,6 +13,7 @@ import java.util.logging.Logger;
  * all the method needed to communicate with the server.
  *
  * All request sending methods are synchronized, so requests can be performed from any thread.
+ * @author Massimo
  */
 public final class ClientConnection implements Runnable
 {

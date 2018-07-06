@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Class for public objective card "Sfumature Scure"
+ * @author Michele
  */
 public class DarkShadesPublicObjectiveCard extends AbstractValueShadesPublicObjectiveCard {
 

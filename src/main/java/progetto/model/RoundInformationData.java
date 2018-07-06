@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Immutable class with data of RoundInformation
+ * @author Michele
  */
 public final class RoundInformationData implements Serializable {
 

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * When a player sends a request, this request is processed by the thread spawned.
  * It ensures that request received by the same player are solved in order of arrival.
  * It DOES not ensure that requests received by different player are solved in order of arrival.
+ * @author Massimo
  */
 abstract class AbstractRoom implements Runnable
 {

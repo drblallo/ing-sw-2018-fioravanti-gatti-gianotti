@@ -6,6 +6,7 @@ import progetto.view.commandline.Printer;
 
 /**
  * Command to show picked dices of the user
+ * @author Federica
  */
 public class ShowPickedDicesCommand extends AbstractCLViewCommand {
 

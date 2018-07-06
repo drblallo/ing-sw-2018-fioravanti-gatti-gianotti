@@ -13,6 +13,7 @@ import java.io.IOException;
 
 /**
  * Controller of the stage shown when the user become the current player
+ * @author Federica
  */
 public class AlertTurnBoxPaneController {
 

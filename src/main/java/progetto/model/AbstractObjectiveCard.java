@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Abstract class for objective card
+ * @author Michele
  */
 public abstract class AbstractObjectiveCard implements Serializable {
 

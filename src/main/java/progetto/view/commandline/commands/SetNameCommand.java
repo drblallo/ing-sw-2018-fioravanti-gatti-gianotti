@@ -5,6 +5,7 @@ import progetto.view.commandline.states.DefaultViewState;
 
 /**
  * Command to set the name of the user
+ * @author Federica
  */
 public class SetNameCommand extends AbstractCLViewCommand {
 

@@ -4,6 +4,7 @@ import progetto.view.commandline.CommandLineView;
 
 /**
  * command to create a new room
+ * @author Federica
  */
 public class CreateRoomCommand extends AbstractCLViewCommand {
 

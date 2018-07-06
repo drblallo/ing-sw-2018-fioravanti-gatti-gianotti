@@ -14,6 +14,7 @@ import progetto.utils.IObserver;
 /**
  * this is the class that handles the player menu fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
 public class PlayerMenuPaneController extends AbstractController{
 

@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * State for the begin of the round
+ * @author Michele
  */
 public class StartRoundState extends AbstractGameState{
 	public StartRoundState() {

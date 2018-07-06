@@ -6,6 +6,7 @@ import progetto.view.commandline.states.RoundViewState;
 
 /**
  * Command to place a dice on the playerboard
+ * @author Federica
  */
 public class PlaceDiceCommand extends AbstractStateSwitcherCommand {
 

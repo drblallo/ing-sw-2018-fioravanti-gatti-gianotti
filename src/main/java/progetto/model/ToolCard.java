@@ -2,6 +2,10 @@ package progetto.model;
 
 import java.io.Serializable;
 
+/**
+ * Class tool card
+ * @author Michele
+ */
 public class ToolCard implements Serializable {
 
 	private String name;

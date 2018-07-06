@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * State used while the player is using an tool card
+ * @author Michele
  */
 public class ToolCardState extends AbstractGameState{
 

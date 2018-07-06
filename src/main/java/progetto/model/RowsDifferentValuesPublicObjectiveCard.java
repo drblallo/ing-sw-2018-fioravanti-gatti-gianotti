@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Class for public objective card "Sfumature diverse - riga"
+ * @author Michele
  */
 public class RowsDifferentValuesPublicObjectiveCard extends AbstractDifferentColValPublicObjectiveCard {
 

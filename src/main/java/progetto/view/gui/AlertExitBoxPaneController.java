@@ -13,6 +13,7 @@ import java.io.IOException;
 
 /**
  * Controller of the stage shown when the user want to leave the game
+ * @author Federica
  */
 public class AlertExitBoxPaneController {
 

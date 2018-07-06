@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Immutable class with parameters used for toolCards
+ * @author Michele
  */
 public final class ToolCardParameters implements Serializable {
 

@@ -4,6 +4,7 @@ package progetto.utils;
  * A extension of AbstractObservable that allows for composition.
  *
  * @param <T> The type of argument that is passed to observers.
+ * @author Massimo
  */
 public final class Callback<T> extends AbstractObservable<T> {
 

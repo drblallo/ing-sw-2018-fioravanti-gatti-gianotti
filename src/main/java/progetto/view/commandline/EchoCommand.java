@@ -1,5 +1,8 @@
 package progetto.view.commandline;
 
+/**
+ * @author Federica
+ */
 public class EchoCommand implements ICommand {
 
     public String getName() {

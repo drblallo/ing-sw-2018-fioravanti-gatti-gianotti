@@ -4,6 +4,7 @@ import progetto.view.commandline.CommandLineView;
 
 /**
  * Command to update the list of the existing rooms
+ * @author Federica
  */
 public class UpdateCommand extends AbstractCLViewCommand {
 

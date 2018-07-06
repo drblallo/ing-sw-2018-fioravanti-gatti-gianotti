@@ -16,6 +16,7 @@ public class ChooseWindowFramePaneController extends AbstractController {
 /**
  * this is the class that handles the choose window frame fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
     @FXML
     private TilePane mainPane;

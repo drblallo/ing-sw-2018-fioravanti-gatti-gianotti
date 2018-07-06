@@ -4,6 +4,7 @@ import progetto.model.*;
 
 /**
  * Action to place a dice in placed window frame
+ * @author Michele
  */
 public class PlaceDiceAction extends AbstractExecutibleGameAction{
 

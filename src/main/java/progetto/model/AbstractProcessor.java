@@ -3,6 +3,7 @@ package progetto.model;
 /**
  * This interface that represents a object that can receive items to be processed.
  * Items are left pending util the relative method is called
+ * @author Michele
  */
 public interface AbstractProcessor<T> {
 

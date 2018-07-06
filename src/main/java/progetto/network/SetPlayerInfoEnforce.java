@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 /**
  * And enforce that is sent when the server wants to notify that the player id is changed.
+ * @author Massimo
  */
 final class SetPlayerInfoEnforce implements IEnforce
 {

@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 /**
  * Implementation of INetowrkModule
+ * @author Massimo
  */
 public final class RMIModule implements INetworkModule {
 

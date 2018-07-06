@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Command to show public and private objective cards
+ * @author Federica
  */
 public class ShowObjectivesCommand extends AbstractCLViewCommand {
 

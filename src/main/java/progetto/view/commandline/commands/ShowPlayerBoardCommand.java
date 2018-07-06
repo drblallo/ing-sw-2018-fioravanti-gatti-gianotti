@@ -7,6 +7,7 @@ import progetto.view.commandline.states.AbstractCLViewState;
 
 /**
  * Command to show the playerboard of a player
+ * @author Federica
  */
 public class ShowPlayerBoardCommand extends AbstractStateSwitcherCommand {
 

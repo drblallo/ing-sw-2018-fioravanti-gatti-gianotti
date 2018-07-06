@@ -11,6 +11,7 @@ import java.util.logging.Logger;
  * room and server level behaviour.
  *
  * It requires an already built INetworkHandler to be created, since it cannot know how connection are established.
+ * @author Massimo
  */
 final class ServerConnection {
 

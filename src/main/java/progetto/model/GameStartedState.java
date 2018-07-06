@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * State used when game has started
+ * @author Michele
  */
 public class GameStartedState extends AbstractGameState
 {

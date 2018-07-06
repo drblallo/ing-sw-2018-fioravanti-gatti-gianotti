@@ -5,6 +5,7 @@ import progetto.view.commandline.states.RoomsChoiceState;
 
 /**
  * Command to go to the RoomsChoiceState
+ * @author Federica
  */
 public class ShowRoomCommand extends AbstractStateSwitcherCommand {
 

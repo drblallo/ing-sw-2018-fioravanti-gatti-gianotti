@@ -5,6 +5,7 @@ import progetto.model.IModel;
 
 /**
  * This is the abstract class that is extended by javafx controllers that are aware of the controller
+ * @author Federica
  */
 public abstract class AbstractStateController {
 

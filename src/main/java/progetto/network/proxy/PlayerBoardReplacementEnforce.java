@@ -7,6 +7,9 @@ import progetto.network.IEnforce;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Massimo
+ */
 public class PlayerBoardReplacementEnforce implements IEnforce
 {
 	private static final Logger LOGGER = Logger.getLogger(PlayerBoardReplacementEnforce.class.getName());

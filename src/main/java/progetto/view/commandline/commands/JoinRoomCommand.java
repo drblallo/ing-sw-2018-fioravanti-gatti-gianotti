@@ -6,6 +6,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to join a room
+ * @author Federica
  */
 public class JoinRoomCommand extends AbstractStateSwitcherCommand {
 

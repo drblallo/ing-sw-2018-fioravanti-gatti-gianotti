@@ -4,6 +4,7 @@ import progetto.utils.Callback;
 
 /**
  * The server side implementation of a message transport layer must implement this interface.
+ * @author Massimo
  */
 public interface INetworkHandler {
 

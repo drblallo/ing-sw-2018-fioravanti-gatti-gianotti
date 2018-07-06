@@ -5,6 +5,7 @@ import progetto.view.commandline.CommandLineView;
 
 /**
  * Command to end the turn
+ * @author Federica
  */
 public class EndTurnCommand extends AbstractCLViewCommand {
 

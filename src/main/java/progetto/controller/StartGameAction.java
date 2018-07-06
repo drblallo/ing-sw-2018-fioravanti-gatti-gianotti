@@ -7,6 +7,7 @@ import progetto.model.PreGameState;
 
 /**
  * starts the model
+ * @author Michele
  */
 public class StartGameAction extends AbstractExecutibleGameAction
 {

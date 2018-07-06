@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 /**
  * Class used to print on the command line WindowFrames and PlayerBoards
+ * @author Federica
  */
 public class Printer {
 

@@ -2,6 +2,9 @@ package progetto.view.commandline;
 
 import java.util.List;
 
+/**
+ * @author Federica
+ */
 public interface ICommandProcessor extends ICommand, IExecutible
 {
 	void registerCommand(ICommand command);

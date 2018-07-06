@@ -12,6 +12,7 @@ import java.util.Map;
 
 /**
  * final class containing all necessary images for the game
+ * @author Federica
  */
 public final class TextureDatabase {
 

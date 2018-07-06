@@ -2,6 +2,7 @@ package progetto.network;
 
 /**
  * Forces the client to update his room info
+ * @author Massimo
  */
 final class SetRoomInfoEnforce implements IEnforce {
 

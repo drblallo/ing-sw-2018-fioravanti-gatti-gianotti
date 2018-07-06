@@ -6,6 +6,7 @@ import progetto.view.commandline.states.RoundViewState;
 
 /**
  * Command to pick a dice from the extracted ones
+ * @author Federica
  */
 public class PickDiceCommand extends AbstractStateSwitcherCommand {
 

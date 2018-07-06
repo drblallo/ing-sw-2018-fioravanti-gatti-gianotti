@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 /**
  * Command queue of the model
+ * @author Michele
  */
 public class CommandQueue extends Container<CommandQueueData> implements AbstractProcessor<AbstractGameAction> {
 

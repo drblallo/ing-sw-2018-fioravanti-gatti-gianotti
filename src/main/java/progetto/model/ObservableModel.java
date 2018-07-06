@@ -1,5 +1,8 @@
 package progetto.model;
 
+/**
+ * @author Michele
+ */
 public interface ObservableModel extends IModel
 {
 	Container<CommandQueueData> getCommandQueue();

@@ -7,6 +7,9 @@ import progetto.model.ObservableModel;
 
 import java.util.HashMap;
 
+/**
+ * @author Federica
+ */
 public class StateManager {
 
     private Stage stage;

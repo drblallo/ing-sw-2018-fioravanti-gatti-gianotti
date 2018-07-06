@@ -1,5 +1,8 @@
 package progetto.network;
 
+/**
+ * @author Massimo
+ */
 public final class NetworkSettings {
 
 	public static final int DEFAULT_TIME_TO_LIVE = 5000;

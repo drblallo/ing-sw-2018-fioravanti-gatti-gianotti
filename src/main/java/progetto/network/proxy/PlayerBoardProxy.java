@@ -2,6 +2,9 @@ package progetto.network.proxy;
 
 import progetto.model.*;
 
+/**
+ * @author Massimo
+ */
 public class PlayerBoardProxy extends AbstractPlayerBoard
 {
 

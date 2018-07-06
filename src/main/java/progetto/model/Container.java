@@ -4,6 +4,10 @@ import progetto.utils.AbstractObservable;
 
 import java.io.Serializable;
 
+/**
+ * @author Michele
+ * @param <T>
+ */
 public class Container<T extends Serializable> extends AbstractObservable<T> implements IContainer<T>
 {
 

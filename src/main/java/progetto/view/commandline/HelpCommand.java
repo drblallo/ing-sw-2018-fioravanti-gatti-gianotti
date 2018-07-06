@@ -1,5 +1,8 @@
 package progetto.view.commandline;
 
+/**
+ * @author Federica
+ */
 public class HelpCommand implements ICommand {
 
     private ICommandProcessor processor;

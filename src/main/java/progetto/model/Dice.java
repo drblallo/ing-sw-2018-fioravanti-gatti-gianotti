@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Dice with a color and a value  (immutable)
+ * @author Michele
  */
 public final class Dice implements Serializable {
 	private final Value value;

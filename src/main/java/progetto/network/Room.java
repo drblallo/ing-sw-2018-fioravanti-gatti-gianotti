@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 /**
  * The extension of Abstract room that is able to keep the sync object synchronized.
+ * @author Massimo
  */
 public final class Room extends AbstractRoom
 {

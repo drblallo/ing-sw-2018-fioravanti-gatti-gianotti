@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 
 /**
  * this is the interface of the object that is created on the client and sent to the server as a remote.
+ * @author Massimo
  */
 interface IRemoteClientSession extends Remote {
 

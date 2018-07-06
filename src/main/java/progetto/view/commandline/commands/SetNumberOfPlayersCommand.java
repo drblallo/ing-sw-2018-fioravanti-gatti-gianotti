@@ -5,6 +5,7 @@ import progetto.view.commandline.CommandLineView;
 
 /**
  * Command to set the number of players of a game
+ * @author Federica
  */
 public class SetNumberOfPlayersCommand extends AbstractCLViewCommand {
 

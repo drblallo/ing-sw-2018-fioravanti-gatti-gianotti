@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Abstract class for public objective card where is asked to count different value/color in columns/rows
+ * @author Michele
  */
 public abstract class AbstractDifferentColValPublicObjectiveCard extends AbstractPublicObjectiveCard{
 

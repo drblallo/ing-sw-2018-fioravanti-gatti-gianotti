@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Class for public objective card "Colori diversi - colonna"
+ * @author Michele
  */
 public class ColumnsDifferentColorsPublicObjectiveCard extends AbstractDifferentColValPublicObjectiveCard {
 

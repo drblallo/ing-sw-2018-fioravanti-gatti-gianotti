@@ -8,6 +8,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to select the dice from the picked ones to use with a tool card
+ * @author Federica
  */
 public class ChoosePickedDiceCommand extends AbstractStateSwitcherCommand {
 

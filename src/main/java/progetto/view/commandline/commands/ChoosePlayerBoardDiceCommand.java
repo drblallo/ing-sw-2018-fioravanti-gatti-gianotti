@@ -9,6 +9,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to select the dice from the playerBoard to use with a tool card
+ * @author Federica
  */
 public class ChoosePlayerBoardDiceCommand extends AbstractStateSwitcherCommand {
 

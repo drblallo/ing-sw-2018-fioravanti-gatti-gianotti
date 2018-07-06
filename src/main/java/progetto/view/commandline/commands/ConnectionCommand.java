@@ -5,6 +5,7 @@ import progetto.view.commandline.states.RoomsState;
 
 /**
  * Command to create a socket or a RMI connection to the server
+ * @author Federica
  */
 public class ConnectionCommand extends AbstractCLViewCommand {
 

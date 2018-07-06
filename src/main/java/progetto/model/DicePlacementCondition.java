@@ -19,7 +19,9 @@ import java.util.logging.Logger;
  *  -Ingore color bond
  *  -Ingore value bond
  *  -Ignore constraint of proximity to another dice
-*/
+ *
+ *  @author Michele
+ */
 public final class DicePlacementCondition implements Serializable{
 
 	private static final int Y_MAX = 3;

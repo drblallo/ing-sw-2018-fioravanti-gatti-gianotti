@@ -2,6 +2,9 @@ package progetto.network;
 
 import progetto.utils.Callback;
 
+/**
+ * @author Massimo
+ */
 public interface INetworkModule {
 	/**
 	 * shutdows the module, disconnect every connection

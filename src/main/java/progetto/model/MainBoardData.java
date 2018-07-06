@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Immutable class with data of MainBoard
+ * @author Michele
  */
 public final class MainBoardData implements Serializable {
 

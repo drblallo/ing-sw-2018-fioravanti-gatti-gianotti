@@ -6,6 +6,9 @@ import progetto.model.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * @author Massimo
+ */
 public class ModelProxy implements ObservableModel
 {
 	private final MainBoardProxy mainBoardProxy = new MainBoardProxy();

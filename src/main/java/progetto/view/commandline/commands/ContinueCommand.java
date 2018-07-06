@@ -5,6 +5,7 @@ import progetto.view.commandline.states.ContinueGameState;
 
 /**
  * Command to go in the ContinueGameState
+ * @author Federica
  */
 public class ContinueCommand extends AbstractStateSwitcherCommand {
 

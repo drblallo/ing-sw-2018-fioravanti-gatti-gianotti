@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 /**
  * Request that is used to try to get a particular chair inside a server room
+ * @author Massimo
  */
 final class PickChairRoomRequest implements IRoomRequest
 {

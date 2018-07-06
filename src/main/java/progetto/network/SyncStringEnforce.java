@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Forces the player to append a sync string command to his sync object
+ * @author Massimo
  */
 final class SyncStringEnforce implements IEnforce {
 	private final Serializable action;

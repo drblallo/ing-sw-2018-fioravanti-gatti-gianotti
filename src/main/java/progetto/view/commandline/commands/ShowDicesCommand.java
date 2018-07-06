@@ -5,6 +5,7 @@ import progetto.view.commandline.states.PickDiceState;
 
 /**
  * Command to show extracted dices
+ * @author Federica
  */
 public class ShowDicesCommand extends AbstractStateSwitcherCommand {
 

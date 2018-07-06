@@ -5,6 +5,7 @@ import progetto.view.commandline.states.ChairSelectionState;
 
 /**
  * Command to go to the ChairSelectionState
+ * @author Federica
  */
 public class SelectChairCommand extends AbstractStateSwitcherCommand {
 

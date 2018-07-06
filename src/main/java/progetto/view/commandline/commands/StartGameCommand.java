@@ -6,6 +6,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to start the game
+ * @author Federica
  */
 public class StartGameCommand extends AbstractStateSwitcherCommand{
 

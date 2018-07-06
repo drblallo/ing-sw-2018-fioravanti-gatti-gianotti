@@ -18,6 +18,7 @@ import java.util.Comparator;
 /**
  * this is the class that handles the choose end game fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
 public class EndGamePaneController extends AbstractStateController {
 

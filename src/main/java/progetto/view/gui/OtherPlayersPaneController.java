@@ -9,6 +9,7 @@ import javafx.scene.layout.*;
 /**
  * this is the class that handles the other players fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
 public class OtherPlayersPaneController extends AbstractStateController {
 
