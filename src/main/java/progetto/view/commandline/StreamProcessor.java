@@ -60,40 +60,28 @@ public class StreamProcessor implements Runnable {
      * @throws IOException are thrown
      */
     private void processCharacter () throws IOException {
-        int i;
-        char c;
 
-        i = bin.read();
-        c=(char) i;
-        if(c=='\n') {
-            characterEnter();
+        String s = (bin.readLine());
+
+        if (s == null)
+        {
+            isAlive = false;
             return;
         }
-        if(i==-1){
-            isAlive=false;
-            read.append(-1);
-            return;
-        }
-        read.append(c);
-    }
+        s = s.replaceAll(System.lineSeparator(), "");
 
-    /**
-     * called when enter is pressed
-     * @throws IOException are thrown
-     */
-    private void characterEnter()throws IOException{
         String output;
         if (isActive)
         {
-            output = comproc.execute(read.toString()) + '\n';
+            output = comproc.execute(s) + '\n';
             if (bout != null)
             {
                 bout.write(output);
                 bout.flush();
             }
         }
-        read.delete(0, read.length());
     }
+
 
     /**
      * read from the input stream
