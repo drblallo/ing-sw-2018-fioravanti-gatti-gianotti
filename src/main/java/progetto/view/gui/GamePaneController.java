@@ -50,6 +50,10 @@ public class GamePaneController extends AbstractStateController {
     @FXML
     private UtilityMenuPaneController utilityMenuPaneController;
 
+    @Override
+    public void onPreShow() {
+        preGamePaneController.onPreShow();
+    }
     /**
      * set up this object, it is equivalent to a constructor since there is no access to it
      */
@@ -132,7 +136,6 @@ public class GamePaneController extends AbstractStateController {
             mainVBox.getChildren().remove(roundVBox);
             if (!mainVBox.getChildren().contains(preGameVBox)) {
                 mainVBox.getChildren().add(preGameVBox);
-                preGamePaneController.onPreShow();
             }
         }else if (abstractGameState.getClass() != EndGameState.class){
             mainVBox.getChildren().remove(preGameVBox);

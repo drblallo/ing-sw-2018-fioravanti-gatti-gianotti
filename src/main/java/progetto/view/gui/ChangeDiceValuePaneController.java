@@ -46,7 +46,8 @@ public class ChangeDiceValuePaneController extends AbstractController{
     private void update(){
         ToolCardParameters toolCardParameters = getModel().getRoundInformation()
                 .getData().getToolCardParameters();
-        if (toolCardParameters.getDice() != null){
+        if (toolCardParameters.getDice() != null && getChair() == getModel().getRoundInformation()
+                .getData().getCurrentPlayer()){
             if (!anchorPane.getChildren().contains(myPane))
                 anchorPane.getChildren().add(myPane);
         }

@@ -42,6 +42,8 @@ public class PreGamePaneController extends AbstractController{
     public void onPreShow(){
         numberOfPlayersChoice.getSelectionModel().clearSelection();
         difficultyChoice.getSelectionModel().clearSelection();
+        updateMainBoard();
+        updateRoomView();
     }
 
     /**
@@ -60,7 +62,7 @@ public class PreGamePaneController extends AbstractController{
         }
         playerAndDifficultyHBox.getChildren().remove(difficultyHBox);
         view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::updateMainBoard));
-        view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(()->updateRoomView(ogg)));
+        view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(()->updateRoomView()));
         numberOfPlayersChoice.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue!=null)
@@ -88,15 +90,15 @@ public class PreGamePaneController extends AbstractController{
         else playerAndDifficultyHBox.getChildren().remove(difficultyHBox);
         if (playerCount != Integer.parseInt(currentNumberOfPlayers.getText())){
             currentNumberOfPlayers.setText(mainBoardData.getPlayerCount() + "");
-            Platform.runLater(()->updateRoomView(getController().getCurrentRoom()));
+            Platform.runLater(()->updateRoomView());
         }
     }
 
     /**
      * update when the current room changes
-     * @param roomView update the available chairs
      */
-    private void updateRoomView(RoomView roomView){
+    private void updateRoomView(){
+            RoomView roomView = getController().getCurrentRoom();
             numberOfChairChoice.getItems().clear();
             numberOfChairChoice.getItems().add(-1);
             MainBoardData mainBoardData = getModel().getMainBoard().getData();
@@ -105,6 +107,7 @@ public class PreGamePaneController extends AbstractController{
                     numberOfChairChoice.getItems().add(i);
             currentNumberOfChair.setText(getController().getChair()+ "");
         }
+            numberOfPlayersChoice.setValue(-1);
     }
 
     /**
