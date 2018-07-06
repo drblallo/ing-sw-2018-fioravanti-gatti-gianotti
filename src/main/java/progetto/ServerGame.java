@@ -166,7 +166,7 @@ public class ServerGame extends GameSync implements  ISync
 		if (System.currentTimeMillis() - allertTime > Settings.getSettings().getAllertTime())
 		{
 			allertTime = System.currentTimeMillis();
-			return "sono passati "+Settings.getSettings().getAllertTime()+" millisecondi\n";
+			return "";
 		}
 		return "";
 	}
