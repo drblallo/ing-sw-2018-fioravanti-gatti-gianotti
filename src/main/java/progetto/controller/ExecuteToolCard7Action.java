@@ -21,11 +21,11 @@ public class ExecuteToolCard7Action extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set callerID
-	 * @param nPlayer
+	 * @param callerID
 	 */
-	public ExecuteToolCard7Action(int nPlayer)
+	public ExecuteToolCard7Action(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 	}
 
 	/**

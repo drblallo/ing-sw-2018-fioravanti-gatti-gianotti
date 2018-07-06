@@ -14,7 +14,7 @@ public abstract class AbstractExecutibleGameAction extends AbstractGameAction {
 
 	/**
 	 * Constructor to set callerID
-	 * @param callerID
+	 * @param callerID ID of the caller
 	 */
 	protected AbstractExecutibleGameAction(int callerID)
 	{

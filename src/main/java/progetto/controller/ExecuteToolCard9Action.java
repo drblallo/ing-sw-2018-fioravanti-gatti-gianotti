@@ -19,11 +19,11 @@ public class ExecuteToolCard9Action extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set callerID
-	 * @param nPlayer
+	 * @param callerID
 	 */
-	public ExecuteToolCard9Action(int nPlayer)
+	public ExecuteToolCard9Action(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 	}
 
 	/**
