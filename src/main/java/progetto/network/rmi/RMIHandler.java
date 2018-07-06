@@ -179,7 +179,6 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 		catch (Exception e)
 		{
 			LOGGER.log(Level.SEVERE,"encountered error while sending enforce {0}", e.getMessage());
-			e.printStackTrace();
 			tearDown();
 		}
 	}

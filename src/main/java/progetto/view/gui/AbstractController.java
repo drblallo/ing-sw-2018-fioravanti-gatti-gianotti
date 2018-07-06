@@ -19,7 +19,7 @@ public abstract class AbstractController {
 	}
 
 	/**
-	 * setup the controller
+	 * setUp the controller
 	 * @param view the current gui view
 	 */
 	public void setUp(GUIView view)

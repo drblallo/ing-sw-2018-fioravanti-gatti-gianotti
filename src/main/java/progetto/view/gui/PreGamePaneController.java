@@ -61,7 +61,7 @@ public class PreGamePaneController extends AbstractController{
         }
         playerAndDifficultyHBox.getChildren().remove(difficultyHBox);
         view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::updateMainBoard));
-        view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(()->updateRoomView()));
+        view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::updateRoomView));
         numberOfPlayersChoice.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue!=null)
@@ -89,7 +89,7 @@ public class PreGamePaneController extends AbstractController{
         else playerAndDifficultyHBox.getChildren().remove(difficultyHBox);
         if (playerCount != Integer.parseInt(currentNumberOfPlayers.getText())){
             currentNumberOfPlayers.setText(mainBoardData.getPlayerCount() + "");
-            Platform.runLater(()->updateRoomView());
+            Platform.runLater(this::updateRoomView);
         }
     }
 

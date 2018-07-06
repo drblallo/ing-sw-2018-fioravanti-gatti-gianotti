@@ -29,7 +29,7 @@ public class PickedDicesSlotPaneController extends AbstractController{
      * @param view the current gui view
      * @param i the playerboard associated to this controller
      */
-    public void setup(GUIView view, int i){
+    public void setUp(GUIView view, int i){
     	super.setUp(view);
         numberOfPlayerboard = i;
         view.getController().getObservable().getPlayerBoard(i).getPickedDicesSlot()

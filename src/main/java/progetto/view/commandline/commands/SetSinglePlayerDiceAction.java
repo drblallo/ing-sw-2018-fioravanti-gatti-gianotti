@@ -52,12 +52,12 @@ public class SetSinglePlayerDiceAction extends AbstractStateSwitcherCommand {
     @Override
     public String getHelp() {
         IModel model = getModel();
-        int SPDice = model.getRoundInformation().getData().getToolCardParameters().getSPDice();
-        if (SPDice<0)
+        int sPDice = model.getRoundInformation().getData().getToolCardParameters().getSPDice();
+        if (sPDice<0)
             return "Scegli dalla riserva il dado da sacrificare per usare la carta scelta " +
                 "(Formato: " + getName()+ " <Numero del dado>) " +
                 "(NB: Il colore del dado deve corrispondere a quello indicato sulla carta)\n";
         else return "Hai selto di sacrificare il: "
-                + model.getMainBoard().getExtractedDices().getData().getDice(SPDice).toString();
+                + model.getMainBoard().getExtractedDices().getData().getDice(sPDice).toString();
     }
 }
