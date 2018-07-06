@@ -115,7 +115,7 @@ public class EndGameViewState extends AbstractCLViewState {
         for (int i = 0; i < playerRankingArrayList.size(); i++) {
 
             result.append((i+1) + "° Classificato: ");
-            playerView = roomView.getPlayer(playerRankingArrayList.get(i).getNumberOfPlayer());
+            playerView = roomView.getPlayerOfChair(playerRankingArrayList.get(i).getNumberOfPlayer());
             if (playerView!=null && playerView.getName()!=null)
                 result.append(playerView.getName());
             else result.append("Giocatore numero " + playerRankingArrayList.get(i).getNumberOfPlayer());

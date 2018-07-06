@@ -2,7 +2,7 @@ package progetto.view.commandline.commands;
 
 import progetto.model.IPlayerBoard;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.Printer;
+import progetto.view.commandline.printer.DrawableUtils;
 import progetto.view.commandline.states.AbstractCLViewState;
 
 /**
@@ -11,20 +11,16 @@ import progetto.view.commandline.states.AbstractCLViewState;
 public class ShowPlayerBoardCommand extends AbstractStateSwitcherCommand {
 
     private int nPlayer;
-    private Printer printer;
 
     /**
      * public constructor
      * @param commandLineView the command line view that this command will modify
      * @param nPlayer the number of the player of which the command will show the playerboard
-     * @param printer the printer to use
      * @param abstractCLViewState the state where to go after showing the playerboard
      */
-    public ShowPlayerBoardCommand(CommandLineView commandLineView, int nPlayer,
-                                  Printer printer, AbstractCLViewState abstractCLViewState) {
+    public ShowPlayerBoardCommand(CommandLineView commandLineView, int nPlayer, AbstractCLViewState abstractCLViewState) {
         super(commandLineView, abstractCLViewState);
         this.nPlayer = nPlayer;
-        this.printer = printer;
     }
 
     /**
@@ -34,9 +30,8 @@ public class ShowPlayerBoardCommand extends AbstractStateSwitcherCommand {
     @Override
     protected void perform(String[] params) {
         IPlayerBoard playerBoard = getModel().getPlayerBoard(nPlayer);
-        write(printer.printPlayerBoard(playerBoard.getDicePlacedFrame().getData(),
-                playerBoard.getData().getWindowFrame(),
-                getModel().getMainBoard().getData().getPlayerCount() == 1));
+        write(DrawableUtils.getPlayerBoard(playerBoard,
+                getModel().getMainBoard().getData().getPlayerCount() == 1).toString());
     }
 
     /**

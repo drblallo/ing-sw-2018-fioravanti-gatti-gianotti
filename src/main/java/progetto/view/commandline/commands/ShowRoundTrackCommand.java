@@ -2,7 +2,7 @@ package progetto.view.commandline.commands;
 
 import progetto.model.RoundTrackData;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.Printer;
+import progetto.view.commandline.printer.DrawableUtils;
 
 /**
  * Command to show the round track
@@ -24,10 +24,9 @@ public class ShowRoundTrackCommand extends AbstractCLViewCommand {
     @Override
     public void exec(String[] args) {
 
-        Printer printer = new Printer();
         RoundTrackData roundTrackData = getModel().getRoundTrack().getData();
         if(!roundTrackData.isFree(0))
-            write(printer.printRoundTrack(roundTrackData));
+            write(DrawableUtils.getRoundTrack(roundTrackData).toString());
         else write("\nIl tracciato dei round è ancora vuoto!");
     }
 

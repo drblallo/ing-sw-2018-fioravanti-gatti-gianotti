@@ -2,7 +2,7 @@ package progetto.view.commandline.commands;
 
 import progetto.model.PickedDicesSlotData;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.Printer;
+import progetto.view.commandline.printer.DrawableUtils;
 
 /**
  * Command to show picked dices of the user
@@ -24,11 +24,10 @@ public class ShowPickedDicesCommand extends AbstractCLViewCommand {
     @Override
      public void exec(String[] params) {
 
-        Printer printer = new Printer();
         PickedDicesSlotData pickedDicesSlotData = getController().getModel()
                 .getPlayerBoard(getController().getChair()).getPickedDicesSlot().getData();
         if(pickedDicesSlotData.getNDices()!=0)
-            write(printer.printDices(pickedDicesSlotData));
+            write(DrawableUtils.getPicked(pickedDicesSlotData).toString());
     }
 
     /**

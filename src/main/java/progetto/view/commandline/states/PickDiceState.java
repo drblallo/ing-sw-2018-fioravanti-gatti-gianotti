@@ -2,9 +2,9 @@ package progetto.view.commandline.states;
 
 import progetto.model.ExtractedDicesData;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.Printer;
 import progetto.view.commandline.commands.PickDiceCommand;
 import progetto.view.commandline.commands.ReturnCommand;
+import progetto.view.commandline.printer.DrawableUtils;
 
 /**
  * State where the user can pick a dice from the extracted ones
@@ -26,7 +26,6 @@ public class PickDiceState extends AbstractCLViewState
     @Override
     public void onApply() {
 
-        Printer printer = new Printer();
         ExtractedDicesData extractedDicesData = getView().getController()
                 .getModel().getMainBoard().getExtractedDices().getData();
 
@@ -35,7 +34,7 @@ public class PickDiceState extends AbstractCLViewState
         }
 
         registerCommand(new ReturnCommand(getView(), new GameTransitionState(getView()), "Indietro"));
-        getView().write(printer.printDices(extractedDicesData));
+        getView().write(DrawableUtils.getExtracted(extractedDicesData).toString());
 
     }
 

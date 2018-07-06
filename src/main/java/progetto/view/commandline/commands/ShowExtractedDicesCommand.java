@@ -2,7 +2,7 @@ package progetto.view.commandline.commands;
 
 import progetto.model.ExtractedDicesData;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.Printer;
+import progetto.view.commandline.printer.DrawableUtils;
 
 /**
  * Command to show extracted dices
@@ -21,11 +21,10 @@ public class ShowExtractedDicesCommand extends AbstractCLViewCommand {
      */
     @Override
     public void exec(String[] args) {
-        Printer printer = new Printer();
         ExtractedDicesData extractedDicesData = getController().getModel()
                 .getMainBoard().getExtractedDices().getData();
         if(extractedDicesData.getNumberOfDices()!=0)
-            write(printer.printDices(extractedDicesData));
+            write(DrawableUtils.getExtracted(extractedDicesData).toString());
     }
 
     /**

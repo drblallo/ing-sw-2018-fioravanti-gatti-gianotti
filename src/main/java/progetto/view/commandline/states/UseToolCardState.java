@@ -3,7 +3,6 @@ package progetto.view.commandline.states;
 import progetto.controller.*;
 import progetto.model.*;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.Printer;
 import progetto.view.commandline.commands.*;
 
 /**
@@ -46,7 +45,7 @@ public class UseToolCardState extends AbstractCLViewState {
             registerCommand(new SetSinglePlayerDiceAction(getView()));
 
         registerCommand(new ShowPickedDicesCommand(getView()));
-        registerCommand(new ShowPlayerBoardCommand(getView(), getController().getChair() , new Printer(), this));
+        registerCommand(new ShowPlayerBoardCommand(getView(), getController().getChair(), this));
         registerCommand(new ShowExtractedDicesCommand(getView()));
         registerCommand(new ShowRoundTrackCommand(getView()));
 

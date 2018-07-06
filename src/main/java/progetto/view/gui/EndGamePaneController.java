@@ -86,7 +86,7 @@ public class EndGamePaneController extends AbstractStateController {
         for (int i = 0; i<playerRankingArrayList.size(); i++){
             score.appendText((i+1) + "° Classificato: ");
 
-            PlayerView playerView = roomView.getPlayer(playerRankingArrayList.get(i).getNumberOfPlayer());
+            PlayerView playerView = roomView.getPlayerOfChair(playerRankingArrayList.get(i).getNumberOfPlayer());
 
             if (playerView!= null && playerView.getName()!=null)
                 score.appendText(playerView.getName());

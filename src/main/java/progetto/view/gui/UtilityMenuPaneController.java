@@ -4,7 +4,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import progetto.model.Value;
 import progetto.network.RoomView;
+
+import java.awt.*;
 
 /**
  * this is the class that handles the utility menu fxml. This class is only instanced by javafx, this mean that
@@ -16,6 +21,7 @@ public class UtilityMenuPaneController extends AbstractController{
     private ChoiceBox<Integer> chairs;
     @FXML
     private Button chatButton;
+    private int countMessage = 0;
 
     /**
      * set up this object, it is equivalent to a constructor since there is no access to it
@@ -26,6 +32,7 @@ public class UtilityMenuPaneController extends AbstractController{
     	super.setUp(view);
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::updateChairs));
         view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::isSinglePlayer));
+        view.getController().getMessageCallback().addObserver(ogg -> Platform.runLater(()->chatMessageRecived()));
     }
 
     /**
@@ -43,7 +50,18 @@ public class UtilityMenuPaneController extends AbstractController{
      */
     @FXML
     private void onChatButtonClicked(){
+        countMessage = 0;
+        chatButton.setText("Chat");
         getView().getStateManager().getStateFromName("ChatPane.fxml").show(true);
+    }
+
+    /**
+     * called when a message is received
+     * update the number of unread messages
+     */
+    private void chatMessageRecived(){
+        countMessage ++;
+        chatButton.setText("Chat (" + countMessage + ")");
     }
 
     /**

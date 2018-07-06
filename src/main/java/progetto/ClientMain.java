@@ -22,7 +22,7 @@ public class ClientMain extends Application {
        // Logger.getLogger(RMIClient.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
         //Logger.getLogger(RMIClient.class.getPackage().getName()).setLevel(Level.ALL);
         //Logger.getLogger(RMIClient.class.getPackage().getName()).getParent().setLevel(Level.ALL);
-        //ServerMain.main(args);
+        ServerMain.main(args);
         launch(args);
 
     }

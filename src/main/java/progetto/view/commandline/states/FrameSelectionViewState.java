@@ -3,8 +3,8 @@ package progetto.view.commandline.states;
 import progetto.model.FrameSelectionState;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.DifferenceDescriptor;
-import progetto.view.commandline.Printer;
 import progetto.view.commandline.commands.SelectWindowCommand;
+import progetto.view.commandline.printer.DrawableUtils;
 
 /**
  * State where the user can choose his window frame at the beginning of a game
@@ -41,8 +41,8 @@ public class FrameSelectionViewState extends AbstractCLViewState {
                             (
                                     getController().getObservable().getPlayerBoard(getController().getChair()),
                                     (data1, data2) -> true,
-                                    (oldData, newData) -> write(new Printer().printWindowFrameChoices(newData,
-                                            getModel().getMainBoard().getData().getPlayerCount() == 1))
+                                    (oldData, newData) -> write(DrawableUtils.getChooseWindowFrame(newData,
+                                            getModel().getMainBoard().getData().getPlayerCount() == 1).toString())
                             ));
         }
     }
@@ -69,9 +69,9 @@ public class FrameSelectionViewState extends AbstractCLViewState {
         String string = "\nScegliere una tra le vetrate proposte:\n";
         if(getModel().getPlayerBoard(getController().getChair()).getData()
                 .getExtractedWindowFrameCouplesWindowFrame()!=null)
-             string = string + new Printer().printWindowFrameChoices
-                (getModel().getPlayerBoard(getController().getChair()).getData(),
-                        getModel().getMainBoard().getData().getPlayerCount() == 1);
+             string = string + DrawableUtils.getChooseWindowFrame(
+                (getModel().getPlayerBoard(getController().getChair()).getData()),
+                        getModel().getMainBoard().getData().getPlayerCount() == 1).toString();
 
         return string;
     }
