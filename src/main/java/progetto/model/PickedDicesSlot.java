@@ -3,6 +3,7 @@ package progetto.model;
 
 /**
  * Dices that still need to be placed that have been taken by the player
+ * @author Michele
  */
 public final class PickedDicesSlot extends Container<PickedDicesSlotData> {
 
@@ -17,9 +18,9 @@ public final class PickedDicesSlot extends Container<PickedDicesSlotData> {
 	/**
 	 * Add a dice and set ignore parameters
 	 * @param dice dice to add
-	 * @param ignoreColor
-	 * @param ignoreValue
-	 * @param ignoreAdjacent
+	 * @param ignoreColor flag
+	 * @param ignoreValue flag
+	 * @param ignoreAdjacent flag
 	 */
 	public void add(Dice dice, boolean ignoreColor, boolean ignoreValue, boolean ignoreAdjacent)
 	{

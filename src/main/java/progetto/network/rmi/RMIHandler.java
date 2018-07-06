@@ -3,16 +3,20 @@ package progetto.network.rmi;
 import progetto.network.IEnforce;
 import progetto.network.INetworkHandler;
 import progetto.network.IRoomRequest;
+import progetto.network.NetworkSettings;
 import progetto.utils.Callback;
 
 import java.rmi.RemoteException;
 import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * rmi implementation of INetworkHandler
+ * @author Massimo
  */
 public final class RMIHandler implements INetworkHandler, Runnable {
 	private static final Logger LOGGER = Logger.getLogger(RMIHandler.class.getName());
@@ -20,6 +24,7 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 	private boolean isDead = false;
 	private Callback<IRoomRequest> requestCallback;
 	private Queue<IEnforce> pendingEnforce = new ConcurrentLinkedQueue<>();
+	private final Timer timer = new Timer();
 
 	/**
 	 * creates a new instance
@@ -36,6 +41,34 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 			}
 		);
 		new Thread(this).start();
+
+	}
+
+	/**
+	 * starts the time that will be used to ping the other side
+	 */
+	private void startTimer()
+	{
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				sendPing();
+			}
+		}, NetworkSettings.DEFAULT_TIME_TO_LIVE, NetworkSettings.DEFAULT_TIME_TO_LIVE);
+	}
+
+	/**
+	 * sends the ping to the other side
+	 */
+	private void sendPing()
+	{
+		try {
+			LOGGER.log(Level.FINE, "ping");
+			session.ping();
+		} catch (RemoteException e) {
+			LOGGER.log(Level.SEVERE, "Failed to ping {0}", e.getMessage());
+			tearDown();
+		}
 	}
 
 	/**
@@ -110,6 +143,8 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 	 */
 	private void tearDown() {
 		isDead = true;
+		timer.cancel();
+		timer.purge();
 	}
 
 	/**
@@ -126,6 +161,7 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 	 */
 	private void sendFirstPending()
 	{
+		LOGGER.log(Level.FINEST, "evalutaing enforces");
 		while (pendingEnforce.peek() == null)
 		{
 			synchronized (this)
@@ -148,6 +184,7 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 		}
 		catch (Exception e)
 		{
+			LOGGER.log(Level.SEVERE,"encountered error while sending enforce {0}", e.getMessage());
 			tearDown();
 		}
 	}
@@ -158,6 +195,8 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 	public void run()
 	{
 		Thread.currentThread().setName(getClass().getName()+" Thread");
+		LOGGER.log(Level.FINE, "Started rmi handler thread");
+		startTimer();
 		while (isRunning())
 			sendFirstPending();
 

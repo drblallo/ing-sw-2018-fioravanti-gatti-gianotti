@@ -44,6 +44,21 @@ public class TestObserver
 	}
 
 	@Test
+	public void testAttachDeatchBeforeCall()
+	{
+		ObserverStub<String> obs = new ObserverStub<String>();
+		ObservableStub s = new ObservableStub();
+
+		s.addObserver(obs);
+		s.removeObserver(obs);
+		s.addObserver(obs);
+
+		assertEquals(1, s.getObserversCount());
+		s.removeObserver(obs);
+		assertEquals(0, s.getObserversCount());
+	}
+
+	@Test
 	public void testStop()
 	{
 		ObserverStub<String> obs = new ObserverStub<String>();

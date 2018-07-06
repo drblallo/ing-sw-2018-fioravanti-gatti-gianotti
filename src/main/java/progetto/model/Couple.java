@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Support class to find nearby locations in the window
+ * @author Michele
  */
 public final class Couple {
 	private int dx;
@@ -9,8 +10,8 @@ public final class Couple {
 
 	/**
 	 * Constructor to set dx, dy
-	 * @param dx
-	 * @param dy
+	 * @param dx dx
+	 * @param dy dy
 	 */
 	Couple(int dx, int dy)
 	{

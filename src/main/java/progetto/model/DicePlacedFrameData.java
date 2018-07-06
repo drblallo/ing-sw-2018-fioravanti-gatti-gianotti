@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Immutable class with data of DicePlacedFrame
+ * @author Michele
  */
 public final class DicePlacedFrameData implements Serializable{
 

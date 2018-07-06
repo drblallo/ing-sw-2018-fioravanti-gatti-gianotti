@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * State used when game has started
+ * @author Michele
  */
 public class GameStartedState extends AbstractGameState
 {
@@ -12,7 +13,7 @@ public class GameStartedState extends AbstractGameState
 	/**
 	 * Execute state-related operations
 	 * First player selection
-	 * @param game
+	 * @param game model where to apply this state
 	 */
 	@Override
 	void apply(Model game)

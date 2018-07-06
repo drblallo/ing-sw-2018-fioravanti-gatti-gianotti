@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox fx:id="mainVBox" maxHeight="175.0" maxWidth="238.0" minHeight="175.0" minWidth="238.0" prefHeight="175.0" prefWidth="238.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.PlayerMenuPaneController">
+   <children>
+      <Region VBox.vgrow="ALWAYS" />
+      <Button fx:id="showOtherPlayersButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#onShowOtherPlayersButtonClicked" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: wheat; -fx-border-color: BLACK; -fx-border-width: 2;" text="Vedi altri giocatori">
+         <font>
+            <Font name="Imprint MT Shadow" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="endTurnButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#onEndTurnButtonClicked" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: wheat; -fx-border-color: BLACK; -fx-border-width: 2;" text="Finisci turno">
+         <font>
+            <Font name="Imprint MT Shadow" size="25.0" />
+         </font>
+      </Button>
+      <HBox fx:id="tokensHBox" spacing="5.0">
+         <children>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="I miei punti favore:">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="numberOfTokens" text="0">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox fx:id="tokensHBox1" spacing="5.0">
+         <children>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="Giocatore corrente:">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentPlayer" text="-1">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

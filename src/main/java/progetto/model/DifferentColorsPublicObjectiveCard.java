@@ -2,17 +2,19 @@ package progetto.model;
 
 /**
  * Class for public objective card "Varieta' di colore"
+ * @author Michele
  */
 public class DifferentColorsPublicObjectiveCard extends AbstractPublicObjectiveCard {
 
 	private static final int N_COLORS = 5;
 	private static final int N_POINT = 4;
+	private static final int CARD_ID = 9;
 
 	/**
 	 * Constructor
 	 */
 	DifferentColorsPublicObjectiveCard() {
-		super("Varieta' di colore", "Set di dadi di ogni colore ovunque");
+		super("Varieta' di colore", "Set di dadi di ogni colore ovunque", CARD_ID);
 	}
 
 	/**

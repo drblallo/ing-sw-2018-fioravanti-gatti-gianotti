@@ -106,7 +106,7 @@ abstract class AbstractSocket implements Runnable {
 	 */
 	private synchronized void tearDown()
 	{
-		LOGGER.fine("tearing down a connection");
+		LOGGER.info("tearing down a connection");
 		keepAliveTimer.cancel();
 		keepAliveTimer.purge();
 		onTearDown();
@@ -203,7 +203,11 @@ abstract class AbstractSocket implements Runnable {
 		} catch (ClassNotFoundException e) { LOGGER.log(Level.SEVERE, "CLASS IS MISSING " + e.getMessage()); }
 	}
 
+	/**
+	 * reads all commands
+	 */
 	public void run() {
+		Thread.currentThread().setName("Socket reading thread");
 		while (isRunning()) {
 			readCommands();
 		}

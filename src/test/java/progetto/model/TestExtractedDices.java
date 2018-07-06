@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test extracted dices class
+ */
 public class TestExtractedDices extends TestCase {
 
 	ExtractedDices dices;
@@ -15,6 +18,9 @@ public class TestExtractedDices extends TestCase {
 		dices = new ExtractedDices();
 	}
 
+	/**
+	 * Test add dice method
+	 */
 	@Test
 	public void testAddDice()
 	{
@@ -29,6 +35,9 @@ public class TestExtractedDices extends TestCase {
 
 	}
 
+	/**
+	 * Test get number of dices method
+	 */
 	@Test
 	public void testGetNumberOfDices()
 	{
@@ -72,6 +81,9 @@ public class TestExtractedDices extends TestCase {
 
 	}
 
+	/**
+	 * Test change dice method
+	 */
 	@Test
 	public void testChangeDice()
 	{
@@ -96,6 +108,9 @@ public class TestExtractedDices extends TestCase {
 
 	}
 
+	/**
+	 * Test remove dice method
+	 */
 	@Test
 	public void testRemoveDice()
 	{
@@ -119,6 +134,9 @@ public class TestExtractedDices extends TestCase {
 
 	}
 
+	/**
+	 * Test remove dice - fail - wrong index - dice not placed
+	 */
 	@Test
 	public void testRemoveDiceFail()
 	{
@@ -130,6 +148,9 @@ public class TestExtractedDices extends TestCase {
 		Assert.assertNull(dices.removeDice(0));
 	}
 
+	/**
+	 * Test extracted dices - add dice, change it, remove it, get number of extracted dices
+	 */
 	@Test
 	public void testAddChangeRemoveGetNumber() {
 

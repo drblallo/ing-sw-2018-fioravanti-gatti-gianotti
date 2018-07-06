@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test Public objective card RowsDifferentValues
+ */
 public class TestRowsDifferentValues {
 
 	DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
@@ -14,6 +17,9 @@ public class TestRowsDifferentValues {
 		dicePlacedFrame = new DicePlacedFrame();
 	}
 
+	/**
+	 * Case one complete row
+	 */
 	@Test
 	public void testOneCompleteRow()
 	{
@@ -32,6 +38,9 @@ public class TestRowsDifferentValues {
 
 	}
 
+	/**
+	 * Case two complete rows
+	 */
 	@Test
 	public void testTwoCompleteRows()
 	{
@@ -57,6 +66,9 @@ public class TestRowsDifferentValues {
 
 	}
 
+	/**
+	 * Case no complete rows
+	 */
 	@Test
 	public void testNotCompleteRows()
 	{
@@ -74,6 +86,9 @@ public class TestRowsDifferentValues {
 
 	}
 
+	/**
+	 * Case one complete row but not different values
+	 */
 	@Test
 	public void testNotDifferent()
 	{

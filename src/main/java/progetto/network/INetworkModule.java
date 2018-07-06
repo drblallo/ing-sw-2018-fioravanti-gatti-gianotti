@@ -2,6 +2,9 @@ package progetto.network;
 
 import progetto.utils.Callback;
 
+/**
+ * @author Massimo
+ */
 public interface INetworkModule {
 	/**
 	 * shutdows the module, disconnect every connection
@@ -19,5 +22,9 @@ public interface INetworkModule {
 	boolean isRunning();
 
 
+	/**
+	 *
+	 * @return the callback that is called every time a player joins the server
+	 */
 	Callback<INetworkHandler> getPlayerJoinedCallback();
 }

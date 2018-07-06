@@ -5,9 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 import progetto.controller.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test action and states
+ */
 public class TestAction {
 
 	private GameController game;
@@ -18,6 +20,9 @@ public class TestAction {
 		game = new GameController();
 	}
 
+	/**
+	 * Test set seed
+	 */
 	@Test
 	public void testSetSeed()
 	{
@@ -28,6 +33,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test set number of player
+	 */
 	@Test
 	public void testSetPlayerCount()
 	{
@@ -42,6 +50,9 @@ public class TestAction {
 		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getPlayerCount());
 	}
 
+	/**
+	 * Test get player ID
+	 */
 	@Test
 	public void testGetPlayerID()
 	{
@@ -62,6 +73,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test get the name of the action
+	 */
 	@Test
 	public void testGetActionName()
 	{
@@ -69,6 +83,9 @@ public class TestAction {
 		Assert.assertEquals(s.getName(), SetPlayerCountAction.class.getSimpleName());
 	}
 
+	/**
+	 * Test start game - Added windowFrameCouples and Frame selection state
+	 */
 	@Test
 	public void testStartGame()
 	{
@@ -86,8 +103,11 @@ public class TestAction {
 		Assert.assertEquals("Frame selection", game.getModel().getMainBoard().getData().getGameState().getName());
 	}
 
+	/**
+	 * Test action is not executable
+	 */
 	@Test
-	public void testNonExecutibleAction()
+	public void testNonExecutableAction()
 	{
 		game.sendAction(new StartGameAction());
 		game.sendAction(new SetSeedAction(2));
@@ -95,6 +115,9 @@ public class TestAction {
 		Assert.assertEquals(0, game.getModel().getSeed());
 	}
 
+	/**
+	 * Test format of the action
+	 */
 	@Test
 	public void testActionFormat()
 	{
@@ -102,6 +125,9 @@ public class TestAction {
 		Assert.assertEquals("SetPlayerCountAction <playerID> <playerCount> ", s);
 	}
 
+	/**
+	 * Test action creation
+	 */
 	@Test
 	public void testActionCreation()
 	{
@@ -113,7 +139,9 @@ public class TestAction {
 		Assert.assertEquals("SetPlayerCountAction playerID: -1 playerCount: 2 ", a.getToolTip());
 	}
 
-
+	/**
+	 * Test action not creatable
+	 */
 	@Test
 	public void testNonCreatableAction()
 	{
@@ -123,6 +151,9 @@ public class TestAction {
 		Assert.assertNull(a);
 	}
 
+	/**
+	 * Test AddWindowFrameCoupleAction - canBeExecuted
+	 */
 	@Test
 	public void testCanBeExecutedAddWindowFrameCoupleAction()
 	{
@@ -140,6 +171,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test action set frame
+	 */
 	@Test
 	public void testFrameSetAction()
 	{
@@ -156,6 +190,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test action pick dice
+	 */
 	@Test
 	public void testPickDiceAction()
 	{
@@ -170,6 +207,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test action place dice
+	 */
 	@Test
 	public void testPlaceDiceAction()
 	{
@@ -190,6 +230,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test action addWindowFrameCouple
+	 */
 	@Test
 	public void testAddWindowFrameCoupleAction() {
 		List<WindowFrameCouple>  windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
@@ -202,6 +245,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test action StartGame
+	 */
 	@Test
 	public void testStartGameAction()
 	{
@@ -216,6 +262,9 @@ public class TestAction {
 		Assert.assertEquals("Frame selection", game.getModel().getMainBoard().getData().getGameState().getName());
 	}
 
+	/**
+	 * Test to verify correct current player
+	 */
 	@Test
 	public void testCurrentPlayer() {
 		List<WindowFrameCouple>  windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
@@ -224,8 +273,6 @@ public class TestAction {
 			game.sendAction(new AddWindowFrameCoupleAction(windowFrameCouples.get(i)));
 		}
 		game.processAllPendingAction();
-		WindowFrameCouple windowFrameCouple = windowFrameCouples.get(1);
-		WindowFrame windowFrame = windowFrameCouple.getWindowFrame(0);
 		MainBoard mainBoard = game.getModel().getMainBoard();
 		mainBoard.setPlayerCount(4);
 		game.sendAction(new StartGameAction());
@@ -240,12 +287,14 @@ public class TestAction {
 		Assert.assertEquals(3, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 	}
 
+	/**
+	 * Test get number of extracted dices
+	 */
 	@Test
 	public void testGetNDices()
 	{
 		List<WindowFrameCouple>  windowFrameCouples = WindowFrameCoupleArray.getInstance().getList();
 		WindowFrameCouple windowFrameCouple = windowFrameCouples.get(1);
-		WindowFrame windowFrame = windowFrameCouple.getWindowFrame(0);
 		MainBoard mainBoard = game.getModel().getMainBoard();
 		mainBoard.setPlayerCount(4);
 		game.sendAction(new StartGameAction());
@@ -260,6 +309,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test pick a dice and place it
+	 */
 	@Test
 	public void testPickDiceAndPlaceDiceAction()
 	{
@@ -300,6 +352,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test action end turn
+	 */
 	@Test
 	public void testEndTurnAction()
 	{
@@ -325,6 +380,9 @@ public class TestAction {
 		Assert.assertEquals(3, game.getModel().getRoundInformation().getData().getCurrentPlayer());
 	}
 
+	/**
+	 * Test action end turn with dice picked but not placed
+	 */
 	@Test
 	public void testEndTurnDicePickedNotPlaced()
 	{
@@ -370,6 +428,9 @@ public class TestAction {
 		Assert.assertEquals(8, game.getModel().getMainBoard().getExtractedDices().getData().getNumberOfDices());
 	}
 
+	/**
+	 * Test state start round
+	 */
 	@Test
 	public void testStartRoundState()
 	{
@@ -378,6 +439,9 @@ public class TestAction {
 		Assert.assertEquals(4, game.getModel().getMainBoard().getExtractedDices().getData().getNumberOfDices());
 	}
 
+	/**
+	 * Test end round and and game
+	 */
 	@Test
 	public void testEndRoundEndGame()
 	{
@@ -448,6 +512,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test action set difficulty (single player)
+	 */
 	@Test
 	public void testSetDifficultyAction()
 	{
@@ -464,6 +531,28 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test action set difficulty - Fail - wrong value
+	 */
+	@Test
+	public void testSetDifficultyActionWrongDifficultyLevel()
+	{
+		game.sendAction(new SetPlayerCountAction(1));
+		game.processAction();
+
+		game.sendAction(new SetDifficultyAction(0));
+		game.processAction();
+		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getDifficulty());
+
+		game.sendAction(new SetDifficultyAction(6));
+		game.processAction();
+		Assert.assertEquals(3, game.getModel().getMainBoard().getData().getDifficulty());
+
+	}
+
+	/**
+	 * Test action set difficulty - fail - wrong number of player
+	 */
 	@Test
 	public void testSetDifficultyActionFail()
 	{
@@ -478,6 +567,9 @@ public class TestAction {
 		Assert.assertFalse(gameAction.canBeExecuted(game.getModel()));
 	}
 
+	/**
+	 * Test action set player count - fail - wrong value
+	 */
 	@Test
 	public void testSetPlayerCountFail()
 	{
@@ -488,6 +580,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test max one dice picked per turn
+	 */
 	@Test
 	public void testMaxOnePickedDice()
 	{
@@ -514,6 +609,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test max one tool card used per turn
+	 */
 	@Test
 	public void testMaxOneToolCard()
 	{
@@ -522,8 +620,7 @@ public class TestAction {
 		game.getModel().setState(new RoundState());
 		game.getModel().getPlayerBoard(0).setToken(10);
 
-		List<Class> actionList = new ArrayList<>();
-		game.getModel().getMainBoard().addToolCard(new ToolCard("", "", GameColor.GREEN, 1, actionList));
+		game.getModel().getMainBoard().addToolCard(new ToolCard("", "", GameColor.GREEN, 1));
 
 		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.ONE, GameColor.GREEN));
 		game.getModel().getMainBoard().getExtractedDices().addDice(new Dice(Value.THREE, GameColor.RED));
@@ -563,6 +660,9 @@ public class TestAction {
 
 	}
 
+	/**
+	 * Test cancel tool card use
+	 */
 	@Test
 	public void testCancelToolCardUseAction()
 	{

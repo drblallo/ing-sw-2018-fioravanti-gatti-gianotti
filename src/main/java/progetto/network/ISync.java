@@ -8,8 +8,14 @@ import java.util.List;
 /**
  * This interface is used to connect the network to whatever we want to keep synchronized across the net.
  * It is assumed that the sequence of string is enough to ensurer that the state of the object is unique.
+ * @author Massimo
  */
 public interface ISync {
+
+	/**
+	 * called every update loop
+	 */
+	String update();
 
 	/**
 	 * Send the string to process
@@ -42,8 +48,21 @@ public interface ISync {
 	 */
 	void clear();
 
+	/**
+	 *
+	 * @return the list of all serializable that where received
+	 */
 	List<Serializable> getAllItems();
 
+	/**
+	 *
+	 * @return the enforce that is called when by the sync object to notify what changed in the server
+	 */
 	Callback<IEnforce> getEnforceCallback();
+
+	/**
+	 *
+	 * @return all the enforces that must be sent to a new player
+	 */
 	List<IEnforce> getNewPlayerEnforces();
 }

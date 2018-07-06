@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class nine dices
+ */
 public class TestNineDices extends TestCase {
 
 	NineDices nineDices;
@@ -15,6 +18,9 @@ public class TestNineDices extends TestCase {
 		nineDices = new NineDices();
 	}
 
+	/**
+	 * Test constructor
+	 */
 	@Test
 	public void testConstructor()
 	{
@@ -24,6 +30,9 @@ public class TestNineDices extends TestCase {
 		}
 	}
 
+	/**
+	 * test copy constructor
+	 */
 	@Test
 	public void testCopyConstructor()
 	{
@@ -37,6 +46,9 @@ public class TestNineDices extends TestCase {
 		}
 	}
 
+	/**
+	 * Test get dice from a position of the roundTrack
+	 */
 	@Test
 	public void testGetDice()
 	{
@@ -53,6 +65,9 @@ public class TestNineDices extends TestCase {
 
 	}
 
+	/**
+	 * Test get dice - fail - wrong index - dice not added
+	 */
 	@Test
 	public void testGetDiceFail()
 	{
@@ -62,6 +77,9 @@ public class TestNineDices extends TestCase {
 
 	}
 
+	/**
+	 * Test add dice
+	 */
 	@Test
 	public void testAddDice()
 	{
@@ -87,6 +105,9 @@ public class TestNineDices extends TestCase {
 
 	}
 
+	/**
+	 * Test isFree method
+	 */
 	public void testIsFree()
 	{
 		Dice dice1 = new Dice(Value.FOUR, GameColor.GREEN);
@@ -102,6 +123,9 @@ public class TestNineDices extends TestCase {
 
 	}
 
+	/**
+	 * Test get number of dices in a position of the round track
+	 */
 	@Test
 	public void testGetNumberOfDices()
 	{
@@ -127,6 +151,9 @@ public class TestNineDices extends TestCase {
 
 	}
 
+	/**
+	 * Test change dice
+	 */
 	@Test
 	public void testChangeDice()
 	{
@@ -148,6 +175,9 @@ public class TestNineDices extends TestCase {
 
 	}
 
+	/**
+	 * Test change dice - fail - wrong index - dice not added
+	 */
 	@Test
 	public void testChangeDiceFail()
 	{

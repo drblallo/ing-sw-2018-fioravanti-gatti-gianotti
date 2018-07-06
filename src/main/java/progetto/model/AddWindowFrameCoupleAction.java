@@ -2,11 +2,16 @@ package progetto.model;
 
 /**
  * add a window frame couple to the model
+ * @author Michele
  */
 public class AddWindowFrameCoupleAction extends AbstractGameAction
 {
 	private final WindowFrameCouple couple;
 
+	/**
+	 * public constructor
+	 * @param couple couple of window frames that must be added to the usable window frame
+	 */
 	public AddWindowFrameCoupleAction(WindowFrameCouple couple)
 	{
 		super(-1);

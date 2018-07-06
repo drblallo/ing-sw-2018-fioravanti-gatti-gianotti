@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Couple of Window Frame (1 Window Pattern card with 2 sides)
+ * @author Michele
  */
 public class WindowFrameCouple implements Serializable {
 

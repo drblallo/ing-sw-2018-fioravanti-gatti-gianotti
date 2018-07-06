@@ -7,6 +7,11 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * It observes a container, notice when it changes and call the writer
+ * @author Federica
+ * @param <T>
+ */
 public class DifferenceDescriptor<T extends Serializable> {
 
 	private T oldData;
@@ -16,6 +21,12 @@ public class DifferenceDescriptor<T extends Serializable> {
 	private final IObserver<T> observer;
 	private static final Logger LOGGER = Logger.getLogger(DifferenceDescriptor.class.getName());
 
+	/**
+	 *
+	 * @param container container to observe
+	 * @param checker difference checked
+	 * @param writer writer to use
+	 */
 	public DifferenceDescriptor(Container<T> container, IDifferenceChecker<T> checker, IWriter<T> writer)
 	{
 		LOGGER.log(Level.INFO, "Created descriptor attached to {0}", container);
@@ -32,12 +43,19 @@ public class DifferenceDescriptor<T extends Serializable> {
 		container.addObserver(observer);
 	}
 
+	/**
+	 * stop observing a continer
+	 */
 	public void detach()
 	{
 		LOGGER.log(Level.INFO, "Detached from {0}", container);
 		container.removeObserver(observer);
 	}
 
+	/**
+	 * start observing a container
+	 * @param c the container to observe
+	 */
 	public void attach(Container<T> c)
 	{
 		LOGGER.log(Level.INFO, "Attached to {0}", container);

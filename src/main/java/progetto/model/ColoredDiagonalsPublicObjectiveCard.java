@@ -4,16 +4,18 @@ import java.util.ArrayList;
 
 /**
  * Class for public objective card "Diagonali Colorate"
+ * @author Michele
  */
 public class ColoredDiagonalsPublicObjectiveCard extends AbstractPublicObjectiveCard {
 
 	private ArrayList<Dice> dices;
+	private static final int CARD_ID = 8;
 
 	/**
 	 * Constructor
 	 */
 	ColoredDiagonalsPublicObjectiveCard() {
-		super("Diagonali Colorate", "Numero di dadi dello stesso colore diagonalmente adiacenti");
+		super("Diagonali Colorate", "Numero di dadi dello stesso colore diagonalmente adiacenti", CARD_ID);
 	}
 
 	/**
@@ -42,9 +44,9 @@ public class ColoredDiagonalsPublicObjectiveCard extends AbstractPublicObjective
 	}
 
 	/**
-	 *Support class to verify two dices
-	 * @param dice1
-	 * @param dice2
+	 *Support class to verify if two dices exist and have the same color
+	 * @param dice1 first dice
+	 * @param dice2 second dice
 	 */
 	private void checkDices(Dice dice1, Dice dice2)
 	{

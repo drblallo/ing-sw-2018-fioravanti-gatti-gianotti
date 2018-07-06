@@ -4,10 +4,16 @@ import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Test class Dice
+ */
 public class TestDice extends TestCase {
 
 	private Dice dice;
 
+	/**
+	 * Test constructor
+	 */
 	@Test
 	public void testConstructor()
 	{
@@ -17,6 +23,9 @@ public class TestDice extends TestCase {
 		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 	}
 
+	/**
+	 * Test setter
+	 */
 	@Test
 	public void testSetter()
 	{
@@ -31,6 +40,9 @@ public class TestDice extends TestCase {
 		Assert.assertEquals(Value.TWO, dice.getValue());
 	}
 
+	/**
+	 * Test increase value method
+	 */
 	@Test
 	public void testIncreaseValue()
 	{
@@ -61,6 +73,9 @@ public class TestDice extends TestCase {
 		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 	}
 
+	/**
+	 * Test decrease value method
+	 */
 	@Test
 	public void testDecreaseValue()
 	{
@@ -91,6 +106,9 @@ public class TestDice extends TestCase {
 		Assert.assertEquals(GameColor.YELLOW, dice.getGameColor());
 	}
 
+	/**
+	 * Test flid dice method
+	 */
 	@Test
 	public void testFlip()
 	{
@@ -121,6 +139,9 @@ public class TestDice extends TestCase {
 
 	}
 
+	/**
+	 * Test to string method
+	 */
 	@Test
 	public void testToString()
 	{

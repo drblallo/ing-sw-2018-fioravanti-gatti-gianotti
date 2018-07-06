@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test end of the game
+ */
 public class TestEndGame {
 
 	Model game;
@@ -14,6 +17,9 @@ public class TestEndGame {
 		game = new Model();
 	}
 
+	/**
+	 * Test - evaluate target score (single player)
+	 */
 	@Test
 	public void testEvaluateTargetScore()
 	{
@@ -46,6 +52,9 @@ public class TestEndGame {
 
 	}
 
+	/**
+	 * Test - evaluate frame (Single player)
+	 */
 	@Test
 	public void testEvaluatePlayerFrameSinglePlayer()
 	{
@@ -74,6 +83,9 @@ public class TestEndGame {
 
 	}
 
+	/**
+	 * Test - evaluate frame (2-4 players)
+	 */
 	@Test
 	public void testEvaluatePlayerFrameMultiPlayer()
 	{
@@ -101,7 +113,9 @@ public class TestEndGame {
 
 	}
 
-
+	/**
+	 * Test - Verify winner (two players)
+	 */
 	@Test
 	public void testWinnerMultiPlayer()
 	{
@@ -142,7 +156,9 @@ public class TestEndGame {
 
 	}
 
-
+	/**
+	 * Test - get winner (single player)
+	 */
 	@Test
 	public void testWinnerSinglePlayer()
 	{
@@ -182,7 +198,9 @@ public class TestEndGame {
 
 	}
 
-
+	/**
+	 * Test - evaluate target score - fail - no dices placed
+	 */
 	@Test
 	public void testEvaluateTargetScoreFail()
 	{
@@ -192,6 +210,9 @@ public class TestEndGame {
 
 	}
 
+	/**
+	 * Test - evaluate single player frame - fail - no dices placed
+	 */
 	@Test
 	public void testEvaluateSinglePlayerFail()
 	{
@@ -201,6 +222,9 @@ public class TestEndGame {
 
 	}
 
+	/**
+	 * Test - evaluate frame (MultiPlayer) - fail - no dices placed
+	 */
 	@Test
 	public void testEvaluateMultiPlayerFail()
 	{

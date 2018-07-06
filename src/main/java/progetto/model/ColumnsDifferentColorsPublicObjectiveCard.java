@@ -2,15 +2,18 @@ package progetto.model;
 
 /**
  * Class for public objective card "Colori diversi - colonna"
+ * @author Michele
  */
-public class ColumnsDifferentColorsPublicObjectiveCard extends AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCard {
+public class ColumnsDifferentColorsPublicObjectiveCard extends AbstractDifferentColValPublicObjectiveCard {
+
+	private static final int CARD_ID = 1;
 
 	/**
 	 * Constructor
 	 */
 	ColumnsDifferentColorsPublicObjectiveCard()
 	{
-		super("Colori diversi - colonna", "Colonne senza colori ripetuti");
+		super("Colori diversi - colonna", "Colonne senza colori ripetuti", CARD_ID);
 	}
 
 	/**

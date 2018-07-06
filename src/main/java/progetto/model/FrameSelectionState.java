@@ -9,6 +9,7 @@ import java.util.List;
  *  Extraction of public cards
  *  Extraction of tool cards
  *  Extraction of window frames
+ *  @author Michele
  */
 public class FrameSelectionState extends AbstractGameState {
 
@@ -18,7 +19,7 @@ public class FrameSelectionState extends AbstractGameState {
 
 	/**
 	 * Execute state-related operations
-	 * @param game
+	 * @param game model where to apply this state
 	 */
 	@Override
 	void apply(Model game) {
@@ -135,7 +136,7 @@ public class FrameSelectionState extends AbstractGameState {
 	 */
 	private void extractToolCards(Model game)
 	{
-		ToolCardDeck toolCardDeck = new ToolCardDeck(game);
+		ToolCardDeck toolCardDeck = new ToolCardDeck();
 
 		int nPlayer = game.getMainBoard().getData().getPlayerCount();
 

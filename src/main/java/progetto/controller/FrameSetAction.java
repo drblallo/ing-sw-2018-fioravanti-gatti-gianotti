@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 /**
  * Action to set window frame at the begin of the game
+ * @author Michele
  */
 public class FrameSetAction extends AbstractExecutibleGameAction {
 
@@ -28,13 +29,13 @@ public class FrameSetAction extends AbstractExecutibleGameAction {
 
 	/**
 	 * Constructor to set values
-	 * @param nPlayer  callerID
+	 * @param callerID  callerID
 	 * @param selectedCouple  selected window frame card
 	 * @param selectedSide selected side of the card
 	 */
-	public FrameSetAction(int nPlayer, int selectedCouple, int selectedSide)
+	public FrameSetAction(int callerID, int selectedCouple, int selectedSide)
 	{
-		super(nPlayer);
+		super(callerID);
 
 		this.selectedCouple = selectedCouple;
 		this.selectedSide = selectedSide;

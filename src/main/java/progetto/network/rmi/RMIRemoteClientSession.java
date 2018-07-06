@@ -1,23 +1,50 @@
 package progetto.network.rmi;
 
 import progetto.network.IEnforce;
+import progetto.network.NetworkSettings;
 import progetto.utils.Callback;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * skeleton of IRemoteClientSession
+ * @author Massimo
  */
 final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemoteClientSession {
 	private static final Logger LOGGER = Logger.getLogger(RMIRemoteClientSession.class.getName());
 	private final transient Callback<String> messageCallback = new Callback<>();
 	private final transient Callback<IEnforce> enforceCallback = new Callback<>();
 	private final transient Callback<IRemoteClientSession> connectionClosedCallback = new Callback<>();
+	private final transient Timer timer = new Timer();
+	private transient int pings = 0;
 
+	/**
+	 * creates new client remote session
+	 * @throws RemoteException
+	 */
 	RMIRemoteClientSession() throws RemoteException {
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				LOGGER.log(Level.FINE, "local tick");
+				pings++;
+				if (pings >= NetworkSettings.MAX_TIME_TO_LIVE_SKIPPED)
+					close();
+			}
+		}, NetworkSettings.DEFAULT_TIME_TO_LIVE, NetworkSettings.DEFAULT_TIME_TO_LIVE);
+	}
+
+	/**
+	 * reset the ping
+	 */
+	public void ping()
+	{
+		pings = 0;
 	}
 
 	/**
@@ -25,7 +52,7 @@ final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemot
 	 */
 	public void sayGoodBye() {
 		LOGGER.fine("tried to disconnect");
-		getConnectionLostCallback().call(this);
+		close();
 	}
 
 	/**
@@ -35,6 +62,16 @@ final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemot
 	public void sendMessage(final String message) {
 		LOGGER.fine("received message ");
 		messageCallback.call(message);
+	}
+
+	/**
+	 * tears down the connection
+	 */
+	private void close()
+	{
+		getConnectionLostCallback().call(this);
+		timer.purge();
+		timer.cancel();
 	}
 
 	/**

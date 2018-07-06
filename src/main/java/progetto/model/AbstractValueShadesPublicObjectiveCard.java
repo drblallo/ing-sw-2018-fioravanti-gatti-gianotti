@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Abstract class for public objective card where is asked to count value shades
+ * @author Michele
  */
 public abstract class AbstractValueShadesPublicObjectiveCard extends  AbstractPublicObjectiveCard{
 
@@ -9,16 +10,17 @@ public abstract class AbstractValueShadesPublicObjectiveCard extends  AbstractPu
 
 	/**
 	 * Constructor
-	 * @param name
-	 * @param effect
+	 * @param name name of the card
+	 * @param effect effect of the card
+	 * @param cardID ID of the card
 	 */
-	AbstractValueShadesPublicObjectiveCard(String name, String effect) {
-		super(name, effect);
+	AbstractValueShadesPublicObjectiveCard(String name, String effect, int cardID) {
+		super(name, effect, cardID);
 	}
 
 	/**
 	 * Evaluate frame
-	 * @param dicePlacedFrame
+	 * @param dicePlacedFrame dice placed frame to evaluate
 	 * @param value1 value 1 to find in dicePlacedFrame
 	 * @param value2 value 2 to find in dicePlacedFrame
 	 * @return n point

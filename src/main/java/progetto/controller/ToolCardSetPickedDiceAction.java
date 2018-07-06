@@ -7,17 +7,11 @@ import progetto.model.ToolCardState;
 
 /**
  * Action to select a picked dice
+ * @author Michele
  */
 public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
 
 	private final int nDice;
-
-	private static final int CARD1 = 1;
-	private static final int CARD5 = 5;
-	private static final int CARD6 = 6;
-	private static final int CARD9 = 9;
-	private static final int CARD10 = 10;
-	private static final int CARD11 = 11;
 
 	/**
 	 * Constructor without parameters
@@ -55,14 +49,10 @@ public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
 			return false;
 		}
 
-		ToolCardState toolCardState = (ToolCardState) data.getGameState();
-
-		int index = toolCardState.getIndex();
-
 		return getCallerID()==game.getRoundInformation().getData().getCurrentPlayer() &&
 				data.getGameState().getClass() == ToolCardState.class &&
 				game.getPlayerBoard(getCallerID()).getPickedDicesSlot().getData().getNDices() > nDice &&
-				nDice >= 0 && verifyCards(index);
+				nDice >= 0 ;
 	}
 
 	/**
@@ -73,16 +63,6 @@ public class ToolCardSetPickedDiceAction extends AbstractExecutibleGameAction{
 	public void execute(Model game)
 	{
 		game.getRoundInformation().setNDice(nDice);
-	}
-
-	/**
-	 * Support method to verify if action is used with the correct tool card
-	 * @param index of the used card
-	 * @return result of the check
-	 */
-	private boolean verifyCards(int index)
-	{
-		return (index == CARD1 || index == CARD5 || index == CARD6 || index == CARD9 || index == CARD10 || index == CARD11);
 	}
 
 }

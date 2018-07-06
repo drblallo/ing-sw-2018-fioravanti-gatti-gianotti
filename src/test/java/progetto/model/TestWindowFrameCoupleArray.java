@@ -5,10 +5,16 @@ import org.junit.Test;
 
 import java.util.List;
 
+/**
+ * Test WindowFrameCoupleArray (Singleton)
+ */
 public class TestWindowFrameCoupleArray {
 
 	List<WindowFrameCouple>  windowFrameCouples;
 
+	/**
+	 * Test read and get list
+	 */
 	@Test
 	public void testRead()
 	{
@@ -22,6 +28,9 @@ public class TestWindowFrameCoupleArray {
 
 	}
 
+	/**
+	 * Test read with path of the file
+	 */
 	@Test
 	public void testReadWithPath()
 	{
@@ -31,6 +40,9 @@ public class TestWindowFrameCoupleArray {
 
 	}
 
+	/**
+	 * Test read - fail - file not found
+	 */
 	@Test
 	public void testReadFailFileNotFound()
 	{
@@ -40,6 +52,9 @@ public class TestWindowFrameCoupleArray {
 
 	}
 
+	/**
+	 * Test read - fail - file with error
+	 */
 	@Test
 	public void testReadFailFileWithError()
 	{
@@ -49,6 +64,9 @@ public class TestWindowFrameCoupleArray {
 
 	}
 
+	/**
+	 * Test read with path - fail - empty path
+	 */
 	@Test
 	public void testReadFailEmptyPath()
 	{
@@ -59,6 +77,9 @@ public class TestWindowFrameCoupleArray {
 
 	}
 
+	/**
+	 * Test return instance
+	 */
 	@Test
 	public void testReturnInstance()
 	{

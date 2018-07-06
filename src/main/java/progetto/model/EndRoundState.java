@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * State used at the end of a round
+ * @author Michele
  */
 public class EndRoundState extends AbstractGameState
 {
@@ -17,7 +18,7 @@ public class EndRoundState extends AbstractGameState
 
 	/**
 	 * Execute state-related operations
-	 * @param game
+	 * @param game model where to apply this state
 	 */
 	@Override
 	void apply(Model game) {

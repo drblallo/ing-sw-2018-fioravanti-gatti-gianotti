@@ -5,12 +5,17 @@ import java.util.logging.Logger;
 
 /**
  * Request that is used to try to get a particular chair inside a server room
+ * @author Massimo
  */
 final class PickChairRoomRequest implements IRoomRequest
 {
 	private static final Logger LOGGER = Logger.getLogger(PickChairRoomRequest.class.getName());
 	private int charID;
 
+	/**
+	 * creates a new request used to pick a chair in the server
+	 * @param charID the chair to be picked
+	 */
 	PickChairRoomRequest(int charID) {
 		this.charID = charID;
 	}

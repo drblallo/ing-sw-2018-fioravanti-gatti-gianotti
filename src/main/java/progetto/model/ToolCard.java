@@ -1,29 +1,30 @@
 package progetto.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Class tool card
+ * @author Michele
+ */
 public class ToolCard implements Serializable {
 
 	private String name;
 	private String effect;
 	private GameColor gameColor;
 	private int index;
-	private List<Class> cardAction;
 
 	/**
 	 * Constructor with name, effect and color of the card
 	 * @param name name of the card
 	 * @param effect effect of the card
 	 */
-	ToolCard(String name, String effect, GameColor gameColor, int index, List<Class> cardAction)
+	ToolCard(String name, String effect, GameColor gameColor, int index)
 	{
 		this.name = name;
 		this.effect = effect;
 		this.gameColor = gameColor;
 		this.index = index;
-		this.cardAction = cardAction;
+
 	}
 
 	/**
@@ -33,20 +34,24 @@ public class ToolCard implements Serializable {
 	public String getToolTip()
 	{
 		//return card name and effect description
-		return index + " " + gameColor + " " + name + " " + effect;
+		return "Colore: " + gameColor + "\nNome: " + name + "\nEffetto: " + effect + "\n";
 	}
 
+	/**
+	 *
+	 * @return index og this tool card
+	 */
 	public int getIndex()
 	{
 		return index;
 	}
 
+	/**
+	 *
+	 * @return color of this tool card
+	 */
 	public GameColor getGameColor() {
 		return gameColor;
 	}
 
-	public List<Class> getCardAction()
-	{
-		return new ArrayList<>(cardAction);
-	}
 }

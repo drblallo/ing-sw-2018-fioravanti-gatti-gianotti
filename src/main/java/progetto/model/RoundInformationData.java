@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Immutable class with data of RoundInformation
+ * @author Michele
  */
 public final class RoundInformationData implements Serializable {
 
@@ -110,7 +111,7 @@ public final class RoundInformationData implements Serializable {
 	/**
 	 * Constructor to set tool card parameters
 	 * @param roundInformationData previous roundInformationData
-	 * @param toolCardParameters
+	 * @param toolCardParameters tool card parameters
 	 */
 	private RoundInformationData(RoundInformationData roundInformationData, ToolCardParameters toolCardParameters)
 	{
@@ -130,7 +131,6 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Get tool card parameters
-	 * @return
 	 */
 	public ToolCardParameters getToolCardParameters()
 	{
@@ -139,7 +139,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param nCard
+	 * @param nCard number of the activated card
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setNCard(int nCard)
@@ -150,7 +150,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param token
+	 * @param token token of the activated card
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setToken(int token)
@@ -161,7 +161,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param sPDice
+	 * @param sPDice single player dice of the activated card
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setSPDice(int sPDice)
@@ -172,7 +172,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param nDice
+	 * @param nDice position of selected picked dice of the activated card
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setNDice(int nDice)
@@ -183,8 +183,8 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set values
-	 * @param xPlacedDice
-	 * @param yPlacedDice
+	 * @param xPlacedDice x pos of the first selected placed dice
+	 * @param yPlacedDice y pos of the first selected placed dice
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setYXValues(int yPlacedDice, int xPlacedDice)
@@ -195,8 +195,8 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set values
-	 * @param xPlacedDice2
-	 * @param yPlacedDice2
+	 * @param xPlacedDice2 x pos of the second selected placed dice
+	 * @param yPlacedDice2 y pos of the second selected placed dice
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setYX2Values(int yPlacedDice2, int xPlacedDice2)
@@ -207,7 +207,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param increaseDecrease
+	 * @param increaseDecrease 0 = increase, 1 = decrease
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setIncreaseDecrease(int increaseDecrease)
@@ -218,7 +218,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param value
+	 * @param value new value of the extracted dice
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setValue(int value)
@@ -229,7 +229,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param changedDiceDB
+	 * @param changedDiceDB = -1 if the dice has not been changed
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setChangedDiceDB(int changedDiceDB)
@@ -240,7 +240,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param round
+	 * @param round number of the round
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setRound(int round)
@@ -251,7 +251,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param nDiceRT
+	 * @param nDiceRT position of the round in the round track
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setNDiceRT(int nDiceRT)
@@ -262,7 +262,7 @@ public final class RoundInformationData implements Serializable {
 
 	/**
 	 * Set value
-	 * @param dice
+	 * @param dice dice for tool card 11
 	 * @return new RoundInformationData with modified values
 	 */
 	RoundInformationData setDice(Dice dice)

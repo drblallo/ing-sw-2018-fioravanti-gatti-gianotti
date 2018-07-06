@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 /**
  * Immutable class with data of ExtractedDices
+ * @author Michele
  */
 public final class ExtractedDicesData implements Serializable{
 

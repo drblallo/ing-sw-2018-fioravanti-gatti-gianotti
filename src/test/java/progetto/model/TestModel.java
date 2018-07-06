@@ -6,6 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import progetto.controller.GameController;
 
+/**
+ * Test class model
+ */
 public class TestModel extends TestCase {
 
 	Model game;
@@ -16,6 +19,9 @@ public class TestModel extends TestCase {
 		game = new Model();
 	}
 
+	/**
+	 * Test getter
+	 */
 	@Test
 	public void testGetter()
 	{
@@ -35,6 +41,9 @@ public class TestModel extends TestCase {
 
 	}
 
+	/**
+	 * Test set seed
+	 */
 	@Test
 	public void testSeed()
 	{
@@ -44,6 +53,9 @@ public class TestModel extends TestCase {
 		Assert.assertEquals(12121212, game.getSeed());
 	}
 
+	/**
+	 * Test game equality
+	 */
 	@Test
 	public void testGameEquality()
 	{

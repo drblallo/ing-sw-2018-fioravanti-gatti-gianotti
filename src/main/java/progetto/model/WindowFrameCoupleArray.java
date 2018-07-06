@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 /**
  * Singleton
  * ArrayList of Window Frame Couples. Upload by file JSON using GSON.
+ * @author Michele
  */
 public final class WindowFrameCoupleArray {
 
@@ -29,6 +30,10 @@ public final class WindowFrameCoupleArray {
 		readWindowFrameCouples(path);
 	}
 
+	/**
+	 *
+	 * @return the instance of this class
+	 */
 	public static synchronized WindowFrameCoupleArray getInstance()
 	{
 		if(instance == null)
@@ -40,7 +45,7 @@ public final class WindowFrameCoupleArray {
 
 	/**
 	 * Get list of window frame couples
-	 * @return
+	 * @return a list of window frame couples
 	 */
 	public List<WindowFrameCouple> getList()
 	{

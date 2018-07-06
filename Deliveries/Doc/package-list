@@ -9,7 +9,7 @@ progetto.network
 progetto.network.localconnection
 progetto.network.rmi
 progetto.network.socket
-progetto.proxy
+progetto.network.proxy
 progetto.utils
 progetto.view.commandline
 progetto.view.gui

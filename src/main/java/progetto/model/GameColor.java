@@ -2,14 +2,15 @@ package progetto.model;
 
 /**
  * Enum for available colors
+ * @author Michele
  */
 public enum GameColor {
 	YELLOW, RED, BLUE, GREEN, PURPLE;
 
 
 	/**
-	 * toString
-	 * @return
+	 *
+	 * @return color to string
 	 */
 	@Override
 	public String toString()

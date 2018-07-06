@@ -6,7 +6,8 @@ import java.util.logging.Logger;
 
 /**
  * Dice bag with 90 dices in 5 colors
-*/
+ * @author Michele
+ */
 public final class DiceBag{
 
 	private static final int NUMBER_OF_DICES_PER_COLOR = 18;
@@ -62,7 +63,7 @@ public final class DiceBag{
 
 	/**
 	 * Add a dice to the bag (with Color color)
-	 * @param gameColor
+	 * @param gameColor color to add
 	 */
 	public void add(GameColor gameColor)
 	{

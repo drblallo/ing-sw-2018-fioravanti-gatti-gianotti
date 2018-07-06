@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  *  Immutable support class with dices in a position of the roundTrack
+ *  @author Michele
  */
 public final class NineDices implements Serializable{
 
@@ -23,7 +24,7 @@ public final class NineDices implements Serializable{
 
 	/**
 	 * Costructor copy
-	 * @param nineDices
+	 * @param nineDices nine dices to copy
 	 */
 	NineDices(NineDices nineDices)
 	{

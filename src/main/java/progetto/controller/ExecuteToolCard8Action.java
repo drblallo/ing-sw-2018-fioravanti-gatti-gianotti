@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Action to execute tool card 8
+ * @author Michele
  */
 public class ExecuteToolCard8Action extends AbstractExecutibleGameAction{
 
@@ -23,11 +24,11 @@ public class ExecuteToolCard8Action extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set callerID
-	 * @param nPlayer
+	 * @param callerID
 	 */
-	public ExecuteToolCard8Action(int nPlayer)
+	public ExecuteToolCard8Action(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 	}
 
 	/**

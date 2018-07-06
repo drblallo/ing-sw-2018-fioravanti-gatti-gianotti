@@ -1,47 +1,57 @@
 package progetto.view.gui;
 
-import javafx.application.Platform;
-import progetto.utils.AbstractObservable;
-import progetto.utils.IObserver;
+import progetto.IClientController;
+import progetto.model.IModel;
 
-public abstract class AbstractController <U, T extends AbstractObservable <U>> {
+/**
+ * A simple class extended by FXML controller to hold the reference of the guiView
+ * @author Federica
+ */
+public abstract class AbstractController {
 
-    private T observable;
+	private GUIView view;
 
-    private IObserver<U> iObserver = ogg -> Platform.runLater(this::update);
+	/**
+	 *
+	 * @return the current gui view
+	 */
+	public GUIView getView() {
+		return view;
+	}
 
-    public final void setObservable(T newObservable){
+	/**
+	 * setUp the controller
+	 * @param view the current gui view
+	 */
+	public void setUp(GUIView view)
+	{
+		this.view = view;
+	}
 
-        if(observable!=null){
+	/**
+	 *
+	 * @return the client controller
+	 */
+	public IClientController getController()
+	{
+		return view.getController();
+	}
 
-            observable.removeObserver(iObserver);
+	/**
+	 *
+	 * @return the current model
+	 */
+	public IModel getModel()
+	{
+		return getController().getModel();
+	}
 
-        }
-
-        observable = newObservable;
-
-        observable.addObserver(iObserver);
-
-        onObserverReplaced();
-
-        Platform.runLater(this::update);
-
-    }
-
-
-
-    protected void onObserverReplaced(){
-
-        //Le classi derivate possono estenderla se vogliono
-
-    }
-
-    protected T getObservable(){
-
-        return observable;
-
-    }
-
-    protected abstract void update();
-
+	/**
+	 *
+	 * @return number of the chair of the player
+	 */
+	public int getChair()
+	{
+		return getController().getChair();
+	}
 }

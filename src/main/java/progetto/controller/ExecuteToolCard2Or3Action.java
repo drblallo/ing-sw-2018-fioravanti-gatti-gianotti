@@ -3,7 +3,8 @@ package progetto.controller;
 import progetto.model.*;
 
 /**
- * Action to execute tool card 2 ore 3
+ * Action to execute tool card 2 or 3
+ * @author Michele
  */
 public class ExecuteToolCard2Or3Action extends AbstractExecutibleGameAction{
 
@@ -20,11 +21,11 @@ public class ExecuteToolCard2Or3Action extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set callerID
-	 * @param nPlayer
+	 * @param callerID
 	 */
-	public ExecuteToolCard2Or3Action(int nPlayer)
+	public ExecuteToolCard2Or3Action(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 	}
 
 	/**

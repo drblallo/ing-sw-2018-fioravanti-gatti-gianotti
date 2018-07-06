@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test dice bag
+ */
 public class TestDiceBag extends TestCase {
 
 	DiceBag diceBag;
@@ -15,6 +18,9 @@ public class TestDiceBag extends TestCase {
 		diceBag = new DiceBag();
 	}
 
+	/**
+	 * Test constructor
+	 */
 	@Test
 	public void testConstructor() {
 
@@ -37,7 +43,9 @@ public class TestDiceBag extends TestCase {
 
 	}
 
-
+	/**
+	 * Test draw a dice
+	 */
 	@Test
 	public void testDraw() {
 
@@ -50,6 +58,9 @@ public class TestDiceBag extends TestCase {
 
 	}
 
+	/**
+	 * Test draw a dice - wrong index
+	 */
 	@Test
 	public void testDrawFail() {
 
@@ -60,7 +71,9 @@ public class TestDiceBag extends TestCase {
 
 	}
 
-
+	/**
+	 * Test add a dice
+	 */
 	@Test
 	public void testAdd()
 	{
@@ -75,6 +88,9 @@ public class TestDiceBag extends TestCase {
 
 	}
 
+	/**
+	 * Test get number of dices
+	 */
 	@Test
 	public void testNumberOfDices()
 	{

@@ -5,12 +5,18 @@ import progetto.model.Model;
 import progetto.model.RoundState;
 import progetto.model.ToolCardState;
 
+import java.util.List;
+
 /**
  * Action to use tool card
+ * @author Michele
  */
 public class UseToolCardAction extends AbstractExecutibleGameAction{
 
 	private final int nCard;
+
+	private static final int INDEX7 = 7;
+	private static final int INDEX8 = 8;
 
 	/**
 	 * Constructor without parameters
@@ -40,12 +46,17 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
-		if(game.getMainBoard().getData().getGameState().getClass() != RoundState.class ||
+		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
+
+		if(currentPlayer != getCallerID() ||
+				game.getMainBoard().getData().getGameState().getClass() != RoundState.class ||
 				nCard>=game.getMainBoard().getData().getToolCards().size() || nCard < 0 ||
-				game.getRoundInformation().getData().getUsedToolCard())
+				game.getRoundInformation().getData().getUsedToolCard() )
 		{
 			return false;
 		}
+
+		boolean tokenEnough = true;
 
 		if(game.getMainBoard().getData().getPlayerCount() != 1)
 		{
@@ -57,10 +68,11 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 				askedToken++;
 			}
 
-			return playerToken >= askedToken;
+			tokenEnough = playerToken >= askedToken;
+
 		}
 
-		return true;
+		return tokenEnough && check7(game) && check8(game);
 
 	}
 
@@ -84,4 +96,61 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 		game.setState(new ToolCardState(game.getMainBoard().getData().getToolCards().get(nCard).getIndex()));
 
 	}
+
+	/**
+	 * Tool card 7 works only if it is the second turn of the player
+	 * @param game game
+	 * @return canBeUsed
+	 */
+	private boolean check7(IModel game)
+	{
+		int cardIndex = game.getMainBoard().getData().getToolCards().get(nCard).getIndex();
+		if(cardIndex == INDEX7)
+		{
+			List<Integer> playerQueue = game.getRoundInformation().getData().getRoundPlayerList();
+			int nPlayer = getCallerID();
+			while(!playerQueue.isEmpty())
+			{
+				int nextP = playerQueue.remove(0);
+				if (nextP == nPlayer)   //check second turn of the player
+				{
+					return false;
+				}
+			}
+
+		}
+
+		return true;
+
+	}
+
+	/**
+	 * Tool card 8 works only if it is the first turn of the player
+	 * @param game game
+	 * @return canBeUsed
+	 */
+	private boolean check8(IModel game)
+	{
+		int cardIndex = game.getMainBoard().getData().getToolCards().get(nCard).getIndex();
+
+		if(cardIndex == INDEX8)
+		{
+			List<Integer> playerQueue = game.getRoundInformation().getData().getRoundPlayerList();
+			int nPlayer = getCallerID();
+
+			while(!playerQueue.isEmpty())
+			{
+				int nextP = playerQueue.remove(0);
+				if (nextP == nPlayer)   //check first turn of the player
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		return true;
+
+	}
+
 }

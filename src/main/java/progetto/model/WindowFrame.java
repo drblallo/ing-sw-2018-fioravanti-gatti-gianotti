@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 /**
  * Window frame for Window Pattern Card
+ * @author Michele
  */
 public final class WindowFrame implements Serializable {
 
-	private static final int MAX_NUMBER_OF_ROWS = 4;
-	private static final int MAX_NUMBER_OF_COLUMNS = 5;
+	public static final int MAX_NUMBER_OF_ROWS = 4;
+	public static final int MAX_NUMBER_OF_COLUMNS = 5;
 
 	private final Value[][] valueLimitationMatrix = new Value[MAX_NUMBER_OF_ROWS][MAX_NUMBER_OF_COLUMNS];
 	private final GameColor[][] colorLimitationMatrix = new GameColor[MAX_NUMBER_OF_ROWS][MAX_NUMBER_OF_COLUMNS];

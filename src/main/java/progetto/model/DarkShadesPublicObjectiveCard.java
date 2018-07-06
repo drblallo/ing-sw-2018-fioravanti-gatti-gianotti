@@ -2,15 +2,18 @@ package progetto.model;
 
 /**
  * Class for public objective card "Sfumature Scure"
+ * @author Michele
  */
 public class DarkShadesPublicObjectiveCard extends AbstractValueShadesPublicObjectiveCard {
+
+	private static final int CARD_ID = 6;
 
 	/**
 	 * Constructor
 	 */
 	DarkShadesPublicObjectiveCard()
 	{
-		super("Sfumature Scure", "Set di 4 & 5 ovunque");
+		super("Sfumature Scure", "Set di 4 & 5 ovunque", CARD_ID);
 	}
 
 	/**

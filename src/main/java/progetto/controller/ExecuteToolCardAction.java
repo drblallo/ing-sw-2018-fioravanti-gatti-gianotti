@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Action to execute a tool card
+ * @author Michele
  */
 public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
@@ -23,11 +24,11 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set callerID
-	 * @param nPlayer
+	 * @param callerID
 	 */
-	public ExecuteToolCardAction(int nPlayer)
+	public ExecuteToolCardAction(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 		gameActionList.add(new ExecuteToolCard1Action(getCallerID()));
 		gameActionList.add(new ExecuteToolCard2Or3Action(getCallerID()));
 		gameActionList.add(new ExecuteToolCard2Or3Action(getCallerID()));
@@ -59,7 +60,9 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 		AbstractGameAction gameAction = setGameAction(game);
 
-		if(gameAction == null)
+		if(gameAction == null ||
+				(game.getMainBoard().getData().getPlayerCount()==1 &&
+						roundInformationData.getToolCardParameters().getSPDice()==-1))
 		{
 			return false;
 		}
@@ -107,7 +110,7 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 	/**
 	 * Support method to set gameAction
-	 * @param game
+	 * @param game model in use
 	 * @return gameAction
 	 */
 	private AbstractGameAction setGameAction(IModel game)

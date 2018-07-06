@@ -2,6 +2,7 @@ package progetto.network;
 
 /**
  * Request sent when the player wishes to send a message to another player inside the room
+ * @author Massimo
  */
 final class SendPrivateMessageRoomRequest implements IRoomRequest {
 	private String message;

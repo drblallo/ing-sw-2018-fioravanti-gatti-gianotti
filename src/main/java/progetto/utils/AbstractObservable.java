@@ -13,6 +13,7 @@ import java.util.logging.Logger;
  * AbstractObservables are thread safe.
  *
  * @param <T> The type that is passed to IObserver when called.
+ * @author Massimo
  */
 public abstract class AbstractObservable<T>
 {
@@ -62,6 +63,7 @@ public abstract class AbstractObservable<T>
 	 */
 	public final synchronized void addObserver(IObserver<T> obs)
 	{
+
 		if (!currentObservers.contains(obs))
 		{
 			LOGGER.log(Level.FINE, "adding observer");
@@ -69,7 +71,10 @@ public abstract class AbstractObservable<T>
 		}
 		else
 		{
-			LOGGER.log(Level.FINE, "observer already existed");
+			if (toBeRemovedObservers.contains(obs))
+				toBeRemovedObservers.remove(obs);
+			else
+				LOGGER.log(Level.FINE, "observer already existed");
 		}
 	}
 

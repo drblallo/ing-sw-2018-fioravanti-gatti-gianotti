@@ -8,6 +8,9 @@ import progetto.controller.GameController;
 
 import java.util.List;
 
+/**
+ * Test frame selection state
+ */
 public class TestFrameSelection {
 
 	GameController game;
@@ -18,6 +21,9 @@ public class TestFrameSelection {
 		game = new GameController();
 	}
 
+	/**
+	 * Test to verify extraction of public objective cards (MultiPlayer)
+	 */
 	@Test
 	public void testPublicObjectiveCard4Player()
 	{
@@ -26,12 +32,18 @@ public class TestFrameSelection {
 		Assert.assertEquals(4, game.getMainBoard().getData().getPlayerCount());
 		List<AbstractPublicObjectiveCard> cards = game.getMainBoard().getData().getPublicObjectiveCards();
 		Assert.assertEquals(3, cards.size());
-		Assert.assertEquals("Sfumature Medie Set di 3 & 4 ovunque", cards.get(0).getToolTip());
-		Assert.assertEquals("Sfumature diverse - riga Righe senza sfumature ripetute", cards.get(1).getToolTip());
-		Assert.assertEquals("Sfumature Scure Set di 4 & 5 ovunque", cards.get(2).getToolTip());
+		Assert.assertEquals("Nome : Sfumature Medie\n" +
+				"Effetto: Set di 3 & 4 ovunque\n", cards.get(0).getToolTip());
+		Assert.assertEquals("Nome : Sfumature diverse - riga\n" +
+				"Effetto: Righe senza sfumature ripetute\n", cards.get(1).getToolTip());
+		Assert.assertEquals("Nome : Sfumature Scure\n" +
+				"Effetto: Set di 4 & 5 ovunque\n", cards.get(2).getToolTip());
 
 	}
 
+	/**
+	 * Test to verify extraction of public objective cards (Single Player)
+	 */
 	@Test
 	public void testPublicObjectiveCard1Player()
 	{
@@ -41,11 +53,16 @@ public class TestFrameSelection {
 		Assert.assertEquals(1, game.getMainBoard().getData().getPlayerCount());
 		List<AbstractPublicObjectiveCard> cards = game.getMainBoard().getData().getPublicObjectiveCards();
 		Assert.assertEquals(2, cards.size());
-		Assert.assertEquals("Diagonali Colorate Numero di dadi dello stesso colore diagonalmente adiacenti", cards.get(0).getToolTip());
-		Assert.assertEquals("Sfumature diverse - riga Righe senza sfumature ripetute", cards.get(1).getToolTip());
+		Assert.assertEquals("Nome : Diagonali Colorate\n" +
+				"Effetto: Numero di dadi dello stesso colore diagonalmente adiacenti\n", cards.get(0).getToolTip());
+		Assert.assertEquals("Nome : Sfumature diverse - riga\n" +
+				"Effetto: Righe senza sfumature ripetute\n", cards.get(1).getToolTip());
 
 	}
 
+	/**
+	 * Test to verify extraction of private objective cards (MultiPlayer)
+	 */
 	@Test
 	public void testPrivateObjectiveCard4Player()
 	{
@@ -60,13 +77,20 @@ public class TestFrameSelection {
 		Assert.assertEquals(1, privateObjectiveCardP1.size());
 		Assert.assertEquals(1, privateObjectiveCardP2.size());
 		Assert.assertEquals(1, privateObjectiveCardP3.size());
-		Assert.assertEquals("Sfumature Giallo Somma dei valori su tutti i dadi Giallo", privateObjectiveCardP0.get(0).getToolTip());
-		Assert.assertEquals("Sfumature Viola Somma dei valori su tutti i dadi Viola", privateObjectiveCardP1.get(0).getToolTip());
-		Assert.assertEquals("Sfumature Blu Somma dei valori su tutti i dadi Blu", privateObjectiveCardP2.get(0).getToolTip());
-		Assert.assertEquals("Sfumature Verde Somma dei valori su tutti i dadi Verde", privateObjectiveCardP3.get(0).getToolTip());
+		Assert.assertEquals("Nome : Sfumature Giallo\n" +
+				"Effetto: Somma dei valori su tutti i dadi Giallo\n", privateObjectiveCardP0.get(0).getToolTip());
+		Assert.assertEquals("Nome : Sfumature Viola\n" +
+				"Effetto: Somma dei valori su tutti i dadi Viola\n", privateObjectiveCardP1.get(0).getToolTip());
+		Assert.assertEquals("Nome : Sfumature Blu\n" +
+				"Effetto: Somma dei valori su tutti i dadi Blu\n", privateObjectiveCardP2.get(0).getToolTip());
+		Assert.assertEquals("Nome : Sfumature Verde\n" +
+				"Effetto: Somma dei valori su tutti i dadi Verde\n", privateObjectiveCardP3.get(0).getToolTip());
 
 	}
 
+	/**
+	 * Test to verify extraction of private objective cards (single player)
+	 */
 	@Test
 	public void testPrivateObjectiveCard1Player()
 	{
@@ -76,11 +100,16 @@ public class TestFrameSelection {
 		Assert.assertEquals(1, game.getMainBoard().getData().getPlayerCount());
 		List<AbstractPrivateObjectiveCard> privateObjectiveCardP0 = game.getPlayerBoard(0).getData().getPrivateObjectiveCard();
 		Assert.assertEquals(2, privateObjectiveCardP0.size());
-		Assert.assertEquals("Sfumature Giallo Somma dei valori su tutti i dadi Giallo", privateObjectiveCardP0.get(0).getToolTip());
-		Assert.assertEquals("Sfumature Viola Somma dei valori su tutti i dadi Viola", privateObjectiveCardP0.get(1).getToolTip());
+		Assert.assertEquals("Nome : Sfumature Giallo\n" +
+				"Effetto: Somma dei valori su tutti i dadi Giallo\n", privateObjectiveCardP0.get(0).getToolTip());
+		Assert.assertEquals("Nome : Sfumature Viola\n" +
+				"Effetto: Somma dei valori su tutti i dadi Viola\n", privateObjectiveCardP0.get(1).getToolTip());
 
 	}
 
+	/**
+	 * Test to verify extraction of window frame cards (single player)
+	 */
 	@Test
 	public void testFrameExtraction1Player()
 	{
@@ -106,6 +135,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test to verify extraction of window frame cards (MultiPlayer)
+	 */
 	@Test
 	public void testFrameExtraction4Player()
 	{
@@ -144,6 +176,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test - frame selection  (single player)
+	 */
 	@Test
 	public void testFrameSelection1Player()
 	{
@@ -163,6 +198,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test - frame selection (MultiPlayer)
+	 */
 	@Test
 	public void testFrameSelection4Player()
 	{
@@ -195,6 +233,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test - frame selection - empty window frame (Single player)
+	 */
 	@Test
 	public void testFrameSelection1PlayerEmptyWindowFrame()
 	{
@@ -209,6 +250,9 @@ public class TestFrameSelection {
 
 	}
 
+	/**
+	 * Test - frame selection - empty window frame (MultiPlayer)
+	 */
 	@Test
 	public void testFrameSelection1PlayerEmptyError()
 	{

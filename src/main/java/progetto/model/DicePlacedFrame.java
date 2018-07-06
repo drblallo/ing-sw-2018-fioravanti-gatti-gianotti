@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Player window with positioned dice
+ * @author Michele
  */
 public final class DicePlacedFrame extends Container<DicePlacedFrameData> {
 

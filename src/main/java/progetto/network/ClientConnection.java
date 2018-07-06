@@ -1,12 +1,10 @@
 package progetto.network;
 
-import progetto.proxy.ModelProxy;
+import progetto.network.proxy.ModelProxy;
 import progetto.utils.Callback;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +13,7 @@ import java.util.logging.Logger;
  * all the method needed to communicate with the server.
  *
  * All request sending methods are synchronized, so requests can be performed from any thread.
+ * @author Massimo
  */
 public final class ClientConnection implements Runnable
 {
@@ -27,8 +26,8 @@ public final class ClientConnection implements Runnable
 	private final Callback<ServerStateView> serverStateViewCallback = new Callback<>();
 	private final Callback<RoomView> roomViewCallback = new Callback<>();
 	private final Callback<ModelProxy> actionEndedCallback = new Callback<>();
+	private final Callback<ClientConnection> connectionClosedCallback = new Callback<>();
 
-	private final Queue<IEnforce> enforcesQueue = new ConcurrentLinkedQueue<>();
 	private final INetworkClient handler;
 	private ServerStateView serverState = new ServerStateView();
 	private int playerID = -1;
@@ -44,9 +43,10 @@ public final class ClientConnection implements Runnable
 	{
 		handler = h;
 		synchronizedObj = ogg;
-		handler.getEnforceCallback().addObserver(enforcesQueue::add);
 
-		new Thread(this).start();
+		Thread t = new Thread(this);
+		t.setName("Client connection");
+		t.start();
 	}
 
 	public ModelProxy getProxy()
@@ -74,6 +74,10 @@ public final class ClientConnection implements Runnable
 
 	public Callback<RoomView> getRoomViewCallback() {
 		return roomViewCallback;
+	}
+
+	public Callback<ClientConnection> getConnectionClosedCallback() {
+		return connectionClosedCallback;
 	}
 
 	/**
@@ -323,9 +327,11 @@ public final class ClientConnection implements Runnable
 	private synchronized void processAllCommand()
 	{
 		IEnforce f;
-		while ((f = enforcesQueue.poll()) != null)
+		while ((f = handler.getEnforceList().poll()) != null)
 		{
+			LOGGER.log(Level.FINE, "processing a command");
 			f.execute(this);
+			LOGGER.log(Level.FINE, "done processing a command");
 		}
 
 	}
@@ -349,5 +355,6 @@ public final class ClientConnection implements Runnable
 				LOGGER.log(Level.SEVERE, "interrupted {0}", e.getMessage());
 			}
 		}
+		connectionClosedCallback.call(this);
 	}
 }

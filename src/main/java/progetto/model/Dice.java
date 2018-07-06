@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Dice with a color and a value  (immutable)
+ * @author Michele
  */
 public final class Dice implements Serializable {
 	private final Value value;
@@ -11,8 +12,8 @@ public final class Dice implements Serializable {
 
 	/**
 	 * Constructor
-	 * @param value
-	 * @param gameColor
+	 * @param value value of the dice
+	 * @param gameColor color of the dice
 	 */
 	Dice(Value value, GameColor gameColor)
 	{
@@ -40,7 +41,7 @@ public final class Dice implements Serializable {
 
 	/**
 	 * Set value
-	 * @param newValue
+	 * @param newValue new value of the dice
 	 * @return a new Dice with newValue as Value, same Color
 	 */
 	public Dice setValue(Value newValue)
@@ -50,7 +51,7 @@ public final class Dice implements Serializable {
 
 	/**
 	 * Set color
-	 * @param newGameColor
+	 * @param newGameColor new color of the dice
 	 * @return a new Dice with newColor as Color, same Value
 	 */
 	public Dice setGameColor(GameColor newGameColor)
@@ -150,8 +151,8 @@ public final class Dice implements Serializable {
 	}
 
 	/**
-	 * toString
-	 * @return
+	 *
+	 * @return this dice to string
 	 */
 	public String toString(){
 

@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test private objective cards
+ */
 public class TestPrivateObjective {
 
 	DicePlacedFrame dicePlacedFrame;
@@ -17,14 +20,21 @@ public class TestPrivateObjective {
 		dicePlacedFrame.addDice(new Dice(Value.FIVE, GameColor.PURPLE), 3, 4);
 	}
 
+	/**
+	 * Test private objective card purple shades
+	 */
 	@Test
 	public void testPurpleShades()
 	{
 		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(GameColor.PURPLE);
-		Assert.assertEquals("Sfumature Viola Somma dei valori su tutti i dadi Viola" , colorShadesPrivateObjectiveCard.getToolTip());
+		Assert.assertEquals("Nome : Sfumature Viola\n" +
+				"Effetto: Somma dei valori su tutti i dadi Viola\n" , colorShadesPrivateObjectiveCard.getToolTip());
 		Assert.assertEquals(9, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
+	/**
+	 * Test private objective card yellow shades
+	 */
 	@Test
 	public void testYellowShades()
 	{
@@ -32,6 +42,9 @@ public class TestPrivateObjective {
 		Assert.assertEquals(3, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
+	/**
+	 * Test private objective card blue shades
+	 */
 	@Test
 	public void testBlueShades()
 	{
@@ -39,6 +52,9 @@ public class TestPrivateObjective {
 		Assert.assertEquals(0, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
+	/**
+	 * Test private objective card red shades
+	 */
 	@Test
 	public void testRedShades()
 	{
@@ -46,6 +62,9 @@ public class TestPrivateObjective {
 		Assert.assertEquals(0, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 
+	/**
+	 * Test private objective card green shades
+	 */
 	@Test
 	public void testGreenShades()
 	{

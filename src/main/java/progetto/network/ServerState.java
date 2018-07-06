@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 /**
  * This class holds all the information at room level that are need to the server.
  * A server is composed by a list of room. Each room holds players.
+ * @author Massimo
  */
 public final class ServerState implements Runnable
 {
@@ -29,7 +30,9 @@ public final class ServerState implements Runnable
 	{
 		WaitingRoom waitingRoom = new WaitingRoom();
 		rooms.put(-1, waitingRoom);
-		new Thread(waitingRoom).start();
+		Thread t = new Thread(waitingRoom);
+		t.setName("Waiting room thread");
+		t.start();
 		this.factory = factory;
 	}
 
@@ -44,7 +47,9 @@ public final class ServerState implements Runnable
 		rooms.put(lastID, room);
 		lastID++;
 		LOGGER.log(Level.FINE,"spawning a new room");
-		new Thread(room).start();
+		Thread t = new Thread(room);
+		t.setName("Room Thread: "+lastID);
+		t.start();
 	}
 
 
@@ -82,11 +87,15 @@ public final class ServerState implements Runnable
 			con.setID(getUnusedID());
 
 		AbstractRoom oldRoom = getRoomOfPlayer(con.getPlayerID());
+		AbstractRoom r = getRoom(roomID);
+
+		for (PlayerView player : r.getView().asList())
+			if (player.getName() == newName)
+				return;
 
 		if (oldRoom != null)
 			oldRoom.enqueueRemoval(con.getPlayerID());
 
-		AbstractRoom r = getRoom(roomID);
 		if (r != null)
 			r.enqueueAdd(newName, con);
 
@@ -96,7 +105,7 @@ public final class ServerState implements Runnable
 	/**
 	 * returns an unused id inside this server
 	 *
-	 * @return
+	 * @return the first unused id
 	 */
 	private int getUnusedID()
 	{
@@ -106,6 +115,10 @@ public final class ServerState implements Runnable
 		return toReturno;
 	}
 
+	/**
+	 *
+	 * @return the current state of the server
+	 */
 	public ServerStateView getView()
 	{
 		ServerStateView v = new ServerStateView();
@@ -123,23 +136,33 @@ public final class ServerState implements Runnable
 		AbstractRoom r = getRoom(roomID);
 
 		if (r != null)
+		{
 			r.stop();
-
-		LOGGER.log(Level.FINE, "room deleted");
-		rooms.remove(r);
+			rooms.remove(r.getRoomID());
+			LOGGER.log(Level.FINE, "room deleted");
+		}
 	}
 
+	/**
+	 * kills the server thread
+	 */
 	void stop()
 	{
 		isRunning = false;
 	}
 
+	/**
+	 * deletes every room and stops them
+	 */
 	private void tearDown()
 	{
 		for (int r : rooms.keySet())
 			deleteRoom(r);
 	}
 
+	/**
+	 * evaluate all the requests, destroys empty room
+	 */
 	private void processAllRequest()
 	{
 
@@ -150,6 +173,9 @@ public final class ServerState implements Runnable
 			{
 				while (r.peekRequest() != null)
 						r.popRequest().execute(this, r);
+
+				if (r.canBeDeleted())
+					deleteRoom(r.getRoomID());
 			}
 
 			Thread.sleep(NetworkSettings.THREAD_CHECK_RATE);
@@ -160,6 +186,9 @@ public final class ServerState implements Runnable
 		}
 	}
 
+	/**
+	 * keeps evaluating all the requests until the server get closed
+	 */
 	public void run()
 	{
 		Thread.currentThread().setName("Server State Thread");
@@ -169,6 +198,10 @@ public final class ServerState implements Runnable
 		tearDown();
 	}
 
+	/**
+	 * broad cast a message to every player in the server
+	 * @param message the message to be broadcast
+	 */
 	public void broadcast(String message)
 	{
 		for (AbstractRoom room : rooms.values())

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="190.0" prefWidth="235.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.UtilityMenuPaneController">
+   <children>
+      <VBox prefHeight="183.0" prefWidth="235.0" spacing="5.0">
+         <children>
+            <Button fx:id="chatButton" mnemonicParsing="false" onAction="#onChatButtonClicked" prefHeight="50.0" prefWidth="349.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Chat">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+            </Button>
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Label text="Cambia sedia: ">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="25.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox spacing="10.0">
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <ChoiceBox fx:id="chairs" prefHeight="50.0" prefWidth="74.0" style="-fx-background-color: wheat; -fx-border-color: BLACK; -fx-border-width: 2;">
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ChoiceBox>
+                  <Button fx:id="sitButton" mnemonicParsing="false" onAction="#onSitButtonPressed" prefHeight="50.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Siediti">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="15.0" />
+                     </font>
+                  </Button>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Button fx:id="menuButton" mnemonicParsing="false" onAction="#onMenuButtonClicked" prefHeight="50.0" prefWidth="349.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 2;" text="Menu principale">
+               <font>
+                  <Font name="Imprint MT Shadow" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

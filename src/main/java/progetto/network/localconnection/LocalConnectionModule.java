@@ -6,6 +6,7 @@ import progetto.utils.Callback;
 
 /**
  * An implementations of INetworkModule that does not go throught the network
+ * @author Massimo
  */
 public final class LocalConnectionModule implements INetworkModule
 {

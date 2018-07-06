@@ -4,71 +4,106 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import progetto.model.Container;
+import javafx.scene.layout.VBox;
+import progetto.controller.ToolCardSetDiceRoundTrackAction;
 import progetto.model.Dice;
 import progetto.model.RoundTrackData;
 
-
-public class RoundTrackPaneController extends AbstractController<RoundTrackData, Container<RoundTrackData>>{
+/**
+ * this is the class that handles the round track fxml. This class is only instanced by javafx, this mean that
+ * must have a default constructor.
+ * @author Federica
+ */
+public class RoundTrackPaneController extends AbstractController{
 
     @FXML
     private HBox showingBox;
     @FXML
     private HBox roundBox;
-    private RoundTrackData roundTrackData;
+    @FXML
+    private VBox vBox;
     private TextureDatabase textureDatabase;
+    private static final int DICE_DIMENSION = 55;
 
-    public void setup(){
+    /**
+     * set up this object, it is equivalent to a constructor since there is no access to it
+     * @param view the current gui view
+     */
+    @Override
+    public void setUp(GUIView view){
+
+    	super.setUp(view);
+        view.getController().getObservable().getRoundTrack().addObserver(ogg -> update());
 
         ImageView imageView;
-
         for(int i=0; i< RoundTrackData.NUMBER_OF_ROUNDS; i++){
             imageView = (ImageView) roundBox.getChildren().get(i);
             final int d = i;
             imageView.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> showDices(d));
-            imageView.addEventHandler(MouseEvent.MOUSE_EXITED, event -> clearDices());
         }
 
         textureDatabase = TextureDatabase.getTextureDatabase();
-
+        vBox.addEventHandler(MouseEvent.MOUSE_EXITED, event -> clearDices());
     }
 
-    @Override
-    protected void update() {
+    /**
+     * called when round track changes
+     * update dices in the round track
+     */
+    private void update() {
 
-        RoundTrackData newRoundTrackData = getObservable().getData();
-        if(roundTrackData == newRoundTrackData || newRoundTrackData == null){
-            return;
-        }
-
-        roundTrackData = newRoundTrackData;
-
+        RoundTrackData roundTrackData = getView().getStateManager().getModel().getRoundTrack().getData();
         ImageView imageView;
         Dice dice;
 
         for(int i = 0; i<RoundTrackData.NUMBER_OF_ROUNDS; i++){
-            if(!roundTrackData.isFree(i)&& roundTrackData.getDice(i,0)!=null) {
-                    dice = roundTrackData.getDice(i, 0);
-                    imageView = (ImageView) roundBox.getChildren().get(i);
+            imageView = (ImageView) roundBox.getChildren().get(i);
+            if(!roundTrackData.isFree(i)) {
+                dice = roundTrackData.getDice(i, 0);
+                if (imageView.getImage()!=textureDatabase.getDice(dice.getGameColor(), dice.getValue().ordinal()+1))
                     imageView.setImage(textureDatabase.getDice(dice.getGameColor(), dice.getValue().ordinal() + 1));
-                }
             }
+            else if (imageView.getImage() != textureDatabase.getDice(null, -1))
+                imageView.setImage(textureDatabase.getDice(null, -1));
+        }
     }
 
+    /**
+     * called when the mouse enters in a node representing a past round
+     * show all the dices of the selected round
+     * @param nRound
+     */
     @FXML
     private void showDices(int nRound){
+        clearDices();
+        RoundTrackData roundTrackData = getModel().getRoundTrack().getData();
         if(!roundTrackData.isFree(nRound)){
             int j=0;
             Dice dice;
             while (roundTrackData.getDice(nRound,j)!=null){
                 dice = roundTrackData.getDice(nRound,j);
-                showingBox.getChildren().add(new ImageView(textureDatabase
-                        .getDice(dice.getGameColor(), dice.getValue().ordinal()+1)));
+                ImageView imageView = new ImageView(textureDatabase.getDice(dice.getGameColor(),
+                        dice.getValue().ordinal()+1));
+                imageView.setFitHeight(DICE_DIMENSION);
+                imageView.setFitWidth(DICE_DIMENSION);
+                final int i = j;
+
+                imageView.setOnMouseClicked(event -> {
+                    ToolCardSetDiceRoundTrackAction toolCardSetDiceRoundTrackAction =
+                            new ToolCardSetDiceRoundTrackAction(getChair(), nRound, i);
+                    if(toolCardSetDiceRoundTrackAction.canBeExecuted(getModel()))
+                        getController().sendAction(toolCardSetDiceRoundTrackAction);
+                });
+                showingBox.getChildren().add(imageView);
                 j++;
             }
         }
     }
 
+    /**
+     * called when the mouse exits from round track area
+     * clears the extra dices showed
+     */
     @FXML
     private void clearDices(){
         showingBox.getChildren().clear();

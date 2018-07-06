@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Round information
+ * @author Michele
  */
 public final class RoundInformation extends Container<RoundInformationData>
 {
@@ -108,8 +109,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param nCard
-	 * @return new RoundInformationData with modified values
+	 * @param nCard position of the card
 	 */
 	public void setNCard(int nCard)
 	{
@@ -118,8 +118,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param token
-	 * @return new RoundInformationData with modified values
+	 * @param token number of tokens
 	 */
 	public void setToken(int token)
 	{
@@ -128,8 +127,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param sPDice
-	 * @return new RoundInformationData with modified values
+	 * @param sPDice single player dice
 	 */
 	public void setSPDice(int sPDice)
 	{
@@ -138,8 +136,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param nDice
-	 * @return new RoundInformationData with modified values
+	 * @param nDice position of selected picked dice
 	 */
 	public void setNDice(int nDice)
 	{
@@ -148,9 +145,8 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set values
-	 * @param xPlacedDice
-	 * @param yPlacedDice
-	 * @return new RoundInformationData with modified values
+	 * @param xPlacedDice x pos of the first selected placed dice
+	 * @param yPlacedDice y pos of the first selected placed dice
 	 */
 	public void setYXValues(int yPlacedDice, int xPlacedDice)
 	{
@@ -159,9 +155,8 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set values
-	 * @param xPlacedDice2
-	 * @param yPlacedDice2
-	 * @return new RoundInformationData with modified values
+	 * @param xPlacedDice2 x pos of the second selected placed dice
+	 * @param yPlacedDice2 y pos of the second selected placed dice
 	 */
 	public void setYX2Values(int yPlacedDice2, int xPlacedDice2)
 	{
@@ -170,8 +165,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param increaseDecrease
-	 * @return new RoundInformationData with modified values
+	 * @param increaseDecrease 0 = increase, 1 = decrease
 	 */
 	public void setIncreaseDecrease(int increaseDecrease)
 	{
@@ -180,8 +174,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param value
-	 * @return new RoundInformationData with modified values
+	 * @param value value of the new dice
 	 */
 	public void setValue(int value)
 	{
@@ -190,8 +183,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param changedDiceDB
-	 * @return new RoundInformationData with modified values
+	 * @param changedDiceDB = -1 if the dice has not been changed
 	 */
 	public void setChangedDiceDB(int changedDiceDB)
 	{
@@ -200,8 +192,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param round
-	 * @return new RoundInformationData with modified values
+	 * @param round number of the round
 	 */
 	public void setRound(int round)
 	{
@@ -210,8 +201,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param nDiceRT
-	 * @return new RoundInformationData with modified values
+	 * @param nDiceRT position of the selected dice of the round track
 	 */
 	public void setNDiceRT(int nDiceRT)
 	{
@@ -220,8 +210,7 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Set value
-	 * @param dice
-	 * @return new RoundInformationData with modified values
+	 * @param dice dice used by tool card
 	 */
 	public void setDice(Dice dice)
 	{
@@ -230,7 +219,6 @@ public final class RoundInformation extends Container<RoundInformationData>
 
 	/**
 	 * Delete all parameters of tool cards
-	 * @return new MainBoardData without deleted parameters
 	 */
 	public void delParamToolCard()
 	{

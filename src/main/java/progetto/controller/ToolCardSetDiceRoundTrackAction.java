@@ -7,14 +7,12 @@ import progetto.model.ToolCardState;
 
 /**
  * Action to select a dice from round track
+ * @author Michele
  */
 public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameAction{
 
 	private final int round;
 	private final int nDiceRT;
-
-	private static final int CARD5 = 5;
-	private static final int CARD12 = 12;
 
 	/**
 	 * Constructor without parameters
@@ -29,13 +27,13 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 
 	/**
 	 * Constructor to set values
-	 * @param nPlayer callerID
-	 * @param round n round
-	 * @param nDiceRT n dice of selected round
+	 * @param callerID callerID
+	 * @param round id of the round
+	 * @param nDiceRT position of the selected dice in the selected round
 	 */
-	public ToolCardSetDiceRoundTrackAction(int nPlayer, int round, int nDiceRT)
+	public ToolCardSetDiceRoundTrackAction(int callerID, int round, int nDiceRT)
 	{
-		super(nPlayer);
+		super(callerID);
 		this.round = round;
 		this.nDiceRT = nDiceRT;
 
@@ -55,13 +53,8 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 			return false;
 		}
 
-		ToolCardState toolCardState = (ToolCardState) data.getGameState();
-
-		int index = toolCardState.getIndex();
-
 		return getCallerID()==game.getRoundInformation().getData().getCurrentPlayer() &&
-				game.getRoundTrack().getData().getDice(round, nDiceRT)!=null &&
-				(index == CARD5 || index == CARD12);
+				game.getRoundTrack().getData().getDice(round, nDiceRT)!=null ;
 
 	}
 

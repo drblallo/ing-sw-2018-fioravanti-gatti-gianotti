@@ -7,6 +7,7 @@ import progetto.model.RoundState;
 
 /**
  * Action to pick a dice (from extracted to picked)
+ * @author Michele
  */
 public class PickDiceAction extends AbstractExecutibleGameAction{
 
@@ -24,12 +25,12 @@ public class PickDiceAction extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set values
-	 * @param nPlayer callerID
+	 * @param callerID callerID
 	 * @param nDice from ExtractedDices
 	 */
-	public PickDiceAction(int nPlayer, int nDice)
+	public PickDiceAction(int callerID, int nDice)
 	{
-		super(nPlayer);
+		super(callerID);
 		this.nDice = nDice;
 	}
 

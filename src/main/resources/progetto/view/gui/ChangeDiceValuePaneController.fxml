@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="anchorPane" maxHeight="245.0" maxWidth="173.0" minHeight="245.0" minWidth="173.0" prefHeight="245.0" prefWidth="173.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.ChangeDiceValuePaneController">
+   <children>
+      <VBox fx:id="myPane" layoutX="37.0" layoutY="23.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <ImageView fx:id="diceToChange" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Label text="Scegli il valore">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Label text="da assegnare">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Label text="al dado ">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Label text="estratto:">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <ChoiceBox fx:id="chooseNumberOfDice" prefHeight="39.0" prefWidth="50.0" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 1;" />
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </HBox>
+            <HBox>
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#onChooseButtonClicked" style="-fx-background-color: wheat; -fx-border-color: black; -fx-border-width: 1;" text="Scegli">
+                     <font>
+                        <Font name="Imprint MT Shadow" size="20.0" />
+                     </font>
+                  </Button>
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -2,9 +2,12 @@ package progetto.network;
 
 import progetto.utils.Callback;
 
+import java.util.Queue;
+
 /**
  * This is the interface that must be implemented by a message transport layer to allow ClientConnection to behave
  * correctly
+ * @author Massimo
  */
 public interface INetworkClient {
 
@@ -28,10 +31,9 @@ public interface INetworkClient {
 
 	/**
 	 *
-	 * @return the callback that is called every time a enforce is received by the network.
-	 * Implementer must ensure that enforcers are received in order.
+	 * @return the list of enforces
 	 */
-	Callback<IEnforce> getEnforceCallback();
+	Queue<IEnforce> getEnforceList();
 
 	/**
 	 *

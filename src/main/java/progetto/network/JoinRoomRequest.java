@@ -2,6 +2,7 @@ package progetto.network;
 
 /**
  * Request that is sent when the player wishes to switch room.
+ * @author Massimo
  */
 final class JoinRoomRequest extends AbstractServerRequest
 {

@@ -4,6 +4,7 @@ import progetto.model.*;
 
 /**
  * Action to execute tool card 9
+ * @author Michele
  */
 public class ExecuteToolCard9Action extends AbstractExecutibleGameAction{
 
@@ -19,11 +20,11 @@ public class ExecuteToolCard9Action extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set callerID
-	 * @param nPlayer
+	 * @param callerID
 	 */
-	public ExecuteToolCard9Action(int nPlayer)
+	public ExecuteToolCard9Action(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 	}
 
 	/**

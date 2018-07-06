@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Class for private objective card "Sfumature"
+ * @author Michele
  */
 public class ColorShadesPrivateObjectiveCard extends AbstractPrivateObjectiveCard {
 
@@ -9,11 +10,11 @@ public class ColorShadesPrivateObjectiveCard extends AbstractPrivateObjectiveCar
 
 	/**
 	 * Constructor
-	 * @param gameColor
+	 * @param gameColor color of the private objective card
 	 */
 	ColorShadesPrivateObjectiveCard(GameColor gameColor)
 	{
-		super("Sfumature " + gameColor.toString(), "Somma dei valori su tutti i dadi " + gameColor.toString());
+		super("Sfumature " + gameColor.toString(), "Somma dei valori su tutti i dadi " + gameColor.toString(), gameColor.ordinal());
 		this.gameColor = gameColor;
 	}
 

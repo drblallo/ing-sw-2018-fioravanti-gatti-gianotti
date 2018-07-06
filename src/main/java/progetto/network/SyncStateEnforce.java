@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * forces the player ro reset the sync object state and to add all commands
+ * @author Massimo
  */
 final class SyncStateEnforce implements IEnforce {
 	private List<Serializable> allCommands;

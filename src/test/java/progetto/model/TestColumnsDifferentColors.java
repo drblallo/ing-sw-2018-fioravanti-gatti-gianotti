@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test public objective card - Columns different colors
+ */
 public class TestColumnsDifferentColors {
 
 	DicePlacedFrame dicePlacedFrame = new DicePlacedFrame();
@@ -14,7 +17,9 @@ public class TestColumnsDifferentColors {
 		dicePlacedFrame = new DicePlacedFrame();
 	}
 
-
+	/**
+	 * case one complete column
+	 */
 	@Test
 	public void testOneCompleteColumn()
 	{
@@ -33,6 +38,9 @@ public class TestColumnsDifferentColors {
 
 	}
 
+	/**
+	 * Case two complete columns
+	 */
 	@Test
 	public void testTwoCompleteColumns()
 	{
@@ -56,6 +64,9 @@ public class TestColumnsDifferentColors {
 
 	}
 
+	/**
+	 * Case no complete columns
+	 */
 	@Test
 	public void testNotCompleteColumns()
 	{
@@ -73,6 +84,9 @@ public class TestColumnsDifferentColors {
 
 	}
 
+	/**
+	 * Case not columns with different values
+	 */
 	@Test
 	public void testNotDifferent()
 	{

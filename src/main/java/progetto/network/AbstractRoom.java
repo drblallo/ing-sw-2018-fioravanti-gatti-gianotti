@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * When a player sends a request, this request is processed by the thread spawned.
  * It ensures that request received by the same player are solved in order of arrival.
  * It DOES not ensure that requests received by different player are solved in order of arrival.
+ * @author Massimo
  */
 abstract class AbstractRoom implements Runnable
 {
@@ -28,6 +29,7 @@ abstract class AbstractRoom implements Runnable
 	private final Queue<AbstractServerRequest> reqQueue = new ConcurrentLinkedQueue<>();
 	private final Queue<IRoomRequest> roomRequests = new ConcurrentLinkedQueue<>();
 	private final ISync syncOgg;
+	private boolean markedForDeletion = false;
 
 	abstract void setPlayerReady(int playerID, boolean ready);
 	abstract void setPlayerChair(int playerID, int newChair);
@@ -39,6 +41,11 @@ abstract class AbstractRoom implements Runnable
 	final int getRoomID()
 	{
 		return id;
+	}
+
+	boolean canBeDeleted()
+	{
+		return markedForDeletion;
 	}
 
 	/**
@@ -119,6 +126,12 @@ abstract class AbstractRoom implements Runnable
 		while (roomRequests.peek() != null) //evaluate directly received by the room
 			roomRequests.poll().execute(this, null);
 
+		if (syncOgg != null) {
+			String s = syncOgg.update();
+			if (s != null && s.length() != 0)
+				broadcast(s);
+		}
+
 		try
 		{
 			Thread.sleep(NetworkSettings.THREAD_CHECK_RATE); //goes to sleep for a while
@@ -137,7 +150,6 @@ abstract class AbstractRoom implements Runnable
 	 */
 	public final void run()
 	{
-		Thread.currentThread().setName("Room Thread "+getRoomID());
 		while (isAlive)
 		{
 			processAllCommand();
@@ -182,6 +194,7 @@ abstract class AbstractRoom implements Runnable
 	{
 		Player info = new Player(playerName, handler);
 		players.put(handler.getPlayerID(), info);
+		markedForDeletion = false;
 		notifyChange();
 		if (getSyncOgg() != null)
 			handler.onRoomChanged(getSyncOgg());
@@ -202,6 +215,8 @@ abstract class AbstractRoom implements Runnable
 	{
 		LOGGER.fine("Player removed from room");
 		players.remove(playerID);
+		if (getPlayerCount() == 0)
+			markedForDeletion = true;
 		notifyChange();
 	}
 

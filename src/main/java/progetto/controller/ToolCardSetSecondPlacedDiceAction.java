@@ -8,14 +8,12 @@ import progetto.model.ToolCardState;
 
 /**
  * Action to select a dice from placed dice frame
+ * @author Michele
  */
 public class ToolCardSetSecondPlacedDiceAction extends AbstractExecutibleGameAction{
 
 	private final int x;
 	private final int y;
-
-	private static final int CARD4 = 4;
-	private static final int CARD12 = 12;
 
 	/**
 	 * Constructor without parameters
@@ -57,12 +55,7 @@ public class ToolCardSetSecondPlacedDiceAction extends AbstractExecutibleGameAct
 			return false;
 		}
 
-		ToolCardState toolCardState = (ToolCardState) data.getGameState();
-
-		int index = toolCardState.getIndex();
-
-		return game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(y, x)!=null &&
-				(index == CARD4 || index == CARD12);
+		return game.getPlayerBoard(getCallerID()).getDicePlacedFrame().getData().getDice(y, x)!=null ;
 
 	}
 

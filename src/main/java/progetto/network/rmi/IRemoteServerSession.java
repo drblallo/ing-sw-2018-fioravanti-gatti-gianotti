@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 /**
  * This is the object that is created on the server and is sent to the client to allow him to
  * send requests
+ * @author Massimo
  */
 interface IRemoteServerSession extends Remote {
 	/**
@@ -22,4 +23,10 @@ interface IRemoteServerSession extends Remote {
 	 * @throws RemoteException all remote exceptions are thrown
 	 */
 	void sendRequest(IRoomRequest request) throws RemoteException;
+
+	/**
+	 * notifies that a new a ping has been received from the client
+	 * @throws RemoteException all remote exceptions are thrown
+	 */
+	void ping() throws RemoteException;
 }

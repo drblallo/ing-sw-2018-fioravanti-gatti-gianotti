@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 
 /**
  * this is the interface of the object that is created on the client and sent to the server as a remote.
+ * @author Massimo
  */
 interface IRemoteClientSession extends Remote {
 
@@ -30,4 +31,9 @@ interface IRemoteClientSession extends Remote {
 	 */
 	void sendEnforce(IEnforce enforce) throws RemoteException;
 
+	/**
+	 * send a keep alive ping to the client
+	 * @throws RemoteException all remote exception are throw
+	 */
+	void ping() throws RemoteException;
 }

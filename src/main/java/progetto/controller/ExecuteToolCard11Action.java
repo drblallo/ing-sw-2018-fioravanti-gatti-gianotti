@@ -4,6 +4,7 @@ import progetto.model.*;
 
 /**
  * Action to execute tool card 11
+ * @author Michele
  */
 public class ExecuteToolCard11Action extends AbstractExecutibleGameAction{
 
@@ -19,11 +20,11 @@ public class ExecuteToolCard11Action extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set callerID
-	 * @param nPlayer
+	 * @param callerID ID of the caller
 	 */
-	public ExecuteToolCard11Action(int nPlayer)
+	public ExecuteToolCard11Action(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 	}
 
 	/**
@@ -61,7 +62,17 @@ public class ExecuteToolCard11Action extends AbstractExecutibleGameAction{
 	@Override
 	public void execute(Model game)
 	{
-		Dice dice = game.getRNGenerator().extractDice(game.getDiceBag());
+		DiceBag diceBag = game.getDiceBag();
+		PlayerBoard playerBoard = game.getPlayerBoard(getCallerID());
+		int nDice = game.getRoundInformation().getData().getToolCardParameters().getNDice();
+
+		Dice dice = playerBoard.getPickedDicesSlot().remove(nDice).getDice();
+
+		GameColor color = dice.getGameColor();
+
+		diceBag.add(color);
+
+		dice = game.getRNGenerator().extractDice(game.getDiceBag());
 
 		game.getRoundInformation().setDice(dice);
 

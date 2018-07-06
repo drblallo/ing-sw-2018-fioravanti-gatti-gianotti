@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 /**
  * A network server is the class that handles the entire state of the network on the server
+ * @author Massimo
  */
 public class NetworkServer
 {
@@ -25,7 +26,6 @@ public class NetworkServer
 	public NetworkServer(ISyncFactory fac)
 	{
 		factory = fac;
-		serverState = new ServerState(factory);
 	}
 
 	/**
@@ -62,7 +62,9 @@ public class NetworkServer
 		running = true;
 
 		serverState = new ServerState(factory);
-		new Thread(serverState).start();
+		Thread t = new Thread(serverState);
+		t.setName("Sagrada server thread");
+		t.start();
 
 		LOGGER.fine("starting all modules");
 		for (INetworkModule module : modules)

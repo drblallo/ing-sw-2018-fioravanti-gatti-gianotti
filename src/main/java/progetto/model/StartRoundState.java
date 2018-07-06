@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * State for the begin of the round
+ * @author Michele
  */
 public class StartRoundState extends AbstractGameState{
 	public StartRoundState() {
@@ -12,7 +13,7 @@ public class StartRoundState extends AbstractGameState{
 	 * Execute state-related operations
 	 * start player queue
 	 * extract dices from diceBag
-	 * @param game
+	 * @param game model where to apply this state
 	 */
 	@Override
 	void apply(Model game) {

@@ -6,10 +6,16 @@ import org.junit.Test;
 
 import java.util.List;
 
+/**
+ * Test WindowFrame class
+ */
 public class TestWindowFrame extends TestCase {
 
 	WindowFrame windowFrame;
 
+	/**
+	 * Test constructor
+	 */
 	@Test
 	public void testConstructor()
 	{
@@ -18,6 +24,9 @@ public class TestWindowFrame extends TestCase {
 		Assert.assertEquals("", windowFrame.getName());
 	}
 
+	/**
+	 * Test getter
+	 */
 	@Test
 	public void testGetter() {
 

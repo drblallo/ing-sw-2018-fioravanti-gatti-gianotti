@@ -4,12 +4,12 @@ import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import progetto.controller.ToolCardSetIncreaseDecreaseAction;
-import progetto.controller.ToolCardSetPickedDiceAction;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test MainBoard (+data) and RoundInformation (+data)
+ */
 public class TestMainBoard extends TestCase {
 
 	MainBoard mainBoard;
@@ -22,6 +22,9 @@ public class TestMainBoard extends TestCase {
 		roundInformation = new RoundInformation();
 	}
 
+	/**
+	 * Test - set and get current first player
+	 */
 	@Test
 	public void testSetGetCurrentFirstPlayer()
 	{
@@ -35,6 +38,9 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	/**
+	 * Test - set and get current player
+	 */
 	@Test
 	public void testSetGetCurrentPlayer()
 	{
@@ -48,6 +54,9 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	/**
+	 * Test - set and get player count (number of players)
+	 */
 	@Test
 	public void testSetGetPlayerCount()
 	{
@@ -61,6 +70,9 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	/**
+	 * Test - set and get current round
+	 */
 	@Test
 	public void testSetGetCurrentRound()
 	{
@@ -74,6 +86,9 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	/**
+	 * Test - Set and get game state
+	 */
 	@Test
 	public void testSetGetGameState()
 	{
@@ -87,6 +102,9 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	/**
+	 * Test - set and get Player queue (queue of next players)
+	 */
 	@Test
 	public void testPlayerQueue()
 	{
@@ -118,6 +136,9 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	/**
+	 * Test - player queue - fail - empty queue
+	 */
 	@Test
 	public void testPlayerQueueFail()
 	{
@@ -145,6 +166,9 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	/**
+	 * Test - set and get window frame couples
+	 */
 	@Test
 	public void testSetGetWindowFrameCouples()
 	{
@@ -160,6 +184,9 @@ public class TestMainBoard extends TestCase {
 		assertEquals(windowFrameCouple2, mainBoard.getData().getWindowFrame(1));
 	}
 
+	/**
+	 * Test get and set extracted dices
+	 */
 	@Test
 	public void testGetSetExtractedDices()
 	{
@@ -184,24 +211,26 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	/**
+	 * Test get number of call of tool cards
+	 */
 	@Test
 	public void testNCallToolCards()
 	{
-		List<Class> actionList = new ArrayList<>();
-		actionList.add(ToolCardSetPickedDiceAction.class);
-		actionList.add(ToolCardSetIncreaseDecreaseAction.class);
-		mainBoard.addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1, actionList));
+		mainBoard.addToolCard(new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1));
 		Assert.assertEquals(0, (int)mainBoard.getData().getNCallToolCard(0));
 
 		mainBoard.incNCallToolCard(0);
 		Assert.assertEquals(1, (int)mainBoard.getData().getNCallToolCard(0));
 	}
 
+	/**
+	 * Test tool cards in mainBoard
+	 */
 	@Test
 	public void testToolCards()
 	{
-		List<Class> actionList = new ArrayList<>();
-		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1, actionList));
+		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1));
 		Assert.assertEquals(1, mainBoard.getData().getToolCards().size());
 
 		mainBoard.removeToolCard(0);
@@ -209,17 +238,33 @@ public class TestMainBoard extends TestCase {
 
 	}
 
+	/**
+	 * Test - get number of call of tool cards - wrong index
+	 */
 	@Test
 	public void testNCallToolCardFail()
 	{
-		List<Class> actionList = new ArrayList<>();
-		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1, actionList));
+		mainBoard.addToolCard(new ToolCard("", "", GameColor.YELLOW, 1));
 
 		mainBoard.incNCallToolCard(-1);
 
 		Assert.assertEquals(0, (int)mainBoard.getData().getNCallToolCard(0));
 
 		Assert.assertEquals(0, (int)mainBoard.getData().getNCallToolCard(-1));
+
+	}
+
+	/**
+	 * Test - get public objective card ID (from main board)
+	 */
+	@Test
+	public void testCardID()
+	{
+		mainBoard.addPublicObjectiveCards(new ColoredDiagonalsPublicObjectiveCard());
+		mainBoard.addPublicObjectiveCards(new ColumnsDifferentColorsPublicObjectiveCard());
+
+		Assert.assertEquals(8, mainBoard.getData().getPublicObjectiveCards().get(0).getCardID());
+		Assert.assertEquals(1, mainBoard.getData().getPublicObjectiveCards().get(1).getCardID());
 
 	}
 

@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 /**
  * A request sent every time the client wishes to change his ready status
+ * @author Massimo
  */
 final class SetReadyRoomRequest implements IRoomRequest
 {

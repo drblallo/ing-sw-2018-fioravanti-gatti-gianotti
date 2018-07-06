@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 /**
  * Immutable class with parameters used for toolCards
+ * @author Michele
  */
 public final class ToolCardParameters implements Serializable {
 
-	private final int nCard;
+	private final int cardPosition;
 	private final int token;
-	private final int sPDice;
-	private final int nDice;
+	private final int singlePlayerDice;
+	private final int pickedDicePosition;
 	private final int yPlacedDice;
 	private final int xPlacedDice;
 	private final int yPlacedDice2;
@@ -19,7 +20,7 @@ public final class ToolCardParameters implements Serializable {
 	private final int value;
 	private final int changedDiceDB;
 	private final int round;
-	private final int nDiceRT;
+	private final int rTDicePosition;
 
 	private final Dice dice;
 
@@ -29,10 +30,10 @@ public final class ToolCardParameters implements Serializable {
 	 */
 	public ToolCardParameters()
 	{
-		nCard = -1;
+		cardPosition = -1;
 		token = -1;
-		sPDice = -1;
-		nDice = -1;
+		singlePlayerDice = -1;
+		pickedDicePosition = -1;
 		yPlacedDice = -1;
 		xPlacedDice = -1;
 		yPlacedDice2 = -1;
@@ -41,7 +42,7 @@ public final class ToolCardParameters implements Serializable {
 		value = -1;
 		changedDiceDB = -1;
 		round = -1;
-		nDiceRT = -1;
+		rTDicePosition = -1;
 
 		dice = null;
 
@@ -50,20 +51,20 @@ public final class ToolCardParameters implements Serializable {
 	/**
 	 * Constructor to set tool card parameters
 	 * @param toolCardParameters previous toolCardParameters
-	 * @param nCard
-	 * @param token
-	 * @param yPlacedDice
-	 * @param xPlacedDice
-	 * @param yPlacedDice2
-	 * @param xPlacedDice2
+	 * @param cardPosition position of the used card
+	 * @param token number of asked token
+	 * @param yPlacedDice placed dice position - y
+	 * @param xPlacedDice placed dice position - x
+	 * @param yPlacedDice2 placed dice 2 position - y
+	 * @param xPlacedDice2 placed dice 2 position - x
 	 */
-	private ToolCardParameters(ToolCardParameters toolCardParameters, int nCard, int token, int yPlacedDice, int xPlacedDice,
+	private ToolCardParameters(ToolCardParameters toolCardParameters, int cardPosition, int token, int yPlacedDice, int xPlacedDice,
 	                           int yPlacedDice2, int xPlacedDice2)
 	{
-		this.nCard = nCard;
+		this.cardPosition = cardPosition;
 		this.token = token;
-		this.sPDice = toolCardParameters.sPDice;
-		this.nDice = toolCardParameters.nDice;
+		this.singlePlayerDice = toolCardParameters.singlePlayerDice;
+		this.pickedDicePosition = toolCardParameters.pickedDicePosition;
 		this.yPlacedDice = yPlacedDice;
 		this.xPlacedDice = xPlacedDice;
 		this.yPlacedDice2 = yPlacedDice2;
@@ -72,7 +73,7 @@ public final class ToolCardParameters implements Serializable {
 		this.value = toolCardParameters.value;
 		this.changedDiceDB = toolCardParameters.changedDiceDB;
 		this.round = toolCardParameters.round;
-		this.nDiceRT = toolCardParameters.nDiceRT;
+		this.rTDicePosition = toolCardParameters.rTDicePosition;
 
 		this.dice = toolCardParameters.dice;
 
@@ -81,15 +82,15 @@ public final class ToolCardParameters implements Serializable {
 	/**
 	 * Constructor to set tool card parameters
 	 * @param toolCardParameters previous toolCardParameters
-	 * @param sPDice
-	 * @param increaseDecrease
+	 * @param singlePlayerDice dice used by single player to use a toolCard
+	 * @param increaseDecrease 0 to decrease, 1 to increase
 	 */
-	private ToolCardParameters(ToolCardParameters toolCardParameters, int sPDice, int increaseDecrease)
+	private ToolCardParameters(ToolCardParameters toolCardParameters, int singlePlayerDice, int increaseDecrease)
 	{
-		this.nCard = toolCardParameters.nCard;
+		this.cardPosition = toolCardParameters.cardPosition;
 		this.token = toolCardParameters.token;
-		this.sPDice = sPDice;
-		this.nDice = toolCardParameters.nDice;
+		this.singlePlayerDice = singlePlayerDice;
+		this.pickedDicePosition = toolCardParameters.pickedDicePosition;
 		this.yPlacedDice = toolCardParameters.yPlacedDice;
 		this.xPlacedDice = toolCardParameters.xPlacedDice;
 		this.yPlacedDice2 = toolCardParameters.yPlacedDice2;
@@ -98,7 +99,7 @@ public final class ToolCardParameters implements Serializable {
 		this.value = toolCardParameters.value;
 		this.changedDiceDB = toolCardParameters.changedDiceDB;
 		this.round = toolCardParameters.round;
-		this.nDiceRT = toolCardParameters.nDiceRT;
+		this.rTDicePosition = toolCardParameters.rTDicePosition;
 
 		this.dice = toolCardParameters.dice;
 
@@ -107,20 +108,20 @@ public final class ToolCardParameters implements Serializable {
 	/**
 	 * Constructor to set tool card parameters
 	 * @param toolCardParameters previous toolCardParameters
-	 * @param nDice
-	 * @param value
-	 * @param changedDiceDB
-	 * @param round
-	 * @param nDiceRT
-	 * @param dice
+	 * @param pickedDicePosition position of the selected picked dice
+	 * @param value chosen value
+	 * @param changedDiceDB -1 if dice has not been changed yet
+	 * @param round round of the selected dice in round track
+	 * @param rTDicePosition position of the selected dice in round of rountrack
+	 * @param dice dice used for toolCard
 	 */
-	private ToolCardParameters(ToolCardParameters toolCardParameters, int nDice,
-	                             int value, int changedDiceDB, int round, int nDiceRT, Dice dice)
+	private ToolCardParameters(ToolCardParameters toolCardParameters, int pickedDicePosition,
+	                           int value, int changedDiceDB, int round, int rTDicePosition, Dice dice)
 	{
-		this.nCard = toolCardParameters.nCard;
+		this.cardPosition = toolCardParameters.cardPosition;
 		this.token = toolCardParameters.token;
-		this.sPDice = toolCardParameters.sPDice;
-		this.nDice = nDice;
+		this.singlePlayerDice = toolCardParameters.singlePlayerDice;
+		this.pickedDicePosition = pickedDicePosition;
 		this.yPlacedDice = toolCardParameters.yPlacedDice;
 		this.xPlacedDice = toolCardParameters.xPlacedDice;
 		this.yPlacedDice2 = toolCardParameters.yPlacedDice2;
@@ -129,71 +130,143 @@ public final class ToolCardParameters implements Serializable {
 		this.value = value;
 		this.changedDiceDB = changedDiceDB;
 		this.round = round;
-		this.nDiceRT = nDiceRT;
+		this.rTDicePosition = rTDicePosition;
 
 		this.dice = dice;
 
 	}
 
+	/**
+	 * Get card position
+	 * @return card position
+	 */
 	public int getNCard() {
-		return nCard;
+		return cardPosition;
 	}
 
+	/**
+	 * Get number of asked token
+	 * @return number of asked token
+	 */
 	public int getToken() {
 		return token;
 	}
 
+	/**
+	 * Get single player selected dice
+	 * @return single player selected dice
+	 */
 	public int getSPDice() {
-		return sPDice;
+		return singlePlayerDice;
 	}
 
+	/**
+	 * get picked dice position
+	 * @return dice position
+	 */
 	public int getNDice() {
-		return nDice;
+		return pickedDicePosition;
 	}
 
+	/**
+	 * get true if first placed dice has been selected
+	 * @return  true if first placed dice has been selected
+	 */
+	public boolean isFirstDiceSet(){
+		return getXPlacedDice() >= 0;
+	}
+
+	/**
+	 get true if second placed dice has been selected
+	 * @return  true if second placed dice has been selected
+	 */
+	public boolean isSecondDiceSet(){
+		return getXPlacedDice2()>=0;
+	}
+
+	/**
+	 * Get y pos of first selected dice in placed frame
+	 * @return y pos of first selected dice in placed frame
+	 */
 	public int getYPlacedDice() {
 		return yPlacedDice;
 	}
 
+	/**
+	 * x pos of first selected dice in placed frame
+	 * @return x pos of first selected dice in placed frame
+	 */
 	public int getXPlacedDice() {
 		return xPlacedDice;
 	}
 
+	/**
+	 * y pos of second selected dice in placed frame
+	 * @return y pos of second selected dice in placed frame
+	 */
 	public int getYPlacedDice2() {
 		return yPlacedDice2;
 	}
 
+	/**
+	 * x pos of second selected dice in placed frame
+	 * @return x pos of selected dice in placed frame
+	 */
 	public int getXPlacedDice2() {
 		return xPlacedDice2;
 	}
 
+	/**
+	 * Get 0 for increase, 1 for decrease, -1 not set
+	 * @return 0 for increase, 1 for decrease, -1 not set
+	 */
 	public int getIncreaseDecrease() {
 		return increaseDecrease;
 	}
 
+	/**
+	 * Get chosen value
+	 * @return chosen value
+	 */
 	public int getValue() {
 		return value;
 	}
 
+	/**
+	 * Get -1 if dice has not been changed
+	 * @return -1 if dice has not been changed
+	 */
 	public int getChangedDiceDB() {
 		return changedDiceDB;
 	}
 
+	/**
+	 * get selected round
+	 * @return selected round
+	 */
 	public int getRound() {
 		return round;
 	}
 
+	/**
+	 * Get position of selected dice in roundTrack
+	 * @return position of selected dice in round track
+	 */
 	public int getNDiceRT() {
-		return nDiceRT;
+		return rTDicePosition;
 	}
 
+	/**
+	 *
+	 * @return dice for tool card 11
+	 */
 	public Dice getDice() {
 		return dice;
 	}
 
 	/**
 	 * Set value
-	 * @param nCard
+	 * @param nCard position of the card
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setNCard(int nCard)
@@ -204,18 +277,18 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param token
+	 * @param token token of this card
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setToken(int token)
 	{
-		return new ToolCardParameters(this, nCard, token, yPlacedDice, xPlacedDice,
+		return new ToolCardParameters(this, cardPosition, token, yPlacedDice, xPlacedDice,
 				yPlacedDice2, xPlacedDice2);
 	}
 
 	/**
 	 * Set value
-	 * @param sPDice
+	 * @param sPDice selected single player card of this card
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setSPDice(int sPDice)
@@ -225,96 +298,96 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param nDice
+	 * @param nDice position of selected picked dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setNDice(int nDice)
 	{
-		return new ToolCardParameters(this, nDice, value, changedDiceDB, round, nDiceRT, dice);
+		return new ToolCardParameters(this, nDice, value, changedDiceDB, round, rTDicePosition, dice);
 	}
 
 	/**
 	 * Set values
-	 * @param xPlacedDice
-	 * @param yPlacedDice
+	 * @param xPlacedDice x pos of first selected placed dice
+	 * @param yPlacedDice y pos of first selected placed dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setYXValues(int yPlacedDice, int xPlacedDice)
 	{
-		return new ToolCardParameters(this, nCard, token, yPlacedDice, xPlacedDice,
+		return new ToolCardParameters(this, cardPosition, token, yPlacedDice, xPlacedDice,
 				yPlacedDice2, xPlacedDice2);
 	}
 
 	/**
 	 * Set values
-	 * @param xPlacedDice2
-	 * @param yPlacedDice2
+	 * @param xPlacedDice2 x pos of second selected placed dice
+	 * @param yPlacedDice2 x pos of second selected placed dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setYX2Values(int yPlacedDice2, int xPlacedDice2)
 	{
-		return new ToolCardParameters(this, nCard, token, yPlacedDice, xPlacedDice,
+		return new ToolCardParameters(this, cardPosition, token, yPlacedDice, xPlacedDice,
 				yPlacedDice2, xPlacedDice2);
 	}
 
 	/**
 	 * Set value
-	 * @param increaseDecrease
+	 * @param increaseDecrease 0 = increase, 1 = decrease
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setIncreaseDecrease(int increaseDecrease)
 	{
-		return new ToolCardParameters(this, sPDice, increaseDecrease);
+		return new ToolCardParameters(this, singlePlayerDice, increaseDecrease);
 	}
 
 	/**
 	 * Set value
-	 * @param value
+	 * @param value new value of the extracted dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setValue(int value)
 	{
-		return new ToolCardParameters(this, nDice, value, changedDiceDB, round, nDiceRT, dice);
+		return new ToolCardParameters(this, pickedDicePosition, value, changedDiceDB, round, rTDicePosition, dice);
 	}
 
 	/**
 	 * Set value
-	 * @param changedDiceDB
+	 * @param changedDiceDB = -1 if the dice has not been changed
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setChangedDiceDB(int changedDiceDB)
 	{
-		return new ToolCardParameters(this, nDice, value, changedDiceDB, round, nDiceRT, dice);
+		return new ToolCardParameters(this, pickedDicePosition, value, changedDiceDB, round, rTDicePosition, dice);
 	}
 
 	/**
 	 * Set value
-	 * @param round
+	 * @param round number of round
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setRound(int round)
 	{
-		return new ToolCardParameters(this, nDice, value, changedDiceDB, round, nDiceRT, dice);
+		return new ToolCardParameters(this, pickedDicePosition, value, changedDiceDB, round, rTDicePosition, dice);
 	}
 
 	/**
 	 * Set value
-	 * @param nDiceRT
+	 * @param nDiceRT position of selected round track dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setNDiceRT(int nDiceRT)
 	{
-		return new ToolCardParameters(this, nDice, value, changedDiceDB, round, nDiceRT, dice);
+		return new ToolCardParameters(this, pickedDicePosition, value, changedDiceDB, round, nDiceRT, dice);
 	}
 
 	/**
 	 * Set value
-	 * @param dice
+	 * @param dice for tool card 11
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setDice(Dice dice)
 	{
-		return new ToolCardParameters(this, nDice, value, changedDiceDB, round, nDiceRT, dice);
+		return new ToolCardParameters(this, pickedDicePosition, value, changedDiceDB, round, rTDicePosition, dice);
 	}
 
 }

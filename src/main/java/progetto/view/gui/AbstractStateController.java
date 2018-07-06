@@ -1,31 +1,87 @@
 package progetto.view.gui;
 
+import progetto.IClientController;
+import progetto.model.IModel;
+
+/**
+ * This is the abstract class that is extended by javafx controllers that are aware of the controller
+ * @author Federica
+ */
 public abstract class AbstractStateController {
 
-    private ViewStateMachine viewStateMachine;
+	private StateManager stateManager;
 
-    public void setViewStateMachine(ViewStateMachine viewStateMachine){
+	/**
+	 *
+	 * @param stateManager state manager to be set
+	 */
+	public void setStateManager(StateManager stateManager){
+		this.stateManager = stateManager;
+	}
 
-        this.viewStateMachine = viewStateMachine;
+	/**
+	 *
+	 * @return current state manager
+	 */
+	public StateManager getStateManager(){
+		return stateManager;
+	}
 
-    }
+	/**
+	 *
+	 * @return current model
+	 */
+	public IModel getModel()
+	{
+		return stateManager.getModel();
+	}
 
-    public ViewStateMachine getViewStateMachine(){
+	/**
+	 * controllers can implement this, it is called every time the associated FXML is called
+	 */
+	public void onPreShow(){
+		//
+	}
 
-        return viewStateMachine;
+	/**
+	 * classes can implement this, it is called the first time the associated FXML is called
+	 */
+	public void setup(){
+		//
+	}
 
-    }
+	/**
+	 * classes can implement this, it is called every time the observed game changes
+	 */
+	public void onGameChanged()
+	{
+		//nothing to do on default
+	}
 
-    public void onPreShow(){
+	/**
+	 *
+	 * @return current guiView
+	 */
+	public GUIView getView() {
+		return stateManager.getGuiView();
+	}
 
-        //
+	/**
+	 *
+	 * @return current client controller
+	 */
+	public IClientController getController() {
+		return getView().getController();
+	}
 
-    }
-
-    public void setup(){
-
-        //
-
-    }
-
+	/**
+	 *
+	 * @return current chair of the user
+	 */
+	public int getChair()
+	{
+		return getController().getChair();
+	}
 }
+
+
