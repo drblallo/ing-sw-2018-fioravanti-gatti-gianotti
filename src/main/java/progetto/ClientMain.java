@@ -34,14 +34,8 @@ public class ClientMain extends Application {
         ClientController controller = new ClientController();
         GUIView view = new GUIView(primaryStage, controller);
         AlertExitBoxPaneController.setup(view);
-        CommandLineView cl = new CommandLineView(controller, System.out);
         view.setVisible(true);
-        cl.setVisible(true);
-        new Thread(cl).start();
-        StreamProcessor streamProcessor =
-        new StreamProcessor(new InputStreamReader(System.in, Charset.defaultCharset()), null, cl);
 
-        new Thread(streamProcessor).start();
     }
 
 }

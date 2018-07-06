@@ -101,7 +101,7 @@ public abstract class AbstractCommandProcessorTest {
         nuovo.registerCommand(command);
         risposta = nuovo.execute("help help");
 
-        assertEquals("PANICKING!!!!!", risposta);
+        assertEquals("give help", risposta);
         risposta=commhelp.getName();
 
         assertEquals("help", risposta);

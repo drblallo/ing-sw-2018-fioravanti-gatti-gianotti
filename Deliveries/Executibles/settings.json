@@ -1,0 +1,10 @@
+{
+  "socketPort": 8527,
+  "loopBackAdress": "127.0.0.1",
+  "loopBackAdressLinux": "127.0.1.1",
+  "rmiPort": 8528,
+  "gameStartTimeOut": 300000,
+  "playerTurnTimeOut": 300000,
+  "allertTime" : 5000,
+  "myIP" :  "127.0.0.1"
+}

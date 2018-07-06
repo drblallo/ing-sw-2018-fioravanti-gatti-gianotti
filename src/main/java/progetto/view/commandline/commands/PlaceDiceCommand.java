@@ -35,7 +35,7 @@ public class PlaceDiceCommand extends AbstractStateSwitcherCommand {
                 int posX = Integer.parseInt(params[1]);
                 int posY = Integer.parseInt(params[2]);
 
-                PlaceDiceAction placeDiceAction = new PlaceDiceAction(getController().getChair(), nDice, posX, posY);
+                PlaceDiceAction placeDiceAction = new PlaceDiceAction(getController().getChair(), nDice, posY, posX);
                 if(placeDiceAction.canBeExecuted(getModel())){
                     getController().sendAction(placeDiceAction);
                     write("Dado piazzato!");
@@ -54,6 +54,6 @@ public class PlaceDiceCommand extends AbstractStateSwitcherCommand {
      */
     @Override
     public String getHelp() {
-        return "Posiziona un dado: (Formato: " + getName() + " <Numero del dado> <Posizione y> <Posizione x>)";
+        return "Posiziona un dado: (Formato: " + getName() + " <Numero del dado> <Posizione x> <Posizione y>)";
     }
 }
