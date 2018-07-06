@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * This is the interface that must be implemented by a message transport layer to allow ClientConnection to behave
  * correctly
+ * @author Massimo
  */
 public interface INetworkClient {
 

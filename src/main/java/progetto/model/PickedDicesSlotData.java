@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Slot for picked dices (immutable)
+ * @author Michele
  */
 public final class PickedDicesSlotData implements Serializable{
 

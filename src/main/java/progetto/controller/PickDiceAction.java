@@ -7,6 +7,7 @@ import progetto.model.RoundState;
 
 /**
  * Action to pick a dice (from extracted to picked)
+ * @author Michele
  */
 public class PickDiceAction extends AbstractExecutibleGameAction{
 

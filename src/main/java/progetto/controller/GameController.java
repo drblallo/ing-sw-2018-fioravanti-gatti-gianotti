@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Michele
+ */
 public class GameController implements IGameController {
 
 	private static final Logger LOGGER = Logger.getLogger(GameController.class.getName());

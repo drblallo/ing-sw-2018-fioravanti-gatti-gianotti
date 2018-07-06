@@ -1,5 +1,8 @@
 package progetto.model;
 
+/**
+ * @author Michele
+ */
 public abstract class AbstractPlayerBoard extends Container<PlayerBoardData> implements IPlayerBoard
 {
 	public AbstractPlayerBoard(PlayerBoardData d)

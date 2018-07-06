@@ -3,6 +3,7 @@ package progetto.model;
 
 /**
  * Dices that still need to be placed that have been taken by the player
+ * @author Michele
  */
 public final class PickedDicesSlot extends Container<PickedDicesSlotData> {
 

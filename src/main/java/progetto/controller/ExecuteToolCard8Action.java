@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Action to execute tool card 8
+ * @author Michele
  */
 public class ExecuteToolCard8Action extends AbstractExecutibleGameAction{
 

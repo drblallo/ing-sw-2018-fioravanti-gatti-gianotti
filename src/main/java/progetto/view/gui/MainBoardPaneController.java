@@ -11,6 +11,7 @@ import progetto.model.PreGameState;
 
 /**
  * deprecated
+ * @author Federica
  */
 public class MainBoardPaneController extends AbstractController{
 

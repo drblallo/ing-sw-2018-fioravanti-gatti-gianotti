@@ -3,6 +3,7 @@ package progetto.network;
 
 /**
  * Request sent every time a client wishes to create a new room on the server.
+ * @author Massimo
  */
 final class RoomCreationRequest extends AbstractServerRequest
 {

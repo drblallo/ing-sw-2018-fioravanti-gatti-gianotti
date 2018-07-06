@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Window frame for Window Pattern Card
+ * @author Michele
  */
 public final class WindowFrame implements Serializable {
 

@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Federica
+ */
 public class CommandProcessor implements ICommandProcessor
 {
     private HashMap <String, ICommand> registered;

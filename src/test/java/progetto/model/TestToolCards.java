@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import progetto.controller.*;
+import progetto.view.ToolCardActionList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,7 +73,9 @@ public class TestToolCards {
 	public void testToolTip()
 	{
 		ToolCard toolCard = new ToolCard("Pinza Sgrossatrice", "Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", GameColor.PURPLE ,1);
-		Assert.assertEquals("1 Viola Pinza Sgrossatrice Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1", toolCard.getToolTip());
+		Assert.assertEquals("Colore: Viola\n" +
+				"Nome: Pinza Sgrossatrice\n" +
+				"Effetto: Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1\n", toolCard.getToolTip());
 
 	}
 
@@ -501,7 +503,9 @@ public class TestToolCards {
 		Assert.assertEquals(10 ,game.getMainBoard().getData().getToolCards().get(0).getIndex());
 		Assert.assertEquals(GameColor.GREEN ,game.getMainBoard().getData().getToolCards().get(0).getGameColor());
 
-		Assert.assertEquals("10 Verde Tampone Diamantato Dopo aver scelto un dado, giralo sulla faccia opposta" ,game.getMainBoard().getData().getToolCards().get(0).getToolTip());
+		Assert.assertEquals("Colore: Verde\n" +
+				"Nome: Tampone Diamantato\n" +
+				"Effetto: Dopo aver scelto un dado, giralo sulla faccia opposta\n" ,game.getMainBoard().getData().getToolCards().get(0).getToolTip());
 
 	}
 

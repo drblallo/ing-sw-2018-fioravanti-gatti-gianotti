@@ -27,7 +27,8 @@ public class TestPrivateObjective {
 	public void testPurpleShades()
 	{
 		ColorShadesPrivateObjectiveCard colorShadesPrivateObjectiveCard = new ColorShadesPrivateObjectiveCard(GameColor.PURPLE);
-		Assert.assertEquals("Sfumature Viola Somma dei valori su tutti i dadi Viola" , colorShadesPrivateObjectiveCard.getToolTip());
+		Assert.assertEquals("Nome : Sfumature Viola\n" +
+				"Effetto: Somma dei valori su tutti i dadi Viola\n" , colorShadesPrivateObjectiveCard.getToolTip());
 		Assert.assertEquals(9, colorShadesPrivateObjectiveCard.evaluateFrame(dicePlacedFrame));
 	}
 

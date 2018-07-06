@@ -4,6 +4,7 @@ import progetto.model.*;
 
 /**
  * Action to end turn
+ * @author Michele
  */
 public class EndTurnAction extends AbstractExecutibleGameAction
 {

@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Abstract class for public objective card
+ * @author Michele
  */
 public abstract class AbstractPublicObjectiveCard extends AbstractObjectiveCard {
 

@@ -1,5 +1,8 @@
 package progetto.model;
 
+/**
+ * @author Michele
+ */
 public interface IModel {
 	IContainer<CommandQueueData> getCommandQueue();
 	IContainer<RoundTrackData> getRoundTrack();

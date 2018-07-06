@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 
 /**
  * this is the inteface that is exposed by the server rmi implementation to allow a client to connect.
+ * @author Massimo
  */
 interface IRemoteLogger extends Remote {
 	/**

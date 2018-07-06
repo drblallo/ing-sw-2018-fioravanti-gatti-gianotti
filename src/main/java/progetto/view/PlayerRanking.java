@@ -2,6 +2,7 @@ package progetto.view;
 
 /**
  * class used to easily calculate final scores in multi player game
+ * @author Federica
  */
 public class PlayerRanking {
 

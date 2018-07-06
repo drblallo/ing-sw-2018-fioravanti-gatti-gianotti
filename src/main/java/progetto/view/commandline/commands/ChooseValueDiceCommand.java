@@ -7,6 +7,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to select the value of a dice when permitted by a tool card
+ * @author Federica
  */
 public class ChooseValueDiceCommand extends AbstractStateSwitcherCommand {
 

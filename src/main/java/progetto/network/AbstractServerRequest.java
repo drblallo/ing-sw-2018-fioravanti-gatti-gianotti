@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * message that is executed at server level.
+ * @author Massimo
  */
 abstract class AbstractServerRequest implements Serializable
 {

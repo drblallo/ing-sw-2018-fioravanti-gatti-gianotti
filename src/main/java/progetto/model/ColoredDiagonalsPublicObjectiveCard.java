@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Class for public objective card "Diagonali Colorate"
+ * @author Michele
  */
 public class ColoredDiagonalsPublicObjectiveCard extends AbstractPublicObjectiveCard {
 

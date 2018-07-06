@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 /**
  * A network server is the class that handles the entire state of the network on the server
+ * @author Massimo
  */
 public class NetworkServer
 {

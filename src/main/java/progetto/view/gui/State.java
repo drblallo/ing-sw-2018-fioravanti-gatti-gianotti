@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Federica
+ * @param <T>
+ */
 public class State<T extends AbstractStateController> {
 
     private static final Logger LOGGER = Logger.getLogger(State.class.getName());

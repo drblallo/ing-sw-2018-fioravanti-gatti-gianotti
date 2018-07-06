@@ -9,6 +9,7 @@ import java.util.List;
  *  Extraction of public cards
  *  Extraction of tool cards
  *  Extraction of window frames
+ *  @author Michele
  */
 public class FrameSelectionState extends AbstractGameState {
 

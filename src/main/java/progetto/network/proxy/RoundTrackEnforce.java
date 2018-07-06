@@ -4,6 +4,9 @@ import progetto.model.RoundTrackData;
 import progetto.network.ClientConnection;
 import progetto.network.IEnforce;
 
+/**
+ * @author Massimo
+ */
 public class RoundTrackEnforce implements IEnforce
 {
 	private final RoundTrackData data;

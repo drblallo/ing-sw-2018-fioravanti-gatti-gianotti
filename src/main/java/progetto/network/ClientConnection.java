@@ -5,8 +5,6 @@ import progetto.utils.Callback;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +13,7 @@ import java.util.logging.Logger;
  * all the method needed to communicate with the server.
  *
  * All request sending methods are synchronized, so requests can be performed from any thread.
+ * @author Massimo
  */
 public final class ClientConnection implements Runnable
 {

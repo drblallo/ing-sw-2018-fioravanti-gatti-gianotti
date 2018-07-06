@@ -6,7 +6,8 @@ import java.util.logging.Logger;
 
 /**
  * Dice bag with 90 dices in 5 colors
-*/
+ * @author Michele
+ */
 public final class DiceBag{
 
 	private static final int NUMBER_OF_DICES_PER_COLOR = 18;

@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * @author Federica
+ */
 public class SagradaPaneController extends AbstractStateController{
 
     @FXML

@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Dices extracted by the player on the main board
+ * @author Michele
  */
 public final class ExtractedDices extends Container<ExtractedDicesData> {
 

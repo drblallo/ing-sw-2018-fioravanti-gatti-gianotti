@@ -6,6 +6,7 @@ import progetto.model.PreGameState;
 
 /**
  * Action to set game seed (needed for random - platform independent)
+ * @author Michele
  */
 public class SetSeedAction extends AbstractExecutibleGameAction
 {

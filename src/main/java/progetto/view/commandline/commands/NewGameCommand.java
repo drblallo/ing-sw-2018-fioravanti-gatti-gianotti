@@ -5,6 +5,7 @@ import progetto.view.commandline.states.SocketRMIChoiceState;
 
 /**
  * Command to start a new game
+ * @author Federica
  */
 public class NewGameCommand extends AbstractStateSwitcherCommand {
 

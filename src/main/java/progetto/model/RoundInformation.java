@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Round information
+ * @author Michele
  */
 public final class RoundInformation extends Container<RoundInformationData>
 {

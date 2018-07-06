@@ -3,6 +3,7 @@ package progetto.model;
 /**
  * State for the end of the game
  * Evaluate frames
+ * @author Michele
  */
 public class EndGameState extends AbstractGameState {
 

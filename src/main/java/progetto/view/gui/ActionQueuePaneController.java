@@ -13,6 +13,9 @@ import progetto.network.RoomView;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Federica
+ */
 public class ActionQueuePaneController extends AbstractController{
 
     private static final Logger LOGGER = Logger.getLogger(ActionQueuePaneController.class.getName());

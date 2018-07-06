@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 /**
  * This is the object that is created on the server and is sent to the client to allow him to
  * send requests
+ * @author Massimo
  */
 interface IRemoteServerSession extends Remote {
 	/**

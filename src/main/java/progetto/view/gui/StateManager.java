@@ -2,12 +2,14 @@ package progetto.view.gui;
 
 import javafx.stage.Stage;
 import progetto.IClientController;
-import progetto.controller.IGameController;
 import progetto.model.IModel;
 import progetto.model.ObservableModel;
 
 import java.util.HashMap;
 
+/**
+ * @author Federica
+ */
 public class StateManager {
 
     private Stage stage;

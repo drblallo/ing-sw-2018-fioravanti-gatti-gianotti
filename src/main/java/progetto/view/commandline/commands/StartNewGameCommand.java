@@ -5,6 +5,7 @@ import progetto.view.commandline.states.DefaultViewState;
 
 /**
  * Command to return to the DefaultViewState
+ * @author Federica
  */
 public class StartNewGameCommand extends AbstractStateSwitcherCommand {
 

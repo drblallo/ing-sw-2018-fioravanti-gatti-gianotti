@@ -3,6 +3,7 @@ package progetto.model;
 
 /**
  * Current state of the model
+ * @author Michele
  */
 public class Model implements ObservableModel{
 

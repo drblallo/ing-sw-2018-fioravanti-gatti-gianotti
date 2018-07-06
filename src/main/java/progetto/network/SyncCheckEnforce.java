@@ -2,6 +2,7 @@ package progetto.network;
 
 /**
  * forces the player to check if his sync object is still in sync
+ * @author Massimo
  */
 final class SyncCheckEnforce implements IEnforce {
 

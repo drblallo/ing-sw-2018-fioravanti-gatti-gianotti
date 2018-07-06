@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Massimo
+ */
 public final class RoomView implements Serializable{
 	private final Map<Integer, PlayerView> playerInfoList = new HashMap<>();
 	private final String roomName;

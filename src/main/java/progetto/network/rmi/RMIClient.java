@@ -1,7 +1,10 @@
 package progetto.network.rmi;
 
 import progetto.Settings;
-import progetto.network.*;
+import progetto.network.IEnforce;
+import progetto.network.INetworkClient;
+import progetto.network.IRoomRequest;
+import progetto.network.NetworkSettings;
 import progetto.utils.Callback;
 
 import java.rmi.RemoteException;
@@ -16,6 +19,7 @@ import java.util.logging.Logger;
 
 /**
  * The rmi implementation of INetworkClient.
+ * @author Massimo
  *
  */
 public final class RMIClient implements INetworkClient, Runnable{

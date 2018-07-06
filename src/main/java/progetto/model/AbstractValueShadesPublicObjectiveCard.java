@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Abstract class for public objective card where is asked to count value shades
+ * @author Michele
  */
 public abstract class AbstractValueShadesPublicObjectiveCard extends  AbstractPublicObjectiveCard{
 

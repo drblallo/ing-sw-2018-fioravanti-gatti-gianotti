@@ -1,9 +1,10 @@
 package progetto.model;
 
 /**
- * Abstract class for public objective card where is asked to count different value/color columns/rows
+ * Abstract class for public objective card where is asked to count different value/color in columns/rows
+ * @author Michele
  */
-public abstract class AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCard extends AbstractPublicObjectiveCard{
+public abstract class AbstractDifferentColValPublicObjectiveCard extends AbstractPublicObjectiveCard{
 
 	private static final int N_PUNT_COL_COL = 5;
 	private static final int N_PUNT_COL_VAL = 4;
@@ -12,11 +13,11 @@ public abstract class AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCar
 
 	/**
 	 * Constructor
-	 * @param name
-	 * @param effect
-	 * @param cardID
+	 * @param name name of the card
+	 * @param effect effect of the card
+	 * @param cardID ID of the card
 	 */
-	AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCard(String name, String effect, int cardID) {
+	AbstractDifferentColValPublicObjectiveCard(String name, String effect, int cardID) {
 		super(name, effect, cardID);
 	}
 

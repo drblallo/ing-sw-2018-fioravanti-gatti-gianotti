@@ -4,6 +4,7 @@ import progetto.model.*;
 
 /**
  * Action to cancel the use of a tool card
+ * @author Michele
  */
 public class CancelToolCardUseAction extends AbstractExecutibleGameAction
 {

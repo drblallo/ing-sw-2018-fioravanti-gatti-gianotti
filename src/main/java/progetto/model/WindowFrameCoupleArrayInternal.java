@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Internal class of WindowFrameCoupleArray
  * Contains the list of WindowFrameCouple
+ * @author Michele
  */
 public class WindowFrameCoupleArrayInternal implements Serializable {
 

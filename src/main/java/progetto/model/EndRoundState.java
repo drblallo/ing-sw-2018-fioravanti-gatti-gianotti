@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * State used at the end of a round
+ * @author Michele
  */
 public class EndRoundState extends AbstractGameState
 {

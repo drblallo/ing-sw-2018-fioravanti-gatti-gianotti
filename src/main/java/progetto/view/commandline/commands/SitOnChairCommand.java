@@ -5,6 +5,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to sit on a chair
+ * @author Federica
  */
 public class SitOnChairCommand extends AbstractStateSwitcherCommand {
 

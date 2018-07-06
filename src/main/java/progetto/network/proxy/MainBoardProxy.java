@@ -5,6 +5,9 @@ import progetto.model.Container;
 import progetto.model.ExtractedDicesData;
 import progetto.model.MainBoardData;
 
+/**
+ * @author Massimo
+ */
 public class MainBoardProxy extends AbstractMainBoard
 {
 

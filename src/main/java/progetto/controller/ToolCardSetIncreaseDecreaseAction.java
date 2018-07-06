@@ -7,6 +7,7 @@ import progetto.model.ToolCardState;
 
 /**
  * Action to choose whether to increase or decrease the value of the dice
+ * @author Michele
  */
 public class ToolCardSetIncreaseDecreaseAction extends AbstractExecutibleGameAction{
 

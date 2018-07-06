@@ -1,14 +1,11 @@
 package progetto.view.gui;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import progetto.IClientController;
 import progetto.controller.FrameSetAction;
 import progetto.model.DicePlacedFrameData;
 import progetto.model.MainBoardData;
@@ -19,6 +16,7 @@ public class ChooseWindowFramePaneController extends AbstractController {
 /**
  * this is the class that handles the choose window frame fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
     @FXML
     private TilePane mainPane;

@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 /**
  * This is the class every command must be derived from.
  * every derived class must implement canBeExecuted and execute.
+ * @author Michele
  */
 public abstract class AbstractGameAction implements Serializable {
 	private final int playerID;

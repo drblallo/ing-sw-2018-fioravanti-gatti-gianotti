@@ -3,7 +3,10 @@ package progetto;
 import progetto.model.AbstractGameAction;
 import progetto.model.IModel;
 import progetto.model.ObservableModel;
-import progetto.network.*;
+import progetto.network.ClientConnection;
+import progetto.network.INetworkClient;
+import progetto.network.RoomView;
+import progetto.network.ServerStateView;
 import progetto.network.proxy.ModelProxy;
 import progetto.network.rmi.RMIClient;
 import progetto.network.socket.SocketClient;
@@ -12,7 +15,6 @@ import progetto.utils.IObserver;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -3,6 +3,9 @@ package progetto.view.gui;
 import progetto.IClientController;
 import progetto.model.IModel;
 
+/**
+ * @author Federica
+ */
 public abstract class AbstractController {
 
 	private GUIView view;

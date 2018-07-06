@@ -5,6 +5,9 @@ import javafx.stage.Stage;
 import progetto.AbstractView;
 import progetto.ClientController;
 
+/**
+ * @author Federica
+ */
 public class GUIView extends AbstractView
 {
 

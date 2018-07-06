@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 /**
  * Action to set window frame at the begin of the game
+ * @author Michele
  */
 public class FrameSetAction extends AbstractExecutibleGameAction {
 

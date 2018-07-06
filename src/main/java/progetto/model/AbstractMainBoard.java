@@ -1,5 +1,8 @@
 package progetto.model;
 
+/**
+ * @author Michele
+ */
 public abstract class AbstractMainBoard extends Container<MainBoardData> implements IMainBoard
 {
 

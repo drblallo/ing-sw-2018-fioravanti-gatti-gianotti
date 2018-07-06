@@ -4,6 +4,7 @@ import progetto.model.*;
 
 /**
  * Action to execute tool card 6 or 10
+ * @author Michele
  */
 public class ExecuteToolCard6Or10Action extends AbstractExecutibleGameAction{
 
