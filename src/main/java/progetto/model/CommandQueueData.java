@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * @author Michele
+ */
 public class CommandQueueData implements Serializable{
 
 	private final List<AbstractGameAction> pastAction;

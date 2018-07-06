@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 /**
  * Implementation of IRemoteLogger
+ * @author Massimo
  */
 final class RMIRemoteLogger implements IRemoteLogger {
 	private static final Logger LOGGER = Logger.getLogger(RMIRemoteLogger.class.getName());

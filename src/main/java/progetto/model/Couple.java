@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Support class to find nearby locations in the window
+ * @author Michele
  */
 public final class Couple {
 	private int dx;

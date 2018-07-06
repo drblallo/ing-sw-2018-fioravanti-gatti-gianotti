@@ -2,10 +2,10 @@ package progetto.view.commandline.commands;
 
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.states.RoomsState;
-import progetto.view.commandline.states.SocketRMIChoiceState;
 
 /**
  * Command to create a socket or a RMI connection to the server
+ * @author Federica
  */
 public class ConnectionCommand extends AbstractCLViewCommand {
 

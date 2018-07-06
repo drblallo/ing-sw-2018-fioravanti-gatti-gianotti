@@ -12,6 +12,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * All calls are blocking until they are solved on the other side.
  * Calls are not parallel.
  * Messages are sent even if the connection is closed.
+ *
+ * @author Massimo
  */
 public final class LocalConnectionClient implements INetworkClient
 {

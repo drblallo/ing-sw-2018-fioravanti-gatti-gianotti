@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 /**
  * Immutable class with data of PlayerBoard
+ * @author Michele
  */
 public final class PlayerBoardData implements Serializable{
 

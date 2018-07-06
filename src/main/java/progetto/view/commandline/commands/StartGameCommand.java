@@ -6,6 +6,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to start the game
+ * @author Federica
  */
 public class StartGameCommand extends AbstractStateSwitcherCommand{
 
@@ -23,7 +24,8 @@ public class StartGameCommand extends AbstractStateSwitcherCommand{
      */
     @Override
     protected void perform(String[] params) {
-        getController().sendAction(new StartGameAction());
+        if (getController().getChair()!=-1)
+            getController().sendAction(new StartGameAction());
     }
 
     /**

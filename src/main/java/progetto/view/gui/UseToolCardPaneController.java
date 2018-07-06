@@ -9,12 +9,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import progetto.controller.*;
 import progetto.model.*;
+import progetto.view.ToolCardActionList;
 
 import java.util.List;
 
 /**
  * this is the class that handles the use tool card fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
 public class UseToolCardPaneController extends AbstractController{
 

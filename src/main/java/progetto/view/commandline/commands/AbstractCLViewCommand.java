@@ -8,6 +8,7 @@ import progetto.view.commandline.states.AbstractCLViewState;
 
 /**
  * Abstract class extended by every command of the command line view
+ * @author Federica
  */
 public abstract class AbstractCLViewCommand implements ICommand{
 

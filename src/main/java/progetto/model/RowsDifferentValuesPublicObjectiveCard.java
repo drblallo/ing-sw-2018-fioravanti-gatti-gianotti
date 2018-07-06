@@ -2,8 +2,9 @@ package progetto.model;
 
 /**
  * Class for public objective card "Sfumature diverse - riga"
+ * @author Michele
  */
-public class RowsDifferentValuesPublicObjectiveCard extends AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCard {
+public class RowsDifferentValuesPublicObjectiveCard extends AbstractDifferentColValPublicObjectiveCard {
 
 	private static final int CARD_ID = 2;
 

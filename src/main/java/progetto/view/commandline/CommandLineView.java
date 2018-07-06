@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Federica
+ */
 public class CommandLineView extends AbstractView implements IExecutible, Runnable
 {
 	private static final Logger LOGGER = Logger.getLogger(CommandLineView.class.getName());

@@ -3,12 +3,12 @@ package progetto.view.commandline.commands;
 import progetto.model.AbstractPrivateObjectiveCard;
 import progetto.model.AbstractPublicObjectiveCard;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.states.RoundViewState;
 
 import java.util.List;
 
 /**
  * Command to show public and private objective cards
+ * @author Federica
  */
 public class ShowObjectivesCommand extends AbstractCLViewCommand {
 

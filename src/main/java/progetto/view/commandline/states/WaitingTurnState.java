@@ -2,7 +2,6 @@ package progetto.view.commandline.states;
 
 import progetto.model.AbstractGameState;
 import progetto.model.RoundState;
-import progetto.model.ToolCard;
 import progetto.model.ToolCardState;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.DifferenceDescriptor;

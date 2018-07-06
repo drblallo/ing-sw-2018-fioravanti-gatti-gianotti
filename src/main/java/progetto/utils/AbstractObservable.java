@@ -13,6 +13,7 @@ import java.util.logging.Logger;
  * AbstractObservables are thread safe.
  *
  * @param <T> The type that is passed to IObserver when called.
+ * @author Massimo
  */
 public abstract class AbstractObservable<T>
 {

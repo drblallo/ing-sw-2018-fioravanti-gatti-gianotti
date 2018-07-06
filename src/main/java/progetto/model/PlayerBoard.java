@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Player table
+ * @author Michele
  */
 public class PlayerBoard extends AbstractPlayerBoard
 {

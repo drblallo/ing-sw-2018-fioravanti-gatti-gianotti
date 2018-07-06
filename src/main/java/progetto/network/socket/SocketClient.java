@@ -3,7 +3,6 @@ package progetto.network.socket;
 import progetto.network.IEnforce;
 import progetto.network.INetworkClient;
 import progetto.network.IRoomRequest;
-import progetto.utils.Callback;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 

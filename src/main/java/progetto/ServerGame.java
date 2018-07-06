@@ -14,7 +14,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
 
 /**
  * A server game is a game structure that will send action to the underlying game and will provide to the room
@@ -166,7 +165,7 @@ public class ServerGame extends GameSync implements  ISync
 		if (System.currentTimeMillis() - allertTime > Settings.getSettings().getAllertTime())
 		{
 			allertTime = System.currentTimeMillis();
-			return "sono passati "+Settings.getSettings().getAllertTime()+" millisecondi\n";
+			return "";
 		}
 		return "";
 	}

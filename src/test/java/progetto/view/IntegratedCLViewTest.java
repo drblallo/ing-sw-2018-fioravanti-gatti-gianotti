@@ -2,14 +2,13 @@ package progetto.view;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import progetto.ClientController;
-import progetto.view.commandline.CommandLineView;
 import progetto.ServerGameFactory;
 import progetto.network.NetworkServer;
 import progetto.network.rmi.RMIModule;
 import progetto.network.socket.SocketServer;
 import progetto.utils.Waiter;
+import progetto.view.commandline.CommandLineView;
 
 public class IntegratedCLViewTest {
 	private NetworkServer networkServer;

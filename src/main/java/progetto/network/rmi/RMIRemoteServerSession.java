@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 /**
  * implementation of IRemoteServerSession
+ * @author Massimo
  */
 final class RMIRemoteServerSession extends UnicastRemoteObject implements IRemoteServerSession {
 	private static final Logger LOGGER = Logger.getLogger(RMIRemoteServerSession.class.getName());

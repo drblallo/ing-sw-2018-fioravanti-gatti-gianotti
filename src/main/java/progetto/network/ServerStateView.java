@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * A representation of the server state that can be sent across the network.
+ * @author Massimo
  */
 public final class ServerStateView implements Serializable
 {

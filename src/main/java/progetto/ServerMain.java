@@ -2,12 +2,8 @@ package progetto;
 
 import progetto.network.NetworkServer;
 import progetto.network.localconnection.LocalConnectionModule;
-import progetto.network.rmi.RMIHandler;
 import progetto.network.rmi.RMIModule;
 import progetto.network.socket.SocketServer;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ServerMain {
 

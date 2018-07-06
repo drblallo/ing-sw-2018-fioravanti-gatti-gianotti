@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 /**
  * Main gaming table
+ * @author Michele
  */
 public final class MainBoard extends AbstractMainBoard
 {

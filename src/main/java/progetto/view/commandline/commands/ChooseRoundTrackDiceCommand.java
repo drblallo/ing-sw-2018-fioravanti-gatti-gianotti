@@ -8,6 +8,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to select the dice from the ones in the round track to use with a tool card
+ * @author Federica
  */
 public class ChooseRoundTrackDiceCommand extends AbstractStateSwitcherCommand {
 

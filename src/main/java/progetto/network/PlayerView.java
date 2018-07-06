@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * A player view is the collection of relevant information that regards a player.
  * It is immutable.
+ * @author Massimo
  */
 public final class PlayerView implements Serializable{
 	private final int id;

@@ -4,6 +4,7 @@ import java.util.Random;
 
 /**
  * Class used to generate random values (with seed), platform independent
+ * @author Michele
  */
 public final class RNGenerator {
 

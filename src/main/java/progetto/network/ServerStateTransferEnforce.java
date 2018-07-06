@@ -5,6 +5,7 @@ package progetto.network;
  * the server state is changed.
  *
  * Server state updates are not provided by default and must be requested by the client.
+ * @author Massimo
  */
 final class ServerStateTransferEnforce implements IEnforce {
 

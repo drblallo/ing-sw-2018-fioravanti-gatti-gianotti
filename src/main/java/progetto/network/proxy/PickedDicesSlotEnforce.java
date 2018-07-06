@@ -4,6 +4,9 @@ import progetto.model.PickedDicesSlotData;
 import progetto.network.ClientConnection;
 import progetto.network.IEnforce;
 
+/**
+ * @author Massimo
+ */
 public class PickedDicesSlotEnforce implements IEnforce
 {
 	private final int target;

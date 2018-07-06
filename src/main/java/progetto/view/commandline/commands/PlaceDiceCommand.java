@@ -6,6 +6,7 @@ import progetto.view.commandline.states.RoundViewState;
 
 /**
  * Command to place a dice on the playerboard
+ * @author Federica
  */
 public class PlaceDiceCommand extends AbstractStateSwitcherCommand {
 
@@ -53,6 +54,6 @@ public class PlaceDiceCommand extends AbstractStateSwitcherCommand {
      */
     @Override
     public String getHelp() {
-        return "Posiziona un dado: (Formato: " + getName() + " <Numero del dado> <Posizione x> <Posizione y>)";
+        return "Posiziona un dado: (Formato: " + getName() + " <Numero del dado> <Posizione y> <Posizione x>)";
     }
 }

@@ -4,6 +4,7 @@ import progetto.view.commandline.CommandLineView;
 
 /**
  * Command to close the game
+ * @author Federica
  */
 public class CloseGameCommand extends AbstractCLViewCommand {
 

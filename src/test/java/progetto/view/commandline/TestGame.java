@@ -4,11 +4,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import progetto.ServerMain;
 import progetto.controller.SetSeedAction;
 import progetto.model.EndGameState;
 import progetto.model.RoundState;
-import progetto.model.ToolCardState;
 import progetto.view.commandline.states.*;
 
 public class TestGame {

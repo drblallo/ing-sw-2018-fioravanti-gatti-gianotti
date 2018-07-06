@@ -5,6 +5,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to continue a past game
+ * @author Federica
  */
 public class ContinueGameCommand extends AbstractStateSwitcherCommand {
 

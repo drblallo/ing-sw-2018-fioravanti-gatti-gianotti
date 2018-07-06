@@ -6,6 +6,7 @@ import progetto.view.commandline.printer.DrawableUtils;
 
 /**
  * Command to show extracted dices
+ * @author Federica
  */
 public class ShowExtractedDicesCommand extends AbstractCLViewCommand {
 

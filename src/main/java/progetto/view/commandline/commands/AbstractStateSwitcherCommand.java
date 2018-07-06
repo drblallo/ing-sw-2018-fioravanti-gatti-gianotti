@@ -6,6 +6,7 @@ import progetto.view.commandline.states.AbstractCLViewState;
 /**
  * Abstract class extended by a group of commands which need to change the state of the command line view
  * after their execution
+ * @author Federica
  */
 public abstract class AbstractStateSwitcherCommand extends AbstractCLViewCommand{
 

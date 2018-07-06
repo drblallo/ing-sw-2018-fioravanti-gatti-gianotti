@@ -9,6 +9,7 @@ import java.util.logging.Logger;
  * so that a right id can be provided.
  *
  * Player name is unique inside a room, player id is unique inside a server.
+ * @author Massimo
  */
 public final class Player
 {

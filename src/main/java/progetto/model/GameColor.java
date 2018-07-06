@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Enum for available colors
+ * @author Michele
  */
 public enum GameColor {
 	YELLOW, RED, BLUE, GREEN, PURPLE;

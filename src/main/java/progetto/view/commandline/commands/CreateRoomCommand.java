@@ -1,10 +1,10 @@
 package progetto.view.commandline.commands;
 
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.states.RoomsState;
 
 /**
  * command to create a new room
+ * @author Federica
  */
 public class CreateRoomCommand extends AbstractCLViewCommand {
 

@@ -6,6 +6,7 @@ import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to solve a tool card
+ * @author Federica
  */
 public class SolveToolCardCommand extends AbstractCLViewCommand {
 

@@ -6,6 +6,7 @@ import progetto.model.PreGameState;
 
 /**
  * Action to set difficulty (used in Single Player game)
+ * @author Michele
  */
 public class SetDifficultyAction extends AbstractExecutibleGameAction
 {

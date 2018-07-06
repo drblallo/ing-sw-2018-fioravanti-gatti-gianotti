@@ -5,7 +5,6 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import progetto.model.GameColor;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.Map;
 
 /**
  * final class containing all necessary images for the game
+ * @author Federica
  */
 public final class TextureDatabase {
 

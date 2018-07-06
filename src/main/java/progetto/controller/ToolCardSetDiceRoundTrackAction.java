@@ -7,6 +7,7 @@ import progetto.model.ToolCardState;
 
 /**
  * Action to select a dice from round track
+ * @author Michele
  */
 public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameAction{
 

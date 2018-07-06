@@ -4,6 +4,9 @@ import progetto.model.RoundInformationData;
 import progetto.network.ClientConnection;
 import progetto.network.IEnforce;
 
+/**
+ * @author Massimo
+ */
 public class RoundInformationEnforce implements IEnforce{
 
 	private RoundInformationData data;

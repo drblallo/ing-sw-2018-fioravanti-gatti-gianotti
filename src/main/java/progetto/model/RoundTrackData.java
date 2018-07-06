@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 /**
  * Immuutable class with data of RoundTrack
+ * @author Michele
  */
 public final class RoundTrackData implements Serializable
 {

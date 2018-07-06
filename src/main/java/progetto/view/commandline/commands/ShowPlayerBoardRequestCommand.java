@@ -5,6 +5,7 @@ import progetto.view.commandline.states.ShowPlayerBoardState;
 
 /**
  * Command to go to the ShowPlayerBoardState
+ * @author Federica
  */
 public class ShowPlayerBoardRequestCommand extends AbstractStateSwitcherCommand {
 

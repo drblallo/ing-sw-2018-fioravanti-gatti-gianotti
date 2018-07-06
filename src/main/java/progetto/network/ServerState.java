@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 /**
  * This class holds all the information at room level that are need to the server.
  * A server is composed by a list of room. Each room holds players.
+ * @author Massimo
  */
 public final class ServerState implements Runnable
 {

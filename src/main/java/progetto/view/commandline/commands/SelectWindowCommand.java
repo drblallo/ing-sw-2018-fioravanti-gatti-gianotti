@@ -6,6 +6,7 @@ import progetto.view.commandline.states.WaitingState;
 
 /**
  * Command to select a window frame at the beginning of the game
+ * @author Federica
  */
 public class SelectWindowCommand extends AbstractStateSwitcherCommand {
 

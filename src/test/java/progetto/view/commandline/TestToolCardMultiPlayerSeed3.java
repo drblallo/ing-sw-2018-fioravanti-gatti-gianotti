@@ -8,10 +8,8 @@ import progetto.controller.EndTurnAction;
 import progetto.controller.FrameSetAction;
 import progetto.controller.SetSeedAction;
 import progetto.model.RoundState;
-import progetto.model.ToolCardState;
 import progetto.view.commandline.states.RoundViewState;
 import progetto.view.commandline.states.ShowToolCardState;
-import progetto.view.commandline.states.UseToolCardState;
 
 public class TestToolCardMultiPlayerSeed3 {
 

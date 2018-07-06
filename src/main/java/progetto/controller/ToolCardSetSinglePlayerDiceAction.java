@@ -4,6 +4,7 @@ import progetto.model.*;
 
 /**
  * Action to set the dice to use to activate tool card in single player
+ * @author Michele
  */
 public class ToolCardSetSinglePlayerDiceAction extends AbstractExecutibleGameAction{
 

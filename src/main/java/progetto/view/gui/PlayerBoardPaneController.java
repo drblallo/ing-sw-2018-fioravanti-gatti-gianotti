@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 /**
  * this is the class that handles the player board fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
 public class PlayerBoardPaneController extends AbstractController{
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Abstract class for objective card
+ * @author Michele
  */
 public abstract class AbstractObjectiveCard implements Serializable {
 
@@ -34,7 +35,7 @@ public abstract class AbstractObjectiveCard implements Serializable {
 	public String getToolTip()
 	{
 		//return card name and effect description
-		return name + " " + effect;
+		return "Nome : " + name + "\nEffetto: " + effect + "\n";
 	}
 
 	/**

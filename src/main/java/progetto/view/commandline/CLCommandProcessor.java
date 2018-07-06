@@ -4,6 +4,9 @@ import progetto.view.commandline.states.AbstractCLViewState;
 
 import java.util.List;
 
+/**
+ * @author Federica
+ */
 public class CLCommandProcessor implements ICommandProcessor{
 
 	private AbstractCLViewState currentState;

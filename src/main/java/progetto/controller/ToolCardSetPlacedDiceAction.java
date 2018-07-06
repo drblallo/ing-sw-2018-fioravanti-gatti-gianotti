@@ -7,6 +7,7 @@ import progetto.model.ToolCardState;
 
 /**
  * Action to select a dice from placed dice frame
+ * @author Michele
  */
 public class ToolCardSetPlacedDiceAction extends AbstractExecutibleGameAction{
 

@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * Class for public objective card "Varieta' di colore"
+ * @author Michele
  */
 public class DifferentColorsPublicObjectiveCard extends AbstractPublicObjectiveCard {
 

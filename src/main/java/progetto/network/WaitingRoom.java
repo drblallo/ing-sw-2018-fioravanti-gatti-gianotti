@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  * All inputs from player are dropped, except server requests. Those requests are sent to the upper level and processed
  * there.
+ * @author Massimo
  */
 final class WaitingRoom extends AbstractRoom
 {

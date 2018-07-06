@@ -8,6 +8,7 @@ import progetto.utils.Callback;
 /**
  * An implementation of INetworkHandler that does not go through the network.
  * Calls are blocking, calls are not synchronized.
+ * @author Massimo
  */
 public final class LocalConnectionHandler implements INetworkHandler
 {

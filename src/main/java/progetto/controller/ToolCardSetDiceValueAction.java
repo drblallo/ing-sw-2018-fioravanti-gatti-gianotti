@@ -4,6 +4,7 @@ import progetto.model.*;
 
 /**
  * Action to set the value of the dice
+ * @author Michele
  */
 public class ToolCardSetDiceValueAction extends AbstractExecutibleGameAction{
 

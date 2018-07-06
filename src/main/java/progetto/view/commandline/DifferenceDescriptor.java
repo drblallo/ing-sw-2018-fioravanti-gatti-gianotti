@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Federica
+ * @param <T>
+ */
 public class DifferenceDescriptor<T extends Serializable> {
 
 	private T oldData;

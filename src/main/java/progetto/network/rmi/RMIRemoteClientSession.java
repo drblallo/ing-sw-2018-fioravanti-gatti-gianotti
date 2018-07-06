@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 /**
  * skeleton of IRemoteClientSession
+ * @author Massimo
  */
 final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemoteClientSession {
 	private static final Logger LOGGER = Logger.getLogger(RMIRemoteClientSession.class.getName());

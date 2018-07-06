@@ -10,6 +10,7 @@ import progetto.model.*;
 /**
  * this is the class that handles the game fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
 public class GamePaneController extends AbstractStateController {
 

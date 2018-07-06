@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 /**
  * rmi implementation of INetworkHandler
+ * @author Massimo
  */
 public final class RMIHandler implements INetworkHandler, Runnable {
 	private static final Logger LOGGER = Logger.getLogger(RMIHandler.class.getName());

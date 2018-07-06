@@ -5,6 +5,7 @@ import progetto.view.commandline.states.AbstractCLViewState;
 
 /**
  * Command to return to a specified state
+ * @author Federica
  */
 public class ReturnCommand extends AbstractStateSwitcherCommand {
 

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 /**
  * Encapsulate a server request in a room requests, so that it can be carried over to the higher level
+ * @author Massimo
  */
 final class EncapsulationRoomRequest implements IRoomRequest
 {

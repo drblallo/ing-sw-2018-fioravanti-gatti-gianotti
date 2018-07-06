@@ -3,6 +3,7 @@ package progetto.model;
 
 /**
  * RoundTrack with advanced dice
+ * @author Michele
  */
 public final class RoundTrack extends Container<RoundTrackData> {
 

@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  *  Immutable support class with dices in a position of the roundTrack
+ *  @author Michele
  */
 public final class NineDices implements Serializable{
 

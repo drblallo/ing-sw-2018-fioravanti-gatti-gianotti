@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Request sent when the player desires to make a modification to the sync object inside that room.
+ * @author Massimo
  */
 final class SendSyncStringRoomRequest implements IRoomRequest
 {

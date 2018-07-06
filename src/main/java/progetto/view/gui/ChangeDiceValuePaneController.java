@@ -13,6 +13,7 @@ import progetto.model.ToolCardParameters;
 /**
  * this is the class that handles the change dice value fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
+ * @author Federica
  */
 public class ChangeDiceValuePaneController extends AbstractController{
 

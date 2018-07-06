@@ -1,13 +1,13 @@
 package progetto.view.commandline.commands;
 
 import progetto.controller.ToolCardSetSinglePlayerDiceAction;
-import progetto.model.Dice;
 import progetto.model.IModel;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to select the dice to sacrifice to use a tool card in single player mode
+ * @author Federica
  */
 public class SetSinglePlayerDiceAction extends AbstractStateSwitcherCommand {
 

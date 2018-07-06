@@ -1,4 +1,4 @@
-package progetto.model;
+package progetto.view;
 
 import progetto.controller.*;
 
@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Singleton
  * List of action for each tool card
+ * @author Federica
  */
 public final class ToolCardActionList {
 

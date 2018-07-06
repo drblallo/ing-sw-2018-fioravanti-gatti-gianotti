@@ -1,13 +1,13 @@
 package progetto.view.commandline.commands;
 
 import progetto.controller.ToolCardSetIncreaseDecreaseAction;
-import progetto.controller.ToolCardSetPickedDiceAction;
 import progetto.model.ToolCardParameters;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to increase or decrease the value of a dice when permitted by a tool card
+ * @author Federica
  */
 public class IncreaseDecreseCommand extends AbstractStateSwitcherCommand {
 

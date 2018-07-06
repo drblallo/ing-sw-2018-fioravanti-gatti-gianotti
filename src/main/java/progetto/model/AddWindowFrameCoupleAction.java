@@ -2,6 +2,7 @@ package progetto.model;
 
 /**
  * add a window frame couple to the model
+ * @author Michele
  */
 public class AddWindowFrameCoupleAction extends AbstractGameAction
 {

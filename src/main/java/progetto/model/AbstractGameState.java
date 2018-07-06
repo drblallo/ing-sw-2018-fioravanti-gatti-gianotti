@@ -2,6 +2,9 @@ package progetto.model;
 
 import java.io.Serializable;
 
+/**
+ * @author Michele
+ */
 public abstract class AbstractGameState implements Serializable
 {
 	private final String name;
