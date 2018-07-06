@@ -313,5 +313,9 @@ public class ClientController implements IClientController
         System.exit(0);
     }
 
+    /**
+     *
+     * @return true is there is a game
+     */
     public boolean thereIsGame(){return clientGame!=null;}
 }
