@@ -11,8 +11,6 @@ import progetto.view.commandline.states.GameTransitionState;
  */
 public class ChooseValueDiceCommand extends AbstractStateSwitcherCommand {
 
-    private static final int MAX_VALUE = 6;
-
     /**
      * public constructor
      * @param commandLineView the command line view that this command will modify

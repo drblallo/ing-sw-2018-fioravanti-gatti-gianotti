@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 /**
  * this is the class that handles the player board fxml. This class is only instanced by javafx, this mean that
  * must have a default constructor.
- * @author Federica
+ * @author Federicai
  */
 public class PlayerBoardPaneController extends AbstractController{
 
@@ -62,7 +62,7 @@ public class PlayerBoardPaneController extends AbstractController{
             LOGGER.log(Level.SEVERE, e.getMessage());
         }
         PlayerBoardPaneController playerBoardPaneControllers = fxmlLoader.getController();
-        playerBoardPaneControllers.setup(view, numberOfPlayerBoard);
+        playerBoardPaneControllers.setUp(view, numberOfPlayerBoard);
         return pane;
     }
 
@@ -71,7 +71,7 @@ public class PlayerBoardPaneController extends AbstractController{
      * @param view the current gui view
      * @param numberOfPlayerBoard the number of the player board associated to this controller
      */
-    public void setup(GUIView view, int numberOfPlayerBoard){
+    public void setUp(GUIView view, int numberOfPlayerBoard){
     	super.setUp(view);
         this.numberOfPlayerBoard = numberOfPlayerBoard;
         topBox.getChildren().remove(chooseWindowFrame);
@@ -79,7 +79,7 @@ public class PlayerBoardPaneController extends AbstractController{
                 .addObserver(ogg-> Platform.runLater(this::updatePlayerBoard));
         view.getController().getObservable().getPlayerBoard(numberOfPlayerBoard).getDicePlacedFrame()
             .addObserver(ogg -> Platform.runLater(this::updateDicePlacedFrame));
-        pickedDicesSlotPaneController.setup(view, numberOfPlayerBoard);
+        pickedDicesSlotPaneController.setUp(view, numberOfPlayerBoard);
 
         ImageView imageView;
 
@@ -244,7 +244,7 @@ public class PlayerBoardPaneController extends AbstractController{
                 pane = null;
             }
             ChooseWindowFramePaneController chooseWindowFramePaneController = fxmlLoader.getController();
-            chooseWindowFramePaneController.setup(model
+            chooseWindowFramePaneController.setUp(model
                     .getPlayerBoard(numberOfPlayerBoard).getData(), getView());
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

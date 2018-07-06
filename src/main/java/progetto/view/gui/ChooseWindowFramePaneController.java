@@ -24,7 +24,7 @@ public class ChooseWindowFramePaneController extends AbstractController {
     /**
      * set up this object, it is equivalent to a constructor since there is no access to it
      */
-    public void setup(PlayerBoardData playerBoardData, GUIView view) {
+    public void setUp(PlayerBoardData playerBoardData, GUIView view) {
 
     	super.setUp(view);
 
