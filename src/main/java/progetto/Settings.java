@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +34,7 @@ public class Settings {
 	private int rmiPort;
 	private int gameStartTimeOut;
 	private int playerTurnTImeOut;
-	private String myIP;
+	private String myIP = "127.0.0.1";
 
 	public int getAllertTime() {
 		return allertTime;
@@ -70,6 +73,23 @@ public class Settings {
 	}
 
 	public String getMyIP() {
-		return myIP;
+			try
+			{
+				String s = InetAddress.getLocalHost().getHostAddress();
+				if (myIP.equals("127.0.0.1"))
+				{
+					if (s.contains("127.0.0.1") || s.contains("127.0.1.1"))
+						throw new UnknownHostException();
+
+					LOGGER.log(Level.INFO, "evaluated my ip as {0}", s);
+					return s;
+				}
+				LOGGER.log(Level.INFO, "evaluated my ip as {0}", myIP);
+				return myIP;
+			}
+			catch (UnknownHostException e) {
+				LOGGER.severe("Failed to resolve my own local IP! Set it in the in config file");
+				return null;
+			}
 	}
 }
