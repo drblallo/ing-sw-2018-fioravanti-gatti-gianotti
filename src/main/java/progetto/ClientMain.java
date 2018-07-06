@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class ClientMain extends Application {
 
     public static void main(String[] args){
-        Logger.getLogger(ClientMain.class.getPackage().getName()).setLevel(Level.SEVERE);
+        Logger.getLogger(ClientMain.class.getPackage().getName()).setLevel(Level.OFF);
         launch(args);
 
     }

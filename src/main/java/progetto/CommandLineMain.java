@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class CommandLineMain {
 	public static void main(String[] args){
 
-		Logger.getLogger(ClientMain.class.getPackage().getName()).setLevel(Level.SEVERE);
+		Logger.getLogger(ClientMain.class.getPackage().getName()).setLevel(Level.OFF);
 		Settings.getSettings();
 		ClientController controller = new ClientController();
 		CommandLineView cl = new CommandLineView(controller, System.out);

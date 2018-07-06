@@ -154,7 +154,7 @@ public class DrawableUtils{
         int num = 1;
         for (WindowFrameCouple w : plb.getExtractedWindowFrameCouplesWindowFrame()) {
             for (int a = 0; a < 2; a++) {
-                WindowFrame frame = w.getWindowFrame(0);
+                WindowFrame frame = w.getWindowFrame(a);
                 d.add(getAddTextOver(getWindowFrame(frame), getWindowFrameDescription(isSinglePlayer, frame, num++)));
             }
         }
