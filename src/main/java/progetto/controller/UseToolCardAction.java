@@ -47,8 +47,6 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 	{
 		int currentPlayer = game.getRoundInformation().getData().getCurrentPlayer();
 
-		System.out.println("USE TOOL CARD");
-
 		if(currentPlayer != getCallerID() ||
 				game.getMainBoard().getData().getGameState().getClass() != RoundState.class ||
 				nCard>=game.getMainBoard().getData().getToolCards().size() || nCard < 0 ||
@@ -106,18 +104,15 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 	private boolean check7(IModel game)
 	{
 		int cardIndex = game.getMainBoard().getData().getToolCards().get(nCard).getIndex();
-		System.out.println("CHECK CARTA 7");
 		if(cardIndex == INDEX7)
 		{
 			List<Integer> playerQueue = game.getRoundInformation().getData().getRoundPlayerList();
 			int nPlayer = getCallerID();
-			System.out.println("CONTROLLO CARTA 7");
 			while(!playerQueue.isEmpty())
 			{
 				int nextP = playerQueue.remove(0);
 				if (nextP == nPlayer)   //check second turn of the player
 				{
-					System.out.println("NON PUOI USARE QUESTA CARTA");
 					return false;
 				}
 			}
@@ -141,7 +136,6 @@ public class UseToolCardAction extends AbstractExecutibleGameAction{
 		{
 			List<Integer> playerQueue = game.getRoundInformation().getData().getRoundPlayerList();
 			int nPlayer = getCallerID();
-			boolean found = false;
 
 			while(!playerQueue.isEmpty())
 			{

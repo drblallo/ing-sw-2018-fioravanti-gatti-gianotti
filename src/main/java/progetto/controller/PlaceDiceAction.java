@@ -25,14 +25,14 @@ public class PlaceDiceAction extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set values
-	 * @param nPlayer callerID
+	 * @param callerID callerID
 	 * @param nDice number of the picked dice to place
 	 * @param y y pos in window frame
 	 * @param x x pos in window frame
 	 */
-	public PlaceDiceAction(int nPlayer, int nDice, int y, int x)
+	public PlaceDiceAction(int callerID, int nDice, int y, int x)
 	{
-		super(nPlayer);
+		super(callerID);
 		this.nDice = nDice;
 		this.x = x;
 		this.y = y;

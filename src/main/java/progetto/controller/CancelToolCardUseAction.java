@@ -18,12 +18,12 @@ public class CancelToolCardUseAction extends AbstractExecutibleGameAction
 	}
 
 	/**
-	 * Constructor to se nPlayer
-	 * @param nPlayer
+	 * Constructor with caller ID
+	 * @param callerID ID of the caller
 	 */
-	public CancelToolCardUseAction(int nPlayer)
+	public CancelToolCardUseAction(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 	}
 
 	/**
