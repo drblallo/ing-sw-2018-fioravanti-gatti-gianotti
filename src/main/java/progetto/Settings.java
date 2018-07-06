@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;

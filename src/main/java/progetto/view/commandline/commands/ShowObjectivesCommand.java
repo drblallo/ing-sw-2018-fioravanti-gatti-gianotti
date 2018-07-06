@@ -3,7 +3,6 @@ package progetto.view.commandline.commands;
 import progetto.model.AbstractPrivateObjectiveCard;
 import progetto.model.AbstractPublicObjectiveCard;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.states.RoundViewState;
 
 import java.util.List;
 

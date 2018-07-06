@@ -1,7 +1,6 @@
 package progetto.view.commandline.commands;
 
 import progetto.controller.ToolCardSetIncreaseDecreaseAction;
-import progetto.controller.ToolCardSetPickedDiceAction;
 import progetto.model.ToolCardParameters;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.states.GameTransitionState;

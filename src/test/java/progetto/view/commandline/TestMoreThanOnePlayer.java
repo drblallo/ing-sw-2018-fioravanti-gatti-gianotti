@@ -8,12 +8,12 @@ import progetto.controller.EndTurnAction;
 import progetto.controller.FrameSetAction;
 import progetto.controller.StartGameAction;
 import progetto.model.EndGameState;
+import progetto.model.FrameSelectionState;
+import progetto.model.RoundState;
 import progetto.view.commandline.states.FrameSelectionViewState;
 import progetto.view.commandline.states.RoundViewState;
 import progetto.view.commandline.states.WaitingState;
 import progetto.view.commandline.states.WaitingTurnState;
-import progetto.model.FrameSelectionState;
-import progetto.model.RoundState;
 
 public class TestMoreThanOnePlayer {
 

@@ -1,14 +1,11 @@
 package progetto.view.gui;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import progetto.IClientController;
 import progetto.controller.FrameSetAction;
 import progetto.model.DicePlacedFrameData;
 import progetto.model.MainBoardData;

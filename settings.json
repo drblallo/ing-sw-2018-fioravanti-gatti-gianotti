@@ -4,5 +4,5 @@
   "gameStartTimeOut": 300000,
   "playerTurnTimeOut": 300000,
   "allertTime" : 5000,
-  "myIP" :  "192.168.1.111"
+  "myIP" :  "127.0.0.1"
 }

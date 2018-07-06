@@ -3,7 +3,7 @@ package progetto.model;
 /**
  * Class for public objective card "Colori diversi - riga"
  */
-public class RowsDifferentColorsPublicObjectiveCard extends AbstractColumnsRowsDifferentColorsValuesPublicObjectiveCard {
+public class RowsDifferentColorsPublicObjectiveCard extends AbstractDifferentColValPublicObjectiveCard {
 
 	private static final int CARD_ID = 0;
 

@@ -4,12 +4,12 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import progetto.model.RoundState;
-import progetto.view.commandline.states.*;
 import progetto.model.FrameSelectionState;
 import progetto.model.PreGameState;
+import progetto.model.RoundState;
 import progetto.network.RoomView;
 import progetto.utils.Waiter;
+import progetto.view.commandline.states.*;
 
 public class TestConnection {
 

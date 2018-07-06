@@ -8,10 +8,8 @@ import javafx.scene.layout.HBox;
 import progetto.controller.SetDifficultyAction;
 import progetto.controller.SetPlayerCountAction;
 import progetto.controller.StartGameAction;
-import progetto.model.AbstractMainBoard;
 import progetto.model.MainBoardData;
 import progetto.network.RoomView;
-import progetto.utils.IObserver;
 
 /**
  * this is the class that handles the pre game fxml. This class is only instanced by javafx, this mean that

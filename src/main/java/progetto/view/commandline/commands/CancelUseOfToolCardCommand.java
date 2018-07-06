@@ -2,7 +2,6 @@ package progetto.view.commandline.commands;
 
 import progetto.controller.CancelToolCardUseAction;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to cancel the use of a tool card

@@ -1,7 +1,6 @@
 package progetto.view.commandline.commands;
 
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.states.RoomsState;
 
 /**
  * Command to update the list of the existing rooms

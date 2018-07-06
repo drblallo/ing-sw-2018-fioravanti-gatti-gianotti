@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
 <AnchorPane maxHeight="500.0" maxWidth="356.0" minHeight="500.0" minWidth="356.0" prefHeight="500.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progetto.view.gui.ObjectiveCardsController">
    <children>
       <TilePane fx:id="objectiveCardsTilePane" hgap="5.0" maxHeight="500.0" maxWidth="356.0" minHeight="500.0" minWidth="356.0" prefHeight="500.0" prefWidth="356.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

@@ -1,4 +1,4 @@
-package progetto.model;
+package progetto.view;
 
 import progetto.controller.*;
 

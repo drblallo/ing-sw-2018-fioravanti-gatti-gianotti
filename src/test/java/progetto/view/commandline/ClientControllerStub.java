@@ -1,8 +1,8 @@
 package progetto.view.commandline;
 
-import progetto.controller.GameController;
-import progetto.IClientController;
 import progetto.AbstractView;
+import progetto.IClientController;
+import progetto.controller.GameController;
 import progetto.model.*;
 import progetto.network.RoomView;
 import progetto.network.ServerStateView;

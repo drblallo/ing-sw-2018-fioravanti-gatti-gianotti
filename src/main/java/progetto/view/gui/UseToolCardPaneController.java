@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import progetto.controller.*;
 import progetto.model.*;
+import progetto.view.ToolCardActionList;
 
 import java.util.List;
 

@@ -30,7 +30,7 @@ public class ToolCard implements Serializable {
 	public String getToolTip()
 	{
 		//return card name and effect description
-		return index + " " + gameColor + " " + name + " " + effect;
+		return "Colore: " + gameColor + "\nNome: " + name + "\nEffetto: " + effect + "\n";
 	}
 
 	public int getIndex()

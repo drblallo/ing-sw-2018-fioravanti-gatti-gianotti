@@ -42,7 +42,7 @@ public class PlayerMenuPaneController extends AbstractController{
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::onRoomChanged));
         view.getController().getObservable().getRoundInformation()
                 .addObserver(ogg -> Platform.runLater(this::updateCurrentPlayer) );
-        view.getController().getObservable().getMainBoard().addObserver(ogg -> updateMainBoard());
+        view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(()->updateMainBoard()));
         AlertTurnBoxPaneController.setup();
     }
 

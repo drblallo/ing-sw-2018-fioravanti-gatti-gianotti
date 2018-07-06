@@ -2,7 +2,6 @@ package progetto.view.commandline.commands;
 
 import progetto.controller.UseToolCardAction;
 import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.states.GameTransitionState;
 
 /**
  * Command to use a tool card

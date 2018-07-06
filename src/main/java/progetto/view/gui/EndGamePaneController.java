@@ -1,6 +1,5 @@
 package progetto.view.gui;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;

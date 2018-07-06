@@ -1,6 +1,5 @@
 package progetto.view.commandline;
 
-import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.states.AbstractCLViewState;
 
 public class StateStub extends AbstractCLViewState {
