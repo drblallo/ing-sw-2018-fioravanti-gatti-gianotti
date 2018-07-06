@@ -2,13 +2,9 @@ package progetto;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import progetto.view.commandline.CommandLineView;
-import progetto.view.commandline.StreamProcessor;
 import progetto.view.gui.AlertExitBoxPaneController;
 import progetto.view.gui.GUIView;
 
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

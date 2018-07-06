@@ -67,7 +67,6 @@ public class GameController implements IGameController {
 	}
 
 	/**
-	 * @deprecated
 	 * @param index the index of the hash you are trying to retrieve
 	 * @return the hash you are trying to retrieve
 	 */

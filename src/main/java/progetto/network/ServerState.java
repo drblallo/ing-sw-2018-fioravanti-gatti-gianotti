@@ -89,9 +89,10 @@ public final class ServerState implements Runnable
 		AbstractRoom oldRoom = getRoomOfPlayer(con.getPlayerID());
 		AbstractRoom r = getRoom(roomID);
 
-		for (PlayerView player : r.getView().asList())
-			if (player.getName() == newName)
-				return;
+		if (r != null)
+			for (PlayerView player : r.getView().asList())
+				if (player.getName() == newName)
+					return;
 
 		if (oldRoom != null)
 			oldRoom.enqueueRemoval(con.getPlayerID());

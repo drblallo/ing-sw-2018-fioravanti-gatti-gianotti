@@ -33,8 +33,8 @@ public class Settings {
 	private int rmiPort;
 	private int gameStartTimeOut;
 	private int playerTurnTImeOut;
-	private String loopBackAdress = "127.0.0.1";
-	private String loopBackAdressLinux = "127.0.1.1";
+	private String loopBackAdress;
+	private String loopBackAdressLinux;
 	private String myIP = loopBackAdress;
 
 	public int getAllertTime() {
