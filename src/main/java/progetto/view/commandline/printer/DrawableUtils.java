@@ -222,7 +222,7 @@ public class DrawableUtils{
             if (dice != null)
                 drawable = new DiceDrawable(dice.getGameColor(), dice.getValue());
 
-            drawable = getAddTextOver(drawable, a +"");
+            drawable = getAddTextOver(drawable, "dado: "+a);
             drawable.drawOnTo(d, a * (t.getWidth() + HORIZONTAL_SPACING), 0);
         }
 
