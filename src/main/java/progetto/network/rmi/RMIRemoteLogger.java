@@ -16,6 +16,12 @@ final class RMIRemoteLogger implements IRemoteLogger {
 		this.server = server;
 	}
 
+	/**
+	 * allows a player to join the server
+	 * @param remote the object that will be used by the server to send enforces
+	 * @return the server remote that is sent to the player
+	 * @throws RemoteException all exception are thrown
+	 */
 	public IRemoteServerSession login(final IRemoteClientSession remote) throws RemoteException {
 
 		LOGGER.fine("Player tries to log in");

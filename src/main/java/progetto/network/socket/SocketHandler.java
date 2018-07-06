@@ -18,6 +18,10 @@ final class SocketHandler extends AbstractSocket implements INetworkHandler {
 
 	private final Callback<IRoomRequest> requestCallback = new Callback<>();
 
+	/**
+	 * creates a socket handler based on a socket
+	 * @param s the socket connected to the client
+	 */
 	SocketHandler(Socket s) {
 		super(s);
 	}

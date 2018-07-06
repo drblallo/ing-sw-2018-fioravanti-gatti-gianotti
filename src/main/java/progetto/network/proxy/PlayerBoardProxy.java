@@ -4,6 +4,7 @@ import progetto.model.*;
 
 /**
  * @author Massimo
+ * the proxy of the player board, contains all the data but does not contain any operation
  */
 public class PlayerBoardProxy extends AbstractPlayerBoard
 {
@@ -16,10 +17,18 @@ public class PlayerBoardProxy extends AbstractPlayerBoard
 		super(new PlayerBoardData());
 	}
 
+	/**
+	 *
+	 * @return the picked dice slot data holded by this object
+	 */
 	public Container<PickedDicesSlotData> getPickedDicesSlot() {
 		return pickedDicesSlotData;
 	}
 
+	/**
+	 *
+	 * @return the dice placed frame data holded by this object
+	 */
 	public Container<DicePlacedFrameData> getDicePlacedFrame() {
 		return dicePlacedFrameData;
 	}

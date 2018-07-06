@@ -9,5 +9,9 @@ import java.io.Serializable;
  */
 public interface IEnforce extends Serializable {
 
+	/**
+	 * extend this class to implement a behaviour that is invoked in the client
+	 * @param c the client connection that received this enforce
+	 */
 	void execute(ClientConnection c);
 }

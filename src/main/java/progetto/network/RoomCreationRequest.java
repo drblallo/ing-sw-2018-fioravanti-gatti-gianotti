@@ -9,6 +9,10 @@ final class RoomCreationRequest extends AbstractServerRequest
 {
 	private String name;
 
+	/**
+	 * creates a new instance of a request that is used to create a new room on the server
+	 * @param name the name of the room to be created
+	 */
 	RoomCreationRequest(String name) {
 		this.name = name;
 	}

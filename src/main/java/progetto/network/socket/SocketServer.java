@@ -20,6 +20,10 @@ public final class SocketServer implements INetworkModule, Runnable {
 	private ServerSocket server = null;
 	private Callback<INetworkHandler> playerJoinedCallback = new Callback<>();
 
+	/**
+	 * creates a module based on the provided port
+	 * @param port the port where the module will listen
+	 */
 	public SocketServer(int port) {
 		localPort = port;
 	}

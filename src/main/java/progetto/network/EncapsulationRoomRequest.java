@@ -12,6 +12,10 @@ final class EncapsulationRoomRequest implements IRoomRequest
 	private final AbstractServerRequest request;
 	private static final Logger LOGGER = Logger.getLogger(EncapsulationRoomRequest.class.getName());
 
+	/**
+	 * Creates a encapsulation room request
+	 * @param request the abstract server request that must be sent to the server
+	 */
 	EncapsulationRoomRequest(AbstractServerRequest request)
 	{
 		this.request = request;

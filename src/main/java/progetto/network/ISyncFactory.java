@@ -7,5 +7,9 @@ package progetto.network;
  */
 public interface ISyncFactory {
 
+	/**
+	 *
+	 * @return a new instance of a sync object
+	 */
 	ISync create();
 }

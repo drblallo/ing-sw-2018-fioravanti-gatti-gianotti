@@ -5,6 +5,10 @@ import progetto.model.Value;
 import java.util.EnumMap;
 import java.util.Map;
 
+
+/**
+ * Drawable rappresenting the simbol of a dice
+ */
 public class DiceNumberDrawable extends Drawable
 {
     private static final int DICE_BORDER_SIZE = 1;
@@ -17,7 +21,11 @@ public class DiceNumberDrawable extends Drawable
     private static final Map<Value, Drawable> dicesNumber = getDicesNumber();
     private static final Drawable empty = new DiceNumberDrawable("         ");
 
-    public DiceNumberDrawable(String s){
+    /**
+     *
+     * @param s the string that will be helded by the dice
+     */
+    private DiceNumberDrawable(String s){
         super(DICE_NUMBER_SIZE, DICE_NUMBER_SIZE);
         verticalLine.drawOnTo(this, 0, DICE_BORDER_SIZE);
         verticalLine.drawOnTo(this, DICE_NUMBER_SIZE - 1, DICE_BORDER_SIZE);
@@ -34,6 +42,10 @@ public class DiceNumberDrawable extends Drawable
     }
 
 
+    /**
+     *
+     * @return the map of drawable that will hold all the numbers
+     */
     private static Map<Value, Drawable> getDicesNumber()
     {
         Map<Value, Drawable> toBeReturned = new EnumMap<>(Value.class);
@@ -48,6 +60,11 @@ public class DiceNumberDrawable extends Drawable
         return toBeReturned;
     }
 
+    /**
+     *
+     * @param value the value of the dice
+     * @return the drawable that rappresent the dice
+     */
     public static Drawable getDice(Value value)
     {
         if (value == null)

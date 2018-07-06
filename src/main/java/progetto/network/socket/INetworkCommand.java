@@ -9,5 +9,10 @@ import java.io.Serializable;
  * @param <T>
  */
 interface INetworkCommand<T extends AbstractSocket> extends Serializable {
+
+	/**
+	 * extend this object add a socket level functionality
+	 * @param mng the manager that will receive this command
+	 */
 	void execute(T mng);
 }

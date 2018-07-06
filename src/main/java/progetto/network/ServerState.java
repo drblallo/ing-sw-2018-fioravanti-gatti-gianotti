@@ -87,11 +87,15 @@ public final class ServerState implements Runnable
 			con.setID(getUnusedID());
 
 		AbstractRoom oldRoom = getRoomOfPlayer(con.getPlayerID());
+		AbstractRoom r = getRoom(roomID);
+
+		for (PlayerView player : r.getView().asList())
+			if (player.getName() == newName)
+				return;
 
 		if (oldRoom != null)
 			oldRoom.enqueueRemoval(con.getPlayerID());
 
-		AbstractRoom r = getRoom(roomID);
 		if (r != null)
 			r.enqueueAdd(newName, con);
 
@@ -101,7 +105,7 @@ public final class ServerState implements Runnable
 	/**
 	 * returns an unused id inside this server
 	 *
-	 * @return
+	 * @return the first unused id
 	 */
 	private int getUnusedID()
 	{
@@ -111,6 +115,10 @@ public final class ServerState implements Runnable
 		return toReturno;
 	}
 
+	/**
+	 *
+	 * @return the current state of the server
+	 */
 	public ServerStateView getView()
 	{
 		ServerStateView v = new ServerStateView();
@@ -135,17 +143,26 @@ public final class ServerState implements Runnable
 		}
 	}
 
+	/**
+	 * kills the server thread
+	 */
 	void stop()
 	{
 		isRunning = false;
 	}
 
+	/**
+	 * deletes every room and stops them
+	 */
 	private void tearDown()
 	{
 		for (int r : rooms.keySet())
 			deleteRoom(r);
 	}
 
+	/**
+	 * evaluate all the requests, destroys empty room
+	 */
 	private void processAllRequest()
 	{
 
@@ -169,6 +186,9 @@ public final class ServerState implements Runnable
 		}
 	}
 
+	/**
+	 * keeps evaluating all the requests until the server get closed
+	 */
 	public void run()
 	{
 		Thread.currentThread().setName("Server State Thread");
@@ -178,6 +198,10 @@ public final class ServerState implements Runnable
 		tearDown();
 	}
 
+	/**
+	 * broad cast a message to every player in the server
+	 * @param message the message to be broadcast
+	 */
 	public void broadcast(String message)
 	{
 		for (AbstractRoom room : rooms.values())

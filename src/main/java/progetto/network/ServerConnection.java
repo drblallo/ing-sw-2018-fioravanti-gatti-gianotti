@@ -159,6 +159,11 @@ final class ServerConnection {
 		handler.sendEnforce(new SyncStringEnforce(s));
 	}
 
+	/**
+	 * send the enforce to the lower level of the protocollar stack, it's up to them to
+	 * carry it over to the client
+	 * @param f the enforce to be sent to the player
+	 */
 	void sendEnforce(IEnforce f)
 	{
 		handler.sendEnforce(f);

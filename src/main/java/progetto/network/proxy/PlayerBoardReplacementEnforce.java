@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Massimo
+ * the enforce that is calle to replace the data on the client side
  */
 public class PlayerBoardReplacementEnforce implements IEnforce
 {
@@ -16,12 +17,21 @@ public class PlayerBoardReplacementEnforce implements IEnforce
 	private PlayerBoardData data;
 	private int target;
 
+	/**
+	 *
+	 * @param data the data that will be sent to the player
+	 * @param target the chair of the player that will receive this item
+	 */
 	public PlayerBoardReplacementEnforce(PlayerBoardData data, int target)
 	{
 		this.data = data;
 		this.target = target;
 	}
 
+	/**
+	 *
+	 * @param c the client connection that received this enforce
+	 */
 	@Override
 	public void execute(ClientConnection c)
 	{

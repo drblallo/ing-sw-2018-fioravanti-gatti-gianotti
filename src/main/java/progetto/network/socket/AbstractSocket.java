@@ -203,6 +203,9 @@ abstract class AbstractSocket implements Runnable {
 		} catch (ClassNotFoundException e) { LOGGER.log(Level.SEVERE, "CLASS IS MISSING " + e.getMessage()); }
 	}
 
+	/**
+	 * reads all commands
+	 */
 	public void run() {
 		Thread.currentThread().setName("Socket reading thread");
 		while (isRunning()) {

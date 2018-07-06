@@ -23,6 +23,10 @@ final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemot
 	private final transient Timer timer = new Timer();
 	private transient int pings = 0;
 
+	/**
+	 * creates new client remote session
+	 * @throws RemoteException
+	 */
 	RMIRemoteClientSession() throws RemoteException {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
@@ -35,6 +39,9 @@ final class RMIRemoteClientSession extends UnicastRemoteObject implements IRemot
 		}, NetworkSettings.DEFAULT_TIME_TO_LIVE, NetworkSettings.DEFAULT_TIME_TO_LIVE);
 	}
 
+	/**
+	 * reset the ping
+	 */
 	public void ping()
 	{
 		pings = 0;

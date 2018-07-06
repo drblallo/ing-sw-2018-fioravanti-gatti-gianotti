@@ -48,8 +48,21 @@ public interface ISync {
 	 */
 	void clear();
 
+	/**
+	 *
+	 * @return the list of all serializable that where received
+	 */
 	List<Serializable> getAllItems();
 
+	/**
+	 *
+	 * @return the enforce that is called when by the sync object to notify what changed in the server
+	 */
 	Callback<IEnforce> getEnforceCallback();
+
+	/**
+	 *
+	 * @return all the enforces that must be sent to a new player
+	 */
 	List<IEnforce> getNewPlayerEnforces();
 }

@@ -17,6 +17,9 @@ import java.util.logging.Logger;
 
 /**
  * @author Federica
+ *
+ * handles everything related to the command live view.
+ * handles threading
  */
 public class CommandLineView extends AbstractView implements IExecutible, Runnable
 {
@@ -31,6 +34,9 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 	private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
 	private boolean isRunning = true;
 
+	/**
+	 * check if the current state is till valid
+	 */
 	private void checkValidity()
 	{
 		if (!currentState.checkValidity()) {
@@ -40,6 +46,11 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		}
 	}
 
+	/**
+	 * creates the command live view
+	 * @param controller the controller this view will be attached to
+	 * @param printStream the printstream where this view will write to
+	 */
 	public CommandLineView(IClientController controller, PrintStream printStream)
 	{
 		super(controller);
@@ -50,29 +61,51 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		controller.getRoomViewCallback().addObserver(this::onRoomChanged);
 	}
 
+	/**
+	 *
+	 * @return if the thread is still running
+	 */
 	public boolean getIsRunning(){
 		return isRunning;
 	}
 
+	/**
+	 *
+	 * @param visible true if the controller wishes you to be visible, false otherwise
+	 */
 	@Override
 	public void setVisible(boolean visible) {
 		isVisibile = visible;
 	}
 
+	/**
+	 * called when the game changes i the controller, returns to the staring view
+	 */
 	@Override
 	public synchronized void onGameChanged() {
 		if (!getController().thereIsGame())
 			setState(new DefaultViewState(this));
 	}
 
+	/**
+	 * sets the player name that will be used to join rooms
+	 * @param playerName
+	 */
 	public void setPlayerName(String playerName){
 		this.playerName = playerName;
 	}
 
+	/**
+	 *
+	 * @return the current name of the player used to log in in to rooms
+	 */
 	public String getPlayerName(){
 		return playerName;
 	}
 
+	/**
+	 * clears all the queue of operations
+	 */
 	private void clearQueue()
 	{
 		while (queue.peek() != null)
@@ -90,6 +123,10 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		}
 	}
 
+	/**
+	 * sets the current state
+	 * @param abstractCLViewState the state to be set
+	 */
 	public void setState(AbstractCLViewState abstractCLViewState){
 
 		currentState.setCurrentState(abstractCLViewState);
@@ -101,11 +138,19 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		LOGGER.log(Level.FINE, "Current state is: {0}", getAbstractCLViewState().getClass().getSimpleName());
 	}
 
+	/**
+	 *
+	 * @return the current state
+	 */
 	public AbstractCLViewState getAbstractCLViewState() {
 		return currentState.getCurrentState();
 	}
 
 
+	/**
+	 *  called when the server room change
+	 * @param roomView the new room view
+	 */
 	private void onRoomChanged(RoomView roomView){
 		if(oldRoomView!=null) {
 			for (int i = 0; i<MainBoardData.MAX_NUM_PLAYERS; i++)
@@ -120,6 +165,10 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		oldRoomView = roomView;
 	}
 
+	/**
+	 *
+	 * @param s the string to be written in the output stream
+	 */
 	public void write(String s)
 	{
 		runLater(() -> {
@@ -128,12 +177,20 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		});
 	}
 
+	/**
+	 *
+	 * @param params the params read from the input
+	 * @return always ""
+	 */
 	@Override
 	public String execute(String params) {
 		runLater( () -> write(getAbstractCLViewState().execute(params)+"\n"));
 		return "";
 	}
 
+	/**
+	 * process all the pending
+	 */
 	private void processPending()
 	{
 		try
@@ -151,6 +208,9 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		}
 	}
 
+	/**
+	 * process all the pending
+	 */
 	void processAllPendings(){
 		do {
 			processPending();
@@ -158,6 +218,9 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 
 	}
 
+	/**
+	 * process all the pending
+	 */
 	public void run()
 	{
 		Thread.currentThread().setName("Command Line Thread");
@@ -165,6 +228,10 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 			processAllPendings();
 	}
 
+	/**
+	 * run a runnable in the correct thread
+	 * @param r the runnable
+	 */
 	private void runLater(Runnable r)
 	{
 		try
@@ -179,6 +246,9 @@ public class CommandLineView extends AbstractView implements IExecutible, Runnab
 		}
 	}
 
+	/**
+	 * close the this thread
+	 */
 	public void stop(){
 		runLater(()->isRunning = false);
 		setVisible(false);

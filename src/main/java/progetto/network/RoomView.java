@@ -15,34 +15,64 @@ public final class RoomView implements Serializable{
 	private final int roomID;
 	private static final int MAX_DISPLAYED_CHAIRS = 4;
 
+	/**
+	 * creates a new instance
+	 * @param roomName the name of the new room
+	 * @param roomID the id of the new room
+	 */
 	public RoomView(String roomName, int roomID) {
 		this.roomName = roomName;
 		this.roomID = roomID;
 	}
 
+	/**
+	 * add a player to the room
+	 * @param info the player to be added to the room
+	 */
 	void addPlayer(Player info)
 	{
 		playerInfoList.put(info.getPlayerID(), info.getView());
 	}
 
+	/**
+	 * @param playerID the id of the player to be retrieved
+	 * @return the player, null if it does not exists
+	 */
 	public PlayerView getPlayer(int playerID)
 	{
 		return playerInfoList.get(playerID);
 	}
 
+	/**
+	 *
+	 * @return the name of this room
+	 */
 	public String getRoomName() {
 		return roomName;
 	}
 
+	/**
+	 *
+	 * @return the id of this room
+	 */
 	public int getRoomID() {
 		return roomID;
 	}
 
+	/**
+	 *
+	 * @return the player count
+	 */
 	public int getPlayerCount()
 	{
 		return playerInfoList.size();
 	}
 
+	/**
+	 *
+	 * @param playerChair the chair of the player that you wish to retrieve
+	 * @return the player sitting in that chair, if it exists
+	 */
 	public PlayerView getPlayerOfChair(int playerChair)
 	{
 		if (playerChair < 0)

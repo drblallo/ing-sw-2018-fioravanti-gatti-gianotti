@@ -12,6 +12,10 @@ class RequestCommand implements INetworkCommand<SocketHandler> {
 		request = req;
 	}
 
+	/**
+	 * send a request to the server
+	 * @param mng the manager that will receive this command
+	 */
 	public void execute(SocketHandler mng) {
 		mng.getRequestCallback().call(request);
 	}

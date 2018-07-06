@@ -15,6 +15,10 @@ class MessageCommand implements INetworkCommand<AbstractSocket> {
 		message = m;
 	}
 
+	/**
+	 * sends a message to the other side
+	 * @param mng the manager that will receive this command
+	 */
 	public void execute(AbstractSocket mng) {
 		LOGGER.log(Level.FINE, message);
 		mng.getMessageCallback().call(message);

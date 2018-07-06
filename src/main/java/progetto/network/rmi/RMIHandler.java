@@ -44,6 +44,9 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 
 	}
 
+	/**
+	 * starts the time that will be used to ping the other side
+	 */
 	private void startTimer()
 	{
 		timer.scheduleAtFixedRate(new TimerTask() {
@@ -54,6 +57,9 @@ public final class RMIHandler implements INetworkHandler, Runnable {
 		}, NetworkSettings.DEFAULT_TIME_TO_LIVE, NetworkSettings.DEFAULT_TIME_TO_LIVE);
 	}
 
+	/**
+	 * sends the ping to the other side
+	 */
 	private void sendPing()
 	{
 		try {

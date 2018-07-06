@@ -5,6 +5,9 @@ import progetto.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * collection of utility to manage the command line
+ */
 public class DrawableUtils{
 
     private static final int VERTICAL_SPACING = 2;
@@ -15,6 +18,10 @@ public class DrawableUtils{
         //constructor hiding
     }
 
+    /**
+     * @param f the window frame to be displayed
+     * @return the drawable that rappresent the window frame
+     */
     private static Drawable getWindowFrame(WindowFrame f) {
         DiceCouple[][] dice = new DiceCouple[WindowFrame.MAX_NUMBER_OF_ROWS][WindowFrame.MAX_NUMBER_OF_COLUMNS];
 
@@ -25,7 +32,11 @@ public class DrawableUtils{
         return getFromMatrix(dice);
     }
 
-    public static Drawable getSourronded(Drawable d)
+    /**
+     *
+     * @return a drawable with lines around thim
+     */
+    private static Drawable getSourronded(Drawable d)
     {
         Drawable ret = new Drawable(d.getHeight() + 2, d.getWidth() + 2);
 
@@ -42,7 +53,12 @@ public class DrawableUtils{
         return ret;
     }
 
-    public static Drawable getFromMatrix(DiceCouple[][] dices)
+    /**
+     *
+     * @param dices the matrix of dices to be evaluated
+     * @return the drawable evaluated from matrix
+     */
+    private static Drawable getFromMatrix(DiceCouple[][] dices)
     {
         Drawable d = new DiceDrawable(null, null);
         d = getSourronded(d);
@@ -71,6 +87,11 @@ public class DrawableUtils{
     }
 
 
+    /**
+     *
+     * @param data the dice placed that used to create the drawable
+     * @return the drawable rappresenting the dice placed data
+     */
     public static Drawable getPlacedDice(DicePlacedFrameData data)
     {
         DiceCouple[][] dice = new DiceCouple[WindowFrame.MAX_NUMBER_OF_ROWS][WindowFrame.MAX_NUMBER_OF_COLUMNS];
@@ -83,6 +104,12 @@ public class DrawableUtils{
         return getFromMatrix(dice);
     }
 
+    /**
+     *
+     * @param data the data used to create the drawable
+     * @param isSinglePlayer true if single player
+     * @return the drawable rappresenting the data
+     */
     public static Drawable getPlayerBoard(IPlayerBoard data, boolean isSinglePlayer)
     {
         Drawable frame = getAddTextOver(getWindowFrame(data.getData().getWindowFrame()), "Finestra");
@@ -100,6 +127,13 @@ public class DrawableUtils{
             return w;
     }
 
+    /**
+     *
+     * @param isSinglePlayer true in single player
+     * @param windowFrame the window frame that will be rappresented
+     * @param num the number of window frame
+     * @return the drawable rappresenting this object
+     */
     private static String getWindowFrameDescription(boolean isSinglePlayer, WindowFrame windowFrame, int num)
     {
         if (!isSinglePlayer)
@@ -108,6 +142,12 @@ public class DrawableUtils{
             return "Finestra " + num;
     }
 
+    /**
+     *
+     * @param plb the playerboard data is to be rappresented
+     * @param isSinglePlayer true if single player
+     * @return the drawable rappresenting the choise
+     */
     public static Drawable getChooseWindowFrame(PlayerBoardData plb, boolean isSinglePlayer)
     {
         List<Drawable> d = new ArrayList<>();
@@ -136,6 +176,12 @@ public class DrawableUtils{
         return toReturn;
     }
 
+    /**
+     *
+     * @param d the base drawable
+     * @param s the text to be added
+     * @return the same drawable with a text other it
+     */
     public static Drawable getAddTextOver(Drawable d, String s)
     {
         Drawable toReturn = new Drawable(d.getHeight() + 1, d.getWidth());
@@ -145,6 +191,11 @@ public class DrawableUtils{
         return toReturn;
     }
 
+    /**
+     *
+     * @param data the data to be rappresented
+     * @return the drawable rappresenting the picked dice data
+     */
     public static Drawable getPicked(PickedDicesSlotData data)
     {
         List<Dice> d = new ArrayList<>();
@@ -154,6 +205,11 @@ public class DrawableUtils{
         return getFromBlock(d);
     }
 
+    /**
+     *
+     * @param dices the dices to be rappsentend
+     * @return the drawable rappresenting the block
+     */
     private static Drawable getFromBlock(List<Dice> dices)
     {
         Drawable t = getAddTextOver(new DiceDrawable(null, null), "");
@@ -174,6 +230,11 @@ public class DrawableUtils{
 
     }
 
+    /**
+     *
+     * @param data the data to be rappresented
+     * @return the drawable that rappresent the extracted dices
+     */
     public static Drawable getExtracted(ExtractedDicesData data)
     {
         List<Dice> d = new ArrayList<>();
@@ -183,6 +244,12 @@ public class DrawableUtils{
         return getFromBlock(d);
     }
 
+    /**
+     *
+     * @param t  the round track data to be rappresented
+     * @param turn the turn to be rappresented
+     * @return the drawable rappresenting the round track
+     */
     public static Drawable getRoundTrackTurn(RoundTrackData t, int turn)
     {
         int a = 0;
@@ -202,6 +269,11 @@ public class DrawableUtils{
         return toReturn;
     }
 
+    /**
+     *
+     * @param t the round track to be rappresented
+     * @return the drawable rappresenting the round track
+     */
     public static Drawable getRoundTrack(RoundTrackData t)
     {
         int a = 0;

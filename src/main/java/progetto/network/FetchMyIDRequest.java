@@ -6,6 +6,9 @@ package progetto.network;
  */
 final class FetchMyIDRequest extends AbstractServerRequest
 {
+	/**
+	 * tries to sent the player id to the relative client
+	 */
 	void execute(ServerState state, AbstractRoom room)
 	{
 		getAuthor().sendID();

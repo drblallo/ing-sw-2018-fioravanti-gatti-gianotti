@@ -26,6 +26,10 @@ public final class RMIModule implements INetworkModule {
 	private final int port;
 
 
+	/**
+	 * creates a new module on the indicated port
+	 * @param port the port where the logger will be registered
+	 */
 	public RMIModule(int port)
 	{
 		System.setProperty("java.rmi.server.hostname", Settings.getSettings().getMyIP());

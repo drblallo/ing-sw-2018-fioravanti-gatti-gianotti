@@ -31,5 +31,9 @@ interface IRemoteClientSession extends Remote {
 	 */
 	void sendEnforce(IEnforce enforce) throws RemoteException;
 
+	/**
+	 * send a keep alive ping to the client
+	 * @throws RemoteException all remote exception are throw
+	 */
 	void ping() throws RemoteException;
 }

@@ -22,6 +22,10 @@ final class RMIRemoteServerSession extends UnicastRemoteObject implements IRemot
 	private long pings;
 	private final transient Timer timer = new Timer();
 
+	/**
+	 * creates the remote connection
+	 * @throws RemoteException all exception are thrown
+	 */
 	RMIRemoteServerSession() throws RemoteException
 	{
 		timer.scheduleAtFixedRate(new TimerTask() {
@@ -37,6 +41,9 @@ final class RMIRemoteServerSession extends UnicastRemoteObject implements IRemot
 		NetworkSettings.DEFAULT_TIME_TO_LIVE);
 	}
 
+	/**
+	 * tears down the connection, stops the timers
+	 */
 	private void close()
 	{
 		timer.cancel();
@@ -45,6 +52,9 @@ final class RMIRemoteServerSession extends UnicastRemoteObject implements IRemot
 	}
 
 
+	/**
+	 * reset the ping timer
+	 */
 	public void ping()
 	{
 		pings = 0;
