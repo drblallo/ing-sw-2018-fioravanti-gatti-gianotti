@@ -52,14 +52,14 @@ public class TestToolCardMultiPlayerSeed3 {
         commandLineView.processAllPendings();
         commandLineView.execute("1");
         commandLineView.execute("2");
-        commandLineView.execute("3 0 0 1");
+        commandLineView.execute("3 0 1 0");
         commandLineView.execute("8");
         commandLineView.processAllPendings();
         clientControllerStub.sendAction(new EndTurnAction(1));
         commandLineView.processAllPendings();
         commandLineView.execute("1");
         commandLineView.execute("1");
-        commandLineView.execute("3 0 0 2"); //BLU
+        commandLineView.execute("3 0 2 0"); //BLU
         commandLineView.execute("8");
         commandLineView.processAllPendings();
         clientControllerStub.sendAction(new EndTurnAction(1));

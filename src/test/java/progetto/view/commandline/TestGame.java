@@ -65,7 +65,7 @@ public class TestGame {
         commandLineView.processAllPendings();
 
         Assert.assertTrue(commandLineView.getController().getModel()
-                .getPlayerBoard(0).getDicePlacedFrame().getData().getDice(0,1)!=null);
+                .getPlayerBoard(0).getDicePlacedFrame().getData().getDice(1,0)!=null);
     }
 
     @Test
