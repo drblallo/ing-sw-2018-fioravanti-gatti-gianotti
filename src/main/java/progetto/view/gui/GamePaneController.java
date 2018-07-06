@@ -37,8 +37,6 @@ public class GamePaneController extends AbstractStateController {
     @FXML
     private PreGamePaneController preGamePaneController;
     @FXML
-    private ActionQueuePaneController actionQueuePaneController;
-    @FXML
     private RoundTrackPaneController roundTrackPaneController;
     @FXML
     private PlayerMenuPaneController playerMenuPaneController;

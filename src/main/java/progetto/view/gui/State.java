@@ -14,10 +14,7 @@ import java.util.logging.Logger;
 /**
  * class of a state of the FSM
  * @param <T> type of the controller associated to this state
- */
-/**
  * @author Federica
- * @param <T>
  */
 public class State<T extends AbstractStateController> {
 

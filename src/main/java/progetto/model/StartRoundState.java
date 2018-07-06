@@ -13,7 +13,7 @@ public class StartRoundState extends AbstractGameState{
 	 * Execute state-related operations
 	 * start player queue
 	 * extract dices from diceBag
-	 * @param game
+	 * @param game model where to apply this state
 	 */
 	@Override
 	void apply(Model game) {

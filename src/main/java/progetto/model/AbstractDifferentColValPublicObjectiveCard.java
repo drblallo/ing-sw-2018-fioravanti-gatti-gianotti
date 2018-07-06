@@ -23,7 +23,7 @@ public abstract class AbstractDifferentColValPublicObjectiveCard extends Abstrac
 
 	/**
 	 * Evaluate frame
-	 * @param dicePlacedFrame
+	 * @param dicePlacedFrame the dice placed frame to evaluate
 	 * @param rowsColumns true = rows , false = columns
 	 * @param valuesColors true = values, false = colors
 	 * @return n point
@@ -43,9 +43,9 @@ public abstract class AbstractDifferentColValPublicObjectiveCard extends Abstrac
 
 	/**
 	 * Support class to evaluate rows
-	 * @param dicePlacedFrameData
-	 * @param valuesColors
-	 * @return
+	 * @param dicePlacedFrameData dice placed frame to evaluate
+	 * @param valuesColors true = values, false = colors
+	 * @return points of the rows
 	 */
 	private int evaluateRows(DicePlacedFrameData dicePlacedFrameData, boolean valuesColors)
 	{
@@ -66,9 +66,9 @@ public abstract class AbstractDifferentColValPublicObjectiveCard extends Abstrac
 
 	/**
 	 * Support class to evaluate columns
-	 * @param dicePlacedFrameData
-	 * @param valuesColors
-	 * @return
+	 * @param dicePlacedFrameData dice placed frame to evaluate
+	 * @param valuesColors  true = values, false = colors
+	 * @return points of the columns
 	 */
 	private int evaluateColumns(DicePlacedFrameData dicePlacedFrameData, boolean valuesColors)
 	{
@@ -88,10 +88,10 @@ public abstract class AbstractDifferentColValPublicObjectiveCard extends Abstrac
 
 	/**
 	 * Support class to evaluate row
-	 * @param dicePlacedFrameData
-	 * @param row
-	 * @param valuesColors
-	 * @return
+	 * @param dicePlacedFrameData dice placed frame to evaluate
+	 * @param row number of the row
+	 * @param valuesColors true = values, false = colors
+	 * @return points of the row
 	 */
 	private boolean evaluateRow(DicePlacedFrameData dicePlacedFrameData, int row, boolean valuesColors)
 	{
@@ -117,10 +117,10 @@ public abstract class AbstractDifferentColValPublicObjectiveCard extends Abstrac
 
 	/**
 	 * Support class to evaluate columns
-	 * @param dicePlacedFrameData
-	 * @param column
-	 * @param valuesColors
-	 * @return
+	 * @param dicePlacedFrameData dice placed frame to evaluate
+	 * @param column number of the column
+	 * @param valuesColors true = values, false = colors
+	 * @return points of the column
 	 */
 	private boolean evaluateColumn(DicePlacedFrameData dicePlacedFrameData, int column, boolean valuesColors)
 	{

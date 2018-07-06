@@ -24,7 +24,7 @@ public final class NineDices implements Serializable{
 
 	/**
 	 * Costructor copy
-	 * @param nineDices
+	 * @param nineDices nine dices to copy
 	 */
 	NineDices(NineDices nineDices)
 	{

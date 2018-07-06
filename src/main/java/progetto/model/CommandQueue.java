@@ -11,6 +11,9 @@ import java.util.LinkedList;
 public class CommandQueue extends Container<CommandQueueData> implements AbstractProcessor<AbstractGameAction> {
 
 
+	/**
+	 * public constructor
+	 */
 	public CommandQueue()
 	{
 		super(new CommandQueueData(new ArrayList<>(), new LinkedList<>()));

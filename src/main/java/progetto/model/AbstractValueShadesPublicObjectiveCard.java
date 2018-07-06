@@ -10,9 +10,9 @@ public abstract class AbstractValueShadesPublicObjectiveCard extends  AbstractPu
 
 	/**
 	 * Constructor
-	 * @param name
-	 * @param effect
-	 * @param cardID
+	 * @param name name of the card
+	 * @param effect effect of the card
+	 * @param cardID ID of the card
 	 */
 	AbstractValueShadesPublicObjectiveCard(String name, String effect, int cardID) {
 		super(name, effect, cardID);
@@ -20,7 +20,7 @@ public abstract class AbstractValueShadesPublicObjectiveCard extends  AbstractPu
 
 	/**
 	 * Evaluate frame
-	 * @param dicePlacedFrame
+	 * @param dicePlacedFrame dice placed frame to evaluate
 	 * @param value1 value 1 to find in dicePlacedFrame
 	 * @param value2 value 2 to find in dicePlacedFrame
 	 * @return n point

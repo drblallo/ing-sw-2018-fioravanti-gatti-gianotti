@@ -201,7 +201,4 @@ public final class TextureDatabase {
         }
         return writableImage;
     }
-
-
-
 }

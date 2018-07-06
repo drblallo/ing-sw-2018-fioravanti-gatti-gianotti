@@ -13,7 +13,7 @@ public class GameStartedState extends AbstractGameState
 	/**
 	 * Execute state-related operations
 	 * First player selection
-	 * @param game
+	 * @param game model where to apply this state
 	 */
 	@Override
 	void apply(Model game)

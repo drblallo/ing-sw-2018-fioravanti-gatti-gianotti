@@ -15,7 +15,7 @@ public class WindowFrameCoupleArrayInternal implements Serializable {
 
 	/**
 	 * Get list of window frame couples
-	 * @return
+	 * @return list of window frame couples
 	 */
 	public List<WindowFrameCouple> getWindowFrameCouples()
 	{

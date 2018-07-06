@@ -44,9 +44,9 @@ public class ColoredDiagonalsPublicObjectiveCard extends AbstractPublicObjective
 	}
 
 	/**
-	 *Support class to verify two dices
-	 * @param dice1
-	 * @param dice2
+	 *Support class to verify if two dices exist and have the same color
+	 * @param dice1 first dice
+	 * @param dice2 second dice
 	 */
 	private void checkDices(Dice dice1, Dice dice2)
 	{

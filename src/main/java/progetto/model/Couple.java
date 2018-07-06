@@ -10,8 +10,8 @@ public final class Couple {
 
 	/**
 	 * Constructor to set dx, dy
-	 * @param dx
-	 * @param dy
+	 * @param dx dx
+	 * @param dy dy
 	 */
 	Couple(int dx, int dy)
 	{

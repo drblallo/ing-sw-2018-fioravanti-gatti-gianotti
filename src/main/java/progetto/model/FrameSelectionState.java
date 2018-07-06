@@ -19,7 +19,7 @@ public class FrameSelectionState extends AbstractGameState {
 
 	/**
 	 * Execute state-related operations
-	 * @param game
+	 * @param game model where to apply this state
 	 */
 	@Override
 	void apply(Model game) {
