@@ -3,7 +3,7 @@ package progetto.controller;
 import progetto.model.AbstractGameAction;
 
 /**
- * Actions extends this abstract
+ * Actions extends this abstract class to be registered in the model
  * @author Michele
  */
 public abstract class AbstractExecutibleGameAction extends AbstractGameAction {

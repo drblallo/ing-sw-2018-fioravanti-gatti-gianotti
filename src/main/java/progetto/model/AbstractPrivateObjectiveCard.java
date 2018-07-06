@@ -8,9 +8,9 @@ public abstract class AbstractPrivateObjectiveCard extends AbstractObjectiveCard
 
 	/**
 	 * Constructor
-	 * @param name
-	 * @param effect
-	 * @param cardID
+	 * @param name name of the card
+	 * @param effect effect of the card
+	 * @param cardID ID of the card
 	 */
 	AbstractPrivateObjectiveCard(String name, String effect, int cardID)
 	{

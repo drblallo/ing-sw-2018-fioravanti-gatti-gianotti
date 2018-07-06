@@ -4,6 +4,7 @@ import progetto.IClientController;
 import progetto.model.IModel;
 
 /**
+ * A simple class extended by FXML controller to hold the reference of the guiView
  * @author Federica
  */
 public abstract class AbstractController {

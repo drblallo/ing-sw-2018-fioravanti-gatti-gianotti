@@ -107,8 +107,8 @@ public class EndGameState extends AbstractGameState {
 
 	/**
 	 * Evaluate frame of player player (multi player game)
-	 * @param player
-	 * @return
+	 * @param player to evaluate
+	 * @return points of the player
 	 */
 	private int evaluateMultiPlayer(Model game, int player)
 	{

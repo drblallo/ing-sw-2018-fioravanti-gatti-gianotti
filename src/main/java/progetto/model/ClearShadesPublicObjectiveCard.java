@@ -19,7 +19,7 @@ public class ClearShadesPublicObjectiveCard extends AbstractValueShadesPublicObj
 	/**
 	 * Evaluate frame
 	 * @param dicePlacedFrame dice placed frame
-	 * @return
+	 * @return points of the Frame
 	 */
 	@Override
 	public int evaluateFrame(DicePlacedFrame dicePlacedFrame)

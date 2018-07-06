@@ -146,7 +146,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Get number of asked token
-	 * @return
+	 * @return number of asked token
 	 */
 	public int getToken() {
 		return token;
@@ -154,7 +154,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Get single player selected dice
-	 * @return
+	 * @return single player selected dice
 	 */
 	public int getSPDice() {
 		return singlePlayerDice;
@@ -250,15 +250,15 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Get position of selected dice in roundTrack
-	 * @return
+	 * @return position of selected dice in round track
 	 */
 	public int getNDiceRT() {
 		return rTDicePosition;
 	}
 
 	/**
-	 * get selected dice
-	 * @return
+	 *
+	 * @return dice for tool card 11
 	 */
 	public Dice getDice() {
 		return dice;
@@ -266,7 +266,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param nCard
+	 * @param nCard position of the card
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setNCard(int nCard)
@@ -277,7 +277,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param token
+	 * @param token token of this card
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setToken(int token)
@@ -288,7 +288,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param sPDice
+	 * @param sPDice selected single player card of this card
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setSPDice(int sPDice)
@@ -298,7 +298,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param nDice
+	 * @param nDice position of selected picked dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setNDice(int nDice)
@@ -308,8 +308,8 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set values
-	 * @param xPlacedDice
-	 * @param yPlacedDice
+	 * @param xPlacedDice x pos of first selected placed dice
+	 * @param yPlacedDice y pos of first selected placed dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setYXValues(int yPlacedDice, int xPlacedDice)
@@ -320,8 +320,8 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set values
-	 * @param xPlacedDice2
-	 * @param yPlacedDice2
+	 * @param xPlacedDice2 x pos of second selected placed dice
+	 * @param yPlacedDice2 x pos of second selected placed dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setYX2Values(int yPlacedDice2, int xPlacedDice2)
@@ -332,7 +332,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param increaseDecrease
+	 * @param increaseDecrease 0 = increase, 1 = decrease
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setIncreaseDecrease(int increaseDecrease)
@@ -342,7 +342,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param value
+	 * @param value new value of the extracted dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setValue(int value)
@@ -352,7 +352,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param changedDiceDB
+	 * @param changedDiceDB = -1 if the dice has not been changed
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setChangedDiceDB(int changedDiceDB)
@@ -362,7 +362,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param round
+	 * @param round number of round
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setRound(int round)
@@ -372,7 +372,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param nDiceRT
+	 * @param nDiceRT position of selected round track dice
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setNDiceRT(int nDiceRT)
@@ -382,7 +382,7 @@ public final class ToolCardParameters implements Serializable {
 
 	/**
 	 * Set value
-	 * @param dice
+	 * @param dice for tool card 11
 	 * @return new ToolCardParameters with modified values
 	 */
 	ToolCardParameters setDice(Dice dice)

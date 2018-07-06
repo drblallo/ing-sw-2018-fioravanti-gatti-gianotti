@@ -37,11 +37,19 @@ public class ToolCard implements Serializable {
 		return "Colore: " + gameColor + "\nNome: " + name + "\nEffetto: " + effect + "\n";
 	}
 
+	/**
+	 *
+	 * @return index og this tool card
+	 */
 	public int getIndex()
 	{
 		return index;
 	}
 
+	/**
+	 *
+	 * @return color of this tool card
+	 */
 	public GameColor getGameColor() {
 		return gameColor;
 	}

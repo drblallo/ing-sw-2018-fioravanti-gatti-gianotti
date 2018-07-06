@@ -6,6 +6,9 @@ package progetto.model;
  */
 public class RoundState extends AbstractGameState {
 
+	/**
+	 * public constructor
+	 */
 	public RoundState() {
 		super("Round State");
 	}

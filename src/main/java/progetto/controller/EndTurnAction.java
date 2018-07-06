@@ -3,7 +3,7 @@ package progetto.controller;
 import progetto.model.*;
 
 /**
- * Action to end turn
+ * Action to end turn, it can be called anytime and it ensures that the game will procede to the next turn
  * @author Michele
  */
 public class EndTurnAction extends AbstractExecutibleGameAction

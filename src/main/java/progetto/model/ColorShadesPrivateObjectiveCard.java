@@ -10,7 +10,7 @@ public class ColorShadesPrivateObjectiveCard extends AbstractPrivateObjectiveCar
 
 	/**
 	 * Constructor
-	 * @param gameColor
+	 * @param gameColor color of the private objective card
 	 */
 	ColorShadesPrivateObjectiveCard(GameColor gameColor)
 	{

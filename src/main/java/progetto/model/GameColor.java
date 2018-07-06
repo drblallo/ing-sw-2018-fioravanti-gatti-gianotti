@@ -9,8 +9,8 @@ public enum GameColor {
 
 
 	/**
-	 * toString
-	 * @return
+	 *
+	 * @return color to string
 	 */
 	@Override
 	public String toString()

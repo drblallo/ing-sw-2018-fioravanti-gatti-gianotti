@@ -9,6 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Game controller manages everything related to a single game. Every modification to the underlying model
+ * can be operated only through send action. It's up to the server to ensure that the correct player is trying
+ * to perform the correct operations.
  * @author Michele
  */
 public class GameController implements IGameController {
@@ -17,6 +20,9 @@ public class GameController implements IGameController {
 	private ArrayList<Integer> pastHashCodes = new ArrayList<>();
 	private Model game = new Model();
 
+	/**
+	 * public constructor
+	 */
 	public GameController()
 	{
 		super();
@@ -60,6 +66,11 @@ public class GameController implements IGameController {
 		}
 	}
 
+	/**
+	 * @deprecated
+	 * @param index the index of the hash you are trying to retrieve
+	 * @return the hash you are trying to retrieve
+	 */
 	public int getHash(int index)
 	{
 		return index;
@@ -82,11 +93,19 @@ public class GameController implements IGameController {
 		return hashCode() == g.hashCode();
 	}
 
+	/**
+	 * NOT THREAD SAFE
+	 * @return current model
+	 */
 	public Model getModel()
 	{
 		return game;
 	}
 
+	/**
+	 * NOT THREAD SAFE
+	 * @return observable model, it is the same model returned by getModel
+	 */
 	@Override
 	public ObservableModel getObservable() {
 		return getModel();

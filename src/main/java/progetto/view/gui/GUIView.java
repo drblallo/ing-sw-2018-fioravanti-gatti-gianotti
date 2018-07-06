@@ -6,6 +6,7 @@ import progetto.AbstractView;
 import progetto.ClientController;
 
 /**
+ * the view that will manage the gui
  * @author Federica
  */
 public class GUIView extends AbstractView

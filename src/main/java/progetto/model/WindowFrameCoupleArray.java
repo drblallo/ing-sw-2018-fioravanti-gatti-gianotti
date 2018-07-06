@@ -30,6 +30,10 @@ public final class WindowFrameCoupleArray {
 		readWindowFrameCouples(path);
 	}
 
+	/**
+	 *
+	 * @return the instance of this class
+	 */
 	public static synchronized WindowFrameCoupleArray getInstance()
 	{
 		if(instance == null)
@@ -41,7 +45,7 @@ public final class WindowFrameCoupleArray {
 
 	/**
 	 * Get list of window frame couples
-	 * @return
+	 * @return a list of window frame couples
 	 */
 	public List<WindowFrameCouple> getList()
 	{
