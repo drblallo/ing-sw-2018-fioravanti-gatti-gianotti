@@ -1,10 +1,7 @@
 package progetto.network.rmi;
 
 import progetto.Settings;
-import progetto.network.IEnforce;
-import progetto.network.INetworkClient;
-import progetto.network.IRoomRequest;
-import progetto.network.NetworkSettings;
+import progetto.network.*;
 import progetto.utils.Callback;
 
 import java.rmi.RemoteException;
@@ -25,9 +22,9 @@ public final class RMIClient implements INetworkClient, Runnable{
 	private static final Logger LOGGER = Logger.getLogger(RMIClient.class.getName());
 	private IRemoteServerSession session;
 	private boolean isAlive = true;
-	private Callback<IEnforce> enforceCallback;
 	private Callback<String> messageCallback;
 	private Queue<IRoomRequest> pendingRequests = new ConcurrentLinkedQueue<>();
+	private ConcurrentLinkedQueue<IEnforce> enforces = new ConcurrentLinkedQueue<>();
 	private final Timer timer = new Timer();
 
 	/**
@@ -35,8 +32,6 @@ public final class RMIClient implements INetworkClient, Runnable{
 	 * @param ip the ip where the server is located.
 	 */
 	public RMIClient(String ip, int port) {
-		Logger.getLogger(RMIClient.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
-		Logger.getLogger(RMIClient.class.getPackage().getName()).setLevel(Level.ALL);
 		try {
 			LOGGER.log(Level.FINE, "creating module");
 			System.setProperty("java.rmi.server.hostname", Settings.getSettings().getMyIP());
@@ -48,7 +43,7 @@ public final class RMIClient implements INetworkClient, Runnable{
 
 			RMIRemoteClientSession local = new RMIRemoteClientSession();
 			local.getConnectionLostCallback().addObserver(ogg -> teardown());
-			enforceCallback = local.getEnforceCallback();
+			local.getEnforceCallback().addObserver(enforces::offer);
 			messageCallback = local.getMessageCallback();
 
 			LOGGER.log(Level.FINE, "Trying to login in {0}", stub);
@@ -151,12 +146,9 @@ public final class RMIClient implements INetworkClient, Runnable{
 		return messageCallback;
 	}
 
-	/**
-	 *
-	 * @return the callback that is called every time a enforce is received
-	 */
-	public Callback<IEnforce> getEnforceCallback() {
-		return enforceCallback;
+	@Override
+	public ConcurrentLinkedQueue<IEnforce> getEnforceList() {
+		return enforces;
 	}
 
 	/**

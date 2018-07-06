@@ -19,6 +19,6 @@ final class EnforceCommand implements INetworkCommand<SocketClient> {
 
 	public void execute(SocketClient mng) {
 		LOGGER.log(Level.FINE, "received enforce {0}", iEnforce.getClass().getSimpleName());
-		mng.getEnforceCallback().call(iEnforce);
+		mng.addEnforce(iEnforce);
 	}
 }

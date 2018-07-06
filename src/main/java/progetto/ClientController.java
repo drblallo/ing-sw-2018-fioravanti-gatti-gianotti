@@ -3,10 +3,7 @@ package progetto;
 import progetto.model.AbstractGameAction;
 import progetto.model.IModel;
 import progetto.model.ObservableModel;
-import progetto.network.ClientConnection;
-import progetto.network.INetworkClient;
-import progetto.network.RoomView;
-import progetto.network.ServerStateView;
+import progetto.network.*;
 import progetto.network.proxy.ModelProxy;
 import progetto.network.rmi.RMIClient;
 import progetto.network.socket.SocketClient;
@@ -15,6 +12,7 @@ import progetto.utils.IObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,7 +32,8 @@ public class ClientController implements IClientController
     private IObserver<String> messageObserver = (message -> messageCallback.call(message));
 
     private Callback<RoomView> roomViewCallback = new Callback<>();
-    private IObserver<RoomView> roomViewIObserver = (message -> roomViewCallback.call(message));
+    private IObserver<RoomView> roomViewIObserver = (message -> {
+        System.out.println("received a room with "+message.getPlayerCount());roomViewCallback.call(message);});
 
     private Callback<ServerStateView> serverViewCallback = new Callback<>();
     private IObserver<ServerStateView> serverStateView = (message -> serverViewCallback.call(message));
