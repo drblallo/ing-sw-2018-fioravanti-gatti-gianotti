@@ -18,14 +18,19 @@ public class EndTurnAction extends AbstractExecutibleGameAction
 	}
 
 	/**
-	 * Constructor su set nPlayer
-	 * @param nPlayer
+	 * Constructor to set callerID
+	 * @param callerID ID of the caller
 	 */
-	public EndTurnAction(int nPlayer)
+	public EndTurnAction(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 	}
 
+	/**
+	 * Verify if the action can be executed
+	 * @param game the model in which this command should be executed
+	 * @return true if the action can be executed
+	 */
 	@Override
 	public boolean canBeExecuted(IModel game)
 	{
@@ -34,6 +39,10 @@ public class EndTurnAction extends AbstractExecutibleGameAction
 				getCallerID() == game.getRoundInformation().getData().getCurrentPlayer();
 	}
 
+	/**
+	 * Execute the action
+	 * @param game the model in which we want to execute this command
+	 */
 	@Override
 	public void execute(Model game)
 	{

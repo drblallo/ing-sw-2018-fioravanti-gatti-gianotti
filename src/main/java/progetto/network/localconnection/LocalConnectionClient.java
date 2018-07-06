@@ -5,6 +5,8 @@ import progetto.network.INetworkClient;
 import progetto.network.IRoomRequest;
 import progetto.utils.Callback;
 
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 /**
  * A local client connection is a fake network connection that implements INetworkClient.
  * All calls are blocking until they are solved on the other side.
@@ -16,7 +18,7 @@ public final class LocalConnectionClient implements INetworkClient
 	private boolean isRunning = true;
 	private LocalConnectionHandler otherSide;
 	private final Callback<String> messageCallback = new Callback<>();
-	private final Callback<IEnforce> enforceCallback = new Callback<>();
+	private final ConcurrentLinkedQueue<IEnforce> enforceList = new ConcurrentLinkedQueue<>();
 
 	/**
 	 * builds a new localClientConnection
@@ -56,6 +58,11 @@ public final class LocalConnectionClient implements INetworkClient
 		isRunning = false;
 	}
 
+	public void addEnforce(IEnforce e)
+	{
+		enforceList.offer(e);
+	}
+
 	/**
 	 *
 	 * @return true if the connection is still open
@@ -74,14 +81,11 @@ public final class LocalConnectionClient implements INetworkClient
 		return messageCallback;
 	}
 
-	/**
-	 *
-	 * @return the callback that is called every time a enforce is received
-	 */
-	public Callback<IEnforce> getEnforceCallback()
-	{
-		return enforceCallback;
+	@Override
+	public ConcurrentLinkedQueue<IEnforce> getEnforceList() {
+		return enforceList;
 	}
+
 
 	/**
 	 * sends a request to the handler connected to this object.

@@ -51,7 +51,7 @@ public final class LocalConnectionHandler implements INetworkHandler
 	 */
 	public void sendEnforce(IEnforce enforce)
 	{
-		otherSide.getEnforceCallback().call(enforce);
+		otherSide.addEnforce(enforce);
 	}
 
 	/**

@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 public class ServerMain {
 
     public static void main(String[] args){
-        Logger.getLogger(RMIHandler.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
-        Logger.getLogger(RMIHandler.class.getPackage().getName()).setLevel(Level.ALL);
+        //Logger.getLogger(RMIHandler.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
+        //Logger.getLogger(RMIHandler.class.getPackage().getName()).setLevel(Level.ALL);
 
         NetworkServer networkServer = new NetworkServer(new ServerGameFactory());
 

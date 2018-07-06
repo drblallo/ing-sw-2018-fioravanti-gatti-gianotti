@@ -61,7 +61,6 @@ public abstract class AbstractINetowrkClientTest extends AbstractNetworkTest
 		getHandler().sendMessage("TEST");
 		wait(LONG_WAIT);
 		Assert.assertEquals("TEST", getMessage());
-		getHandler().sendEnforce(null);
 	}
 
 	@Test
@@ -78,7 +77,7 @@ public abstract class AbstractINetowrkClientTest extends AbstractNetworkTest
 	{
 		getHandler().sendEnforce(new SetPlayerInfoEnforce(-1));
 		wait(LONG_WAIT);
-		Assert.assertEquals(SetPlayerInfoEnforce.class, getEnforce().getClass());
+		Assert.assertEquals(SetPlayerInfoEnforce.class, getClient().getEnforceList().poll().getClass());
 	}
 
 }

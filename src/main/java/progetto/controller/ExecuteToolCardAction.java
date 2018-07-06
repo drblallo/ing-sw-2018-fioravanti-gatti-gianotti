@@ -23,11 +23,11 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set callerID
-	 * @param nPlayer
+	 * @param callerID
 	 */
-	public ExecuteToolCardAction(int nPlayer)
+	public ExecuteToolCardAction(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 		gameActionList.add(new ExecuteToolCard1Action(getCallerID()));
 		gameActionList.add(new ExecuteToolCard2Or3Action(getCallerID()));
 		gameActionList.add(new ExecuteToolCard2Or3Action(getCallerID()));
@@ -109,7 +109,7 @@ public class ExecuteToolCardAction extends AbstractExecutibleGameAction{
 
 	/**
 	 * Support method to set gameAction
-	 * @param game
+	 * @param game model in use
 	 * @return gameAction
 	 */
 	private AbstractGameAction setGameAction(IModel game)

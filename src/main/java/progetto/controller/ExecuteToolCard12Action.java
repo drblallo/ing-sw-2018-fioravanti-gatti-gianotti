@@ -19,11 +19,11 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 
 	/**
 	 * Constructor to set callerID
-	 * @param nPlayer
+	 * @param callerID ID of the caller
 	 */
-	public ExecuteToolCard12Action(int nPlayer)
+	public ExecuteToolCard12Action(int callerID)
 	{
-		super(nPlayer);
+		super(callerID);
 	}
 
 	/**
@@ -105,6 +105,11 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Support method to verify parameters of the tool card
+	 * @param game model in use
+	 * @return result of the check
+	 */
 	private boolean verifyParam(IModel game)
 	{
 		RoundInformationData roundInformationData = game.getRoundInformation().getData();
@@ -129,6 +134,13 @@ public class ExecuteToolCard12Action extends AbstractExecutibleGameAction{
 
 	}
 
+	/**
+	 * Supporto method to verify dice color
+	 * @param diceRT dice of the roundTrack
+	 * @param dice first dice selected
+	 * @param dice2 second dice selected
+	 * @return result of the check
+	 */
 	private boolean verifyDiceColor(Dice diceRT, Dice dice, Dice dice2)
 	{
 		return !((dice!=null && dice.getGameColor()!=diceRT.getGameColor()) ||

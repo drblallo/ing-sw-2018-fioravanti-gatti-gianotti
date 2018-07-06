@@ -23,7 +23,7 @@ public class SetPlayerCountAction extends AbstractExecutibleGameAction
 	}
 
 	/**
-	 * Constructor to set callerID
+	 * Constructor with callerID
 	 */
 	public SetPlayerCountAction(int playerCount)
 	{

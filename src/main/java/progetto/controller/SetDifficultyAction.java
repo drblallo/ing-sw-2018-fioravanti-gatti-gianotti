@@ -25,7 +25,7 @@ public class SetDifficultyAction extends AbstractExecutibleGameAction
 
 	/**
 	 * Constructor to set difficulty
-	 * @param difficulty
+	 * @param difficulty value to set
 	 */
 	public SetDifficultyAction(int difficulty)
 	{

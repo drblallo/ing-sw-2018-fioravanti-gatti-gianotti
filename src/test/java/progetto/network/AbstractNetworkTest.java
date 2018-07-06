@@ -10,11 +10,7 @@ public abstract class AbstractNetworkTest
 	private INetworkClient client;
 	private INetworkHandler handler;
 	private INetworkModule module;
-	private IEnforce enforce;
 
-	public IEnforce getEnforce() {
-		return enforce;
-	}
 
 	public IRoomRequest getRequest() {
 		return request;
@@ -72,7 +68,6 @@ public abstract class AbstractNetworkTest
 		client = cFact.getINetworkClient();
 		client.getMessageCallback().addObserver(ogg -> message = ogg);
 
-		client.getEnforceCallback().addObserver(ogg -> enforce = ogg);
 		wait(MEDIUM_WAIT);
 
 	}

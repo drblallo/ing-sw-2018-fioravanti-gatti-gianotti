@@ -32,9 +32,8 @@ public class LocalConnectionClientTest extends AbstractLocalConnectionTest
 	@Test
 	public void testSendEnforce()
 	{
-		client.getEnforceCallback().addObserver(ogg -> lastEnforce = ogg);
 		handler.sendEnforce(new EnforceStub());
-		assertEquals(EnforceStub.class, lastEnforce.getClass());
+		assertEquals(EnforceStub.class, client.getEnforceList().poll().getClass());
 	}
 
 	@Test

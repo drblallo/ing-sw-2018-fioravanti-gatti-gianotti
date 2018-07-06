@@ -29,7 +29,6 @@ public final class ClientConnection implements Runnable
 	private final Callback<ModelProxy> actionEndedCallback = new Callback<>();
 	private final Callback<ClientConnection> connectionClosedCallback = new Callback<>();
 
-	private final Queue<IEnforce> enforcesQueue = new ConcurrentLinkedQueue<>();
 	private final INetworkClient handler;
 	private ServerStateView serverState = new ServerStateView();
 	private int playerID = -1;
@@ -45,7 +44,6 @@ public final class ClientConnection implements Runnable
 	{
 		handler = h;
 		synchronizedObj = ogg;
-		handler.getEnforceCallback().addObserver(enforcesQueue::add);
 
 		Thread t = new Thread(this);
 		t.setName("Client connection");
@@ -330,7 +328,7 @@ public final class ClientConnection implements Runnable
 	private synchronized void processAllCommand()
 	{
 		IEnforce f;
-		while ((f = enforcesQueue.poll()) != null)
+		while ((f = handler.getEnforceList().poll()) != null)
 		{
 			LOGGER.log(Level.FINE, "processing a command");
 			f.execute(this);

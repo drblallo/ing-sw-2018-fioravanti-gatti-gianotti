@@ -26,13 +26,13 @@ public class ToolCardSetDiceRoundTrackAction extends AbstractExecutibleGameActio
 
 	/**
 	 * Constructor to set values
-	 * @param nPlayer callerID
-	 * @param round n round
-	 * @param nDiceRT n dice of selected round
+	 * @param callerID callerID
+	 * @param round id of the round
+	 * @param nDiceRT position of the selected dice in the selected round
 	 */
-	public ToolCardSetDiceRoundTrackAction(int nPlayer, int round, int nDiceRT)
+	public ToolCardSetDiceRoundTrackAction(int callerID, int round, int nDiceRT)
 	{
-		super(nPlayer);
+		super(callerID);
 		this.round = round;
 		this.nDiceRT = nDiceRT;
 

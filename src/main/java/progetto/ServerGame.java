@@ -237,6 +237,7 @@ public class ServerGame extends GameSync implements  ISync
 			enforces.add(new DicePlacedFrameEnforce(model.getPlayerBoard(a).getDicePlacedFrame().getData(), a));
 			enforces.add(new PickedDicesSlotEnforce(model.getPlayerBoard(a).getPickedDicesSlot().getData(), a));
 		}
+		enforces.add(new DoneEnforce());
 		return enforces;
 	}
 }

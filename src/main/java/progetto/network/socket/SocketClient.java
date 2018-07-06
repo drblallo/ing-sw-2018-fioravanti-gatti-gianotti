@@ -5,26 +5,32 @@ import progetto.network.INetworkClient;
 import progetto.network.IRoomRequest;
 import progetto.utils.Callback;
 
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 /**
  * A socket client is a implementation of INetwork client, it is used on the client side to communicate with the server
  */
 public final class SocketClient extends AbstractSocket implements INetworkClient {
 
-	private final Callback<IEnforce> enforceCallback = new Callback<>();
+	private final ConcurrentLinkedQueue<IEnforce> listOfEnforces = new ConcurrentLinkedQueue<>();
 
 	public SocketClient(String ip, int port) {
 		super(ip, port);
 	}
 
+	protected void addEnforce(IEnforce e)
+	{
+		listOfEnforces.offer(e);
+	}
+
+	@Override
+	public ConcurrentLinkedQueue<IEnforce> getEnforceList() {
+		return listOfEnforces;
+	}
+
 	public void sendRequest(IRoomRequest request) {
 		sendCommand(new RequestCommand(request));
 	}
-
-
-	public Callback<IEnforce> getEnforceCallback() {
-		return enforceCallback;
-	}
-
 
 	/**
 	 * called when the connection gets closed.
