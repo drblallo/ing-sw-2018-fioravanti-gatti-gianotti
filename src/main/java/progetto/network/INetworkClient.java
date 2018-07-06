@@ -2,7 +2,7 @@ package progetto.network;
 
 import progetto.utils.Callback;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.Queue;
 
 /**
  * This is the interface that must be implemented by a message transport layer to allow ClientConnection to behave
@@ -33,7 +33,7 @@ public interface INetworkClient {
 	 *
 	 * @return the list of enforces
 	 */
-	ConcurrentLinkedQueue<IEnforce> getEnforceList();
+	Queue<IEnforce> getEnforceList();
 
 	/**
 	 *

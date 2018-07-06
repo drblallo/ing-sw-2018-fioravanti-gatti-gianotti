@@ -1,6 +1,7 @@
 package progetto.view.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -19,7 +20,6 @@ public class ExistingGamesPaneController extends AbstractStateController {
     private Label errorLabel;
     @FXML
     private AnchorPane anchorPane;
-    private static final int BACKGROUND_SIZE = 300;
 
     /**
      * set up this object, it is equivalent to a constructor since there is no access to it
@@ -27,7 +27,10 @@ public class ExistingGamesPaneController extends AbstractStateController {
     @Override
     public void setup(){
         Image image = new Image(getClass().getResourceAsStream("toolcard_large.png"));
-        BackgroundSize backgroundSize = new BackgroundSize(BACKGROUND_SIZE,BACKGROUND_SIZE,true,true,true,false);
+        BackgroundSize backgroundSize = new BackgroundSize(
+                Control.USE_COMPUTED_SIZE,
+                Control.USE_COMPUTED_SIZE,
+                true,true,true,false);
         BackgroundImage backgroundImage = new BackgroundImage(image,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);

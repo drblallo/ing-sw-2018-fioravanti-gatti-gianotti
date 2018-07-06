@@ -34,8 +34,7 @@ public class ClientController implements IClientController
     private IObserver<String> messageObserver = (message -> messageCallback.call(message));
 
     private Callback<RoomView> roomViewCallback = new Callback<>();
-    private IObserver<RoomView> roomViewIObserver = (message -> {
-        System.out.println("received a room with "+message.getPlayerCount());roomViewCallback.call(message);});
+    private IObserver<RoomView> roomViewIObserver = (roomViewCallback::call);
 
     private Callback<ServerStateView> serverViewCallback = new Callback<>();
     private IObserver<ServerStateView> serverStateView = (message -> serverViewCallback.call(message));

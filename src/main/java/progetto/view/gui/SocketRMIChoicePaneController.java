@@ -1,10 +1,7 @@
 package progetto.view.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
@@ -28,8 +25,6 @@ public class SocketRMIChoicePaneController extends AbstractStateController {
     @FXML
     private AnchorPane anchorPane;
 
-    private static final int BACKGROUND_SIZE = 300;
-
     /**
      * called when the fxml is loaded for the first time
      * load the background
@@ -38,7 +33,10 @@ public class SocketRMIChoicePaneController extends AbstractStateController {
     public void setup() {
 
         Image image = new Image(getClass().getResourceAsStream("toolcard_large.png"));
-        BackgroundSize backgroundSize = new BackgroundSize(BACKGROUND_SIZE,BACKGROUND_SIZE,true,true,true,false);
+        BackgroundSize backgroundSize = new BackgroundSize(
+                Control.USE_COMPUTED_SIZE,
+                Control.USE_COMPUTED_SIZE,
+                true,true,true,false);
         BackgroundImage backgroundImage = new BackgroundImage(image,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);

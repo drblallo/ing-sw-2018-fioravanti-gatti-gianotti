@@ -33,7 +33,9 @@ public class Settings {
 	private int rmiPort;
 	private int gameStartTimeOut;
 	private int playerTurnTImeOut;
-	private String myIP = "127.0.0.1";
+	private String loopBackAdress = "127.0.0.1";
+	private String loopBackAdressLinux = "127.0.1.1";
+	private String myIP = loopBackAdress;
 
 	public int getAllertTime() {
 		return allertTime;
@@ -75,9 +77,9 @@ public class Settings {
 			try
 			{
 				String s = InetAddress.getLocalHost().getHostAddress();
-				if (myIP.equals("127.0.0.1"))
+				if (myIP.equals(loopBackAdress))
 				{
-					if (s.contains("127.0.0.1") || s.contains("127.0.1.1"))
+					if (s.contains(loopBackAdress) || s.contains(loopBackAdressLinux))
 						throw new UnknownHostException();
 
 					LOGGER.log(Level.INFO, "evaluated my ip as {0}", s);

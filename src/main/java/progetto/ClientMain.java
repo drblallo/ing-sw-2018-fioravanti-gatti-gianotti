@@ -9,15 +9,13 @@ import progetto.view.gui.GUIView;
 
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientMain extends Application {
 
     public static void main(String[] args){
-
-       // Logger.getLogger(RMIClient.class.getPackage().getName()).getParent().getHandlers()[0].setLevel(Level.ALL);
-        //Logger.getLogger(RMIClient.class.getPackage().getName()).setLevel(Level.ALL);
-        //Logger.getLogger(RMIClient.class.getPackage().getName()).getParent().setLevel(Level.ALL);
-        ServerMain.main(args);
+        Logger.getLogger(ClientMain.class.getPackage().getName()).setLevel(Level.SEVERE);
         launch(args);
 
     }

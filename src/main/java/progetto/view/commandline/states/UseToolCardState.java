@@ -1,7 +1,10 @@
 package progetto.view.commandline.states;
 
 import progetto.controller.*;
-import progetto.model.*;
+import progetto.model.IModel;
+import progetto.model.MainBoardData;
+import progetto.model.ToolCard;
+import progetto.model.ToolCardState;
 import progetto.view.ToolCardActionList;
 import progetto.view.commandline.CommandLineView;
 import progetto.view.commandline.commands.*;

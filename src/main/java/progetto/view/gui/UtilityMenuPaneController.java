@@ -4,12 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
-import progetto.model.Value;
 import progetto.network.RoomView;
-
-import java.awt.*;
 
 /**
  * this is the class that handles the utility menu fxml. This class is only instanced by javafx, this mean that
@@ -33,7 +28,7 @@ public class UtilityMenuPaneController extends AbstractController{
     	super.setUp(view);
         view.getController().getRoomViewCallback().addObserver(ogg -> Platform.runLater(this::updateChairs));
         view.getController().getObservable().getMainBoard().addObserver(ogg -> Platform.runLater(this::isSinglePlayer));
-        view.getController().getMessageCallback().addObserver(ogg -> Platform.runLater(()->chatMessageRecived()));
+        view.getController().getMessageCallback().addObserver(ogg -> Platform.runLater(this::chatMessageRecived));
     }
 
     /**

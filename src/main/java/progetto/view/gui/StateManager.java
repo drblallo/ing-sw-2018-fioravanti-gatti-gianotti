@@ -101,7 +101,16 @@ public class StateManager {
 
     /**
      *
+     * @return the current state
+     */
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    /**
+     *
      * @return current immutable model
+
      */
     public IModel getModel()
     {

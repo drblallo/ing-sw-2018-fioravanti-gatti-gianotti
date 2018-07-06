@@ -1,11 +1,8 @@
 package progetto.view.commandline.printer;
 
-import javafx.scene.input.DragEvent;
 import progetto.model.Value;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 public class DiceNumberDrawable extends Drawable

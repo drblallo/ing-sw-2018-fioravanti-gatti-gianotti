@@ -1,11 +1,7 @@
 package progetto.view.commandline.printer;
 
-import progetto.model.Dice;
 import progetto.model.GameColor;
 import progetto.model.Value;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DiceDrawable extends Drawable {
 
@@ -28,10 +24,4 @@ public class DiceDrawable extends Drawable {
         color.drawOnTo(this, value.getWidth() + DICE_EMPTY_COLUMN_SIZE, 0);
     }
 
-    public static void main(String[] args)
-    {
-        for (Value v : Value.values())
-            for (GameColor col : GameColor.values())
-            System.out.println(new DiceDrawable(col, v).toString());
-    }
 }

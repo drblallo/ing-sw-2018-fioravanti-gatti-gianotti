@@ -4,6 +4,7 @@ import progetto.network.IEnforce;
 import progetto.network.INetworkClient;
 import progetto.network.IRoomRequest;
 
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -23,7 +24,7 @@ public final class SocketClient extends AbstractSocket implements INetworkClient
 	}
 
 	@Override
-	public ConcurrentLinkedQueue<IEnforce> getEnforceList() {
+	public Queue<IEnforce> getEnforceList() {
 		return listOfEnforces;
 	}
 

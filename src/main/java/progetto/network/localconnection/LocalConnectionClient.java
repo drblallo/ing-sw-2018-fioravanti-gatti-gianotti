@@ -5,6 +5,7 @@ import progetto.network.INetworkClient;
 import progetto.network.IRoomRequest;
 import progetto.utils.Callback;
 
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -84,7 +85,7 @@ public final class LocalConnectionClient implements INetworkClient
 	}
 
 	@Override
-	public ConcurrentLinkedQueue<IEnforce> getEnforceList() {
+	public Queue<IEnforce> getEnforceList() {
 		return enforceList;
 	}
 

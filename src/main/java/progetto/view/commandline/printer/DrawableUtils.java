@@ -7,11 +7,13 @@ import java.util.List;
 
 public class DrawableUtils{
 
-    private static final int HORIZONTAL_SIZE = 35;
-    private static final int VERTICAL_SIZE = 24;
     private static final int VERTICAL_SPACING = 2;
     private static final int HORIZONTAL_SPACING = 2;
 
+    private DrawableUtils()
+    {
+        //constructor hiding
+    }
 
     private static Drawable getWindowFrame(WindowFrame f) {
         DiceCouple[][] dice = new DiceCouple[WindowFrame.MAX_NUMBER_OF_ROWS][WindowFrame.MAX_NUMBER_OF_COLUMNS];

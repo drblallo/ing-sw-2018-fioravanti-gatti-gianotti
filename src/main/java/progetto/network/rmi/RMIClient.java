@@ -151,7 +151,7 @@ public final class RMIClient implements INetworkClient, Runnable{
 	}
 
 	@Override
-	public ConcurrentLinkedQueue<IEnforce> getEnforceList() {
+	public Queue<IEnforce> getEnforceList() {
 		return enforces;
 	}
 
